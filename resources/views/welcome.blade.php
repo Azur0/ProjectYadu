@@ -1,99 +1,45 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts/app')
 
-        <title>Laravel</title>
+@section('content')
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum nisi quis orci dictum, eget molestie enim ullamcorper. Sed et lectus ut diam bibendum eleifend. Aliquam tellus lorem, aliquam vitae lorem sed, pulvinar molestie leo. Nunc a arcu sed mauris condimentum feugiat quis quis ipsum. Vivamus dignissim, ex ac lobortis vehicula, eros eros convallis lectus, quis pharetra ex ligula a magna. Curabitur eget ultrices tortor, vitae hendrerit felis. Etiam id rhoncus sapien, a lacinia velit. Sed sit amet vestibulum ligula. Aliquam tincidunt nisi a sapien volutpat blandit. Sed quis pretium lectus. In dolor elit, fermentum quis pellentesque ac, porta sit amet nibh. Quisque lacinia molestie ipsum in blandit.
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+    Nam et enim nisi. Integer id nulla mi. Vestibulum cursus nisi vel massa vestibulum, quis rhoncus tortor lobortis. Suspendisse luctus, eros eu maximus volutpat, nibh nisl sodales tortor, in interdum justo lorem quis lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac vestibulum mauris. Nulla ultricies fermentum tellus, ut molestie libero rhoncus pulvinar. Ut nulla nisi, blandit quis orci sit amet, tristique iaculis velit. Vivamus eu neque molestie, condimentum orci vel, tincidunt lacus. Quisque interdum tincidunt accumsan.
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    Nunc pulvinar felis non libero dapibus imperdiet. Curabitur sit amet augue vel odio convallis ultrices eget id lorem. Suspendisse a eros sodales, auctor orci et, tempus lorem. In hac habitasse platea dictumst. Curabitur sit amet tempor urna. Quisque ac mi arcu. Nunc lacinia luctus neque, in eleifend massa eleifend sed. Nam lobortis neque orci, vitae convallis nunc maximus in. Etiam mauris leo, rhoncus vel semper in, fringilla vel elit.
 
-            .full-height {
-                height: 100vh;
-            }
+    In auctor felis mauris, porttitor auctor eros viverra non. Donec diam risus, rutrum a est sit amet, pulvinar faucibus nisl. Morbi sed nulla elementum, gravida eros id, tincidunt erat. Morbi aliquam pellentesque consequat. Sed venenatis justo sapien, sed dictum sem volutpat non. Fusce congue rhoncus eleifend. Maecenas non rutrum nisi. Donec nec ullamcorper orci. Donec elit ipsum, fringilla sit amet auctor sagittis, volutpat pellentesque velit.
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    Suspendisse et congue justo, vitae molestie est. Ut nunc tellus, fermentum sed sagittis et, volutpat vitae felis. Praesent nisl ipsum, dignissim ut diam at, eleifend tristique ex. Vestibulum in mi nec quam dictum varius. Duis vel ante vitae metus venenatis posuere eget tempor velit. Aenean hendrerit nulla arcu, ultricies porttitor risus feugiat eu. In eu est sapien. Morbi id blandit ipsum. Nulla dictum nisl vel iaculis luctus. Fusce ac augue nisl. Donec semper neque sed lectus aliquet sollicitudin.
 
-            .position-ref {
-                position: relative;
-            }
+    In vitae semper urna. Etiam ullamcorper posuere tortor ut molestie. Morbi finibus enim sit amet augue ullamcorper, in aliquam ex pellentesque. Aliquam iaculis ex vel bibendum tempor. Cras quam felis, porta et nunc vitae, imperdiet faucibus augue. Nulla a egestas lacus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce turpis neque, consequat sit amet rutrum ut, egestas nec turpis. Maecenas tristique viverra odio vitae tempus. Fusce aliquam scelerisque auctor. Nullam eu quam erat. In vestibulum iaculis eros non aliquet. Sed ut urna et massa venenatis sagittis. Aenean aliquet quam felis, nec malesuada est egestas nec.
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+    Phasellus varius facilisis rhoncus. Nulla et nibh et augue lacinia interdum in vitae tortor. Suspendisse nisl massa, porta ut nunc ac, fringilla facilisis justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed commodo eleifend posuere. Donec id nisi vestibulum, ultrices mi ut, malesuada odio. Pellentesque finibus venenatis eros et facilisis. Nam varius mi nec tortor luctus, lobortis aliquet eros fermentum. Vivamus auctor erat lorem, ac malesuada dolor porta eget. Aliquam erat volutpat. Praesent nec lobortis odio. Proin eu lobortis enim. Sed eros odio, maximus vel turpis nec, vulputate euismod tortor.
 
-            .content {
-                text-align: center;
-            }
+    Vestibulum vel sollicitudin eros. Vestibulum fermentum id magna at pulvinar. Morbi ligula nibh, consequat vitae suscipit eget, mattis at massa. Vivamus vehicula commodo velit, id cursus sapien vestibulum eget. Morbi viverra rutrum mauris vitae suscipit. Mauris sed pharetra massa, sed ullamcorper dui. Maecenas efficitur enim at scelerisque dapibus. Mauris viverra consequat molestie. Proin id purus vitae mauris blandit posuere. Suspendisse sed sem enim. Etiam interdum ac odio in pulvinar. Quisque dignissim at mauris sit amet iaculis. Morbi at euismod nibh.
 
-            .title {
-                font-size: 84px;
-            }
+    Vivamus nec efficitur orci. Maecenas suscipit turpis sem, ac tristique purus feugiat at. Proin volutpat nisi ac gravida dignissim. Phasellus ipsum ante, ullamcorper eu lacus et, venenatis suscipit velit. Etiam molestie at erat a laoreet. Suspendisse fringilla eleifend augue. Sed sodales arcu sit amet quam porttitor, quis feugiat felis mollis. Integer dignissim ipsum at lectus cursus, id vehicula leo consequat. Vestibulum vitae ultricies erat, sit amet tincidunt sapien.
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+    Sed dui purus, efficitur elementum pulvinar sed, vulputate sit amet mi. Morbi mi enim, tincidunt at ipsum nec, eleifend luctus nisl. Etiam vitae iaculis metus. Morbi finibus dolor sit amet lorem pharetra molestie. Phasellus bibendum ipsum quam, vel aliquet leo pretium ut. Nullam pellentesque malesuada nibh quis pharetra. Sed velit odio, mattis ac arcu vitae, pharetra semper nulla. Vivamus euismod eget sem ut pretium. Sed porta velit ut urna semper convallis. Nulla et scelerisque odio. Phasellus quis nibh semper, laoreet quam sed, eleifend nibh. Mauris molestie lectus tellus, id laoreet justo blandit nec.
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+    Phasellus posuere finibus nulla, quis blandit dolor. Nam vestibulum nisi ut metus vehicula, in lacinia felis convallis. Morbi faucibus diam a metus auctor tristique. Donec ut purus nunc. Donec vestibulum ultricies turpis sed interdum. Nulla aliquet pulvinar nibh, ac varius mauris gravida vehicula. Nunc aliquet varius enim quis interdum. Suspendisse vestibulum ullamcorper sapien, fermentum sodales dolor rutrum vitae.
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+    Nulla velit ante, porttitor et nulla eu, gravida sodales risus. Nulla non odio id tortor ornare posuere. Duis ullamcorper ac neque dictum pellentesque. Morbi congue aliquam mauris et iaculis. Phasellus pulvinar risus sed arcu pretium, a tincidunt dui feugiat. Proin tempus maximus ipsum, dignissim molestie est efficitur quis. Aliquam a convallis est, a tincidunt purus.
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+    Aenean nec posuere enim. Praesent lobortis, est ut commodo cursus, mauris nibh condimentum felis, et accumsan ante neque eget purus. Duis eu orci et felis auctor mollis a vitae dui. Nulla sed dolor fringilla, tincidunt mi ut, interdum mi. Nunc interdum quam non orci dapibus, sed auctor metus convallis. Suspendisse potenti. Nulla turpis justo, tempor a ex vitae, fermentum elementum nunc. Nullam sit amet consequat nisl. Curabitur vehicula turpis non congue volutpat. Mauris nec rhoncus enim, eu fringilla libero.
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+    Suspendisse risus nisl, congue vel aliquet ut, venenatis ac augue. Mauris ac vulputate odio. Curabitur sit amet velit non mauris aliquet feugiat nec sed erat. Nam fringilla a justo ut scelerisque. Praesent mattis posuere risus sed tempus. Phasellus sit amet imperdiet nulla. In sollicitudin, ligula eget cursus venenatis, magna augue vestibulum ex, at luctus lorem enim vitae dolor. Nullam viverra erat et sodales pretium.
+
+    Sed eu nibh suscipit, lobortis magna at, commodo erat. Quisque tincidunt nisi quis nisi efficitur consequat. Praesent suscipit, magna sit amet vestibulum condimentum, massa sem ultrices sem, accumsan iaculis nulla dolor et lectus. Vivamus at urna at tortor placerat mattis nec a mi. In hac habitasse platea dictumst. Pellentesque dignissim vehicula enim, vitae ullamcorper turpis maximus quis. Vivamus id rhoncus risus, id scelerisque quam. Praesent et feugiat magna. Sed luctus eros vel eros efficitur, quis tincidunt metus tincidunt. Integer sagittis tristique pellentesque.
+
+    Curabitur metus purus, sagittis at ultricies in, sodales in risus. Etiam a iaculis sem. Donec feugiat vulputate finibus. Aenean id ullamcorper turpis. Pellentesque venenatis quis eros non dignissim. Nunc at sollicitudin felis. Mauris facilisis ligula a volutpat vehicula. Cras sit amet ligula facilisis, consequat ligula dignissim, commodo ligula.
+
+    Proin vitae sem metus. Morbi accumsan massa tellus, id fringilla ligula iaculis a. Mauris at lacus eu nibh vestibulum venenatis. Aliquam erat volutpat. In sollicitudin velit in euismod eleifend. Aenean gravida enim vitae nulla malesuada suscipit. Aenean bibendum maximus condimentum. Donec quis ipsum quis nibh ultricies iaculis eu maximus erat. Donec felis neque, condimentum et pharetra eu, bibendum at est. Etiam libero leo, vulputate in nunc eu, accumsan molestie orci. Curabitur suscipit est sed risus ornare dapibus. Sed at dapibus augue, in scelerisque dui. Donec id erat in nisl consectetur ullamcorper non a nisl. Integer elit purus, tincidunt vel euismod non, vestibulum ut tellus. Nunc elit nisl, hendrerit a ante sed, mattis lobortis sapien.
+
+    Aliquam id nisi id massa vestibulum porta scelerisque at ex. Quisque enim ante, consectetur at cursus in, malesuada vitae libero. Praesent felis felis, dapibus non ex ut, vehicula pharetra orci. Donec pellentesque ante ut interdum efficitur. Suspendisse eget odio pulvinar diam sollicitudin lacinia at eget arcu. Integer vitae ipsum lectus. Vestibulum porttitor eros eu augue facilisis faucibus at et nibh. Nullam a molestie sapien. In lacinia porttitor ante. Vestibulum in auctor augue. Nulla vitae dui lorem. Donec tincidunt, leo ac porta sodales, turpis arcu dignissim sem, non dapibus ante augue vitae augue. In cursus feugiat tempus.
+
+    Nulla facilisi. Donec a convallis nulla. Maecenas vel tempus nisi. Nullam vel mattis metus. Cras gravida tempus nisl, vel tincidunt neque sodales sit amet. Phasellus posuere convallis ultricies. Nunc placerat erat lacus. Quisque vel malesuada sem, eget venenatis arcu. In ultricies sit amet arcu nec faucibus.
+
+    Fusce mollis, magna eu vehicula tristique, nibh sapien suscipit augue, eu venenatis libero mi vitae lorem. Proin ac placerat dui. Aliquam iaculis urna ut nunc pharetra varius. Etiam sem velit, vulputate eget purus in, convallis varius metus. Donec convallis mollis nibh, in vehicula tellus iaculis eget. Cras euismod a leo at imperdiet. Fusce rutrum velit quis urna hendrerit aliquam. Phasellus convallis lorem tortor, at scelerisque leo pharetra ut. Cras luctus risus quis nisi egestas vulputate. Nullam placerat arcu at orci cursus gravida.
+</p>
+@endsection

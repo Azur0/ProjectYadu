@@ -23,8 +23,8 @@ class CreateChatmessagesTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('account_id');
-            $table->integer('event_id');
+            $table->unsignedInteger('account_id');
+            $table->unsignedInteger('event_id');
             $table->text('message');
             $table->tinyInteger('isDeleted')->default('0');
             $table->timestamps();

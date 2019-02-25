@@ -23,8 +23,8 @@ class CreateAccountHasFollowersTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('account_id');
-            $table->integer('follower_id');
+            $table->unsignedInteger('account_id');
+            $table->unsignedInteger('follower_id');
             $table->timestamps();
 
             $table->index(["account_id"], 'fk_account_has_account_account2_idx');

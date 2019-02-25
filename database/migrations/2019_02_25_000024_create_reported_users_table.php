@@ -23,11 +23,11 @@ class CreateReportedUsersTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('reportedUser_id');
-            $table->integer('reportSubmitter_id');
+            $table->unsignedInteger('reportedUser_id');
+            $table->unsignedInteger('reportSubmitter_id');
             $table->string('reportReason', 30);
-            $table->integer('chatmessage_id')->nullable();
-            $table->integer('event_id')->nullable();
+            $table->unsignedInteger('chatmessage_id')->nullable();
+            $table->unsignedInteger('event_id')->nullable();
             $table->text('explanation')->nullable();
             $table->timestamps();
 

@@ -23,7 +23,7 @@ class CreateLogEntriesTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('account_id')->nullable();
+            $table->unsignedInteger('account_id')->nullable();
             $table->string('category', 15);
             $table->text('entry');
             $table->string('ip', 45)->nullable();

@@ -23,7 +23,7 @@ class CreateEventHasTagsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('event_id');
+            $table->unsignedInteger('event_id');
             $table->string('tag', 25);
             $table->timestamps();
 

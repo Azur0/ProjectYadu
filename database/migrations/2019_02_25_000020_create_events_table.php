@@ -24,8 +24,8 @@ class CreateEventsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('status', 20);
-            $table->integer('location_id');
-            $table->integer('owner_id');
+            $table->unsignedInteger('location_id');
+            $table->unsignedInteger('owner_id');
             $table->string('activityName', 45);
             $table->dateTime('startDate');
             $table->dateTime('endDate')->nullable();

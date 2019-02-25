@@ -23,7 +23,7 @@ class CreateLoginAttemptsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('account_id');
+            $table->unsignedInteger('account_id');
             $table->tinyInteger('loginSuccesfull')->default('0');
             $table->string('ip', 45);
             $table->timestamps();

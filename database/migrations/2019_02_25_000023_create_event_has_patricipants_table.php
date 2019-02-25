@@ -23,8 +23,8 @@ class CreateEventHasPatricipantsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('event_id');
-            $table->integer('account_id');
+            $table->unsignedInteger('event_id');
+            $table->unsignedInteger('account_id');
             $table->enum('rating', ['1', '2', '3', '4', '5'])->nullable();
             $table->timestamps();
 

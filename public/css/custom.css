@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'ConsolasRegular';
+    src: url('/fonts/Consolas Regular.ttf');
+}
+
+#main {
+    position: relative;
+}
+
+#body {
+   padding: 40px 10px 300px 10px;
+}
+
+.navbg {
+    background-color: #E79535;
+}
+
+.navbar-header {
+    margin-top: 11px;
+}
+
+.nav-link:hover {
+    color: white !important;
+}
+
+.nav-item {
+    font-size: 18px;
+    font-family: ConsolasRegular;
+}
+
+.logo {
+    padding-right: 53px;
+}
+
+.logo-text {
+    margin-top: 15px;
+    margin-left: 40px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  line-height: 60px;
+  background-color: #E79535;
+}
+
+.center-block {
+  display: table;
+  margin: 0 auto;
+}
+
+.nav-link-footer {
+    height: 35px;
+}
+
+.nav-link-footer a {
+    color: hsla(0,0%,100%,.5);\
+}
+
+.nav-link-footer a:hover {
+    color: white;
+    text-decoration:none;
+}
+
+@media screen and (max-width: 575px) {
+    .col-sm > .list-unstyled {
+        text-align: center !important
+    }
+}

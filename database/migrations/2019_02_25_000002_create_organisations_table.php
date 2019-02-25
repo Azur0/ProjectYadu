@@ -32,6 +32,7 @@ class CreateOrganisationsTable extends Migration
             $table->string('postalcode', 45)->nullable();
             $table->integer('housenumber')->nullable();
             $table->string('housenumberAddition', 2)->nullable();
+            $table->timestamps();
         });
     }
 

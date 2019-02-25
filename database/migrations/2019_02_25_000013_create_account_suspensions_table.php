@@ -29,6 +29,7 @@ class CreateAccountSuspensionsTable extends Migration
             $table->string('reason');
             $table->tinyInteger('isLifted')->default('0');
             $table->text('reasonLifted')->nullable();
+            $table->timestamps();
 
             $table->index(["account_id"], 'fk_suspension_accounts1_idx');
 

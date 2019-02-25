@@ -28,6 +28,7 @@ class CreateLocationsTable extends Migration
             $table->string('postalcode', 45);
             $table->string('locLatitude', 45)->nullable();
             $table->string('locLongtitude', 45)->nullable();
+            $table->timestamps();
         });
     }
 

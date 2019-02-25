@@ -24,6 +24,7 @@ class CreateAccountRolesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('role');
             $table->string('description')->nullable();
+            $table->timestamps();
         });
     }
 

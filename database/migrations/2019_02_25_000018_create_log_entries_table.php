@@ -27,6 +27,7 @@ class CreateLogEntriesTable extends Migration
             $table->string('category', 15);
             $table->text('entry');
             $table->string('ip', 45)->nullable();
+            $table->timestamps();
 
             $table->index(["account_id"], 'fk_log_account1_idx');
 

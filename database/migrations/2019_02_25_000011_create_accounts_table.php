@@ -36,6 +36,7 @@ class CreateAccountsTable extends Migration
             $table->tinyInteger('isDeleted')->default('0');
             $table->tinyInteger('isVerified')->default('0');
             $table->longText('bio')->nullable();
+            $table->timestamps();
 
             $table->index(["accountRole"], 'fk_accounts_accountRoles1_idx');
 

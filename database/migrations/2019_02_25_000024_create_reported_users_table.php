@@ -29,6 +29,7 @@ class CreateReportedUsersTable extends Migration
             $table->integer('chatmessage_id')->nullable();
             $table->integer('event_id')->nullable();
             $table->text('explanation')->nullable();
+            $table->timestamps();
 
             $table->index(["reportSubmitter_id"], 'fk_reports_accounts2_idx');
 

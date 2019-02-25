@@ -26,6 +26,7 @@ class CreatePremiumSubscriptionsTable extends Migration
             $table->integer('account_id');
             $table->integer('plan_id');
             $table->dateTime('startDate');
+            $table->timestamps();
 
             $table->index(["plan_id"], 'fk_PremiumSubscription_plan1_idx');
 

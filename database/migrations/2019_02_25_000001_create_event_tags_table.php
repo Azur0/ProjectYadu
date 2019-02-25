@@ -24,6 +24,7 @@ class CreateEventTagsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('tag');
             $table->text('description')->nullable();
+            $table->timestamps();
         });
     }
 

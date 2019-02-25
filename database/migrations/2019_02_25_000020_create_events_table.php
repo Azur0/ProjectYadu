@@ -32,6 +32,7 @@ class CreateEventsTable extends Migration
             $table->text('description');
             $table->binary('bannerImage');
             $table->tinyInteger('isDeleted')->default('0');
+            $table->timestamps();
 
             $table->index(["location_id"], 'fk_activity_Location1_idx');
 

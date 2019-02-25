@@ -27,6 +27,7 @@ class CreateSubscriptionPlansTable extends Migration
             $table->text('description')->nullable();
             $table->double('pricePerMonth');
             $table->integer('amountOfMonths')->default('1');
+            $table->timestamps();
         });
     }
 

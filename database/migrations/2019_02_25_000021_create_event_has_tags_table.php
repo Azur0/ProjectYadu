@@ -25,6 +25,7 @@ class CreateEventHasTagsTable extends Migration
             $table->increments('id');
             $table->integer('event_id');
             $table->string('tag', 25);
+            $table->timestamps();
 
             $table->index(["event_id"], 'fk_eventTags_has_event_event1_idx');
 

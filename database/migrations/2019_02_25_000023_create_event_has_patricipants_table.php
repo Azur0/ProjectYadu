@@ -26,6 +26,7 @@ class CreateEventHasPatricipantsTable extends Migration
             $table->integer('event_id');
             $table->integer('account_id');
             $table->enum('rating', ['1', '2', '3', '4', '5'])->nullable();
+            $table->timestamps();
 
             $table->index(["account_id"], 'fk_accounts_has_activity_accounts1_idx');
 

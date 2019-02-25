@@ -25,6 +25,7 @@ class CreateVerificationLinksTable extends Migration
             $table->increments('id');
             $table->integer('account_id');
             $table->dateTime('dateOfVerification')->nullable();
+            $table->timestamps();
 
             $table->index(["account_id"], 'fk_email_verification_account1_idx');
 

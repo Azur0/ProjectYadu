@@ -26,6 +26,7 @@ class CreateLoginAttemptsTable extends Migration
             $table->integer('account_id');
             $table->tinyInteger('loginSuccesfull')->default('0');
             $table->string('ip', 45);
+            $table->timestamps();
 
             $table->index(["account_id"], 'fk_loginAttempt_accounts1_idx');
 

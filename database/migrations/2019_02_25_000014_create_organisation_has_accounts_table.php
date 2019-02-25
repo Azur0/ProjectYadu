@@ -25,6 +25,7 @@ class CreateOrganisationHasAccountsTable extends Migration
             $table->increments('id');
             $table->integer('account_id');
             $table->integer('organisation_id');
+            $table->timestamps();
 
             $table->index(["account_id"], 'fk_account_has_organisation_accounts1_idx');
 

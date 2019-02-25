@@ -25,6 +25,7 @@ class CreateAccountHasFollowersTable extends Migration
             $table->increments('id');
             $table->integer('account_id');
             $table->integer('follower_id');
+            $table->timestamps();
 
             $table->index(["account_id"], 'fk_account_has_account_account2_idx');
 

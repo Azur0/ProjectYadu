@@ -23,6 +23,7 @@ class CreateProhibitedWordsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('word');
+            $table->timestamps();
         });
     }
 

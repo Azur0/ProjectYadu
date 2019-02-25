@@ -27,6 +27,7 @@ class CreateChatmessagesTable extends Migration
             $table->integer('event_id');
             $table->text('message');
             $table->tinyInteger('isDeleted')->default('0');
+            $table->timestamps();
 
             $table->index(["event_id"], 'fk_accounts_has_activity_activity2_idx');
 

@@ -22,7 +22,7 @@ class CreateBannedIpsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('ip');
+            $table->string('ip',45)->primary();
             $table->timestamps();
         });
     }

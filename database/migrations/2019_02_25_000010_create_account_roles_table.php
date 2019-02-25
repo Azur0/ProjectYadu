@@ -22,7 +22,7 @@ class CreateAccountRolesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('role');
+            $table->string('role', 10)->primary();
             $table->string('description')->nullable();
             $table->timestamps();
         });

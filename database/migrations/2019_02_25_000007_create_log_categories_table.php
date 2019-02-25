@@ -22,7 +22,7 @@ class CreateLogCategoriesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('category');
+            $table->string('category',15)->primary();
             $table->timestamps();
         });
     }

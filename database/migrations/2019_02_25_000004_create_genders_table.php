@@ -22,7 +22,7 @@ class CreateGendersTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('gender');
+            $table->string('gender', 15)->primary();
             $table->timestamps();
         });
     }

@@ -22,7 +22,7 @@ class CreateEventStatusTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('status');
+            $table->string('status',20)->primary();
             $table->timestamps();
         });
     }

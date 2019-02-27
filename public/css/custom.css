@@ -51,6 +51,11 @@
   background-color: #E79535;
 }
 
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 .center-block {
   display: table;
   margin: 0 auto;
@@ -127,8 +132,8 @@ background-size: cover;
 
 @media (min-width: 768px) {
     .banner-text {
-        padding-top: 250px;
-        padding-bottom: 250px;
+        padding-top: 150px;
+        padding-bottom: 150px;
     }
 }
 
@@ -187,4 +192,10 @@ background-size: cover;
 
 .accordion .card:first-of-type, .card:not(:first-of-type):not(:last-of-type) {
     border-bottom: 1px solid rgba(0,0,0,.125) !important;
+}
+
+@media (max-width: 576px) {
+    .accordion {
+        margin-bottom: 200px !important;
+    }
 }

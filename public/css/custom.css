@@ -3,13 +3,29 @@
     src: url('/fonts/Consolas Regular.ttf');
 }
 
+html, body {
+    height: 100%;
+}
+
 #main {
     position: relative;
+    min-height: 100%;
 }
 
 #body {
-   padding: 40px 10px 300px 10px;
+   padding: 40px 10px 100px 10px;
 }
+
+#footer {
+    height: 200px;
+}
+
+@media (max-width: 576px) {
+    #footer {
+        height: 350px;
+    }
+}
+
 
 .navbg {
     background-color: #E79535;
@@ -85,12 +101,11 @@
 
 .masthead {
     text-align: center;
-color: #fff;
-background-image: url(../images/header-bg.jpg);
-background-repeat: no-repeat;
-background-attachment: scroll;
-background-position: center center;
-background-size: cover;
+    color: #fff;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
 }
 
 @media (min-width: 576px) {
@@ -192,10 +207,4 @@ background-size: cover;
 
 .accordion .card:first-of-type, .card:not(:first-of-type):not(:last-of-type) {
     border-bottom: 1px solid rgba(0,0,0,.125) !important;
-}
-
-@media (max-width: 576px) {
-    .accordion {
-        margin-bottom: 200px !important;
-    }
 }

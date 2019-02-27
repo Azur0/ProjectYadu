@@ -127,8 +127,8 @@ background-size: cover;
 
 @media (min-width: 768px) {
     .banner-text {
-        padding-top: 250px;
-        padding-bottom: 250px;
+        padding-top: 150px;
+        padding-bottom: 150px;
     }
 }
 

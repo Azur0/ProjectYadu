@@ -73,8 +73,8 @@
                         <img class="default" src="https://www.yadu.nu/assets/img/icons/categories/transportation-outline_bike.svg">
                         <img class="selected" src="https://www.yadu.nu/assets/img/icons/categories/white/transportation-outline_bike.svg">
                         <span>Op wielen</span>
-                    </div>
-                </div>-->
+                    </div>-->
+                </div>
 
                 </div>
             </div>

@@ -131,6 +131,9 @@
     display: none !important;
   }
 
+  input[type=radio]:checked + .category span {
+    color: white ;
+  }
 #category_box .category span {
     display: block;
     text-align: center;

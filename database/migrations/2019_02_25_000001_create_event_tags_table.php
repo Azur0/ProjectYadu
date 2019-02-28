@@ -24,6 +24,8 @@ class CreateEventTagsTable extends Migration
             $table->engine = 'InnoDB';
             $table->string('tag', 25)->primary();
             $table->text('description')->nullable();
+            $table->binary('imageDefault');
+            $table->binary('imageSelected');
             $table->timestamps();
         });
     }

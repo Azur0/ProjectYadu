@@ -27,25 +27,26 @@
             <div class="types">
                 <div id="category_box">
 
-                    <input type="radio" id="1" name="test" value="1" checked>
+                    <input type="radio" id="1" name="type" value="1" checked>
                     <label for="1" class="category" title="Uitje met gezinnen">
                         <img class="default" src="https://www.yadu.nu/assets/img/icons/categories/users-outline_family.svg">
                         <img class="selected" src="https://www.yadu.nu/assets/img/icons/categories/white/users-outline_family.svg">
                         <span>Uitje met gezinnen</span>
                     </label>
-                    <input type="radio" id="2" name="test" value="2">
+                    <input type="radio" id="2" name="type" value="2">
                     <label for="2" class="category" title="Eten">
                         <img class="default" src="https://www.yadu.nu/assets/img/icons/categories/food-outline_course.svg">
                         <img class="selected" src="https://www.yadu.nu/assets/img/icons/categories/white/food-outline_course.svg">
                         <span>Eten</span>
                     </label>
 
-                    <input type="radio" id="3" name="test" value="3">
+                    <input type="radio" id="3" name="type" value="3">
                     <label for="3" class="category" title="Borrelen">
                         <img class="default" src="https://www.yadu.nu/assets/img/icons/categories/food-outline_cocktail.svg">
                         <img class="selected" src="https://www.yadu.nu/assets/img/icons/categories/white/food-outline_cocktail.svg">
                         <span>Borrelen</span>
                     </label>
+                    
                     <!--
                     <div class="category" title="Koffie">
                         <img class="default" src="https://www.yadu.nu/assets/img/icons/categories/food-outline_coffee.svg">
@@ -109,17 +110,22 @@
         <div>
             <h3>5. Beschrijf je uitje</h3>
             <div class="description">
-                <input type="text" id="title" name="title" placeholder="Titel" oninput="update_counter_title(this)" maxlength="30">
+                <input type="text" id="title" name="title" placeholder="Titel" oninput="update_counter_title(this)" maxlength="30" required>
                 <span id="chars_title"></span> characters remaining
-                <textarea id="desc" name="description" placeholder="Omschrijving.." oninput="update_counter_desc(this)" maxlength="150"></textarea>
+                <textarea id="desc" name="description" placeholder="Omschrijving.." oninput="update_counter_desc(this)" maxlength="150" required></textarea>
                 <span id="chars_desc"></span> characters remaining
                
             </div>
         </div>
         <div>
+            <!-- Met inspect element krijg ik het nog voor elkaar om meer dan 25 in te stellen, dit moet ik nog veranderen door js scriptje ofzo toe te voegen! -->
             <h3>6. Hoeveel mensen gaan er max mee?</h3>
+            <div class="description">
+            <input type="number" name="people" min="1" max="25" value="1" required >
+            <span class="number_desc">mensen kunnen mee (incl. jezelf)</span>
+            </div>
         </div>
-        <input type="submit" name="verzenden" value="Verzend!!">
+        <input class="submit" type="submit" name="verzenden" value="Verzend!!">
     </form>
 </div>
 @endsection 

@@ -1,6 +1,24 @@
 @extends('layouts/app')
 
 @section('content')
+<script>
+                    window.onload = function() { 
+                        var textarea = document.getElementById('desc');
+                        var text = document.getElementById('title');
+                        var len_d = parseInt(textarea.getAttribute("maxlength"), 10); 
+                        var len_t = parseInt(text.getAttribute("maxlength"), 10); 
+                        document.getElementById('chars_desc').innerHTML = len_d - textarea.value.length;
+                        document.getElementById('chars_title').innerHTML = len_t - text.value.length;
+                    }
+                    function update_counter_title(text){
+                        var len = parseInt(text.getAttribute("maxlength"), 10); 
+                        document.getElementById('chars_title').innerHTML = len - text.value.length;
+                    }
+                    function update_counter_desc(textarea){
+                        var len = parseInt(textarea.getAttribute("maxlength"), 10); 
+                        document.getElementById('chars_desc').innerHTML = len - textarea.value.length;
+                    }
+                </script>
 <div class="create-event">
     <form action="/events" method="POST">
         {{ csrf_field() }}
@@ -76,25 +94,32 @@
                     </div>-->
                 </div>
 
-                </div>
             </div>
-            <div class="pic">
-                <h3>2. Kies een foto voor je event </h3>
-            </div>
-            <div class="loc">
-                <h3>3. Kies de (verzamel)locatie </h3>
-            </div>
-            <div class="date">
-                <h3>4. Kies de datum en tijd</h3>
+        </div>
+        <div class="pic">
+            <h3>2. Kies een foto voor je event </h3>
+        </div>
+        <div class="loc">
+            <h3>3. Kies de (verzamel)locatie </h3>
+        </div>
+        <div class="date">
+            <h3>4. Kies de datum en tijd</h3>
 
+        </div>
+        <div>
+            <h3>5. Beschrijf je uitje</h3>
+            <div class="description">
+                <input type="text" id="title" name="title" placeholder="Titel" oninput="update_counter_title(this)" maxlength="30">
+                <span id="chars_title"></span> characters remaining
+                <textarea id="desc" name="description" placeholder="Omschrijving.." oninput="update_counter_desc(this)" maxlength="150"></textarea>
+                <span id="chars_desc"></span> characters remaining
+               
             </div>
-            <div>
-                <h3>5. Beschrijf je uitje</h3>
-            </div>
-            <div>
-                <h3>6. Hoeveel mensen gaan er max mee?</h3>
-            </div>
-            <input type="submit" name="verzenden" value="Verzend!!">
+        </div>
+        <div>
+            <h3>6. Hoeveel mensen gaan er max mee?</h3>
+        </div>
+        <input type="submit" name="verzenden" value="Verzend!!">
     </form>
 </div>
 @endsection 

@@ -15,6 +15,9 @@
                 @include('layouts.nav')
             </div>
 
+            <!-- Optional -->
+            @yield('banner')
+
             <div id="body" class="container">
                 @yield('content')
             </div>

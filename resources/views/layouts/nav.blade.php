@@ -6,7 +6,7 @@
             </button>
         </div>
         <a class="navbar-brand d-none d-lg-inline-block" href="/">
-            <img src={{ asset('images/logoCircle.png')}} width="60" alt="logo">
+            <img src={{ asset('images/logoCircle.png')}} width="57" alt="logo">
         </a>
         <p class="navbar-brand d-none d-lg-inline-block logo-text nav-item">VIND WAT JE BINDT!</p>
         <!-- Mobile logo -->

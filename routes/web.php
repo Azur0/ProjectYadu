@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EventsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +16,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/events/create', 'EventsController@create');
-Route::get('/events', 'EventsController@index');
-Route::post('/events', 'EventsController@store');
+Route::resource('events', 'EventsController');
 
 Route::get('/about', function () {
     return view('about');

@@ -16,7 +16,7 @@ class PagesController extends Controller
     }
 
     public function events(){
-        $events = Event::all();
+        $events = Event::take(18)->get();
         return view('events', compact('events'));
     }
 }

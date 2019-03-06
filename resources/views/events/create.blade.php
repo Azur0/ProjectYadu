@@ -47,13 +47,14 @@
         </div>
         <div class="date">
             <h3>4. Kies de datum en tijd</h3>
-            <input id="date" name="startDate" type="date" value="{{ old('startDate') }}" required>
-            <input id="time" name="startTime" type="time" value="{{ old('startTime') }}" required>
+            <div class="description">
+                <input id="date" name="startDate" type="datetime-local" value="{{ old('startDate') }}" required>
+            </div>
         </div>
         <div>
             <h3>5. Beschrijf je uitje</h3>
             <div class="description">
-                <input type="text" id="title" name="title" placeholder="Titel" oninput="update_counter_title(this)" maxlength="30" value="{{ old('title') }}">
+                <input type="text" id="title" name="activityName" placeholder="Titel" oninput="update_counter_title(this)" maxlength="30" value="{{ old('title') }}">
                 <span id="chars_title"></span> characters remaining
                 <textarea id="desc" name="description" placeholder="Omschrijving.." oninput="update_counter_desc(this)" maxlength="150" required>{{ old('description') }}</textarea>
                 <span id="chars_desc"></span> characters remaining

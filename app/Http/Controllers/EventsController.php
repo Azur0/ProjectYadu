@@ -28,7 +28,6 @@ class EventsController extends Controller
         //
         $Tags = EventTag::all();
         return view('events.create')->withtags($Tags);
-    
     }
 
     /**
@@ -41,17 +40,24 @@ class EventsController extends Controller
     {
         //
         $attributes = request()->validate([
-            'title' => 'required|max:30',
+            'activityName' => 'required|max:30',
             'description' => 'required|max:150',
-            'people' => 'required',//min en max nog doen
-            'tag' => 'required'
+            'people' => 'required', //min en max nog doen
+            'tag' => 'required',
+            'startDate' => 'required'
         ]);
+        Event::create(
+            [
+                'activityName' => $attributes['activityName'],
+                'status' => 'bezig',
+                'description' => $attributes['description'],
+                'startDate' => $attributes['startDate'],
+                'location_id' => '1',
+                'owner_id' => '1'
+            ]
+        );
 
-        return($attributes);
-        Event::create($attributes);
-        
         return redirect('/events');
-
     }
 
     /**

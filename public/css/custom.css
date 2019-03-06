@@ -87,9 +87,8 @@ input[type=number] {
     margin-left: 10px;
 }
 
-.description input[type=text],
-textarea,
-input[type=number] {
+.description input,
+textarea{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

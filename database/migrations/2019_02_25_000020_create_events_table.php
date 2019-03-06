@@ -26,9 +26,10 @@ class CreateEventsTable extends Migration
             $table->string('status', 20);
             $table->unsignedInteger('location_id');
             $table->unsignedInteger('owner_id');
-            $table->string('activityName', 45);
+            $table->string('eventName', 45);
             $table->dateTime('startDate');
             $table->dateTime('endDate')->nullable();
+            $table->unsignedInteger('numberOfPeople');
             $table->text('description');
             $table->binary('bannerImage');
             $table->tinyInteger('isDeleted')->default('0');

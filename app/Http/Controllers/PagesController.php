@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Event;
 
 class PagesController extends Controller
 {
@@ -15,7 +16,7 @@ class PagesController extends Controller
     }
 
     public function events(){
-        $events = \App\Event::all();
-        return view('events');
+        $events = Event::all();
+        return view('events', compact('events'));
     }
 }

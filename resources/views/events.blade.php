@@ -7,6 +7,9 @@
 @section('content')
     <div class="event_overview">
 
+        {{--@foreach()--}}
+        {{--@endforeach--}}
+
         <div class="row">
 
             <div class="col-4 event">

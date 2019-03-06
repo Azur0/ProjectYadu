@@ -39,12 +39,15 @@ class EventsController extends Controller
     public function store()
     {
         //
+        return(request()->all());
         $attributes = request()->validate([
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
             'people' => 'required', //min en max nog doen
             'tag' => 'required',
-            'startDate' => 'required'
+            'startDate' => 'required',
+            'location' => 'required'
+
         ]);
         Event::create(
             [

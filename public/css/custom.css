@@ -208,3 +208,47 @@ html, body {
 .accordion .card:first-of-type, .card:not(:first-of-type):not(:last-of-type) {
     border-bottom: 1px solid rgba(0,0,0,.125) !important;
 }
+
+.contact-item {
+    margin-bottom: 15px;
+}
+
+.contact-item h5 {
+    font-family: ConsolasRegular;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #E79535;
+    margin-bottom: .1rem !important;
+}
+
+.contact-item span{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.media {
+    margin: 0px 15px 0px 0px;
+}
+
+.linkedin {
+    left: 15px;
+}
+
+.twitter {
+    left: 60px;
+}
+
+.facebook {
+    left: 105px;
+}
+
+.instagram {
+    left: 145px;
+}
+
+@media screen and (min-width: 575px) {
+    .media {
+        position: absolute;
+        bottom: 0;
+    }
+}

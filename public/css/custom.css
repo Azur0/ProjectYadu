@@ -49,6 +49,7 @@
   width: 100%;
   line-height: 60px;
   background-color: #E79535;
+  z-index: 1000;
 }
 
 .row {
@@ -198,4 +199,22 @@ background-size: cover;
     .accordion {
         margin-bottom: 200px !important;
     }
+}
+
+/* Event Overview */
+
+.event{
+    height: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.event_info{
+    background: rgba(255,255,0,0.7);
+    height: 100%;
+    position: absolute;
+    width: calc(100% - 20px);
+    z-index: 100;
+    height: 50%;
+    margin-top: -25%;
 }

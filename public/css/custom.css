@@ -3,13 +3,29 @@
     src: url('/fonts/Consolas Regular.ttf');
 }
 
+html, body {
+    height: 100%;
+}
+
 #main {
     position: relative;
+    min-height: 100%;
 }
 
 #body {
     padding: 40px 10px 300px 10px;
 }
+
+#footer {
+    height: 200px;
+}
+
+@media (max-width: 576px) {
+    #footer {
+        height: 350px;
+    }
+}
+
 
 .navbg {
     background-color: #E79535;
@@ -296,7 +312,6 @@ input[type=radio]:checked+.category span {
 .masthead {
     text-align: center;
     color: #fff;
-    background-image: url(../images/header-bg.jpg);
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -405,8 +420,46 @@ input[type=radio]:checked+.category span {
     border-bottom: 1px solid rgba(0, 0, 0, .125) !important;
 }
 
-@media (max-width: 576px) {
-    .accordion {
-        margin-bottom: 200px !important;
+.contact-item {
+    margin-bottom: 15px;
+}
+
+.contact-item h5 {
+    font-family: ConsolasRegular;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #E79535;
+    margin-bottom: .1rem !important;
+}
+
+.contact-item span{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.media {
+    margin: 0px 15px 0px 0px;
+}
+
+.linkedin {
+    left: 15px;
+}
+
+.twitter {
+    left: 60px;
+}
+
+.facebook {
+    left: 105px;
+}
+
+.instagram {
+    left: 145px;
+}
+
+@media screen and (min-width: 575px) {
+    .media {
+        position: absolute;
+        bottom: 0;
     }
 }

@@ -52,7 +52,7 @@ class CreateEventsTable extends Migration
                 ->onUpdate('no action');
 
             $table->foreign('status', 'fk_event_eventStatus1_idx')
-                ->references('status')->on('event_status')
+                ->references('status')->on('event_statuses')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

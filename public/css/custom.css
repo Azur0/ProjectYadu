@@ -218,4 +218,5 @@ background-size: cover;
     height: 50%;
     margin-top: -25%;
     padding: 5px;
+    white-space: nowrap;
 }

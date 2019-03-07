@@ -7,9 +7,9 @@
 @section('content')
     <div class="event_overview row">
         @foreach ($events as $event)
-            <div class="col-sm-6 col-lg-4 event">
+            <div class="col-md-6 col-lg-4 event">
                 <img src={{ asset("images/beer.jpg") }} class="img-responsive" width="100%" alt="Event">
-                <div class="event_info">
+                <div class="event_info text-truncate">
                     {{-- If your are reading this, it is probably broken. Change activityName to eventName to fix. --}}
                     <h3>{{$event->activityName}}</h3>
                     <p>{{App\location::where('id', $event->location_id)->firstOrFail()->postalcode }}

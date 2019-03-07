@@ -20,8 +20,9 @@
         <div class="col-4 event">
             <img src={{ asset("images/beer.jpg") }} class="img-responsive" width="100%" alt="Event">
             <div class="event_info">
+                {{-- If your are reading this, it is probably broken. Change activityName to eventName to fix. --}}
                 <h3>{{$event->activityName}}</h3>
-                <p>{{dateToText($event->startDate)}}</p>
+                <p>{{App\location::where('id', $event->location_id)->firstOrFail()->postalcode }} - {{dateToText($event->startDate)}}</p>
             </div>
         </div>
 

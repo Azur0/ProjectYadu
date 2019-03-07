@@ -16,7 +16,17 @@ class PagesController extends Controller
     }
 
     public function events(){
-        $events = Event::take(18)->get();
+
+        $events = Event::where('startDate','>=', $this->formatDate())->take(18)->get();
         return view('events', compact('events'));
+    }
+
+    private function formatDate(){
+        //TODO Should private functions be here?
+        $date = getdate();
+        $formatted_date = $date['year'] . "/";
+        $formatted_date .= $date['mon'] . "/";
+        $formatted_date .= $date['mday'];
+        return $formatted_date;
     }
 }

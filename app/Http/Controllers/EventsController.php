@@ -39,7 +39,6 @@ class EventsController extends Controller
     public function store()
     {
         //
-        return(request()->all());
         $attributes = request()->validate([
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
@@ -51,10 +50,12 @@ class EventsController extends Controller
         ]);
         Event::create(
             [
-                'activityName' => $attributes['activityName'],
+                'eventName' => $attributes['activityName'],
                 'status' => 'bezig',
                 'description' => $attributes['description'],
                 'startDate' => $attributes['startDate'],
+                'numberOfPeople' => $attributes['people'],
+                'tag' => $attributes['tag'],
                 'location_id' => '1',
                 'owner_id' => '1'
             ]

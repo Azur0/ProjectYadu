@@ -5,123 +5,109 @@
 @endsection
 
 @section('content')
-    <div class="event_overview">
-        <?php
-        $i = 0;
-        $size = count($events);
-
-        foreach ($events as $event){
-        $i++;
-        if ($i % 3 == 1) {
-            echo "<div class=\"row\">";
-        }
-        ?>
-
-        <div class="col-4 event">
-            <img src={{ asset("images/beer.jpg") }} class="img-responsive" width="100%" alt="Event">
-            <div class="event_info">
-                {{-- If your are reading this, it is probably broken. Change activityName to eventName to fix. --}}
-                <h3>{{$event->activityName}}</h3>
-                <p>{{App\location::where('id', $event->location_id)->firstOrFail()->postalcode }} - {{dateToText($event->startDate)}}</p>
+    <div class="event_overview row">
+        @foreach ($events as $event)
+            <div class="col-4 event">
+                <img src={{ asset("images/beer.jpg") }} class="img-responsive" width="100%" alt="Event">
+                <div class="event_info">
+                    {{-- If your are reading this, it is probably broken. Change activityName to eventName to fix. --}}
+                    <h3>{{$event->activityName}}</h3>
+                    <p>{{App\location::where('id', $event->location_id)->firstOrFail()->postalcode }}
+                        - {{dateToText($event->startDate)}}</p>
+                </div>
             </div>
-        </div>
-
-        <?php
-        if ($i % 3 == 0 || $size == $i) {
-            echo "</div><br>";
-        }
-        }
-        ?>
-
-
+        @endforeach
     </div>
 @endsection
 
 <?php
 
-        function dateToText($timestamp){
-            $date = getdate(strtotime($timestamp));
-            $formatted_date = dateToDayCode($date) . " ";
-            $formatted_date .= $date['mday'] . " ";
-            $formatted_date .= dateToMonth($date) . " ";
-            $formatted_date .= $date['year'];
-            return $formatted_date;
-        }
+function dateToText($timestamp)
+{
+    $date = getdate(strtotime($timestamp));
+    $formatted_date = dateToDayCode($date) . " ";
+    $formatted_date .= $date['mday'] . " ";
+    $formatted_date .= dateToMonth($date) . " ";
+    $formatted_date .= $date['year'];
+    return $formatted_date;
+}
 
-        function dateToDayCode($date){
-            //TODO multi-language support
-            switch($date['wday']){
-                case 0:
-                    $day_code = "Zo";
-                    break;
-                case 1:
-                    $day_code = "Ma";
-                    break;
-                case 2:
-                    $day_code = "Di";
-                    break;
-                case 3:
-                    $day_code = "Wo";
-                    break;
-                case 4:
-                    $day_code = "Do";
-                    break;
-                case 5:
-                    $day_code = "Vr";
-                    break;
-                case 6:
-                    $day_code = "Za";
-                    break;
-                default:
-                    $day_code = "??";
-                    break;
-            }
-            return $day_code;
-        }
+function dateToDayCode($date)
+{
+    //TODO multi-language support
+    switch ($date['wday']) {
+        case 0:
+            $day_code = "Zo";
+            break;
+        case 1:
+            $day_code = "Ma";
+            break;
+        case 2:
+            $day_code = "Di";
+            break;
+        case 3:
+            $day_code = "Wo";
+            break;
+        case 4:
+            $day_code = "Do";
+            break;
+        case 5:
+            $day_code = "Vr";
+            break;
+        case 6:
+            $day_code = "Za";
+            break;
+        default:
+            $day_code = "??";
+            break;
+    }
+    return $day_code;
+}
 
-        function dateToMonth($date){
-            //TODO mutli-language support
-            switch($date['month']){
-                case "January":
-                    $month = "Januari";
-                    break;
-                case "February":
-                    $month = "Februari";
-                    break;
-                case "March":
-                    $month = "Maart";
-                    break;
-                case "April":
-                    $month = "April";
-                    break;
-                case "May":
-                    $month = "Mei";
-                    break;
-                case "June":
-                    $month = "Juni";
-                    break;
-                case "July":
-                    $month = "Juli";
-                    break;
-                case "August":
-                    $month = "Augustus";
-                    break;
-                case "September":
-                    $month = "September";
-                    break;
-                case "October":
-                    $month = "Oktober";
-                    break;
-                case "November":
-                    $month = "November";
-                    break;
-                case "December":
-                    $month = "December";
-                    break;
-                default:
-                    $month = "??";
-                    break;
-            }
-            return $month;
-        }
+function dateToMonth($date)
+{
+    //TODO mutli-language support
+    switch ($date['month']) {
+        case "January":
+            $month = "Januari";
+            break;
+        case "February":
+            $month = "Februari";
+            break;
+        case "March":
+            $month = "Maart";
+            break;
+        case "April":
+            $month = "April";
+            break;
+        case "May":
+            $month = "Mei";
+            break;
+        case "June":
+            $month = "Juni";
+            break;
+        case "July":
+            $month = "Juli";
+            break;
+        case "August":
+            $month = "Augustus";
+            break;
+        case "September":
+            $month = "September";
+            break;
+        case "October":
+            $month = "Oktober";
+            break;
+        case "November":
+            $month = "November";
+            break;
+        case "December":
+            $month = "December";
+            break;
+        default:
+            $month = "??";
+            break;
+    }
+    return $month;
+}
 ?>

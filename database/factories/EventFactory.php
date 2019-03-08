@@ -11,6 +11,6 @@ $factory->define(App\Event::class, function (Faker $faker) {
         'startDate' => date('Y-m-d H:i'),
         'endDate' => $faker->dateTimeBetween('now', '+1 month'),
         'description' => $faker->text,
-        'bannerImage' => $faker->imageUrl(1920, 1080, 'cats')
+        'bannerImage' => file_get_contents($faker->imageUrl(960, 640, 'cats'))
     ];
 });

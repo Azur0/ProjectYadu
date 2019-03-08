@@ -3,7 +3,7 @@
 @section('nav')
 
 
-<h1>    {{ $test }} </h1>
+<h1>    {{ $lat}} </h1>
 
 
 @section('footer')

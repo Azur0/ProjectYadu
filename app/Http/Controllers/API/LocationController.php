@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Event;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\IpApi;
@@ -60,16 +61,34 @@ class LocationController extends Controller
         //if (navigator.geolocation) {
             //$test = navigator.geolocation.getCurrentPosition();
         //} else {
-       // IpApi::$apikey;
-
-        $test = self::get_ip();
-        $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$test));
+        $ip = self::get_ip();
+        $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));
             if($query && $query['status'] == 'success'){
-            $test = $query['zip'];
+             return $query['zip'];
             }else{
-                echo 'Something is wrong';
+                return false;
             }
         //}
-        return view('temp\testLocation',compact('test'));
+    }
+
+    public function evenLonLat(Event $event){
+        $eventZipCode = $event->location()->postalcode;
+        //https://wiki.openstreetmap.org/wiki/Nominatim#Parameters for getting the lat and lon for the zip code
+        $query2 = @unserialize(file_get_contents('https://nominatim.openstreetmap.org/search/'.$eventZipCode.'?format=json&limit=1'));
+        return $query2;
+    }
+
+    public function isWithinReach(Event $event){
+        $eventLocation = self::eventLonLat($event);
+        dd($eventLocation);
+        $userLocation = self::getLocation();
+        // Do not forget to get the google API key
+        $query3 = @unserialize(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='.$userLocation['lat'].','.$userLocation['lon'].'&destinations='.$eventLocation['lat'].'%'.$eventLocation['lon'].'&key=YOUR_API_KEY'));
+        //Some black magic for getting the distance value
+        //if(){
+            //return true;
+        //}else{
+            //return false;
+        //}
     }
 }

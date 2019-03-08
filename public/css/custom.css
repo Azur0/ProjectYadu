@@ -204,11 +204,9 @@ background-size: cover;
 /* Event Overview */
 
 .event{
-    height: auto;
     padding-left: 10px;
     padding-right: 10px;
     margin-top: 20px;
-    display: inline-block;
 }
 
 .event_info{
@@ -226,11 +224,17 @@ background-size: cover;
     .event_info {
         font-size: 1.2rem;
     }
+    .event img{
+        height: 200px;
+    }
 }
 
 @media (min-width: 768px) {
     .event_info {
         font-size: 0.9rem;
+    }
+    .event img{
+        height: 175px;
     }
 }
 
@@ -238,4 +242,9 @@ background-size: cover;
     .event_info {
         font-size: 1rem;
     }
+    .event img{
+        height: 200px;
+    }
 }
+
+

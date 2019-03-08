@@ -218,6 +218,7 @@ background-size: cover;
     height: 50%;
     margin-top: -25%;
     padding: 5px;
+    color: black;
 }
 
 @media (max-width: 768px) {

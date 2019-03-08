@@ -14,8 +14,10 @@
                     <div class="event_info text-truncate">
                         {{-- If your are reading this, it is probably broken. Change activityName to eventName to fix. --}}
                         <h3>{{$event->activityName}}</h3>
-                        <p>{{App\location::where('id', $event->location_id)->firstOrFail()->postalcode }}
-                            - {{dateToText($event->startDate)}}</p>
+                        <p>
+                            {{dateToText($event->startDate)}} <br>
+                            {{cityFromPostalcode(App\location::where('id', $event->location_id)->firstOrFail()->postalcode) }}
+                        </p>
                     </div>
                 </a>
             </div>
@@ -33,5 +35,22 @@ function dateToText($timestamp)
     $formatted_date = ucfirst($date->formatLocalized('%a %d %B %Y'));
     return $formatted_date;
 }
+
+function cityFromPostalcode($postalcode){
+    //TODO Check invalid postalcode
+    $url = "https://nominatim.openstreetmap.org/search?q={$postalcode}&format=json&addressdetails=1";
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch,CURLOPT_USERAGENT,"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    $json = json_decode($result, true);
+    $city = $json[0]['address']['suburb'];
+    return $city;
+}
+
 
 ?>

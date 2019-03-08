@@ -116,7 +116,9 @@
                     </label>
                     @endforeach
                 </div>
-
+                @if ($errors->has('tag'))
+                <div class="error">Kies een type.</div>
+                @endif
             </div>
         </div>
         <div class="pic">
@@ -125,16 +127,20 @@
         <div class="loc">
             <h3>3. Kies de (verzamel)locatie </h3>
             <div class="description location">
-                <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required  value="{{ old('location') }}">
+                <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required value="{{ old('location') }}">
                 <div id="map"></div>
-
-
+                @if ($errors->has('location'))
+                <div class="error">Het locatie-veld is verplicht.</div>
+                @endif
             </div>
         </div>
         <div class="date">
             <h3>4. Kies de datum en tijd</h3>
             <div class="description">
                 <input id="date" name="startDate" type="datetime-local" value="{{ old('startDate') }}" required>
+                @if ($errors->has('startDate'))
+                <div class="error">Deze datum/tijd is ongeldig.</div>
+                @endif
             </div>
         </div>
         <div>
@@ -142,26 +148,28 @@
             <div class="description">
                 <input type="text" id="title" name="activityName" placeholder="Titel" oninput="update_counter_title(this)" maxlength="30" required value="{{ old('activityName') }}">
                 <span id="chars_title"></span> characters remaining
+                @if ($errors->has('activityName'))
+                <div class="error">Het titel-veld is verplicht.</div>
+                @endif
+
                 <textarea id="desc" name="description" placeholder="Omschrijving.." oninput="update_counter_desc(this)" maxlength="150" required>{{ old('description') }}</textarea>
                 <span id="chars_desc"></span> characters remaining
-
+                @if ($errors->has('description'))
+                <div class="error">Het omschrijving-veld is verplicht.</div>
+                @endif
             </div>
         </div>
         <div>
             <h3>6. Hoeveel mensen gaan er max mee?</h3>
             <div class="description">
-                <input type="number" name="people" min="1" max="25" required value="{{ old('people') }}">
+                <input type="number" name="people" min="1" max="25"  value="{{ old('people') }}">
                 <span class="number_desc">mensen kunnen mee (incl. jezelf)</span>
+                @if ($errors->has('people'))
+                <div class="error">Het max aantal mensen-veld is verplicht.</div>
+                @endif
             </div>
         </div>
         <input class="submit" type="submit" name="verzenden" value="Verzend">
-        <div class="notification is-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-                @endforeach
-            </ul>
-        </div>
     </form>
 </div>
 @endsection 

@@ -244,6 +244,10 @@ textarea {
     margin: 0;
 }
 
+.error{
+    color: red;
+}
+
 .submit {
     background-color: #3aaa35;
     /* Green */

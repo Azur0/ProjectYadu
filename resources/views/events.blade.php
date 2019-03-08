@@ -11,7 +11,7 @@
                 <img src={{ asset("images/beer.jpg") }} class="img-responsive" width="100%" alt="Event">
                 <div class="event_info text-truncate">
                     {{-- If your are reading this, it is probably broken. Change activityName to eventName to fix. --}}
-                    <h3>{{$event->activityName}}</h3>
+                    <a href="/events/{{$event->id}}"><h3>{{$event->activityName}}</h3></a>
                     <p>{{App\location::where('id', $event->location_id)->firstOrFail()->postalcode }}
                         - {{dateToText($event->startDate)}}</p>
                 </div>

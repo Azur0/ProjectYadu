@@ -44,7 +44,7 @@ class EventsController extends Controller
             'description' => 'required|max:150',
             'people' => 'required', //min en max nog doen
             'tag' => 'required',
-            'startDate' => 'required',
+            'startDate' => 'required|date|after:now',
             'location' => 'required'
 
         ]);

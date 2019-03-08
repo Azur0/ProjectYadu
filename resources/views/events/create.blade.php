@@ -140,7 +140,7 @@
         <div>
             <h3>5. Beschrijf je uitje</h3>
             <div class="description">
-                <input type="text" id="title" name="activityName" placeholder="Titel" oninput="update_counter_title(this)" maxlength="30" required value="{{ old('title') }}">
+                <input type="text" id="title" name="activityName" placeholder="Titel" oninput="update_counter_title(this)" maxlength="30" required value="{{ old('activityName') }}">
                 <span id="chars_title"></span> characters remaining
                 <textarea id="desc" name="description" placeholder="Omschrijving.." oninput="update_counter_desc(this)" maxlength="150" required>{{ old('description') }}</textarea>
                 <span id="chars_desc"></span> characters remaining

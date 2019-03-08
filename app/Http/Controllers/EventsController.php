@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Account;
 use App\Event;
 use Illuminate\Http\Request;
 use App\EventTag;
+use Illuminate\View\View;
 
 class EventsController extends Controller
 {
@@ -70,9 +72,9 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Event $event)
     {
-        //
+        return view('events.show', compact('event'));
     }
 
     /**
@@ -107,5 +109,11 @@ class EventsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function join($event)
+    {
+
+        return redirect('/events/'. $event);
     }
 }

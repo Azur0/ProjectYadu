@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('events', 'EventsController');
+Route::get('events/{id}/join', 'EventsController@join');
 
 Route::get('/about', function () {
     return view('about');

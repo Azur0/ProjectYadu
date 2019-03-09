@@ -6,6 +6,7 @@
         <div class="col-md-6">
             <div style="background-image: url();">
                 <h1>{{$event->activityName}}</h1><br>
+                <img class="img-fluid" src="https://via.placeholder.com/4000x2000s.jpg"/><br>
                 {{$event->startDate}} <br><br>
             </div>
 
@@ -18,7 +19,7 @@
 
             <div class="row">
                 <h3>Wie gaan er mee?</h3>
-                @if($event->participants->contains(2)) {{--TODO: Change the 2 to the id of the active account--}}
+                @if($event->participants->contains(5)) {{--TODO: Change the 5 to the id of the active account--}}
                 <a href="/events/{{$event->id}}/leave" class="btn btn-danger btn-sm my-auto mx-2">Afmelden</a>
                 @else
                     <a href="/events/{{$event->id}}/join" class="btn btn-success btn-sm my-auto mx-2">Aanmelden</a>

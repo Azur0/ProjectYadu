@@ -115,7 +115,7 @@ class EventsController extends Controller
     public function join($id)
     {
         $event = Event::findOrFail($id);
-        $event->participants()->attach(2); //TODO: Change the 2 to the id of the active account
+        $event->participants()->attach(5); //TODO: Change the 5 to the id of the active account
 
         return redirect('/events/'.$id);
     }
@@ -123,7 +123,7 @@ class EventsController extends Controller
     public function leave($id)
     {
         $event = Event::findOrFail($id);
-        $event->participants()->detach(2); //TODO: Change the 2 to the id of the active account
+        $event->participants()->detach(5); //TODO: Change the 5 to the id of the active account
 
         return redirect('/events/'.$id);
     }

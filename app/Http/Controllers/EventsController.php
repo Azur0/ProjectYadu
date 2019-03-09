@@ -7,6 +7,7 @@ use App\Event;
 use Illuminate\Http\Request;
 use App\EventTag;
 use Illuminate\View\View;
+use function PhpParser\filesInDir;
 
 class EventsController extends Controller
 {
@@ -111,9 +112,19 @@ class EventsController extends Controller
         //
     }
 
-    public function join($event)
+    public function join($id)
     {
+        $event = Event::findOrFail($id);
+        $event->participants()->attach(2); //TODO: Change the 2 to the id of the active account
 
-        return redirect('/events/'. $event);
+        return redirect('/events/'.$id);
+    }
+
+    public function leave($id)
+    {
+        $event = Event::findOrFail($id);
+        $event->participants()->detach(2); //TODO: Change the 2 to the id of the active account
+
+        return redirect('/events/'.$id);
     }
 }

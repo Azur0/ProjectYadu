@@ -67,12 +67,10 @@ class CreateEventsTable extends Migration
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-
-            /* Moet ik nog naar kijken, geeft atm error! 
             $table->foreign('event_picture_id', 'fk_event_pictures1_idx')
                 ->references('id')->on('event_pictures')
                 ->onDelete('no action')
-                ->onUpdate('no action');*/
+                ->onUpdate('no action');
         });
     }
 

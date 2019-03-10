@@ -23,11 +23,10 @@ class CreateEventTagsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->string('tag', 25)->primary();
-            $table->text('description')->nullable();
-            $table->binary('imageDefault');
-            $table->binary('imageSelected');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE event_tags ADD imageDefault LONGBLOB");
+        DB::statement("ALTER TABLE event_tags ADD imageSelected LONGBLOB");
     }
 
     /**

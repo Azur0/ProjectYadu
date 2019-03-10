@@ -20,7 +20,9 @@ class AccountController extends Controller
     		'middleName' => ['Min:5','Max:45'],
     		'lastName' => ['Min:5','Max:45'],
     		'dateOfBirth' => 'Date',
-    		'email' => ['E-Mail','Required']
+    		'email' => ['E-Mail','Required'],
+    		'password' => ['Required','Min:8','confirmed'],
+    		'password_confirmation' => 'Required';
     	]);
 
     	Account::create($values);
@@ -28,5 +30,5 @@ class AccountController extends Controller
     	redirect('/login');
     }
 
-    
+
 }

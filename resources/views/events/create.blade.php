@@ -125,6 +125,7 @@
         <script>
             function check(tag) {
                 $(".picture").hide();
+                $(".picture").prop('checked', false);
                 $("."+tag).show();
             }
         </script>
@@ -139,6 +140,9 @@
                     </label>
                     @endforeach
                 </div>
+                @if ($errors->has('picture'))
+                <div class="error">Kies een foto.</div>
+                @endif
             </div>
         </div>
         <div class="loc">

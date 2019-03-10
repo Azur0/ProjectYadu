@@ -3,7 +3,8 @@
     src: url('/fonts/Consolas Regular.ttf');
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -25,7 +26,6 @@ html, body {
         height: 350px;
     }
 }
-
 
 .navbg {
     background-color: #E79535;
@@ -140,6 +140,7 @@ input[type=number] {
     background-color: #fff;
     font-family: Roboto;
 }
+
 #pac-input {
     margin-left: 12px;
     text-overflow: ellipsis;
@@ -173,7 +174,8 @@ input[type=number] {
 #target {
     width: 345px;
 }
-.location{
+
+.location {
     height: 400px;
 }
 
@@ -223,8 +225,10 @@ textarea {
     opacity: 0.3;
 }
 
-input[type=radio]:checked+.picture img{
+input[type=radio]:checked+.picture img {
     opacity: 1 !important;
+    outline: 4px solid #3aaa35;
+    outline-offset: -4px;
 }
 
 #box .picture img:hover {
@@ -254,7 +258,7 @@ input[type=radio]:checked+.picture img{
     margin: 0;
 }
 
-.error{
+.error {
     color: red;
 }
 
@@ -446,7 +450,7 @@ input[type=radio]:checked+.category span {
     margin-bottom: .1rem !important;
 }
 
-.contact-item span{
+.contact-item span {
     display: table-cell;
     vertical-align: middle;
 }

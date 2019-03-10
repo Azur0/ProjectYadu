@@ -8,6 +8,6 @@ class Event extends Model
 {
     public function eventPicture()
     {
-        return $this->hasOne(EventPicture::class);
+        return $this->hasOne(EventPicture::class, 'id');
     }
 }

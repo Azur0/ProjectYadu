@@ -21,9 +21,8 @@ class PagesController extends Controller
     }
 
     public function events(){
-        $picture = EventPicture::first();
         $events = Event::where('startDate','>=', $this->formatDate())->take(18)->get();
-        return view('events', compact(['events','picture']));
+        return view('events', compact('events'));
     }
 
     private function formatDate(){

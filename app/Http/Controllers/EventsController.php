@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use Illuminate\Http\Request;
 use App\EventTag;
+use App\EventPicture;
 
 class EventsController extends Controller
 {
@@ -27,7 +28,8 @@ class EventsController extends Controller
     {
         //
         $Tags = EventTag::all();
-        return view('events.create')->withtags($Tags);
+        $Picture = EventPicture::all();
+        return view('events.create')->withtags($Tags)->withpictures($Picture);
     }
 
     /**

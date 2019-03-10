@@ -105,9 +105,9 @@
         <div class="type">
             <h3>1. Kies het type uitje </h3>
             <div class="types">
-                <div id="category_box">
+                <div id="box">
                     @foreach ($tags as $Tag)
-                    <input type="radio" id="{{$Tag->tag}}" name="tag" value="{{$Tag->tag}}">
+                    <input type="radio" id="{{$Tag->tag}}" name="tag" value="{{$Tag->tag}}" onclick="check(this.value)">
                     <label for="{{$Tag->tag}}" class="category" title="Uitje met gezinnen">
                         <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($Tag->imageDefault) . '"/>'; ?>
                         <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($Tag->imageSelected) . '"/>'; ?>
@@ -121,8 +121,25 @@
                 @endif
             </div>
         </div>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        <script>
+            function check(tag) {
+                $(".picture").hide();
+                $("."+tag).show();
+            }
+        </script>
         <div class="pic">
             <h3>2. Kies een foto voor je event </h3>
+            <div class="types">
+                <div id="box">
+                    @foreach ($pictures as $picture)
+                    <input type="radio" id="{{$picture->id}}" class="picture {{$picture->tag}}" name="picture" value="{{$picture->id}}">
+                    <label for="{{$picture->id}}" class="picture {{$picture->tag}}" title="Uitje met gezinnen">
+                        <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($picture->pictures) . '"/>'; ?>
+                    </label>
+                    @endforeach
+                </div>
+            </div>
         </div>
         <div class="loc">
             <h3>3. Kies de (verzamel)locatie </h3>
@@ -162,7 +179,7 @@
         <div>
             <h3>6. Hoeveel mensen gaan er max mee?</h3>
             <div class="description">
-                <input type="number" name="people" min="1" max="25"  value="{{ old('people') }}">
+                <input type="number" name="people" min="1" max="25" value="{{ old('people') }}">
                 <span class="number_desc">mensen kunnen mee (incl. jezelf)</span>
                 @if ($errors->has('people'))
                 <div class="error">Het max aantal mensen-veld is verplicht.</div>

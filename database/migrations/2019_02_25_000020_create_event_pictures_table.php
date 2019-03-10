@@ -26,7 +26,7 @@ class CreateEventPicturesTable extends Migration
 
 
         });
-        DB::statement("ALTER TABLE event_pictures ADD pictures LONGBLOB");
+        DB::statement("ALTER TABLE event_pictures ADD picture LONGBLOB");
     }
 
     /**

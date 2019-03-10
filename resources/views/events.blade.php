@@ -10,7 +10,8 @@
 
             <div class="col-md-6 col-lg-4 event">
                 <a href="/events/{{$event->id}}">
-                    <img src={{ asset("images/large.jpg") }} class="img-responsive" width="100%" alt="Event">
+                    {{--<img src={{ asset("images/large.jpg") }} class="img-responsive" width="100%" alt="Event">--}}
+                    <img class="default" src="data:image/jpeg;base64,' . base64_encode($event->eventPicture->Picures) . '" class="img-responsive" width="100%" alt="Event"/>
                     <div class="event_info text-truncate">
                         {{-- If your are reading this, it is probably broken. Change activityName to eventName to fix. --}}
                         <h3>{{$event->activityName}}</h3>

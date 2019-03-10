@@ -16,13 +16,15 @@ class CreateEventPicturesTable extends Migration
         Schema::create('event_pictures', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('tag', 25);
+            $table->unsignedInteger('tag_id');
             $table->timestamps();
 
-            $table->index(["tag"], 'fk_event_pictures_eventTags1_idx');
+            $table->index(["tag_id"], 'fk_event_pictures_eventTags1_idx');
 
-            $table->foreign('tag', 'fk_event_pictures_eventTags1_idx')
-            ->references('tag')->on('event_tags');
+            $table->foreign('tag_id', 'fk_event_eventTags2_idx')
+            ->references('id')->on('event_tags')
+            ->onDelete('no action')
+            ->onUpdate('no action');
 
 
         });

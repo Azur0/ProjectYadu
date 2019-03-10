@@ -65,9 +65,11 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
+        <div id="logreg" class="col-md-8 offset-md-4">Nog geen account? registreer <a href="/register">hier</a>.</div>
     </div>
 </div>
 @endsection

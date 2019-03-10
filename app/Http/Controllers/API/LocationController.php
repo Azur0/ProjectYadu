@@ -73,7 +73,7 @@ class LocationController extends Controller
 
     public function evenLonLat(Event $event){
         $eventZipCode = $event->location()->postalcode;
-        //https://wiki.openstreetmap.org/wiki/Nominatim#Parameters for getting the lat and lon for the zip code
+        //https://wiki.openstreetmap.org/wiki/Nominatim#Examples for getting the lat and lon for the zip code
         $query2 = @unserialize(file_get_contents('https://nominatim.openstreetmap.org/search/'.$eventZipCode.'?format=json&limit=1'));
         return $query2;
     }
@@ -84,6 +84,8 @@ class LocationController extends Controller
         $userLocation = self::getLocation();
         // Do not forget to get the google API key
         $query3 = @unserialize(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='.$userLocation['lat'].','.$userLocation['lon'].'&destinations='.$eventLocation['lat'].'%'.$eventLocation['lon'].'&key=YOUR_API_KEY'));
+        dd($query3['distance']);
+
         //Some black magic for getting the distance value
         //if(){
             //return true;

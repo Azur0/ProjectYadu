@@ -27,4 +27,8 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+Route::get('/slider',function(){
+    return view('temp\sliderDemo');
+});
+
 Route::get('/location','API\LocationController@getLocation');

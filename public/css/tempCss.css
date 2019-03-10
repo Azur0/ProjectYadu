@@ -1,0 +1,68 @@
+@font-face {
+    font-family: 'ConsolasRegular';
+    src: url('/fonts/Consolas Regular.ttf');
+}
+
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.6;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 15px;
+    margin-top: 30px;
+}
+
+
+ .slider:active, .slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: round;
+    width: 40px;
+    height: 40px;
+    background: #E79535;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 40px;
+    height: 40px;
+    background: #E79535;
+    cursor: progress;
+}
+
+.box-range-value{
+    background-color: #2e3436;
+    height: 50px;
+    width: 50px;
+    border-radius: 0 50% 50% 50%;
+    transform: rotate(-135deg);
+    margin: auto;
+    left:0;
+    right:0;
+    top: 30px;
+    bottom: 20px;
+
+}
+
+#rangeValueDisplay{
+    color: white;
+    transform: rotate(135deg);
+    position: relative;
+    margin: auto;
+    text-align: center;
+    font-size: 28px;
+    font-family: ConsolasRegular;
+}

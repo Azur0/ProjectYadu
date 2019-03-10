@@ -47,7 +47,8 @@ class EventsController extends Controller
             'people' => 'required', //min en max nog doen
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
-            'location' => 'required'
+            'location' => 'required',
+            'picture' => 'required'
 
         ]);
         Event::create(
@@ -57,9 +58,10 @@ class EventsController extends Controller
                 'description' => $attributes['description'],
                 'startDate' => $attributes['startDate'],
                 'numberOfPeople' => $attributes['people'],
-                'tag' => $attributes['tag'],
+                'tag_id' => $attributes['tag'],
                 'location_id' => '1',
-                'owner_id' => '1'
+                'owner_id' => '1',
+                'event_picture_id'=> $attributes['picture']
             ]
         );
 

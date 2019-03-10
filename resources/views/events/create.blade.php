@@ -107,7 +107,7 @@
             <div class="types">
                 <div id="box">
                     @foreach ($tags as $Tag)
-                    <input type="radio" id="{{$Tag->tag}}" name="tag" value="{{$Tag->tag}}" onclick="check(this.value)">
+                    <input type="radio" id="{{$Tag->tag}}" name="tag" value="{{$Tag->id}}" onclick="check({{$Tag->id }})">
                     <label for="{{$Tag->tag}}" class="category" title="Uitje met gezinnen">
                         <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($Tag->imageDefault) . '"/>'; ?>
                         <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($Tag->imageSelected) . '"/>'; ?>
@@ -133,9 +133,9 @@
             <div class="types">
                 <div id="box">
                     @foreach ($pictures as $picture)
-                    <input type="radio" id="{{$picture->id}}" class="picture {{$picture->tag}}" name="picture" value="{{$picture->id}}">
-                    <label for="{{$picture->id}}" class="picture {{$picture->tag}}" title="Uitje met gezinnen">
-                        <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($picture->pictures) . '"/>'; ?>
+                    <input type="radio" id="{{$picture->id}}" class="picture {{$picture->tag_id}}" name="picture" value="{{$picture->id}}">
+                    <label for="{{$picture->id}}" class="picture {{$picture->tag_id}}" title="Uitje met gezinnen">
+                        <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($picture->picture) . '"/>'; ?>
                     </label>
                     @endforeach
                 </div>

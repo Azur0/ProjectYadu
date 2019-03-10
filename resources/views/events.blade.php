@@ -38,7 +38,11 @@ function dateToText($timestamp)
 }
 
 function cityFromPostalcode($postalcode){
-    //TODO Check invalid postalcode
+
+    if(!isValidPostalcode($postalcode)){
+        return "Invalid postal code";
+    }
+
     $url = "https://nominatim.openstreetmap.org/search?q={$postalcode}&format=json&addressdetails=1";
 
     $ch = curl_init();
@@ -49,8 +53,16 @@ function cityFromPostalcode($postalcode){
     curl_close($ch);
 
     $json = json_decode($result, true);
-    $city = $json[0]['address']['suburb'];
-    return $city;
+    if(isset($json[0]['address']['suburb'])){
+        return $json[0]['address']['suburb'];
+    }else{
+        return "City not found";
+    }
+}
+
+function isValidPostalcode($postalcode){
+    $regex = '/^([1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9])[a-zA-Z]{2}$/';
+    return preg_match($regex,$postalcode);
 }
 
 

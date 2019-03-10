@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\EventPicture;
 
 class PagesController extends Controller
 {
@@ -20,9 +21,9 @@ class PagesController extends Controller
     }
 
     public function events(){
-
+        $picture = EventPicture::first();
         $events = Event::where('startDate','>=', $this->formatDate())->take(18)->get();
-        return view('events', compact('events'));
+        return view('events', compact(['events','picture']));
     }
 
     private function formatDate(){

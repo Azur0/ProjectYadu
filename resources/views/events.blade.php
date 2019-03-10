@@ -7,14 +7,12 @@
 @section('content')
     <div class="event_overview row">
         @foreach ($events as $event)
-
             <div class="col-md-6 col-lg-4 event">
                 <a href="/events/{{$event->id}}">
-                    {{--<img src={{ asset("images/large.jpg") }} class="img-responsive" width="100%" alt="Event">--}}
-                    <img class="default" src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->pictures)}}" class="img-responsive" width="100%" alt="Event"/>
+                    <img class="default" src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->pictures)}}"
+                         class="img-responsive" width="100%" alt="Event"/>
                     <div class="event_info text-truncate">
-                        {{-- If your are reading this, it is probably broken. Change activityName to eventName to fix. --}}
-                        <h3>{{$event->activityName}}</h3>
+                        <h3>{{$event->eventName}}</h3>
                         <p>
                             {{dateToText($event->startDate)}} <br>
                             {{cityFromPostalcode(App\location::where('id', $event->location_id)->firstOrFail()->postalcode) }}
@@ -22,7 +20,6 @@
                     </div>
                 </a>
             </div>
-
         @endforeach
     </div>
 @endsection
@@ -37,9 +34,9 @@ function dateToText($timestamp)
     return $formatted_date;
 }
 
-function cityFromPostalcode($postalcode){
-
-    if(!isValidPostalcode($postalcode)){
+function cityFromPostalcode($postalcode)
+{
+    if (!isValidPostalcode($postalcode)) {
         return "Invalid postal code";
     }
 
@@ -47,23 +44,22 @@ function cityFromPostalcode($postalcode){
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch,CURLOPT_USERAGENT,"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $result = curl_exec($ch);
     curl_close($ch);
 
     $json = json_decode($result, true);
-    if(isset($json[0]['address']['suburb'])){
+    if (isset($json[0]['address']['suburb'])) {
         return $json[0]['address']['suburb'];
-    }else{
+    } else {
         return "City not found";
     }
 }
 
-function isValidPostalcode($postalcode){
+function isValidPostalcode($postalcode)
+{
     $regex = '/^([1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9])[a-zA-Z]{2}$/';
-    return preg_match($regex,$postalcode);
+    return preg_match($regex, $postalcode);
 }
-
-
 ?>

@@ -13,7 +13,7 @@
     appearance: none;
     width: 85%;
     height: 25px;
-    background: #d3d3d3;
+    background: #3AAA35;
     outline: none;
     opacity: 0.6;
     -webkit-transition: .2s;
@@ -32,7 +32,7 @@
     appearance: round;
     width: 40px;
     height: 40px;
-    background: #E79535;
+    background: #3AAA35;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -40,7 +40,7 @@
 .slider::-moz-range-thumb {
     width: 40px;
     height: 40px;
-    background: #E79535;
+    background: #3AAA35;
     cursor: progress;
 }
 

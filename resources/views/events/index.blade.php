@@ -11,7 +11,7 @@
                 <a href="/events/{{$event->id}}">
                     <div class="card mb-4 box-shadow">
                         <img class="card-img-top"
-                             src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->pictures)}}"
+                             src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->picture)}}"
                              alt="Card image cap">
                         <div class="event_info">
                             <h3>{{$event->eventName}}</h3>

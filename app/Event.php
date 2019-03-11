@@ -10,7 +10,7 @@ class Event extends Model
 
     public function eventPicture()
     {
-        return $this->hasOne(EventPicture::class, 'id');
+        return $this->hasOne('App\EventPicture', 'id', 'event_picture_id');
     }
 
     public function owner()

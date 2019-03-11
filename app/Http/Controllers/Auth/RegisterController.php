@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Account;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -40,6 +40,13 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    protected function showRegistrationForm()
+    {
+        $genders = \App\Gender::all();
+
+        return view('auth.register')->with('genders', $genders);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,9 +56,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'firstName' => ['min:5','max:45','required'],
+            'middleName' => 'max:45',
+            'lastName' => ['min:5','max:45'],
+            'dateOfBirth' => 'date',
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8','confirmed']
         ]);
     }
 
@@ -63,17 +73,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        return Account::create([
+            'firstName' => $data['firstName'],
+            'middleName' => $data['middleName'],
+            'lastName' => $data['lastName'],
+            'dateOfBirth' => $data['dateOfBirth'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }
 
-    protected function showRegistrationForm()
-    {
-        $genders = \App\Gender::all();
-
-		return view('auth.register')->with('genders', $genders);
-    }
+    
 }

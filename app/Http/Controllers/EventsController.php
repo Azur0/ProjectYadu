@@ -19,6 +19,7 @@ class EventsController extends Controller
     public function index()
     {
         $events = Event::where('startDate','>=', $this->formatDate())->get(); //add ->get(18)
+        $events = $this->filterDistance($events);
         return view('events.index', compact('events'));
     }
 
@@ -139,5 +140,10 @@ class EventsController extends Controller
         $formatted_date .= $date['mon'] . "/";
         $formatted_date .= $date['mday'];
         return $formatted_date;
+    }
+
+    private function filterDistance($events){
+        //TODO: Distance filter code van Dogen
+        return $events;
     }
 }

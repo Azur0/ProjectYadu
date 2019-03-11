@@ -69,4 +69,11 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    protected function showRegistrationForm()
+    {
+        $genders = \App\Gender::all();
+
+		return view('auth.register')->with('genders', $genders);
+    }
 }

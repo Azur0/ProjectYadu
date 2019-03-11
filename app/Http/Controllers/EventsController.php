@@ -18,7 +18,8 @@ class EventsController extends Controller
      */
     public function index()
     {
-        return view('events.index');
+        $events = Event::where('startDate','>=', $this->formatDate())->get(); //add ->get(18)
+        return view('events.index', compact('events'));
     }
 
     /**
@@ -130,5 +131,13 @@ class EventsController extends Controller
         }
         return redirect('/events/' . $id);
         //TODO: Add error 'You already joined!'
+    }
+
+    private function formatDate(){
+        $date = getdate();
+        $formatted_date = $date['year'] . "/";
+        $formatted_date .= $date['mon'] . "/";
+        $formatted_date .= $date['mday'];
+        return $formatted_date;
     }
 }

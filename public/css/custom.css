@@ -263,49 +263,35 @@ html, body {
 }
 
 .event_info{
-    background: rgba(255,255,255,0.7);
-    position: absolute;
-    width: calc(100% - 20px);
-    z-index: 100;
-    height: 50%;
-    margin-top: -25%;
     padding: 5px;
-    color: black;
+}
+
+.event_info p{
+    margin: 0;
+}
+
+.event img{
+    width: auto;
+    text-align: center;
+    overflow: hidden;
 }
 
 @media (max-width: 768px) {
-    .event_info {
-        font-size: 1.1rem;
-    }
     .event img{
         height: 200px;
     }
 }
 
 @media (min-width: 768px) {
-    .event_info {
-        font-size: 0.9rem;
-    }
-    .event img{
-        height: 175px;
-    }
-}
-
-@media (min-width: 992px) {
-    .event_info {
-        font-size: 0.7rem;
-    }
     .event img{
         height: 175px;
     }
 }
 
 @media (min-width: 1200px) {
-    .event_info {
-        font-size: 1rem;
     }
     .event img{
-        height: 200px;
+        height: 150px;
     }
 }
 

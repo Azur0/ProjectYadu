@@ -8,17 +8,16 @@
     <div class="event_overview row">
         @foreach ($events as $event)
             <div class="col-md-6 col-lg-4 event">
-                <a href="/events/{{$event->id}}">
-                    <img class="default" src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->pictures)}}"
-                         class="img-responsive" width="100%" alt="Event"/>
-                    <div class="event_info text-truncate">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->pictures)}}" alt="Card image cap">
+                    <div class="event_info">
                         <h3>{{$event->eventName}}</h3>
                         <p>
                             {{dateToText($event->startDate)}} <br>
                             {{cityFromPostalcode(App\location::where('id', $event->location_id)->firstOrFail()->postalcode) }}
                         </p>
                     </div>
-                </a>
+                </div>
             </div>
         @endforeach
     </div>

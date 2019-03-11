@@ -11,16 +11,22 @@
         <div id="rangeValueDisplay">
         </div>
     </div>
-    <div class="slidecontainer">
+    <div class="slideContainer">
         <input type="range"
                ticks="[5, 10, 15, 20, 25]"
-               labels='["short", "medium", "long"]'
                min="5"
                max="25"
                step="5"
                value="15"
-               class="slider" id="rangeValue"></input>
+               class="slider" id="rangeValue">
+        <label class="rangeTextLeft">5 KM</label>
+        <label class="rangeTextCenter">10 KM</label>
+        <label class="rangeTextCenter">15 KM</label>
+        <label class="rangeTextCenter">20 KM</label>
+        <label class="rangeTextRight">25 KM</label>
     </div>
+
+
 
     <script type="text/javascript">
         var slider=document.getElementById("rangeValue");

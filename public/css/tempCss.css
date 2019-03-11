@@ -3,7 +3,7 @@
     src: url('/fonts/Consolas Regular.ttf');
 }
 
-.slidecontainer {
+.slideContainer {
     width: 100%;
 }
 
@@ -64,5 +64,29 @@
     margin: auto;
     text-align: center;
     font-size: 28px;
+    font-family: ConsolasRegular;
+}
+
+.rangeTextLeft{
+    align-content: center;
+    width:20% !important;
+    font-size: 28px;
+    margin: auto !important;
+    font-family: ConsolasRegular;
+}
+
+.rangeTextCenter{
+    width:20% !important;
+    align-content: center;
+    font-size: 28px;
+    margin: auto !important;
+    font-family: ConsolasRegular;
+}
+
+.rangeTextRight{
+    width:20% !important;
+    align-content: center;
+    font-size: 28px;
+    margin: auto !important;
     font-family: ConsolasRegular;
 }

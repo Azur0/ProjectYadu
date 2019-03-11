@@ -109,7 +109,7 @@ class LocationController extends Controller
             $result = curl_exec($ch);
             curl_close($ch);
             $json = json_decode($result, true);
-            $json['rows'][0]['elements'][0]['distance']['value'];
+            //$json['rows'][0]['elements'][0]['distance']['value'];
             if($json['rows'][0]['elements'][0]['distance']['value'] <= $distance){
             return true;
             }else{

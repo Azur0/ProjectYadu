@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Event;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\EventTag;
 use Illuminate\View\View;
@@ -18,8 +19,14 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $events = Event::where('startDate','>=', $this->formatDate())->get(); //add ->get(18)
-        $events = $this->filterDistance($events);
+        $unfiltered_events = Event::where('startDate','>=', $this->formatDate())->get(); //add ->get(18)
+        $events = new Collection();
+        foreach ($unfiltered_events as $event){
+            if($this->isEventInRange($event)){
+                $events->push($event);
+            }
+        }
+
         return view('events.index', compact('events'));
     }
 
@@ -142,8 +149,7 @@ class EventsController extends Controller
         return $formatted_date;
     }
 
-    private function filterDistance($events){
-        //TODO: Distance filter code van Dogen
-        return $events;
+    private function isEventInRange(Event $event){
+        return true;
     }
 }

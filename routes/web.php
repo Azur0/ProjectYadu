@@ -25,10 +25,7 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/events', 'EventsController@index');
-
 Route::resource('events', 'EventsController');
-
 Route::get('events/{id}/join', 'EventsController@join');
 Route::get('events/{id}/leave', 'EventsController@leave');
 

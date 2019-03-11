@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Gender;
 
 class AccountController extends Controller
 {
@@ -10,7 +11,7 @@ class AccountController extends Controller
 	{
 		$genders = \App\Gender::all();
 
-		return view('auth.register', ['genders' => $genders]);
+		return view('auth.register')->with('genders', $genders);;
 	}
 
     public function store()

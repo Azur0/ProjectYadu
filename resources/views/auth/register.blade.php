@@ -59,7 +59,6 @@
                             <div class="col-md-6">
                                 <select name="gender">
                                     <option value="-">-</option>
-                                    
                                     @foreach($genders as $gender)
                                         <option value="{{ $gender->gender }}">{{ $gender->gender }}</option>
                                     @endforeach

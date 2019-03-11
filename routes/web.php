@@ -16,8 +16,6 @@ Route::get('/about', function () { return view('about'); });
 Route::get('/contact', function () { return view('contact'); });
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::get('/register', 'AccountController@create')->name('register');
-
 Auth::routes();
 
 

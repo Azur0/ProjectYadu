@@ -5,7 +5,7 @@
 @section('nav')
 
 @section('content')
-<h1>    {{ $lat}} </h1>
+<h1>{{ $userLocation['lon']. "   ".$userLocation['lat']."\n" .$eventLocation[0]['lon']. "   " .$eventLocation[0]['lat'] }} </h1>
 @endsection()
 
 @section('footer')

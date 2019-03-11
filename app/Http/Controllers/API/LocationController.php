@@ -72,14 +72,15 @@ class LocationController extends Controller
     }
 
     public function evenLonLat(Event $event){
-        $eventZipCode = $event->location()->postalcode;
+        //$eventZipCode = $event->location()->postalcode;
+        $eventZipCode = '5222AS';
         //https://wiki.openstreetmap.org/wiki/Nominatim#Examples for getting the lat and lon for the zip code
         $query2 = @unserialize(file_get_contents('https://nominatim.openstreetmap.org/search/'.$eventZipCode.'?format=json&limit=1'));
         return $query2;
     }
 
     public function isWithinReach(/*Event $event*/){
-        //$eventLocation = self::eventLonLat($event);
+        $eventLocation = self::eventLonLat(/*$event*/);
         //dd($eventLocation);
         $userLocation = self::getLocation();
         dd($userLocation);

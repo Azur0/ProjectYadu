@@ -1,7 +1,104 @@
 @extends('layouts/app')
 
 @section('content')
+
+<div class="create-event">
+    <form action="/events" method="POST">
+        @csrf
+        <div class="type">
+            <h3>1. Kies het type uitje </h3>
+            <div class="types">
+                <div id="box">
+                    @foreach ($tags as $Tag)
+                    <input type="radio" id="{{$Tag->tag}}" name="tag" value="{{$Tag->id}}" onclick="check({{$Tag->id }})">
+                    <label for="{{$Tag->tag}}" class="category" title="Uitje met gezinnen">
+                        <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($Tag->imageDefault) . '"/>'; ?>
+                        <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($Tag->imageSelected) . '"/>'; ?>
+                        <span>{{$Tag->tag}}</span>
+                    </label>
+                    @endforeach
+                </div>
+                @if ($errors->has('tag'))
+                <div class="error">Kies een type.</div>
+                @endif
+            </div>
+        </div>
+
+        <div class="pic">
+            <h3>2. Kies een foto voor je event </h3>
+            <div class="types">
+                <div id="box">
+                    @foreach ($pictures as $picture)
+                    <input type="radio" id="{{$picture->id}}" class="picture {{$picture->tag_id}}" name="picture" value="{{$picture->id}}">
+                    <label for="{{$picture->id}}" class="picture {{$picture->tag_id}}" title="Uitje met gezinnen">
+                        <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($picture->picture) . '"/>'; ?>
+                    </label>
+                    @endforeach
+                </div>
+                @if ($errors->has('picture'))
+                <div class="error">Kies een foto.</div>
+                @endif
+            </div>
+        </div>
+        
+        <div class="loc">
+            <h3>3. Kies de (verzamel)locatie </h3>
+            <div class="description location">
+                <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required value="{{ old('location') }}">
+                <div id="map"></div>
+                @if ($errors->has('location'))
+                <div class="error">Het locatie-veld is verplicht.</div>
+                @endif
+            </div>
+        </div>
+        <div class="date">
+            <h3>4. Kies de datum en tijd</h3>
+            <div class="description">
+                <input id="date" name="startDate" type="datetime-local" value="{{ old('startDate') }}" required>
+                @if ($errors->has('startDate'))
+                <div class="error">Deze datum/tijd is ongeldig.</div>
+                @endif
+            </div>
+        </div>
+        <div>
+            <h3>5. Beschrijf je uitje</h3>
+            <div class="description">
+                <input type="text" id="title" name="activityName" placeholder="Titel" oninput="update_counter_title(this)" maxlength="30" required value="{{ old('activityName') }}">
+                <span id="chars_title"></span> characters remaining
+                @if ($errors->has('activityName'))
+                <div class="error">Het titel-veld is verplicht.</div>
+                @endif
+
+                <textarea id="desc" name="description" placeholder="Omschrijving.." oninput="update_counter_desc(this)" maxlength="150" required>{{ old('description') }}</textarea>
+                <span id="chars_desc"></span> characters remaining
+                @if ($errors->has('description'))
+                <div class="error">Het omschrijving-veld is verplicht.</div>
+                @endif
+            </div>
+        </div>
+        <div>
+            <h3>6. Hoeveel mensen gaan er max mee?</h3>
+            <div class="description">
+                <input type="number" name="people" min="1" max="25" value="{{ old('people') }}">
+                <span class="number_desc">mensen kunnen mee (incl. jezelf)</span>
+                @if ($errors->has('people'))
+                <div class="error">Het max aantal mensen-veld is verplicht.</div>
+                @endif
+            </div>
+        </div>
+        <input class="submit" type="submit" name="verzenden" value="Verzend">
+    </form>
+</div>
 <script>
+    // function for displaying the images
+    function check(tag) {
+        $(".picture").hide();
+        $(".picture").prop('checked', false);
+        $("." + tag).show();
+    }
+
+
+    // script for character remaining
     window.onload = function() {
         var textarea = document.getElementById('desc');
         var text = document.getElementById('title');
@@ -20,9 +117,7 @@
         var len = parseInt(textarea.getAttribute("maxlength"), 10);
         document.getElementById('chars_desc').innerHTML = len - textarea.value.length;
     }
-    // This example adds a search box to a map, using the Google Place Autocomplete
-    // feature. People can enter geographical searches. The search box will return a
-    // pick list containing a mix of places and predicted search terms.
+
 
     // This example requires the Places library. Include the libraries=places
     // parameter when you first load the API. For example:
@@ -99,98 +194,5 @@
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=places&callback=initAutocomplete" async defer></script>
-<div class="create-event">
-    <form action="/events" method="POST">
-        @csrf
-        <div class="type">
-            <h3>1. Kies het type uitje </h3>
-            <div class="types">
-                <div id="box">
-                    @foreach ($tags as $Tag)
-                    <input type="radio" id="{{$Tag->tag}}" name="tag" value="{{$Tag->id}}" onclick="check({{$Tag->id }})">
-                    <label for="{{$Tag->tag}}" class="category" title="Uitje met gezinnen">
-                        <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($Tag->imageDefault) . '"/>'; ?>
-                        <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($Tag->imageSelected) . '"/>'; ?>
-
-                        <span>{{$Tag->tag}}</span>
-                    </label>
-                    @endforeach
-                </div>
-                @if ($errors->has('tag'))
-                <div class="error">Kies een type.</div>
-                @endif
-            </div>
-        </div>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-        <script>
-            function check(tag) {
-                $(".picture").hide();
-                $(".picture").prop('checked', false);
-                $("."+tag).show();
-            }
-        </script>
-        <div class="pic">
-            <h3>2. Kies een foto voor je event </h3>
-            <div class="types">
-                <div id="box">
-                    @foreach ($pictures as $picture)
-                    <input type="radio" id="{{$picture->id}}" class="picture {{$picture->tag_id}}" name="picture" value="{{$picture->id}}">
-                    <label for="{{$picture->id}}" class="picture {{$picture->tag_id}}" title="Uitje met gezinnen">
-                        <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($picture->picture) . '"/>'; ?>
-                    </label>
-                    @endforeach
-                </div>
-                @if ($errors->has('picture'))
-                <div class="error">Kies een foto.</div>
-                @endif
-            </div>
-        </div>
-        <div class="loc">
-            <h3>3. Kies de (verzamel)locatie </h3>
-            <div class="description location">
-                <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required value="{{ old('location') }}">
-                <div id="map"></div>
-                @if ($errors->has('location'))
-                <div class="error">Het locatie-veld is verplicht.</div>
-                @endif
-            </div>
-        </div>
-        <div class="date">
-            <h3>4. Kies de datum en tijd</h3>
-            <div class="description">
-                <input id="date" name="startDate" type="datetime-local" value="{{ old('startDate') }}" required>
-                @if ($errors->has('startDate'))
-                <div class="error">Deze datum/tijd is ongeldig.</div>
-                @endif
-            </div>
-        </div>
-        <div>
-            <h3>5. Beschrijf je uitje</h3>
-            <div class="description">
-                <input type="text" id="title" name="activityName" placeholder="Titel" oninput="update_counter_title(this)" maxlength="30" required value="{{ old('activityName') }}">
-                <span id="chars_title"></span> characters remaining
-                @if ($errors->has('activityName'))
-                <div class="error">Het titel-veld is verplicht.</div>
-                @endif
-
-                <textarea id="desc" name="description" placeholder="Omschrijving.." oninput="update_counter_desc(this)" maxlength="150" required>{{ old('description') }}</textarea>
-                <span id="chars_desc"></span> characters remaining
-                @if ($errors->has('description'))
-                <div class="error">Het omschrijving-veld is verplicht.</div>
-                @endif
-            </div>
-        </div>
-        <div>
-            <h3>6. Hoeveel mensen gaan er max mee?</h3>
-            <div class="description">
-                <input type="number" name="people" min="1" max="25" value="{{ old('people') }}">
-                <span class="number_desc">mensen kunnen mee (incl. jezelf)</span>
-                @if ($errors->has('people'))
-                <div class="error">Het max aantal mensen-veld is verplicht.</div>
-                @endif
-            </div>
-        </div>
-        <input class="submit" type="submit" name="verzenden" value="Verzend">
-    </form>
-</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 @endsection 

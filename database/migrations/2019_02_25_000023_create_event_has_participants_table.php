@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventHasPatricipantsTable extends Migration
+class CreateEventHasParticipantsTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'event_has_patricipants';
+    public $tableName = 'event_has_participants';
 
     /**
      * Run the migrations.
-     * @table event_has_patricipants
+     * @table event_has_participants
      *
      * @return void
      */

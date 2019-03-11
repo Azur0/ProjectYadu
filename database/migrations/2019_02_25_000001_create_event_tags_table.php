@@ -22,7 +22,8 @@ class CreateEventTagsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->string('tag', 25)->primary();
+            $table->increments('id');
+            $table->string('tag', 25);
             $table->timestamps();
         });
         DB::statement("ALTER TABLE event_tags ADD imageDefault LONGBLOB");

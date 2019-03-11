@@ -24,7 +24,7 @@ class CreateEventsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('status', 20);
-            $table->string('tag', 25);
+            $table->unsignedInteger('tag_id');
             $table->unsignedInteger('location_id');
             $table->unsignedInteger('owner_id');
             $table->unsignedInteger('event_picture_id');
@@ -41,7 +41,7 @@ class CreateEventsTable extends Migration
 
             $table->index(["status"], 'fk_event_eventStatus1_idx');
 
-            $table->index(["tag"], 'fk_event_eventTags1_idx');
+            $table->index(["tag_id"], 'fk_event_eventTags1_idx');
 
             $table->index(["owner_id"], 'fk_activity_accounts1_idx');
 
@@ -62,8 +62,8 @@ class CreateEventsTable extends Migration
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->foreign('tag', 'fk_event_eventTags1_idx')
-                ->references('tag')->on('event_tags')
+            $table->foreign('tag_id', 'fk_event_eventTags1_idx')
+                ->references('id')->on('event_tags')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 

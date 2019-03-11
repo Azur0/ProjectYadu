@@ -114,6 +114,8 @@ class EventsController extends Controller
 
     public function join($id)
     {
+        dd(auth()->user()->id);
+
         $event = Event::findOrFail($id);
         if (!$event->participants->contains(5)) {
             $event->participants()->attach(5); //TODO: Change the 5 to the id of the active account

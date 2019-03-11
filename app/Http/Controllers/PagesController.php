@@ -21,7 +21,7 @@ class PagesController extends Controller
     }
 
     public function events(){
-        $events = Event::where('startDate','>=', $this->formatDate())->take(18)->get();
+        $events = Event::where('startDate','>=', $this->formatDate())->get(); //add ->get(18)
         $eventAmount = Event::all()->count();
         return view('events', compact(['events', 'eventAmount']));
     }

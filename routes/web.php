@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EventsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +24,10 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
+
+Route::resource('events', 'EventsController');
+Route::get('events/{id}/join', 'EventsController@join');
+Route::get('events/{id}/leave', 'EventsController@leave');
+
+
+

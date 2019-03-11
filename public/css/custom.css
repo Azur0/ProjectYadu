@@ -475,8 +475,14 @@ input[type=radio]:checked + .category span {
     margin-top: 20px;
 }
 
+.event a:hover{
+    text-decoration: none !important;
+    color: black;
+}
+
 .event_info {
     padding: 5px;
+    color: black;
 }
 
 .event_info p {

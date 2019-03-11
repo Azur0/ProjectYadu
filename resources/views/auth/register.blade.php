@@ -137,4 +137,9 @@
         <div id="logreg" class="col-md-8 offset-md-4">Al een account? login <a href="/login">hier</a>.</div>
     </div>
 </div>
+<script language="javascript">
+window.onbeforeunload = function() {
+    return "Je wijzigingen worden niet opgeslagen!";
+};
+</script>
 @endsection

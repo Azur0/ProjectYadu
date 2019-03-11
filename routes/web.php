@@ -18,6 +18,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/register', 'AccountController@create')->name('register');
 
-//Auth::routes();
+Auth::routes();
 
 

@@ -22,7 +22,7 @@ class AccountController extends Controller
     		'dateOfBirth' => 'Date',
     		'email' => ['E-Mail','Required'],
     		'password' => ['Required','Min:8','confirmed'],
-    		'password_confirmation' => 'Required';
+    		'password_confirmation' => 'Required'
     	]);
 
     	Account::create($values);

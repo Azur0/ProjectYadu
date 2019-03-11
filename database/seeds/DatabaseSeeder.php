@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(GendersTableSeeder::class);
         $this->call(EventStatusesTableSeeder::class);
         $this->call(AccountsTableSeeder::class);
+        $this->call(EventTagsTableSeeder::class);
+        $this->call(EventPicturesTableSeeder::class);
         $this->call(EventsTableSeeder::class);
     }
 }

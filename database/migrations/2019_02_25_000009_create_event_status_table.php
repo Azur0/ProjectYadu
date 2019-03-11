@@ -8,7 +8,7 @@ class CreateEventStatusTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'event_status';
+    public $tableName = 'event_statuses';
     /**
      * Run the migrations.
      * @table event_status

@@ -36,7 +36,7 @@ class EventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store()
@@ -70,7 +70,7 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Event $event)
@@ -81,7 +81,7 @@ class EventsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -92,8 +92,8 @@ class EventsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -104,7 +104,7 @@ class EventsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -115,16 +115,20 @@ class EventsController extends Controller
     public function join($id)
     {
         $event = Event::findOrFail($id);
-        $event->participants()->attach(5); //TODO: Change the 5 to the id of the active account
-
-        return redirect('/events/'.$id);
+        if (!$event->participants->contains(5)) {
+            $event->participants()->attach(5); //TODO: Change the 5 to the id of the active account
+        }
+        return redirect('/events/' . $event->id);
+        //TODO: Add error 'You already joined!'
     }
 
     public function leave($id)
     {
         $event = Event::findOrFail($id);
-        $event->participants()->detach(5); //TODO: Change the 5 to the id of the active account
-
-        return redirect('/events/'.$id);
+        if ($event->participants->contains(5)) {
+            $event->participants()->detach(5); //TODO: Change the 5 to the id of the active account
+        }
+        return redirect('/events/' . $id);
+        //TODO: Add error 'You already joined!'
     }
 }

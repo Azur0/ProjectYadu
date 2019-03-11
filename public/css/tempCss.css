@@ -5,12 +5,13 @@
 
 .slideContainer {
     width: 100%;
+    text-align: center;
 }
 
 .slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 100%;
+    width: 85%;
     height: 25px;
     background: #d3d3d3;
     outline: none;
@@ -66,27 +67,35 @@
     font-size: 28px;
     font-family: ConsolasRegular;
 }
+.labels{
+    display:flex;
+}
+
+.labels label{
+    
+    flex-grow: 1;
+}
 
 .rangeTextLeft{
     align-content: center;
-    width:20% !important;
+    text-align: center;
     font-size: 28px;
-    margin: auto !important;
     font-family: ConsolasRegular;
 }
 
+
 .rangeTextCenter{
-    width:20% !important;
     align-content: center;
+    text-align: center;
     font-size: 28px;
-    margin: auto !important;
     font-family: ConsolasRegular;
 }
 
 .rangeTextRight{
-    width:20% !important;
     align-content: center;
+    text-align: center;
     font-size: 28px;
-    margin: auto !important;
     font-family: ConsolasRegular;
 }
+
+

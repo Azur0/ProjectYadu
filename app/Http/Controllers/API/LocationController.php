@@ -44,8 +44,8 @@ class LocationController extends Controller
     private $ip;
 
     public function get_ip(){
-
-
+        $test = '145.49.118.11';
+        return $test;
         if(isset($_SERVER['HTTP_CLIENT_IP'])){
             return $_SERVER['HTTP_CLIENT_IP'];
         }
@@ -78,19 +78,21 @@ class LocationController extends Controller
         return $query2;
     }
 
-    public function isWithinReach(Event $event){
-        $eventLocation = self::eventLonLat($event);
-        dd($eventLocation);
+    public function isWithinReach(/*Event $event*/){
+        //$eventLocation = self::eventLonLat($event);
+        //dd($eventLocation);
         $userLocation = self::getLocation();
+        dd($userLocation);
         // Do not forget to get the google API key
-        $query3 = @unserialize(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='.$userLocation['lat'].','.$userLocation['lon'].'&destinations='.$eventLocation['lat'].'%'.$eventLocation['lon'].'&key=YOUR_API_KEY'));
+        $query3 = @unserialize(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='.$userLocation['lat'].','.$userLocation['lon'].'&destinations='.$eventLocation['lat'].'%'.$eventLocation['lon'].'&key=AIzaSyDL4ugHzrWMXq40HaC3KEUtdgoeTVX3JcU'));
         dd($query3['distance']);
 
         //Some black magic for getting the distance value
-        //if(){
-            //return true;
-        //}else{
-            //return false;
-        //}
+        /* if(){
+            return true;
+        }else{
+            return false;
+        } */
+        return ('temp\testLocation', compact('userLocation'));
     }
 }

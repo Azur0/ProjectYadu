@@ -11,7 +11,7 @@
 .slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 85%;
+    width: 90%;
     height: 25px;
     background: #3AAA35;
     outline: none;
@@ -21,7 +21,6 @@
     border-radius: 15px;
     margin-top: 30px;
 }
-
 
  .slider:active, .slider:hover {
     opacity: 1;

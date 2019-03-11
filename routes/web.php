@@ -31,4 +31,4 @@ Route::get('/slider',function(){
     return view('temp\sliderDemo');
 });
 
-Route::get('/location','API\LocationController@getLocation');
+Route::get('/location','API\LocationController@isWithinReach');

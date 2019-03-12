@@ -4,9 +4,9 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div style="background-image: url();">
+            <div>
                 <h1>{{$event->activityName}}</h1><br>
-                <?php echo '<img class="img-fluid rounded-circle" width="50" class="my-auto" src="data:image/jpeg;base64,' . base64_encode($event->bannerImage) . '"/>'; ?>
+                <img class="img-fluid w-100" src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->picture)}}"/><br>
                 {{$event->startDate}} <br><br>
             </div>
 
@@ -19,11 +19,15 @@
 
             <div class="row">
                 <h3>Wie gaan er mee?</h3>
-                @if($event->owner->id != auth()->user()->id)
-                    @if($event->participants->contains(auth()->user()->id))
-                        <a href="/events/{{$event->id}}/leave" class="btn btn-danger btn-sm my-auto mx-2">Afmelden</a>
-                    @else
-                        <a href="/events/{{$event->id}}/join" class="btn btn-success btn-sm my-auto mx-2">Aanmelden</a>
+                @if(Auth::check())
+                    @if($event->owner->id != auth()->user()->id)
+                        @if($event->participants->contains(auth()->user()->id))
+                            <a href="/events/{{$event->id}}/leave"
+                               class="btn btn-danger btn-sm my-auto mx-2">Afmelden</a>
+                        @else
+                            <a href="/events/{{$event->id}}/join"
+                               class="btn btn-success btn-sm my-auto mx-2">Aanmelden</a>
+                        @endif
                     @endif
                 @endif
             </div>

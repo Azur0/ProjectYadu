@@ -33,6 +33,7 @@ class EventsController extends Controller
                 $events->push($event);
             }
         }
+
         return view('events.index', compact('events'));
     }
 
@@ -155,14 +156,61 @@ class EventsController extends Controller
         return $formatted_date;
     }
     // var that can be set by ajax request
-
-    private function isEventInRange(Event $event){
+    //public $distance = 20;
+    private function isEventInRange(Event $event ){
+        $distance = 20;
         //Some more code is need to define the distance with the slider.
         $locationController = new LocationController();
-        $shouldBeShown = $locationController->isWithinReach($event,20); //<-- the distance should be this value
+        $shouldBeShown = $locationController->isWithinReach($event, $distance); //<-- the distance should be this value
         if($shouldBeShown){
             return true;
         }
         return false;
+    }
+
+    public function actionDistanceFilter(Request $request){
+        //$this->distance = _POST('distance');
+        $distance = $request->input('query');
+
+        $unfiltered_events = Event::where('isDeleted', '==', 0)
+            ->where('startDate','>=', $this->formatDate())
+            ->orderBy('startDate', 'asc')
+            ->get();
+
+        //TODO: Set initial amount of items to load and add 'load more' button
+
+        $events = new Collection();
+        foreach ($unfiltered_events as $event){
+            if($this->isEventInRange($event,$distance)){
+                $events->push($event);
+            }
+        }
+        //$myJSON = json_encode($myArr);
+        //dd($myJSON);
+        return json_encode($events);
+        // if($request->ajax()){
+        //     EventTag::where('id','==', $query);
+        //     if($query !=''){
+        //         $data = EventTag::where('id','==', $query);
+        //     }else{
+        //         $data = "";
+        //     }
+        // }
+        // if($data!=""){
+        //     foreach($data as $Picture){
+        //         $output .='
+        //         <input type="radio" id="'.$Picture->id.'" class="picture '.$Picture->tag_id.'" name="picture" value="'.$Picture->id.'">
+        //         <label for="'.$Picture->id.'" class="picture '.$Picture->tag_id.'" title="Uitje met gezinnen">
+        //         <img class="default" src="data:image/jpeg;base64,' . base64_encode($Picture->picture) . '"/>
+        //         </label>
+        //         ';
+        //     }
+        // }else{
+        //     $output ='<p>Selecteer eerst de type uitje.</p>';
+        // }
+        // $data = array(
+        //     'pictures'=> $output
+        // );
+        // echo json_encode($data);
     }
 }

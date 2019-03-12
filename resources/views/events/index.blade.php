@@ -19,14 +19,14 @@
             <label class="rangeTextRight"> > </label>
         </div>
     </div>
-    <div class="event_overview row">
+    <div class="event_overview row" id="eventsToDisplay">
         @foreach ($events as $event)
             <div class="col-md-6 col-lg-4 event">
                 <a href="/events/{{$event->id}}">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top"
-                             src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->picture)}}"
-                             alt="Card image cap">
+                        {{--<img class="card-img-top"--}}
+                             {{--src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->picture)}}"--}}
+                             {{--alt="Card image cap">--}}
                         <div class="event_info">
                             <h3>{{$event->eventName}}</h3>
                             <p>
@@ -50,7 +50,50 @@
             }else{
                 val.innerHTML = this.value;
             }
-            //AJAX request
+            fetch_events();
+        };
+
+
+
+        //AJAX request
+        function fetch_events(){
+            //alert('test');
+            var distance;
+            distance = $("#rangeValue").val();
+            $.ajax({
+                url: "{{ route('events_controller.actionDistanceFilter')}}",
+                method: 'POST',
+                data: {
+                    distance: distance,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    //alert('success');
+                    alert(data);
+                    console.log(data);
+                    if (data == "") {
+                        //lert("test");
+                        $('#eventsToDisplay').html("<p>error</p>");
+                    } else {
+                        $('#eventsToDisplay').html(data[0]);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(
+                        'An error occurred... Look at the console (F12 or Ctrl+Shift+I, Console tab) for more information!'
+                    );
+
+                    $('#result').html('<p>status code: ' + jqXHR.status + '</p><p>errorThrown: ' + errorThrown +
+                        '</p><p>jqXHR.responseText:</p><div>' + jqXHR.responseText + '</div>');
+                    console.log('jqXHR:');
+                    console.log(jqXHR);
+                    console.log('textStatus:');
+                    console.log(textStatus);
+                    console.log('errorThrown:');
+                    console.log(errorThrown);
+                }
+            })
 
         }
     </script>

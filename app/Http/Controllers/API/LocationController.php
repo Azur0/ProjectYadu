@@ -94,7 +94,7 @@ class LocationController extends Controller
         return $json;
     }
 
-    public function isWithinReach(Event $event, $distance ){
+    public function isWithinReach(Event $event, $distance){
         $userLocation = self::getLocation();
         //dd($userLocation['lon']);
         $eventLocation = self::eventLonLat($event);

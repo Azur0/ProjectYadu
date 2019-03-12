@@ -37,4 +37,5 @@ Route::get('/location','API\LocationController@isWithinReach');
 Route::resource('events', 'EventsController');
 Route::get('events/{id}/join', 'EventsController@join');
 Route::get('events/{id}/leave', 'EventsController@leave');
+Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilter')->name('events_controller.actionDistanceFilter');
 

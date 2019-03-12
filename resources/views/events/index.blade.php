@@ -35,7 +35,9 @@ slider.oninput = function() {
     fetch_events();
 };
 
-
+$(document).ready(function() {
+    fetch_events();
+});
 
 //AJAX request
 function fetch_events() {
@@ -53,7 +55,7 @@ function fetch_events() {
         success: function(data) {
             console.log(data);
             if (data == "") {
-                $('#eventsToDisplay').html("<p>error</p>");
+                $('#eventsToDisplay').html("<div style='text-align:center; width:100%; padding-top:50px;'><h1>Er kan geen uitje worden gevonden in uw buurt.</h1><div>");
             } else {
                 $('#eventsToDisplay').html("");
                 data.forEach(function(element) {
@@ -63,8 +65,8 @@ function fetch_events() {
                         "'><div class='card mb-4 box-shadow'> <img class = 'card-img-top' src ='data:image/jpeg;base64, " +
                         element['picture'] +
                         "' alt = 'Card image cap'><div class = 'event_info' > <h3> " +
-                        element['eventName'] + "</h3><p>" + element['startDate'] +
-                        "<br>" + element['location_id'] +
+                        element['eventName'] + "</h3><p>" + element['date'] +
+                        "<br>" + element['loc'] +
                         "</p></div></div></a></div>");
 
                 });
@@ -87,8 +89,3 @@ function fetch_events() {
 }
 </script>
 @endsection
-
-<?php
-
-
-?>

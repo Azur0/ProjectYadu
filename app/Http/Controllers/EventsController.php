@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\EventTag;
 use Illuminate\View\View;
 use function PhpParser\filesInDir;
+use Carbon;
+use App\Location;
 
 class EventsController extends Controller
 {
@@ -21,19 +23,16 @@ class EventsController extends Controller
      */
     public function index()
     {
-
-       
-        
         $unfiltered_events = Event::where('isDeleted', '==', 0)
-            ->where('startDate','>=', $this->formatDate())
+            ->where('startDate', '>=', $this->formatDate())
             ->orderBy('startDate', 'asc')
             ->get();
-        
+
         //TODO: Set initial amount of items to load and add 'load more' button
 
         $events = new Collection();
-        foreach ($unfiltered_events as $event){
-            if($this->isEventInRange($event)){
+        foreach ($unfiltered_events as $event) {
+            if ($this->isEventInRange($event)) {
                 $events->push($event);
             }
         }
@@ -152,7 +151,8 @@ class EventsController extends Controller
         //TODO: Add error 'You already joined!'
     }
 
-    private function formatDate(){
+    private function formatDate()
+    {
         $date = getdate();
         $formatted_date = $date['year'] . "/";
         $formatted_date .= $date['mon'] . "/";
@@ -161,11 +161,12 @@ class EventsController extends Controller
     }
     // var that can be set by ajax request
     //public $distance = 20;
-    private function isEventInRange(Event $event){
+    private function isEventInRange(Event $event)
+    {
         //Some more code is need to define the distance with the slider.
         $locationController = new LocationController();
         $shouldBeShown = $locationController->isWithinReach($event, $this->distance); //<-- the distance should be this value
-        if($shouldBeShown){
+        if ($shouldBeShown) {
             return true;
         }
         return false;
@@ -173,67 +174,72 @@ class EventsController extends Controller
 
     private $distance = 0;
 
-    public function actionDistanceFilter(Request $request){
-    
+    public function actionDistanceFilter(Request $request)
+    {
+
         $this->distance = $request->input('distance');
 
         $unfiltered_events = Event::where('isDeleted', '==', 0)
-            ->where('startDate','>=', $this->formatDate())
+            ->where('startDate', '>=', $this->formatDate())
             ->orderBy('startDate', 'asc')
             ->get();
 
         //TODO: Set initial amount of items to load and add 'load more' button
 
         $events = new Collection();
-        foreach ($unfiltered_events as $event){
-            if($this->isEventInRange($event)){
-                // $event->startDate =  dateToText($event->startDate);
-                // $event->location_id = cityFromPostalcode(App\location::where('id', $event->location_id)->firstOrFail()->postalcode);
-                // $event->eventPicture->picture = base64_encode($event->eventPicture->picture);
+        foreach ($unfiltered_events as $event) {
+            if ($this->isEventInRange($event)) {
+                $date = self::dateToText($event->startDate);
+
+                $postalcode = self::cityFromPostalcode($event->Location->postalcode);
+
                 $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
                 $Pic = (base64_encode($Picture[0]->picture));
-                
-                $event->setAttribute('picture', $Pic); 
+
+                $event->setAttribute('picture', $Pic);
+                $event->setAttribute('loc', $postalcode);
+                $event->setAttribute('date', $date);
                 $events->push($event);
             }
         }
         return json_encode($events);
     }
-    
-    function dateToText($timestamp)
-{
-    setlocale(LC_ALL, 'nl_NL.utf8');
-    $date = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp);
-    $formatted_date = ucfirst($date->formatLocalized('%a %d %B %Y'));
-    return $formatted_date;
-}
 
-function cityFromPostalcode($postalcode)
-{
-    if (!isValidPostalcode($postalcode)) {
-        return "Invalid postal code";
+    public function dateToText($timestamp)
+    {
+        setlocale(LC_ALL, 'nl_NL.utf8');
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp);
+        $formatted_date = ucfirst($date->formatLocalized('%a %d %B %Y'));
+        return $formatted_date;
     }
 
-    $url = "https://nominatim.openstreetmap.org/search?q={$postalcode}&format=json&addressdetails=1";
+    public function cityFromPostalcode($postalcode)
+    {
+        if (!self::isValidPostalcode($postalcode)) {
+            return "Invalid postal code";
+        }
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $result = curl_exec($ch);
-    curl_close($ch);
+        $url = "https://nominatim.openstreetmap.org/search?q={$postalcode}&format=json&addressdetails=1";
 
-    $json = json_decode($result, true);
-    if (isset($json[0]['address']['suburb'])) {
-        return $json[0]['address']['suburb'];
-    } else {
-        return "City not found";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        $json = json_decode($result, true);
+        if (isset($json[0]['address']['suburb'])) {
+            return $json[0]['address']['suburb'];
+        } else {
+            return "City not found";
+        }
+    }
+
+    public function isValidPostalcode($postalcode)
+    {
+        $regex = '/^([1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9])[a-zA-Z]{2}$/';
+        return preg_match($regex, $postalcode);
     }
 }
 
-function isValidPostalcode($postalcode)
-{
-    $regex = '/^([1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9])[a-zA-Z]{2}$/';
-    return preg_match($regex, $postalcode);
-}
-}

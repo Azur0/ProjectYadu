@@ -6,6 +6,7 @@ use App\Event;
 use Illuminate\Http\Request;
 use App\EventTag;
 use App\EventPicture;
+use Validator;
 
 class EventsController extends Controller
 {
@@ -38,10 +39,10 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         //
-        $attributes = request()->validate([
+        $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
             'people' => 'required', //min en max nog doen
@@ -49,24 +50,45 @@ class EventsController extends Controller
             'startDate' => 'required|date|after:now',
             'location' => 'required',
             'picture' => 'required'
-
         ]);
+      
+        $validator->after(function ($validator) use ($request) {
+            if ($this->isPictureValid($request['tag'], $request['picture'])) {
+                $validator->errors()->add('picture', 'Something is wrong with this field!');
+            }
+        });
+        
+        if ($validator->fails()) {
+            return redirect('/events/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         Event::create(
             [
-                'eventName' => $attributes['activityName'],
+                'eventName' => $request['activityName'],
                 'status' => 'bezig',
-                'description' => $attributes['description'],
-                'startDate' => $attributes['startDate'],
-                'numberOfPeople' => $attributes['people'],
-                'tag_id' => $attributes['tag'],
+                'description' => $request['description'],
+                'startDate' => $request['startDate'],
+                'numberOfPeople' => $request['people'],
+                'tag_id' => $request['tag'],
                 'location_id' => '1',
                 'owner_id' => '1',
-                'event_picture_id'=> $attributes['picture']
+                'event_picture_id'=> $request['picture']
             ]
         );
-
         return redirect('/events');
     }
+
+
+    public function isPictureValid($tag, $picture){
+        $eventPicture = EventPicture::all()->where('id','==',  $picture)->pluck('tag_id');
+        if($eventPicture[0] != $tag){
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * Display the specified resource.

@@ -16,7 +16,6 @@ use App\Http\Controllers\EventsController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('events', 'EventsController');
 
 Route::get('/about', function () {
     return view('about');
@@ -25,3 +24,10 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
+
+Route::resource('events', 'EventsController');
+Route::get('events/{id}/join', 'EventsController@join');
+Route::get('events/{id}/leave', 'EventsController@leave');
+
+
+

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Account;
 use App\Event;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\EventTag;
 use App\EventPicture;
 use Validator;
+use Illuminate\View\View;
+use function PhpParser\filesInDir;
 
 class EventsController extends Controller
 {
@@ -17,7 +21,20 @@ class EventsController extends Controller
      */
     public function index()
     {
-        return view('events.index');
+        $unfiltered_events = Event::where('isDeleted', '==', 0)
+            ->where('startDate','>=', $this->formatDate())
+            ->orderBy('startDate', 'asc')
+            ->get();
+        
+        //TODO: Set initial amount of items to load and add 'load more' button
+
+        $events = new Collection();
+        foreach ($unfiltered_events as $event){
+            if($this->isEventInRange($event)){
+                $events->push($event);
+            }
+        }
+        return view('events.index', compact('events'));
     }
 
     /**
@@ -36,7 +53,7 @@ class EventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -93,18 +110,18 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Event $event)
     {
-        //
+        return view('events.show', compact('event'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -115,8 +132,8 @@ class EventsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -127,11 +144,43 @@ class EventsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+    }
+
+    public function join($id)
+    {
+        $event = Event::findOrFail($id);
+        if (!$event->participants->contains(5)) {
+            $event->participants()->attach(5); //TODO: Change the 5 to the id of the active account
+        }
+        return redirect('/events/' . $event->id);
+        //TODO: Add error 'You already joined!'
+    }
+
+    public function leave($id)
+    {
+        $event = Event::findOrFail($id);
+        if ($event->participants->contains(5)) {
+            $event->participants()->detach(5); //TODO: Change the 5 to the id of the active account
+        }
+        return redirect('/events/' . $id);
+        //TODO: Add error 'You already joined!'
+    }
+
+    private function formatDate(){
+        $date = getdate();
+        $formatted_date = $date['year'] . "/";
+        $formatted_date .= $date['mon'] . "/";
+        $formatted_date .= $date['mday'];
+        return $formatted_date;
+    }
+
+    private function isEventInRange(Event $event){
+        return true;
     }
 }

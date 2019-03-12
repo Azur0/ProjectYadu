@@ -61,8 +61,8 @@ function fetch_events() {
                         "<div class='col-md-6 col-lg-4 event'><a href='/events/" + element[
                             'id'] +
                         "'><div class='card mb-4 box-shadow'> <img class = 'card-img-top' src ='data:image/jpeg;base64, " +
-                        element['picture_id'] +
-                        "' alt = 'Card image cap'><div class = 'event_info' > < h3 > " +
+                        element['picture'] +
+                        "' alt = 'Card image cap'><div class = 'event_info' > <h3> " +
                         element['eventName'] + "</h3><p>" + element['startDate'] +
                         "<br>" + element['location_id'] +
                         "</p></div></div></a></div>");
@@ -71,9 +71,6 @@ function fetch_events() {
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            alert(
-                'An error occurred... Look at the console (F12 or Ctrl+Shift+I, Console tab) for more information!'
-            );
 
             $('#result').html('<p>status code: ' + jqXHR.status + '</p><p>errorThrown: ' +
                 errorThrown +

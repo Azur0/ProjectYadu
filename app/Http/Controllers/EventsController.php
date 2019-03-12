@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\EventPicture;
 use App\Event;
 use App\Http\Controllers\API\LocationController;
 use Illuminate\Database\Eloquent\Collection;
@@ -20,6 +21,9 @@ class EventsController extends Controller
      */
     public function index()
     {
+
+       
+        
         $unfiltered_events = Event::where('isDeleted', '==', 0)
             ->where('startDate','>=', $this->formatDate())
             ->orderBy('startDate', 'asc')
@@ -183,9 +187,13 @@ class EventsController extends Controller
         $events = new Collection();
         foreach ($unfiltered_events as $event){
             if($this->isEventInRange($event)){
-                $event->startDate =  dateToText($event->startDate);
-                $event->location_id = cityFromPostalcode(App\location::where('id', $event->location_id)->firstOrFail()->postalcode);
-                $event->picture_id = base64_encode($event->eventPicture->picture);
+                // $event->startDate =  dateToText($event->startDate);
+                // $event->location_id = cityFromPostalcode(App\location::where('id', $event->location_id)->firstOrFail()->postalcode);
+                // $event->eventPicture->picture = base64_encode($event->eventPicture->picture);
+                $Picture = eventPicture::where('id', '=', 1)->get();
+                $test = (base64_encode($Picture[0]->picture));
+                
+                $event->setAttribute('picture',$test); 
                 $events->push($event);
             }
         }

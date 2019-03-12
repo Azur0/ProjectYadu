@@ -5,6 +5,13 @@
 @endsection
 
 @section('content')
+
+    <div class="row">
+    <div class="col-12">
+        <a href="/events/create" class="btn btn-yadu-orange w-100"><i class="fas fa-user-friends"></i> Organiseer een evenement</a>
+    </div>
+    </div>
+
     <div class="event_overview row">
         @foreach ($events as $event)
             <div class="col-md-6 col-lg-4 event">

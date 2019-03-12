@@ -158,19 +158,20 @@ class EventsController extends Controller
     // var that can be set by ajax request
     //public $distance = 20;
     private function isEventInRange(Event $event){
-        $distance = 5;
         //Some more code is need to define the distance with the slider.
         $locationController = new LocationController();
-        $shouldBeShown = $locationController->isWithinReach($event, $distance); //<-- the distance should be this value
+        $shouldBeShown = $locationController->isWithinReach($event, $this->distance); //<-- the distance should be this value
         if($shouldBeShown){
             return true;
         }
         return false;
     }
 
+    private $distance = 0;
+
     public function actionDistanceFilter(Request $request){
-        //$this->distance = _POST('distance');
-        $distance = $request->input('query');
+    
+        $this->distance = $request->input('distance');
 
         $unfiltered_events = Event::where('isDeleted', '==', 0)
             ->where('startDate','>=', $this->formatDate())
@@ -181,7 +182,7 @@ class EventsController extends Controller
 
         $events = new Collection();
         foreach ($unfiltered_events as $event){
-            if($this->isEventInRange($event,$distance)){
+            if($this->isEventInRange($event)){
                 $events->push($event);
             }
         }

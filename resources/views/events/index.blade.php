@@ -5,14 +5,6 @@
 @endsection
 
 @section('content')
-
-
-<div class="row">
-    <div class="col-12">
-        <a href="/events/create" class="btn btn-yadu-orange w-100"><i class="fas fa-user-friends"></i> Organiseer een evenement</a>
-    </div>
-</div>
-
 <div class="box-range-value">
     <div id="rangeValueDisplay"></div>
 </div>
@@ -26,6 +18,13 @@
         <label class="rangeTextRight"> > </label>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-12">
+        <a href="/events/create" class="btn btn-yadu-orange w-100"><i class="fas fa-user-friends"></i> Organiseer een evenement</a>
+    </div>
+</div>
+
 <div class="event_overview row" id="eventsToDisplay">
 </div>
 <script type="text/javascript">

@@ -195,13 +195,10 @@ class EventsController extends Controller
         $formatted_date .= $date['mday'];
         return $formatted_date;
     }
-    // var that can be set by ajax request
-    //public $distance = 20;
     private function isEventInRange(Event $event)
     {
-        //Some more code is need to define the distance with the slider.
         $locationController = new LocationController();
-        $shouldBeShown = $locationController->isWithinReach($event, $this->distance); //<-- the distance should be this value
+        $shouldBeShown = $locationController->isWithinReach($event, $this->distance);
         if ($shouldBeShown) {
             return true;
         }

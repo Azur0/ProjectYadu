@@ -157,8 +157,8 @@ class EventsController extends Controller
     }
     // var that can be set by ajax request
     //public $distance = 20;
-    private function isEventInRange(Event $event ){
-        $distance = 20;
+    private function isEventInRange(Event $event){
+        $distance = 5;
         //Some more code is need to define the distance with the slider.
         $locationController = new LocationController();
         $shouldBeShown = $locationController->isWithinReach($event, $distance); //<-- the distance should be this value

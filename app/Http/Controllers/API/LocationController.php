@@ -44,9 +44,6 @@ class LocationController extends Controller
     //private $ip;
 
     private function get_ip(){
-        $test = '145.49.118.11';
-
-        return $test;
         if(isset($_SERVER['HTTP_CLIENT_IP'])){
             return $_SERVER['HTTP_CLIENT_IP'];
         }
@@ -63,7 +60,7 @@ class LocationController extends Controller
             //$test = navigator.geolocation.getCurrentPosition();
         //} else {
         $ip = self::get_ip();
-        $ip = '145.130.187.157';
+        //$ip = '145.130.187.157';
         $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));
             if($query && $query['status'] == 'success'){
              return $query;

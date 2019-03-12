@@ -19,10 +19,12 @@
 
             <div class="row">
                 <h3>Wie gaan er mee?</h3>
-                @if($event->participants->contains(5)) {{--TODO: Change the 5 to the id of the active account--}}
-                <a href="/events/{{$event->id}}/leave" class="btn btn-danger btn-sm my-auto mx-2">Afmelden</a>
-                @else
-                    <a href="/events/{{$event->id}}/join" class="btn btn-success btn-sm my-auto mx-2">Aanmelden</a>
+                @if($event->owner->id != auth()->user()->id)
+                    @if($event->participants->contains(auth()->user()->id))
+                        <a href="/events/{{$event->id}}/leave" class="btn btn-danger btn-sm my-auto mx-2">Afmelden</a>
+                    @else
+                        <a href="/events/{{$event->id}}/join" class="btn btn-success btn-sm my-auto mx-2">Aanmelden</a>
+                    @endif
                 @endif
             </div>
             @foreach($event->participants as $participant)
@@ -45,7 +47,8 @@
                     });
                 }
             </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap" async defer></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap"
+                    async defer></script>
         </div>
     </div>
 @endsection

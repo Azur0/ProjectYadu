@@ -114,11 +114,10 @@ class EventsController extends Controller
 
     public function join($id)
     {
-        dd(auth()->user()->id);
 
         $event = Event::findOrFail($id);
-        if (!$event->participants->contains(5)) {
-            $event->participants()->attach(5); //TODO: Change the 5 to the id of the active account
+        if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
+            $event->participants()->attach(auth()->user()->id);
         }
         return redirect('/events/' . $event->id);
         //TODO: Add error 'You already joined!'
@@ -127,8 +126,8 @@ class EventsController extends Controller
     public function leave($id)
     {
         $event = Event::findOrFail($id);
-        if ($event->participants->contains(5)) {
-            $event->participants()->detach(5); //TODO: Change the 5 to the id of the active account
+        if ($event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
+            $event->participants()->detach(auth()->user()->id);
         }
         return redirect('/events/' . $id);
         //TODO: Add error 'You already joined!'

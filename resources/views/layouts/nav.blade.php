@@ -20,7 +20,7 @@
                 <a href="/" class="nav-link m-2 nav-item active">HOME</a>
             </li>
             <li>
-                <a href="/events/create" class="nav-link m-2 nav-item">EVENEMENTEN</a>
+                <a href="/events" class="nav-link m-2 nav-item">EVENEMENTEN</a>
             </li>
             <li>
                 <a href="/about" class="nav-link m-2 nav-item">OVER ONS</a>

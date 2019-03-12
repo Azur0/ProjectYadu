@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Event;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\EventTag;
 use Illuminate\View\View;
@@ -18,7 +19,20 @@ class EventsController extends Controller
      */
     public function index()
     {
-        return view('events.index');
+        $unfiltered_events = Event::where('isDeleted', '==', 0)
+            ->where('startDate','>=', $this->formatDate())
+            ->orderBy('startDate', 'asc')
+            ->get();
+        
+        //TODO: Set initial amount of items to load and add 'load more' button
+
+        $events = new Collection();
+        foreach ($unfiltered_events as $event){
+            if($this->isEventInRange($event)){
+                $events->push($event);
+            }
+        }
+        return view('events.index', compact('events'));
     }
 
     /**
@@ -131,5 +145,17 @@ class EventsController extends Controller
         }
         return redirect('/events/' . $id);
         //TODO: Add error 'You already joined!'
+    }
+
+    private function formatDate(){
+        $date = getdate();
+        $formatted_date = $date['year'] . "/";
+        $formatted_date .= $date['mon'] . "/";
+        $formatted_date .= $date['mday'];
+        return $formatted_date;
+    }
+
+    private function isEventInRange(Event $event){
+        return true;
     }
 }

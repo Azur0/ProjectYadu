@@ -65,6 +65,7 @@ html, body {
     width: 100%;
     line-height: 60px;
     background-color: #E79535;
+    z-index: 1000;
 }
 
 .row {
@@ -140,6 +141,7 @@ input[type=number] {
     background-color: #fff;
     font-family: Roboto;
 }
+
 #pac-input {
     margin-left: 12px;
     text-overflow: ellipsis;
@@ -173,7 +175,8 @@ input[type=number] {
 #target {
     width: 345px;
 }
-.location{
+
+.location {
     height: 400px;
 }
 
@@ -236,7 +239,7 @@ textarea {
     display: none;
 }
 
-#category_box~label {
+#category_box ~ label {
     height: 100%;
 }
 
@@ -271,25 +274,25 @@ textarea {
 
 /* IMAGE STYLES */
 
-input[type=radio]+.category {
+input[type=radio] + .category {
     cursor: pointer;
 }
 
-input[type=radio]:checked+.category {
+input[type=radio]:checked + .category {
     background-color: #44CC14 !important;
 }
 
-input[type=radio]:checked+.category img.selected {
+input[type=radio]:checked + .category img.selected {
     opacity: 1 !important;
     display: block !important;
 }
 
-input[type=radio]:checked+.category img.default {
+input[type=radio]:checked + .category img.default {
     opacity: 0 !important;
     display: none !important;
 }
 
-input[type=radio]:checked+.category span {
+input[type=radio]:checked + .category span {
     color: white;
 }
 
@@ -379,7 +382,7 @@ input[type=radio]:checked+.category span {
 }
 
 @media screen and (max-width: 575px) {
-    .col-sm>.list-unstyled {
+    .col-sm > .list-unstyled {
         text-align: center !important
     }
 }
@@ -407,7 +410,7 @@ input[type=radio]:checked+.category span {
     white-space: normal;
 }
 
-.card-header>h5:hover {
+.card-header > h5:hover {
     text-decoration: none;
 }
 
@@ -432,7 +435,7 @@ input[type=radio]:checked+.category span {
     margin-bottom: .1rem !important;
 }
 
-.contact-item span{
+.contact-item span {
     display: table-cell;
     vertical-align: middle;
 }
@@ -463,3 +466,54 @@ input[type=radio]:checked+.category span {
         bottom: 0;
     }
 }
+
+/* Event Overview */
+
+.event {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+}
+
+.event a:hover{
+    text-decoration: none !important;
+    color: black;
+}
+
+.event_info {
+    padding: 5px;
+    color: black;
+}
+
+.event_info p {
+    margin: 0;
+}
+
+.event img {
+    width: auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .event img {
+        height: 200px;
+    }
+}
+
+@media (min-width: 768px) {
+    .event img {
+        height: 175px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .event img {
+        height: 150px;
+    }
+}
+
+
+
+
+

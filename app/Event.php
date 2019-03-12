@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    //
-    protected $fillable = ['eventName','description', 'startDate', 'status', 'location_id', 'owner_id', 'tag', 'numberOfPeople'];
+    protected $fillable = ['eventName', 'description', 'startDate', 'status', 'location_id', 'owner_id', 'tag', 'numberOfPeople'];
+
+    public function eventPicture()
+    {
+        return $this->hasOne('App\EventPicture', 'id', 'event_picture_id');
+    }
 
     public function owner()
     {

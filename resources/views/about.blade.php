@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('banner')
-<div class="container-fluid masthead">
+<div class="container-fluid masthead" style="background-image: url(../images/about-header-bg.jpg);">
     <div class="overlay">
         <div class="banner-container">
             <div class="banner-text">

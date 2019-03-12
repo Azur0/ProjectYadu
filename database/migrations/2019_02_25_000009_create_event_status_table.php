@@ -9,6 +9,7 @@ class CreateEventStatusTable extends Migration
      * @var string
      */
     public $tableName = 'event_statuses';
+
     /**
      * Run the migrations.
      * @table event_status

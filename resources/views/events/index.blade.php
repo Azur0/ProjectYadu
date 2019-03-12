@@ -55,7 +55,7 @@ function fetch_events() {
         success: function(data) {
             console.log(data);
             if (data == "") {
-                $('#eventsToDisplay').html("<div style='text-align:center; width:100%; padding-top:50px;'><h1>Er kan geen uitje worden gevonden in uw buurt.</h1><div>");
+                $('#eventsToDisplay').html("<div style='text-align:center; width:100%; padding-top:50px;'><h1>Er kan geen event worden gevonden in uw buurt.</h1><div>");
             } else {
                 $('#eventsToDisplay').html("");
                 data.forEach(function(element) {
@@ -73,16 +73,7 @@ function fetch_events() {
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-
-            $('#result').html('<p>status code: ' + jqXHR.status + '</p><p>errorThrown: ' +
-                errorThrown +
-                '</p><p>jqXHR.responseText:</p><div>' + jqXHR.responseText + '</div>');
-            console.log('jqXHR:');
-            console.log(jqXHR);
-            console.log('textStatus:');
-            console.log(textStatus);
-            console.log('errorThrown:');
-            console.log(errorThrown);
+            $('#eventsToDisplay').html("<div style='text-align:center; width:100%; padding-top:50px;'><h1>Er kan geen event worden geladen.</h1><div>");
         }
     })
 

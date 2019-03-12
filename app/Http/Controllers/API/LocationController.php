@@ -45,8 +45,13 @@ class LocationController extends Controller
     }
 
     public function isWithinReach(Event $event, $distance){
+        if($distance == 25){
+            return true;
+        }
+
         $userLocation = self::getLocation();
         $eventLocation = self::eventLonLat($event);
+
         if($eventLocation != false && $userLocation != false) {
             $query3 = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' . $userLocation['lat'] . ',' . $userLocation['lon'] . '&destinations=' . $eventLocation[0]['lat'] . ',' . $eventLocation[0]['lon'] . '&key=AIzaSyDL4ugHzrWMXq40HaC3KEUtdgoeTVX3JcU';
             $ch = curl_init();
@@ -56,9 +61,6 @@ class LocationController extends Controller
             $result = curl_exec($ch);
             curl_close($ch);
             $json = json_decode($result, true);
-            if($distance==25){
-                return true;
-            }
             if($json['rows'][0]['elements'][0]['distance']['value'] <= ($distance*1000)){
             return true;
             }else{

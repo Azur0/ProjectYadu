@@ -84,3 +84,4 @@ yarn-error.log
 .idea/php.xml
 .idea/modules.xml
 app/Http/Controllers/Auth/RegisterControllerbackup.php
+.idea/inspectionProfiles/profiles_settings.xml

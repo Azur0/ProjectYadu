@@ -20,17 +20,14 @@ class CreateEventPicturesTable extends Migration
             $table->timestamps();
 
             $table->index(["tag_id"], 'fk_event_pictures_eventTags1_idx');
-
             $table->foreign('tag_id', 'fk_event_eventTags2_idx')
             ->references('id')->on('event_tags')
             ->onDelete('no action')
             ->onUpdate('no action');
-
-
         });
         DB::statement("ALTER TABLE event_pictures ADD picture LONGBLOB");
     }
-
+  
     /**
      * Reverse the migrations.
      *

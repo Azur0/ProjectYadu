@@ -1,9 +1,7 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
 class CreateEventTagsTable extends Migration
 {
     /**
@@ -11,7 +9,6 @@ class CreateEventTagsTable extends Migration
      * @var string
      */
     public $tableName = 'event_tags';
-
     /**
      * Run the migrations.
      * @table event_tags
@@ -29,7 +26,6 @@ class CreateEventTagsTable extends Migration
         DB::statement("ALTER TABLE event_tags ADD imageDefault LONGBLOB");
         DB::statement("ALTER TABLE event_tags ADD imageSelected LONGBLOB");
     }
-
     /**
      * Reverse the migrations.
      *

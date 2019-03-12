@@ -11,7 +11,7 @@ class CreateEventsTable extends Migration
      * @var string
      */
     public $tableName = 'events';
-
+  
     /**
      * Run the migrations.
      * @table events
@@ -51,7 +51,7 @@ class CreateEventsTable extends Migration
                 ->references('id')->on('locations')
                 ->onDelete('no action')
                 ->onUpdate('no action');
-
+          
             $table->foreign('owner_id', 'fk_activity_accounts1_idx')
                 ->references('id')->on('accounts')
                 ->onDelete('no action')

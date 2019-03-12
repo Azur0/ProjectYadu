@@ -9,10 +9,13 @@ use App\Http\Controllers\API\LocationController;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\EventTag;
+use Validator;
 use Illuminate\View\View;
 use function PhpParser\filesInDir;
 use Carbon;
 use App\Location;
+use Auth;
+
 
 class EventsController extends Controller
 {
@@ -47,9 +50,13 @@ class EventsController extends Controller
      */
     public function create()
     {
+        if(Auth::check()) {
         //
         $Tags = EventTag::all();
-        return view('events.create')->withtags($Tags);
+        $Picture = EventPicture::all();
+        return view('events.create')->withtags($Tags)->withpictures($Picture);
+        }
+        return redirect('/login');
     }
 
     /**
@@ -58,33 +65,56 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         //
-        $attributes = request()->validate([
+        $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
             'people' => 'required', //min en max nog doen
             'tag' => 'required',
-            'startDate' => 'required',
-            'location' => 'required'
-
+            'startDate' => 'required|date|after:now',
+            'location' => 'required',
+            'picture' => 'required'
         ]);
+      
+        $validator->after(function ($validator) use ($request) {
+            if ($this->isPictureValid($request['tag'], $request['picture'])) {
+                $validator->errors()->add('picture', 'Something is wrong with this field!');
+            }
+        });
+        
+        if ($validator->fails()) {
+            return redirect('/events/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         Event::create(
             [
-                'eventName' => $attributes['activityName'],
-                'status' => 'bezig',
-                'description' => $attributes['description'],
-                'startDate' => $attributes['startDate'],
-                'numberOfPeople' => $attributes['people'],
-                'tag' => $attributes['tag'],
+                'eventName' => $request['activityName'],
+                'status' => 'created',
+                'description' => $request['description'],
+                'startDate' => $request['startDate'],
+                'numberOfPeople' => $request['people'],
+                'tag_id' => $request['tag'],
                 'location_id' => '1',
-                'owner_id' => '1'
+                'owner_id' => auth()->user()->id,
+                'event_picture_id'=> $request['picture']
             ]
         );
-
         return redirect('/events');
     }
+
+
+    public function isPictureValid($tag, $picture){
+        $eventPicture = EventPicture::all()->where('id','==',  $picture)->pluck('tag_id');
+        if($eventPicture[0] != $tag){
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * Display the specified resource.
@@ -133,22 +163,28 @@ class EventsController extends Controller
 
     public function join($id)
     {
-        $event = Event::findOrFail($id);
-        if (!$event->participants->contains(5)) {
-            $event->participants()->attach(5); //TODO: Change the 5 to the id of the active account
+        if(Auth::check()) {
+            $event = Event::findOrFail($id);
+            if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
+                $event->participants()->attach(auth()->user()->id);
+            }
+            //TODO: Add error 'You already joined!'
         }
+        //TODO: Add error 'You are not logged in!'
         return redirect('/events/' . $event->id);
-        //TODO: Add error 'You already joined!'
     }
 
     public function leave($id)
     {
-        $event = Event::findOrFail($id);
-        if ($event->participants->contains(5)) {
-            $event->participants()->detach(5); //TODO: Change the 5 to the id of the active account
+        if(Auth::check()) {
+            $event = Event::findOrFail($id);
+            if ($event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
+                $event->participants()->detach(auth()->user()->id);
+            }
+            //TODO: Add error 'You are not joined!'
         }
+        //TODO: Add error 'You are not logged in!'
         return redirect('/events/' . $id);
-        //TODO: Add error 'You already joined!'
     }
 
     private function formatDate()

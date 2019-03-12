@@ -29,7 +29,11 @@
                 <a href="/contact" class="nav-link m-2 nav-item">CONTACT</a>
             </li>
             <li>
-                <a href="/login" class="nav-link m-2 nav-item">INLOGGEN/REGISTREREN</a>
+            @if(Auth::user())
+                <a href="/logout" class="nav-link m-2 nav-item">UITLOGGEN</a>
+            @else 
+                <a href="/login" class="nav-link m-2 nav-item">INLOGGEN</a>
+            @endif
             </li>
         </ul>
     </div>

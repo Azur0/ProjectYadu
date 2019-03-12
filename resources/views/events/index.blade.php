@@ -5,9 +5,16 @@
 @endsection
 
 @section('content')
-<div class="box-range-value">
-    <div id="rangeValueDisplay">
+
+
+<div class="row">
+    <div class="col-12">
+        <a href="/events/create" class="btn btn-yadu-orange w-100"><i class="fas fa-user-friends"></i> Organiseer een evenement</a>
     </div>
+</div>
+
+<div class="box-range-value">
+    <div id="rangeValueDisplay"></div>
 </div>
 <div class="slideContainer">
     <input type="range" ticks="[5, 10, 15, 20, 25]" min="5" max="25" step="5" value="20" class="slider" id="rangeValue">
@@ -21,7 +28,6 @@
 </div>
 <div class="event_overview row" id="eventsToDisplay">
 </div>
-
 <script type="text/javascript">
 var slider = document.getElementById("rangeValue");
 var val = document.getElementById("rangeValueDisplay");

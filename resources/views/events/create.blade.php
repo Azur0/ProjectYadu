@@ -6,7 +6,7 @@
     <form action="/events" method="POST">
         @csrf
         <div class="type">
-            <h3>1. Kies het type uitje </h3>
+            <h3>1. Kies het type event </h3>
             <div class="types">
                 <div class="box">
                     @foreach ($tags as $Tag)
@@ -87,143 +87,141 @@
         </div>
         <input class="submit" type="submit" name="verzenden" value="Verzend">
     </form>
-    </div>
-    <script>
-    $(document).ready(function() {
-        fetch_customer_data();
+</div>
+<script>
+$(document).ready(function() {
+    fetch_customer_data();
+});
+
+function check(tag) {
+    fetch_customer_data(tag);
+}
+
+function fetch_customer_data(query) {
+    $.ajax({
+        url: "{{ route('events_controller.action')}}",
+        method: 'POST',
+        data: {
+            query: query,
+            _token: '{{ csrf_token() }}'
+        },
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+            if (data == "") {
+                $('#box2').html("<h5><i>Kies eerst het type event</i></h5>");
+            } else {
+                $('#box2').html("");
+
+                data.forEach(function(element) {
+                    $('#box2').html($("#box2").html() + "<input type='radio' id='" +
+                        element['id'] + "' class='picture " + element['tag_id'] +
+                        "' name='picture' value='" + element['id'] + "'> <label for='" +
+                        element['id'] + "' class='picture " + element['tag_id'] +
+                        "' title='Uitje met gezinnen'> <img class='default' src='data:image/jpeg;base64," +
+                        element['picture'] + "'/> </label>");
+                });
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('jqXHR:');
+            console.log(jqXHR);
+            console.log('textStatus:');
+            console.log(textStatus);
+            console.log('errorThrown:');
+            console.log(errorThrown);
+        }
+
+    })
+}
+</script>
+<script>
+function update_counter_title(text) {
+    var len = parseInt(text.getAttribute("maxlength"), 10);
+    document.getElementById('chars_title').innerHTML = len - text.value.length;
+}
+
+function update_counter_desc(textarea) {
+    var len = parseInt(textarea.getAttribute("maxlength"), 10);
+    document.getElementById('chars_desc').innerHTML = len - textarea.value.length;
+}
+
+
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+function initAutocomplete() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: 51.6978162,
+            lng: 5.3036748
+        },
+        zoom: 13,
+        mapTypeId: 'roadmap'
     });
 
-    function check(tag) {
-        fetch_customer_data(tag);
-    }
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    function fetch_customer_data(query) {
-        $.ajax({
-            url: "{{ route('events_controller.action')}}",
-            method: 'POST',
-            data: {
-                query: query,
-                _token: '{{ csrf_token() }}'
-            },
-            dataType: 'json',
-            success: function(data) {
-                console.log(data);
-                if (data == "") {
-                    $('#box2').html("<p>error</p>");
-                } else {
-                    $('#box2').html("");
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+        searchBox.setBounds(map.getBounds());
+    });
 
-                    data.forEach(function(element) {
-                        $('#box2').html($("#box2").html() + "<input type='radio' id='" +
-                            element['id'] + "' class='picture " + element['tag_id'] +
-                            "' name='picture' value='" + element['id'] + "'> <label for='" +
-                            element['id'] + "' class='picture " + element['tag_id'] +
-                            "' title='Uitje met gezinnen'> <img class='default' src='data:image/jpeg;base64," +
-                            element['picture'] + "'/> </label>");
-                    });
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                $('#result').html('<p>status code: ' + jqXHR.status + '</p><p>errorThrown: ' + errorThrown +
-                    '</p><p>jqXHR.responseText:</p><div>' + jqXHR.responseText + '</div>');
-                console.log('jqXHR:');
-                console.log(jqXHR);
-                console.log('textStatus:');
-                console.log(textStatus);
-                console.log('errorThrown:');
-                console.log(errorThrown);
-            }
+    var markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function() {
+        var places = searchBox.getPlaces();
 
-        })
-    }
-    </script>
-    <script>
-    function update_counter_title(text) {
-        var len = parseInt(text.getAttribute("maxlength"), 10);
-        document.getElementById('chars_title').innerHTML = len - text.value.length;
-    }
+        if (places.length == 0) {
+            return;
+        }
 
-    function update_counter_desc(textarea) {
-        var len = parseInt(textarea.getAttribute("maxlength"), 10);
-        document.getElementById('chars_desc').innerHTML = len - textarea.value.length;
-    }
-
-
-    // This example requires the Places library. Include the libraries=places
-    // parameter when you first load the API. For example:
-    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-    function initAutocomplete() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: {
-                lat: 51.6978162,
-                lng: 5.3036748
-            },
-            zoom: 13,
-            mapTypeId: 'roadmap'
+        // Clear out the old markers.
+        markers.forEach(function(marker) {
+            marker.setMap(null);
         });
+        markers = [];
 
-        // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-            searchBox.setBounds(map.getBounds());
-        });
-
-        var markers = [];
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function() {
-            var places = searchBox.getPlaces();
-
-            if (places.length == 0) {
+        // For each place, get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place) {
+            if (!place.geometry) {
+                console.log("Returned place contains no geometry");
                 return;
             }
+            var icon = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+            };
 
-            // Clear out the old markers.
-            markers.forEach(function(marker) {
-                marker.setMap(null);
-            });
-            markers = [];
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+                map: map,
+                icon: icon,
+                title: place.name,
+                position: place.geometry.location
+            }));
 
-            // For each place, get the icon, name and location.
-            var bounds = new google.maps.LatLngBounds();
-            places.forEach(function(place) {
-                if (!place.geometry) {
-                    console.log("Returned place contains no geometry");
-                    return;
-                }
-                var icon = {
-                    url: place.icon,
-                    size: new google.maps.Size(71, 71),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(25, 25)
-                };
-
-                // Create a marker for each place.
-                markers.push(new google.maps.Marker({
-                    map: map,
-                    icon: icon,
-                    title: place.name,
-                    position: place.geometry.location
-                }));
-
-                if (place.geometry.viewport) {
-                    // Only geocodes have viewport.
-                    bounds.union(place.geometry.viewport);
-                } else {
-                    bounds.extend(place.geometry.location);
-                }
-            });
-            map.fitBounds(bounds);
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
         });
-    }
-    </script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=places&callback=initAutocomplete"
-        async defer></script>
-    @endsection
+        map.fitBounds(bounds);
+    });
+}
+</script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=places&callback=initAutocomplete"
+    async defer></script>
+@endsection

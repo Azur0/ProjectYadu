@@ -9,6 +9,7 @@
         <title>{{ config('app.name', 'Yadu') }}</title>
         <link rel="icon" type="image/png" href="/images/favicon.png" />
 
+        <script src="{{ asset('js/app.js') }}"></script>
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -31,6 +32,5 @@
                 @include('layouts.footer')
             </div>
         </div>
-        <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

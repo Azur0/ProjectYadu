@@ -45,10 +45,13 @@ class EventsController extends Controller
      */
     public function create()
     {
+        if(Auth::check()) {
         //
         $Tags = EventTag::all();
         $Picture = EventPicture::all();
         return view('events.create')->withtags($Tags)->withpictures($Picture);
+        }
+        return redirect('/login');
     }
 
     /**
@@ -85,13 +88,13 @@ class EventsController extends Controller
         Event::create(
             [
                 'eventName' => $request['activityName'],
-                'status' => 'bezig',
+                'status' => 'created',
                 'description' => $request['description'],
                 'startDate' => $request['startDate'],
                 'numberOfPeople' => $request['people'],
                 'tag_id' => $request['tag'],
                 'location_id' => '1',
-                'owner_id' => '1',
+                'owner_id' => auth()->user()->id,
                 'event_picture_id'=> $request['picture']
             ]
         );

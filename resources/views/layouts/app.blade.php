@@ -7,6 +7,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
         <title>{{ config('app.name', 'Yadu') }}</title>
+        <link rel="icon" type="image/png" href="/images/favicon.png" />
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/custom.css') }}">

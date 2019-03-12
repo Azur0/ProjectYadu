@@ -11,6 +11,7 @@ use App\EventPicture;
 use Validator;
 use Illuminate\View\View;
 use function PhpParser\filesInDir;
+use Auth;
 
 class EventsController extends Controller
 {
@@ -154,22 +155,28 @@ class EventsController extends Controller
 
     public function join($id)
     {
-        $event = Event::findOrFail($id);
-        if (!$event->participants->contains(5)) {
-            $event->participants()->attach(5); //TODO: Change the 5 to the id of the active account
+        if(Auth::check()) {
+            $event = Event::findOrFail($id);
+            if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
+                $event->participants()->attach(auth()->user()->id);
+            }
+            //TODO: Add error 'You already joined!'
         }
+        //TODO: Add error 'You are not logged in!'
         return redirect('/events/' . $event->id);
-        //TODO: Add error 'You already joined!'
     }
 
     public function leave($id)
     {
-        $event = Event::findOrFail($id);
-        if ($event->participants->contains(5)) {
-            $event->participants()->detach(5); //TODO: Change the 5 to the id of the active account
+        if(Auth::check()) {
+            $event = Event::findOrFail($id);
+            if ($event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
+                $event->participants()->detach(auth()->user()->id);
+            }
+            //TODO: Add error 'You are not joined!'
         }
+        //TODO: Add error 'You are not logged in!'
         return redirect('/events/' . $id);
-        //TODO: Add error 'You already joined!'
     }
 
     private function formatDate(){

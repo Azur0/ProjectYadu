@@ -60,9 +60,12 @@ function fetch_events() {
                     $('#eventsToDisplay').html($("#eventsToDisplay").html() +
                         "<div class='col-md-6 col-lg-4 event'><a href='/events/" + element[
                             'id'] +
-                        "'><div class='card mb-4 box-shadow'><div class='event_info'><h3>" +
+                        "'><div class='card mb-4 box-shadow'> <img class = 'card-img-top' src ='data:image/jpeg;base64, " +
+                        element['picture_id'] +
+                        "' alt = 'Card image cap'><div class = 'event_info' > < h3 > " +
                         element['eventName'] + "</h3><p>" + element['startDate'] +
-                        " <br>3971NK</p></div></div></a></div>");
+                        "<br>" + element['location_id'] +
+                        "</p></div></div></a></div>");
 
                 });
             }
@@ -90,40 +93,5 @@ function fetch_events() {
 
 <?php
 
-function dateToText($timestamp)
-{
-    setlocale(LC_ALL, 'nl_NL.utf8');
-    $date = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp);
-    $formatted_date = ucfirst($date->formatLocalized('%a %d %B %Y'));
-    return $formatted_date;
-}
 
-function cityFromPostalcode($postalcode)
-{
-    if (!isValidPostalcode($postalcode)) {
-        return "Invalid postal code";
-    }
-
-    $url = "https://nominatim.openstreetmap.org/search?q={$postalcode}&format=json&addressdetails=1";
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $result = curl_exec($ch);
-    curl_close($ch);
-
-    $json = json_decode($result, true);
-    if (isset($json[0]['address']['suburb'])) {
-        return $json[0]['address']['suburb'];
-    } else {
-        return "City not found";
-    }
-}
-
-function isValidPostalcode($postalcode)
-{
-    $regex = '/^([1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9])[a-zA-Z]{2}$/';
-    return preg_match($regex, $postalcode);
-}
 ?>

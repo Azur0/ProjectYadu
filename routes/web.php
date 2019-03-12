@@ -20,6 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
 
 Route::resource('events', 'EventsController');
+Route::post('/events/action', 'EventsController@action')->name('events_controller.action');
 Route::get('events/{id}/join', 'EventsController@join');
 Route::get('events/{id}/leave', 'EventsController@leave');
 

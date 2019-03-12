@@ -54,6 +54,15 @@ class EventsController extends Controller
         return redirect('/login');
     }
 
+    public function action(Request $request)
+    {
+        $Picture = EventPicture::where('tag_id', '=', $request->input('query'))->get();
+        foreach ($Picture as $x) {
+            $x->picture = base64_encode($x->picture);
+        }
+        return json_encode($Picture);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

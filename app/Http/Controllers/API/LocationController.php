@@ -74,11 +74,12 @@ class LocationController extends Controller
     }
 
     private function eventLonLat(Event $event){
-        dd($event->location()->postalcode);
-        $eventZipCode = $event->location()->postalcode;
+
+        //dd($event->location());
+        //dd($event->location->postalcode);
         //$eventZipCode = '5222AS';
         //https://wiki.openstreetmap.org/wiki/Nominatim#Examples for getting the lat and lon for the zip code
-
+        $eventZipCode = $event->location->postalcode;
         //https://nominatim.openstreetmap.org/search/5222AS?format=json&limit=1
         //$query2 = file_get_contents('https://nominatim.openstreetmap.org/search/5222AS?format=json&limit=1');
         $query2 = "https://nominatim.openstreetmap.org/search?q=".$eventZipCode."&format=json&addressdetails=1";
@@ -89,7 +90,7 @@ class LocationController extends Controller
         $result = curl_exec($ch);
         curl_close($ch);
         $json = json_decode($result, true);
-        dd($json);
+        //dd($json);
         return $json;
     }
 

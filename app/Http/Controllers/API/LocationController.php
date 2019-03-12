@@ -21,7 +21,8 @@ class LocationController extends Controller
     }
 
     private function getLocation(){
-        $ip = self::get_ip();
+        // $ip = self::get_ip();
+        $ip = "143.179.42.159";
         $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));
             if($query && $query['status'] == 'success'){
              return $query;

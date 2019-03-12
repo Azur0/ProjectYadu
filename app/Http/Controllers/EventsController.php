@@ -190,10 +190,10 @@ class EventsController extends Controller
                 // $event->startDate =  dateToText($event->startDate);
                 // $event->location_id = cityFromPostalcode(App\location::where('id', $event->location_id)->firstOrFail()->postalcode);
                 // $event->eventPicture->picture = base64_encode($event->eventPicture->picture);
-                $Picture = eventPicture::where('id', '=', 1)->get();
-                $test = (base64_encode($Picture[0]->picture));
+                $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
+                $Pic = (base64_encode($Picture[0]->picture));
                 
-                $event->setAttribute('picture',$test); 
+                $event->setAttribute('picture', $Pic); 
                 $events->push($event);
             }
         }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EventsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,3 +34,7 @@ Route::get('/slider',function(){
 });
 
 Route::get('/location','API\LocationController@isWithinReach');
+Route::resource('events', 'EventsController');
+Route::get('events/{id}/join', 'EventsController@join');
+Route::get('events/{id}/leave', 'EventsController@leave');
+

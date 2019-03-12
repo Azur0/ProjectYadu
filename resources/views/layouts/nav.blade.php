@@ -29,7 +29,7 @@
                 <a href="/contact" class="nav-link m-2 nav-item">CONTACT</a>
             </li>
             <li>
-                <a href="/login" class="nav-link m-2 nav-item">INLOGGEN/REGISTREREN</a>
+                <a href="/login" class="nav-link m-2 nav-item">LOGIN</a>
             </li>
         </ul>
     </div>

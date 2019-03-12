@@ -30,7 +30,7 @@
             </li>
             <li>
             @if(Auth::user())
-                <a href="javascript:AlertIt();" class="nav-link m-2 nav-item">UITLOGGEN</a>
+                <a href="/logout" class="nav-link m-2 nav-item">UITLOGGEN</a>
             @else 
                 <a href="/login" class="nav-link m-2 nav-item">INLOGGEN</a>
             @endif
@@ -38,12 +38,3 @@
         </ul>
     </div>
 </nav>
-<script type="text/javascript">
-    function AlertIt() {
-        var answer = confirm ("Weet je zeker dat je wilt uitloggen?")
-        if (answer)
-            window.location="/logout";
-        else
-            return false;
-    }
-</script>

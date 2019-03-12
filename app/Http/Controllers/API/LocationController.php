@@ -109,6 +109,9 @@ class LocationController extends Controller
             curl_close($ch);
             $json = json_decode($result, true);
             //$json['rows'][0]['elements'][0]['distance']['value'];
+            if($distance==25){
+                return true;
+            }
             if($json['rows'][0]['elements'][0]['distance']['value'] <= ($distance*1000)){
             return true;
             }else{

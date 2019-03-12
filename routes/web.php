@@ -13,25 +13,14 @@ use App\Http\Controllers\EventsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return view('welcome'); });
+Route::get('/about', function () { return view('about'); });
+Route::get('/contact', function () { return view('contact'); });
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
 
 Route::resource('events', 'EventsController');
-
 Route::get('events/{id}/join', 'EventsController@join');
 Route::get('events/{id}/leave', 'EventsController@leave');
 
 Auth::routes();
-
-Route::get('/contact', function () {
-    return view('contact');
-});
-
-Route::get('/about', function () {
-    return view('about');
-});

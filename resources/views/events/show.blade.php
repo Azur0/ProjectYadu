@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-6">
             <div>
-                <h1>{{$event->activityName}}</h1><br>
+                <h1>{{$event->eventName}}</h1><br>
                 <img class="img-fluid w-100" src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->picture)}}"/><br>
                 {{$event->startDate}} <br><br>
             </div>

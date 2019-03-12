@@ -76,7 +76,7 @@
                             <label for="dateOfBirth" class="col-md-4 col-form-label text-md-right">{{ __('Date of Birth') }}</label>
 
                             <div class="col-md-6">
-                                <input type="date" name="dateOfBirth">
+                                <input type="date" name="dateOfBirth" value="{{ old('dateOfBirth') }}">
 
                                 @if ($errors->has('dateOfBirth'))
                                     <span class="invalid-feedback" role="alert">

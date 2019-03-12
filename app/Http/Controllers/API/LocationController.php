@@ -41,9 +41,9 @@ class LocationController extends Controller
         //
     }
 
-    private $ip;
+    //private $ip;
 
-    public function get_ip(){
+    private function get_ip(){
         $test = '145.49.118.11';
 
         return $test;
@@ -58,7 +58,7 @@ class LocationController extends Controller
     }
 
     // Should i use one of the commonly used names such as show or something els?
-    public function getLocation(){
+    private function getLocation(){
         //if (navigator.geolocation) {
             //$test = navigator.geolocation.getCurrentPosition();
         //} else {
@@ -73,7 +73,8 @@ class LocationController extends Controller
         //}
     }
 
-    public function eventLonLat(Event $event){
+    private function eventLonLat(Event $event){
+        dd($event->location()->postalcode);
         $eventZipCode = $event->location()->postalcode;
         //$eventZipCode = '5222AS';
         //https://wiki.openstreetmap.org/wiki/Nominatim#Examples for getting the lat and lon for the zip code
@@ -110,12 +111,14 @@ class LocationController extends Controller
             curl_close($ch);
             $json = json_decode($result, true);
             //$json['rows'][0]['elements'][0]['distance']['value'];
-            if($json['rows'][0]['elements'][0]['distance']['value'] <= $distance){
+            if($json['rows'][0]['elements'][0]['distance']['value'] <= ($distance*1000)){
             return true;
             }else{
             return false;
             }
         }
-        return view('temp.testLocation', compact(['userLocation','eventLocation']));
+        //Should this return false if we can't get a distance?
+        return false;
+        //return view('temp.testLocation', compact(['userLocation','eventLocation']));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Event;
+use App\Http\Controllers\API\LocationController;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\EventTag;
@@ -155,6 +156,12 @@ class EventsController extends Controller
     }
 
     private function isEventInRange(Event $event){
-        return true;
+        //Some more code is need to define the distance with the slider.
+        $locationController = new LocationController();
+        $shouldBeShown = $locationController->isWithinReach($event,10);
+        if($shouldBeShown){
+            return true;
+        }
+        return false;
     }
 }

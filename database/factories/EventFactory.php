@@ -9,8 +9,8 @@ $factory->define(App\Event::class, function (Faker $faker) {
         'location_id' => '1',
         'owner_id' => '1',
         'eventName' => 'museum',
-        'startDate' => date('Y-m-d H:i'),
-        'endDate' => $faker->dateTimeBetween('now', '+1 month'),
+        'startDate' => Carbon::parse(date('Y-m-d H:i'))->addDays(7),
+        'endDate' => $faker->dateTimeBetween('+2 week', '+1 month'),
         'numberOfPeople' => 1,
         'description' => $faker->text,
         'event_picture_id' => 1

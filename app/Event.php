@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-
     protected $fillable = ['eventName','description', 'startDate', 'status', 'location_id', 'owner_id', 'tag_id', 'numberOfPeople', 'event_picture_id'];
 
     public function eventPicture()
@@ -24,4 +23,11 @@ class Event extends Model
         return $this->belongsToMany('App\Account', 'event_has_patricipants', 'event_id', 'account_id');
         //TODO: Fix the typo of patricipants
     }
+	
+	public function location(){
+        //return $this->hasOne('App\Location','location_id','id');
+        return $this->belongsTo('App\Location','location_id','id');
+        //return $this->belongsTo(Location::class);
+	}
+	
 }

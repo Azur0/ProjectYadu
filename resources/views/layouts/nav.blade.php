@@ -17,22 +17,22 @@
     <div class="collapse navbar-collapse flex-grow-1 text-left" id="myNavbar">
         <ul class="navbar-nav ml-auto flex-nowrap">
             <li>
-                <a href="/" class="nav-link m-2 nav-item active">HOME</a>
+                <a href="/" class="nav-link m-2 nav-item {{ request()->is('/') ? 'active' : '' }}">HOME</a>
             </li>
             <li>
-                <a href="/events" class="nav-link m-2 nav-item">EVENEMENTEN</a>
+                <a href="/events" class="nav-link m-2 nav-item {{ request()->is('events') ? 'active' : (request()->is('events/*') ? 'active' : '') }}">EVENEMENTEN</a>
             </li>
             <li>
-                <a href="/about" class="nav-link m-2 nav-item">OVER ONS</a>
+                <a href="/about" class="nav-link m-2 nav-item {{ request()->is('about') ? 'active' : '' }}">OVER ONS</a>
             </li>
             <li>
-                <a href="/contact" class="nav-link m-2 nav-item">CONTACT</a>
+                <a href="/contact" class="nav-link m-2 nav-item {{ request()->is('contact') ? 'active' : '' }}">CONTACT</a>
             </li>
             <li>
             @if(Auth::user())
                 <a href="/logout" class="nav-link m-2 nav-item">UITLOGGEN</a>
-            @else 
-                <a href="/login" class="nav-link m-2 nav-item">INLOGGEN</a>
+            @else
+                <a href="/login" class="nav-link m-2 nav-item {{ request()->is('login') ? 'active' : '' }}">INLOGGEN</a>
             @endif
             </li>
         </ul>

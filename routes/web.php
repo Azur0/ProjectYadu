@@ -13,15 +13,37 @@ use App\Http\Controllers\EventsController;
 |
 */
 
+app()->singleton('ipApi', function(){
+    return new \App\Services\IpApi('test');
+});
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
 Route::get('/', function () { return view('welcome'); });
 Route::get('/about', function () { return view('about'); });
 Route::get('/contact', function () { return view('contact'); });
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
 
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
+Route::get('/slider',function(){
+    return view('temp\sliderDemo');
+});
+
+Route::get('/location','API\LocationController@isWithinReach');
 Route::resource('events', 'EventsController');
 Route::post('/events/action', 'EventsController@action')->name('events_controller.action');
 Route::get('events/{id}/join', 'EventsController@join');
 Route::get('events/{id}/leave', 'EventsController@leave');
-
+Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilter')->name('events_controller.actionDistanceFilter');
 Auth::routes();
+

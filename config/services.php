@@ -40,4 +40,8 @@ return [
         ],
     ],
 
+    'location_API' => [
+        'IP_API_KEY' => env('IP_API')
+    ],
+
 ];

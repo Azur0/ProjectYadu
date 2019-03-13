@@ -20,8 +20,7 @@ class Event extends Model
 
     public function participants()
     {
-        return $this->belongsToMany('App\Account', 'event_has_patricipants', 'event_id', 'account_id');
-        //TODO: Fix the typo of patricipants
+        return $this->belongsToMany('App\Account', 'event_has_participants', 'event_id', 'account_id');
     }
 	
 	public function location(){

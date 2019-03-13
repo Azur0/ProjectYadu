@@ -9,6 +9,7 @@
         <title>{{ config('app.name', 'Yadu') }}</title>
         <link rel="icon" type="image/png" href="/images/favicon.png" />
 
+        <script src="{{ asset('js/app.js') }}"></script>
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
         <link rel="stylesheet" href="{{ asset('css/filterCSS.css') }}">
@@ -32,6 +33,5 @@
                 @include('layouts.footer')
             </div>
         </div>
-
     </body>
 </html>

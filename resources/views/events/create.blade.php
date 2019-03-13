@@ -7,39 +7,34 @@
         @csrf
         <div class="type">
             <h3>1. Kies het type event </h3>
-            <div id="box">
-                @foreach ($tags as $Tag)
-                <input type="radio" id="{{$Tag->tag}}" name="tag" value="{{$Tag->id}}" onclick="check({{$Tag->id }})">
-                <label for="{{$Tag->tag}}" class="category" title="Uitje met gezinnen">
-                    <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($Tag->imageDefault) . '"/>'; ?>
-                    <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($Tag->imageSelected) . '"/>'; ?>
-                    <span>{{$Tag->tag}}</span>
-                </label>
-                @endforeach
+            <div class="types">
+                <div class="box">
+                    @foreach ($tags as $Tag)
+                    <input type="radio" id="{{$Tag->tag}}" name="tag" value="{{$Tag->id}}"
+                        onclick="check({{$Tag->id }})">
+                    <label for="{{$Tag->tag}}" class="category" title="Uitje met gezinnen">
+                        <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($Tag->imageDefault) . '"/>'; ?>
+                        <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($Tag->imageSelected) . '"/>'; ?>
+                        <span>{{$Tag->tag}}</span>
+                    </label>
+                    @endforeach
+                </div>
+                @if ($errors->has('tag'))
+                <div class="error">Kies een type.</div>
+                @endif
             </div>
-            @if ($errors->has('tag'))
-            <div class="error">Kies een type.</div>
-            @endif
         </div>
 
         <div class="pic">
             <h3>2. Kies een foto voor je event </h3>
-            <div id="box">
-                @foreach ($pictures as $picture)
-                <input type="radio" id="{{$picture->id}}" class="picture {{$picture->tag_id}}" style="display: none;"
-                    name="picture" value="{{$picture->id}}">
-                <label for="{{$picture->id}}" class="picture {{$picture->tag_id}}" style="display: none;"
-                    title="Uitje met gezinnen">
-                    <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($picture->picture) . '"/>'; ?>
-                </label>
-                @endforeach
-                <div id="picture-overlay">
-                    <span id="choose-type" style="">Kies eerst het type event</span>
+            <div class="types">
+                <div id="box2" class="box">
+
                 </div>
+                @if ($errors->has('picture'))
+                <div class="error">Kies een foto.</div>
+                @endif
             </div>
-            @if ($errors->has('picture'))
-            <div class="error">Kies een foto of kies een foto die bij de juiste tag hoort.</div>
-            @endif
         </div>
 
         <div class="loc">
@@ -53,7 +48,6 @@
                 @endif
             </div>
         </div>
-
         <div class="date">
             <h3>4. Kies de datum en tijd</h3>
             <div class="description">
@@ -63,7 +57,6 @@
                 @endif
             </div>
         </div>
-
         <div>
             <h3>5. Beschrijf je uitje</h3>
             <div class="description">
@@ -82,7 +75,6 @@
                 @endif
             </div>
         </div>
-
         <div>
             <h3>6. Hoeveel mensen gaan er max mee?</h3>
             <div class="description">
@@ -97,25 +89,53 @@
     </form>
 </div>
 <script>
-// function for displaying the images
+$(document).ready(function() {
+    fetch_customer_data();
+});
+
 function check(tag) {
-    $("#picture-overlay").hide();
-    $(".picture").hide();
-    $(".picture").prop('checked', false);
-    $("." + tag).show();
+    fetch_customer_data(tag);
 }
 
+function fetch_customer_data(query) {
+    $.ajax({
+        url: "{{ route('events_controller.action')}}",
+        method: 'POST',
+        data: {
+            query: query,
+            _token: '{{ csrf_token() }}'
+        },
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+            if (data == "") {
+                $('#box2').html("<h5><i>Kies eerst het type event</i></h5>");
+            } else {
+                $('#box2').html("");
 
-// script for character remaining
-window.onload = function() {
-    var textarea = document.getElementById('desc');
-    var text = document.getElementById('title');
-    var len_d = parseInt(textarea.getAttribute("maxlength"), 10);
-    var len_t = parseInt(text.getAttribute("maxlength"), 10);
-    document.getElementById('chars_desc').innerHTML = len_d - textarea.value.length;
-    document.getElementById('chars_title').innerHTML = len_t - text.value.length;
+                data.forEach(function(element) {
+                    $('#box2').html($("#box2").html() + "<input type='radio' id='" +
+                        element['id'] + "' class='picture " + element['tag_id'] +
+                        "' name='picture' value='" + element['id'] + "'> <label for='" +
+                        element['id'] + "' class='picture " + element['tag_id'] +
+                        "' title='Uitje met gezinnen'> <img class='default' src='data:image/jpeg;base64," +
+                        element['picture'] + "'/> </label>");
+                });
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('jqXHR:');
+            console.log(jqXHR);
+            console.log('textStatus:');
+            console.log(textStatus);
+            console.log('errorThrown:');
+            console.log(errorThrown);
+        }
+
+    })
 }
-
+</script>
+<script>
 function update_counter_title(text) {
     var len = parseInt(text.getAttribute("maxlength"), 10);
     document.getElementById('chars_title').innerHTML = len - text.value.length;
@@ -204,5 +224,4 @@ function initAutocomplete() {
 <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=places&callback=initAutocomplete"
     async defer></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 @endsection

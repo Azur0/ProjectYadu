@@ -41,6 +41,7 @@ Route::get('/slider',function(){
 
 Route::get('/location','API\LocationController@isWithinReach');
 Route::resource('events', 'EventsController');
+Route::post('/events/action', 'EventsController@action')->name('events_controller.action');
 Route::get('events/{id}/join', 'EventsController@join');
 Route::get('events/{id}/leave', 'EventsController@leave');
 Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilter')->name('events_controller.actionDistanceFilter');

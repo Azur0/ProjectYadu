@@ -112,11 +112,17 @@ class EventsController extends Controller
 
 
     public function isPictureValid($tag, $picture){
-        $eventPicture = EventPicture::all()->where('id','==',  $picture)->pluck('tag_id');
-        if($eventPicture[0] != $tag){
+        if(!EventPicture::where('id','=',  $picture)->exists()){
             return true;
         }
+        else{
+        $eventPicture = EventPicture::all()->where('id','=',  $picture)->pluck('tag_id');
+        if($eventPicture[0] != $tag){
+            return true;
+        } 
         return false;
+    }
+
     }
 
 

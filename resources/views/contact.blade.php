@@ -40,22 +40,22 @@
             <div class="row">
                 <div class="col-xs-6 media linkedin">
                     <a href="https://nl.linkedin.com/in/carmentoelen" class="contact-item">
-                        <i class="fa fa-linkedin" style="font-size: 36px; color: #E79535"></i>
+                        <i class="fab fa-linkedin" style="font-size: 36px; color: #E79535"></i>
                     </a>
                 </div>
                 <div class="col-xs-6 media twitter">
                     <a href="https://twitter.com/_Yadu_" class="contact-item">
-                        <i class="fa fa-twitter" style="font-size: 36px; color: #E79535"></i>
+                        <i class="fab fa-twitter" style="font-size: 36px; color: #E79535"></i>
                     </a>
                 </div>
                 <div class="col-xs-6 media facebook">
                     <a href="https://www.facebook.com/yadu.nu/?ref=bookmarks" class="contact-item">
-                        <i class="fa fa-facebook" style="font-size: 36px; color: #E79535"></i>
+                        <i class="fab fa-facebook" style="font-size: 36px; color: #E79535"></i>
                     </a>
                 </div>
                 <div class="col-xs-6 media instagram">
                     <a href="https://www.instagram.com/yadu.nu/" class="contact-item">
-                        <i class="fa fa-instagram" style="font-size: 36px; color: #E79535"></i>
+                        <i class="fab fa-instagram" style="font-size: 36px; color: #E79535"></i>
                     </a>
                 </div>
             </div>

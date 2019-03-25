@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Account;
 use App\Http\Controllers\Controller;
+use App\Mail\Confirmation;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -73,7 +75,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Account::create([
+        $account = Account::create([
             'firstName' => $data['firstName'],
             'middleName' => $data['middleName'],
             'lastName' => $data['lastName'],
@@ -82,5 +84,11 @@ class RegisterController extends Controller
             'genders' => ($data['gender'] == "-" ? 'unknown' : $data['gender']),
             'password' => Hash::make($data['password']),
         ]);
+
+        Mail::to($account['email'])->send(
+            new Confirmation($account)
+        );
+
+        return $account;
     }
 }

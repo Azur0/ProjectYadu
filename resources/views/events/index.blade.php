@@ -17,6 +17,7 @@
         <label class="rangeTextCenter">20 KM</label>
         <label class="rangeTextRight"> > </label>
     </div>
+    <input type="text" id="filterByTag" oninput="fetch_events()" placeholder="Zoeken op Tag">
 </div>
 
 <div class="row">
@@ -49,11 +50,13 @@ function fetch_events() {
     //alert('test');
     var distance;
     distance = $("#rangeValue").val();
+    var inputTag = $(filterByTag).val();
     $.ajax({
         url: "{{ route('events_controller.actionDistanceFilter')}}",
         method: 'POST',
         data: {
             distance: distance,
+            inputTag: inputTag,
             _token: '{{ csrf_token() }}'
         },
         dataType: 'json',

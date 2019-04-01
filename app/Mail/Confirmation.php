@@ -11,16 +11,20 @@ class Confirmation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $information;
-
     /**
      * Create a new message instance.
      *
      * @param $account
      */
+
+    public $information;
+
     public function __construct($account)
     {
-        $this->information = $account;
+        $this->information['mail'] = $account->mail;
+        $this->information['gender'] = $account->gender;
+        $this->information['middleName'] = $account->middleName;
+        $this->information['lastName'] = $account->lastName;
     }
 
     /**

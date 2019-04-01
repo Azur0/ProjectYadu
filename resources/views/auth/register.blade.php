@@ -15,11 +15,11 @@
                             <label for="firstName" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}*</label>
 
                             <div class="col-md-6">
-                                <input id=" firstName" type="text" class="form-control{{ $errors->has('   firstName') ? ' is-invalid' : '' }}" placeholder="name" name=" firstName" value="{{ old('firstName') }}" required autofocus maxlength="45">
+                                <input id="firstName" type="text" class="form-control{{ $errors->has('firstName') ? ' is-invalid' : '' }}" placeholder="name" name="firstName" value="{{ old('firstName') }}" required autofocus maxlength="45">
 
                                 @if ($errors->has(' firstName'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first(' firstName') }}</strong>
+                                        <strong>{{ $errors->first('firstName') }}</strong>
                                     </span>
                                 @endif
                             </div>

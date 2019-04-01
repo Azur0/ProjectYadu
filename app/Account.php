@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Account extends Authenticatable
 {
     //
-    protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password'];
+    protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender'];
 
 
 }

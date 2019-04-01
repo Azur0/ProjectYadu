@@ -13,23 +13,4 @@ class AccountController extends Controller
 
 		return view('auth.register')->with('genders', $genders);;
 	}
-
-    public function store()
-    {
-    	$values = request()->validate([
-    		'firstName' => ['Min:5','Max:45','Required'],
-    		'middleName' => ['Min:5','Max:45'],
-    		'lastName' => ['Min:5','Max:45'],
-    		'dateOfBirth' => 'Date',
-    		'email' => ['E-Mail','Required'],
-    		'password' => ['Required','Min:8','confirmed'],
-    		'password_confirmation' => 'Required'
-    	]);
-
-    	Account::create($values);
-
-    	redirect('/login');
-    }
-
-
 }

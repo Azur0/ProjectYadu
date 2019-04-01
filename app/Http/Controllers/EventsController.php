@@ -33,13 +33,18 @@ class EventsController extends Controller
 
         //TODO: Set initial amount of items to load and add 'load more' button
 
+
         $events = new Collection();
+        //TODO:2 Filter the unfiltered events
+
+        //TODO:2 Remove this foreach
         foreach ($unfiltered_events as $event) {
+
             if ($this->isEventInRange($event)) {
                 $events->push($event);
             }
         }
-
+        //TODO:2 Change this value to the filter events
         return view('events.index', compact('events'));
     }
 
@@ -235,7 +240,15 @@ class EventsController extends Controller
         //TODO: Set initial amount of items to load and add 'load more' button
 
         $events = new Collection();
+
+        //TODO:3 Filters from Ruben
+
+        //TODO:2 Filter the unfiltered events
+        $locationController = new LocationController();
+
+        //TODO:2 Change this value to the filter events
         foreach ($unfiltered_events as $event) {
+            //TODO:2 Remove this iff
             if ($this->isEventInRange($event)) {
                 $date = self::dateToText($event->startDate);
 

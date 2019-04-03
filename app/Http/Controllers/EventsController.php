@@ -30,21 +30,8 @@ class EventsController extends Controller
             ->where('startDate', '>=', $this->formatDate())
             ->orderBy('startDate', 'asc')
             ->get();
-
-        //TODO: Set initial amount of items to load and add 'load more' button
-
-
         $events = new Collection();
-        //TODO:2 Filter the unfiltered events
-
-        //TODO:2 Remove this foreach
-        foreach ($unfiltered_events as $event) {
-
-            if ($this->isEventInRange($event)) {
-                $events->push($event);
-            }
-        }
-        //TODO:2 Change this value to the filter events
+        $events = $this->areEvenstInRange($unfiltered_events);
         return view('events.index', compact('events'));
     }
 
@@ -215,6 +202,7 @@ class EventsController extends Controller
         $formatted_date .= $date['mday'];
         return $formatted_date;
     }
+
     private function isEventInRange(Event $event)
     {
         $locationController = new LocationController();
@@ -223,6 +211,12 @@ class EventsController extends Controller
             return true;
         }
         return false;
+    }
+
+    private function areEvenstInRange($events)
+    {
+        $locationController = new LocationController();
+        return  $events = $locationController->areWithinReach($events, $this->distance);
     }
 
     private $distance = 0;
@@ -238,30 +232,25 @@ class EventsController extends Controller
             ->get();
 
         //TODO: Set initial amount of items to load and add 'load more' button
-
         $events = new Collection();
 
         //TODO:3 Filters from Ruben
 
-        //TODO:2 Filter the unfiltered events
-        $locationController = new LocationController();
+        //TODO:2 Filter the unfiltered events (Or so called pre-filtered events)
+        $filtered_events = $this->areEvenstInRange($unfiltered_events);
 
-        //TODO:2 Change this value to the filter events
-        foreach ($unfiltered_events as $event) {
-            //TODO:2 Remove this iff
-            if ($this->isEventInRange($event)) {
-                $date = self::dateToText($event->startDate);
+        foreach ($filtered_events as $event) {
+            $date = self::dateToText($event->startDate);
 
-                $postalcode = self::cityFromPostalcode($event->Location->postalcode);
+            $postalcode = self::cityFromPostalcode($event->Location->postalcode);
 
-                $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
-                $Pic = (base64_encode($Picture[0]->picture));
+            $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
+            $Pic = (base64_encode($Picture[0]->picture));
 
-                $event->setAttribute('picture', $Pic);
-                $event->setAttribute('loc', $postalcode);
-                $event->setAttribute('date', $date);
-                $events->push($event);
-            }
+            $event->setAttribute('picture', $Pic);
+            $event->setAttribute('loc', $postalcode);
+            $event->setAttribute('date', $date);
+            $events->push($event);
         }
         return json_encode($events);
     }

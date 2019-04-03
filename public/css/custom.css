@@ -527,9 +527,25 @@ input[type=radio]:checked + .category span {
     overflow: hidden;
 }
 
+#filterByTag{
+    border-radius: 2px;
+    margin: 10px;
+}
+
+.loadingSpinner{
+    width: 10%;
+    height: 10%;
+    margin: auto;
+    padding: 0;
+}
+
 @media (max-width: 768px) {
     .event img {
         height: 200px;
+    }
+    .loadingSpinner{
+        width: 15%;
+        height: 15%;
     }
 }
 

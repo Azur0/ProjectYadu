@@ -26,21 +26,22 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $unfiltered_events = Event::where('isDeleted', '==', 0)
-            ->where('startDate', '>=', $this->formatDate())
-            ->orderBy('startDate', 'asc')
-            ->get();
+        // $unfiltered_events = Event::where('isDeleted', '==', 0)
+        //     ->where('startDate', '>=', $this->formatDate())
+        //     ->orderBy('startDate', 'asc')
+        //     ->get();
 
-        //TODO: Set initial amount of items to load and add 'load more' button
+        // //TODO: Set initial amount of items to load and add 'load more' button
 
-        $events = new Collection();
-        foreach ($unfiltered_events as $event) {
-            if ($this->isEventInRange($event)) {
-                $events->push($event);
-            }
-        }
+        // $events = new Collection();
+        // foreach ($unfiltered_events as $event) {
+        //     if ($this->isEventInRange($event)) {
+        //         $events->push($event);
+        //     }
+        // }
 
-        return view('events.index', compact('events'));
+        $tags = EventTag::all()->pluck('tag');
+        return view('events.index', compact('tags'));
     }
 
     /**

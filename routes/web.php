@@ -40,11 +40,10 @@ Route::get('events/{id}/leave', 'EventsController@leave');
 
 Route::post('/events/action', 'EventsController@action')->name('events_controller.action');
 Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilter')->name('events_controller.actionDistanceFilter');
-Route::post('/profile/updateProfile', 'AccountController@updateProfile');
-Route::post('/profile/changePassword', 'AccountController@changePassword');
+Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
+Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
 
 Auth::routes();
 
 Route::resource('events', 'EventsController');
-Route::resource('profile', 'ProfileController');
 

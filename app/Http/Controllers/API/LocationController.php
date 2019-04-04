@@ -46,6 +46,7 @@ class LocationController extends Controller
     }
 
     public function isWithinReach(Event $event, $distance){
+        return true;
         if($distance == 25){
             return true;
         }

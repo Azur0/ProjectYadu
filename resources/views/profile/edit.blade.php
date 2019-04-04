@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Edit Profile') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('profile/updateProfile') }}">
+                        <form method="POST" action="#">
                             @csrf
 
                             <div class="form-group row">
@@ -140,7 +140,7 @@
                     <div class="card-header">{{ __('Change password') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{route('profile/changePassword')}}">
+                        <form method="POST" action="#">
                             @csrf
 
                             <div class="form-group row">

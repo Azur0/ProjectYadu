@@ -46,4 +46,5 @@ Route::post('/profile/changePassword', 'AccountController@changePassword')->midd
 Auth::routes();
 
 Route::resource('events', 'EventsController');
+Route::resource('profile', 'ProfileController');
 

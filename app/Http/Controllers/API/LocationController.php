@@ -56,7 +56,7 @@ class LocationController extends Controller
             $eventDistances = $this->googleRequest($request);
             //dd($eventDistances);
             for ($j = 0; $j < count($slicedArray); $j++) {
-                if($eventDistances['status'] == 'OK'){
+                if($eventDistances['status'] === 'OK'){
                     if ($eventDistances['rows'][0]['elements'][$j]['distance']['value'] <= ($distance * 1000)) {
                         $eventsToReturn->push($slicedArray[$j]);
                     }

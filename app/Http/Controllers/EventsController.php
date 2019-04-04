@@ -27,7 +27,8 @@ class EventsController extends Controller
     public function index()
     {
         $tags = EventTag::all()->pluck('tag');
-        return view('events.index', compact('tags'));
+        $names = Event::all()->pluck('eventName');
+        return view('events.index', compact(['tags', 'names']));
     }
 
     /**

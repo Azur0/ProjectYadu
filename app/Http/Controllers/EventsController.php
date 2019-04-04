@@ -26,8 +26,8 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $tags = EventTag::all()->pluck('tag');
-        $names = Event::all()->pluck('eventName');
+        $tags = EventTag::pluck('tag');
+        $names = Event::distinct('eventName')->pluck('eventName');
         return view('events.index', compact(['tags', 'names']));
     }
 
@@ -217,9 +217,8 @@ class EventsController extends Controller
             ->whereIn('id', $names)
             ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
-            ->get();
+            ->get();       
 
-       
         //TODO: Set initial amount of items to load and add 'load more' button
 
         $events = new Collection();

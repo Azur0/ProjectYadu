@@ -13,4 +13,12 @@ class AccountController extends Controller
 
 		return view('auth.register')->with('genders', $genders);;
 	}
+
+	public function changePassword($userid){
+
+    }
+
+    public function updateProfile($userid){
+
+    }
 }

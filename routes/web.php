@@ -33,17 +33,16 @@ Route::get('/', function () { return view('welcome'); });
 Route::get('/about', function () { return view('about'); });
 Route::get('/contact', function () { return view('contact'); });
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
-Route::get('/slider',function(){
-    return view('temp\sliderDemo');
-});
-
 Route::get('/location','API\LocationController@isWithinReach');
-Route::post('/events/action', 'EventsController@action')->name('events_controller.action');
 Route::get('events/{id}/join', 'EventsController@join');
 Route::get('events/{id}/leave', 'EventsController@leave');
+
+Route::post('/events/action', 'EventsController@action')->name('events_controller.action');
 Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilter')->name('events_controller.actionDistanceFilter');
+Route::post('/profile/updateProfile', 'AccountController@updateProfile');
+Route::post('/profile/changePassword', 'AccountController@changePassword');
+
 Auth::routes();
 
 Route::resource('events', 'EventsController');

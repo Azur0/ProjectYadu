@@ -17,11 +17,6 @@ class Account extends Authenticatable implements MustVerifyEmailContract
 
     protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender'];
 
-    /*
-    protected $dispatchesEvents = [
-        'created' => AccountCreatedEvent::class
-    ];*/
-
     public function gender(){
        return $this->belongsTo(Gender::class);
     }

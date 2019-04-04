@@ -213,7 +213,7 @@ class EventsController extends Controller
         $this->distance = $request->input('distance');
 
         $unfiltered_events = Event::where('isDeleted', '==', 0)
-            ->where('startDate', '>=', $this->formatDate())
+            ->where(['startDate', '>=', $this->formatDate()],['eventName', 'like', '%' . $request->inputName .'%'])
             ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
             ->get();

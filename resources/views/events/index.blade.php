@@ -25,6 +25,13 @@
             <option value="{{$tag}}">
         @endforeach
     </datalist>
+    <label for="filterByName">Zoek op naam:</label>
+    <input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" />
+    <datalist id="names">
+        @foreach ($names as $name)
+            <option value="{{$name}}">
+        @endforeach
+    </datalist>
 </div>
 
 <div class="row">
@@ -61,12 +68,14 @@ function fetch_events() {
     var distance;
     distance = $("#rangeValue").val();
     var inputTag = $(filterByTag).val();
+    var inputName = $(filterByName).val();
     $.ajax({
         url: "{{ route('events_controller.actionDistanceFilter')}}",
         method: 'POST',
         data: {
             distance: distance,
             inputTag: inputTag,
+            inputName: inputName,
             _token: '{{ csrf_token() }}'
         },
         dataType: 'json',

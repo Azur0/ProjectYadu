@@ -42,7 +42,7 @@ class LocationController extends Controller
         //$front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=';
         $userLocation = $userLocation['lat'] . ',' . $userLocation['lon'];
         $destination = '&destinations=';
-        $EndapiKey = '&key=AIzaSyDL4ugHzrWMXq40HaC3KEUtdgoeTVX3JcU';
+        $EndapiKey = '&key=AIzaSyDksBmYSSEkU0zeODKCUNozmiW9PQRoBxg';
         $eventsToReturn = new Collection();
         for ($i = 0; $i <= ceil(count($events) / 25); $i++) {
             $slicedArray = $events->splice(25 * $i, 25);

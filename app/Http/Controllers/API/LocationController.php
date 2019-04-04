@@ -42,7 +42,7 @@ class LocationController extends Controller
         //$front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=';
         $userLocation = $userLocation['lat'] . ',' . $userLocation['lon'];
         $destination = '&destinations=';
-        $EndapiKey = '&key=AIzaSyDksBmYSSEkU0zeODKCUNozmiW9PQRoBxg';
+        $EndapiKey = '&key=AIzaSyClxGzJPExYO1V4f3u-EexDfqAQvtPleDU';
         $eventsToReturn = new Collection();
         for ($i = 0; $i <= ceil(count($events) / 25); $i++) {
             $slicedArray = $events->splice(25 * $i, 25);
@@ -54,9 +54,12 @@ class LocationController extends Controller
             //$request = $front . $userLocation . $destination .$locations . $EndapiKey;
             $request = $front . $locations . $EndapiKey;
             $eventDistances = $this->googleRequest($request);
+            //dd($eventDistances);
             for ($j = 0; $j < count($slicedArray); $j++) {
-                if ($eventDistances['rows'][0]['elements'][$j]['distance']['value'] <= ($distance * 1000)) {
-                    $eventsToReturn->push($slicedArray[$j]);
+                if($eventDistances['status'] == 'OK'){
+                    if ($eventDistances['rows'][0]['elements'][$j]['distance']['value'] <= ($distance * 1000)) {
+                        $eventsToReturn->push($slicedArray[$j]);
+                    }
                 }
             }
         }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Gender;
+use App\Rules\genderExists;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EditProfileRequest extends FormRequest
@@ -24,17 +25,11 @@ class EditProfileRequest extends FormRequest
      */
     public function rules()
     {
-        $genders = collect();
-        foreach (Gender::all() as $gender){
-            $genders->push($gender->gender);
-        }
-
         return [
             'firstName' => ['required','min:1','max:45','string'],
             'middleName' => ['nullable', 'max:45','string'],
             'lastName' => ['nullable', 'max:45','string'],
-            //'gender' => ['in:'.$genders],
-            'gender' => [''],
+            'gender' => [new genderExists],
             'dateOfBirth' => ['nullable', 'date'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:accounts,email']
         ];

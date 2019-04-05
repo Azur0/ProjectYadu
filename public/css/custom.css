@@ -4,6 +4,10 @@
     display: none;
 }
 
+.force-show{
+    display: flex !important;
+}
+
 .btn-yadu-orange {
     color: white;
     background-color: #F39200;

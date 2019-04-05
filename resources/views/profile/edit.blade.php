@@ -69,7 +69,7 @@
                                 <label for="gender"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                                 <div class="col-md-6">
-                                    <select name="gender" selected="{{$account->gender}}">
+                                    <select name="gender" selected="{{$account->gender}}" class="form-control{{ $errors->has('firstName') ? ' is-invalid' : '' }}">
                                         @if($account->gender == null)
                                             <option value="-" selected>-</option>
                                         @endif
@@ -82,13 +82,14 @@
                                             @endif
                                         @endforeach
                                     </select>
-
                                     @if ($errors->has('gender'))
-                                        <span class="invalid-feedback" role="alert">
+
+                                        <span class="invalid-feedback force-show" role="alert">
                                         <strong>{{ $errors->first('gender') }}</strong>
                                     </span>
                                     @endif
                                 </div>
+
                             </div>
 
                             <div class="form-group row">
@@ -223,17 +224,19 @@
                                 </label>
 
                                 <div class="col-md-4 mt-2">
-                                    <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#confirmDeleteAccount">
+                                    <button type="button" class="btn btn-danger float-right" data-toggle="modal"
+                                            data-target="#confirmDeleteAccount">
                                         {{ __('Delete account') }}
                                     </button>
                                 </div>
 
-                                <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <h5 class="modal-title">Confirm</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -241,8 +244,11 @@
                                                 Are you sure you want to delete your account?
                                             </div>
                                             <div class="modal-footer">
-                                                <input type="submit" form="deleteAccount" class="btn btn-danger" value="Yes, Delete it">
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">No, Keep it!</button>
+                                                <input type="submit" form="deleteAccount" class="btn btn-danger"
+                                                       value="Yes, Delete it">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">No,
+                                                    Keep it!
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

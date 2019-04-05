@@ -14,7 +14,7 @@ class ChangePasswordRequest extends FormRequest
      */
     public function authorize()
     {
-        return isAuthorized($this->accountId)
+        return isAuthorized($this->accountId);
     }
 
     /**

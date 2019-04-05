@@ -52,4 +52,10 @@ class AccountController extends Controller
         //TODO: Redirect to success page!
         return redirect('/');
     }
+
+    public function deleteAccount(){
+        isAuthorized(request()->accountId);
+        dd('Hier moet Martijn zijn code komen');
+	    //TODO: Martijn zijn delete code!
+    }
 }

@@ -46,6 +46,7 @@ Route::get('profile/edit', 'ProfileController@edit');
 Route::post('profile/edit', 'ProfileController@edit');
 Route::post('/profile/updateProfile', 'AccountController@updateProfile');
 Route::post('/profile/changePassword', 'AccountController@changePassword');
+Route::post('/profile/deleteAccount', 'AccountController@deleteAccount');
 
 Auth::routes();
 

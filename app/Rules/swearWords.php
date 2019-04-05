@@ -28,7 +28,7 @@ class swearWords implements Rule
     {
         $ProhibitedWords = ProhibitedWord::all()->pluck('word');
         foreach ($ProhibitedWords as $ProhibitedWord) {
-            if (strpos($value, $ProhibitedWord) !== false) {
+            if (strpos(strtolower($value), strtolower($ProhibitedWord)) !== false) {
                 return false;
             }
         }

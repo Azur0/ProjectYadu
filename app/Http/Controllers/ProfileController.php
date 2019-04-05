@@ -9,11 +9,20 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    function edit($id){
+    function edit(){
 
-        isAuthorized($id);
+        //If this function is called from POST request use the requests userId
+        if(request()->userId != null){
+            $userId = request()->userId;
+        } else{
+            //If the function is called from a GET request get the userId from Auth
+            $userId = Auth::id();
+        }
+
+        isAuthorized($userId);
+
         $genders = Gender::all();
-        $account = Account::where('id', $id)
+        $account = Account::where('id', $userId)
             ->firstOrFail();
 
         return view('profile.edit', compact(['account', 'genders']));

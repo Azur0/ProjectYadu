@@ -1,5 +1,9 @@
 /*global styles*/
 
+.hidden{
+    display: none;
+}
+
 .btn-yadu-orange {
     color: white;
     background-color: #F39200;
@@ -58,6 +62,7 @@ body {
 .nav-item {
     font-size: 18px;
     font-family: ConsolasRegular;
+    outline-width: 0;
 }
 
 .logo {

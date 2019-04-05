@@ -40,11 +40,14 @@ Route::get('events/{id}/leave', 'EventsController@leave');
 
 Route::post('/events/action', 'EventsController@action')->name('events_controller.action');
 Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilter')->name('events_controller.actionDistanceFilter');
+
+//Profile
+Route::get('profile/edit', 'ProfileController@edit');
+Route::post('profile/edit', 'ProfileController@edit');
 Route::post('/profile/updateProfile', 'AccountController@updateProfile');
 Route::post('/profile/changePassword', 'AccountController@changePassword');
 
 Auth::routes();
 
 Route::resource('events', 'EventsController');
-Route::resource('profile', 'ProfileController');
 

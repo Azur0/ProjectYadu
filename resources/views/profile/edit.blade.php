@@ -34,7 +34,7 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Middle Name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text"
+                                    <input id="middleName" type="text"
                                            class="form-control{{ $errors->has('middleName') ? ' is-invalid' : '' }}"
                                            placeholder="middleName" name="middleName" value="{{$account->middleName}}"
                                            maxlength="45">
@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name"
+                                <label for="lastName"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
 
                                 <div class="col-md-6">
@@ -140,15 +140,16 @@
                     <div class="card-header">{{ __('Change password') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="#">
+                        <form method="POST" action="/profile/changePassword">
                             @csrf
+                            <input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
 
                             <div class="form-group row">
                                 <label for="currentPassword" class="col-md-4 col-form-label text-md-right">{{ __('Current Password') }}
                                     *</label>
 
                                 <div class="col-md-6">
-                                    <input id="currentPassword" minlength="8" type="password"
+                                    <input id="currentPassword" type="password"
                                            class="form-control{{ $errors->has('currentPassword') ? ' is-invalid' : '' }}"
                                            name="currentPassword" required>
 
@@ -178,13 +179,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="newPasswordConfirm"
+                                <label for="newPassword_confirmation"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Confirm New Password') }}
                                     *</label>
 
                                 <div class="col-md-6">
-                                    <input id="newPasswordConfirm" minlength="8" type="password" class="form-control"
-                                           name="newPasswordConfirm" required>
+                                    <input id="newPassword_confirmation" minlength="8" type="password" class="form-control"
+                                           name="newPassword_confirmation" required>
 
                                     @if ($errors->has('confirmNewPassword'))
                                         <span class="invalid-feedback" role="alert">

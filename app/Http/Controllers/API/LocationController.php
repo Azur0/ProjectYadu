@@ -43,8 +43,8 @@ class LocationController extends Controller
         $result = curl_exec($ch);
         curl_close($ch);
         $json = json_decode($result, true);
-        //$event->location->locLatitude = ;
-        //$event->location->locLongtitude = ;
+        $event->location->locLatitude = $json[0]['lat'];
+        $event->location->locLongtitude = $json[0]['lon'];
         return $event;
     }
 

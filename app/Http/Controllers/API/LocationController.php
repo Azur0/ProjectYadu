@@ -32,6 +32,29 @@ class LocationController extends Controller
             }
     }
 
+    private function eventLonLat($event){
+
+        $eventZipCode = $event->location->postalcode;
+        $query2 = "https://nominatim.openstreetmap.org/search?q=".$eventZipCode."&format=json&addressdetails=1";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $query2);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $json = json_decode($result, true);
+        //$event->location->locLatitude = ;
+        //$event->location->locLongtitude = ;
+        return $event;
+    }
+
+    private function setEventsLonLat($events){
+        foreach($events as $event){
+            $this->eventLonLat($event);
+        }
+        return $events;
+    }
+
     public function areWithinReach($events, $distance)
     {
         if ($distance == 25) {
@@ -44,6 +67,7 @@ class LocationController extends Controller
         $destination = '&destinations=';
         $EndapiKey = '&key=AIzaSyClxGzJPExYO1V4f3u-EexDfqAQvtPleDU';
         $eventsToReturn = new Collection();
+        $events = $this->setEventsLonLat($events);
         for ($i = 0; $i <= ceil(count($events) / 25); $i++) {
             $slicedArray = $events->splice(25 * $i, 25);
             $locations = "";

@@ -27,12 +27,7 @@
                 @endforeach
         </datalist>
         <label for="filterByName">Zoek op naam:</label>
-        <input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" />
-        <datalist id="names">
-            @foreach ($names as $name)
-            <option value="{{$name}}">
-                @endforeach
-        </datalist>
+        <input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" autocomplete="off"/>
     </div>
 </div>
 

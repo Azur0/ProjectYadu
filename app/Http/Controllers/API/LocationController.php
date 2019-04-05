@@ -43,16 +43,22 @@ class LocationController extends Controller
         $result = curl_exec($ch);
         curl_close($ch);
         $json = json_decode($result, true);
-        $event->location->locLatitude = $json[0]['lat'];
-        $event->location->locLongtitude = $json[0]['lon'];
+        if(!empty($json)) {
+            $event->location->locLatitude = $json[0]['lat'];
+            $event->location->locLongtitude = $json[0]['lon'];
+        }
         return $event;
     }
 
     private function setEventsLonLat($events){
+        $eventsToReturn = new Collection();
         foreach($events as $event){
             $this->eventLonLat($event);
+            if($event->location->locLatitude != null){
+                $eventsToReturn->push($event);
+            }
         }
-        return $events;
+        return $eventsToReturn;
     }
 
     public function areWithinReach($events, $distance)
@@ -67,6 +73,7 @@ class LocationController extends Controller
         $destination = '&destinations=';
         $EndapiKey = '&key=AIzaSyClxGzJPExYO1V4f3u-EexDfqAQvtPleDU';
         $eventsToReturn = new Collection();
+
         $events = $this->setEventsLonLat($events);
         for ($i = 0; $i <= ceil(count($events) / 25); $i++) {
             $slicedArray = $events->splice(25 * $i, 25);
@@ -78,7 +85,6 @@ class LocationController extends Controller
             //$request = $front . $userLocation . $destination .$locations . $EndapiKey;
             $request = $front . $locations . $EndapiKey;
             $eventDistances = $this->googleRequest($request);
-            //dd($eventDistances);
             for ($j = 0; $j < count($slicedArray); $j++) {
                 if($eventDistances['status'] === 'OK'){
                     if ($eventDistances['rows'][0]['elements'][$j]['distance']['value'] <= ($distance * 1000)) {

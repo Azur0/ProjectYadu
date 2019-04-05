@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Account;
+use App\Rules\matchesDatabasePassword;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class ChangePasswordRequest extends FormRequest
 {
@@ -16,12 +14,7 @@ class ChangePasswordRequest extends FormRequest
      */
     public function authorize()
     {
-        //TODO: display password incorrect message instead of 401
-        $account = Account::Where('id', Auth::id())->firstOrFail();
-        $passwordCorrect = Hash::check($this->currentPassword, $account->password);
-        $isAuthorized = isAuthorized($this->accountId);
-
-        return ($passwordCorrect && $isAuthorized);
+        return isAuthorized($this->accountId)
     }
 
     /**
@@ -32,7 +25,7 @@ class ChangePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'currentPassword' => ['required'],
+            'currentPassword' => ['required', new matchesDatabasePassword()],
             'newPassword' => ['required', 'string', 'min:8','confirmed']
         ];
     }

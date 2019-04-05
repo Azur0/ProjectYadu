@@ -527,7 +527,7 @@ input[type=radio]:checked + .category span {
     overflow: hidden;
 }
 
-#filterByTag{
+#filterByTag, #filterByName{
     border-radius: 5px;
     margin: 10px;
 }
@@ -546,6 +546,15 @@ input[type=radio]:checked + .category span {
     .loadingSpinner{
         width: 15%;
         height: 15%;
+    }
+    .search{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        
+    }
+    .search label, input{
+        width: 100%;
     }
 }
 

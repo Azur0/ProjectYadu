@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Gender;
+use App\Rules\emailUniqueExceptSelf;
 use App\Rules\genderExists;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -31,7 +32,7 @@ class EditProfileRequest extends FormRequest
             'lastName' => ['nullable', 'max:45','string'],
             'gender' => [new genderExists],
             'dateOfBirth' => ['nullable', 'date'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:accounts,email']
+            'email' => ['required', 'string', 'email', 'max:255', new emailUniqueExceptSelf]
         ];
     }
 }

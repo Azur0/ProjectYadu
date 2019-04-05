@@ -13,12 +13,12 @@
                             <input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
                             <div class="form-group row">
                                 <label for="firstName"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('First name') }}*</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Firstname') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="firstName" type="text"
                                            class="form-control{{ $errors->has('firstName') ? ' is-invalid' : '' }}"
-                                           placeholder="Name" name="firstName" value="{{$account->firstName}}" required
+                                           placeholder="Firstname" name="firstName" value="{{$account->firstName}}" required
                                            autofocus maxlength="45">
 
                                     @if ($errors->has('firstName'))
@@ -31,12 +31,12 @@
 
                             <div class="form-group row">
                                 <label for="middleName"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Middle Name') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Middlename') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="middleName" type="text"
                                            class="form-control{{ $errors->has('middleName') ? ' is-invalid' : '' }}"
-                                           placeholder="middleName" name="middleName" value="{{$account->middleName}}"
+                                           placeholder="Middlename" name="middleName" value="{{$account->middleName}}"
                                            maxlength="45">
 
                                     @if ($errors->has('middleName'))
@@ -49,12 +49,12 @@
 
                             <div class="form-group row">
                                 <label for="lastName"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Lastname') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="lastName" type="text"
                                            class="form-control{{ $errors->has('lastName') ? ' is-invalid' : '' }}"
-                                           placeholder="lastName" name="lastName" value="{{$account->lastName}}"
+                                           placeholder="Lastname" name="lastName" value="{{$account->lastName}}"
                                            maxlength="45">
 
                                     @if ($errors->has('lastName'))
@@ -69,7 +69,7 @@
                                 <label for="gender"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                                 <div class="col-md-6">
-                                    <select name="gender" selected="{{$account->gender}}" class="form-control{{ $errors->has('firstName') ? ' is-invalid' : '' }}">
+                                    <select name="gender" selected="{{$account->gender}}" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
                                         @if($account->gender == null)
                                             <option value="-" selected>-</option>
                                         @endif

@@ -67,7 +67,7 @@ class LocationController extends Controller
             return $events;
         }
         $userLocation = self::getLocation();
-        $front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=52.161436,5.416094&destinations=';
+        $front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=51.688445,5.287405&destinations=';
         //$front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=';
         $userLocation = $userLocation['lat'] . ',' . $userLocation['lon'];
         $destination = '&destinations=';

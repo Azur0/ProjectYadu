@@ -97,7 +97,7 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Date of Birth') }}</label>
 
                                 <div class="col-md-6">
-                                    <input type="date" name="dateOfBirth" value="{{$account->dateOfBirth}}">
+                                    <input type="date" name="dateOfBirth" value="{{$account->dateOfBirth}}" class="form-control{{ $errors->has('dateOfBirth') ? ' is-invalid' : '' }}">
 
                                     @if ($errors->has('dateOfBirth'))
                                         <span class="invalid-feedback" role="alert">

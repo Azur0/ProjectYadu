@@ -26,21 +26,8 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $unfiltered_events = Event::where('isDeleted', '==', 0)
-            ->where('startDate', '>=', $this->formatDate())
-            ->orderBy('startDate', 'asc')
-            ->get();
-
-        //TODO: Set initial amount of items to load and add 'load more' button
-
-        $events = new Collection();
-        foreach ($unfiltered_events as $event) {
-            if ($this->isEventInRange($event)) {
-                $events->push($event);
-            }
-        }
-
-        return view('events.index', compact('events'));
+        $tags = EventTag::all()->pluck('tag');
+        return view('events.index', compact('tags'));
     }
 
     /**
@@ -76,7 +63,6 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
@@ -114,20 +100,17 @@ class EventsController extends Controller
         );
         return redirect('/events');
     }
-
-
+    
     public function isPictureValid($tag, $picture){
-        if(!EventPicture::where('id','=',  $picture)->exists()){
+        if (!EventPicture::where('id','=',  $picture)->exists()) {
             return true;
-        }
-        else{
-        $eventPicture = EventPicture::all()->where('id','=',  $picture)->pluck('tag_id');
-        if($eventPicture[0] != $tag){
-            return true;
-        } 
+        } else {
+            $eventPicture = EventPicture::all()->where('id','=',  $picture)->pluck('tag_id');
+            if ($eventPicture[0] != $tag) {
+                return true;
+            } 
         return false;
-    }
-
+        }
     }
 
 
@@ -224,11 +207,14 @@ class EventsController extends Controller
 
     public function actionDistanceFilter(Request $request)
     {
+       
+        $tags = EventTag::where('tag', 'like', '%' . $request->inputTag .'%')->pluck('id');
 
         $this->distance = $request->input('distance');
 
         $unfiltered_events = Event::where('isDeleted', '==', 0)
             ->where('startDate', '>=', $this->formatDate())
+            ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
             ->get();
 
@@ -290,4 +276,3 @@ class EventsController extends Controller
         return preg_match($regex, $postalcode);
     }
 }
-

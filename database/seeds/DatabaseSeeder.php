@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EventTagsTableSeeder::class);
         $this->call(EventPicturesTableSeeder::class);
         $this->call(EventsTableSeeder::class);
+        $this->call(ProhibitedWordsTableSeeder::class);
     }
 }

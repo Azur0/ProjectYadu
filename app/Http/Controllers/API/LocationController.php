@@ -68,10 +68,11 @@ class LocationController extends Controller
         }
         $userLocation = self::getLocation();
         $front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=51.688445,5.287405&destinations=';
-        //TODO uncomment this for the live server
+        //TODO:2 uncomment this for the live server
         //$front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=';
         $userLocation = $userLocation['lat'] . ',' . $userLocation['lon'];
         $destination = '&destinations=';
+        //TODO:1 get this from a middle ware 
         $EndapiKey = '&key=AIzaSyClxGzJPExYO1V4f3u-EexDfqAQvtPleDU';
         $eventsToReturn = new Collection();
 
@@ -83,7 +84,7 @@ class LocationController extends Controller
                 $locations .= $slice->location->locLatitude . '%2C' . $slice->location->locLongtitude . '%7C';
             }
             $locations = substr($locations, 0, -3);
-            //TODO uncomment this for the live server
+            //TODO:2 uncomment this for the live server
             //$request = $front . $userLocation . $destination .$locations . $EndapiKey;
             $request = $front . $locations . $EndapiKey;
             $eventDistances = $this->googleRequest($request);

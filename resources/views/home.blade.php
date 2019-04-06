@@ -2,22 +2,79 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<div class="card">
+				<div class="card-header">
+					<a href="/account/participating"><i class="fas fa-calendar-alt"></i> Participating</a>
+				</div>
+				<div class="card-body">
+					<table class="table table-hover">
+						<thead>
+						<tr>
+							<th scope="col">naam</th>
+							<th scope="col">eigenaar</th>
+							<th scope="col">datum</th>
+							<th scope="col">locatie</th>
+						</tr>
+						</thead>
+						<tbody>
+						@foreach($events as $event)
+							<tr>
+								<td><a href="/events/{{$event->id}}">{{ $event->eventName }}</a></td>
+								<td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
+								<td>{{ date('d-m-Y', strtotime($event->startDate)) }}</td>
+								<td>{{ $event->location->postalcode }}</td>
+							</tr>
+						@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-header"><i class="fas fa-user"></i> User</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+				<div class="card-body">
+					@if (session('status'))
+						<div class="alert alert-success" role="alert">
+							{{ session('status') }}
+						</div>
+					@endif
 
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
+					You are logged in!
+
+					<div>
+						<a href="/account/settings"><i class="fas fa-user-cog"></i> settings</a>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header">
+					<a href="/account/myevents"><i class="fas fa-calendar-alt"></i> My events</a> <a class="right" href="/events/create"><i class="fas fa-plus-square"></i></a>
+				</div>
+				<div class="card-body">
+					@if($events)
+
+						@foreach($events as $event)
+							<div class="dashboard_event">
+								<a href="/events/{{ $event->id }}">
+									<img class="card-img-top" src="data:image/png;base64,{{ chunk_split(base64_encode($event->eventPicture->picture)) }}">
+									<div class="dashboard_event_info">
+										<h3>{{ str_limit($event->eventName, $limit = 8, $end = '...') }}</h3>
+										<p>{{ date('d-m-Y', strtotime($event->startDate)) }}</p>
+									</div>
+								</a>
+							</div>
+							<hr>
+						@endforeach
+					@else
+						No events found
+					@endif
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 @endsection

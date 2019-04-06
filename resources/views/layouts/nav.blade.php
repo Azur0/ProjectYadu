@@ -28,13 +28,18 @@
             <li>
                 <a href="/contact" class="nav-link m-2 nav-item {{ request()->is('contact') ? 'active' : '' }}">CONTACT</a>
             </li>
-            <li>
             @if(Auth::user())
-                <a href="/logout" class="nav-link m-2 nav-item">UITLOGGEN</a>
+	            <li>
+	                <a href="/home" class="nav-link m-2 nav-item {{ request()->is('home') ? 'active' : '' }}">DASHBOARD</a>
+	            </li>
+	            <li>
+	                <a href="/logout" class="nav-link m-2 nav-item">UITLOGGEN</a>
+	            </li>
             @else
-                <a href="/login" class="nav-link m-2 nav-item {{ request()->is('login') ? 'active' : '' }}">INLOGGEN</a>
+	            <li>
+	                <a href="/login" class="nav-link m-2 nav-item {{ request()->is('login') ? 'active' : '' }}">INLOGGEN</a>
+	            </li>
             @endif
-            </li>
         </ul>
     </div>
 </nav>

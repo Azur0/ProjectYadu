@@ -1,4 +1,4 @@
-
+//npm run development -- --watch
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -11,4 +11,139 @@
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.card-header
+{
+	background-color: #E79435;
+	color: white;
+
+	a, .btn-link
+	{
+		color:	white;
+	}
+	a:hover
+	{
+		color: #A0FF7F;
+	}
+
+	.right
+	{
+		float: right;
+	}
+}
+
+.dashboard_event
+{
+	display: flex;
+
+	a
+	{
+		width:	100%;
+		display: flex;
+
+		@media screen and (max-width: 991px)
+		{
+			display: block;
+		}
+
+	}
+	a:hover
+	{
+		text-decoration: none;
+	}
+	
+
+	img
+	{
+		max-width: 120px; 
+		max-height: 80px;
+		display: block;
+	}
+
+	.dashboard_event_info
+	{
+		h3, p
+		{
+			padding: 0 5px;
+			margin: 0 5px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+}
+
+.events
+{
+	width: 100%;
+	padding: 0;
+	font-size: 0;
+	text-align: center;
+
+	@media screen and (max-width: $break-small)
+	{
+    	display: block;
+    	width: 100px;
+    	min-width: 100%;
+		max-width: 100%;
+	}
+}
+
+.event_wrap
+{
+	
+	display: inline-block;
+	overflow: hidden;
+	width: 30%;
+	padding: 10px;
+	margin: 5px;
+	background-color: #FFBF7F;
+	border-radius: calc(0.25rem - 1px) ;
+	position: relative;
+	font-size: initial;
+
+	&:hover
+	{
+		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.04);
+	}
+
+	.event_info
+	{
+		background-color: #FFFFFF;
+		text-align: center;
+	}
+
+	.event_avatar
+	{
+		max-width: 30%;
+		height: auto;
+		margin: auto;
+		position: absolute;
+    	top: 20%;
+    	left: 35%;
+
+		img
+		{
+			width: 100%;
+			border-radius: 300px;
+			background-color: white;
+		}
+		h3
+		{
+			max-height: 30px;
+			color: white;
+			text-align: center;
+			font-weight: bold;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+
+	@media screen and (max-width: $break-small)
+	{
+    	width: 100px;
+    	min-width: 100%;
+		max-width: 100%;
+		margin: 0 0 1em 0;
+	}
 }

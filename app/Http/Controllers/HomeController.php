@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Event;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $events = Event::all()->where('owner_id', auth()->user()->id);
+        $participation = Event::all()->where('owner_id', auth()->user()->id);
+
+        return view('home', compact('events','participation'));
     }
 }

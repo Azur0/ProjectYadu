@@ -26,8 +26,9 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $tags = EventTag::all()->pluck('tag');
-        return view('events.index', compact('tags'));
+        $tags = EventTag::pluck('tag');
+        $names = Event::distinct('eventName')->pluck('eventName');
+        return view('events.index', compact(['tags', 'names']));
     }
 
     /**
@@ -209,14 +210,14 @@ class EventsController extends Controller
     {
        
         $tags = EventTag::where('tag', 'like', '%' . $request->inputTag .'%')->pluck('id');
-
+        $names = Event::where('eventName', 'like', '%' . $request->inputName .'%')->pluck('id');
         $this->distance = $request->input('distance');
-
         $unfiltered_events = Event::where('isDeleted', '==', 0)
             ->where('startDate', '>=', $this->formatDate())
+            ->whereIn('id', $names)
             ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
-            ->get();
+            ->get();       
 
         //TODO: Set initial amount of items to load and add 'load more' button
 

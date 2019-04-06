@@ -18,13 +18,17 @@
         <label class="rangeTextCenter">20 KM</label>
         <label class="rangeTextRight"> > </label>
     </div>
-    <label for="filterByTag">Kies een categorie:</label>
-    <input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag" />
-    <datalist id="tags">
-        @foreach ($tags as $tag)
+    <div class="search">
+        <label for="filterByTag">Kies een categorie:</label>
+        <input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag" />
+        <datalist id="tags">
+            @foreach ($tags as $tag)
             <option value="{{$tag}}">
-        @endforeach
-    </datalist>
+                @endforeach
+        </datalist>
+        <label for="filterByName">Zoek op naam:</label>
+        <input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" autocomplete="off"/>
+    </div>
 </div>
 
 <div class="row">
@@ -61,12 +65,14 @@ function fetch_events() {
     var distance;
     distance = $("#rangeValue").val();
     var inputTag = $(filterByTag).val();
+    var inputName = $(filterByName).val();
     $.ajax({
         url: "{{ route('events_controller.actionDistanceFilter')}}",
         method: 'POST',
         data: {
             distance: distance,
             inputTag: inputTag,
+            inputName: inputName,
             _token: '{{ csrf_token() }}'
         },
         dataType: 'json',

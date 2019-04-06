@@ -19,12 +19,12 @@
 						</tr>
 						</thead>
 						<tbody>
-						@foreach($events as $event)
+						@foreach($participation as $par)
 							<tr>
-								<td><a href="/events/{{$event->id}}">{{ $event->eventName }}</a></td>
-								<td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
-								<td>{{ date('d-m-Y', strtotime($event->startDate)) }}</td>
-								<td>{{ $event->location->postalcode }}</td>
+								<td><a href="/events/{{$par->id}}">{{ $par->eventName }}</a></td>
+								<td>{{ $par->owner->firstName }} {{ $par->owner->middleName }} {{ $par->owner->lastName }}</td>
+								<td>{{ date('d-m-Y', strtotime($par->startDate)) }}</td>
+								<td>{{ $par->location->postalcode }}</td>
 							</tr>
 						@endforeach
 						</tbody>

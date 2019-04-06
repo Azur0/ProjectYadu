@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Gender;
 use App\Event;
+use App\EventHasParticipants;
 use Auth;
 
 class AccountController extends Controller
@@ -34,8 +35,14 @@ class AccountController extends Controller
 	{
 		if(Auth::check())
 		{
-			$events = Event::all()->where('owner_id', auth()->user()->id);
+			$events = array();
+			$part = EventHasParticipants::get()->where('account_id', '==', auth()->user()->id);
 
+			foreach($part as $par)
+			{
+				array_push($events, Event::find($par->event_id));
+			}
+		
 			return view('accounts/participating', compact('events'));
 		}
 		else

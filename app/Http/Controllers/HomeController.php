@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\EventHasParticipants;
 use Auth;
 
 class HomeController extends Controller
@@ -26,8 +27,14 @@ class HomeController extends Controller
     public function index()
     {
         $events = Event::all()->where('owner_id', auth()->user()->id);
-        $participation = Event::all()->where('owner_id', auth()->user()->id);
+        $participation = array();        
+        $part = EventHasParticipants::get()->where('account_id', '==', auth()->user()->id);
 
+        foreach($part as $par)
+        {
+	        array_push($participation, Event::find($par->event_id));
+        }
+         
         return view('home', compact('events','participation'));
     }
 }

@@ -11,6 +11,12 @@ class GendersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Gender')->create();
+        $genders = array("Male", "Female");
+
+        foreach ($genders as $gender) {
+            DB::table('genders')->insert([
+                'gender' => $gender,
+            ]);
+        }
     }
 }

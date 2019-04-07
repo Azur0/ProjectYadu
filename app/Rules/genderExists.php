@@ -26,6 +26,10 @@ class genderExists implements Rule
      */
     public function passes($attribute, $gender)
     {
+        if ($gender == "-"){
+            return true;
+        }
+
         $genderMatches = Gender::where('gender', $gender)->count();
         return ($genderMatches > 0);
     }

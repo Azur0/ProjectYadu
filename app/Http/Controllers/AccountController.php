@@ -40,7 +40,13 @@ class AccountController extends Controller
 
 	    $account = Account::where('id', $request->accountId)->firstOrFail();
 
-	    $account->gender = $validated['gender'];
+	    if($validated['gender'] == "-"){
+            $account->gender = null;
+        }
+	    else {
+            $account->gender = $validated['gender'];
+        }
+
         $account->email = $validated['email'];
         $account->firstName = $validated['firstName'];
         $account->middleName = $validated['middleName'];
@@ -49,7 +55,6 @@ class AccountController extends Controller
 
         $account->save();
 
-        //TODO: Redirect to success page!
         return redirect('/');
     }
 

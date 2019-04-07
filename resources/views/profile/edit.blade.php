@@ -18,7 +18,8 @@
                                 <div class="col-md-6">
                                     <input id="firstName" type="text"
                                            class="form-control{{ $errors->has('firstName') ? ' is-invalid' : '' }}"
-                                           placeholder="Firstname" name="firstName" value="{{$account->firstName}}" required
+                                           placeholder="Firstname" name="firstName" value="{{$account->firstName}}"
+                                           required
                                            autofocus maxlength="45">
 
                                     @if ($errors->has('firstName'))
@@ -69,10 +70,9 @@
                                 <label for="gender"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                                 <div class="col-md-6">
-                                    <select name="gender" selected="{{$account->gender}}" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
-                                        @if($account->gender == null)
-                                            <option value="-" selected>-</option>
-                                        @endif
+                                    <select name="gender" selected="{{$account->gender}}"
+                                            class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
+                                        <option value="-" selected>-</option>
                                         @foreach($genders as $gender)
                                             @if($gender->gender == $account->gender)
                                                 <option value="{{ $gender->gender }}"
@@ -97,7 +97,8 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Date of Birth') }}</label>
 
                                 <div class="col-md-6">
-                                    <input type="date" name="dateOfBirth" value="{{$account->dateOfBirth}}" class="form-control{{ $errors->has('dateOfBirth') ? ' is-invalid' : '' }}">
+                                    <input type="date" name="dateOfBirth" value="{{$account->dateOfBirth}}"
+                                           class="form-control{{ $errors->has('dateOfBirth') ? ' is-invalid' : '' }}">
 
                                     @if ($errors->has('dateOfBirth'))
                                         <span class="invalid-feedback" role="alert">
@@ -211,53 +212,54 @@
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">{{ __('Delete account') }}</div>
-                    <div class="card-body">
-                        <form method="POST" id="deleteAccount" action="/profile/deleteAccount">
-                            @csrf
-                            <input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
-                            <div class="form-group row">
-                                <label for="currentPassword"
-                                       class="col-md-8 col-form-label text-md-left">Click here to delete your account.
-                                    <br><strong>This can not be undone!</strong>
-                                </label>
+                {{--<div class="card">--}}
+                    {{--<div class="card-header">{{ __('Delete account') }}</div>--}}
+                    {{--<div class="card-body">--}}
+                        {{--<form method="POST" id="deleteAccount" action="/profile/deleteAccount">--}}
+                            {{--@csrf--}}
+                            {{--<input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">--}}
+                            {{--<div class="form-group row">--}}
+                                {{--<label for="currentPassword"--}}
+                                       {{--class="col-md-8 col-form-label text-md-left">Click here to delete your account.--}}
+                                    {{--<br><strong>This can not be undone!</strong>--}}
+                                {{--</label>--}}
 
-                                <div class="col-md-4 mt-2">
-                                    <button type="button" class="btn btn-danger float-right" data-toggle="modal"
-                                            data-target="#confirmDeleteAccount">
-                                        {{ __('Delete account') }}
-                                    </button>
-                                </div>
+                                {{--<div class="col-md-4 mt-2">--}}
+                                    {{--<button type="button" class="btn btn-danger float-right" data-toggle="modal"--}}
+                                            {{--data-target="#confirmDeleteAccount">--}}
+                                        {{--{{ __('Delete account') }}--}}
+                                    {{--</button>--}}
+                                {{--</div>--}}
 
-                                <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Confirm</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to delete your account?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <input type="submit" form="deleteAccount" class="btn btn-danger"
-                                                       value="Yes, Delete it">
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">No,
-                                                    Keep it!
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {{--<div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">--}}
+                                    {{--<div class="modal-dialog" role="document">--}}
+                                        {{--<div class="modal-content">--}}
+                                            {{--<div class="modal-header">--}}
+                                                {{--<h5 class="modal-title">Confirm</h5>--}}
+                                                {{--<button type="button" class="close" data-dismiss="modal"--}}
+                                                        {{--aria-label="Close">--}}
+                                                    {{--<span aria-hidden="true">&times;</span>--}}
+                                                {{--</button>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="modal-body">--}}
+                                                {{--Are you sure you want to delete your account?--}}
+                                            {{--</div>--}}
+                                            {{--<div class="modal-footer">--}}
+                                                {{--<input type="submit" form="deleteAccount" class="btn btn-danger"--}}
+                                                       {{--value="Yes, Delete it">--}}
+                                                {{--<button type="button" class="btn btn-primary" data-dismiss="modal">No,--}}
+                                                    {{--Keep it!--}}
+                                                {{--</button>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
 
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                            {{--</div>--}}
+                        {{--</form>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
             </div>
         </div>
     </div>

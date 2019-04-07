@@ -20,21 +20,36 @@
                 <a href="/" class="nav-link m-2 nav-item {{ request()->is('/') ? 'active' : '' }}">HOME</a>
             </li>
             <li>
-                <a href="/events" class="nav-link m-2 nav-item {{ request()->is('events') ? 'active' : (request()->is('events/*') ? 'active' : '') }}">EVENEMENTEN</a>
+                <a href="/events"
+                   class="nav-link m-2 nav-item {{ request()->is('events') ? 'active' : (request()->is('events/*') ? 'active' : '') }}">EVENEMENTEN</a>
             </li>
             <li>
                 <a href="/about" class="nav-link m-2 nav-item {{ request()->is('about') ? 'active' : '' }}">OVER ONS</a>
             </li>
             <li>
-                <a href="/contact" class="nav-link m-2 nav-item {{ request()->is('contact') ? 'active' : '' }}">CONTACT</a>
+                <a href="/contact"
+                   class="nav-link m-2 nav-item {{ request()->is('contact') ? 'active' : '' }}">CONTACT</a>
             </li>
-            <li>
+
             @if(Auth::user())
-                <a href="/logout" class="nav-link m-2 nav-item">UITLOGGEN</a>
+                <form method="POST" action="/profile/edit">
+                    @csrf
+                    <input type="hidden" id="userId" name="userId" value="{{Auth::id()}}">
+                    <input type="submit" id="submit-form" class="hidden" />
+                </form>
+                <li>
+                    {{--<a href="{{link_to('ProfileController@edit', $userId = Auth::id())}}" class="nav-link m-2 nav-item">Profiel</a>--}}
+                    <label class="nav-link m-2 nav-item" for="submit-form" tabindex="0">PROFILE</label>
+                </li>
+                <li>
+                    <a href="/logout" class="nav-link m-2 nav-item">UITLOGGEN</a>
+                </li>
             @else
-                <a href="/login" class="nav-link m-2 nav-item {{ request()->is('login') ? 'active' : '' }}">INLOGGEN</a>
+                <li>
+                    <a href="/login"
+                       class="nav-link m-2 nav-item {{ request()->is('login') ? 'active' : '' }}">INLOGGEN</a>
+                </li>
             @endif
-            </li>
         </ul>
     </div>
 </nav>

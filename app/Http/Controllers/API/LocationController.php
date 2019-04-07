@@ -50,7 +50,8 @@ class LocationController extends Controller
         if($distance == 25){
             return true;
         }
-
+        return true;
+        
         //$userLocation = self::getLocation();
         $eventLocation = self::eventLonLat($event);
 

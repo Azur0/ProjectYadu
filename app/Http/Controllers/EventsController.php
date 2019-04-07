@@ -38,13 +38,13 @@ class EventsController extends Controller
      */
     public function create()
     {
-        if(Auth::check()) {
+        if(Auth::user()->hasVerifiedEmail()) {
         //
         $Tags = EventTag::all();
         $Picture = EventPicture::all();
         return view('events.create')->withtags($Tags)->withpictures($Picture);
         }
-        return redirect('/login');
+        return redirect('/events');
     }
 
     public function action(Request $request)
@@ -162,7 +162,8 @@ class EventsController extends Controller
 
     public function join($id)
     {
-        if(Auth::check()) {
+
+        if(Auth::user()->hasVerifiedEmail()) {
             $event = Event::findOrFail($id);
             if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->attach(auth()->user()->id);

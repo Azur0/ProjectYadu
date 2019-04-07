@@ -38,11 +38,10 @@ class EventsController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->hasVerifiedEmail()) {
-        //
-        $Tags = EventTag::all();
-        $Picture = EventPicture::all();
-        return view('events.create')->withtags($Tags)->withpictures($Picture);
+        if(Auth::check() && Auth::user()->hasVerifiedEmail()) {
+            $Tags = EventTag::all();
+            $Picture = EventPicture::all();
+            return view('events.create')->withtags($Tags)->withpictures($Picture);
         }
         return redirect('/events');
     }
@@ -171,7 +170,7 @@ class EventsController extends Controller
             //TODO: Add error 'You already joined!'
         }
         //TODO: Add error 'You are not logged in!'
-        return redirect('/events/' . $event->id);
+        return redirect('/events/' . $id);
     }
 
     public function leave($id)

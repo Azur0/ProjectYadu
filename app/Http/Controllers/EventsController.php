@@ -38,11 +38,10 @@ class EventsController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->hasVerifiedEmail()) {
-        //
-        $Tags = EventTag::all();
-        $Picture = EventPicture::all();
-        return view('events.create')->withtags($Tags)->withpictures($Picture);
+        if(Auth::check() && Auth::user()->hasVerifiedEmail()) {
+            $Tags = EventTag::all();
+            $Picture = EventPicture::all();
+            return view('events.create')->withtags($Tags)->withpictures($Picture);
         }
         return redirect('/events');
     }
@@ -171,7 +170,7 @@ class EventsController extends Controller
             //TODO: Add error 'You already joined!'
         }
         //TODO: Add error 'You are not logged in!'
-        return redirect('/events/' . $event->id);
+        return redirect('/events/' . $id);
     }
 
     public function leave($id)
@@ -195,6 +194,7 @@ class EventsController extends Controller
         $formatted_date .= $date['mday'];
         return $formatted_date;
     }
+
     private function isEventInRange(Event $event)
     {
         $locationController = new LocationController();
@@ -203,6 +203,12 @@ class EventsController extends Controller
             return true;
         }
         return false;
+    }
+
+    private function areEvenstInRange($events)
+    {
+        $locationController = new LocationController();
+        return  $events = $locationController->areWithinReach($events, $this->distance);
     }
 
     private $distance = 0;
@@ -221,22 +227,25 @@ class EventsController extends Controller
             ->get();       
 
         //TODO: Set initial amount of items to load and add 'load more' button
-
         $events = new Collection();
-        foreach ($unfiltered_events as $event) {
-            if ($this->isEventInRange($event)) {
-                $date = self::dateToText($event->startDate);
 
-                $postalcode = self::cityFromPostalcode($event->Location->postalcode);
+        //TODO:3 Filters from Ruben
 
-                $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
-                $Pic = (base64_encode($Picture[0]->picture));
+        //TODO:2 Filter the unfiltered events (Or so called pre-filtered events)
+        $filtered_events = $this->areEvenstInRange($unfiltered_events);
 
-                $event->setAttribute('picture', $Pic);
-                $event->setAttribute('loc', $postalcode);
-                $event->setAttribute('date', $date);
-                $events->push($event);
-            }
+        foreach ($filtered_events as $event) {
+            $date = self::dateToText($event->startDate);
+
+            $postalcode = self::cityFromPostalcode($event->Location->postalcode);
+
+            $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
+            $Pic = (base64_encode($Picture[0]->picture));
+
+            $event->setAttribute('picture', $Pic);
+            $event->setAttribute('loc', $postalcode);
+            $event->setAttribute('date', $date);
+            $events->push($event);
         }
         return json_encode($events);
     }

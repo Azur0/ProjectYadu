@@ -34,7 +34,6 @@ class CreateAccountsTable extends Migration
             $table->binary('avatar')->nullable()->default(null);
             $table->tinyInteger('doForcePasswordChange')->default('0');
             $table->tinyInteger('isDeleted')->default('0');
-            $table->tinyInteger('isVerified')->default('0');
             $table->dateTime('email_verified_at')->nullable();
             $table->longText('bio')->nullable();
             $table->rememberToken();

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Account;
 use App\Http\Controllers\Controller;
+use App\Mail\Confirmation;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Rules\swearWords;
@@ -57,7 +59,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'firstName' => ['required','min:5','max:45','string', new swearWords],
+
+            'firstName' => ['required','min:1','max:45','string', new swearWords],
             'middleName' => ['nullable', 'max:45','string'],
             'lastName' => ['nullable', 'max:45','string'],
             'dateOfBirth' => ['nullable', 'date'],
@@ -74,7 +77,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Account::create([
+        $account = Account::create([
             'firstName' => $data['firstName'],
             'middleName' => $data['middleName'],
             'lastName' => $data['lastName'],
@@ -83,5 +86,7 @@ class RegisterController extends Controller
             'genders' => ($data['gender'] == "-" ? 'unknown' : $data['gender']),
             'password' => Hash::make($data['password']),
         ]);
+
+        return $account;
     }
 }

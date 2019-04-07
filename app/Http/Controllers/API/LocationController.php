@@ -57,6 +57,7 @@ class LocationController extends Controller
             if($event->location->locLatitude != null){
                 $eventsToReturn->push($event);
             }
+
         }
         return $eventsToReturn;
     }

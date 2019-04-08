@@ -11,6 +11,7 @@ class EventPicturesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\EventPicture')->create();
+        factory('App\EventPicture', 10)->create();
+        //TODO realistic data
     }
 }

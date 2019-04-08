@@ -11,6 +11,7 @@ class EventTagsTableSeeder extends Seeder
      */
     public function run()
     {
+        //TODO images
         //factory('App\EventTag')->create();
 
         DB::table('event_tags')->insert([

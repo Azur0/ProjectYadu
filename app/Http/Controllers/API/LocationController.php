@@ -25,15 +25,14 @@ class LocationController extends Controller
         $ip = self::get_ip();
         //$ip = '145.49.103.72';
         $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));
-            if($query && $query['status'] == 'success'){
-             return $query;
-            }else{
-                return false;
-            }
+        if($query && $query['status'] == 'success'){
+            return $query;
+        }else{
+            return false;
+        }
     }
-
+    //TODO:3 remove this when we receive the google api key for maps
     private function eventLonLat($event){
-
         $eventZipCode = $event->location->postalcode;
         $query2 = "https://nominatim.openstreetmap.org/search?q=".$eventZipCode."&format=json&addressdetails=1";
         $ch = curl_init();
@@ -68,16 +67,20 @@ class LocationController extends Controller
             return $events;
         }
         $userLocation = self::getLocation();
+        //This a temporary measure, this will be removed when it is running on a live server
         $front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=51.688445,5.287405&destinations=';
         //TODO:2 uncomment this for the live server
         //$front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=';
         $userLocation = $userLocation['lat'] . ',' . $userLocation['lon'];
         $destination = '&destinations=';
-        //TODO:1 get this from a middle ware 
+        //TODO:1 get this from a middle ware
         $EndapiKey = '&key=AIzaSyClxGzJPExYO1V4f3u-EexDfqAQvtPleDU';
         $eventsToReturn = new Collection();
 
+        //This will be removed when the lat and lon will be set with event creation - this will be done with the google map api
+        //TODO:3 remove this when we receive the google api key for maps
         $events = $this->setEventsLonLat($events);
+        //This will separate the events in sets of 25 because the google api can only receive a maximum of 25 destinations for each request
         for ($i = 0; $i <= ceil(count($events) / 25); $i++) {
             $slicedArray = $events->splice(25 * $i, 25);
             $locations = "";

@@ -13,7 +13,8 @@ class AccountsTableSeeder extends Seeder
     {
         //factory('App\Account', 10)->create();
 
-        //TODO capitalization
+        $filePath = public_path() . "/images/avatar_default.jpg";
+
         DB::table('accounts')->insert([
             'accountRole' => 'User',
             'gender' =>  'Male',
@@ -22,7 +23,8 @@ class AccountsTableSeeder extends Seeder
             'firstName' => 'Joël',
             'middleName' => null,
             'lastName' => 'Rijfers',
-            'email_verified_at' => date("Y-m-d H:i:s"),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -35,7 +37,7 @@ class AccountsTableSeeder extends Seeder
             'firstName' => 'Ruben',
             'middleName' => null,
             'lastName' => 'Westerman',
-            'email_verified_at' => date("Y-m-d H:i:s"),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -48,7 +50,7 @@ class AccountsTableSeeder extends Seeder
             'firstName' => 'Bram',
             'middleName' => null,
             'lastName' => 'Dortmans',
-            'email_verified_at' => date("Y-m-d H:i:s"),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -61,7 +63,7 @@ class AccountsTableSeeder extends Seeder
             'firstName' => 'Bram',
             'middleName' => null,
             'lastName' => 'Vermeeren',
-            'email_verified_at' => date("Y-m-d H:i:s"),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -74,7 +76,7 @@ class AccountsTableSeeder extends Seeder
             'firstName' => 'Ayoub',
             'middleName' => null,
             'lastName' => 'Ik weet je achternaam niet',
-            'email_verified_at' => date("Y-m-d H:i:s"),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -87,7 +89,7 @@ class AccountsTableSeeder extends Seeder
             'firstName' => 'Burak',
             'middleName' => null,
             'lastName' => 'Imre',
-            'email_verified_at' => date("Y-m-d H:i:s"),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -100,7 +102,7 @@ class AccountsTableSeeder extends Seeder
             'firstName' => 'Dogen',
             'middleName' => null,
             'lastName' => 'Arias Maat',
-            'email_verified_at' => date("Y-m-d H:i:s"),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -113,7 +115,7 @@ class AccountsTableSeeder extends Seeder
             'firstName' => 'Jeroen',
             'middleName' => null,
             'lastName' => 'van Beuningen',
-            'email_verified_at' => date("Y-m-d H:i:s"),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -126,7 +128,7 @@ class AccountsTableSeeder extends Seeder
             'firstName' => 'Martijn',
             'middleName' => null,
             'lastName' => 'Blom',
-            'email_verified_at' => date("Y-m-d H:i:s"),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -139,7 +141,7 @@ class AccountsTableSeeder extends Seeder
             'firstName' => 'Merijn',
             'middleName' => null,
             'lastName' => 'Monfils',
-            'email_verified_at' => date("Y-m-d H:i:s"),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);

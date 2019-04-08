@@ -26,7 +26,8 @@ class AccountsTableSeeder extends Seeder
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s")
         ]);
 
         DB::table('accounts')->insert([
@@ -39,7 +40,8 @@ class AccountsTableSeeder extends Seeder
             'lastName' => 'Westerman',
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s")
         ]);
 
         DB::table('accounts')->insert([
@@ -52,7 +54,8 @@ class AccountsTableSeeder extends Seeder
             'lastName' => 'Dortmans',
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s")
         ]);
 
         DB::table('accounts')->insert([
@@ -65,7 +68,8 @@ class AccountsTableSeeder extends Seeder
             'lastName' => 'Vermeeren',
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s")
         ]);
 
         DB::table('accounts')->insert([
@@ -78,7 +82,8 @@ class AccountsTableSeeder extends Seeder
             'lastName' => 'Ik weet je achternaam niet',
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s")
         ]);
 
         DB::table('accounts')->insert([
@@ -91,7 +96,8 @@ class AccountsTableSeeder extends Seeder
             'lastName' => 'Imre',
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s")
         ]);
 
         DB::table('accounts')->insert([
@@ -104,7 +110,8 @@ class AccountsTableSeeder extends Seeder
             'lastName' => 'Arias Maat',
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s")
         ]);
 
         DB::table('accounts')->insert([
@@ -117,7 +124,8 @@ class AccountsTableSeeder extends Seeder
             'lastName' => 'van Beuningen',
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s")
         ]);
 
         DB::table('accounts')->insert([
@@ -130,7 +138,8 @@ class AccountsTableSeeder extends Seeder
             'lastName' => 'Blom',
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s")
         ]);
 
         DB::table('accounts')->insert([
@@ -143,7 +152,8 @@ class AccountsTableSeeder extends Seeder
             'lastName' => 'Monfils',
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s")
         ]);
     }
 }

@@ -92,5 +92,21 @@ class LocationsTableSeeder extends Seeder
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
+
+        DB::table('locations')->insert([
+            'houseNumber' => '153',
+            'houseNumberAddition' => null,
+            'postalCode' => '2911RE',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s")
+        ]);
+
+        DB::table('locations')->insert([
+            'houseNumber' => '2',
+            'houseNumberAddition' => null,
+            'postalCode' => '3439MX',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s")
+        ]);
     }
 }

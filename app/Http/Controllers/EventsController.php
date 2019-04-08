@@ -195,16 +195,6 @@ class EventsController extends Controller
         return $formatted_date;
     }
 
-    private function isEventInRange(Event $event)
-    {
-        $locationController = new LocationController();
-        $shouldBeShown = $locationController->isWithinReach($event, $this->distance);
-        if ($shouldBeShown) {
-            return true;
-        }
-        return false;
-    }
-
     private function areEvenstInRange($events)
     {
         $locationController = new LocationController();

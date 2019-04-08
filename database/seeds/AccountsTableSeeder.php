@@ -15,8 +15,8 @@ class AccountsTableSeeder extends Seeder
 
         //TODO capitalization
         DB::table('accounts')->insert([
-            'accountRole' => 'user',
-            'gender' =>  'male',
+            'accountRole' => 'User',
+            'gender' =>  'Male',
             'email' => 'joel@yadu.com',
             'password' => Hash::make('password'),
             'firstName' => 'Joël',
@@ -28,8 +28,8 @@ class AccountsTableSeeder extends Seeder
         ]);
 
         DB::table('accounts')->insert([
-            'accountRole' => 'user',
-            'gender' =>  'male',
+            'accountRole' => 'User',
+            'gender' =>  'Male',
             'email' => 'ruben@yadu.com',
             'password' => Hash::make('password'),
             'firstName' => 'Ruben',
@@ -41,8 +41,8 @@ class AccountsTableSeeder extends Seeder
         ]);
 
         DB::table('accounts')->insert([
-            'accountRole' => 'user',
-            'gender' =>  'male',
+            'accountRole' => 'User',
+            'gender' =>  'Male',
             'email' => 'bramd@yadu.com',
             'password' => Hash::make('password'),
             'firstName' => 'Bram',
@@ -54,8 +54,8 @@ class AccountsTableSeeder extends Seeder
         ]);
 
         DB::table('accounts')->insert([
-            'accountRole' => 'user',
-            'gender' =>  'male',
+            'accountRole' => 'User',
+            'gender' =>  'Male',
             'email' => 'bramv@yadu.com',
             'password' => Hash::make('password'),
             'firstName' => 'Bram',
@@ -67,8 +67,8 @@ class AccountsTableSeeder extends Seeder
         ]);
 
         DB::table('accounts')->insert([
-            'accountRole' => 'user',
-            'gender' =>  'male',
+            'accountRole' => 'User',
+            'gender' =>  'Male',
             'email' => 'ayoub@yadu.com',
             'password' => Hash::make('password'),
             'firstName' => 'Ayoub',
@@ -80,8 +80,8 @@ class AccountsTableSeeder extends Seeder
         ]);
 
         DB::table('accounts')->insert([
-            'accountRole' => 'user',
-            'gender' =>  'male',
+            'accountRole' => 'User',
+            'gender' =>  'Male',
             'email' => 'burak@yadu.com',
             'password' => Hash::make('password'),
             'firstName' => 'Burak',
@@ -93,8 +93,8 @@ class AccountsTableSeeder extends Seeder
         ]);
 
         DB::table('accounts')->insert([
-            'accountRole' => 'user',
-            'gender' =>  'male',
+            'accountRole' => 'User',
+            'gender' =>  'Male',
             'email' => 'dogen@yadu.com',
             'password' => Hash::make('password'),
             'firstName' => 'Dogen',
@@ -106,8 +106,8 @@ class AccountsTableSeeder extends Seeder
         ]);
 
         DB::table('accounts')->insert([
-            'accountRole' => 'user',
-            'gender' =>  'male',
+            'accountRole' => 'User',
+            'gender' =>  'Male',
             'email' => 'jeroen@yadu.com',
             'password' => Hash::make('password'),
             'firstName' => 'Jeroen',
@@ -119,8 +119,8 @@ class AccountsTableSeeder extends Seeder
         ]);
 
         DB::table('accounts')->insert([
-            'accountRole' => 'user',
-            'gender' =>  'male',
+            'accountRole' => 'User',
+            'gender' =>  'Male',
             'email' => 'martijn@yadu.com',
             'password' => Hash::make('password'),
             'firstName' => 'Martijn',
@@ -132,8 +132,8 @@ class AccountsTableSeeder extends Seeder
         ]);
 
         DB::table('accounts')->insert([
-            'accountRole' => 'user',
-            'gender' =>  'male',
+            'accountRole' => 'User',
+            'gender' =>  'Male',
             'email' => 'merijn@yadu.com',
             'password' => Hash::make('password'),
             'firstName' => 'Merijn',

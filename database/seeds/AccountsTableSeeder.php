@@ -13,6 +13,7 @@ class AccountsTableSeeder extends Seeder
     {
         //factory('App\Account', 10)->create();
 
+        //TODO capitalization
         DB::table('accounts')->insert([
             'accountRole' => 'user',
             'gender' =>  'male',

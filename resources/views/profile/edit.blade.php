@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">{{ __('Edit Profile') }}</div>
 
@@ -144,8 +144,6 @@
                     <div class="card-body">
                         <form method="POST" action="/profile/changePassword">
                             @csrf
-                            <input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
-
                             <div class="form-group row">
                                 <label for="currentPassword"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Current Password') }}
@@ -212,53 +210,52 @@
                     </div>
                 </div>
 
-                {{--<div class="card">--}}
-                    {{--<div class="card-header">{{ __('Delete account') }}</div>--}}
-                    {{--<div class="card-body">--}}
-                        {{--<form method="POST" id="deleteAccount" action="/profile/deleteAccount">--}}
-                            {{--@csrf--}}
-                            {{--<input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">--}}
-                            {{--<div class="form-group row">--}}
-                                {{--<label for="currentPassword"--}}
-                                       {{--class="col-md-8 col-form-label text-md-left">Click here to delete your account.--}}
-                                    {{--<br><strong>This can not be undone!</strong>--}}
-                                {{--</label>--}}
+                <div class="card">
+                    <div class="card-header">{{ __('Delete account') }}</div>
+                    <div class="card-body">
+                        <form method="POST" id="deleteAccount" action="/profile/deleteAccount">
+                            @csrf
+                            <div class="form-group row">
+                                <label for="currentPassword"
+                                       class="col-md-8 col-form-label text-md-left">Click here to delete your account.
+                                    <br><strong>This can not be undone!</strong>
+                                </label>
 
-                                {{--<div class="col-md-4 mt-2">--}}
-                                    {{--<button type="button" class="btn btn-danger float-right" data-toggle="modal"--}}
-                                            {{--data-target="#confirmDeleteAccount">--}}
-                                        {{--{{ __('Delete account') }}--}}
-                                    {{--</button>--}}
-                                {{--</div>--}}
+                                <div class="col-md-4 mt-2">
+                                    <button type="button" class="btn btn-danger float-right" data-toggle="modal"
+                                            data-target="#confirmDeleteAccount">
+                                        {{ __('Delete account') }}
+                                    </button>
+                                </div>
 
-                                {{--<div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">--}}
-                                    {{--<div class="modal-dialog" role="document">--}}
-                                        {{--<div class="modal-content">--}}
-                                            {{--<div class="modal-header">--}}
-                                                {{--<h5 class="modal-title">Confirm</h5>--}}
-                                                {{--<button type="button" class="close" data-dismiss="modal"--}}
-                                                        {{--aria-label="Close">--}}
-                                                    {{--<span aria-hidden="true">&times;</span>--}}
-                                                {{--</button>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="modal-body">--}}
-                                                {{--Are you sure you want to delete your account?--}}
-                                            {{--</div>--}}
-                                            {{--<div class="modal-footer">--}}
-                                                {{--<input type="submit" form="deleteAccount" class="btn btn-danger"--}}
-                                                       {{--value="Yes, Delete it">--}}
-                                                {{--<button type="button" class="btn btn-primary" data-dismiss="modal">No,--}}
-                                                    {{--Keep it!--}}
-                                                {{--</button>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
+                                <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Confirm</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to delete your account?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="submit" form="deleteAccount" class="btn btn-danger"
+                                                       value="Yes, Delete it">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">No,
+                                                    Keep it!
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            {{--</div>--}}
-                        {{--</form>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
             </div>
         </div>

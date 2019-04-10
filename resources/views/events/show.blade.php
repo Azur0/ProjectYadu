@@ -36,7 +36,7 @@
             </div>
             @foreach($event->participants as $participant)
                 <div class="row my-1">
-                    <img class="img-fluid rounded-circle" width="50" class="my-auto" src="data:image/jpeg;base64, {{base64_encode($participant->avatar)}}"/>
+                    <img class="img-fluid rounded-circle my-auto avatar" src="data:image/jpeg;base64, {{base64_encode($participant->avatar)}}"/>
                     <h5 class="my-auto ml-2">{{$participant->firstName .' '. $participant->middleName .' '. $participant->lastName}}</h5>
                 </div>
             @endforeach

@@ -26,21 +26,9 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $unfiltered_events = Event::where('isDeleted', '==', 0)
-            ->where('startDate', '>=', $this->formatDate())
-            ->orderBy('startDate', 'asc')
-            ->get();
-
-        //TODO: Set initial amount of items to load and add 'load more' button
-
-        $events = new Collection();
-        foreach ($unfiltered_events as $event) {
-            if ($this->isEventInRange($event)) {
-                $events->push($event);
-            }
-        }
-
-        return view('events.index', compact('events'));
+        $tags = EventTag::pluck('tag');
+        $names = Event::distinct('eventName')->pluck('eventName');
+        return view('events.index', compact(['tags', 'names']));
     }
 
     /**
@@ -50,13 +38,12 @@ class EventsController extends Controller
      */
     public function create()
     {
-        if(Auth::check()) {
-        //
-        $Tags = EventTag::all();
-        $Picture = EventPicture::all();
-        return view('events.create')->withtags($Tags)->withpictures($Picture);
+        if(Auth::check() && Auth::user()->hasVerifiedEmail()) {
+            $Tags = EventTag::all();
+            $Picture = EventPicture::all();
+            return view('events.create')->withtags($Tags)->withpictures($Picture);
         }
-        return redirect('/login');
+        return redirect('/events');
     }
 
     public function action(Request $request)
@@ -76,7 +63,6 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
@@ -114,20 +100,17 @@ class EventsController extends Controller
         );
         return redirect('/events');
     }
-
-
+    
     public function isPictureValid($tag, $picture){
-        if(!EventPicture::where('id','=',  $picture)->exists()){
+        if (!EventPicture::where('id','=',  $picture)->exists()) {
             return true;
-        }
-        else{
-        $eventPicture = EventPicture::all()->where('id','=',  $picture)->pluck('tag_id');
-        if($eventPicture[0] != $tag){
-            return true;
-        } 
+        } else {
+            $eventPicture = EventPicture::all()->where('id','=',  $picture)->pluck('tag_id');
+            if ($eventPicture[0] != $tag) {
+                return true;
+            } 
         return false;
-    }
-
+        }
     }
 
 
@@ -227,7 +210,8 @@ class EventsController extends Controller
 
     public function join($id)
     {
-        if(Auth::check()) {
+
+        if(Auth::user()->hasVerifiedEmail()) {
             $event = Event::findOrFail($id);
             if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->attach(auth()->user()->id);
@@ -235,7 +219,7 @@ class EventsController extends Controller
             //TODO: Add error 'You already joined!'
         }
         //TODO: Add error 'You are not logged in!'
-        return redirect('/events/' . $event->id);
+        return redirect('/events/' . $id);
     }
 
     public function leave($id)
@@ -259,45 +243,48 @@ class EventsController extends Controller
         $formatted_date .= $date['mday'];
         return $formatted_date;
     }
-    private function isEventInRange(Event $event)
+
+    private function areEvenstInRange($events)
     {
         $locationController = new LocationController();
-        $shouldBeShown = $locationController->isWithinReach($event, $this->distance);
-        if ($shouldBeShown) {
-            return true;
-        }
-        return false;
+        return  $events = $locationController->areWithinReach($events, $this->distance);
     }
 
     private $distance = 0;
 
     public function actionDistanceFilter(Request $request)
     {
-
+       
+        $tags = EventTag::where('tag', 'like', '%' . $request->inputTag .'%')->pluck('id');
+        $names = Event::where('eventName', 'like', '%' . $request->inputName .'%')->pluck('id');
         $this->distance = $request->input('distance');
-
         $unfiltered_events = Event::where('isDeleted', '==', 0)
             ->where('startDate', '>=', $this->formatDate())
+            ->whereIn('id', $names)
+            ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
-            ->get();
+            ->get();       
 
         //TODO: Set initial amount of items to load and add 'load more' button
-
         $events = new Collection();
-        foreach ($unfiltered_events as $event) {
-            if ($this->isEventInRange($event)) {
-                $date = self::dateToText($event->startDate);
 
-                $postalcode = self::cityFromPostalcode($event->Location->postalcode);
+        //TODO:3 Filters from Ruben
 
-                $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
-                $Pic = (base64_encode($Picture[0]->picture));
+        //TODO:2 Filter the unfiltered events (Or so called pre-filtered events)
+        $filtered_events = $this->areEvenstInRange($unfiltered_events);
 
-                $event->setAttribute('picture', $Pic);
-                $event->setAttribute('loc', $postalcode);
-                $event->setAttribute('date', $date);
-                $events->push($event);
-            }
+        foreach ($filtered_events as $event) {
+            $date = self::dateToText($event->startDate);
+
+            $postalcode = self::cityFromPostalcode($event->Location->postalcode);
+
+            $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
+            $Pic = (base64_encode($Picture[0]->picture));
+
+            $event->setAttribute('picture', $Pic);
+            $event->setAttribute('loc', $postalcode);
+            $event->setAttribute('date', $date);
+            $events->push($event);
         }
         return json_encode($events);
     }
@@ -339,4 +326,3 @@ class EventsController extends Controller
         return preg_match($regex, $postalcode);
     }
 }
-

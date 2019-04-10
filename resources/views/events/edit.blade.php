@@ -11,14 +11,13 @@
                 <div class="types">
                     <div class="box">
                         @foreach ($data['tags'] as $tag)
-                            @if($tag->id == $data["event"]->tag_id)
-                                <input type="radio" id="{{$tag->tag}}" name="tag" value="{{$tag->id}}"
-                                       onclick="check({{$tag->id }})" checked>
-                                {{--<script>check({{$tag->id}})</script> TODO:run check script--}}
-                            @else
-                                <input type="radio" id="{{$tag->tag}}" name="tag" value="{{$tag->id}}"
-                                       onclick="check({{$tag->id }})">
-                            @endif
+                            <input type="radio" id="{{$tag->tag}}" name="tag" value="{{$tag->id}}"
+                                   onclick="check({{$tag->id }})"
+                                   @if($tag->id == $data["event"]->tag_id)
+                                   @php($selectedTag = $tag)
+                                   checked
+                                    @endif
+                            >
                             <label for="{{$tag->tag}}" class="category" title="Uitje met gezinnen">
                                 <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
                                 <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($tag->imageSelected) . '"/>'; ?>
@@ -36,7 +35,17 @@
                 <h3>2. Kies een foto voor je event </h3>
                 <div class="types">
                     <div id="box2" class="box">
-
+                        @foreach($selectedTag->eventPictures()->get() as $picture)
+                            <input type='radio' id='{{$picture->id}}' class='picture {{$picture->id}}' name='picture'
+                                   value='{{$picture->id}}'
+                            @if($picture->id == $data["event"]->event_picture_id)
+                                checked
+                            @endif
+                            >
+                            <label for='{{$picture->id}}' class='picture {{$picture->id}}' title='Uitje met gezinnen'>
+                                <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($picture->picture) . '"/>'; ?>
+                            </label>
+                        @endforeach
                     </div>
                     @if ($errors->has('picture'))
                         <div class="error">Kies een foto.</div>
@@ -100,10 +109,6 @@
         </form>
     </div>
     <script>
-        $(document).ready(function () {
-            fetch_customer_data();
-        });
-
         function check(tag) {
             fetch_customer_data(tag);
         }

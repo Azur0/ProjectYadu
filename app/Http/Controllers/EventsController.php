@@ -80,7 +80,7 @@ class EventsController extends Controller
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
-            'people' => 'required', //min en max nog doen
+            'people' => 'required', //TODO: min en max nog doen
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
             'location' => 'required',
@@ -148,9 +148,20 @@ class EventsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Event $event)
     {
-        //
+        if ($event->owner_id == Auth::id()) {
+            $data = array(
+                'event' => $event,
+                'tags' => EventTag::all(),
+                'picture' => EventPicture::all()
+            );
+
+            return view('events.edit', compact('data'));
+        }
+        else {
+            abort(403);
+        }
     }
 
     /**
@@ -162,7 +173,45 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'activityName' => 'required|max:30',
+            'description' => 'required|max:150',
+            'numberOfPeople' => 'required', //TODO: min en max nog doen
+            'tag' => 'required',
+            'startDate' => 'required|date|after:now',
+            'location' => 'required',
+            'numberOfPeople' => 'required'
+        ]);
+
+        $validator->after(function ($validator) use ($request) {
+            if ($this->isPictureValid($request['tag'], $request['picture'])) {
+                $validator->errors()->add('picture', 'Something is wrong with this field!');
+            }
+        });
+
+        if ($validator->fails()) {
+            return redirect("/events/$id/edit")
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $event = Event::where('id', $id);
+
+        $event->update(
+            [
+                'eventName' => $request['activityName'],
+                'description' => $request['description'],
+                'startDate' => $request['startDate'],
+                'numberOfPeople' => $request['numberOfPeople'],
+                'tag_id' => $request['tag'],
+                'location_id' => '1',
+                'owner_id' => auth()->user()->id,
+                'event_picture_id'=> $request['picture']
+            ]
+        );
+        //TODO: update status and location
+
+        return redirect('/events');
     }
 
     /**

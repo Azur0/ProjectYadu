@@ -38,7 +38,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        if(Auth::check() && Auth::user()->hasVerifiedEmail()) {
+        if (Auth::check() && Auth::user()->hasVerifiedEmail()) {
             $Tags = EventTag::all();
             $Picture = EventPicture::all();
             return view('events.create')->withtags($Tags)->withpictures($Picture);
@@ -72,17 +72,17 @@ class EventsController extends Controller
             'location' => 'required',
             'picture' => 'required'
         ]);
-      
+
         $validator->after(function ($validator) use ($request) {
             if ($this->isPictureValid($request['tag'], $request['picture'])) {
                 $validator->errors()->add('picture', 'Something is wrong with this field!');
             }
         });
-        
+
         if ($validator->fails()) {
             return redirect('/events/create')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
         Event::create(
@@ -95,21 +95,22 @@ class EventsController extends Controller
                 'tag_id' => $request['tag'],
                 'location_id' => '1',
                 'owner_id' => auth()->user()->id,
-                'event_picture_id'=> $request['picture']
+                'event_picture_id' => $request['picture']
             ]
         );
         return redirect('/events');
     }
-    
-    public function isPictureValid($tag, $picture){
-        if (!EventPicture::where('id','=',  $picture)->exists()) {
+
+    public function isPictureValid($tag, $picture)
+    {
+        if (!EventPicture::where('id', '=', $picture)->exists()) {
             return true;
         } else {
-            $eventPicture = EventPicture::all()->where('id','=',  $picture)->pluck('tag_id');
+            $eventPicture = EventPicture::all()->where('id', '=', $picture)->pluck('tag_id');
             if ($eventPicture[0] != $tag) {
                 return true;
-            } 
-        return false;
+            }
+            return false;
         }
     }
 
@@ -141,8 +142,7 @@ class EventsController extends Controller
             );
 
             return view('events.edit', compact('data'));
-        }
-        else {
+        } else {
             abort(403);
         }
     }
@@ -156,6 +156,7 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
@@ -180,20 +181,24 @@ class EventsController extends Controller
 
         $event = Event::where('id', $id);
 
-        $event->update(
-            [
-                'eventName' => $request['activityName'],
-                'description' => $request['description'],
-                'startDate' => $request['startDate'],
-                'numberOfPeople' => $request['numberOfPeople'],
-                'tag_id' => $request['tag'],
-                'location_id' => '1',
-                'event_picture_id'=> $request['picture']
-            ]
-        );
-        //TODO: location
-
-        return redirect('/events');
+        if (Auth::id == $event->user_id) {
+            $event->update(
+                [
+                    'eventName' => $request['activityName'],
+                    'description' => $request['description'],
+                    'startDate' => $request['startDate'],
+                    'numberOfPeople' => $request['numberOfPeople'],
+                    'tag_id' => $request['tag'],
+                    'location_id' => '1',
+                    'event_picture_id' => $request['picture']
+                ]
+            );
+            //TODO: location
+            return redirect('/events');
+        }
+        else {
+            abort(403);
+        }
     }
 
     /**
@@ -210,7 +215,7 @@ class EventsController extends Controller
     public function join($id)
     {
 
-        if(Auth::user()->hasVerifiedEmail()) {
+        if (Auth::user()->hasVerifiedEmail()) {
             $event = Event::findOrFail($id);
             if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->attach(auth()->user()->id);
@@ -223,7 +228,7 @@ class EventsController extends Controller
 
     public function leave($id)
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             $event = Event::findOrFail($id);
             if ($event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->detach(auth()->user()->id);
@@ -246,23 +251,23 @@ class EventsController extends Controller
     private function areEvenstInRange($events)
     {
         $locationController = new LocationController();
-        return  $events = $locationController->areWithinReach($events, $this->distance);
+        return $events = $locationController->areWithinReach($events, $this->distance);
     }
 
     private $distance = 0;
 
     public function actionDistanceFilter(Request $request)
     {
-       
-        $tags = EventTag::where('tag', 'like', '%' . $request->inputTag .'%')->pluck('id');
-        $names = Event::where('eventName', 'like', '%' . $request->inputName .'%')->pluck('id');
+
+        $tags = EventTag::where('tag', 'like', '%' . $request->inputTag . '%')->pluck('id');
+        $names = Event::where('eventName', 'like', '%' . $request->inputName . '%')->pluck('id');
         $this->distance = $request->input('distance');
         $unfiltered_events = Event::where('isDeleted', '==', 0)
             ->where('startDate', '>=', $this->formatDate())
             ->whereIn('id', $names)
             ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
-            ->get();       
+            ->get();
 
         //TODO: Set initial amount of items to load and add 'load more' button
         $events = new Collection();

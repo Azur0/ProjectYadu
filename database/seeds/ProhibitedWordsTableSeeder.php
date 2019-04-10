@@ -12,6 +12,8 @@ class ProhibitedWordsTableSeeder extends Seeder
     public function run()
     {
 
+        //TODO realistic swearwords
+
         $words = array(
             "aapmens",
             "aatstulp",

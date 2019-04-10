@@ -5,13 +5,14 @@
         <div class="col-md-6">
             <div>
                 <h1>{{$event->eventName}}</h1><br>
-                <img class="img-fluid w-100 rounded" src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->picture)}}"/><br>
-                <h4 class="mb-5">{{$event->startDate}}</h4>
+                <img class="img-fluid w-100 rounded event_img mb-3" src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->picture)}}"/><br>
+                <h3>Wanneer?</h3>
+                <h5 class="mb-5">{{date("d-m-Y H:i", strtotime($event->startDate))}}</h5>
             </div>
 
             <h3>Initiatiefnemer</h3>
             <div class="row my-1">
-                <img class="img-fluid rounded-circle" width="50" class="my-auto" src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}"/>
+                <img class="img-fluid rounded-circle my-auto avatar" src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}"/>
                 <h5 class="my-auto ml-2">{{$event->owner->firstName .' '. $event->owner->middleName .' '. $event->owner->lastName}}</h5>
             </div>
             <br><br>
@@ -42,13 +43,9 @@
             @endforeach
         </div>
         <div class="col-md-6">
-            <div class="mb-5">
-                <h3>Beschrijving</h3>
-                <p>{{$event->description}}</p>
-            </div>
             {{--TODO: Add map API--}}
             <h3>Kaart</h3>
-            <div id="map" class="rounded" style="height: 30em;"></div>
+            <div id="map" class="rounded event_map"></div>
             <script>
                 var map;
 
@@ -61,6 +58,10 @@
             </script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap"
                     async defer></script>
+            <div class="mb-5">
+                <h3>Beschrijving</h3>
+                <p>{{$event->description}}</p>
+            </div>
         </div>
     </div>
 

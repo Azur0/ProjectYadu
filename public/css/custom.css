@@ -553,6 +553,14 @@ input[type=radio]:checked + .category span {
     height: 50px;
 }
 
+.event_img {
+    height: 353px;
+}
+.event_map {
+    max-height: 353px;
+    margin-bottom: 25px;
+}
+
 @media (max-width: 768px) {
     .event img {
         height: 200px;

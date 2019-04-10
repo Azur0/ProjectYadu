@@ -7,7 +7,8 @@
                 <h1>{{$event->eventName}}</h1><br>
                 <img class="img-fluid w-100 rounded event_img mb-3" src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->picture)}}"/><br>
                 <h3>Wanneer?</h3>
-                <h5 class="mb-5">{{date("d-m-Y H:i", strtotime($event->startDate))}}</h5>
+                @php($timestamp = strtotime($event->startDate))
+                <h5 class="mb-5">{{\App\Http\Controllers\DateTimeController::getDayNames(date("w", $timestamp))}} {{date("d-m-Y", $timestamp)}} om {{date("H:i", $timestamp)}}</h5>
             </div>
 
             <h3>Initiatiefnemer</h3>

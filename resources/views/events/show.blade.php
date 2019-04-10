@@ -75,7 +75,6 @@
             </script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap"
                     async defer></script>
-            <p>{{$event->location()->first()->postalcode}} {{$event->location()->first()->houseNumber}}{{$event->location()->first()->houseNumberAddition}}</p>
             <div class="mb-5">
                 <h3>Beschrijving</h3>
                 <p>{{$event->description}}</p>

@@ -11,6 +11,14 @@ class EventStatusesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\EventStatus')->create();
+        $statuses = array("Created", "Ongoing");
+
+        foreach ($statuses as $status) {
+            DB::table('event_statuses')->insert([
+                'status' => $status,
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+        }
     }
 }

@@ -188,11 +188,10 @@ class EventsController extends Controller
                 'numberOfPeople' => $request['numberOfPeople'],
                 'tag_id' => $request['tag'],
                 'location_id' => '1',
-                'owner_id' => auth()->user()->id,
                 'event_picture_id'=> $request['picture']
             ]
         );
-        //TODO: update status and location
+        //TODO: location
 
         return redirect('/events');
     }

@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use App\Gender;
 use App\Event;
 use App\EventHasParticipants;
-use Auth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 

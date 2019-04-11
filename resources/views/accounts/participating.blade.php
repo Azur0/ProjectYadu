@@ -3,11 +3,6 @@
 @section('content')
 	<div class="col">
 		<div class="card">
-			<div class="card-header">
-				<a href="/home"><i class="fas fa-door-open"></i> Dashboard</a>
-			</div>
-		</div>
-		<div class="card">
 			<div class="card-header"><i class="fas fa-calendar-alt"></i> Events particiting</div>
 		</div>
 			<ul class="events">

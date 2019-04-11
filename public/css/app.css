@@ -10678,6 +10678,15 @@ a.text-dark:focus {
   float: right;
 }
 
+#user_avatar {
+  text-align: center;
+}
+
+#user_avatar img {
+  border-radius: 80px;
+  width: 150px;
+}
+
 .dashboard_event {
   display: flex;
 }

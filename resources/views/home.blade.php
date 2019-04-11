@@ -42,15 +42,18 @@
 							{{ session('status') }}
 						</div>
 					@endif
-
-					You are logged in!
-
-					<form method="POST" action="/profile/edit">
-						@csrf
-						<input type="hidden" id="userId" name="userId" value="{{Auth::id()}}">
-						<input type="submit" id="submit-form" class="hidden" />
-					</form>
+					<div id="user_avatar">
+						<img src="data:image/png;base64,{{ chunk_split(base64_encode(Auth::user()->avatar)) }}">
+					</div>
+					<div>	
+						{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}
+					</div>
 					<div>
+						<form method="POST" action="/profile/edit">										
+							@csrf
+							<input type="hidden" id="userId" name="userId" value="{{Auth::id()}}">
+							<input type="submit" id="submit-form" class="hidden" />
+						</form>
 						{{--<a href="{{link_to('ProfileController@edit', $userId = Auth::id())}}" class="nav-link m-2 nav-item">Profiel</a>--}}
 						<label for="submit-form" tabindex="0"><i class="fas fa-user-cog"></i>profile settings</label>
 					</div>

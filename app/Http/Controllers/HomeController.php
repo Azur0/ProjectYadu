@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $events = Event::all()->where('owner_id', auth()->user()->id);
+        $events = Event::where('owner_id', auth()->user()->id)->take(5)->get();
         $participation = array();        
         $part = EventHasParticipants::get()->where('account_id', '==', auth()->user()->id);
 

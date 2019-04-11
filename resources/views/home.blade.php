@@ -34,8 +34,9 @@
 		</div>
 		<div class="col-md-4">
 			<div class="card">
-				<div class="card-header"><i class="fas fa-user"></i> User</div>
-
+				<div class="card-header">
+					<i class="fas fa-user"></i> User
+				</div>
 				<div class="card-body">
 					@if (session('status'))
 						<div class="alert alert-success" role="alert">
@@ -45,9 +46,9 @@
 					<div id="user_avatar">
 						<img src="data:image/png;base64,{{ chunk_split(base64_encode(Auth::user()->avatar)) }}">
 					</div>
-					<div>	
+					<h3>	
 						{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}
-					</div>
+					</h3>
 					<div>
 						<form method="POST" action="/profile/edit">										
 							@csrf

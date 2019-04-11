@@ -14,6 +14,7 @@ class Account extends Authenticatable implements MustVerifyEmailContract
 {
     //
     use Notifiable;
+    use Traits\Encryptable;
 
     protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender'];
 

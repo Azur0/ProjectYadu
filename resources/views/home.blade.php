@@ -45,6 +45,26 @@
 
 					You are logged in!
 
+					@if(Auth::user())
+						<form method="POST" action="/profile/edit">
+							@csrf
+							<input type="hidden" id="userId" name="userId" value="{{Auth::id()}}">
+							<input type="submit" id="submit-form" class="hidden" />
+						</form>
+						<li>
+							{{--<a href="{{link_to('ProfileController@edit', $userId = Auth::id())}}" class="nav-link m-2 nav-item">Profiel</a>--}}
+							<label class="nav-link m-2 nav-item" for="submit-form" tabindex="0">PROFILE</label>
+						</li>
+						<li>
+							<a href="/logout" class="nav-link m-2 nav-item">UITLOGGEN</a>
+						</li>
+					@else
+						<li>
+							<a href="/login"
+							   class="nav-link m-2 nav-item {{ request()->is('login') ? 'active' : '' }}">INLOGGEN</a>
+						</li>
+					@endif
+
 					<div>
 						<a href="/account/settings"><i class="fas fa-user-cog"></i> settings</a>
 					</div>

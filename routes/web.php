@@ -17,9 +17,7 @@ app()->singleton('ipApi', function(){
     return new \App\Services\IpApi('test');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'EventsController@welcome');
 
 Route::get('/about', function () {
     return view('about');
@@ -29,7 +27,6 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/', function () { return view('welcome'); });
 Route::get('/about', function () { return view('about'); });
 Route::get('/contact', function () { return view('contact'); });
 Route::get('/home', 'HomeController@index')->name('home');

@@ -26,7 +26,7 @@ class AccountController extends Controller
 	{
 		if(Auth::check())
 		{
-			$events = Event::all()->where('owner_id', auth()->user()->id);
+			$events = Event::all()->where('owner_id', auth()->user()->id)->where('isDeleted', '==', 0);
 
 			return view('accounts/my_events', compact('events'));
 		}

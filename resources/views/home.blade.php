@@ -45,38 +45,23 @@
 
 					You are logged in!
 
-					@if(Auth::user())
-						<form method="POST" action="/profile/edit">
-							@csrf
-							<input type="hidden" id="userId" name="userId" value="{{Auth::id()}}">
-							<input type="submit" id="submit-form" class="hidden" />
-						</form>
-						<li>
-							{{--<a href="{{link_to('ProfileController@edit', $userId = Auth::id())}}" class="nav-link m-2 nav-item">Profiel</a>--}}
-							<label class="nav-link m-2 nav-item" for="submit-form" tabindex="0">PROFILE</label>
-						</li>
-						<li>
-							<a href="/logout" class="nav-link m-2 nav-item">UITLOGGEN</a>
-						</li>
-					@else
-						<li>
-							<a href="/login"
-							   class="nav-link m-2 nav-item {{ request()->is('login') ? 'active' : '' }}">INLOGGEN</a>
-						</li>
-					@endif
-
+					<form method="POST" action="/profile/edit">
+						@csrf
+						<input type="hidden" id="userId" name="userId" value="{{Auth::id()}}">
+						<input type="submit" id="submit-form" class="hidden" />
+					</form>
 					<div>
-						<a href="/account/settings"><i class="fas fa-user-cog"></i> settings</a>
+						{{--<a href="{{link_to('ProfileController@edit', $userId = Auth::id())}}" class="nav-link m-2 nav-item">Profiel</a>--}}
+						<label for="submit-form" tabindex="0"><i class="fas fa-user-cog"></i>profile settings</label>
 					</div>
 				</div>
 			</div>
 			<div class="card">
 				<div class="card-header">
-					<a href="/account/myevents"><i class="fas fa-calendar-alt"></i> My events</a> <a class="right" href="/events/create"><i class="fas fa-plus-square"></i></a>
+					<a href="/account/myevents"><i class="fas fa-calendar-alt"></i> My events</a><a class="right" href="/events/create"><i class="fas fa-plus-square"></i></a>
 				</div>
 				<div class="card-body">
 					@if($events)
-
 						@foreach($events as $event)
 							<div class="dashboard_event">
 								<a href="/events/{{ $event->id }}">

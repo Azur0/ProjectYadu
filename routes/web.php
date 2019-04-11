@@ -17,36 +17,34 @@ app()->singleton('ipApi', function(){
     return new \App\Services\IpApi('test');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/about', function () {
-    return view('about');
-});
-
-Route::get('/contact', function () {
-    return view('contact');
-});
-
 Route::get('/', function () { return view('welcome'); });
 Route::get('/about', function () { return view('about'); });
 Route::get('/contact', function () { return view('contact'); });
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/account/myevents', 'AccountController@myEvents');
 Route::get('/account/participating', 'AccountController@participating');
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
-Route::get('/slider',function(){
-    return view('temp\sliderDemo');
-});
 
 Route::get('/location','API\LocationController@isWithinReach');
-Route::resource('events', 'EventsController');
-Route::post('/events/action', 'EventsController@action')->name('events_controller.action');
 Route::get('events/{id}/join', 'EventsController@join');
 Route::get('events/{id}/leave', 'EventsController@leave');
+
+Route::post('/events/action', 'EventsController@action')->name('events_controller.action');
 Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilter')->name('events_controller.actionDistanceFilter');
+
+Auth::routes(['verify' => true]);
+
+//Profile
+Route::get('profile/edit', 'ProfileController@edit');
+Route::post('profile/edit', 'ProfileController@edit');
+Route::post('/profile/updateProfile', 'AccountController@updateProfile');
+Route::post('/profile/changePassword', 'AccountController@changePassword');
+Route::post('/profile/deleteAccount', 'AccountController@deleteAccount');
+
 Auth::routes();
+
+Route::resource('events', 'EventsController');
 
 

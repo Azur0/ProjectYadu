@@ -11,8 +11,15 @@ class AccountRolesTableSeeder extends Seeder
      */
     public function run()
     {
-        //factory('App\AccountRole')->create();
-        DB::table('account_roles')->insert(['role' => 'user', 'description' => 'default role',]);
-        DB::table('account_roles')->insert(['role' => 'admin', 'description' => 'administrator',]);
+        $roles = array("User", "Admin");
+
+        foreach ($roles as $role) 
+       	{
+            DB::table('account_roles')->insert([
+                'role' => $role,
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
+        }
     }
 }

@@ -2,17 +2,27 @@
 
 namespace App;
 
+use App\Events\AccountCreatedEvent;
+use App\Mail\Confirmation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Mail;
 
-class Account extends Authenticatable
+class Account extends Authenticatable implements MustVerifyEmailContract
 {
     //
+    use Notifiable;
+
     protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender'];
 
-    public function participates()
+    public function gender()
+    {
+       return $this->belongsTo(Gender::class);
+	}
+
+	public function participates()
     {
         return $this->belongsToMany('App\Event', 'event_has_participants', 'account_id', 'event_id');
     }

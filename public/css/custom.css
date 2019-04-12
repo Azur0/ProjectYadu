@@ -548,6 +548,19 @@ input[type=radio]:checked + .category span {
     padding: 0;
 }
 
+.avatar {
+    width: 50px;
+    height: 50px;
+}
+
+.event_img {
+    height: 353px;
+}
+.event_map {
+    max-height: 353px;
+    margin-bottom: 25px;
+}
+
 @media (max-width: 768px) {
     .event img {
         height: 200px;
@@ -560,7 +573,7 @@ input[type=radio]:checked + .category span {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        
+
     }
     .search label, input{
         width: 100%;

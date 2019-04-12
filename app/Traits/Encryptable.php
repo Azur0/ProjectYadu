@@ -8,16 +8,21 @@ trait Encryptable
     public function getAttribute($key)
     {
         $value = parent::getAttribute($key);
-       
-        if (in_array($key, $this->fillable)) {
-            $value = Crypt::decrypt($value);
+        $decrypt = ['firstName', 'middleName', 'lastName'];
+
+        if (in_array($key, $decrypt)) {
+            if (!is_null($value)) {
+                $value = Crypt::decrypt($value);
+            }
         }
         return $value;
     }
 
     public function setAttribute($key, $value)
     {
-        if (in_array($key, $this->fillable)) {
+        $encrypt = ['firstName', 'middleName', 'lastName'];
+
+        if (in_array($key, $encrypt)) {
             if (!is_null($value)){
                 $value = Crypt::encrypt($value);
             }

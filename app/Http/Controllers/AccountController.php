@@ -45,9 +45,13 @@ class AccountController extends Controller
 
 			foreach($part as $par)
 			{
-				array_push($events, Event::find($par->event_id));
+				$event = Event::find($par->event_id);
+
+				if($event->isDeleted == 0)
+				{
+					array_push($events, Event::find($par->event_id));
+				}
 			}
-		
 			return view('accounts/participating', compact('events'));
 		}
 		else

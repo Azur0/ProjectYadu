@@ -30,11 +30,16 @@ class HomeController extends Controller
         $participation = array();        
         $part = EventHasParticipants::get()->where('account_id', '==', auth()->user()->id);
 
+
         foreach($part as $par)
-        {
-	        array_push($participation, Event::find($par->event_id));
-        }
-         
+		{
+			$event = Event::find($par->event_id);
+
+			if($event->isDeleted == 0)
+			{
+				array_push($participation, $event);
+			}
+		}
         return view('home', compact('events','participation'));
     }
 }

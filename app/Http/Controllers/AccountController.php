@@ -59,10 +59,15 @@ class AccountController extends Controller
     }
 
     public function deleteAccount(){
+
+	    $ID = Auth::user()->id;
+
+        Auth::logout();
+
         DB::table('accounts')
-            ->where('id', Auth::user()->id)
+            ->where('id', $ID)
             ->update([
-                'email' => '',
+                'email' =>  $ID + rand(),
                 'password' => '',
                 'firstName' => 'Deleted',
                 'middleName' => NULL,
@@ -73,8 +78,6 @@ class AccountController extends Controller
                 'remember_token' => NULL,
                 'updated_at' => date("Y-m-d h:i:12")
             ]);
-
-        Auth::logout();
 
         return redirect('/');
     }

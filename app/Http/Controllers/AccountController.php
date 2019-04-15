@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Gender;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use DB;
 
 class AccountController extends Controller
 {
@@ -58,7 +59,23 @@ class AccountController extends Controller
     }
 
     public function deleteAccount(){
-        dd('Hier moet Martijn zijn code komen');
-	    //TODO: Martijn zijn delete code!
+        DB::table('accounts')
+            ->where('id', Auth::user()->id)
+            ->update([
+                'email' => '',
+                'password' => '',
+                'firstName' => 'Deleted',
+                'middleName' => NULL,
+                'lastName' => NULL,
+                'avatar' => NULL,
+                'isDeleted' => 1,
+                'bio' => NULL,
+                'remember_token' => NULL,
+                'updated_at' => date("Y-m-d h:i:12")
+            ]);
+
+        Auth::logout();
+
+        return redirect('/');
     }
 }

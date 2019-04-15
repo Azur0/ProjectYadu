@@ -181,7 +181,7 @@ class EventsController extends Controller
 
         $event = Event::where('id', $id);
 
-        if (Auth::id == $event->user_id) {
+        if (Auth::id() == $event->user_id) {
             $event->update(
                 [
                     'eventName' => $request['activityName'],

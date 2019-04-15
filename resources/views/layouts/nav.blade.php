@@ -32,14 +32,8 @@
             </li>
 
             @if(Auth::user())
-                <form method="POST" action="/profile/edit">
-                    @csrf
-                    <input type="hidden" id="userId" name="userId" value="{{Auth::id()}}">
-                    <input type="submit" id="submit-form" class="hidden" />
-                </form>
                 <li>
-                    {{--<a href="{{link_to('ProfileController@edit', $userId = Auth::id())}}" class="nav-link m-2 nav-item">Profiel</a>--}}
-                    <label class="nav-link m-2 nav-item" for="submit-form" tabindex="0">PROFILE</label>
+                    <a href="/profile/edit" class="nav-link m-2 nav-item">PROFILE</a>
                 </li>
                 <li>
                     <a href="/logout" class="nav-link m-2 nav-item">UITLOGGEN</a>

@@ -41,11 +41,10 @@ Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilt
 Auth::routes(['verify' => true]);
 
 //Profile
-Route::get('profile/edit', 'ProfileController@edit');
-Route::post('profile/edit', 'ProfileController@edit');
-Route::post('/profile/updateProfile', 'AccountController@updateProfile');
-Route::post('/profile/changePassword', 'AccountController@changePassword');
-Route::post('/profile/deleteAccount', 'AccountController@deleteAccount');
+Route::get('profile/edit', 'ProfileController@edit')->middleware('auth');
+Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
+Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
+Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middleware('auth');
 
 Auth::routes();
 

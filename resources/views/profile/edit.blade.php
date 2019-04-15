@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">{{ __('Edit Profile') }}</div>
 
@@ -144,8 +144,6 @@
                     <div class="card-body">
                         <form method="POST" action="/profile/changePassword">
                             @csrf
-                            <input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
-
                             <div class="form-group row">
                                 <label for="currentPassword"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Current Password') }}
@@ -217,7 +215,6 @@
                     <div class="card-body">
                         <form method="POST" id="deleteAccount" action="/profile/deleteAccount">
                             @csrf
-                            <input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
                             <div class="form-group row">
                                 <label for="currentPassword"
                                        class="col-md-8 col-form-label text-md-left">Click here to delete your account.

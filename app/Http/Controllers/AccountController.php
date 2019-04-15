@@ -31,15 +31,14 @@ class AccountController extends Controller
 
         $account->save();
 
-        //TODO: Redirect to success page!
-        return redirect('/');
+        return redirect('/profile/edit');
     }
 
     public function updateProfile(EditProfileRequest $request)
     {
 	    $validated = $request->validated();
 
-	    $account = Account::where('id', $request->accountId)->firstOrFail();
+	    $account = Account::where('id', Auth::id())->firstOrFail();
 
 	    if($validated['gender'] == "-"){
             $account->gender = null;
@@ -56,12 +55,10 @@ class AccountController extends Controller
 
         $account->save();
 
-        return redirect('/');
+        return redirect('/profile/edit');
     }
 
     public function deleteAccount(){
-        isAuthorized(request()->accountId);
-
         DB::table('accounts')
             ->where('id', Auth::user()->id)
             ->update([

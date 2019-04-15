@@ -6,6 +6,7 @@ use App\Gender;
 use App\Rules\emailUniqueExceptSelf;
 use App\Rules\genderExists;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class EditProfileRequest extends FormRequest
 {
@@ -16,7 +17,7 @@ class EditProfileRequest extends FormRequest
      */
     public function authorize()
     {
-        return isAuthorized($this->accountId);
+        return Auth::check();
     }
 
     /**

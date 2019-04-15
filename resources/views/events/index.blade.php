@@ -6,10 +6,12 @@
 
 @section('content')
 
-<div class="box-range-value">
+<div class="slideContainer">
+<div style="width:90%; margin:auto;">
+<div class="box-range-value" id="box-move-with-distance">
     <div id="rangeValueDisplay"></div>
 </div>
-<div class="slideContainer">
+</div>
     <input type="range" ticks="[5, 10, 15, 20, 25]" min="5" max="25" step="5" value="20" class="slider" id="rangeValue">
     <div class="labels">
         <label class="rangeTextLeft">5 KM</label>
@@ -52,11 +54,17 @@ slider.oninput = function() {
     } else {
         val.innerHTML = this.value;
     }
+    document.getElementById("box-move-with-distance").style.transform = "translate(-"+((((this.value/5)-1)*10)+5)+"px) rotate(-136deg)";
+    document.getElementById("box-move-with-distance").style.margin = "0 0 0 "+((((this.value/5)-1)*25))+"%";
+   
     fetch_events();
 };
 
 $(document).ready(function() {
     fetch_events();
+    document.getElementById("box-move-with-distance").style.transform = "translate(-"+((((slider.value/5)-1)*10)+5)+"px) rotate(-136deg)";
+    document.getElementById("box-move-with-distance").style.margin = "0 0 0 "+((((slider.value/5)-1)*25))+"%";
+   
 });
 
 //AJAX request

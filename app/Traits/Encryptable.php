@@ -12,9 +12,10 @@ trait Encryptable
 
         if (in_array($key, $decrypt)) {
             if (!is_null($value)) {
-                return $value = Crypt::decrypt($value);
+                $value = Crypt::decrypt($value);
             }
         }
+        return $value;
     }
 
     public function setAttribute($key, $value)

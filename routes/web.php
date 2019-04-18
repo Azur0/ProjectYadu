@@ -17,7 +17,6 @@ app()->singleton('ipApi', function(){
     return new \App\Services\IpApi('test');
 });
 
-
 Route::get('/', 'EventsController@welcome');
 
 Route::get('/about', function () { return view('about'); });

@@ -50,13 +50,7 @@
 						{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}
 					</h3>
 					<div>
-						<form method="POST" action="/profile/edit">										
-							@csrf
-							<input type="hidden" id="userId" name="userId" value="{{Auth::id()}}">
-							<input type="submit" id="submit-form" class="hidden" />
-						</form>
-						{{--<a href="{{link_to('ProfileController@edit', $userId = Auth::id())}}" class="nav-link m-2 nav-item">Profiel</a>--}}
-						<label for="submit-form" tabindex="0"><i class="fas fa-user-cog"></i>profile settings</label>
+						<a href="/profile/edit"><i class="fas fa-user-cog"></i> profile settings</a>
 					</div>
 				</div>
 			</div>

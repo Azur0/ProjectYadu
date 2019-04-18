@@ -2,6 +2,9 @@
 
 @section('content')
 	<div class="col">
+		<div class="backlink">
+			<a href="/home"><i class="fas fa-arrow-left"></i> Dashboard</a>
+		</div>
 		<div class="card">
 			<div class="card-header"><i class="fas fa-calendar-alt"></i> Events particiting</div>
 		</div>

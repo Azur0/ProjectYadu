@@ -67,7 +67,7 @@ class AccountController extends Controller
         DB::table('accounts')
             ->where('id', $ID)
             ->update([
-                'email' =>  $ID + rand(),
+                'email' =>  $ID,
                 'password' => '',
                 'firstName' => 'Deleted',
                 'middleName' => NULL,

@@ -13,12 +13,14 @@
                             <input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
                             <div class="form-group row">
                                 <label for="firstName"
-                                       class="col-md-4 col-form-label text-md-right">{{__('profile.edit_firstname')}}&nbsp;*</label>
+                                       class="col-md-4 col-form-label text-md-right">{{__('profile.edit_firstname')}}
+                                    &nbsp;*</label>
 
                                 <div class="col-md-6">
                                     <input id="firstName" type="text"
                                            class="form-control{{ $errors->has('firstName') ? ' is-invalid' : '' }}"
-                                           placeholder="{{__('profile.edit_firstname')}}" name="firstName" value="{{$account->firstName}}"
+                                           placeholder="{{__('profile.edit_firstname')}}" name="firstName"
+                                           value="{{$account->firstName}}"
                                            required
                                            autofocus maxlength="45">
 
@@ -37,7 +39,8 @@
                                 <div class="col-md-6">
                                     <input id="middleName" type="text"
                                            class="form-control{{ $errors->has('middleName') ? ' is-invalid' : '' }}"
-                                           placeholder="{{__('profile.edit_middlename')}}" name="middleName" value="{{$account->middleName}}"
+                                           placeholder="{{__('profile.edit_middlename')}}" name="middleName"
+                                           value="{{$account->middleName}}"
                                            maxlength="45">
 
                                     @if ($errors->has('middleName'))
@@ -55,7 +58,8 @@
                                 <div class="col-md-6">
                                     <input id="lastName" type="text"
                                            class="form-control{{ $errors->has('lastName') ? ' is-invalid' : '' }}"
-                                           placeholder="{{ __('profile.edit_lastname')}}" name="lastName" value="{{$account->lastName}}"
+                                           placeholder="{{ __('profile.edit_lastname')}}" name="lastName"
+                                           value="{{$account->lastName}}"
                                            maxlength="45">
 
                                     @if ($errors->has('lastName'))
@@ -202,7 +206,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button id="submit" type="submit" class="btn btn-primary">
-                                       {{__('profile.edit_change_password')}}
+                                        {{__('profile.edit_change_password')}}
                                     </button>
                                 </div>
                             </div>
@@ -245,18 +249,17 @@
                                             <div class="modal-footer">
                                                 <input type="submit" form="deleteAccount" class="btn btn-danger"
                                                        value="{{__('profile.edit_delete_account_positive')}}">
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">{{__('profile.edit_delete_account_negative')}}
+                                                <button type="button" class="btn btn-primary"
+                                                        data-dismiss="modal">{{__('profile.edit_delete_account_negative')}}
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

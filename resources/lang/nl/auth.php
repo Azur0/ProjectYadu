@@ -29,4 +29,21 @@ return [
 
     ///////////////////////////////// Register ////////////////////////////////
 
+    'register_register_title' => 'Registreren',
+    'register_firstname' => 'Voornaam',
+    'register_middlename' => 'Tussenvoegsel',
+    'register_lastname' => 'Achternaam',
+    'register_gender' => 'Geslacht',
+    'register_birthday' => 'Geboortedatum',
+    'register_email' => 'E-Mailadres',
+    'register_password' => 'Wachtwoord',
+    'register_confirm_password' => 'Bevestig wachtwoord',
+    'register_register' => 'Registreren',
+    'register_already_registered' => 'Heb je al een account? Login <a href=":url">hier</a>.',
+
+    ///////////////////////////////// Reset //////////////////////////////////
+
+    'reset_reset_title' => 'Wachtwoord herstellen',
+    'reset_email' => 'E-Mailadres',
+    'reset_reset' => 'Verstuur herstel link',
 ];

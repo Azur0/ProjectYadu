@@ -17,31 +17,31 @@
     <div class="collapse navbar-collapse flex-grow-1 text-left" id="myNavbar">
         <ul class="navbar-nav ml-auto flex-nowrap">
             <li>
-                <a href="/" class="nav-link m-2 nav-item {{ request()->is('/') ? 'active' : '' }}">HOME</a>
+                <a href="/" class="nav-link m-2 nav-item {{ request()->is('/') ? 'active' : '' }}">{{__('navigation.nav_home')}}</a>
             </li>
             <li>
                 <a href="/events"
-                   class="nav-link m-2 nav-item {{ request()->is('events') ? 'active' : (request()->is('events/*') ? 'active' : '') }}">EVENEMENTEN</a>
+                   class="nav-link m-2 nav-item {{ request()->is('events') ? 'active' : (request()->is('events/*') ? 'active' : '') }}">{{__('navigation.nav_events')}}</a>
             </li>
             <li>
-                <a href="/about" class="nav-link m-2 nav-item {{ request()->is('about') ? 'active' : '' }}">OVER ONS</a>
+                <a href="/about" class="nav-link m-2 nav-item {{ request()->is('about') ? 'active' : '' }}">{{__('navigation.nav_about')}}</a>
             </li>
             <li>
                 <a href="/contact"
-                   class="nav-link m-2 nav-item {{ request()->is('contact') ? 'active' : '' }}">CONTACT</a>
+                   class="nav-link m-2 nav-item {{ request()->is('contact') ? 'active' : '' }}">{{__('navigation.nav_contact')}}</a>
             </li>
 
             @if(Auth::user())
                 <li>
-                    <a href="/profile/edit" class="nav-link m-2 nav-item">PROFILE</a>
+                    <a href="/profile/edit" class="nav-link m-2 nav-item">{{__('navigation.nav_profile')}}</a>
                 </li>
                 <li>
-                    <a href="/logout" class="nav-link m-2 nav-item">UITLOGGEN</a>
+                    <a href="/logout" class="nav-link m-2 nav-item">{{__('navigation.nav_logout')}}</a>
                 </li>
             @else
                 <li>
                     <a href="/login"
-                       class="nav-link m-2 nav-item {{ request()->is('login') ? 'active' : '' }}">INLOGGEN</a>
+                       class="nav-link m-2 nav-item {{ request()->is('login') ? 'active' : '' }}">{{__('navigation.nav_login')}}</a>
                 </li>
             @endif
         </ul>

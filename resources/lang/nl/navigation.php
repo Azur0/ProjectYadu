@@ -10,6 +10,7 @@ return [
 
 ///////////////////////////////// Navigation //////////////////////////////
 
+    'nav_motto' => 'VIND WAT JE BINDT!',
     'nav_home' => 'HOME',
     'nav_events' => 'EVENEMENTEN',
     'nav_about' => 'OVER ONS',

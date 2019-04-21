@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Events\NewMessage;
 use App\Event;
 use App\Message;
 use Auth;
@@ -21,7 +22,11 @@ class MessageController extends Controller
             'user_id' => Auth::id()
         ]);
 
-        $message = Message::where('id', $message->id)->with('account')->first();
+        $message = Message::where('id', $message->id)->with(['account' => function ($query) {
+            return $query->select(['id', 'firstName', 'lastName']);
+        }])->first();
+
+        broadcast(new NewMessage($message))->toOthers();
 
         return $message->toJson();
     }

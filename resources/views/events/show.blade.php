@@ -84,7 +84,7 @@
 
     <!-- BEGIN CHAT TEMPLATE -->
 
-    <div id="app" class="message-container clearfix">
+    <div id="app" class="message-container clearfix" v-if="account">
         <div class="people-list" id="people-list">
             <div class="search">
                 <input type="text" placeholder="search" />
@@ -152,6 +152,7 @@
             },
             mounted() {
                 this.getMessages();
+                this.listen();
             },
             methods: {
                 getMessages() {
@@ -175,6 +176,12 @@
                         .catch(function (error) {
                             console.log(error);
                         });
+                },
+                listen() {
+                    Echo.channel('event.'+this.event.id)
+                        .listen('NewMessage', (message) => {
+                            this.messages.push(message)
+                        })
                 }
             }
         });

@@ -128,6 +128,9 @@ class EventsController extends Controller
      */
     public function show(Event $event)
     {
+        //$event->eventPicture->picture = base64_encode($event->eventPicture->picture);
+        $event->eventPicture->setAttribute('picture', base64_encode($event->eventPicture->picture));
+        //dd($event->eventPicture->getAttribute('picture'));
         return view('events.show', compact('event'));
     }
 

@@ -82,4 +82,102 @@
         </div>
     </div>
 
+    <!-- BEGIN CHAT TEMPLATE -->
+
+    <div id="app" class="message-container clearfix">
+        <div class="people-list" id="people-list">
+            <div class="search">
+                <input type="text" placeholder="search" />
+                <i class="fa fa-search"></i>
+            </div>
+            <!-- PARTICIPANTS HERE! -->
+        </div>
+
+        <div class="chat">
+            <div class="chat-header clearfix">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+
+                <div class="chat-about">
+                    <div class="chat-with">Eventnaam</div>
+                </div>
+            </div>
+            <!-- end chat-header -->
+
+            <div class="chat-history">
+                <ul>
+
+                    <li v-for="message in messages">
+                        <div class="message-data">
+                            <span class="message-data-name"><i class="fa fa-circle online"></i> @{{  message.account.firstName + ' ' + message.account.lastName}}</span>
+                            <span class="message-data-time">@{{ message.created_at }}</span>
+                        </div>
+                        <div class="message my-message">
+                            @{{ message.body }}
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+            <!-- end chat-history -->
+
+            <div class="chat-message clearfix">
+                <textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows="3" v-model="messageBox"></textarea>
+
+                <button @click.prevent="postMessage">Send</button>
+
+            </div>
+            <!-- end chat-message -->
+
+        </div>
+        <!-- end chat -->
+
+    </div>
+    <!-- end container -->
+
+    <!-- END CHAT TEMPLATE -->
+
+@endsection
+
+@section('scripts')
+    <script>
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                messages: {},
+                messageBox: '',
+                event: {!! json_encode($event->getAttributes()) !!},
+                account: {!! Auth::check() ? json_encode(Auth::user()->only(['id', 'firstName', 'lastName'])) : 'null' !!}
+            },
+            mounted() {
+                this.getMessages();
+            },
+            methods: {
+                getMessages() {
+                    axios.get(`/api/events/${this.event.id}/messages`)
+                        .then((response) => {
+                            this.messages = response.data
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                postMessage() {
+                    axios.post(`/api/events/${this.event.id}/message`, {
+                        api_token: this.account.api_token,
+                        body: this.messageBox
+                    })
+                        .then((response) => {
+                            this.messages.push(response.data);
+                            this.messageBox = '';
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+            }
+        });
+
+    </script>
 @endsection

@@ -34,4 +34,8 @@ class Account extends Authenticatable implements MustVerifyEmailContract
     public function gender(){
        return $this->belongsTo(Gender::class);
     }
+
+    public function messages() {
+        return $this->hasMany('App\Message');
+    }
 }

@@ -6,7 +6,7 @@
             <div>
                 <h1>{{$event->eventName}}</h1><br>
                 <img class="img-fluid w-100 rounded event_img mb-3"
-                     src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->picture)}}"/><br>
+                     src="data:image/jpeg;base64, {{base64_decode($event->eventPicture->picture)}}"/><br>
                 <h3>Wanneer?</h3>
                 @php($timestamp = strtotime($event->startDate))
                 <h5 class="mb-5">{{\App\Http\Controllers\DateTimeController::getDayNames(date("w", $timestamp))}} {{date("d-m-Y", $timestamp)}}
@@ -148,7 +148,7 @@
                 messages: {},
                 messageBox: '',
                 event: {!! json_encode($event->getAttributes()) !!},
-                account: {!! Auth::check() ? json_encode(Auth::user()->only(['id', 'firstName', 'lastName'])) : 'null' !!}
+                account: {!! Auth::check() ? json_encode(Auth::user()->only(['id', 'firstName', 'lastName', 'api_token'])) : 'null' !!}
             },
             mounted() {
                 this.getMessages();

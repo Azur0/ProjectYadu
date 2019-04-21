@@ -163,7 +163,7 @@ class AccountsTableSeeder extends Seeder
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
             'email_verified_at' => date("Y-m-d H:i:s"),
-            'api_token' => str_random(60)
+            'api_token' => bin2hex(openssl_random_pseudo_bytes(30))
         ]);
     }
 }

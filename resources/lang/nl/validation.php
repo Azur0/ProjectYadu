@@ -113,6 +113,11 @@ return [
     'uploaded'             => 'Het uploaden van :attribute is mislukt.',
     'url'                  => ':attribute moet een geldig URL zijn.',
     'uuid'                 => ':attribute moet een geldig UUID zijn.',
+
+    //Custom validation messages
+    'genderExists'         => 'Onbekend geslacht.',
+    'swearWords'           => ':attribute is niet toegestaan omdat deze een scheldwoord bevat.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -170,5 +175,6 @@ return [
         'title'                 => 'titel',
         'username'              => 'gebruikersnaam',
         'year'                  => 'jaar',
+        'dateOfBirth'           => 'geboortedatum'
     ],
 ];

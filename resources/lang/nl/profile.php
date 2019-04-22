@@ -19,7 +19,7 @@ return [
     'edit_lastname' => 'Achternaam',
     'edit_gender' => 'Geslacht',
     'edit_birthday' => 'Geboortedatum',
-    'edit_email' => 'E-Mail adres',
+    'edit_email' => 'E-Mailadres',
     'edit_update_profile' => 'Profiel bijwerken',
 
     'edit_change_password_title' => 'Wachtwoord wijzigen',

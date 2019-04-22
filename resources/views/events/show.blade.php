@@ -103,7 +103,7 @@
             </div>
             <!-- end chat-header -->
 
-            <div class="chat-history">
+            <div id="chat" class="chat-history" v-chat-scroll>
                 <ul>
 
                     <li v-for="message in messages" v-bind:class="{'clearfix':(message.account.id !== {{ Auth::id() }})}">
@@ -133,7 +133,7 @@
             <!-- end chat-history -->
 
             <div class="chat-message clearfix">
-                <textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows="3" v-model="messageBox"></textarea>
+                <textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows="3" v-model="messageBox" v-on:keyup.enter="postMessage"></textarea>
 
                 <button @click.prevent="postMessage">Send</button>
 

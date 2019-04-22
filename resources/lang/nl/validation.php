@@ -29,7 +29,7 @@ return [
     ],
     'boolean'              => ':attribute moet ja of nee zijn.',
     'confirmed'            => ':attribute bevestiging komt niet overeen.',
-    'date'                 => ':attribute moet een datum bevatten.',
+    'date'                 => ':attribute moet een datum zijn.',
     'date_equals'          => ':attribute moet een datum gelijk aan :date zijn.',
     'date_format'          => ':attribute moet een geldig datum formaat bevatten.',
     'different'            => ':attribute en :other moeten verschillend zijn.',
@@ -129,9 +129,9 @@ return [
     |
     */
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+        'dateOfBirth' => [
+            'before' => ':attribute mag niet in de toekomst zijn.'
+        ]
     ],
     /*
     |--------------------------------------------------------------------------
@@ -151,6 +151,7 @@ return [
         'content'               => 'inhoud',
         'country'               => 'land',
         'date'                  => 'datum',
+        'dateOfBirth'           => 'geboortedatum',
         'day'                   => 'dag',
         'description'           => 'omschrijving',
         'email'                 => 'e-mailadres',
@@ -173,8 +174,8 @@ return [
         'subject'               => 'onderwerp',
         'time'                  => 'tijd',
         'title'                 => 'titel',
+        'today'                 => 'vandaag',
         'username'              => 'gebruikersnaam',
         'year'                  => 'jaar',
-        'dateOfBirth'           => 'geboortedatum'
     ],
 ];

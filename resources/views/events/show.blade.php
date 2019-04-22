@@ -106,13 +106,24 @@
             <div class="chat-history">
                 <ul>
 
-                    <li v-for="message in messages">
-                        <div class="message-data">
-                            <span class="message-data-name"><i class="fa fa-circle online"></i> @{{  message.account.firstName + ' ' + message.account.lastName}}</span>
-                            <span class="message-data-time">@{{ message.created_at }}</span>
+                    <li v-for="message in messages" v-bind:class="{'clearfix':(message.account.id !== {{ Auth::id() }})}">
+                        <div v-if="message.account.id === {{ Auth::id() }}">
+                            <div class="message-data">
+                                <span class="message-data-name"><i class="fa fa-circle online"></i> @{{  message.account.firstName + ' ' + message.account.lastName}}</span>
+                                <span class="message-data-time">@{{ message.created_at }}</span>
+                            </div>
+                            <div class="message my-message">
+                                @{{ message.body }}
+                            </div>
                         </div>
-                        <div class="message my-message">
-                            @{{ message.body }}
+                        <div v-else-if="message.account.id !== {{ Auth::id() }}">
+                            <div class="message-data align-right">
+                                <span class="message-data-time">@{{ message.created_at }}</span>
+                                <span class="message-data-name"></i> @{{  message.account.firstName + ' ' + message.account.lastName}}</span> <i class="fa fa-circle me"></i>
+                            </div>
+                            <div class="message other-message float-right">
+                                @{{ message.body }}
+                            </div>
                         </div>
                     </li>
 

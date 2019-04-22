@@ -11,8 +11,6 @@ class EventsTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO descriptions
-
         //factory('App\Event', 10)->create();
         $date = date("Y-m-d H:i:s");
 

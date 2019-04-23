@@ -41,6 +41,6 @@ class genderExists implements Rule
      */
     public function message()
     {
-        return 'Unknown gender';
+        return __('validation.genderExists');
     }
 }

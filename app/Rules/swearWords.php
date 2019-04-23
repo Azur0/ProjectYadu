@@ -42,6 +42,6 @@ class swearWords implements Rule
      */
     public function message()
     {
-        return trans('validation.swearWords');
+        return __('validation.swearWords');
     }
 }

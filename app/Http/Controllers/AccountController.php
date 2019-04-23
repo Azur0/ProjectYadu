@@ -59,22 +59,23 @@ class AccountController extends Controller
     }
 
     public function deleteAccount(){
-        DB::table('accounts')
-            ->where('id', Auth::user()->id)
-            ->update([
-                'email' => '',
-                'password' => '',
-                'firstName' => 'Deleted',
-                'middleName' => NULL,
-                'lastName' => NULL,
-                'avatar' => NULL,
-                'isDeleted' => 1,
-                'bio' => NULL,
-                'remember_token' => NULL,
-                'updated_at' => date("Y-m-d h:i:12")
-            ]);
 
+	    $ID = Auth::user()->id;
         Auth::logout();
+
+        $account = Account::where('id', $ID)->firstOrFail();
+
+        $account->email = $ID;
+        $account->password = '';
+        $account->firstname = 'Deleted user';
+        $account->middlename = null;
+        $account->lastname = null;
+        $account->avatar = null;
+        $account->isDeleted = 1;
+        $account->bio = null;
+        $account->remember_token = null;
+
+        $account->save();
 
         return redirect('/');
     }

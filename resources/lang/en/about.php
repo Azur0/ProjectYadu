@@ -18,14 +18,14 @@ return [
 
     'how_title' => 'How?',
     'how_content' => 'Through our website and app we bring like-minded people together based on shared interests.</br>
-        These interests are the starting point for activities to really "connect" Yadu members!</br>
+        These interests are the starting point for activities to really \'connect\' Yadu members!</br>
         You can easily create your own activity and invite your neighbors, friends or colleagues and you can participate in the activities of others.',
 
     'why_now_title' => 'Why NOW?',
     'why_now_content' => 'The growing need for real contact is the foundation on which Yadu makes a positive difference.',
 
     'how_does_it_work_title' => 'How does it work?',
-    'how_does_it_work_content' => 'By facilitating fun and educational “events” on our platform, we bring like-minded people into contact with each other, based on shared interests. In our own environment and also outside your current network.',
+    'how_does_it_work_content' => 'By facilitating fun and educational \'events\' on our platform, we bring like-minded people into contact with each other, based on shared interests. In our own environment and also outside your current network.',
 
     'for_who_title' => 'For who?',
     'for_who_content' => '<u>For you as an individual, as an informal caregiver and as a volunteer</u></br>
@@ -38,13 +38,13 @@ return [
         Targeting more interaction. By sharing your activities: more awareness and involvement.',
 
     'what_we_offer_title' => 'What do we offer?',
-    'what_we_offer_content' => 'Yadu is what you call a "societal challenge"</br>
-        A service with which an organization / company / individual can do something for society and also benefits from it. So the knife cuts both ways.',
+    'what_we_offer_content' => 'Yadu is what you call a \'societal challenge\'</br>
+        A service with which an organization / company / individual can do something for society and also benefits from it. The knife cuts both ways.',
 
     'what_we_think_we_offer_title' => 'What do we think we offer?',
     'what_we_think_we_offer_content' => '
         <ol>
-            <li>Internal: Cut back on recruitment costs and "care" costs (happy & healthy people)</li>
+            <li>Internal: Cut back on recruitment costs and \'care\' costs (happy & healthy people)</li>
             <li>Social return on investment: Happy users and measurable increases in contacts and contact moments</li>
         </ol>
 

@@ -9,14 +9,14 @@ return [
     */
 
     'our_story_title' => 'Our Story',
-    'our_story_content' => 'Yadu is ontwikkeld met als doel...',
+    'our_story_content' => 'Yadu started with this goal in mind...',
 
-    'why_title' => 'Waarom?',
-    'why_content' => 'Samen vaker leuke dingen doen, geeft energie.</br>
-        Yadu is gebouwd om vaker spontaan leuke dingen te kunnen doen, met bekenden en onbekenden in onze eigen omgeving!</br>
-        Een gloednieuwe facilitaire online dienst voor het maken van echt contact, bedoelt als online sleutel naar offline contact.',
+    'why_title' => 'Why?',
+    'why_content' => 'Doing things together, gives us engery.</br>
+        Yadu was build to let us do spontaneous fun things more often. With people you know or with complete strangers in our own area!</br>
+        A brand new online service to make real contact, meant as an online key for offline contact.',
 
-    'how_title' => 'Hoe?',
+    'how_title' => 'How?',
     'how_content' => 'Via de Yadu website & app brengen wij gelijkgestemden in contact met elkaar op basis van gedeelde interesses.</br>
         Deze interesses zijn het uitgangspunt voor activiteiten om Yadu leden echt te ‘verbinden’!</br>
         Zelf kun je eenvoudig een activiteit aanmaken en je buren, vrienden of je collega’s uitnodigen en meedoen aan het initiatief van anderen.',

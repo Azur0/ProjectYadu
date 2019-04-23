@@ -27,14 +27,23 @@
 
     <!-- Nav Item - Pages -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+            aria-controls="collapsePages">
             <i class="fas fa-fw fa-cog"></i>
             <span>Pagina's</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Beheren:</h6>
-                <a class="collapse-item" href="{{ url('admin')  }}">Placeholder link</a>
+                <?php
+                    $pages = array_map('basename',  glob(base_path().'/resources/lang/nl/*.php*'));
+                ?>
+                @foreach ($pages as $page)
+                <?php
+                    $pageBasename = basename($page, '.php');
+                ?>
+                <a class="collapse-item" href="{{ url('edit/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
+                @endforeach
             </div>
         </div>
     </li>
@@ -49,7 +58,8 @@
 
     <!-- Nav Item - Users -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true"
+            aria-controls="collapseUsers">
             <i class="fas fa-fw fa-users"></i>
             <span>Gebruikers</span>
         </a>
@@ -63,7 +73,8 @@
 
     <!-- Nav Item - Events -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEvents" aria-expanded="true" aria-controls="collapseEvents">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEvents" aria-expanded="true"
+            aria-controls="collapseEvents">
             <i class="fas fa-fw fa-users"></i>
             <span>Evenementen</span>
         </a>

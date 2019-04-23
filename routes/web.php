@@ -30,6 +30,8 @@ Route::get('/contact', function () {
 Route::get('/about', function () { return view('about'); });
 Route::get('/contact', function () { return view('contact'); });
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/edit/{page}', 'EditLangController@index');
+Route::post('admin', 'EditLangController@saveFile');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
 Route::get('/location','API\LocationController@isWithinReach');
 Route::get('events/{id}/join', 'EventsController@join');

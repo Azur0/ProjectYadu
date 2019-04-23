@@ -189,7 +189,7 @@
                         });
                 },
                 listen() {
-                    Echo.channel('event.'+this.event.id)
+                    Echo.private('event.'+this.event.id)
                         .listen('NewMessage', (message) => {
                             this.messages.push(message)
                         })

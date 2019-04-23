@@ -48,7 +48,7 @@ return [
             <li>2. Social return on investment: Happy users and measurable increases in contacts and contact moments/li>
         </ol>
 
-        The impression of the atmosphere on YouTube: <a href="https://www.youtube.com/watch?v=sjjJoRQ_tWE"></a>',
+        The <a href="https://www.youtube.com/watch?v=sjjJoRQ_tWE">impression of the atmosphere</a> on YouTube',
 
     'four_pillars_title' => 'The four Yadu pillars:',
     'four_pillars_content' => 'Sustainable employability, the individual, participation and vitality.',

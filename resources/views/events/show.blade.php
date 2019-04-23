@@ -82,8 +82,8 @@
         </div>
     </div>
 
+    @if(Auth::check() && !empty($event->participants()->where('account_id', Auth::id())->first()))
     <!-- BEGIN CHAT TEMPLATE -->
-
     <div id="app" class="message-container clearfix" v-if="account">
         <div class="people-list" id="people-list">
             <div class="search">
@@ -147,9 +147,10 @@
     <!-- end container -->
 
     <!-- END CHAT TEMPLATE -->
+    @endif
 
 @endsection
-
+@if(Auth::check() && !empty($event->participants()->where('account_id', Auth::id())->first()))
 @section('scripts')
     <script>
 
@@ -197,5 +198,15 @@
             }
         });
 
+        // Disable newline on enter(except when holding shift)
+        $('textarea').keydown(function(e){
+            if (e.keyCode == 13 && !e.shiftKey)
+            {
+                // prevent default behavior
+                e.preventDefault();
+            }
+        });
+
     </script>
 @endsection
+@endif

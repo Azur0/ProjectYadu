@@ -7,13 +7,15 @@
                 <h1>{{$event->eventName}}</h1><br>
                 <img class="img-fluid w-100 rounded event_img mb-3"
                      src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->picture)}}"/><br>
-                <h3>Wanneer?</h3>
+                <h3>{{__('events.show_date')}}</h3>
                 @php($timestamp = strtotime($event->startDate))
+                {{-- TODO: This currently cant be translated --}}
+                {{-- TODO: Controller logic in view --}}
                 <h5 class="mb-5">{{\App\Http\Controllers\DateTimeController::getDayNames(date("w", $timestamp))}} {{date("d-m-Y", $timestamp)}}
                     om {{date("H:i", $timestamp)}}</h5>
             </div>
 
-            <h3>Initiatiefnemer</h3>
+            <h3>{{__('events.show_initiator')}}</h3>
             <div class="row my-1">
                 <img class="img-fluid rounded-circle my-auto avatar"
                      src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}"/>
@@ -22,20 +24,20 @@
             <br><br>
 
             <div class="row">
-                <h3>Wie gaan er mee?</h3>
+                <h3>{{__('events.show_attendees')}}</h3>
                 @if(Auth::check())
                     @if($event->owner->id != auth()->user()->id)
                         @if($event->participants->contains(auth()->user()->id))
                             <a href="/events/{{$event->id}}/leave"
-                               class="btn btn-danger btn-sm my-auto mx-2">Afmelden</a>
+                               class="btn btn-danger btn-sm my-auto mx-2">{{__('events.show_leave')}}</a>
                         @elseif($event->participants->count() < $event->numberOfPeople)
                             <a href="/events/{{$event->id}}/join"
-                               class="btn btn-success btn-sm my-auto mx-2">Aanmelden</a>
+                               class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
                         @endif
                     @endif
                 @endif
             </div>
-            <p class="text-md-right">{{$event->participants->count()}} deelnemers van de {{$event->numberOfPeople}}</p>
+            <p class="text-md-right">{{__('events.show_number_of_attendees', ['amount' => $event->participants->count(), 'max' => $event->numberOfPeople])}}</p>
             <div class="progress">
                 <div class="progress-bar" role="progressbar"
                      style="width: {{$event->participants->count() / $event->numberOfPeople * 100}}%" aria-valuemin="0"
@@ -51,7 +53,7 @@
         </div>
         <div class="col-md-6">
             {{--TODO: Add map API--}}
-            <h3>Waar?</h3>
+            <h3>{{__('events.show_location')}}</h3>
             <h5>{{$event->location()->first()->postalcode}} {{$event->location()->first()->houseNumber}}{{$event->location()->first()->houseNumberAddition}}</h5>
             <div id="map" class="rounded event_map"></div>
             <script>
@@ -76,7 +78,7 @@
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap"
                     async defer></script>
             <div class="mb-5">
-                <h3>Beschrijving</h3>
+                <h3>{{__('events.show_description')}}</h3>
                 <p>{{$event->description}}</p>
             </div>
         </div>

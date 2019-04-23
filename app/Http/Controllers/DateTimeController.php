@@ -8,28 +8,27 @@ class DateTimeController extends Controller
 {
     public static function getDayNames($dayNumber)
     {
-        //TODO: Change to lang files
         switch ($dayNumber) {
             case 1:
-                return "Maandag";
+                return __('global.days_monday');
                 break;
             case 2:
-                return "Dinsdag";
+                return __('global.days_tuesday');
                 break;
             case 3:
-                return "Woensdag";
+                return __('global.days_wednesday');
                 break;
             case 4:
-                return "Donderdag";
+                return __('global.days_thursday');
                 break;
             case 5:
-                return "Vrijdag";
+                return __('global.days_friday');
                 break;
             case 6:
-                return "Zaterdag";
+                return __('global.days_saturday');
                 break;
             case 7:
-                return "Zondag";
+                return __('global.days_sunday');
                 break;
         }
     }

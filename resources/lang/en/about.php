@@ -45,7 +45,7 @@ return [
     'what_we_think_we_offer_content' => '
         <ol>
             <li>Internal: Cut back on recruitment costs and "care" costs (happy & healthy people)</li>
-            <li>2. Social return on investment: Happy users and measurable increases in contacts and contact moments/li>
+            <li>Social return on investment: Happy users and measurable increases in contacts and contact moments/li>
         </ol>
 
         The <a href="https://www.youtube.com/watch?v=sjjJoRQ_tWE">impression of the atmosphere</a> on YouTube',

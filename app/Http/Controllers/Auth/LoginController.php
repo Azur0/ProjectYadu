@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Account;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -38,4 +39,13 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    // redirect user to previous page after logging in.
+    public function showLoginForm()
+    {
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
+        return view('auth.login');
+    }
 }

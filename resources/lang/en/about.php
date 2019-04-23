@@ -12,9 +12,9 @@ return [
     'our_story_content' => 'Yadu started with this goal in mind...',
 
     'why_title' => 'Why?',
-    'why_content' => 'Doing things together, gives us engery.</br>
-        Yadu was build to let us do spontaneous fun things more often. With people you know or with complete strangers in our own area!</br>
-        A brand new online service to make real contact, meant as an online key for offline contact.',
+    'why_content' => 'Doing things together, gives us energy.</br>
+        Yadu was build to let us do spontaneous and fun things more often with people you know or with complete strangers in your area!</br>
+        A brand new online service to make real contacts, meant to be the online key to offline contacts.',
 
     'how_title' => 'How?',
     'how_content' => 'Via de Yadu website & app brengen wij gelijkgestemden in contact met elkaar op basis van gedeelde interesses.</br>

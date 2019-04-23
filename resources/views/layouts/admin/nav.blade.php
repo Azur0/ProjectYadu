@@ -34,7 +34,7 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Beheren:</h6>
+                <h6 class="collapse-header">Nederlands:</h6>
                 <?php
                     $pages = array_map('basename',  glob(base_path().'/resources/lang/nl/*.php*'));
                 ?>
@@ -42,7 +42,18 @@
                 <?php
                     $pageBasename = basename($page, '.php');
                 ?>
-                <a class="collapse-item" href="{{ url('edit/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
+                <a class="collapse-item" href="{{ url('edit/nl/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
+                @endforeach
+                
+                <h6 class="collapse-header">Engels:</h6>
+                <?php
+                    $pages = array_map('basename',  glob(base_path().'/resources/lang/en/*.php*'));
+                ?>
+                @foreach ($pages as $page)
+                <?php
+                    $pageBasename = basename($page, '.php');
+                ?>
+                <a class="collapse-item" href="{{ url('edit/en/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
                 @endforeach
             </div>
         </div>

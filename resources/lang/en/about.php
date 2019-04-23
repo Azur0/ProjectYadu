@@ -34,7 +34,7 @@ return [
         <u>For organizations:</u></br>
         Connections bring growth and strengthen the mission of socially involved entrepreneurs.</br>
         </br>
-        <u>Voor SMEs/Freelancer:</u></br>
+        <u>For SMEs/Freelancer:</u></br>
         Targeting more interaction. By sharing your activities: more awareness and involvement.',
 
     'what_we_offer_title' => 'What do we offer?',

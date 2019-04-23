@@ -10,8 +10,8 @@ return [
 
     'contact_title' => 'Contact',
 
-    'contact_us_title' => 'Neem contact met ons op',
-    'contact_us_content' => 'Heeft u vragen? Neem dan vooral contact met ons op',
+    'contact_us_title' => 'Contact us',
+    'contact_us_content' => 'If you have any questions, please do not hesitate to contact us.',
 
     'email' => 'EMAIL',
     'kvk' => 'KvK',

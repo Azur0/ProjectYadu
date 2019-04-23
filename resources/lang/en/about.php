@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'our_story_title' => 'Ons verhaal',
+    'our_story_title' => 'Our Story',
     'our_story_content' => 'Yadu is ontwikkeld met als doel...',
 
     'why_title' => 'Waarom?',

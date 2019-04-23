@@ -38,7 +38,7 @@ return [
     'create_step3' => 'Kies de (verzamel)locatie',
     'create_step4' => 'Kies de datum en tijd',
     'create_step5' => 'Beschrijf je uitje',
-    'create_step6' => 'Beschrijf je uitje',
+    'create_step6' => 'Aantal personen',
 
     'create_submit' => 'Verzenden',
     'create_title' => 'Titel',

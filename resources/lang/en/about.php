@@ -60,6 +60,6 @@ return [
     'sustainability_title' => 'Sustainability',
     'sustainability_content' => '<b>To keep the service sustainable and somewhat affordable, we are looking for organizations to make our service accessible to a larger audience.</b></br>
         </br>
-        We have registered 'Voordewereldvanmorgen'. So that everyone who feels involved in our mission: "promoting the value of real life contacts" can support. Do you want to know more about how Yadu can connect with our commitment? Please contact us: info@yadu.nu.',
+        We have registered \'Voordewereldvanmorgen\'. So that everyone who feels involved in our mission: "promoting the value of real life contacts" can support. Do you want to know more about how Yadu can connect with our commitment? Please contact us: info@yadu.nu.',
 ];
 

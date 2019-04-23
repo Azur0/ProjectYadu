@@ -18,32 +18,32 @@ return [
 
     ///////////////////////////////// Login ///////////////////////////////////
 
-    'login_login_title' => 'Inloggen',
-    'login_email' => 'E-Mailadres',
-    'login_password' => 'Wachtwoord',
-    'login_remember_me' => 'Ingelogd blijven',
-    'login_login' => 'Inloggen',
-    'login_forgot_password' => 'Wachtwoord vergeten?',
-    'login_register_new_account' => 'Nog geen account? Registreer <a href=":url">hier</a>.',
+    'login_login_title' => 'Login',
+    'login_email' => 'E-mail adress',
+    'login_password' => 'Password',
+    'login_remember_me' => 'Stay logged in',
+    'login_login' => 'Login',
+    'login_forgot_password' => 'Forgot your password?',
+    'login_register_new_account' => 'Don/'t' have an account yet? Sign up <a href=":url">here</a>.',
 
     ///////////////////////////////// Register ////////////////////////////////
 
-    'register_register_title' => 'Registreren',
-    'register_firstname' => 'Voornaam',
-    'register_middlename' => 'Tussenvoegsel',
-    'register_lastname' => 'Achternaam',
-    'register_gender' => 'Geslacht',
-    'register_birthday' => 'Geboortedatum',
-    'register_email' => 'E-Mailadres',
-    'register_password' => 'Wachtwoord',
-    'register_confirm_password' => 'Bevestig wachtwoord',
-    'register_register' => 'Registreren',
-    'register_already_registered' => 'Heb je al een account? Login <a href=":url">hier</a>.',
+    'register_register_title' => 'Sign up',
+    'register_firstname' => 'First name',
+    'register_middlename' => 'Middle name',
+    'register_lastname' => 'Last name',
+    'register_gender' => 'Gender',
+    'register_birthday' => 'Date of birth',
+    'register_email' => 'E-mail adress',
+    'register_password' => 'Password',
+    'register_confirm_password' => 'Confirm password',
+    'register_register' => 'Sign up',
+    'register_already_registered' => 'Already have an account? Login <a href=":url">here</a>.',
 
     ///////////////////////////////// Reset //////////////////////////////////
 
-    'reset_reset_title' => 'Wachtwoord herstellen',
-    'reset_email' => 'E-Mailadres',
-    'reset_reset' => 'Verstuur herstel link',
+    'reset_reset_title' => 'Reset password',
+    'reset_email' => 'E-mail adress',
+    'reset_reset' => 'Send reset link',
 
 ];

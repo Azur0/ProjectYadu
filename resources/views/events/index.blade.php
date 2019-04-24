@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     <div class="slideContainer">
         <div style="width:90%; margin:auto;">
             <div class="box-range-value" id="box-move-with-distance">
@@ -26,7 +25,7 @@
             <input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag"/>
             <datalist id="tags">
                 @foreach ($tags as $tag)
-                    <option value="{{$tag}}">
+                    <option value="{{__('events.cat'.$tag->id)}}">
                 @endforeach
             </datalist>
             <label for="filterByName">{{__('events.index_search_name')}}</label>

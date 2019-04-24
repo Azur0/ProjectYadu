@@ -7,7 +7,7 @@ return [
     | About Language Lines
     |--------------------------------------------------------------------------
     */
-
+    'title' => 'Over Yadu',
     'our_story_title' => 'Ons verhaal',
     'our_story_content' => 'Yadu is ontwikkeld met als doel...',
 

@@ -8,6 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
+    'title' => 'About Yadu',
     'our_story_title' => 'Our Story',
     'our_story_content' => 'Yadu started with this goal in mind...',
 

@@ -43,6 +43,6 @@ class matchesDatabasePassword implements Rule
      */
     public function message()
     {
-        return 'Incorrect password';
+        return __('auth.failed');
     }
 }

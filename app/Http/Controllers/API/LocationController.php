@@ -63,6 +63,8 @@ class LocationController extends Controller
 
     public function areWithinReach($events, $distance)
     {
+        //TODO:4 Until the moment that Yadu gives us the API keys this will be default mode for the distance filter return
+        return $events;
         if ($distance == 25) {
             return $events;
         }

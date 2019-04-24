@@ -27,9 +27,9 @@ class CreateAccountsTable extends Migration
             $table->string('gender', 15)->nullable();
             $table->string('email');
             $table->string('password');
-            $table->string('firstName', 45);
-            $table->string('middleName', 45)->nullable();
-            $table->string('lastName', 45)->nullable();
+            $table->string('firstName', 255);
+            $table->string('middleName', 255)->nullable();
+            $table->string('lastName', 255)->nullable();
             $table->date('dateOfBirth')->nullable();
             $table->binary('avatar')->nullable()->default(null);
             $table->tinyInteger('doForcePasswordChange')->default('0');

@@ -51,6 +51,6 @@ class emailUniqueExceptSelf implements Rule
      */
     public function message()
     {
-        return 'This email address is already in use';
+        return __('validation.unique');
     }
 }

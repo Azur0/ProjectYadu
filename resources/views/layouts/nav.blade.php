@@ -8,7 +8,7 @@
         <a class="navbar-brand d-none d-lg-inline-block" href="/">
             <img src={{ asset('images/logoCircle.png')}} width="57" alt="logo">
         </a>
-        <p class="navbar-brand d-none d-lg-inline-block logo-text nav-item">VIND WAT JE BINDT!</p>
+        <p class="navbar-brand d-none d-lg-inline-block logo-text nav-item">{{__('navigation.nav_motto')}}</p>
         <!-- Mobile logo -->
         <a class="navbar-brand-two mx-auto d-lg-none d-inline-block logo" href="/">
             <img src={{ asset('images/logoCircle.png')}} width="60" alt="logo">
@@ -17,37 +17,31 @@
     <div class="collapse navbar-collapse flex-grow-1 text-left" id="myNavbar">
         <ul class="navbar-nav ml-auto flex-nowrap">
             <li>
-                <a href="/" class="nav-link m-2 nav-item {{ request()->is('/') ? 'active' : '' }}">HOME</a>
+                <a href="/" class="nav-link m-2 nav-item {{ request()->is('/') ? 'active' : '' }}">{{__('navigation.nav_home')}}</a>
             </li>
             <li>
                 <a href="/events"
-                   class="nav-link m-2 nav-item {{ request()->is('events') ? 'active' : (request()->is('events/*') ? 'active' : '') }}">EVENEMENTEN</a>
+                   class="nav-link m-2 nav-item {{ request()->is('events') ? 'active' : (request()->is('events/*') ? 'active' : '') }}">{{__('navigation.nav_events')}}</a>
             </li>
             <li>
-                <a href="/about" class="nav-link m-2 nav-item {{ request()->is('about') ? 'active' : '' }}">OVER ONS</a>
+                <a href="/about" class="nav-link m-2 nav-item {{ request()->is('about') ? 'active' : '' }}">{{__('navigation.nav_about')}}</a>
             </li>
             <li>
                 <a href="/contact"
-                   class="nav-link m-2 nav-item {{ request()->is('contact') ? 'active' : '' }}">CONTACT</a>
+                   class="nav-link m-2 nav-item {{ request()->is('contact') ? 'active' : '' }}">{{__('navigation.nav_contact')}}</a>
             </li>
 
             @if(Auth::user())
-                <form method="POST" action="/profile/edit">
-                    @csrf
-                    <input type="hidden" id="userId" name="userId" value="{{Auth::id()}}">
-                    <input type="submit" id="submit-form" class="hidden" />
-                </form>
                 <li>
-                    {{--<a href="{{link_to('ProfileController@edit', $userId = Auth::id())}}" class="nav-link m-2 nav-item">Profiel</a>--}}
-                    <label class="nav-link m-2 nav-item" for="submit-form" tabindex="0">PROFILE</label>
+                    <a href="/profile/edit" class="nav-link m-2 nav-item">{{__('navigation.nav_profile')}}</a>
                 </li>
                 <li>
-                    <a href="/logout" class="nav-link m-2 nav-item">UITLOGGEN</a>
+                    <a href="/logout" class="nav-link m-2 nav-item">{{__('navigation.nav_logout')}}</a>
                 </li>
             @else
                 <li>
                     <a href="/login"
-                       class="nav-link m-2 nav-item {{ request()->is('login') ? 'active' : '' }}">INLOGGEN</a>
+                       class="nav-link m-2 nav-item {{ request()->is('login') ? 'active' : '' }}">{{__('navigation.nav_login')}}</a>
                 </li>
             @endif
         </ul>

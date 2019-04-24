@@ -31,6 +31,12 @@ class EventsController extends Controller
         return view('events.index', compact(['tags', 'names']));
     }
 
+    public function welcome()
+    {
+        $events = Event::all();
+        return view('welcome', compact('events'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

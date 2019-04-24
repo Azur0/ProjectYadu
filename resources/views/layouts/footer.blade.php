@@ -7,19 +7,19 @@
             <div class="col-sm">
                 <ul class="list-unstyled">
                    <li class="nav-link-footer">
-                     <a href="/about">OVER YADU</a>
+                     <a href="/about">{{__('navigation.footer_about')}}</a>
                    </li>
                    <li class="nav-link-footer">
-                     <a href="/contact">CONTACT</a>
+                     <a href="/contact">{{__('navigation.footer_contact')}}</a>
                    </li>
                    <li class="nav-link-footer">
-                     <a href="/terms-and-conditions">VOORWAARDEN</a>
+                     <a href="/terms-and-conditions">{{__('navigation.footer_tos')}}</a>
                    </li>
                    <li class="nav-link-footer">
-                     <a href="/cookies">COOKIES</a>
+                     <a href="/cookies">{{__('navigation.footer_cookies')}}</a>
                    </li>
                    <li class="nav-link-footer">
-                     <a href="/privacy">PRIVACY</a>
+                     <a href="/privacy">{{__('navigation.footer_privacy')}}</a>
                    </li>
                  </ul>
             </div>

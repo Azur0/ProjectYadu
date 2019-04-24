@@ -118,3 +118,9 @@
 		margin-bottom: 50px;
 	}
 }
+
+.greyified
+{
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+}

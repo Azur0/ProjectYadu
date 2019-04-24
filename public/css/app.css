@@ -10749,3 +10749,8 @@ a.text-dark:focus {
   }
 }
 
+.greyified {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+

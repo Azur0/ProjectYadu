@@ -55,8 +55,12 @@
 			<?php $plus = 0; ?>
 			@foreach($regular_events as $event)
 				<div class='col-md-6 col-lg-4 event'>
-					<a href='/events/{{$event->id}}'>
+					<a href='/events/{{ $event->id }}'>
+						@if( $event->status == 'Created' || $event->status == 'Ongoing')
 						<div class='card mb-4 box-shadow'>
+						@else
+						<div class='card mb-4 box-shadow greyified'>
+						@endif
 							<img class = 'card-img-top' src="data:image/png;base64,{{ chunk_split(base64_encode($event->eventPicture->picture)) }}" alt = 'Card image cap'>
 							<div class = 'event_info' > 
 								<h3>{{ str_limit($event->eventName, $limit = 25, $end = '...') }}</h3>

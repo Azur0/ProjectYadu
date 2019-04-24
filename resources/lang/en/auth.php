@@ -24,7 +24,7 @@ return [
     'login_remember_me' => 'Stay logged in',
     'login_login' => 'Login',
     'login_forgot_password' => 'Forgot your password?',
-    'login_register_new_account' => 'Don/'t' have an account yet? Sign up <a href=":url">here</a>.',
+    'login_register_new_account' => 'Don\'t have an account yet? Sign up <a href=":url">here</a>.',
 
     ///////////////////////////////// Register ////////////////////////////////
 

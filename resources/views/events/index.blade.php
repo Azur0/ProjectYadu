@@ -90,7 +90,7 @@
                         $('#eventsToDisplay').html(
                             //TODO remove inline style
                             //TODO TRANSLATION
-                            "<div style='text-align:center; width:100%; padding-top:50px;'><h1>Er kan geen event worden gevonden in uw buurt.</h1><div>"
+                            "<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_no_event_found')}}</h1><div>"
                         );
                     } else {
                         $('#eventsToDisplay').html("");
@@ -110,7 +110,7 @@
                 error: function (jqXHR, textStatus, errorThrown) {
                     $('#eventsToDisplay').html(
                         //TODO TRANSLATION
-                        "<div style='text-align:center; width:100%; padding-top:50px;'><h1>Er kan geen event worden geladen.</h1><div>"
+                        "<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_loading_error')}}</h1><div>"
                     );
                 }
             })

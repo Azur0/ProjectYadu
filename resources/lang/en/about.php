@@ -17,49 +17,49 @@ return [
         A brand new online service to make real contacts, meant to be the online key to offline contacts.',
 
     'how_title' => 'How?',
-    'how_content' => 'Via de Yadu website & app brengen wij gelijkgestemden in contact met elkaar op basis van gedeelde interesses.</br>
-        Deze interesses zijn het uitgangspunt voor activiteiten om Yadu leden echt te ‘verbinden’!</br>
-        Zelf kun je eenvoudig een activiteit aanmaken en je buren, vrienden of je collega’s uitnodigen en meedoen aan het initiatief van anderen.',
+    'how_content' => 'Through our website and app we bring like-minded people together based on shared interests.</br>
+        These interests are the starting point for activities to really \'connect\' Yadu members!</br>
+        You can easily create your own activity and invite your neighbors, friends or colleagues and you can participate in the activities of others.',
 
-    'why_now_title' => 'Waarom NU?',
-    'why_now_content' => 'De groeiende behoefte van ieder mens aan zingeving en de toenemende behoefte aan echt contact is het fundament waarop Yadu het positieve verschil maakt.',
+    'why_now_title' => 'Why NOW?',
+    'why_now_content' => 'The growing need for real contact is the foundation on which Yadu makes a positive difference.',
 
-    'how_does_it_work_title' => 'Hoe werkt Yadu?',
-    'how_does_it_work_content' => 'Door leuke en leerzame “uitjes” te faciliteren op ons platform brengen wij gelijkgestemden in contact met elkaar, op basis van gedeelde interesses. In onze eigen omgeving en ook buiten je huidige netwerk om.',
+    'how_does_it_work_title' => 'How does it work?',
+    'how_does_it_work_content' => 'By facilitating fun and educational \'events\' on our platform, we bring like-minded people into contact with each other, based on shared interests. In our own environment and also outside your current network.',
 
-    'for_who_title' => 'Voor wie?',
-    'for_who_content' => '<u>Voor jou als individu, als mantelzorger en als vrijwilliger:</u></br>
-        Voor meer gezelligheid en efficiënt gebruik van je kostbare tijd.</br>
+    'for_who_title' => 'For who?',
+    'for_who_content' => '<u>For you as an individual, as an informal caregiver and as a volunteer</u></br>
+        For more fun and an efficient use of your valuable time</br>
         </br>
-        <u>Voor Organisaties:</u></br>
-        Verbindingen brengen groei en versterken de missie van maatschappelijk betrokken ondernemers.</br>
+        <u>For organizations:</u></br>
+        Connections bring growth and strengthen the mission of socially involved entrepreneurs.</br>
         </br>
-        <u>Voor MKB/ZZP:</u></br>
-        Doelgericht meer interactie. Door het delen van je activiteiten: meer bekendheid en betrokkenheid.',
+        <u>For SMEs/Freelancer:</u></br>
+        Targeting more interaction. By sharing your activities: more awareness and involvement.',
 
-    'what_we_offer_title' => 'Wat brengt Yadu?',
-    'what_we_offer_content' => 'Yadu is wat je noemt een ‘societal challenge’:</br>
-        Een dienst waarmee een organisatie/bedrijf/individu, iets voor de maatschappij kan doen èn er zelf ook voordeel bij heeft. Het mes snijdt dus aan twee kanten.',
+    'what_we_offer_title' => 'What do we offer?',
+    'what_we_offer_content' => 'Yadu is what you call a \'societal challenge\'</br>
+        A service with which an organization / company / individual can do something for society and also benefits from it. The knife cuts both ways.',
 
-    'what_we_think_we_offer_title' => 'Wat denken wij te brengen?',
+    'what_we_think_we_offer_title' => 'What do we think we offer?',
     'what_we_think_we_offer_content' => '
         <ol>
-            <li>Intern: Bezuinigen op wervingskosten en “zorg” kosten ( happy&healthy people)</li>
-            <li>Social return on investment: Blije gebruikers en meetbare toename contacten/contactmomenten</li>
+            <li>Internal: Cut back on recruitment costs and \'care\' costs (happy & healthy people)</li>
+            <li>Social return on investment: Happy users and measurable increases in contacts and contact moments</li>
         </ol>
 
-        Op YouTube de <a href="https://www.youtube.com/watch?v=sjjJoRQ_tWE">sfeerimpressie</a>',
+        The <a href="https://www.youtube.com/watch?v=sjjJoRQ_tWE">impression of the atmosphere</a> on YouTube',
 
-    'four_pillars_title' => 'De vier Yadu pijlers',
-    'four_pillars_content' => 'Duurzaam inzetbaarheid, de individu, participatie en vitaliteit.',
+    'four_pillars_title' => 'The four Yadu pillars',
+    'four_pillars_content' => 'Sustainable employability, the individual, participation and vitality.',
 
-    'social_enterprise_title' => 'Yadu staat in de startblokken als Social Enterprise:',
-    'social_enterprise_content' => 'Nu moeten er een aantal dingen gebeuren. Wij zoeken de juiste mix om de Yadu (community) te valoriseren.</br>
-        Dit willen wij doen met een (klein) team (aankomende) professionals.',
+    'social_enterprise_title' => 'Yadu is in the starting blocks as Social Enterprise',
+    'social_enterprise_content' => 'Now a number of things must happen. We are looking for the right mix to valorize the Yadu (community).</br>
+        We want to do this with a (small) team of (future) professionals.',
 
-    'sustainability_title' => 'Duurzaamheid',
-    'sustainability_content' => '<b>Om de dienst duurzaam en enigszins betaalbaar te houden zoeken wij organisaties om samen onze dienst voor een groter publiek toegankelijk te maken.</b></br>
+    'sustainability_title' => 'Sustainability',
+    'sustainability_content' => '<b>To keep the service sustainable and somewhat affordable, we are looking for organizations to make our service accessible to a larger audience.</b></br>
         </br>
-        Wij hebben ons ingeschreven \'Voordewereldvanmorgen\'. Zodat iedereen die zich betrokken voelt bij onze missie: “de waarde van real life contacten bevorderen” kan ondersteunen.',
+        We have registered \'Voordewereldvanmorgen\'. So that everyone who feels involved in our mission: \'promoting the value of real life contacts\' can support. Do you want to know more about how Yadu can connect with our commitment? Please contact us: info@yadu.nu.',
 ];
 

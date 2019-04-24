@@ -93,6 +93,7 @@ function fetch_events() {
             } else {
                 $('#eventsToDisplay').html("");
                 data.forEach(function(element) {
+                    
                     $('#eventsToDisplay').html($("#eventsToDisplay").html() +
                         "<div class='col-md-6 col-lg-4 event'><a href='/events/" + element[
                             'id'] +

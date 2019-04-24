@@ -7,9 +7,39 @@
 @csrf
 <input type="hidden" name="file" value="{{$page}}">
 <input type="hidden" name="lang" value="{{$lang}}">
+
+<?php
+function isObjectArray($key, $item){
+    printTitle($key);
+    foreach($item as $key => $singleItem){
+        if (is_array($singleItem)){
+            isObjectArray($key, $singleItem);
+        }
+        else {
+            printInputFields($key, $singleItem);
+        }
+    }
+}
+
+function printTitle($key){
+    echo "<p><strong>$key</strong></p>";
+}
+
+function printInputFields($key, $item){
+    echo "<p> - $key - <input type='text' name='$key' id='EditInput' value='$item'></p>";
+}
+
+?>
+
 @foreach ($x as $key => $item)
-<p>{{$key}} - <input type="text" name="{{$key}}" id="EditInput" value="{{$item}}"></p>
+    @if (!is_array($item))
+        <p>{{$key}} - <input type="text" name="{{$key}}" id="EditInput" value="{{$item}}"></p>
+    @else
+        <?php isObjectArray($key, $item) ?>
+    @endif
+    
 @endforeach
+
 <input type="submit" value="submit">
 </form>
 

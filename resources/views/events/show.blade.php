@@ -148,7 +148,15 @@
 @section('scripts')
     <script>
 
-        const app = new Vue({
+        let warning = document.createElement("strong");
+        warning.style.color = "red";
+        warning.innerHTML = "Swearword detected!";
+
+        function insertAfter(referenceNode, newNode) {
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        }
+
+            const app = new Vue({
             el: '#app',
             data: {
                 messages: {},
@@ -178,9 +186,10 @@
                         .then((response) => {
                             this.messages.push(response.data);
                             this.messageBox = '';
+                            warning.remove();
                         })
                         .catch(function (error) {
-                            console.log(error);
+                            insertAfter(document.getElementById("message-to-send"), warning);
                         });
                 },
                 listen() {

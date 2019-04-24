@@ -7,6 +7,7 @@ use App\Events\NewMessage;
 use App\Event;
 use App\Message;
 use Auth;
+use App\Rules\swearWords;
 
 class MessageController extends Controller
 {
@@ -17,6 +18,11 @@ class MessageController extends Controller
     }
 
     public function store(Request $request, Event $event) {
+
+        $this->validate($request, [
+            'body' => [new swearWords]
+        ]);
+
         $message = $event->messages()->create([
            'body' => $request->body,
             'user_id' => Auth::id()

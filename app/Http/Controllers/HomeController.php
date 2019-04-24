@@ -30,7 +30,6 @@ class HomeController extends Controller
         $participation = array();        
         $part = EventHasParticipants::get()->where('account_id', '==', auth()->user()->id);
 
-
         foreach($part as $par)
 		{
 			$event = Event::find($par->event_id);

@@ -72,15 +72,14 @@ class AccountController extends Controller
 
         $account->save();
 
-        //TODO: Redirect to success page!
-        return redirect('/');
+        return redirect('/profile/edit');
     }
 
     public function updateProfile(EditProfileRequest $request)
     {
 	    $validated = $request->validated();
 
-	    $account = Account::where('id', $request->accountId)->firstOrFail();
+	    $account = Account::where('id', Auth::id())->firstOrFail();
 
 	    if($validated['gender'] == "-"){
             $account->gender = null;
@@ -97,29 +96,28 @@ class AccountController extends Controller
 
         $account->save();
 
-        return redirect('/');
+        return redirect('/profile/edit');
     }
 
-    public function deleteAccount()
-    {
-        isAuthorized(request()->accountId);
 
-        DB::table('accounts')
-            ->where('id', Auth::user()->id)
-            ->update([
-                'email' => '',
-                'password' => '',
-                'firstName' => 'Deleted',
-                'middleName' => NULL,
-                'lastName' => NULL,
-                'avatar' => NULL,
-                'isDeleted' => 1,
-                'bio' => NULL,
-                'remember_token' => NULL,
-                'updated_at' => date("Y-m-d h:i:12")
-            ]);
+    public function deleteAccount(){
 
+	    $ID = Auth::user()->id;
         Auth::logout();
+
+        $account = Account::where('id', $ID)->firstOrFail();
+
+        $account->email = $ID;
+        $account->password = '';
+        $account->firstname = 'Deleted user';
+        $account->middlename = null;
+        $account->lastname = null;
+        $account->avatar = null;
+        $account->isDeleted = 1;
+        $account->bio = null;
+        $account->remember_token = null;
+
+        $account->save();
 
         return redirect('/');
     }

@@ -3,12 +3,13 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
+
             <div class="col-md-8">
                 <div class="backlink">
 					<a href="/home"><i class="fas fa-arrow-left"></i> Dashboard</a>
 				</div>
                 <div class="card">
-                    <div class="card-header">{{ __('Edit Profile') }}</div>
+                    <div class="card-header">{{__('profile.edit_edit_profile_title')}}</div>
 
                     <div class="card-body">
                         <form method="POST" action="/profile/updateProfile">
@@ -16,12 +17,14 @@
                             <input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
                             <div class="form-group row">
                                 <label for="firstName"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Firstname') }}*</label>
+                                       class="col-md-4 col-form-label text-md-right">{{__('profile.edit_firstname')}}
+                                    &nbsp;*</label>
 
                                 <div class="col-md-6">
                                     <input id="firstName" type="text"
                                            class="form-control{{ $errors->has('firstName') ? ' is-invalid' : '' }}"
-                                           placeholder="Firstname" name="firstName" value="{{$account->firstName}}"
+                                           placeholder="{{__('profile.edit_firstname')}}" name="firstName"
+                                           value="{{$account->firstName}}"
                                            required
                                            autofocus maxlength="45">
 
@@ -35,12 +38,13 @@
 
                             <div class="form-group row">
                                 <label for="middleName"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Middlename') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{__('profile.edit_middlename')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="middleName" type="text"
                                            class="form-control{{ $errors->has('middleName') ? ' is-invalid' : '' }}"
-                                           placeholder="Middlename" name="middleName" value="{{$account->middleName}}"
+                                           placeholder="{{__('profile.edit_middlename')}}" name="middleName"
+                                           value="{{$account->middleName}}"
                                            maxlength="45">
 
                                     @if ($errors->has('middleName'))
@@ -53,12 +57,13 @@
 
                             <div class="form-group row">
                                 <label for="lastName"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Lastname') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('profile.edit_lastname')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="lastName" type="text"
                                            class="form-control{{ $errors->has('lastName') ? ' is-invalid' : '' }}"
-                                           placeholder="Lastname" name="lastName" value="{{$account->lastName}}"
+                                           placeholder="{{ __('profile.edit_lastname')}}" name="lastName"
+                                           value="{{$account->lastName}}"
                                            maxlength="45">
 
                                     @if ($errors->has('lastName'))
@@ -71,7 +76,7 @@
 
                             <div class="form-group row">
                                 <label for="gender"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{__('profile.edit_gender')}}</label>
                                 <div class="col-md-6">
                                     <select name="gender" selected="{{$account->gender}}"
                                             class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
@@ -97,7 +102,7 @@
 
                             <div class="form-group row">
                                 <label for="dateOfBirth"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Date of Birth') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('profile.edit_birthday')}}</label>
 
                                 <div class="col-md-6">
                                     <input type="date" name="dateOfBirth" value="{{$account->dateOfBirth}}"
@@ -114,7 +119,7 @@
 
                             <div class="form-group row">
                                 <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}*</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('profile.edit_email')}}&nbsp;*</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -133,7 +138,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button id="submit" type="submit" class="btn btn-primary">
-                                        {{ __('Update Profile') }}
+                                        {{__('profile.edit_update_profile')}}
                                     </button>
                                 </div>
                             </div>
@@ -143,15 +148,13 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header">{{ __('Change password') }}</div>
+                    <div class="card-header">{{__('profile.edit_change_password_title')}}</div>
                     <div class="card-body">
                         <form method="POST" action="/profile/changePassword">
                             @csrf
-                            <input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
-
                             <div class="form-group row">
                                 <label for="currentPassword"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Current Password') }}
+                                       class="col-md-4 col-form-label text-md-right">{{__('profile.edit_current_password')}}
                                     *</label>
 
                                 <div class="col-md-6">
@@ -169,7 +172,7 @@
 
                             <div class="form-group row">
                                 <label for="newPassword"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('New Password') }}
+                                       class="col-md-4 col-form-label text-md-right">{{__('profile.edit_new_password')}}
                                     *</label>
 
                                 <div class="col-md-6">
@@ -187,7 +190,7 @@
 
                             <div class="form-group row">
                                 <label for="newPassword_confirmation"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Confirm New Password') }}
+                                       class="col-md-4 col-form-label text-md-right">{{__('profile.edit_confirm_new_password')}}
                                     *</label>
 
                                 <div class="col-md-6">
@@ -207,7 +210,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button id="submit" type="submit" class="btn btn-primary">
-                                        {{ __('Change password') }}
+                                        {{__('profile.edit_change_password')}}
                                     </button>
                                 </div>
                             </div>
@@ -216,21 +219,21 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header">{{ __('Delete account') }}</div>
+                    <div class="card-header">{{__('profile.edit_delete_account_title')}}</div>
                     <div class="card-body">
                         <form method="POST" id="deleteAccount" action="/profile/deleteAccount">
                             @csrf
-                            <input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
                             <div class="form-group row">
                                 <label for="currentPassword"
-                                       class="col-md-8 col-form-label text-md-left">Click here to delete your account.
-                                    <br><strong>This can not be undone!</strong>
+                                       class="col-md-8 col-form-label text-md-left">
+                                    {{__('profile.edit_delete_account_content')}}</br>
+                                    <strong>{{__('profile.edit_delete_account_cannot_be_undone')}}</strong>
                                 </label>
 
                                 <div class="col-md-4 mt-2">
                                     <button type="button" class="btn btn-danger float-right" data-toggle="modal"
                                             data-target="#confirmDeleteAccount">
-                                        {{ __('Delete account') }}
+                                        {{__('profile.edit_delete_account')}}
                                     </button>
                                 </div>
 
@@ -238,31 +241,29 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Confirm</h5>
+                                                <h5 class="modal-title">{{__('profile.edit_delete_account_confirm_title')}}</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                Are you sure you want to delete your account?
+                                                {{__('profile.edit_delete_account_confirm_content')}}
                                             </div>
                                             <div class="modal-footer">
                                                 <input type="submit" form="deleteAccount" class="btn btn-danger"
-                                                       value="Yes, Delete it">
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">No,
-                                                    Keep it!
+                                                       value="{{__('profile.edit_delete_account_positive')}}">
+                                                <button type="button" class="btn btn-primary"
+                                                        data-dismiss="modal">{{__('profile.edit_delete_account_negative')}}
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

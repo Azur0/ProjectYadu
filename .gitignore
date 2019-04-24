@@ -86,3 +86,5 @@ yarn-error.log
 app/Http/Controllers/Auth/RegisterControllerbackup.php
 .idea/inspectionProfiles/profiles_settings.xml
 public/images/test.jpg
+.idea/Source code.iml
+

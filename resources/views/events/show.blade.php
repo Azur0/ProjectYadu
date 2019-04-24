@@ -81,66 +81,67 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
     @if(Auth::check() && !empty($event->participants()->where('account_id', Auth::id())->first()))
-    <!-- BEGIN CHAT TEMPLATE -->
-    <div id="app" class="message-container clearfix" v-if="account">
+        <!-- BEGIN CHAT TEMPLATE -->
+            <div id="app" class="message-container clearfix" v-if="account">
 
-        <div class="chat">
-            <div class="chat-header clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+                <div class="chat">
+                    <div class="chat-header clearfix">
+                        <div class="chat-about">
+                            <h1 class="chat-with">Chat</h1>
+                        </div>
+                    </div>
+                    <!-- end chat-header -->
 
-                <div class="chat-about">
-                    <div class="chat-with">Eventnaam</div>
+                    <div id="chat" class="chat-history" v-chat-scroll>
+                        <ul>
+
+                            <li v-for="message in messages" v-bind:class="{'clearfix':(message.account.id !== {{ Auth::id() }})}">
+                                <div v-if="message.account.id === {{ Auth::id() }}">
+                                    <div class="message-data">
+                                        <span class="message-data-name"><i class="fa fa-circle online"></i> @{{  message.account.firstName + ' ' + message.account.lastName}}</span>
+                                        <span class="message-data-time">@{{ message.created_at }}</span>
+                                    </div>
+                                    <div class="message my-message">
+                                        @{{ message.body }}
+                                    </div>
+                                </div>
+                                <div v-else-if="message.account.id !== {{ Auth::id() }}">
+                                    <div class="message-data align-right">
+                                        <span class="message-data-time">@{{ message.created_at }}</span>
+                                        <span class="message-data-name"></i> @{{  message.account.firstName + ' ' + message.account.lastName}}</span> <i class="fa fa-circle me"></i>
+                                    </div>
+                                    <div class="message other-message float-right">
+                                        @{{ message.body }}
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                    <!-- end chat-history -->
+
+                    <div class="chat-message clearfix">
+                        <textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows="3" v-model="messageBox" v-on:keyup.enter="postMessage"></textarea>
+
+                        <button @click.prevent="postMessage">Send</button>
+
+                    </div>
+                    <!-- end chat-message -->
+
                 </div>
-            </div>
-            <!-- end chat-header -->
-
-            <div id="chat" class="chat-history" v-chat-scroll>
-                <ul>
-
-                    <li v-for="message in messages" v-bind:class="{'clearfix':(message.account.id !== {{ Auth::id() }})}">
-                        <div v-if="message.account.id === {{ Auth::id() }}">
-                            <div class="message-data">
-                                <span class="message-data-name"><i class="fa fa-circle online"></i> @{{  message.account.firstName + ' ' + message.account.lastName}}</span>
-                                <span class="message-data-time">@{{ message.created_at }}</span>
-                            </div>
-                            <div class="message my-message">
-                                @{{ message.body }}
-                            </div>
-                        </div>
-                        <div v-else-if="message.account.id !== {{ Auth::id() }}">
-                            <div class="message-data align-right">
-                                <span class="message-data-time">@{{ message.created_at }}</span>
-                                <span class="message-data-name"></i> @{{  message.account.firstName + ' ' + message.account.lastName}}</span> <i class="fa fa-circle me"></i>
-                            </div>
-                            <div class="message other-message float-right">
-                                @{{ message.body }}
-                            </div>
-                        </div>
-                    </li>
-
-                </ul>
+                <!-- end chat -->
 
             </div>
-            <!-- end chat-history -->
+            <!-- end container -->
 
-            <div class="chat-message clearfix">
-                <textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows="3" v-model="messageBox" v-on:keyup.enter="postMessage"></textarea>
-
-                <button @click.prevent="postMessage">Send</button>
-
-            </div>
-            <!-- end chat-message -->
-
-        </div>
-        <!-- end chat -->
-
+            <!-- END CHAT TEMPLATE -->
+        @else
+            <h3>Meld je aan bij dit event om te kunnen chatten!</h3>
+        @endif
     </div>
-    <!-- end container -->
-
-    <!-- END CHAT TEMPLATE -->
-    @endif
 
 @endsection
 @if(Auth::check() && !empty($event->participants()->where('account_id', Auth::id())->first()))

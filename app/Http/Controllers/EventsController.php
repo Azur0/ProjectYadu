@@ -199,9 +199,9 @@ class EventsController extends Controller
                 ->withInput();
         }
 
-        $event = Event::where('id', $id);
+        $event = Event::where('id', $id)->firstorfail();
 
-        if (Auth::id() == $event->user_id) {
+        if (Auth::id() == $event->owner_id) {
             $event->update(
                 [
                     'eventName' => $request['activityName'],
@@ -213,7 +213,7 @@ class EventsController extends Controller
                     'event_picture_id' => $request['picture']
                 ]
             );
-            //TODO: location
+            //TODO: set location
             return redirect('/events');
         }
         else {

@@ -85,13 +85,6 @@
     @if(Auth::check() && !empty($event->participants()->where('account_id', Auth::id())->first()))
     <!-- BEGIN CHAT TEMPLATE -->
     <div id="app" class="message-container clearfix" v-if="account">
-        <div class="people-list" id="people-list">
-            <div class="search">
-                <input type="text" placeholder="search" />
-                <i class="fa fa-search"></i>
-            </div>
-            <!-- PARTICIPANTS HERE! -->
-        </div>
 
         <div class="chat">
             <div class="chat-header clearfix">

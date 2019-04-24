@@ -19,6 +19,11 @@ class EditLangController extends Controller
     }
 
     public function saveFile(Request $request){
+        $request->validate([
+            'lang' => 'required',
+            'file' => 'required',
+        ]);
+
         $fileName = base_path()."/resources/lang/".$request->lang."/".$request->file.".php";
         $fileBegin = "<?php return [";
         $fileMiddle = "";

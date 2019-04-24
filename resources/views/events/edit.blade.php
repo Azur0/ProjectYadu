@@ -67,8 +67,10 @@
             <div class="date">
                 <h3>4. Kies de datum en tijd</h3>
                 <div class="description">
-                    <input id="date" name="startDate" type="datetime-local" value="{{ $data['event']->startDate }}"
-                           required>
+                    <h5>Date</h5>
+                    <input id="date" name="startDate" type="date" value="{{ $data['event']->startDate }}" required>
+                    <h5>Time</h5>
+                    <input id="date" name="startTime" type="time" value="{{ $data['event']->startTime }}" required>
                     @if ($errors->has('startDate'))
                         <div class="error">Deze datum/tijd is ongeldig.</div>
                     @endif

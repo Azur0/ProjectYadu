@@ -75,9 +75,12 @@ class EventsController extends Controller
             'people' => 'required', //TODO: min en max nog doen
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
+            'startTime' => 'required',
             'location' => 'required',
             'picture' => 'required'
         ]);
+
+        $request['startDate'] = $request['startDate'] . ' ' . $request['startTime'];
 
         $validator->after(function ($validator) use ($request) {
             if ($this->isPictureValid($request['tag'], $request['picture'])) {
@@ -147,6 +150,13 @@ class EventsController extends Controller
                 'picture' => EventPicture::all()
             );
 
+            $datetime = explode(' ', $event->startDate);
+
+            $event->startDate = $datetime[0];
+
+            $event->startTime = $datetime[1];
+
+
             return view('events.edit', compact('data'));
         } else {
             abort(403);
@@ -169,9 +179,13 @@ class EventsController extends Controller
             'numberOfPeople' => 'required', //TODO: min en max nog doen
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
+            'startTime' => 'required',
             'location' => 'required',
             'numberOfPeople' => 'required'
         ]);
+
+
+        $request['startDate'] = $request['startDate'] . ' ' . $request['startTime'];
 
         $validator->after(function ($validator) use ($request) {
             if ($this->isPictureValid($request['tag'], $request['picture'])) {

@@ -51,7 +51,10 @@
             <div class="date">
                 <h3>4. {{__('events.create_step4')}}</h3>
                 <div class="description">
-                    <input id="date" name="startDate" type="datetime-local" value="{{ old('startDate') }}" required>
+                    <h5>Date</h5>
+                    <input id="date" name="startDate" type="date" value="{{ old('startDate') }}" required>
+                    <h5>Time</h5>
+                    <input id="date" name="startTime" type="time" value="{{ old('startTime') }}" required>
                     @if ($errors->has('startDate'))
                         <div class="error">{{__('events.error_invalid_datetime')}}</div>
                     @endif

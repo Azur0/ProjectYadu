@@ -6,16 +6,16 @@
 		<div class="col-md-8">
 			<div class="card">
 				<div class="card-header">
-					<a href="/account/participating"><i class="fas fa-calendar-alt"></i> Participating</a>
+					<a href="/account/participating"><i class="fas fa-calendar-alt"></i> {{__('home.participating_title')}}</a>
 				</div>
 				<div class="card-body">
 					<table class="table table-hover">
 						<thead>
 						<tr>
-							<th scope="col">naam</th>
-							<th scope="col">eigenaar</th>
-							<th scope="col">datum</th>
-							<th scope="col">locatie</th>
+							<th scope="col">{{__('home.participating_table_colname_name')}}</th>
+							<th scope="col">{{__('home.participating_table_colname_owner')}}</th>
+							<th scope="col">{{__('home.participating_table_colname_date')}}</th>
+							<th scope="col">{{__('home.participating_table_colname_location')}}</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -35,7 +35,7 @@
 		<div class="col-md-4">
 			<div class="card">
 				<div class="card-header">
-					<i class="fas fa-user"></i> User
+					<i class="fas fa-user"></i> {{__('user_title')}}
 				</div>
 				<div class="card-body">
 					@if (session('status'))
@@ -50,13 +50,13 @@
 						{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}
 					</h3>
 					<div>
-						<a href="/profile/edit"><i class="fas fa-user-cog"></i> profile settings</a>
+						<a href="/profile/edit"><i class="fas fa-user-cog"></i> {{__('user_link_settings')}}</a>
 					</div>
 				</div>
 			</div>
 			<div class="card">
 				<div class="card-header">
-					<a href="/account/myevents"><i class="fas fa-calendar-alt"></i> My events</a><a class="right" href="/events/create"><i class="fas fa-plus-square"></i></a>
+					<a href="/account/myevents"><i class="fas fa-calendar-alt"></i> {{__('my_events_title')}}</a><a class="right" href="/events/create"><i class="fas fa-plus-square"></i></a>
 				</div>
 				<div class="card-body">
 					@if($events)
@@ -73,7 +73,7 @@
 							<hr>
 						@endforeach
 					@else
-						No events found
+						{{ __('my_events_no_events') }}
 					@endif
 				</div>
 			</div>

@@ -3,17 +3,17 @@
 @section('content')
 	<div class="col">
 		<div class="backlink">
-			<a href="/home"><i class="fas fa-arrow-left"></i> Dashboard</a>
+			<a href="/home"><i class="fas fa-arrow-left"></i> {{__('home.link_dashboard')}}</a>
 		</div>
 		<div class="card">
-			<div class="card-header"><i class="fas fa-calendar-alt"></i> My events</div>
+			<div class="card-header"><i class="fas fa-calendar-alt"></i> {{__('my_events_title')}}</div>
 			<div class="card-body">
 				<table class="table table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">naam</th>
-                        <th scope="col">datum</th>
-                        <th scope="col">locatie</th>
+                        <th scope="col">{{__('home.participating_table_colname_name')}}</th>
+                        <th scope="col">{{__('home.participating_table_colname_date')}}</th>
+                        <th scope="col">{{__('home.participating_table_colname_location')}}</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -25,7 +25,6 @@
                             <td>{{ $event->location->postalcode }}</td>
                             <td>
                             	<a href="/events/{{$event->id}}/edit"><i class="fas fa-edit" style="font-size:20px; margin-right: 10px; color:#2578AF;"></i></a>
-                            	<a href="/events/{{$event->id}}/delete"><i class="fas fa-trash-alt" style="font-size:20px; color:red;"></i></a>
                             </td>
                         </tr>
                     @endforeach

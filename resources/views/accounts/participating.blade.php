@@ -3,10 +3,10 @@
 @section('content')
 	<div class="col">
 		<div class="backlink">
-			<a href="/home"><i class="fas fa-arrow-left"></i> Dashboard</a>
+			<a href="/home"><i class="fas fa-arrow-left"></i> {{__('home.link_dashboard')}}</a>
 		</div>
 		<div class="card">
-			<div class="card-header"><i class="fas fa-calendar-alt"></i> Events particiting</div>
+			<div class="card-header"><i class="fas fa-calendar-alt"></i> {{__('home.participating_title')}}</div>
 		</div>
 			<ul class="events">
 				@foreach($events as $event)

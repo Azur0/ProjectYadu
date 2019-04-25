@@ -27,12 +27,11 @@
                 <a href="/about" class="nav-link m-2 nav-item {{ request()->is('about') ? 'active' : '' }}">{{__('navigation.nav_about')}}</a>
             </li>
             <li>
-                <a href="/contact"
-                   class="nav-link m-2 nav-item {{ request()->is('contact') ? 'active' : '' }}">{{__('navigation.nav_contact')}}</a>
+                <a href="/contact" class="nav-link m-2 nav-item {{ request()->is('contact') ? 'active' : '' }}">{{__('navigation.nav_contact')}}</a>
             </li>
             @if(Auth::user())
 	            <li>
-	                <a href="/home" class="nav-link m-2 nav-item {{ request()->is('home') ? 'active' : '' }}">{{'__(navigation.nav_dash')}}</a>
+	                <a href="/home" class="nav-link m-2 nav-item {{ request()->is('home') ? 'active' : '' }}">{{__('navigation.nav_dash')}}</a>
 	            </li>
 	            <li>
 	                <a href="/logout" class="nav-link m-2 nav-item">{{__('navigation.nav_logout')}}</a>

@@ -13,6 +13,8 @@ return [
     'nav_motto' => 'VIND WAT JE BINDT!',
     'nav_home' => 'HOME',
     'nav_events' => 'EVENTS',
+    'nav_eventsS' => 'Events',
+    'nav_overview' => 'Overview',
     'nav_about' => 'ABOUT US',
     'nav_contact' => 'CONTACT',
     'nav_profile' => 'PROFILE',

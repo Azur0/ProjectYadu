@@ -22,7 +22,7 @@ class EventsController extends Controller
     public function index()
     {
 
-        $tags = EventTag::pluck('tag');
+        $tags = EventTag::all();
         $names = Event::distinct('eventName')->pluck('eventName');
         return view('admin/events.index', compact(['tags', 'names']));
     }

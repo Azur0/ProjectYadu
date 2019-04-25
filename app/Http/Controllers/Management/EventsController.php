@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\Management;
 
 use App\Event;
+use App\EventPicture;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use App\EventTag;
+use Validator;
+use Illuminate\Support\Carbon;
+use Auth;
 use App\Http\Controllers\Controller;
 
 class EventsController extends Controller
@@ -15,9 +21,10 @@ class EventsController extends Controller
      */
     public function index()
     {
+
         $tags = EventTag::pluck('tag');
         $names = Event::distinct('eventName')->pluck('eventName');
-        return view('admin.index', compact(['tags', 'names']));
+        return view('admin/events.index', compact(['tags', 'names']));
     }
 
     public function welcome()

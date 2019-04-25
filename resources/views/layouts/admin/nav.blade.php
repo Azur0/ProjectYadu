@@ -70,7 +70,7 @@
         <div id="collapseEvents" class="collapse" aria-labelledby="headingEvents" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Beheren:</h6>
-                <a class="collapse-item" href="{{ url('admin')  }}">Placeholder link</a>
+                <a class="collapse-item" href="{{ url('admin/events')  }}"></a>
             </div>
         </div>
     </li>

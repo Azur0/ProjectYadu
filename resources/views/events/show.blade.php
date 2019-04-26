@@ -134,7 +134,7 @@
                 });
 
                 document.getElementById("share-twitter").addEventListener('click', function(){
-                    let url = `https://twitter.com/intent/tweet?text={{$event->eventName}} ${window.location.href}`;
+                    let url = `https://twitter.com/intent/tweet?text={{$event->eventName}}: ${window.location.href} %23Yadu`;
                     window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
                 });
             </script>

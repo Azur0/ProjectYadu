@@ -56,7 +56,7 @@
         <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Beheren:</h6>
-                <a class="collapse-item" href="{{ url('admin')  }}">Placeholder link</a>
+                <a class="collapse-item" href="{{ url('admin/accounts')  }}">Accounts</a>
             </div>
         </div>
     </li>

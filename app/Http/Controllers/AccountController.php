@@ -79,4 +79,19 @@ class AccountController extends Controller
 
         return redirect('/');
     }
+
+    public function admin_index()
+    {
+
+        $accounts = Account::all();
+
+        return view('admin.accounts.index', compact('accounts'));
+    }
+
+    public function admin_show($id)
+    {
+        $account = Account::where('id', $id)->firstOrFail();
+
+        return view('admin.accounts.show', compact('account'));
+    }
 }

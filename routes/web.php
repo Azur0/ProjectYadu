@@ -48,6 +48,7 @@ Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middle
 
 Auth::routes();
 
-Route::resource('events', 'EventsController');
-
 Route::get('admin', function () { return view('admin.index'); });
+
+Route::get('admin/accounts', 'AccountController@admin_index');
+Route::get('admin/accounts/{id}', 'AccountController@admin_show');

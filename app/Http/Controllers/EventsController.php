@@ -27,16 +27,39 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $tags = EventTag::pluck('tag');
+        $tags = EventTag::all();
         $names = Event::distinct('eventName')->pluck('eventName');
         return view('events.index', compact(['tags', 'names']));
     }
 
     public function welcome()
-    {
-        $events = Event::all();
-        return view('welcome', compact('events'));
-    }
+	{
+		$events = Event::take(6)
+			->where('isDeleted', '==', 0)
+			->orderBy('isHighlighted', 'desc')
+			->orderBy('startDate', 'desc')
+			->get();
+		$regular_events = Event::take(3)
+			->where('isDeleted', '==', 0)
+			->where('isHighlighted', '==', 0)
+			->orderBy('startDate', 'desc')
+			->get();
+
+		foreach($events as $event)
+		{
+			$event->city = self::cityFromPostalcode($event->Location->postalcode);
+			$event->startDate = self::dateToText($event->startDate);
+
+		}
+		foreach($regular_events as $event)
+		{
+			$event->city = self::cityFromPostalcode($event->Location->postalcode);
+			$event->startDate = self::dateToText($event->startDate);
+
+		}
+		
+		return view('welcome', compact('events', 'regular_events'));
+	}
 
     /**
      * Show the form for creating a new resource.
@@ -46,7 +69,7 @@ class EventsController extends Controller
 
     public function create()
     {
-        if(Auth::check() && Auth::user()->hasVerifiedEmail()) {
+        if (Auth::check() && Auth::user()->hasVerifiedEmail()) {
             $Tags = EventTag::all();
             $Picture = EventPicture::all();
             return view('events.create')->withtags($Tags)->withpictures($Picture);
@@ -74,23 +97,26 @@ class EventsController extends Controller
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
-            'people' => 'required', //min en max nog doen
+            'people' => 'required', //TODO: min en max nog doen
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
+            'startTime' => 'required',
             'location' => 'required',
             'picture' => 'required'
         ]);
-      
+
+        $request['startDate'] = $request['startDate'] . ' ' . $request['startTime'];
+
         $validator->after(function ($validator) use ($request) {
             if ($this->isPictureValid($request['tag'], $request['picture'])) {
                 $validator->errors()->add('picture', 'Something is wrong with this field!');
             }
         });
-        
+
         if ($validator->fails()) {
             return redirect('/events/create')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
         Event::create(
@@ -103,21 +129,22 @@ class EventsController extends Controller
                 'tag_id' => $request['tag'],
                 'location_id' => '1',
                 'owner_id' => auth()->user()->id,
-                'event_picture_id'=> $request['picture']
+                'event_picture_id' => $request['picture']
             ]
         );
         return redirect('/events');
     }
-    
-    public function isPictureValid($tag, $picture){
-        if (!EventPicture::where('id','=',  $picture)->exists()) {
+
+    public function isPictureValid($tag, $picture)
+    {
+        if (!EventPicture::where('id', '=', $picture)->exists()) {
             return true;
         } else {
-            $eventPicture = EventPicture::all()->where('id','=',  $picture)->pluck('tag_id');
+            $eventPicture = EventPicture::all()->where('id', '=', $picture)->pluck('tag_id');
             if ($eventPicture[0] != $tag) {
                 return true;
-            } 
-        return false;
+            }
+            return false;
         }
     }
 
@@ -139,9 +166,26 @@ class EventsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Event $event)
     {
-        //
+        if ($event->owner_id == Auth::id()) {
+            $data = array(
+                'event' => $event,
+                'tags' => EventTag::all(),
+                'picture' => EventPicture::all()
+            );
+
+            $datetime = explode(' ', $event->startDate);
+
+            $event->startDate = $datetime[0];
+
+            $event->startTime = $datetime[1];
+
+
+            return view('events.edit', compact('data'));
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -153,7 +197,53 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $validator = Validator::make($request->all(), [
+            'activityName' => 'required|max:30',
+            'description' => 'required|max:150',
+            'numberOfPeople' => 'required', //TODO: min en max nog doen
+            'tag' => 'required',
+            'startDate' => 'required|date|after:now',
+            'startTime' => 'required',
+            'location' => 'required',
+            'numberOfPeople' => 'required'
+        ]);
+
+
+        $request['startDate'] = $request['startDate'] . ' ' . $request['startTime'];
+
+        $validator->after(function ($validator) use ($request) {
+            if ($this->isPictureValid($request['tag'], $request['picture'])) {
+                $validator->errors()->add('picture', 'Something is wrong with this field!');
+            }
+        });
+
+        if ($validator->fails()) {
+            return redirect("/events/$id/edit")
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $event = Event::where('id', $id)->firstorfail();
+
+        if (Auth::id() == $event->owner_id) {
+            $event->update(
+                [
+                    'eventName' => $request['activityName'],
+                    'description' => $request['description'],
+                    'startDate' => $request['startDate'],
+                    'numberOfPeople' => $request['numberOfPeople'],
+                    'tag_id' => $request['tag'],
+                    'location_id' => '1',
+                    'event_picture_id' => $request['picture']
+                ]
+            );
+            //TODO: set location
+            return redirect('/events');
+        }
+        else {
+            abort(403);
+        }
     }
 
     /**
@@ -170,7 +260,7 @@ class EventsController extends Controller
     public function join($id)
     {
 
-        if(Auth::user()->hasVerifiedEmail()) {
+        if (Auth::user()->hasVerifiedEmail()) {
             $event = Event::findOrFail($id);
             if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->attach(auth()->user()->id);
@@ -183,7 +273,7 @@ class EventsController extends Controller
 
     public function leave($id)
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             $event = Event::findOrFail($id);
             if ($event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->detach(auth()->user()->id);
@@ -206,23 +296,23 @@ class EventsController extends Controller
     private function areEvenstInRange($events)
     {
         $locationController = new LocationController();
-        return  $events = $locationController->areWithinReach($events, $this->distance);
+        return $events = $locationController->areWithinReach($events, $this->distance);
     }
 
     private $distance = 0;
 
     public function actionDistanceFilter(Request $request)
     {
-       
-        $tags = EventTag::where('tag', 'like', '%' . $request->inputTag .'%')->pluck('id');
-        $names = Event::where('eventName', 'like', '%' . $request->inputName .'%')->pluck('id');
+
+        $tags = EventTag::where('tag', 'like', '%' . $request->inputTag . '%')->pluck('id');
+        $names = Event::where('eventName', 'like', '%' . $request->inputName . '%')->pluck('id');
         $this->distance = $request->input('distance');
         $unfiltered_events = Event::where('isDeleted', '==', 0)
             ->where('startDate', '>=', $this->formatDate())
             ->whereIn('id', $names)
             ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
-            ->get();       
+            ->get();
 
         //TODO: Set initial amount of items to load and add 'load more' button
         $events = new Collection();

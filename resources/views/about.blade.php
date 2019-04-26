@@ -6,7 +6,7 @@
         <div class="banner-container">
             <div class="banner-text">
                 <div class="banner-title">
-                    Over Yadu
+                    {{__('about.title')}}
                 </div>
             </div>
         </div>

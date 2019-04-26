@@ -23,8 +23,8 @@
 							<tr>
 								<td><a href="/events/{{$par->id}}">{{ $par->eventName }}</a></td>
 								<td>{{ $par->owner->firstName }} {{ $par->owner->middleName }} {{ $par->owner->lastName }}</td>
-								<td>{{ date('d-m-Y', strtotime($par->startDate)) }}</td>
-								<td>{{ $par->location->postalcode }}</td>
+								<td>{{ $par->date }}</td>
+								<td>{{ $par->location->postalcode }} {{ $par->city }}</td>
 							</tr>
 						@endforeach
 						</tbody>
@@ -35,7 +35,7 @@
 		<div class="col-md-4">
 			<div class="card">
 				<div class="card-header">
-					<i class="fas fa-user"></i> {{__('user_title')}}
+					<i class="fas fa-user"></i> {{__('home.user_title')}}
 				</div>
 				<div class="card-body">
 					@if (session('status'))
@@ -50,13 +50,13 @@
 						{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}
 					</h3>
 					<div>
-						<a href="/profile/edit"><i class="fas fa-user-cog"></i> {{__('user_link_settings')}}</a>
+						<a href="/profile/edit"><i class="fas fa-user-cog"></i> {{__('home.user_link_settings')}}</a>
 					</div>
 				</div>
 			</div>
 			<div class="card">
 				<div class="card-header">
-					<a href="/account/myevents"><i class="fas fa-calendar-alt"></i> {{__('my_events_title')}}</a><a class="right" href="/events/create"><i class="fas fa-plus-square"></i></a>
+					<a href="/account/myevents"><i class="fas fa-calendar-alt"></i> {{__('home.my_events_title')}}</a><a class="right" href="/events/create"><i class="fas fa-plus-square"></i></a>
 				</div>
 				<div class="card-body">
 					@if($events)
@@ -66,14 +66,14 @@
 									<img class="card-img-top" src="data:image/png;base64,{{ chunk_split(base64_encode($event->eventPicture->picture)) }}">
 									<div class="dashboard_event_info">
 										<h3>{{ str_limit($event->eventName, $limit = 8, $end = '...') }}</h3>
-										<p>{{ date('d-m-Y', strtotime($event->startDate)) }}</p>
+										<p>{{ $event->date }}</p>
 									</div>
 								</a>
 							</div>
 							<hr>
 						@endforeach
 					@else
-						{{ __('my_events_no_events') }}
+						{{ __('home.my_events_no_events') }}
 					@endif
 				</div>
 			</div>

@@ -7,27 +7,28 @@
 		</div>
 		<div class="card">
 			<div class="card-header"><i class="fas fa-calendar-alt"></i> {{__('home.participating_title')}}</div>
+			<div class="card-body">
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th scope="col">{{__('home.participating_table_colname_name')}}</th>
+						<th scope="col">{{__('home.participating_table_colname_owner')}}</th>
+						<th scope="col">{{__('home.participating_table_colname_date')}}</th>
+						<th scope="col">{{__('home.participating_table_colname_location')}}</th>
+					</tr>
+					</thead>
+					<tbody>
+					@foreach($events as $event)
+						<tr>
+							<td><a href="/events/{{$event->id}}">{{ $event->eventName }}</a></td>
+							<td>{{ $event->owner->firstName }}</td>
+							<td>{{ $event->date }}</td>
+							<td>{{ $event->location->postalcode }} {{ $event->city }}</td>
+						</tr>
+					@endforeach
+					</tbody>
+				</table>
+			</div>
 		</div>
-			<ul class="events">
-				@foreach($events as $event)
-					<li class="event_wrap">
-						<a href="/events/{{$event->id}}">
-							<div class="box-shadow">
-								<div class="event_background">
-									<img class="card-img-top" src="data:image/png;base64,{{ chunk_split(base64_encode($event->eventPicture->picture)) }}">
-								</div>
-								<div class="event_avatar">
-									<img src="data:image/png;base64,{{ chunk_split(base64_encode($event->owner->avatar)) }}">
-									<h3>{{ str_limit($event->owner->firstName, $limit = 17, $end = '...') }}</h3>
-								</div>
-								<div class="event_info">
-									<h3>{{ str_limit($event->eventName, $limit = 17, $end = '...') }}</h3>
-									<p>{{ date('d-m-Y', strtotime($event->startDate)) }}<br>{{ $event->location->postalcode }}</p>
-								</div>
-							</div>
-						</a>
-					</li>
-				@endforeach
-			</ul>
-		</div>
+	</div>
 @endsection

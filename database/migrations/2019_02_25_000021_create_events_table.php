@@ -33,7 +33,7 @@ class CreateEventsTable extends Migration
             $table->dateTime('endDate')->nullable();
             $table->unsignedInteger('numberOfPeople');
             $table->text('description');
-
+            $table->tinyInteger('isHighlighted')->default('0');
             $table->tinyInteger('isDeleted')->default('0');
             $table->timestamps();
 

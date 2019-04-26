@@ -7,7 +7,7 @@ return [
     | About Language Lines
     |--------------------------------------------------------------------------
     */
-
+    'title' => 'Over Yadu',
     'our_story_title' => 'Ons verhaal',
     'our_story_content' => 'Yadu is ontwikkeld met als doel...',
 
@@ -25,7 +25,7 @@ return [
     'why_now_content' => 'De groeiende behoefte van ieder mens aan zingeving en de toenemende behoefte aan echt contact is het fundament waarop Yadu het positieve verschil maakt.',
 
     'how_does_it_work_title' => 'Hoe werkt Yadu?',
-    'how_does_it_work_content' => 'Door leuke en leerzame “uitjes” te faciliteren op ons platform brengen wij gelijkgestemden in contact met elkaar, op basis van gedeelde interesses. In onze eigen omgeving en ook buiten je huidige netwerk om.',
+    'how_does_it_work_content' => 'Door leuke en leerzame \'uitjes\' te faciliteren op ons platform brengen wij gelijkgestemden in contact met elkaar, op basis van gedeelde interesses. In onze eigen omgeving en ook buiten je huidige netwerk om.',
 
     'for_who_title' => 'Voor wie?',
     'for_who_content' => '<u>Voor jou als individu, als mantelzorger en als vrijwilliger:</u></br>
@@ -44,7 +44,7 @@ return [
     'what_we_think_we_offer_title' => 'Wat denken wij te brengen?',
     'what_we_think_we_offer_content' => '
         <ol>
-            <li>Intern: Bezuinigen op wervingskosten en “zorg” kosten ( happy&healthy people)</li>
+            <li>Intern: Bezuinigen op wervingskosten en \'zorg\' kosten (happy & healthy people)</li>
             <li>Social return on investment: Blije gebruikers en meetbare toename contacten/contactmomenten</li>
         </ol>
 
@@ -60,6 +60,6 @@ return [
     'sustainability_title' => 'Duurzaamheid',
     'sustainability_content' => '<b>Om de dienst duurzaam en enigszins betaalbaar te houden zoeken wij organisaties om samen onze dienst voor een groter publiek toegankelijk te maken.</b></br>
         </br>
-        Wij hebben ons ingeschreven \'Voordewereldvanmorgen\'. Zodat iedereen die zich betrokken voelt bij onze missie: “de waarde van real life contacten bevorderen” kan ondersteunen.',
+        Wij hebben ons ingeschreven \'Voordewereldvanmorgen\'. Zodat iedereen die zich betrokken voelt bij onze missie: \'de waarde van real life contacten bevorderen\' kan ondersteunen.',
 ];
 

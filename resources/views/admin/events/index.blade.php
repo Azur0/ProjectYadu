@@ -2,8 +2,7 @@
 
 @section('content')
 
-
-    <div>
+	 <div>
         <div class="search">
             <label for="filterByTag">{{__('events.index_select_category')}}</label>
             <input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag"/>
@@ -16,6 +15,36 @@
             <input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" autocomplete="off"/>
         </div>
     </div>
+
+	<div class="card">
+		<div class="card-header">
+			<a href="/account/participating"><i class="fas fa-calendar-alt"></i> {{__('home.participating_title')}}</a>
+		</div>
+		<div class="card-body">
+			<table class="table table-hover">
+				<thead>
+				<tr>
+					<th scope="col">{{__('home.participating_table_colname_name')}}</th>
+					<th scope="col">{{__('home.participating_table_colname_owner')}}</th>
+					<th scope="col">{{__('home.participating_table_colname_date')}}</th>
+					<th scope="col">{{__('home.participating_table_colname_location')}}</th>
+				</tr>
+				</thead>
+				<tbody>
+				@foreach($events as $event)
+					<tr>
+						<td><a href="/admin/events/{{$events->id}}">{{ $events->eventName }}</a></td>
+						<td>{{ $events->owner->firstName }} {{ $events->owner->middleName }} {{ $events->owner->lastName }}</td>
+						<td>{{ $events->date }}</td>
+						<td>{{ $events->location->postalcode }} {{ $events->city }}</td>
+					</tr>
+				@endforeach
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+   
 
     <div class="row">
         <div class="col-12">

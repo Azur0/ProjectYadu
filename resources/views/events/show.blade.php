@@ -86,12 +86,11 @@
             <div class="mb-5">
                 <h3>{{__('events.show_share')}}</h3>
                 <div>
-                    <span id="share-whatsapp" class="fab fa-whatsapp" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer;"></span>
-                    <span id="share-facebook" class="fab fa-facebook" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer;"></span>
-                    <span id="share-twitter" class="fab fa-twitter" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer;"></span>
-                    <span id="share-instagram" class="fab fa-instagram" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer;"></span>
-                    {{--<span id="share-link" class="fa fa-link" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer;"></span>--}}
-                    <span id="share-link" class="fa fa-link" data-toggle="modal" data-target="#confirmDeleteAccount" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer;"></span>
+                    <a id="share-whatsapp" class="fab fa-whatsapp" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
+                    <a id="share-facebook" class="fab fa-facebook" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
+                    <a id="share-twitter" class="fab fa-twitter" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
+                    <a id="share-instagram" class="fab fa-instagram" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
+                    <a id="share-link" class="fa fa-link" data-toggle="modal" data-target="#confirmDeleteAccount" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
                 </div>
             </div>
 
@@ -127,8 +126,15 @@
                     document.body.removeChild(clipboard);
 
                     document.getElementById("page-url").innerHTML = url;
-                })
+                });
+
+                document.getElementById("share-facebook").addEventListener('click', function(){
+                    let url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
+                    window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+                });
             </script>
+
+            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v3.2"></script>
             {{--End section Share buttons--}}
 
         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\EventPicture;
 use App\Event;
+use App\EventHasParticipants;
 use App\Http\Controllers\API\LocationController;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -65,6 +66,7 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         if (Auth::check() && Auth::user()->hasVerifiedEmail()) {

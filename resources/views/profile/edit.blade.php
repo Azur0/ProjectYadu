@@ -3,7 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+
+            <div class="col-md-8">
+                <div class="backlink">
+					<a href="/home"><i class="fas fa-arrow-left"></i> Dashboard</a>
+				</div>
                 <div class="card">
                     <div class="card-header">{{__('profile.edit_edit_profile_title')}}</div>
 

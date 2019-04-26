@@ -32,10 +32,33 @@ class EventsController extends Controller
     }
 
     public function welcome()
-    {
-        $events = Event::all();
-        return view('welcome', compact('events'));
-    }
+	{
+		$events = Event::take(6)
+			->where('isDeleted', '==', 0)
+			->orderBy('isHighlighted', 'desc')
+			->orderBy('startDate', 'desc')
+			->get();
+		$regular_events = Event::take(3)
+			->where('isDeleted', '==', 0)
+			->where('isHighlighted', '==', 0)
+			->orderBy('startDate', 'desc')
+			->get();
+
+		foreach($events as $event)
+		{
+			$event->city = self::cityFromPostalcode($event->Location->postalcode);
+			$event->startDate = self::dateToText($event->startDate);
+
+		}
+		foreach($regular_events as $event)
+		{
+			$event->city = self::cityFromPostalcode($event->Location->postalcode);
+			$event->startDate = self::dateToText($event->startDate);
+
+		}
+		
+		return view('welcome', compact('events', 'regular_events'));
+	}
 
     /**
      * Show the form for creating a new resource.

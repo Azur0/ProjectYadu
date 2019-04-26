@@ -62,6 +62,7 @@ return [
 
     'show_location' => 'Locatie',
     'show_date' => 'Datum en tijd',
+    'show_title' => 'Titel',
     'show_description' => 'Beschijving',
     'show_initiator' => 'Initiatiefnemer',
     'show_attendees' => 'Wie gaan er mee?',
@@ -70,4 +71,6 @@ return [
     'show_number_of_attendees' => ':amount van de :max deelnemers',
     'show_attendees_ammount' => 'Hoeveelheid deelnemers',
     'show_max'=> 'Max hoeveelheid deelnemers',
+    'show_edit' => 'Wijzigen',
+    'show_delete' => 'Verwijderen',
 ];

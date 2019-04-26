@@ -62,6 +62,7 @@ return [
 
     'show_location' => 'Location',
     'show_date' => 'Date and time',
+    'show_title' => 'Title',
     'show_description' => 'Description',
     'show_initiator' => 'Initiator',
     'show_attendees' => 'Who is coming?',
@@ -70,4 +71,6 @@ return [
     'show_number_of_attendees' => ':amount of :max attendees',
     'show_attendees_ammount' => 'Ammount of attendees',
     'show_max'=> 'Max ammount of attendees',
+    'show_edit' => 'Edit',
+    'show_delete' => 'Delete',
 ];

@@ -32,7 +32,7 @@
 				<tr>
 					<th scope="col"></th>
 					<th scope="col">ID</th>
-					<th scope="col">{{__('events.show_description')}}</th>
+					<th scope="col">{{__('events.show_title')}}</th>
 					<th scope="col">{{__('events.show_initiator')}}</th>
 					<th scope="col">{{__('events.show_date')}}</th>
 					<th scope="col">{{__('events.show_location')}}</th>
@@ -60,9 +60,19 @@
                             <td>{{ $event->location->postalcode }} {{ $event->city }}</td>
                             <td>{{$event->numberOfPeople}}</td>
                             <td>{{$event->participants->count()}}</td>
-                            <td><!-- should be a button to edit the event --></td>
-                            <td><!-- should be a button to delete the event --></td>
                         </a>
+                        <td><a href="admin/events/{{$event->id}}/edit" class="button">{{__('events.show_edit')}}</a></td>
+                        <td>
+                            <form method="POST" action="admin/events/{{$event->id}}">
+                                @method('DELETE')
+                                @csrf
+                                <div class="field">
+                                    <div class="control">
+                                        <button type="submit" class="button">{{__('events.show_delete')}}</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </td>
 					</tr>
 
 				@endforeach

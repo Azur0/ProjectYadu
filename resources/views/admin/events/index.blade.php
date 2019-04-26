@@ -30,7 +30,7 @@
 					<th scope="col">{{__('home.participating_table_colname_location')}}</th>
 				</tr>
 				</thead>
-				<tbody>
+				<tbody >
 				@foreach($events as $event)
 					<tr>
 						<td><a href="/admin/events/{{$events->id}}">{{ $events->eventName }}</a></td>

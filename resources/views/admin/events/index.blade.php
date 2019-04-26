@@ -32,30 +32,39 @@
 				<tr>
 					<th scope="col"></th>
 					<th scope="col">ID</th>
-					<th scope="col">{{__('events.show_location')}}</th>
+					<th scope="col">{{__('events.show_description')}}</th>
 					<th scope="col">{{__('events.show_initiator')}}</th>
+					<th scope="col">{{__('events.show_date')}}</th>
 					<th scope="col">{{__('events.show_location')}}</th>
-					<th scope="col">{{__('events.show_location')}}</th>
-					<th scope="col">{{__('events.show_location')}}</th>
-					<th scope="col">{{__('events.show_location')}}</th>
+                    <th scope="col">{{__('events.show_max')}}</th>
+                    <th scope="col">{{__('events.show_attendees_ammount')}}</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
 				</tr>
 				</thead>
 				<tbody id="eventsToDisplay">
 					@foreach($events as $event)
+
+
 					<tr>
-						<td>
-							@if(  $event->isHighlighted == 1)
-								<i class="fas fa-star"></i>
-							@endif
-						</td>
-						<td>{{ $event->id}}</td>
-						<td>{{ $event->name}}</td>
-						<td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
-						<td>{{ $event->date }}</td>
-						<td>{{ $event->location->postalcode }} {{ $event->city }}</td>
-						<td>{{$event->numberOfPeople}}</td>
-						<td>{{$event->participants->count()}}</td>
+                        <a href='/events/"+ {{$event->id}}+"'>
+                            <td>
+                                @if(  $event->isHighlighted == 1)
+                                    <i class="fas fa-star"></i>
+                                @endif
+                            </td>
+                            <td>{{ $event->id}}</td>
+                            <td>{{ $event->name}}</td>
+                            <td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
+                            <td>{{ $event->date }}</td>
+                            <td>{{ $event->location->postalcode }} {{ $event->city }}</td>
+                            <td>{{$event->numberOfPeople}}</td>
+                            <td>{{$event->participants->count()}}</td>
+                            <td><!-- should be a button to edit the event --></td>
+                            <td><!-- should be a button to delete the event --></td>
+                        </a>
 					</tr>
+
 				@endforeach
 				</tbody>
 			</table>

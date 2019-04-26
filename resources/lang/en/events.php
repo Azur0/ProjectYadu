@@ -68,4 +68,6 @@ return [
     'show_join' => 'Join',
     'show_leave' => 'Leave',
     'show_number_of_attendees' => ':amount of :max attendees',
+    'show_attendees_ammount' => 'Ammount of attendees',
+    'show_max'=> 'Max ammount of attendees',
 ];

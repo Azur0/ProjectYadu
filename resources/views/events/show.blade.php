@@ -137,6 +137,11 @@
                     let url = `https://twitter.com/intent/tweet?text={{$event->eventName}}: ${window.location.href} %23Yadu`;
                     window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
                 });
+
+                document.getElementById("share-whatsapp").addEventListener('click', function(){
+                    let url = `https://wa.me/?text={{$event->eventName}}: ${window.location.href}`;
+                    window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+                });
             </script>
 
             <script async defer crossorigin="anonymous" src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v3.2"></script>

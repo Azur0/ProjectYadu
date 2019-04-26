@@ -14,11 +14,6 @@ use App\Http\Controllers\Controller;
 
 class EventsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
     	$events = Event::all();
@@ -33,11 +28,6 @@ class EventsController extends Controller
         return view('welcome', compact('events'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         if(Auth::check() && Auth::user()->hasVerifiedEmail()) {
@@ -57,12 +47,6 @@ class EventsController extends Controller
         return json_encode($Picture);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -115,52 +99,92 @@ class EventsController extends Controller
         }
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Event $event)
     {
         return view('events.show', compact('event'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Event $event)
     {
-        //
+        if ($event->owner_id == Auth::id()) {
+            $data = array(
+                'event' => $event,
+                'tags' => EventTag::all(),
+                'picture' => EventPicture::all()
+            );
+
+            $datetime = explode(' ', $event->startDate);
+
+            $event->startDate = $datetime[0];
+
+            $event->startTime = $datetime[1];
+
+
+            return view('admin/events.edit', compact('data'));
+        } else {
+            abort(403);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'activityName' => 'required|max:30',
+            'description' => 'required|max:150',
+            'numberOfPeople' => 'required', //TODO: min en max nog doen
+            'tag' => 'required',
+            'startDate' => 'required|date|after:now',
+            'startTime' => 'required',
+            'location' => 'required',
+            'numberOfPeople' => 'required'
+        ]);
+
+
+        $request['startDate'] = $request['startDate'] . ' ' . $request['startTime'];
+
+        $validator->after(function ($validator) use ($request) {
+            if ($this->isPictureValid($request['tag'], $request['picture'])) {
+                $validator->errors()->add('picture', 'Something is wrong with this field!');
+            }
+        });
+
+        if ($validator->fails()) {
+            return redirect("/events/$id/edit")
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $event = Event::where('id', $id)->firstorfail();
+
+        if (Auth::id() == $event->owner_id) {
+            $event->update(
+                [
+                    'eventName' => $request['activityName'],
+                    'description' => $request['description'],
+                    'startDate' => $request['startDate'],
+                    'numberOfPeople' => $request['numberOfPeople'],
+                    'tag_id' => $request['tag'],
+                    'location_id' => '1',
+                    'event_picture_id' => $request['picture']
+                ]
+            );
+            //TODO: set location
+            return redirect('/events');
+        }
+        else {
+            abort(403);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy(Event $event)
     {
-        //
+        //$this->authorize('update',$event);
+        $event->delete();
+        return redirect('admin/events');
     }
 
+    // Remove this later ------------------------------------------------------------
     public function join($id)
     {
 
@@ -175,6 +199,7 @@ class EventsController extends Controller
         return redirect('/events/' . $id);
     }
 
+    // Remove this later ------------------------------------------------------------
     public function leave($id)
     {
         if(Auth::check()) {
@@ -187,7 +212,7 @@ class EventsController extends Controller
         //TODO: Add error 'You are not logged in!'
         return redirect('/events/' . $id);
     }
-
+    // -------------------------------------------------------------------------------
     private function formatDate()
     {
         $date = getdate();

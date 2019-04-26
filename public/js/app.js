@@ -49164,6 +49164,7 @@ __webpack_require__(/*! C:\xampp\htdocs\Project-Yadu-A1\resources\sass\app.scss 
 module.exports = __webpack_require__(/*! C:\xampp\htdocs\Project-Yadu-A1\resources\sass\sb-admin-2.scss */"./resources/sass/sb-admin-2.scss");
 
 
+
 /***/ })
 
 /******/ });

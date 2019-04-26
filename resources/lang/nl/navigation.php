@@ -15,7 +15,7 @@ return [
     'nav_events' => 'EVENEMENTEN',
     'nav_about' => 'OVER ONS',
     'nav_contact' => 'CONTACT',
-    'nav_profile' => 'PROFIEL',
+    'nav_dashboard' => 'DASHBOARD',
     'nav_login' => 'INLOGGEN',
     'nav_logout' => 'UITLOGGEN',
 

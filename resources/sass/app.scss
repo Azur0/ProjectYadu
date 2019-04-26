@@ -8,9 +8,102 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.navbar-laravel {
+.backlink
+{
+	margin: 0 0 1em 0;
+}
+
+.navbar-laravel
+{
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.card-header
+{
+	background-color: #E79435;
+	color: white;
+
+	a, .btn-link
+	{
+		color:	white;
+	}
+	a:hover
+	{
+		color: #A0FF7F;
+	}
+
+	.right
+	{
+		float: right;
+	}
+}
+
+#user_avatar
+{
+	text-align: center;	
+
+	img
+	{
+		border-radius: 80px;
+		width:		150px;
+	}
+}
+
+.dashboard_event
+{
+	display: flex;
+
+	a
+	{
+		width:	100%;
+		display: flex;
+
+		@media screen and (max-width: 991px)
+		{
+			display: block;
+		}
+
+	}
+	a:hover
+	{
+		text-decoration: none;
+	}
+	
+
+	img
+	{
+		max-width: 120px; 
+		max-height: 80px;
+		display: block;
+	}
+
+	.dashboard_event_info
+	{
+		h3, p
+		{
+			padding: 0 5px;
+			margin: 0 5px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+}
+
+.events
+{
+	width: 100%;
+	padding: 0;
+	font-size: 0;
+	text-align: center;
+
+	@media screen and (max-width: $break-small)
+	{
+    	display: block;
+    	width: 100px;
+    	min-width: 100%;
+		max-width: 100%;
+	}
 }
 
 #welcome_carousel
@@ -124,3 +217,4 @@
 	-webkit-filter: grayscale(100%);
 	filter: grayscale(100%);
 }
+

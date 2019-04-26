@@ -24,19 +24,33 @@
 			<table class="table table-hover">
 				<thead>
 				<tr>
-					<th scope="col">{{__('home.participating_table_colname_name')}}</th>
+					<th scope="col"></th>
+					<th scope="col">ID</th>
+					<th scope="col">{{__('event.show_location')}}</th>
 					<th scope="col">{{__('home.participating_table_colname_owner')}}</th>
 					<th scope="col">{{__('home.participating_table_colname_date')}}</th>
 					<th scope="col">{{__('home.participating_table_colname_location')}}</th>
+					<th scope="col">{{__('home.participating_table_colname_max_participants')}}</th>
+                    <th scope="col">{{__('home.participating_table_colname_participants')}}</th>
 				</tr>
 				</thead>
 				<tbody >
 				@foreach($events as $event)
 					<tr>
-						<td><a href="/admin/events/{{$events->id}}">{{ $events->eventName }}</a></td>
-						<td>{{ $events->owner->firstName }} {{ $events->owner->middleName }} {{ $events->owner->lastName }}</td>
-						<td>{{ $events->date }}</td>
-						<td>{{ $events->location->postalcode }} {{ $events->city }}</td>
+						<td>
+							@if(  $event->isHighlighted == 0)
+								ster
+							@else
+								geenster
+							@endif
+						</td>
+						<td>{{ $event->id}}</td>
+						<td>{{ $event->name}}</td>
+						<td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
+						<td>{{ $event->date }}</td>
+						<td>{{ $event->location->postalcode }} {{ $event->city }}</td>
+                        <td>{{$event->numberOfPeople}}</td>
+                        <td>{{$event->participants->count()}}</td>
 					</tr>
 				@endforeach
 				</tbody>

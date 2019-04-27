@@ -51,7 +51,7 @@
                                 @endif
                             </td>
                             <td>{{ $event->id}}</td>
-                            <td>{{ $event->name}}</td>
+                            <td>{{ $event->eventName}}</td>
                             <td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
                             <td>{{ $event->date }}</td>
                             <td>{{ $event->location->postalcode }} {{ $event->city }}</td>
@@ -108,13 +108,16 @@
 						{
 							`<tr>
 								<td></td>
-								<td> element['owner'] </td>
-								<td> element['owner'] </td>
-								<td> element['owner'] </td>
-								<td> element['owner'] </td>
-								<td> element['owner'] </td>
-								<td> element['owner'] </td>
-								<td> element['owner'] </td>
+								<td> element['id'] </td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>`
 						});
 					}

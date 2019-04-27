@@ -61,15 +61,15 @@
 						<td>{{ $event->location->postalcode }} {{ $event->city }}</td>
 						<td>{{$event->numberOfPeople}}</td>
 						<td>{{$event->participants->count()}}</td>
-						<td><a href="/events/{{$event->id}}" class="button-show">{{__('events.show')}}</a></td>
-                        <td><a href="/admin/events/{{$event->id}}/edit" class="button">{{__('events.show_edit')}}</a></td>
+						<td><a href="/events/{{$event->id}}" class="button-show button-hover">{{__('events.show')}}</a></td>
+                        <td><a href="/admin/events/{{$event->id}}/edit" class="button button-hover">{{__('events.show_edit')}}</a></td>
                         <td>
                             <form method="POST" action="/admin/events/{{$event->id}}">
                                 @method('DELETE')
                                 @csrf
                                 <div class="field">
                                     <div class="control">
-                                        <button type="submit" class="button-remove">{{__('events.show_delete')}}</button>
+                                        <button type="submit" class="button-remove button-hover">{{__('events.show_delete')}}</button>
                                     </div>
                                 </div>
                             </form>
@@ -107,22 +107,24 @@
 					if (data == "") {
 						$('#eventsToDisplay').html("<tr>{{__('events.index_no_event_found')}}</tr>");
 					} else {
-						$('#eventsToDisplay').html("");
+
+                        $('#eventsToDisplay').html("");
 						data.forEach(function (element)
 						{
-							`<tr>
-								<td></td>
-								<td> element['id'] </td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>`
+                            $('#eventsToDisplay').html($("#eventsToDisplay").html()+
+							"<tr> " +
+                                "<td>"+ element['id'] + "</td>" +
+                                "<td>"+ element['id'] + "</td>" +
+                                "<td>"+ element['id'] + "</td>" +
+                                "<td>"+ element['id'] + "</td>" +
+                                "<td>"+ element['id'] + "</td>" +
+                                "<td>"+ element['id'] + "</td>" +
+                                "<td>"+ element['id'] + "</td>" +
+                                "<td>"+ element['id'] + "</td>" +
+                                "<td>"+ element['id'] + "</td>" +
+                                "<td>"+ element['id'] + "</td>" +
+                                "<td>"+ element['id'] + "</td>" +
+                            "</tr>")
 						});
 					}
 				},

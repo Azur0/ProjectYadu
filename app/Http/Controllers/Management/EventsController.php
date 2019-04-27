@@ -106,6 +106,8 @@ class EventsController extends Controller
 
     public function edit(Event $event)
     {
+        dd($event->owner_id );
+        dd(Auth::id());
         if ($event->owner_id == Auth::id()) {
             $data = array(
                 'event' => $event,

@@ -61,7 +61,7 @@
                             <td>{{$event->numberOfPeople}}</td>
                             <td>{{$event->participants->count()}}</td>
                         </a>
-                        <td><a href="admin/events/{{$event->id}}/edit" class="button">{{__('events.show_edit')}}</a></td>
+                        <td><a href="/admin/events/{{$event->id}}/edit" class="button">{{__('events.show_edit')}}</a></td>
                         <td>
                             <form method="POST" action="/admin/events/{{$event->id}}">
                                 @method('DELETE')

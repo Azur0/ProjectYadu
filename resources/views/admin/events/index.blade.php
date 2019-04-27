@@ -63,7 +63,7 @@
                         </a>
                         <td><a href="admin/events/{{$event->id}}/edit" class="button">{{__('events.show_edit')}}</a></td>
                         <td>
-                            <form method="POST" action="admin/events/{{$event->id}}">
+                            <form method="POST" action="/admin/events/{{$event->id}}">
                                 @method('DELETE')
                                 @csrf
                                 <div class="field">

@@ -57,7 +57,7 @@
                             <td>{{ $event->location->postalcode }} {{ $event->city }}</td>
                             <td>{{$event->numberOfPeople}}</td>
                             <td>{{$event->participants->count()}}</td>
-						<td><a href="/events/{{$event->id}}">{{__('events.show')}}</a></td>
+						<td><a href="/events/{{$event->id}}" class="button-show">{{__('events.show')}}</a></td>
                         <td><a href="/admin/events/{{$event->id}}/edit" class="button">{{__('events.show_edit')}}</a></td>
                         <td>
                             <form method="POST" action="/admin/events/{{$event->id}}">
@@ -65,7 +65,7 @@
                                 @csrf
                                 <div class="field">
                                     <div class="control">
-                                        <button type="submit" class="button">{{__('events.show_delete')}}</button>
+                                        <button type="submit" class="button-remove">{{__('events.show_delete')}}</button>
                                     </div>
                                 </div>
                             </form>

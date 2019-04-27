@@ -59,7 +59,7 @@ return [
     'create_error_max_participants_required' => 'The amount of people field is required',
 
 ///////////////////////////////// Show ////////////////////////////////////
-
+    'show' => 'View',
     'show_location' => 'Location',
     'show_date' => 'Date and time',
     'show_title' => 'Title',

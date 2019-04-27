@@ -59,7 +59,7 @@ return [
     'create_error_max_participants_required' => 'Het max aantal mensen-veld is verplicht.',
 
 ///////////////////////////////// Show ////////////////////////////////////
-
+    'show' => 'Weergeven',
     'show_location' => 'Locatie',
     'show_date' => 'Datum en tijd',
     'show_title' => 'Titel',

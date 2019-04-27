@@ -33,6 +33,7 @@
 					<th scope="col">{{__('events.show_location')}}</th>
                     <th scope="col">{{__('events.show_max')}}</th>
                     <th scope="col">{{__('events.show_attendees_ammount')}}</th>
+					<th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
 				</tr>
@@ -41,8 +42,9 @@
 					@foreach($events as $event)
 
 
-					<tr>
-                        <a href='events/"+ {{$event->id}}+"'>
+					<tr >
+
+
                             <td>
                                 @if(  $event->isHighlighted == 1)
                                     <i class="fas fa-star"></i>
@@ -55,7 +57,7 @@
                             <td>{{ $event->location->postalcode }} {{ $event->city }}</td>
                             <td>{{$event->numberOfPeople}}</td>
                             <td>{{$event->participants->count()}}</td>
-                        </a>
+						<td><a href="/events/{{$event->id}}">{{__('events.show')}}</a></td>
                         <td><a href="/admin/events/{{$event->id}}/edit" class="button">{{__('events.show_edit')}}</a></td>
                         <td>
                             <form method="POST" action="/admin/events/{{$event->id}}">

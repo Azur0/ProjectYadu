@@ -43,20 +43,18 @@
 
 
 					<tr >
-
-
-                            <td>
-                                @if(  $event->isHighlighted == 1)
-                                    <i class="fas fa-star"></i>
-                                @endif
-                            </td>
-                            <td>{{ $event->id}}</td>
-                            <td>{{ $event->eventName}}</td>
-                            <td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
-                            <td>{{ $event->date }}</td>
-                            <td>{{ $event->location->postalcode }} {{ $event->city }}</td>
-                            <td>{{$event->numberOfPeople}}</td>
-                            <td>{{$event->participants->count()}}</td>
+						<td>
+							@if(  $event->isHighlighted == 1)
+								<i class="fas fa-star"></i>
+							@endif
+						</td>
+						<td>{{ $event->id}}</td>
+						<td>{{ $event->eventName}}</td>
+						<td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
+						<td>{{ \Carbon\Carbon::parse($event->date)->format('d/m/Y')}}  </td>
+						<td>{{ $event->location->postalcode }} {{ $event->city }}</td>
+						<td>{{$event->numberOfPeople}}</td>
+						<td>{{$event->participants->count()}}</td>
 						<td><a href="/events/{{$event->id}}" class="button-show">{{__('events.show')}}</a></td>
                         <td><a href="/admin/events/{{$event->id}}/edit" class="button">{{__('events.show_edit')}}</a></td>
                         <td>

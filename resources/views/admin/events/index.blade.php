@@ -4,11 +4,6 @@
 
 	<div class="card">
 		<div class="card-header">
-			<i class="fas fa-calendar-alt"></i> {{__('event.event')}} 
-			<span>
-				<a href="/events/create" class="btn btn-yadu-orange w-100"><i class="fas fa-user-friends"></i>&nbsp;{{__('events.index_create_event')}}
-				</a>
-			</span>
 			<div>
 				<div class="search">
 					<label for="filterByTag">{{__('events.index_select_category')}}</label>
@@ -47,7 +42,7 @@
 
 
 					<tr>
-                        <a href='/events/"+ {{$event->id}}+"'>
+                        <a href='events/"+ {{$event->id}}+"'>
                             <td>
                                 @if(  $event->isHighlighted == 1)
                                     <i class="fas fa-star"></i>

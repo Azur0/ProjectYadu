@@ -60,6 +60,7 @@ return [
 
 ///////////////////////////////// Show ////////////////////////////////////
     'show' => 'View',
+    'show_lang' => 'English',
     'show_location' => 'Location',
     'show_date' => 'Date and time',
     'show_title' => 'Title',

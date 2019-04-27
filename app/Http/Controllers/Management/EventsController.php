@@ -7,6 +7,7 @@ use App\EventPicture;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\EventTag;
+use App\Account;
 use Validator;
 use Illuminate\Support\Carbon;
 use Auth;
@@ -106,9 +107,9 @@ class EventsController extends Controller
 
     public function edit(Event $event)
     {
-        dd($event->owner_id );
-        dd(Auth::id());
-        if ($event->owner_id == Auth::id()) {
+        //TODO: Should find a better way
+        $account = Account::where('id',Auth::id())->get();
+        if ($event->owner_id == Auth::id() || $account[0]->accountRole == 'Admin') {
             $data = array(
                 'event' => $event,
                 'tags' => EventTag::all(),

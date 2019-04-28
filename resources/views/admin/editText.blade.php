@@ -17,7 +17,7 @@ function isObjectArray($key, $item){
         if (is_array($singleItem)){
             printTitle($key);
             global $addedString;
-            $addedString .= "---";
+            $addedString .= "&nbsp;&nbsp;&nbsp;&nbsp;";
             isObjectArray($key, $singleItem);
         }
         else {
@@ -33,7 +33,7 @@ function printTitle($key){
 
 function printInputFields($key, $item, $primaryKey){
     global $addedString;
-    echo "<p> $addedString - $key <input type='text' name='$primaryKey;$key' id='EditInput' value='$item'></p>";
+    echo "<p> $addedString $key - <input type='text' name='$primaryKey;$key' id='EditInput' value='".htmlspecialchars_decode($item)."'></p>";
 }
 
 ?>
@@ -41,13 +41,13 @@ function printInputFields($key, $item, $primaryKey){
     @foreach ($x as $key => $item)
     @if (!is_array($item))
     <?php global $addedString; $addedString = "";?>
-    <p>{{$key}} - <input type="text" name="{{$key}}" id="EditInput" value="{{$item}}"></p>
+    <p>{{$key}} - <input type="text" name="{{$key}}" id="EditInput" value="{{htmlspecialchars_decode($item)}}"></p>
     @else
     <?php 
         global $addedString; 
         $addedString = ""; 
         printTitle($key); 
-        $addedString = "---"; 
+        $addedString = "&nbsp;&nbsp;&nbsp;&nbsp;"; 
         isObjectArray($key, $item); ?>
     @endif
 

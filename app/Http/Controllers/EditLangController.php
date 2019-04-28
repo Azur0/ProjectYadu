@@ -48,44 +48,25 @@ class EditLangController extends Controller
         file_put_contents($fileName, $fileBegin.$fileMiddle.$fileEnd);
         return redirect('/admin');
     }
-    function makeMiddle($input, $baseFile, $fileMiddle, $baseKey){
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        
-        foreach ($baseFile as $key => $value){
-            
-            // if($baseKey!=""){
-            //     dd($baseFile);
-            // }
-            
-            if(is_array($value)){
-             
-                // if($baseKey!=""){
-                //     dd($baseFile);
-                // }
+    function makeMiddle($input, $baseFile, $fileMiddle, $baseKey) 
+    {
+        foreach ($baseFile as $key => $value) {            
+            if (is_array($value)) {
+
                 $fileMiddle .= "'$key' => [";
-               
-                
                 $fileMiddle = $this->makeMiddle($input, $value, $fileMiddle, $key);
-                
                 $fileMiddle .= " ], "; 
-            }else{
-                // $out->writeln("--> key ".$key);
-                // $out->writeln("--> value ".$value);
-                if($baseKey != ""){
+
+            } else {
+                if($baseKey != "") {
                     $valueFromInput = $input["$baseKey;$key"];
-                }
-                else{
+                } else {
                     $valueFromInput = $input["$key"];    
                 }
-                
+                $string = str_replace("'", "\'", $valueFromInput);
                 $fileMiddle .=" '$key' => '$valueFromInput', ";
-                // dd($fileMiddle);
             }
         }
-        // if($baseKey==""){
-        //     dd($fileMiddle);
-        // }
-        //  dd($fileMiddle);
         return $fileMiddle;
     }
 }

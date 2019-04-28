@@ -35,7 +35,6 @@
 					<th scope="col">{{__('events.show_date')}}</th>
 					<th scope="col">{{__('events.show_location')}}</th>
                     <th scope="col">{{__('events.show_max')}}</th>
-                    <th scope="col">{{__('events.show_attendees_ammount')}}</th>
 					<th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -63,8 +62,7 @@
 							@endif
 						</td>
 						<td>{{ $event->location->postalcode }} {{ $event->city }}</td>
-						<td>{{$event->numberOfPeople}}</td>
-						<td>{{$event->participants->count()}}</td>
+						<td>{{$event->numberOfPeople}}/{{$event->participants->count()}}</td>
 						<td><a href="/events/{{$event->id}}" class="button-show button-hover">{{__('events.show')}}</a></td>
                         <td><a href="/admin/events/{{$event->id}}/edit" class="button button-hover">{{__('events.show_edit')}}</a></td>
                         <td>
@@ -132,8 +130,7 @@
                                 	"<td>"+ element['owner_firstName'] + " "+ middleName +element['owner_lastName'] + "</td>" +
                                 	"<td>"+ element['user_date'] + "</td>" +
                                 	"<td>"+ element['location']['postalcode'] + " " + element['loc'] + "</td>" +
-									"<td>"+ element['numberOfPeople'] + "</td>" +
-									"<td>"+ element['participants_ammount'] + "</td>" +
+									"<td>"+ element['numberOfPeople'] + "/" + element['participants_ammount'] + "</td>" +
                                 	"<td><a href='/events/"+ element['id']+"' class='button-show button-hover'>{{__('events.show')}}</a></td>" +
                                 	"<td><a href='/admin/events/"+ element['id']+"/edit'class='button button-hover'>{{__('events.show_edit')}}</a></td>" +
 									"<td><form method='POST' action='/admin/events/"+element['id']+"'>" +

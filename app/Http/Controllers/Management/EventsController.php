@@ -17,16 +17,14 @@ class EventsController extends Controller
 {
 	public function index()
 	{
-		$events = Event::all();
-		$tags = EventTag::all();
-		$names = Event::distinct('eventName')->pluck('eventName');
-		return view('admin/events.index', compact(['tags', 'names'],'events'));
-	}
-
-	public function welcome()
-	{
-		$events = Event::all();
-		return view('welcome', compact('events'));
+		if (Auth::check())
+		{
+			$events = Event::all();
+			$tags = EventTag::all();
+			$names = Event::distinct('eventName')->pluck('eventName');
+			return view('admin/events.index', compact(['tags', 'names'],'events'));	
+		}
+		
 	}
 
 	public function create()
@@ -102,7 +100,7 @@ class EventsController extends Controller
 
 	public function show(Event $event)
 	{
-		if( Auth()::check() )
+		if (Auth::check())
 		{
 			return view('events.show', compact('event'));
 		}
@@ -114,14 +112,14 @@ class EventsController extends Controller
 
 	public function edit(Event $event)
 	{
-		if( Auth()::check() )
+		if (Auth::check())
 		{
-			if(Auth::id() == 'Admin')
+			if (Auth::id() == 'Admin')
 			{
 				$data = array(
-				'event' => $event,
-				'tags' => EventTag::all(),
-				'picture' => EventPicture::all()
+					'event' => $event,
+					'tags' => EventTag::all(),
+					'picture' => EventPicture::all()
 				);
 
 				$datetime = explode(' ', $event->startDate);

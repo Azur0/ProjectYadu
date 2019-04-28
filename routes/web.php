@@ -50,3 +50,4 @@ Route::resource('events', 'EventsController');
 Route::get('admin', function () { return view('admin.index'); });
 
 Route::resource('admin/events','Management\EventsController');
+Route::post('/admin/events/actionDistanceFilter', 'Management\EventsController@actionDistanceFilter')->name('admin_events_controller.actionDistanceFilter');

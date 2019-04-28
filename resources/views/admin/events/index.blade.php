@@ -93,7 +93,7 @@
 			var inputTag = $(filterByTag).val();
 			var inputName = $(filterByName).val();
 			$.ajax({
-				url: "{{ route('events_controller.actionDistanceFilter')}}",
+				url: "{{ route('admin_events_controller.actionDistanceFilter')}}",
 				method: 'POST',
 				data: {
 					distance: 25,
@@ -107,24 +107,30 @@
 					if (data == "") {
 						$('#eventsToDisplay').html("<tr>{{__('events.index_no_event_found')}}</tr>");
 					} else {
-
                         $('#eventsToDisplay').html("");
 						data.forEach(function (element)
 						{
-                            $('#eventsToDisplay').html($("#eventsToDisplay").html() +
-							"<tr> " +
-                                "<td>"+ element['id'] + "</td>" +
-                                "<td>"+ element['id'] + "</td>" +
-                                "<td>"+ element['id'] + "</td>" +
-                                "<td>"+ element['id'] + "</td>" +
-                                "<td>"+ element['id'] + "</td>" +
-                                "<td>"+ element['id'] + "</td>" +
-                                "<td>"+ element['id'] + "</td>" +
-                                "<td>"+ element['id'] + "</td>" +
-                                "<td>"+ element['id'] + "</td>" +
-                                "<td>"+ element['id'] + "</td>" +
-                                "<td>"+ element['id'] + "</td>" +
-                            "</tr>")
+							var highlighted = ""
+							if(element['isHighlighted'] == 1){
+								highlighted = "<i class='fas fa-star'></i>"
+							}
+							console.log(element);
+                            $('#eventsToDisplay').html($("#eventsToDisplay").html()+
+									"<tr><td>"+ highlighted +"</td>" +
+									"<td>"+ element['id'] + "</td>" +
+                                	"<td>"+ element['eventName'] + "</td>" +
+                                	"<td>"+ element['id'] + "</td>" +
+                                	"<td>"+ element['date'] + "</td>" +
+                                	"<td>"+ element['location']['postalcode'] +" "+ element['loc'] + "</td>" +
+									"<td>"+ element['numberOfPeople'] + "</td>" +
+									"<td>"+ element['participants'] + "</td>" +
+                                	"<td><a href='/events/"+ element['id']+"' class='button-show button-hover'>{{__('events.show')}}</a></td>" +
+                                	"<td><a href='/admin/events/"+ element['id']+"/edit'class='button button-hover'>{{__('events.show_edit')}}</a></td>" +
+									"<td><form method='POST' action='/admin/events/"+element['id']+"'>" +
+									'@method('DELETE') @csrf' +
+									"<div class='field'><div class='control'>"+
+									"<button type='submit' class='button-remove button-hover'>{{__('events.show_delete')}}"+
+									"</button> </div> </div> </form></td></tr>")
 						});
 					}
 				},

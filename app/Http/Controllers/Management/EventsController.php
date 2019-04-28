@@ -258,41 +258,40 @@ class EventsController extends Controller
 	private $distance = 0;
 
 	public function actionDistanceFilter(Request $request)
-	{
+    {
 
-		$tags = EventTag::where('tag', 'like', '%' . $request->inputTag .'%')->pluck('id');
-		$names = Event::where('eventName', 'like', '%' . $request->inputName .'%')->pluck('id');
-		$this->distance = $request->input('distance');
-		$unfiltered_events = Event::where('isDeleted', '==', 0)
-			->where('startDate', '>=', $this->formatDate())
-			->whereIn('id', $names)
-			->whereIn('tag_id', $tags)
-			->orderBy('startDate', 'asc')
-			->get();
+        $tags = EventTag::where('tag', 'like', '%' . $request->inputTag .'%')->pluck('id');
+        $names = Event::where('eventName', 'like', '%' . $request->inputName .'%')->pluck('id');
+        $this->distance = $request->input('distance');
+        $unfiltered_events = Event::where('isDeleted', '==', 0)
+            ->where('startDate', '>=', $this->formatDate())
+            ->whereIn('id', $names)
+            ->whereIn('tag_id', $tags)
+            ->orderBy('startDate', 'asc')
+            ->get();
 
-		//TODO: Set initial amount of items to load and add 'load more' button
-		$events = new Collection();
+        $events = new Collection();
 
-		//TODO:3 Filters from Ruben
+        foreach ($unfiltered_events as $event) {
+            $date = self::dateToText($event->startDate);
 
-		//TODO:2 Filter the unfiltered events (Or so called pre-filtered events)
-		//$filtered_events = $this->areEvenstInRange($unfiltered_events);
+            $postalcode = self::cityFromPostalcode($event->Location->postalcode);
 
-		foreach ($unfiltered_events as $event) {
-			$date = self::dateToText($event->startDate);
+            $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
+            $Pic = (base64_encode($Picture[0]->picture));
 
-			$postalcode = self::cityFromPostalcode($event->Location->postalcode);
+            $owner = Account::where('id', '=', $event->owner_id)->get();
 
-			$Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
-			$Pic = (base64_encode($Picture[0]->picture));
-
-			$event->setAttribute('picture', $Pic);
-			$event->setAttribute('loc', $postalcode);
-			$event->setAttribute('date', $date);
-			$events->push($event);
-		}
-		return json_encode($events);
-	}
+            $event->setAttribute('owner_firstName', $owner[0]['firstName']);
+            $event->setAttribute('owner_middleName', $owner[0]['middleName']);
+            $event->setAttribute('owner_lastName', $owner[0]['lastName']);
+            $event->setAttribute('picture', $Pic);
+            $event->setAttribute('loc', $postalcode);
+            $event->setAttribute('date', $date);
+            $events->push($event);
+        }
+        return json_encode($events);
+    }
 
 	public function dateToText($timestamp)
 	{

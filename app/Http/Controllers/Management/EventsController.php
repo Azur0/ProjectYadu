@@ -267,7 +267,12 @@ class EventsController extends Controller
             $Pic = (base64_encode($Picture[0]->picture));
 
             $owner = Account::where('id', '=', $event->owner_id)->get();
-
+            $eventInfo = Event::where('id', '=', $event->id)->get();
+            $ammount = 0;
+            if($eventInfo[0]->participants->count() != 0){
+                $ammount = $eventInfo[0]->participants->count();
+            }
+            $event->setAttribute('participants_ammount',$ammount);
             $event->setAttribute('owner_firstName', $owner[0]['firstName']);
             $event->setAttribute('owner_middleName', $owner[0]['middleName']);
             $event->setAttribute('owner_lastName', $owner[0]['lastName']);

@@ -14,7 +14,7 @@
 						@endforeach
 					</datalist>
 					<label for="filterByName">{{__('events.index_search_name')}}</label>
-					<input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" autocomplete="off"/>
+					<input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" placeholder="search" autocomplete="off"/>
 				</div>
 			</div>
 			<div class="col-12">
@@ -114,16 +114,20 @@
 							if(element['isHighlighted'] == 1){
 								highlighted = "<i class='fas fa-star'></i>"
 							}
+							var middleName = ""
+							if(element['owner_middleName'] != null){
+								middleName = element['owner_middleName'] + " ";
+							}
 							console.log(element);
                             $('#eventsToDisplay').html($("#eventsToDisplay").html()+
 									"<tr><td>"+ highlighted +"</td>" +
 									"<td>"+ element['id'] + "</td>" +
                                 	"<td>"+ element['eventName'] + "</td>" +
-                                	"<td>"+ element['id'] + "</td>" +
+                                	"<td>"+ element['owner_firstName'] + " "+ middleName +element['owner_lastName'] + "</td>" +
                                 	"<td>"+ element['date'] + "</td>" +
-                                	"<td>"+ element['location']['postalcode'] +" "+ element['loc'] + "</td>" +
+                                	"<td>"+ element['location']['postalcode'] + " " + element['loc'] + "</td>" +
 									"<td>"+ element['numberOfPeople'] + "</td>" +
-									"<td>"+ element['participants'] + "</td>" +
+									"<td>"+ element['participants_ammount'] + "</td>" +
                                 	"<td><a href='/events/"+ element['id']+"' class='button-show button-hover'>{{__('events.show')}}</a></td>" +
                                 	"<td><a href='/admin/events/"+ element['id']+"/edit'class='button button-hover'>{{__('events.show_edit')}}</a></td>" +
 									"<td><form method='POST' action='/admin/events/"+element['id']+"'>" +

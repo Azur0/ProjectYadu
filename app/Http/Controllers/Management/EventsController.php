@@ -122,7 +122,6 @@ class EventsController extends Controller
 
             $event->startTime = $datetime[1];
 
-
             return view('admin/events.edit', compact('data'));
         } else {
             abort(403);
@@ -246,13 +245,7 @@ class EventsController extends Controller
             ->orderBy('startDate', 'asc')
             ->get();
 
-        //TODO: Set initial amount of items to load and add 'load more' button
         $events = new Collection();
-
-        //TODO:3 Filters from Ruben
-
-        //TODO:2 Filter the unfiltered events (Or so called pre-filtered events)
-        //$filtered_events = $this->areEvenstInRange($unfiltered_events);
 
         foreach ($unfiltered_events as $event) {
             $date = self::dateToText($event->startDate);
@@ -262,6 +255,11 @@ class EventsController extends Controller
             $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
             $Pic = (base64_encode($Picture[0]->picture));
 
+            $owner = Account::where('id', '=', $event->owner_id)->get();
+
+            $event->setAttribute('owner_firstName', $owner[0]['firstName']);
+            $event->setAttribute('owner_middleName', $owner[0]['middleName']);
+            $event->setAttribute('owner_lastName', $owner[0]['lastName']);
             $event->setAttribute('picture', $Pic);
             $event->setAttribute('loc', $postalcode);
             $event->setAttribute('date', $date);

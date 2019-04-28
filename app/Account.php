@@ -34,7 +34,13 @@ class Account extends Authenticatable implements MustVerifyEmailContract
         }
     }
 
-    public function gender(){
+    public function gender()
+    {
        return $this->belongsTo(Gender::class);
+	}
+
+	public function participates()
+    {
+        return $this->belongsToMany('App\Event', 'event_has_participants', 'account_id', 'event_id');
     }
 }

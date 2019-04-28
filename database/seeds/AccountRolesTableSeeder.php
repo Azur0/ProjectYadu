@@ -13,7 +13,8 @@ class AccountRolesTableSeeder extends Seeder
     {
         $roles = array("User", "Admin");
 
-        foreach ($roles as $role) {
+        foreach ($roles as $role) 
+       	{
             DB::table('account_roles')->insert([
                 'role' => $role,
                 'created_at' => date("Y-m-d H:i:s"),

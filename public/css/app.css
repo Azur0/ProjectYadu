@@ -10655,8 +10655,238 @@ a.text-dark:focus {
   }
 }
 
+.backlink {
+  margin: 0 0 1em 0;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+
+.card-header {
+  background-color: #E79435;
+  color: white;
+}
+
+.card-header a,
+.card-header .btn-link {
+  color: white;
+}
+
+.card-header a:hover {
+  color: #A0FF7F;
+}
+
+.card-header .right {
+  float: right;
+}
+
+#user_avatar {
+  text-align: center;
+}
+
+#user_avatar img {
+  border-radius: 80px;
+  width: 150px;
+}
+
+.dashboard_event {
+  display: flex;
+}
+
+.dashboard_event a {
+  width: 100%;
+  display: flex;
+}
+
+@media screen and (max-width: 991px) {
+  .dashboard_event a {
+    display: block;
+  }
+}
+
+.dashboard_event a:hover {
+  text-decoration: none;
+}
+
+.dashboard_event img {
+  max-width: 120px;
+  max-height: 80px;
+  display: block;
+}
+
+.dashboard_event .dashboard_event_info h3,
+.dashboard_event .dashboard_event_info p {
+  padding: 0 5px;
+  margin: 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.events {
+  width: 100%;
+  padding: 0;
+  font-size: 0;
+  text-align: center;
+}
+
+@media screen and (max-width: 580px) {
+  .events {
+    display: block;
+    width: 100px;
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+.event_wrap {
+  display: inline-block;
+  overflow: hidden;
+  width: 30%;
+  padding: 10px;
+  margin: 5px;
+  background-color: #FFBF7F;
+  border-radius: calc(0.25rem - 1px);
+  position: relative;
+  font-size: initial;
+}
+
+.event_wrap:hover {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.04);
+}
+
+.event_wrap .event_info {
+  background-color: #FFFFFF;
+  text-align: center;
+}
+
+.event_wrap .event_avatar {
+  max-width: 30%;
+  height: auto;
+  margin: auto;
+  position: absolute;
+  top: 20%;
+  left: 35%;
+}
+
+.event_wrap .event_avatar img {
+  width: 100%;
+  border-radius: 300px;
+  background-color: white;
+}
+
+.event_wrap .event_avatar h3 {
+  max-height: 30px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 580px) {
+  .event_wrap {
+    width: 100px;
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0 0 1em 0;
+  }
+}
+
+
+#welcome_carousel {
+  margin: 0 0 30px 0;
+  background-image: url("/images/contact-header-bg.jpg");
+  background-size: cover;
+}
+
+#welcome_carousel a,
+#welcome_carousel a:hover {
+  color: white;
+}
+
+#welcome_carousel .carousel-caption {
+  text-shadow: 2px 2px 2px black;
+}
+
+@media only screen and (min-width: 740px) {
+  #welcome_carousel {
+    overflow: hidden;
+  }
+
+  #welcome_carousel .carousel-inner {
+    height: 50vh !important;
+  }
+
+  #welcome_carousel .carousel-inner .carousel-item {
+    height: 50vh !important;
+  }
+
+  #welcome_carousel .carousel-inner .carousel-item .carousel_img_container {
+    overflow: hidden;
+  }
+
+  #welcome_carousel .carousel-inner .carousel-item .carousel_img_container img {
+    min-width: 100%;
+    overflow-y: auto;
+  }
+
+  #welcome_carousel .carousel-inner .carousel-item a,
+  #welcome_carousel .carousel-inner .carousel-item a:hover {
+    color: white;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  #welcome_carousel img {
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+  }
+}
+
+@media only screen and (max-width: 739px) {
+  #welcome_carousel .carousel-caption p {
+    display: none;
+  }
+
+  #welcome_carousel .carousel-caption .d-none {
+    display: block !important;
+  }
+}
+
+#welcome_info {
+  margin: 0 auto 30px auto;
+  text-align: center;
+}
+
+#welcome_info p {
+  max-width: 60%;
+  margin: auto;
+}
+
+#welcome_recent h2 {
+  background-color: #E79435;
+  padding: 0.5em;
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+#welcome_recent p,
+#welcome_recent h3 {
+  text-align: center;
+}
+
+@media only screen and (max-width: 739px) {
+  #welcome_recent {
+    margin-bottom: 50px;
+  }
+}
+
+.greyified {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
 }
 

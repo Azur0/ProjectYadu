@@ -12,18 +12,18 @@ return [
 
     'nav_motto' => 'VIND WAT JE BINDT!',
     'nav_home' => 'HOME',
-    'nav_events' => 'EVENEMENTEN',
-    'nav_about' => 'OVER ONS',
+    'nav_events' => 'EVENTS',
+    'nav_about' => 'ABOUT US',
     'nav_contact' => 'CONTACT',
-    'nav_dashboard' => 'DASHBOARD',
-    'nav_login' => 'INLOGGEN',
-    'nav_logout' => 'UITLOGGEN',
+    'nav_profile' => 'PROFILE',
+    'nav_login' => 'LOGIN',
+    'nav_logout' => 'LOGOUT',
 
 ///////////////////////////////// Footer //////////////////////////////////
 
-    'footer_about' => 'OVER YADU',
+    'footer_about' => 'ABOUT YADU',
     'footer_contact' => 'CONTACT',
-    'footer_tos' => 'VOORWAARDEN',
+    'footer_tos' => 'TERMS OF USE',
     'footer_cookies' => 'COOKIES',
     'footer_privacy' => 'PRIVACY',
 

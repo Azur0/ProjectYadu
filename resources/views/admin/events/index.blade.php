@@ -111,7 +111,7 @@
                         $('#eventsToDisplay').html("");
 						data.forEach(function (element)
 						{
-                            $('#eventsToDisplay').html($("#eventsToDisplay").html()+
+                            $('#eventsToDisplay').html($("#eventsToDisplay").html() +
 							"<tr> " +
                                 "<td>"+ element['id'] + "</td>" +
                                 "<td>"+ element['id'] + "</td>" +

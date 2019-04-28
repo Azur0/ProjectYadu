@@ -22,6 +22,10 @@ class Event extends Model
     {
         return $this->belongsToMany('App\Account', 'event_has_participants', 'event_id', 'account_id');
     }
+
+    public function tag(){
+        return $this->belongsTo('App\EventTag', 'tag_id','id');
+    }
 	
 	public function location(){
         //return $this->hasOne('App\Location','location_id','id');

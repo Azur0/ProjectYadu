@@ -272,6 +272,20 @@ class EventsController extends Controller
             if($eventInfo[0]->participants->count() != 0){
                 $ammount = $eventInfo[0]->participants->count();
             }
+            $userDate = "";
+            //TODO found out how the lang is set in our project
+            if(true){
+                $userDate = \Carbon\Carbon::parse($event->date)->format('d/m/Y');
+            }else{
+                $userDate = \Carbon\Carbon::parse($event->date)->format('m/d/Y');
+            }
+            $eventTag = EventTag::where('id', '=', $event->tag_id)->get();
+
+
+
+
+            $event->setAttribute('tag', $eventTag[0]['tag']);
+            $event->setAttribute('user_date', $userDate);
             $event->setAttribute('participants_ammount',$ammount);
             $event->setAttribute('owner_firstName', $owner[0]['firstName']);
             $event->setAttribute('owner_middleName', $owner[0]['middleName']);

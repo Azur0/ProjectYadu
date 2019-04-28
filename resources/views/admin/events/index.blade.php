@@ -1,5 +1,7 @@
 @extends('layouts/admin/app')
-
+@section('custom_script')
+	<script type="text/javascript" src="/js/admin_event_filter.js" defer></script>
+@endsection
 @section('content')
 
 	<div class="card">
@@ -27,6 +29,7 @@
 				<tr>
 					<th scope="col"></th>
 					<th scope="col">ID</th>
+					<th scope="col">{{__('events.show_category')}}</th>
 					<th scope="col">{{__('events.show_title')}}</th>
 					<th scope="col">{{__('events.show_initiator')}}</th>
 					<th scope="col">{{__('events.show_date')}}</th>
@@ -49,6 +52,7 @@
 							@endif
 						</td>
 						<td>{{ $event->id}}</td>
+						<td>{{ $event->tag->tag }}</td>
 						<td>{{ $event->eventName}}</td>
 						<td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
 						<td>
@@ -118,13 +122,15 @@
 							if(element['owner_middleName'] != null){
 								middleName = element['owner_middleName'] + " ";
 							}
+
 							console.log(element);
                             $('#eventsToDisplay').html($("#eventsToDisplay").html()+
 									"<tr><td>"+ highlighted +"</td>" +
 									"<td>"+ element['id'] + "</td>" +
+									"<td>"+ element['tag'] + "</td>" +
                                 	"<td>"+ element['eventName'] + "</td>" +
                                 	"<td>"+ element['owner_firstName'] + " "+ middleName +element['owner_lastName'] + "</td>" +
-                                	"<td>"+ element['date'] + "</td>" +
+                                	"<td>"+ element['user_date'] + "</td>" +
                                 	"<td>"+ element['location']['postalcode'] + " " + element['loc'] + "</td>" +
 									"<td>"+ element['numberOfPeople'] + "</td>" +
 									"<td>"+ element['participants_ammount'] + "</td>" +

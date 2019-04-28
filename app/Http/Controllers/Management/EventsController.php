@@ -279,9 +279,9 @@ class EventsController extends Controller
             $userDate = "";
             //TODO found out how the lang is set in our project
             if(true){
-                $userDate = \Carbon\Carbon::parse($event->date)->format('d/m/Y - H:i');
+                $userDate = \Carbon\Carbon::parse($event->startDate)->format('d/m/Y - H:i');
             }else{
-                $userDate = \Carbon\Carbon::parse($event->date)->format('m/d/Y - H:i');
+                $userDate = \Carbon\Carbon::parse($event->startDate)->format('m/d/Y - H:i');
             }
             $eventTag = EventTag::where('id', '=', $event->tag_id)->get();
 

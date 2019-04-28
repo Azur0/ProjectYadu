@@ -56,9 +56,9 @@
 						<td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
 						<td>
 							@if(__('events.show_lang') == "Dutch")
-								{{ \Carbon\Carbon::parse($event->date)->format('d/m/Y - H:i')}}
+								{{ \Carbon\Carbon::parse($event->startDate)->format('d/m/Y - H:i')}}
 							@else
-								{{ \Carbon\Carbon::parse($event->date)->format('m/d/Y - H:i')}}
+								{{ \Carbon\Carbon::parse($event->startDate)->format('m/d/Y - H:i')}}
 							@endif
 						</td>
 						<td>{{ $event->location->postalcode }} - {{ $event->city }}</td>

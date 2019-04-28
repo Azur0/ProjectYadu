@@ -56,12 +56,12 @@
 						<td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
 						<td>
 							@if(__('events.show_lang') == "Dutch")
-								{{ \Carbon\Carbon::parse($event->date)->format('d/m/Y H:i')}}
+								{{ \Carbon\Carbon::parse($event->date)->format('d/m/Y - H:i')}}
 							@else
-								{{ \Carbon\Carbon::parse($event->date)->format('m/d/Y H:i')}}
+								{{ \Carbon\Carbon::parse($event->date)->format('m/d/Y - H:i')}}
 							@endif
 						</td>
-						<td>{{ $event->location->postalcode }} {{ $event->city }}</td>
+						<td>{{ $event->location->postalcode }} - {{ $event->city }}</td>
 						<td>{{$event->numberOfPeople}}/{{$event->participants->count()}}</td>
 						<td><a href="/events/{{$event->id}}" class="button-show button-hover">{{__('events.show')}}</a></td>
                         <td><a href="/admin/events/{{$event->id}}/edit" class="button button-hover">{{__('events.show_edit')}}</a></td>
@@ -129,7 +129,7 @@
                                 	"<td>"+ element['eventName'] + "</td>" +
                                 	"<td>"+ element['owner_firstName'] + " "+ middleName +element['owner_lastName'] + "</td>" +
                                 	"<td>"+ element['user_date'] + "</td>" +
-                                	"<td>"+ element['location']['postalcode'] + " " + element['loc'] + "</td>" +
+                                	"<td>"+ element['location']['postalcode'] + " - " + element['loc'] + "</td>" +
 									"<td>"+ element['numberOfPeople'] + "/" + element['participants_ammount'] + "</td>" +
                                 	"<td><a href='/events/"+ element['id']+"' class='button-show button-hover'>{{__('events.show')}}</a></td>" +
                                 	"<td><a href='/admin/events/"+ element['id']+"/edit'class='button button-hover'>{{__('events.show_edit')}}</a></td>" +

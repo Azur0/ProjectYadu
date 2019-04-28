@@ -60,6 +60,7 @@ return [
 
 ///////////////////////////////// Show ////////////////////////////////////
     'show' => 'Weergeven',
+    'show_category' => 'Categorie',
     'show_lang' => 'Dutch',
     'show_location' => 'Locatie',
     'show_date' => 'Datum en tijd',

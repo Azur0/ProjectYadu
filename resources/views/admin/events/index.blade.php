@@ -1,5 +1,7 @@
 @extends('layouts/admin/app')
-
+@section('custom_script')
+	<script type="text/javascript" src="/js/admin_event_filter.js" defer></script>
+@endsection
 @section('content')
 
 	<div class="card">
@@ -14,7 +16,7 @@
 						@endforeach
 					</datalist>
 					<label for="filterByName">{{__('events.index_search_name')}}</label>
-					<input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" autocomplete="off"/>
+					<input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" placeholder="search" autocomplete="off"/>
 				</div>
 			</div>
 			<div class="col-12">
@@ -27,12 +29,12 @@
 				<tr>
 					<th scope="col"></th>
 					<th scope="col">ID</th>
+					<th scope="col">{{__('events.show_category')}}</th>
 					<th scope="col">{{__('events.show_title')}}</th>
 					<th scope="col">{{__('events.show_initiator')}}</th>
 					<th scope="col">{{__('events.show_date')}}</th>
 					<th scope="col">{{__('events.show_location')}}</th>
                     <th scope="col">{{__('events.show_max')}}</th>
-                    <th scope="col">{{__('events.show_attendees_ammount')}}</th>
 					<th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -49,18 +51,18 @@
 							@endif
 						</td>
 						<td>{{ $event->id}}</td>
+						<td>{{ $event->tag->tag }}</td>
 						<td>{{ $event->eventName}}</td>
 						<td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
 						<td>
 							@if(__('events.show_lang') == "Dutch")
-								{{ \Carbon\Carbon::parse($event->date)->format('d/m/Y')}}
+								{{ \Carbon\Carbon::parse($event->startDate)->format('d/m/Y - H:i')}}
 							@else
-								{{ \Carbon\Carbon::parse($event->date)->format('m/d/Y')}}
+								{{ \Carbon\Carbon::parse($event->startDate)->format('m/d/Y - H:i')}}
 							@endif
 						</td>
-						<td>{{ $event->location->postalcode }} {{ $event->city }}</td>
-						<td>{{$event->numberOfPeople}}</td>
-						<td>{{$event->participants->count()}}</td>
+						<td>{{ $event->location->postalcode }} - {{ $event->city }}</td>
+						<td>{{$event->numberOfPeople}}/{{$event->participants->count()}}</td>
 						<td><a href="/events/{{$event->id}}" class="button-show button-hover">{{__('events.show')}}</a></td>
                         <td><a href="/admin/events/{{$event->id}}/edit" class="button button-hover">{{__('events.show_edit')}}</a></td>
                         <td>
@@ -114,16 +116,21 @@
 							if(element['isHighlighted'] == 1){
 								highlighted = "<i class='fas fa-star'></i>"
 							}
+							var middleName = ""
+							if(element['owner_middleName'] != null){
+								middleName = element['owner_middleName'] + " ";
+							}
+
 							console.log(element);
                             $('#eventsToDisplay').html($("#eventsToDisplay").html()+
 									"<tr><td>"+ highlighted +"</td>" +
 									"<td>"+ element['id'] + "</td>" +
+									"<td>"+ element['tag'] + "</td>" +
                                 	"<td>"+ element['eventName'] + "</td>" +
-                                	"<td>"+ element['id'] + "</td>" +
-                                	"<td>"+ element['date'] + "</td>" +
-                                	"<td>"+ element['location']['postalcode'] +" "+ element['loc'] + "</td>" +
-									"<td>"+ element['numberOfPeople'] + "</td>" +
-									"<td>"+ element['participants'] + "</td>" +
+                                	"<td>"+ element['owner_firstName'] + " "+ middleName +element['owner_lastName'] + "</td>" +
+                                	"<td>"+ element['user_date'] + "</td>" +
+                                	"<td>"+ element['location']['postalcode'] + " - " + element['loc'] + "</td>" +
+									"<td>"+ element['numberOfPeople'] + "/" + element['participants_ammount'] + "</td>" +
                                 	"<td><a href='/events/"+ element['id']+"' class='button-show button-hover'>{{__('events.show')}}</a></td>" +
                                 	"<td><a href='/admin/events/"+ element['id']+"/edit'class='button button-hover'>{{__('events.show_edit')}}</a></td>" +
 									"<td><form method='POST' action='/admin/events/"+element['id']+"'>" +

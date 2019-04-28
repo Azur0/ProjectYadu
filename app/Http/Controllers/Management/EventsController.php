@@ -102,14 +102,23 @@ class EventsController extends Controller
 
     public function show(Event $event)
     {
-        return view('events.show', compact('event'));
+        if( Auth() )
+        {
+        	
+        }
+        else
+        {
+        	return redirect('/login');
+        }
+        //return view('events.show', compact('event'));
     }
 
     public function edit(Event $event)
     {
         //TODO: Should find a better way
         $account = Account::where('id',Auth::id())->get();
-        if ($event->owner_id == Auth::id() || $account[0]->accountRole == 'Admin') {
+        if ($event->owner_id == Auth::id() || $account[0]->accountRole == 'Admin') 
+        {
             $data = array(
                 'event' => $event,
                 'tags' => EventTag::all(),
@@ -119,11 +128,13 @@ class EventsController extends Controller
             $datetime = explode(' ', $event->startDate);
 
             $event->startDate = $datetime[0];
-
             $event->startTime = $datetime[1];
 
+
             return view('admin/events.edit', compact('data'));
-        } else {
+        } 
+        else
+        {
             abort(403);
         }
     }

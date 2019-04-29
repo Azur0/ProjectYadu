@@ -55,19 +55,22 @@
   text-decoration: none !important;
 }
 
-.card-body
+
+@media screen and (max-width: 1331px)
 {
-	overflow-y: scroll;
-}
-
-.card-header
-{
-
-	height: 60px;
-	overflow-y: scroll;
-
-	.search
+	.card-header
 	{
-		min-width: 700px;
+
+		height: 60px;
+		overflow-y: scroll;
+
+		.search
+		{
+			min-width: 700px;
+		}
+	}
+	.card-body
+	{
+		overflow-y: scroll;
 	}
 }

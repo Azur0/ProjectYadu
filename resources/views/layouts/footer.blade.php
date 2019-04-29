@@ -24,8 +24,8 @@
                     </li>
                 </ul>
             </div>
-            <div>
-                <form method="POST" action="/language" class="form-group mt-3">
+            <div class="col-sm float-right">
+                <form method="POST" action="/language" class="form-group mt-3 float-right">
                     @csrf
                     <select name="language" id="language" onchange="this.form.submit()" class="form-control">
                         <option value="nl" @if(App::getlocale() == 'nl') selected @endif >NL</option>

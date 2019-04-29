@@ -12,7 +12,7 @@ class Event extends Model
 
     protected $dispatchesEvents = [
         'deleting' => EventDeleted::class,
-        'edited' => EventEdited::class
+        'updated' => EventEdited::class
     ];
 
     public function eventPicture()

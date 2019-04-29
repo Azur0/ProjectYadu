@@ -13,8 +13,8 @@
                         {{--@endforeach--}}
                     {{--</datalist>--}}
                     {{--<label for="filterByName">{{__('events.index_search_name')}}</label>--}}
-                    <input oninput="fetch_events()" list="names" id="filterByName" name="filterByName"
-                           autocomplete="off"/>
+                    {{--<input oninput="fetch_events()" list="names" id="filterByName" name="filterByName"--}}
+                           {{--autocomplete="off"/>--}}
                 </div>
             </div>
             <div class="col-12">

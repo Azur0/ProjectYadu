@@ -553,6 +553,11 @@ input[type=radio]:checked + .category span {
     height: 50px;
 }
 
+.avatar-lg {
+    width: 100px;
+    height: 100px;
+}
+
 .event_img {
     height: 353px;
 }

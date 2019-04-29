@@ -49,5 +49,8 @@ Route::get('admin', function () { return view('admin.index'); });
 
 Route::get('admin/accounts', 'Management\AccountsController@index');
 Route::get('admin/accounts/{id}', 'Management\AccountsController@show');
+Route::get('admin/accounts/{id}/activate', 'Management\AccountsController@activate');
+Route::get('admin/accounts/{id}/delete', 'Management\AccountsController@destroy');
+Route::get('admin/accounts/{id}/restore', 'Management\AccountsController@restore');
 
 Route::resource('admin/events','Management\EventsController');

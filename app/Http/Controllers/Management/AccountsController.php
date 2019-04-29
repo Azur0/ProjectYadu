@@ -69,21 +69,6 @@ class AccountsController extends Controller
         }
     }
 
-    public function restore($id)
-    {
-        if (Auth::check() && Auth::user()->accountRole == 'Admin') {
-            $account = Account::where('id', $id)->firstOrFail();
-
-            $account->isDeleted = 0;
-
-            $account->save();
-
-            return redirect('admin/accounts');
-        } else {
-            abort(403);
-        }
-    }
-
     public function update($id)
     {
         if (Auth::check() && Auth::user()->accountRole == 'Admin') {

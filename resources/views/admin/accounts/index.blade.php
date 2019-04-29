@@ -30,12 +30,12 @@
                             <td>{{$account->email}}</td>
                             <td>
                                 @if($account->email_verified_at != null)
-                                    <button disabled class="btn btn-success">{{$account->email_verified_at}}</button>
+                                    <span class="text-success"><i class="fa fa-check" aria-hidden="true"></i></span>
                                 @else
-                                    <button disabled class="btn btn-danger">---</button>
+                                    <span class="text-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
                                 @endif
                             </td>
-                            <td>{{$account->created_at}}</td>
+                            <td>{{date('d-m-Y', strtotime($account->created_at))}}</td>
                         </tr>
                     @endforeach
                     </tbody>

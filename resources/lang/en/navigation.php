@@ -17,7 +17,7 @@ return [
     'nav_overview' => 'Overview',
     'nav_about' => 'ABOUT US',
     'nav_contact' => 'CONTACT',
-    'nav_profile' => 'PROFILE',
+    'nav_dashboard' => 'DASHBOARD',
     'nav_login' => 'LOGIN',
     'nav_logout' => 'LOGOUT',
 

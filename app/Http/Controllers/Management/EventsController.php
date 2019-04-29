@@ -15,21 +15,27 @@ use App\Http\Controllers\Controller;
 
 class EventsController extends Controller
 {
-
 	public function index()
 	{
 		if (Auth::check())
 		{
-			$events = Event::all();
+			if (Auth::user()->accountRole == 'Admin')
+			{
+				$events = Event::all();
 
-            $tags = EventTag::all();
-            $names = Event::distinct('eventName')->pluck('eventName');
-        	$currentDate = Carbon::now();
-            foreach($events as $event){
-                $event->city = self::cityFromPostalcode($event->Location->postalcode);
-                $event->currentDate = $currentDate;
-            }
-            return view('admin/events.index', compact(['tags', 'names'],'events'));  
+				$tags = EventTag::all();
+				$names = Event::distinct('eventName')->pluck('eventName');
+				$currentDate = Carbon::now();
+				foreach($events as $event){
+					$event->city = self::cityFromPostalcode($event->Location->postalcode);
+					$event->currentDate = $currentDate;
+				}
+				return view('admin/events.index', compact(['tags', 'names'],'events'));  
+			}
+			else
+			{
+				abort(403);
+			}
 		}
 		else
 		{
@@ -39,12 +45,27 @@ class EventsController extends Controller
 
 	public function create()
 	{
-		if(Auth::check() && Auth::user()->hasVerifiedEmail()) {
-			$Tags = EventTag::all();
-			$Picture = EventPicture::all();
-			return view('events.create')->withtags($Tags)->withpictures($Picture);
+		if (Auth::check())
+		{
+			if (Auth::user()->accountRole == 'Admin')
+			{
+				if(Auth::user()->hasVerifiedEmail())
+				{
+					$Tags = EventTag::all();
+					$Picture = EventPicture::all();
+					return view('events.create')->withtags($Tags)->withpictures($Picture);
+				}
+				return redirect('/events');
+			}
+			else
+			{
+				abort(403);
+			}
 		}
-		return redirect('/events');
+		else
+		{
+			return redirect('/login');
+		}
 	}
 
 	public function action(Request $request)
@@ -168,8 +189,6 @@ class EventsController extends Controller
 		{
 			if (Auth::user()->accountRole == 'Admin')
 			{
-				//dd($request['isHighlighted']);
-
 				$validator = Validator::make($request->all(), [
 					'activityName' => 'required|max:30',
 					'description' => 'required|max:150',

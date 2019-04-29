@@ -109,7 +109,7 @@
 				},
 				dataType: 'json',
 				success: function (data) {
-					console.log(data);
+
 					if (data == "") {
 						$('#eventsToDisplay').html("<tr>{{__('events.index_no_event_found')}}</tr>");
 					} else {
@@ -134,7 +134,7 @@
 								middleName = element['owner_middleName'] + " ";
 							}
 
-							console.log(element);
+							
 							$('#eventsToDisplay').html($("#eventsToDisplay").html()+
 									"<tr><td>"+ highlighted +"</td>" +
 									"<td>"+ timeIcon +"</td>" +

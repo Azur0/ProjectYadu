@@ -1,12 +1,11 @@
 @component('mail::message')
-# Introduction
 
-Event is edited
+    # {{__('mail.editTitle')}}
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+    {{$salutation . $ownerName}}
 
-Thanks,<br>
-{{ config('app.name') }}
+    {{__('mail.editText1') . $event->eventName . __('mail.editText2')}}
+
+    {{__('mail.closing')}}
+
 @endcomponent

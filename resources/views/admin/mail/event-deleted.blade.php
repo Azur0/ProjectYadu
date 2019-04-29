@@ -1,13 +1,10 @@
 @component('mail::message')
-# Introduction
 
-This is a delete message
+    # {{__('mail.deleteTitle')}}
+    {{$salutation . $ownerName}}
 
+    {{__('mail.deleteText1') . $event->eventName . __('mail.deleteText2')}}
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+    {{__('mail.closing')}}
 
-Thanks,<br>
-{{ config('app.name') }}
 @endcomponent

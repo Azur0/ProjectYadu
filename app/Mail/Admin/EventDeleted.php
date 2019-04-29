@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Lang;
 
 class EventDeleted extends Mailable
 {
@@ -16,9 +17,10 @@ class EventDeleted extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $event;
+    public function __construct($event)
     {
-        //
+        $this->event = $event;
     }
 
     /**
@@ -28,6 +30,9 @@ class EventDeleted extends Mailable
      */
     public function build()
     {
-        return $this->markdown('admin/mail.event-deleted');
+        return $this->markdown('admin/mail.event-deleted')->with([
+            'salutation'=> Lang::get('mail.salutation'),
+            'ownerName'=>$this->event->owner->firstName
+        ]);
     }
 }

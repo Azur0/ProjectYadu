@@ -230,9 +230,12 @@ class EventsController extends Controller
 
 	public function destroy(Event $event)
 	{
-		//$this->authorize('update',$event);
-		$event->delete();
-		return redirect('admin/events');
+		if (Auth::check())
+		{
+			//$this->authorize('update',$event);
+			$event->delete();
+			return redirect('admin/events');
+		}
 	}
 
 	// Remove this later ------------------------------------------------------------

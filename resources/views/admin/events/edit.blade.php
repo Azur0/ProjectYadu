@@ -20,28 +20,28 @@
 				<form action="/admin/events/{{$data['event']->id}}" method="POST">
 					@method("PATCH")
 					@csrf
-					<h3>iNf0</h3>
+					<h3>{{__('events.edit_header_info')}}</h3>
 					<div class="description">
-						<h5>Title</h5>
+						<h5>{{__('events.edit_info_title')}}</h5>
 						<input type="text" id="title" name="activityName" placeholder="Titel"
 							   oninput="update_counter_title(this)" maxlength="30" required
 							   value="{{ $data['event']->eventName }}">
 						<span id="chars_title"></span> characters remaining
 						@if ($errors->has('activityName'))
-							<div class="error">Het titel-veld is verplicht.</div>
+							<div class="error">{{__('events.edit_error_title')}}</div>
 						@endif
 
-						<h5>Omschrijving</h5>
+						<h5>{{__('events.edit_info_description')}}</h5>
 						<textarea id="desc" name="description" placeholder="Omschrijving.."
 								  oninput="update_counter_desc(this)"
 								  maxlength="150" required>{{ $data['event']->description }}</textarea>
 						<span id="chars_desc"></span> characters remaining
 						@if ($errors->has('description'))
-							<div class="error">Het omschrijving-veld is verplicht.</div>
+							<div class="error">{{__('events.edit_error_description')}}</div>
 						@endif
 					</div>
 					<div class="description">
-						<h5>Gehighlight</h5>
+						<h5>{{__('events.edit_info_highlighted')}}</h5>
 						<div class="custom-control custom-switch">
 							@if($data['event']->isHighlighted == 0)
 								<input type="checkbox" name="isHighlighted" class="custom-control-input" id="customSwitches">
@@ -58,24 +58,24 @@
 							<h5>Time</h5>
 							<input id="date" name="startTime" type="time" value="{{ $data['event']->startTime }}" required>
 							@if ($errors->has('startDate'))
-								<div class="error">Deze datum/tijd is ongeldig.</div>
+								<div class="error">{{__('events.edit_error_date')}}</div>
 							@endif
 						</div>
 					</div>
 					
 					<div>
 						<div class="description">
-							<h5>Aantal deelnemers</h5>
+							<h5>{{__('events.edit_info_amountofparticipants')}}</h5>
 							<input type="number" name="numberOfPeople" min="1" max="25"
 								   value="{{ $data['event']->numberOfPeople }}">
-							<span class="number_desc">mensen kunnen mee (incl. jezelf)</span>
+							<span class="number_desc">{{__('events.edit_info_amountofparticipants_desc')}}</span>
 							@if ($errors->has('numberOfPeople'))
-								<div class="error">Het max aantal mensen-veld is verplicht.</div>
+								<div class="error">{{__('events.edit_error_amountofparticipants')}}</div>
 							@endif
 						</div>
 					</div>
 					<div class="type">
-						<h3>Type</h3>
+						<h3>{{__('events.edit_header_category')}}</h3>
 						<div class="types">
 							<div class="box">
 								@foreach ($data['tags'] as $tag)
@@ -94,13 +94,12 @@
 								@endforeach
 							</div>
 							@if ($errors->has('tag'))
-								<div class="error">Kies een type.</div>
+								<div class="error">{{__('events.edit_error_category')}}</div>
 							@endif
 						</div>
 					</div>
-
 					<div class="pic">
-						<h3>Banner</h3>
+						<h3>{{__('events.edit_header_location')}}</h3>
 						<div class="types">
 							<div id="box2" class="box">
 								@foreach($selectedTag->eventPictures()->get() as $picture)
@@ -116,20 +115,20 @@
 								@endforeach
 							</div>
 							@if ($errors->has('picture'))
-								<div class="error">Kies een foto.</div>
+								<div class="error">{{__('events.edit_error_img')}}</div>
 							@endif
 						</div>
 					</div>
 
 					
 					<div class="loc">
-						<h3>locatie </h3>
+						<h3>{{__('events.edit_header_location')}}</h3>
 						<div class="description location">
 							<input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required
 								   value="{{ $data['event']->location()->first()->postalcode }} {{ $data['event']->location()->first()->houseNumber }}{{ $data['event']->location()->first()->houseNumberAddition }}">
 							<div id="map"></div>
 							@if ($errors->has('location'))
-								<div class="error">Het locatie-veld is verplicht.</div>
+								<div class="error">{{__('events.edit_error_location')}}</div>
 							@endif
 						</div>
 					</div>

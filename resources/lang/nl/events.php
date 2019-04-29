@@ -75,4 +75,25 @@ return [
     'show_max'=> 'Max hoeveelheid deelnemers',
     'show_edit' => 'Wijzigen',
     'show_delete' => 'Verwijderen',
+
+///////////////////////////////// Edit ////////////////////////////////////
+	'edit_header_info' => 'Evenement informatie',
+	'edit_info_title' => 'Titel',
+	'edit_info_description' => 'Omschrijving',
+	'edit_info_highlighted' => 'Uitgelicht',
+	'edit_info_date' => 'Datum',
+	'edit_info_time' => 'Tijd',
+	'edit_info_amountofparticipants' => 'Aantal deelnemers',
+	'edit_info_amountofparticipants_desc' => 'Mensen kunnen mee (incl. jezelf)',
+	'edit_header_category' => 'Evenement Categorie',
+	'edit_header_banner' => 'Evenement Banner foto',
+	'edit_header_location' => 'Evenement Locatie',
+	
+	'edit_error_title' => 'Het titel-veld is verplicht.',
+	'edit_error_description' => 'Het omschrijving-veld is verplicht.',
+	'edit_error_date' => 'Deze datum/tijd is ongeldig.',
+	'edit_error_amountofparticipants' => 'Het max aantal mensen-veld is verplicht.',
+	'edit_error_category' => 'Kies een type.',
+	'edit_error_img' => 'Kies een foto.',
+	'edit_error_location' => 'Het locatie-veld is verplicht.',
 ];

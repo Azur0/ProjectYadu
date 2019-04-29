@@ -17,6 +17,7 @@ return [
     'index_email' => 'Email',
     'index_verified' => 'Verified',
     'index_created' => 'Created on',
+    'index_search' => 'Email or Role',
 
 
 ///////////////////////////////// Edit ////////////////////////////////////
@@ -53,4 +54,6 @@ return [
     'password_reset' => 'Password Reset',
     'password_reset_button' => 'Send Reset Password Email',
 
+    'index_no_event_found' => 'No accounts found',
+    'index_loading_error' => 'Error loading accounts'
 ];

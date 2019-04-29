@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Management;
 
 use App\AccountRole;
 use App\Http\Controllers\AccountController;
+use function foo\func;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Account;
@@ -99,5 +101,39 @@ class AccountsController extends Controller
         } else {
             abort(403);
         }
+    }
+
+    public function action(Request $request)
+    {
+        $string = $request['inputName'];
+
+        $accounts = Account::where('isDeleted', '0')
+            ->where(function ($query) use ($string) {
+                return $query->where('email', 'like', '%' . $string . '%')
+                    ->orWhere('accountRole', $string);
+            });
+
+
+        $accounts = $accounts->get();
+
+
+        foreach ($accounts as $account) {
+            $account['fullName'] = $account['firstName'] . " " . $account['middleName'] . " " . $account['lastName'];
+
+
+            $account['avatar'] = base64_encode($account['avatar']);
+
+            if ($account['email_verified_at'] != null) {
+                $account['email_verified_at'] = "<span class=\"text-success\"><i class=\"fa fa-check\" aria-hidden=\"true\"></i></span>";
+            } else {
+                $account['email_verified_at'] = "<span class=\"text-danger\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></span>";
+            }
+
+//            $account['created_at'] = date('d-m-Y', strtotime($account['created_at']));
+
+            $account['url'] = url('/admin/accounts/' . $account['id']);
+        }
+
+        return json_encode($accounts);
     }
 }

@@ -17,6 +17,7 @@ return [
     'index_email' => 'Email',
     'index_verified' => 'Geverifieerd',
     'index_created' => 'Aangemaakt op',
+    'index_search' => 'Email of Rol',
 
 
 ///////////////////////////////// Edit ////////////////////////////////////
@@ -52,5 +53,8 @@ return [
     'email_verify_button' => 'Activeer',
     'password_reset' => 'Wachtwoord resetten',
     'password_reset_button' => 'Stuur wachtwoord reset email',
+
+    'index_no_event_found' => 'Geen accounts gevonden',
+    'index_loading_error' => 'Error tijdens het laden van accounts'
 
 ];

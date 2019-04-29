@@ -10,6 +10,7 @@ use App\Http\Controllers\API\LocationController;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\EventTag;
+use Illuminate\Support\Facades\App;
 use Validator;
 use Illuminate\View\View;
 use function PhpParser\filesInDir;
@@ -340,7 +341,7 @@ class EventsController extends Controller
 
     public function dateToText($timestamp)
     {
-        setlocale(LC_ALL, 'nl_NL.utf8');
+        setlocale(LC_ALL, App::getLocale());
         $date = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp);
         $formatted_date = ucfirst($date->formatLocalized('%a %d %B %Y'));
         return $formatted_date;

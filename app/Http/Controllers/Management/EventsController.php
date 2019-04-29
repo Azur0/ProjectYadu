@@ -176,8 +176,15 @@ class EventsController extends Controller
 					'startDate' => 'required|date|after:now',
 					'startTime' => 'required',
 					'location' => 'required',
-					'numberOfPeople' => 'required'
+					'numberOfPeople' => 'required',
+					'isHighlighted' => 'nullable|string'
 				]);
+
+				$highlight = 0;
+				if($request['isHighlighted'] == "on")
+				{
+					$highlight = 1;
+				}
 
 				$request['startDate'] = $request['startDate'] . ' ' . $request['startTime'];
 
@@ -207,7 +214,7 @@ class EventsController extends Controller
 						'tag_id' => $request['tag'],
 						'location_id' => '1',
 						'event_picture_id' => $request['picture'],
-						'isHighlighted' => 'true'
+						'isHighlighted' => $highlight
 					]
 				);
 				//TODO: set location

@@ -8,7 +8,7 @@ use App\Events\Eventedited;
 
 class Event extends Model
 {
-    protected $fillable = ['eventName','description', 'startDate', 'status', 'location_id', 'owner_id', 'tag_id', 'numberOfPeople', 'event_picture_id'];
+    protected $fillable = ['eventName','description', 'startDate', 'status', 'location_id', 'owner_id', 'tag_id', 'numberOfPeople', 'event_picture_id','isHighlighted'];
 
     protected $dispatchesEvents = [
         'deleting' => EventDeleted::class,

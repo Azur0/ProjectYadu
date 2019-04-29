@@ -24,30 +24,28 @@ class EditLangController extends Controller
             'lang' => 'required',
             'lang_file' => 'required',
         ]);
+
         $currentLocale = app()->getLocale();
         App::setLocale($request->lang);
         $langArrayFromFile = __($request->lang_file);
         App::setLocale($currentLocale);
-        // dd($langArrayFromFile);
 
         $fileName = base_path()."/resources/lang/".$request->lang."/".$request->lang_file.".php";
         $fileBegin = "<?php return [";
-       
 
         $values = $request->all();
-        // dd($values);
         unset($values["lang"]);
         unset($values["_token"]);
         unset($values["lang_file"]);
         
         $fileMiddle = $this->makeMiddle($values, $langArrayFromFile, "", "");
         
-        // dd($fileMiddle);
-
         $fileEnd = "];";
+        
         file_put_contents($fileName, $fileBegin.$fileMiddle.$fileEnd);
         return redirect('/admin');
     }
+    
     function makeMiddle($input, $baseFile, $fileMiddle, $baseKey) 
     {
         foreach ($baseFile as $key => $value) {            

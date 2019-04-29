@@ -166,10 +166,12 @@ class EventsController extends Controller
 		{
 			if (Auth::user()->accountRole == 'Admin')
 			{
+				//dd($request['isHighlighted']);
+
 				$validator = Validator::make($request->all(), [
 					'activityName' => 'required|max:30',
 					'description' => 'required|max:150',
-					'numberOfPeople' => 'required', //TODO: min en max nog doen
+					'numberOfPeople' => 'required|min:1', //TODO: min en max nog doen
 					'tag' => 'required',
 					'startDate' => 'required|date|after:now',
 					'startTime' => 'required',
@@ -205,7 +207,7 @@ class EventsController extends Controller
 						'tag_id' => $request['tag'],
 						'location_id' => '1',
 						'event_picture_id' => $request['picture'],
-						'isHighlighted' => 1
+						'isHighlighted' => 'true'
 					]
 				);
 				//TODO: set location

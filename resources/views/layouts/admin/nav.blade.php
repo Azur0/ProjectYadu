@@ -7,6 +7,14 @@
 		</div>
 	</a>
 
+	<hr class="sidebar-divider my-0">
+
+	<li class="nav-item">
+		<a href="/" class="nav-link">
+			<i class="fas fa-arrow-left"></i><span> Yadu</span>
+		</a>
+	</li>
+
 	<!-- Divider -->
 	<hr class="sidebar-divider my-0">
 

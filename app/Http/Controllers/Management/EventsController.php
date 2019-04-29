@@ -21,9 +21,12 @@ class EventsController extends Controller
 		if (Auth::check())
 		{
 			$events = Event::all();
-			$tags = EventTag::all();
-			$names = Event::distinct('eventName')->pluck('eventName');
-			return view('admin/events.index', compact(['tags', 'names'],'events'));	
+            $tags = EventTag::all();
+            $names = Event::distinct('eventName')->pluck('eventName');
+            foreach($events as $event){
+                $event->city = self::cityFromPostalcode($event->Location->postalcode);
+            }
+            return view('admin/events.index', compact(['tags', 'names'],'events'));  
 		}
 		else
 		{
@@ -158,51 +161,59 @@ class EventsController extends Controller
 
 	public function update(Request $request, $id)
 	{
-		$validator = Validator::make($request->all(), [
-			'activityName' => 'required|max:30',
-			'description' => 'required|max:150',
-			'numberOfPeople' => 'required', //TODO: min en max nog doen
-			'tag' => 'required',
-			'startDate' => 'required|date|after:now',
-			'startTime' => 'required',
-			'location' => 'required',
-			'numberOfPeople' => 'required'
-		]);
+		if (Auth::check())
+		{
+			if (Auth::user()->accountRole == 'Admin')
+			{
+				$validator = Validator::make($request->all(), [
+					'activityName' => 'required|max:30',
+					'description' => 'required|max:150',
+					'numberOfPeople' => 'required', //TODO: min en max nog doen
+					'tag' => 'required',
+					'startDate' => 'required|date|after:now',
+					'startTime' => 'required',
+					'location' => 'required',
+					'numberOfPeople' => 'required'
+				]);
 
+				$request['startDate'] = $request['startDate'] . ' ' . $request['startTime'];
 
-		$request['startDate'] = $request['startDate'] . ' ' . $request['startTime'];
+				$validator->after(function ($validator) use ($request)
+				{
+					if ($this->isPictureValid($request['tag'], $request['picture']))
+					{
+						$validator->errors()->add('picture', 'Something is wrong with this field!');
+					}
+				});
 
-		$validator->after(function ($validator) use ($request) {
-			if ($this->isPictureValid($request['tag'], $request['picture'])) {
-				$validator->errors()->add('picture', 'Something is wrong with this field!');
+				if ($validator->fails())
+				{
+					return redirect("/admin/events/$id/edit")
+						->withErrors($validator)
+						->withInput();
+				}
+
+				$event = Event::where('id', $id)->firstorfail();
+
+				$event->update(
+					[
+						'eventName' => $request['activityName'],
+						'description' => $request['description'],
+						'startDate' => $request['startDate'],
+						'numberOfPeople' => $request['numberOfPeople'],
+						'tag_id' => $request['tag'],
+						'location_id' => '1',
+						'event_picture_id' => $request['picture'],
+						'isHighlighted' => 1
+					]
+				);
+				//TODO: set location
+				return redirect('/admin/events');
 			}
-		});
-
-		if ($validator->fails()) {
-			return redirect("/events/$id/edit")
-				->withErrors($validator)
-				->withInput();
-		}
-
-		$event = Event::where('id', $id)->firstorfail();
-
-		if (Auth::id() == $event->owner_id) {
-			$event->update(
-				[
-					'eventName' => $request['activityName'],
-					'description' => $request['description'],
-					'startDate' => $request['startDate'],
-					'numberOfPeople' => $request['numberOfPeople'],
-					'tag_id' => $request['tag'],
-					'location_id' => '1',
-					'event_picture_id' => $request['picture']
-				]
-			);
-			//TODO: set location
-			return redirect('/events');
-		}
-		else {
-			abort(403);
+			else
+			{
+				abort(403);
+			}
 		}
 	}
 

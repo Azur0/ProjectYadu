@@ -5,8 +5,8 @@
         <i class="fa fa-bars"></i>
     </button>
 
-    <!-- Topbar Search -->
-    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+    <!-- Topbar Search 
+    <form class=" d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
         <div class="input-group">
             <input type="text" class="form-control bg-light border-0 small" placeholder="Zoeken..." aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
@@ -15,7 +15,7 @@
                 </button>
             </div>
         </div>
-    </form>
+    </form>-->
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
@@ -44,14 +44,14 @@
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Carmen Toelen</span>
-                <img class="img-profile rounded-circle" src="https://www.shareicon.net/download/2017/02/09/878597_user_512x512.png">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}</span>
+                <img class="img-profile rounded-circle" src="data:image/png;base64,{{ chunk_split(base64_encode(Auth::user()->avatar)) }}">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="/logout">
+                <a class="dropdown-item" href="/home">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
+                    Dashboard
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">

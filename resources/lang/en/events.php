@@ -75,4 +75,25 @@ return [
     'show_max'=> 'Max ammount of attendees',
     'show_edit' => 'Edit',
     'show_delete' => 'Delete',
+
+///////////////////////////////// Admin Edit ////////////////////////////////////
+	'edit_header_info' => 'Event Information',
+	'edit_info_title' => 'Title',
+	'edit_info_description' => 'Description',
+	'edit_info_highlighted' => 'Highlighted event',
+	'edit_info_date' => 'Date',
+	'edit_info_time' => 'Time',
+	'edit_info_amountofparticipants' => 'Amount of participants',
+	'edit_info_amountofparticipants_desc' => 'Max amount of participants',
+	'edit_header_category' => 'Event Category',
+	'edit_header_banner' => 'Event Banner Image',
+	'edit_header_location' => 'Event Location',
+
+	'edit_error_title' => 'The title-field is required.',
+	'edit_error_description' => 'The description-field is required.',
+	'edit_error_date' => 'Date/time is invalid.',
+	'edit_error_amountofparticipants' => 'The max amount of people-field is required.',
+	'edit_error_category' => 'Choose a category.',
+	'edit_error_img' => 'Choose an image.',
+	'edit_error_location' => 'The location-field is required.',
 ];

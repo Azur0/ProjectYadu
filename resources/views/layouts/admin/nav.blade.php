@@ -28,12 +28,12 @@
 	<!-- Divider -->
 	<hr class="sidebar-divider">
 
-	<!-- Heading -->
+	<!-- Heading-->
 	<div class="sidebar-heading">
 		Content
 	</div>
 
-	<!-- Nav Item - Pages -->
+	<!--Nav Item - Pages--> 
 	<li class="nav-item">
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
 			<i class="fas fa-fw fa-cog"></i>
@@ -55,7 +55,7 @@
 		Admin
 	</div>
 
-	<!-- Nav Item - Users -->
+	<!-- Nav Item - Users 
 	<li class="nav-item">
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
 			<i class="fas fa-fw fa-users"></i>
@@ -63,11 +63,11 @@
 		</a>
 		<div id="collapseUsers" class="collapse" aria-labelledby="headingUsers" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<!--<h6 class="collapse-header">Beheren:</h6>-->
+				<h6 class="collapse-header">Beheren:</h6>
 				<a class="collapse-item" href="{{ url('admin')  }}">Users: Placeholder link</a>
 			</div>
 		</div>
-	</li>
+	</li>-->
 
 	<!-- Nav Item - Events -->
 	<li class="nav-item">
@@ -79,7 +79,7 @@
 			<div class="bg-white py-2 collapse-inner rounded">
 				<!--<h6 class="collapse-header">Beheren:</h6>-->
 				<a class="collapse-item" href="{{ url('admin/events')  }}">{{__('navigation.nav_overview')}}</a>
-				<a class="collapse-item" href="{{ url('admin/events/create')  }}">Create</a>
+				<!--<a class="collapse-item" href="{{ url('admin/events/create')  }}">Create</a>-->
 			</div>
 		</div>
 	</li>

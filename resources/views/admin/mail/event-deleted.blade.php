@@ -1,7 +1,8 @@
 @component('mail::message')
 # Introduction
 
-The body of your message.
+This is a delete message
+
 
 @component('mail::button', ['url' => ''])
 Button Text

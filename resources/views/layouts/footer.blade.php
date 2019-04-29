@@ -25,11 +25,11 @@
                 </ul>
             </div>
             <div>
-                <form method="POST" action="/language">
+                <form method="POST" action="/language" class="form-group mt-3">
                     @csrf
-                    <select name="language" id="language" onchange="this.form.submit()">
+                    <select name="language" id="language" onchange="this.form.submit()" class="form-control">
                         <option value="nl" @if(App::getlocale() == 'nl') selected @endif >NL</option>
-                        <option value="en" @if(App::getlocale() == 'en') selected @endif >ENG</option>
+                        <option value="en" @if(App::getlocale() == 'en') selected @endif >EN</option>
                     </select>
                 </form>
             </div>

@@ -1,4 +1,4 @@
-
+//npm run development -- --watch
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -8,7 +8,213 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.navbar-laravel {
+.backlink
+{
+	margin: 0 0 1em 0;
+}
+
+.navbar-laravel
+{
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+.card-header
+{
+	background-color: #E79435;
+	color: white;
+
+	a, .btn-link
+	{
+		color:	white;
+	}
+	a:hover
+	{
+		color: #A0FF7F;
+	}
+
+	.right
+	{
+		float: right;
+	}
+}
+
+#user_avatar
+{
+	text-align: center;	
+
+	img
+	{
+		border-radius: 80px;
+		width:		150px;
+	}
+}
+
+.dashboard_event
+{
+	display: flex;
+
+	a
+	{
+		width:	100%;
+		display: flex;
+
+		@media screen and (max-width: 991px)
+		{
+			display: block;
+		}
+
+	}
+	a:hover
+	{
+		text-decoration: none;
+	}
+	
+
+	img
+	{
+		max-width: 120px; 
+		max-height: 80px;
+		display: block;
+	}
+
+	.dashboard_event_info
+	{
+		h3, p
+		{
+			padding: 0 5px;
+			margin: 0 5px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+}
+
+.events
+{
+	width: 100%;
+	padding: 0;
+	font-size: 0;
+	text-align: center;
+
+	@media screen and (max-width: $break-small)
+	{
+    	display: block;
+    	width: 100px;
+    	min-width: 100%;
+		max-width: 100%;
+	}
+}
+
+#welcome_carousel
+{
+	margin: 0 0 30px 0;
+	background-image: url("/images/contact-header-bg.jpg");
+	background-size: cover;
+
+	a, a:hover
+	{
+		color: white;
+	}
+
+	.carousel-caption
+	{
+		text-shadow: 2px 2px 2px black;
+	}
+
+	@media only screen and (min-width: 740px)
+	{
+		//height: 50vh;
+		overflow: hidden;
+		.carousel-inner
+		{
+			height: 50vh !important;
+
+			.carousel-item
+			{
+				height: 50vh !important;
+
+				.carousel_img_container
+				{
+					//height: 50vh ;
+					overflow: hidden;
+
+					img
+					{
+						min-width: 100%;
+						overflow-y: auto;
+					}
+				}
+
+				
+				a, a:hover
+				{
+					color: white;
+				}
+			}
+		}
+	}
+	@media only screen and (min-width: 1440px)
+	{
+		img
+		{
+			transform: translateY(-50%);
+		}
+	}
+	@media only screen and (max-width: 739px)
+	{
+		.carousel-caption
+		{
+			p
+			{
+				display: none;
+			} 
+		}
+		.carousel-caption .d-none
+		{
+			display: block !important;
+		}
+	}
+}
+
+#welcome_info
+{
+	margin: 0 auto 30px auto;
+	text-align: center;
+
+	p
+	{
+		max-width: 60%;
+		margin: auto;
+	}
+}
+
+#welcome_recent
+{
+
+	h2
+	{
+		background-color: #E79435;
+		padding: 0.5em;
+		color: white;
+		margin: 0;
+		text-align: center;
+	}
+
+	p, h3
+	{
+		text-align: center;
+	}
+
+	@media only screen and (max-width: 739px)
+	{
+		margin-bottom: 50px;
+	}
+}
+
+.greyified
+{
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
+

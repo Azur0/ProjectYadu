@@ -8,6 +8,6 @@ class EventTag extends Model
 {
     public function eventPictures()
     {
-        return $this->hasMany(EventPicture::class);
+        return $this->hasMany("App\EventPicture", "tag_id", "id");
     }
 }

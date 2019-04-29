@@ -38,7 +38,7 @@ return [
     'create_step3' => 'Kies de (verzamel)locatie',
     'create_step4' => 'Kies de datum en tijd',
     'create_step5' => 'Beschrijf je uitje',
-    'create_step6' => 'Beschrijf je uitje',
+    'create_step6' => 'Aantal personen',
 
     'create_submit' => 'Verzenden',
     'create_title' => 'Titel',
@@ -59,13 +59,19 @@ return [
     'create_error_max_participants_required' => 'Het max aantal mensen-veld is verplicht.',
 
 ///////////////////////////////// Show ////////////////////////////////////
-
+    'show' => 'Weergeven',
+    'show_lang' => 'Dutch',
     'show_location' => 'Locatie',
     'show_date' => 'Datum en tijd',
+    'show_title' => 'Titel',
     'show_description' => 'Beschijving',
     'show_initiator' => 'Initiatiefnemer',
     'show_attendees' => 'Wie gaan er mee?',
     'show_join' => 'Aanmelden',
     'show_leave' => 'Afmelden',
     'show_number_of_attendees' => ':amount van de :max deelnemers',
+    'show_attendees_ammount' => 'Hoeveelheid deelnemers',
+    'show_max'=> 'Max hoeveelheid deelnemers',
+    'show_edit' => 'Wijzigen',
+    'show_delete' => 'Verwijderen',
 ];

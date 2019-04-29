@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     <div class="slideContainer">
         <div style="width:90%; margin:auto;">
             <div class="box-range-value" id="box-move-with-distance">
@@ -26,7 +25,7 @@
             <input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag"/>
             <datalist id="tags">
                 @foreach ($tags as $tag)
-                    <option value="{{$tag}}">
+                    <option value="{{__('events.cat'.$tag->id)}}">
                 @endforeach
             </datalist>
             <label for="filterByName">{{__('events.index_search_name')}}</label>
@@ -53,6 +52,21 @@
             if (25 == slider.value) {
                 val.innerHTML = "∞";
             } else {
+
+                $('#eventsToDisplay').html("");
+                data.forEach(function(element) {
+                    
+                    $('#eventsToDisplay').html($("#eventsToDisplay").html() +
+                        "<div class='col-md-6 col-lg-4 event'><a href='/events/" + element[
+                            'id'] +
+                        "'><div class='card mb-4 box-shadow'> <img class = 'card-img-top' src ='data:image/jpeg;base64, " +
+                        element['picture'] +
+                        "' alt = 'Card image cap'><div class = 'event_info' > <h3> " +
+                        element['eventName'] + "</h3><p>" + element['date'] +
+                        "<br>" + element['loc'] +
+                        "</p></div></div></a></div>");
+                });
+
                 val.innerHTML = this.value;
             }
             document.getElementById("box-move-with-distance").style.transform = "translate(-" + ((((this.value / 5) - 1) * 10) + 5) + "px) rotate(-136deg)";
@@ -60,7 +74,6 @@
 
             fetch_events();
         };
-
         $(document).ready(function () {
             fetch_events();
             document.getElementById("box-move-with-distance").style.transform = "translate(-" + ((((slider.value / 5) - 1) * 10) + 5) + "px) rotate(-136deg)";
@@ -91,7 +104,7 @@
                         $('#eventsToDisplay').html(
                             //TODO remove inline style
                             //TODO TRANSLATION
-                            "<div style='text-align:center; width:100%; padding-top:50px;'><h1>Er kan geen event worden gevonden in uw buurt.</h1><div>"
+                            "<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_no_event_found')}}</h1><div>"
                         );
                     } else {
                         $('#eventsToDisplay').html("");
@@ -111,7 +124,7 @@
                 error: function (jqXHR, textStatus, errorThrown) {
                     $('#eventsToDisplay').html(
                         //TODO TRANSLATION
-                        "<div style='text-align:center; width:100%; padding-top:50px;'><h1>Er kan geen event worden geladen.</h1><div>"
+                        "<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_loading_error')}}</h1><div>"
                     );
                 }
             })

@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ URL::asset('/css/sb-admin-2.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('/css/custom.css') }}">
 
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('js/sb-admin-2.js') }}"></script>
 </head>
 
 <body id="page-top">
@@ -59,10 +61,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.js"></script>
-
 </body>
 
 </html>

@@ -7,9 +7,12 @@ use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\EditProfileRequest;
 use Illuminate\Http\Request;
 use App\Gender;
+use App\Event;
+use App\EventHasParticipants;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use DB;
+
 
 class AccountController extends Controller
 {
@@ -80,18 +83,4 @@ class AccountController extends Controller
         return redirect('/');
     }
 
-    public function admin_index()
-    {
-
-        $accounts = Account::all();
-
-        return view('admin.accounts.index', compact('accounts'));
-    }
-
-    public function admin_show($id)
-    {
-        $account = Account::where('id', $id)->firstOrFail();
-
-        return view('admin.accounts.show', compact('account'));
-    }
 }

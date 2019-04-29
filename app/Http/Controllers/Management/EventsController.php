@@ -1,75 +1,37 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Management;
 
-use App\Account;
-use App\EventPicture;
 use App\Event;
-use App\EventHasParticipants;
-use App\Http\Controllers\API\LocationController;
+use App\EventPicture;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\EventTag;
+use App\Account;
 use Validator;
-use Illuminate\View\View;
-use function PhpParser\filesInDir;
 use Illuminate\Support\Carbon;
-use App\Location;
 use Auth;
-
+use App\Http\Controllers\Controller;
 
 class EventsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+    	$events = Event::all();
         $tags = EventTag::all();
         $names = Event::distinct('eventName')->pluck('eventName');
-        return view('events.index', compact(['tags', 'names']));
+        return view('admin/events.index', compact(['tags', 'names'],'events'));
     }
 
     public function welcome()
-	{
-		$events = Event::take(6)
-			->where('isDeleted', '==', 0)
-			->orderBy('isHighlighted', 'desc')
-			->orderBy('startDate', 'desc')
-			->get();
-		$regular_events = Event::take(3)
-			->where('isDeleted', '==', 0)
-			->where('isHighlighted', '==', 0)
-			->orderBy('startDate', 'desc')
-			->get();
-
-		foreach($events as $event)
-		{
-			$event->city = self::cityFromPostalcode($event->Location->postalcode);
-			$event->startDate = self::dateToText($event->startDate);
-
-		}
-		foreach($regular_events as $event)
-		{
-			$event->city = self::cityFromPostalcode($event->Location->postalcode);
-			$event->startDate = self::dateToText($event->startDate);
-
-		}
-		
-		return view('welcome', compact('events', 'regular_events'));
-	}
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    {
+        $events = Event::all();
+        return view('welcome', compact('events'));
+    }
 
     public function create()
     {
-        if (Auth::check() && Auth::user()->hasVerifiedEmail()) {
+        if(Auth::check() && Auth::user()->hasVerifiedEmail()) {
             $Tags = EventTag::all();
             $Picture = EventPicture::all();
             return view('events.create')->withtags($Tags)->withpictures($Picture);
@@ -86,26 +48,17 @@ class EventsController extends Controller
         return json_encode($Picture);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
-            'people' => 'required', //TODO: min en max nog doen
+            'people' => 'required', //min en max nog doen
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
-            'startTime' => 'required',
             'location' => 'required',
             'picture' => 'required'
         ]);
-
-        $request['startDate'] = $request['startDate'] . ' ' . $request['startTime'];
 
         $validator->after(function ($validator) use ($request) {
             if ($this->isPictureValid($request['tag'], $request['picture'])) {
@@ -129,18 +82,17 @@ class EventsController extends Controller
                 'tag_id' => $request['tag'],
                 'location_id' => '1',
                 'owner_id' => auth()->user()->id,
-                'event_picture_id' => $request['picture']
+                'event_picture_id'=> $request['picture']
             ]
         );
         return redirect('/events');
     }
 
-    public function isPictureValid($tag, $picture)
-    {
-        if (!EventPicture::where('id', '=', $picture)->exists()) {
+    public function isPictureValid($tag, $picture){
+        if (!EventPicture::where('id','=',  $picture)->exists()) {
             return true;
         } else {
-            $eventPicture = EventPicture::all()->where('id', '=', $picture)->pluck('tag_id');
+            $eventPicture = EventPicture::all()->where('id','=',  $picture)->pluck('tag_id');
             if ($eventPicture[0] != $tag) {
                 return true;
             }
@@ -148,27 +100,16 @@ class EventsController extends Controller
         }
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Event $event)
     {
         return view('events.show', compact('event'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Event $event)
     {
-        if ($event->owner_id == Auth::id()) {
+        //TODO: Should find a better way
+        $account = Account::where('id',Auth::id())->get();
+        if ($event->owner_id == Auth::id() || $account[0]->accountRole == 'Admin') {
             $data = array(
                 'event' => $event,
                 'tags' => EventTag::all(),
@@ -182,22 +123,14 @@ class EventsController extends Controller
             $event->startTime = $datetime[1];
 
 
-            return view('events.edit', compact('data'));
+            return view('admin/events.edit', compact('data'));
         } else {
             abort(403);
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
@@ -246,21 +179,19 @@ class EventsController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy(Event $event)
     {
-        //
+        //$this->authorize('update',$event);
+        $event->delete();
+        return redirect('admin/events');
     }
 
+    // Remove this later ------------------------------------------------------------
     public function join($id)
     {
 
-        if (Auth::user()->hasVerifiedEmail()) {
+        if(Auth::user()->hasVerifiedEmail()) {
             $event = Event::findOrFail($id);
             if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->attach(auth()->user()->id);
@@ -271,9 +202,10 @@ class EventsController extends Controller
         return redirect('/events/' . $id);
     }
 
+    // Remove this later ------------------------------------------------------------
     public function leave($id)
     {
-        if (Auth::check()) {
+        if(Auth::check()) {
             $event = Event::findOrFail($id);
             if ($event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->detach(auth()->user()->id);
@@ -283,7 +215,7 @@ class EventsController extends Controller
         //TODO: Add error 'You are not logged in!'
         return redirect('/events/' . $id);
     }
-
+    // -------------------------------------------------------------------------------
     private function formatDate()
     {
         $date = getdate();
@@ -296,7 +228,7 @@ class EventsController extends Controller
     private function areEvenstInRange($events)
     {
         $locationController = new LocationController();
-        return $events = $locationController->areWithinReach($events, $this->distance);
+        return  $events = $locationController->areWithinReach($events, $this->distance);
     }
 
     private $distance = 0;
@@ -304,8 +236,8 @@ class EventsController extends Controller
     public function actionDistanceFilter(Request $request)
     {
 
-        $tags = EventTag::where('tag', 'like', '%' . $request->inputTag . '%')->pluck('id');
-        $names = Event::where('eventName', 'like', '%' . $request->inputName . '%')->pluck('id');
+        $tags = EventTag::where('tag', 'like', '%' . $request->inputTag .'%')->pluck('id');
+        $names = Event::where('eventName', 'like', '%' . $request->inputName .'%')->pluck('id');
         $this->distance = $request->input('distance');
         $unfiltered_events = Event::where('isDeleted', '==', 0)
             ->where('startDate', '>=', $this->formatDate())
@@ -320,9 +252,9 @@ class EventsController extends Controller
         //TODO:3 Filters from Ruben
 
         //TODO:2 Filter the unfiltered events (Or so called pre-filtered events)
-        $filtered_events = $this->areEvenstInRange($unfiltered_events);
+        //$filtered_events = $this->areEvenstInRange($unfiltered_events);
 
-        foreach ($filtered_events as $event) {
+        foreach ($unfiltered_events as $event) {
             $date = self::dateToText($event->startDate);
 
             $postalcode = self::cityFromPostalcode($event->Location->postalcode);

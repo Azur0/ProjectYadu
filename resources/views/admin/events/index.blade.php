@@ -23,16 +23,17 @@
 				<thead>
 				<tr>
 					<th scope="col"></th>
+					<th scope="col"></th>
 					<th scope="col">ID</th>
 					<th scope="col">{{__('events.show_category')}}</th>
 					<th scope="col">{{__('events.show_title')}}</th>
 					<th scope="col">{{__('events.show_initiator')}}</th>
 					<th scope="col">{{__('events.show_date')}}</th>
 					<th scope="col">{{__('events.show_location')}}</th>
-                    <th scope="col">{{__('events.show_attendees_ammount')}}</th>
+					<th scope="col">{{__('events.show_attendees_ammount')}}</th>
 					<th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+					<th scope="col"></th>
+					<th scope="col"></th>
 				</tr>
 				</thead>
 				<tbody id="eventsToDisplay">
@@ -45,6 +46,20 @@
 								<i class="fas fa-star"></i>
 							@endif
 						</td>
+						<td>
+							@php
+								$startDate = date('Y-m-d', strtotime( $event->startDate ));
+								$currentDate = date('Y-m-d', strtotime( $event->currentDate ));
+							@endphp
+
+							@if($startDate == $currentDate)
+								<i class="fas fa-hourglass-half"></i>
+							@elseif($startDate < $currentDate)
+								<i class="fas fa-hourglass-end"></i>
+							@else
+								<i class="fas fa-hourglass-start"></i>
+							@endif
+						</td>
 						<td>{{ $event->id}}</td>
 						<td>{{ $event->tag->tag }}</td>
 						<td>{{ $event->eventName}}</td>
@@ -53,18 +68,18 @@
 						<td>{{ $event->location->postalcode }} - {{ $event->city }}</td>
 						<td>{{$event->participants->count()}}/{{$event->numberOfPeople}}</td>
 						<td><a href="/events/{{$event->id}}" class="button-show button-hover">{{__('events.show')}}</a></td>
-                        <td><a href="/admin/events/{{$event->id}}/edit" class="button button-hover">{{__('events.show_edit')}}</a></td>
-                        <td>
-                            <form method="POST" action="/admin/events/{{$event->id}}">
-                                @method('DELETE')
-                                @csrf
-                                <div class="field">
-                                    <div class="control">
-                                        <button type="submit" class="button-remove button-hover">{{__('events.show_delete')}}</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </td>
+						<td><a href="/admin/events/{{$event->id}}/edit" class="button button-hover">{{__('events.show_edit')}}</a></td>
+						<td>
+							<form method="POST" action="/admin/events/{{$event->id}}">
+								@method('DELETE')
+								@csrf
+								<div class="field">
+									<div class="control">
+										<button type="submit" class="button-remove button-hover">{{__('events.show_delete')}}</button>
+									</div>
+								</div>
+							</form>
+						</td>
 					</tr>
 
 				@endforeach
@@ -98,7 +113,7 @@
 					if (data == "") {
 						$('#eventsToDisplay').html("<tr>{{__('events.index_no_event_found')}}</tr>");
 					} else {
-                        $('#eventsToDisplay').html("");
+						$('#eventsToDisplay').html("");
 						data.forEach(function (element)
 						{
 							var highlighted = ""
@@ -111,17 +126,17 @@
 							}
 
 							console.log(element);
-                            $('#eventsToDisplay').html($("#eventsToDisplay").html()+
+							$('#eventsToDisplay').html($("#eventsToDisplay").html()+
 									"<tr><td>"+ highlighted +"</td>" +
 									"<td>"+ element['id'] + "</td>" +
 									"<td>"+ element['tag'] + "</td>" +
-                                	"<td>"+ element['eventName'] + "</td>" +
-                                	"<td>"+ element['owner_firstName'] + " "+ middleName +element['owner_lastName'] + "</td>" +
-                                	"<td>"+ element['user_date'] + "</td>" +
-                                	"<td>"+ element['location']['postalcode'] + " - " + element['loc'] + "</td>" +
+									"<td>"+ element['eventName'] + "</td>" +
+									"<td>"+ element['owner_firstName'] + " "+ middleName +element['owner_lastName'] + "</td>" +
+									"<td>"+ element['user_date'] + "</td>" +
+									"<td>"+ element['location']['postalcode'] + " - " + element['loc'] + "</td>" +
 									"<td>"+element['participants_ammount'] +  "/" + element['numberOfPeople'] + "</td>" +
-                                	"<td><a href='/events/"+ element['id']+"' class='button-show button-hover'>{{__('events.show')}}</a></td>" +
-                                	"<td><a href='/admin/events/"+ element['id']+"/edit'class='button button-hover'>{{__('events.show_edit')}}</a></td>" +
+									"<td><a href='/events/"+ element['id']+"' class='button-show button-hover'>{{__('events.show')}}</a></td>" +
+									"<td><a href='/admin/events/"+ element['id']+"/edit'class='button button-hover'>{{__('events.show_edit')}}</a></td>" +
 									"<td><form method='POST' action='/admin/events/"+element['id']+"'>" +
 									'@method('DELETE') @csrf' +
 									"<div class='field'><div class='control'>"+

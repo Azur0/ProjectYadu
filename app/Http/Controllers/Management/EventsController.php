@@ -24,8 +24,10 @@ class EventsController extends Controller
 
             $tags = EventTag::all();
             $names = Event::distinct('eventName')->pluck('eventName');
+        	$currentDate = Carbon::now();
             foreach($events as $event){
                 $event->city = self::cityFromPostalcode($event->Location->postalcode);
+                $event->currentDate = $currentDate;
             }
             return view('admin/events.index', compact(['tags', 'names'],'events'));  
 		}

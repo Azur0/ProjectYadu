@@ -54,3 +54,20 @@
   color: #EEEEEE !important;
   text-decoration: none !important;
 }
+
+.card-body
+{
+	overflow-y: scroll;
+}
+
+.card-header
+{
+
+	height: 60px;
+	overflow-y: scroll;
+
+	.search
+	{
+		min-width: 700px;
+	}
+}

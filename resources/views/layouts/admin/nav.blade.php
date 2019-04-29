@@ -55,7 +55,7 @@
 		Admin
 	</div>
 
-	<!-- Nav Item - Users 
+	<!-- Nav Item - Users-->
 	<li class="nav-item">
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
 			<i class="fas fa-fw fa-users"></i>
@@ -67,7 +67,7 @@
 				<a class="collapse-item" href="{{ url('admin')  }}">Users: Placeholder link</a>
 			</div>
 		</div>
-	</li>-->
+	</li>
 
 	<!-- Nav Item - Events -->
 	<li class="nav-item">

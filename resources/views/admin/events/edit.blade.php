@@ -17,37 +17,36 @@
 		</div>
 		<div class="card-body">
 			<div class="create-event">
-				<form action="/events/{{$data['event']->id}}" method="POST">
+				<form action="/admin/events/{{$data['event']->id}}" method="POST">
 					@method("PATCH")
 					@csrf
-					<div>
-						<div class="description">
-							<h5>Title</h5>
-							<input type="text" id="title" name="activityName" placeholder="Titel"
-								   oninput="update_counter_title(this)" maxlength="30" required
-								   value="{{ $data['event']->eventName }}">
-							<span id="chars_title"></span> characters remaining
-							@if ($errors->has('activityName'))
-								<div class="error">Het titel-veld is verplicht.</div>
-							@endif
+					<h3>iNf0</h3>
+					<div class="description">
+						<h5>Title</h5>
+						<input type="text" id="title" name="activityName" placeholder="Titel"
+							   oninput="update_counter_title(this)" maxlength="30" required
+							   value="{{ $data['event']->eventName }}">
+						<span id="chars_title"></span> characters remaining
+						@if ($errors->has('activityName'))
+							<div class="error">Het titel-veld is verplicht.</div>
+						@endif
 
-							<h5>Omschrijving</h5>
-							<textarea id="desc" name="description" placeholder="Omschrijving.."
-									  oninput="update_counter_desc(this)"
-									  maxlength="150" required>{{ $data['event']->description }}</textarea>
-							<span id="chars_desc"></span> characters remaining
-							@if ($errors->has('description'))
-								<div class="error">Het omschrijving-veld is verplicht.</div>
-							@endif
-						</div>
+						<h5>Omschrijving</h5>
+						<textarea id="desc" name="description" placeholder="Omschrijving.."
+								  oninput="update_counter_desc(this)"
+								  maxlength="150" required>{{ $data['event']->description }}</textarea>
+						<span id="chars_desc"></span> characters remaining
+						@if ($errors->has('description'))
+							<div class="error">Het omschrijving-veld is verplicht.</div>
+						@endif
 					</div>
 					<div class="description">
 						<h5>Gehighlight</h5>
 						<div class="custom-control custom-switch">
 							@if($data['event']->isHighlighted == 0)
-								<input type="checkbox" class="custom-control-input" id="customSwitches">
+								<input type="checkbox" name="isHighlighted" class="custom-control-input" id="customSwitches">
 							@else
-								<input type="checkbox" class="custom-control-input" id="customSwitches" checked>
+								<input type="checkbox" name="isHighlighted" class="custom-control-input" id="customSwitches" checked>
 							@endif
 							<label class="custom-control-label" for="customSwitches"></label>
 						</div>
@@ -272,6 +271,15 @@
                 map.fitBounds(bounds);
             });
         }
+
+        window.onload = function()
+        {
+        	var len = $("#title").attr('maxLength');
+			document.getElementById('chars_title').innerHTML = len - $("#title").val().length;
+
+			var len = $("#desc").attr('maxLength');
+			document.getElementById('chars_desc').innerHTML = len - $("#desc").val().length;
+        };
     </script>
     <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=places&callback=initAutocomplete"

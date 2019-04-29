@@ -54,13 +54,7 @@
 						<td>{{ $event->tag->tag }}</td>
 						<td>{{ $event->eventName}}</td>
 						<td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
-						<td>
-							@if(__('events.show_lang') == "Dutch")
-								{{ \Carbon\Carbon::parse($event->startDate)->format('d/m/Y - H:i')}}
-							@else
-								{{ \Carbon\Carbon::parse($event->startDate)->format('m/d/Y - H:i')}}
-							@endif
-						</td>
+						<td>{{ \Carbon\Carbon::parse($event->startDate)->format(__('formats.dateFormat'))}}</td>
 						<td>{{ $event->location->postalcode }} - {{ $event->city }}</td>
 						<td>{{$event->numberOfPeople}}/{{$event->participants->count()}}</td>
 						<td><a href="/events/{{$event->id}}" class="button-show button-hover">{{__('events.show')}}</a></td>

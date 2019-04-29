@@ -300,7 +300,7 @@ class EventsController extends Controller
         $events = new Collection();
 
         foreach ($unfiltered_events as $event) {
-            $date = self::dateToText($event->startDate);
+            //$date = self::dateToText($event->startDate);
 
             $postalcode = self::cityFromPostalcode($event->Location->postalcode);
 
@@ -315,7 +315,7 @@ class EventsController extends Controller
             }
             $userDate = "";
             //TODO found out how the lang is set in our project
-            if(true){
+            if($request->session()->get('locale') == 'nl'){
                 $userDate = \Carbon\Carbon::parse($event->startDate)->format('d/m/Y - H:i');
             }else{
                 $userDate = \Carbon\Carbon::parse($event->startDate)->format('m/d/Y - H:i');
@@ -333,7 +333,7 @@ class EventsController extends Controller
             $event->setAttribute('owner_lastName', $owner[0]['lastName']);
             $event->setAttribute('picture', $Pic);
             $event->setAttribute('loc', $postalcode);
-            $event->setAttribute('date', $date);
+            //$event->setAttribute('date', $date);
             $events->push($event);
         }
         return json_encode($events);

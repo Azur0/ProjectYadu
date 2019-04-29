@@ -5,11 +5,11 @@
         <div class="card-header">
             <div class="col-12">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
+                    <li class="nav-item tab">
                         <a class="nav-link active" id="accounts-tab" data-toggle="tab" href="#accounts" role="tab"
                            aria-controls="accounts" aria-selected="true">{{ __('accounts.index_active')}}</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item tab">
                         <a class="nav-link" id="deleted-tab" data-toggle="tab" href="#deleted" role="tab"
                            aria-controls="deleted" aria-selected="false">{{ __('accounts.index_deleted')}}</a>
                     </li>

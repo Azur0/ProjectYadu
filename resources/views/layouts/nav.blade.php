@@ -31,7 +31,7 @@
             </li>
             @if(Auth::user())
 	            <li>
-	                <a href="/home" class="nav-link m-2 nav-item {{ request()->is('home') ? 'active' : '' }}">{{__('navigation.nav_dash')}}</a>
+	                <a href="/home" class="nav-link m-2 nav-item {{ request()->is('home') ? 'active' : '' }}">{{__('navigation.nav_dashboard')}}</a>
 	            </li>
 	            <li>
 	                <a href="/logout" class="nav-link m-2 nav-item">{{__('navigation.nav_logout')}}</a>

@@ -120,6 +120,15 @@
 							if(element['isHighlighted'] == 1){
 								highlighted = "<i class='fas fa-star'></i>"
 							}
+							var timeIcon = ""
+							if(element['dateInt'] == 0){
+								timeIcon = "<i class=\"fas fa-hourglass-half\"></i>"
+							}else if(element['dateInt'] ==1){
+								timeIcon = "<i class=\"fas fa-hourglass-end\"></i>"
+							}else{
+								timeIcon = "<i class=\"fas fa-hourglass-start\"></i>"
+							}
+
 							var middleName = ""
 							if(element['owner_middleName'] != null){
 								middleName = element['owner_middleName'] + " ";
@@ -128,6 +137,7 @@
 							console.log(element);
 							$('#eventsToDisplay').html($("#eventsToDisplay").html()+
 									"<tr><td>"+ highlighted +"</td>" +
+									"<td>"+ timeIcon +"</td>" +
 									"<td>"+ element['id'] + "</td>" +
 									"<td>"+ element['tag'] + "</td>" +
 									"<td>"+ element['eventName'] + "</td>" +

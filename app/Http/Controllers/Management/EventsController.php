@@ -324,9 +324,16 @@ class EventsController extends Controller
             }
             $eventTag = EventTag::where('id', '=', $event->tag_id)->get();
 
+            $startDate = date('Y-m-d', strtotime($event->startDate));
+            $currentDate = date('Y-m-d', strtotime(Carbon::now()));
+            $dateInt =2;
+            if($startDate == $currentDate){
+                $dateInt =0;
+            }else if($startDate < $currentDate){
+                $dateInt =1;
+            }
 
-
-
+            $event->setAttribute('dateInt', $dateInt);
             $event->setAttribute('tag', $eventTag[0]['tag']);
             $event->setAttribute('user_date', $userDate);
             $event->setAttribute('participants_ammount',$ammount);

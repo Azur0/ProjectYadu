@@ -52,5 +52,6 @@ Route::get('admin/accounts/{id}', 'Management\AccountsController@show');
 Route::get('admin/accounts/{id}/activate', 'Management\AccountsController@activate');
 Route::get('admin/accounts/{id}/delete', 'Management\AccountsController@destroy');
 Route::get('admin/accounts/{id}/restore', 'Management\AccountsController@restore');
+Route::post('admin/accounts/{id}/update', 'Management\AccountsController@update');
 
 Route::resource('admin/events','Management\EventsController');

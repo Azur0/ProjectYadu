@@ -10,12 +10,12 @@
                     @if($account->isDeleted == 0)
                         <button type="button" class="btn btn-danger my-auto" data-toggle="modal"
                                 data-target="#confirmDeleteAccount">
-                            {{__('profile.edit_delete_account')}}
+                            {{__('accounts.edit_delete_account')}}
                         </button>
                     @else
                         <button type="button" class="btn btn-success my-auto" data-toggle="modal"
                                 data-target="#confirmDeleteAccount">
-                            Account herstellen
+                            {{__('accounts.edit_restore_account')}}
                         </button>
                     @endif
 
@@ -24,7 +24,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">{{__('profile.edit_delete_account_confirm_title')}}</h5>
+                                    <h5 class="modal-title">{{__('accounts.edit_delete_account_confirm_title')}}</h5>
                                     <button type="button" class="close" data-dismiss="modal"
                                             aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -32,26 +32,26 @@
                                 </div>
                                 @if($account->isDeleted == 0)
                                 <div class="modal-body">
-                                    {{__('profile.edit_delete_account_confirm_content')}}
+                                    {{__('accounts.edit_delete_account_confirm_content')}}
                                 </div>
                                 <div class="modal-footer">
                                     <a type="submit" href="{{url('/admin/accounts/'. $account->id .'/delete')}}"
                                        class="btn btn-danger">
-                                        {{__('profile.edit_delete_account_positive')}}</a>
+                                        {{__('accounts.edit_delete_account_positive')}}</a>
                                     <button type="button" class="btn btn-primary"
-                                            data-dismiss="modal">{{__('profile.edit_delete_account_negative')}}
+                                            data-dismiss="modal">{{__('accounts.edit_delete_account_negative')}}
                                     </button>
                                 </div>
                                 @else
                                 <div class="modal-body">
-                                    Weet je zeker dat je dit account wilt herstellen?
+                                    {{__('accounts.edit_restore_account_confirm_content')}}
                                 </div>
                                 <div class="modal-footer">
                                     <a type="submit" href="{{url('/admin/accounts/'. $account->id .'/restore')}}"
-                                       class="btn btn-danger">
-                                        Ja, herstel het</a>
+                                       class="btn btn-success">
+                                        {{__('accounts.edit_restore_account_positive')}}</a>
                                     <button type="button" class="btn btn-primary"
-                                            data-dismiss="modal">Nee, herstel het niet
+                                            data-dismiss="modal">{{__('accounts.edit_restore_account_negative')}}
                                     </button>
                                 </div>
                                 @endif
@@ -64,32 +64,40 @@
         <div class="card-body">
             <table class="table mb-3">
                 <tr>
-                    <th>Email geverifieerd</th>
+                    <th>{{__('accounts.email_verified')}}</th>
                     <td>
                         @if($account->email_verified_at != null)
                             {{$account->email_verified_at}}
                         @else
                             <a href="{{url('/admin/accounts/'. $account->id .'/activate')}}"
-                               class="btn btn-warning">Activeer</a>
+                               class="btn btn-warning">{{__('accounts.email_verify_button')}}</a>
                         @endif
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{__('accounts.password_reset')}}</th>
+                    <td>
+                        <a href="{{url('/admin/accounts/'. $account->id .'/passwordreset')}}"
+                           class="btn-warning btn">{{__('accounts.password_reset_button')}}</a>
                     </td>
                 </tr>
             </table>
 
             <hr>
 
-            <h3 class="mb-3">Edit Account</h3>
+            <h3 class="mb-3">{{__('accounts.edit_edit_account_title')}}</h3>
 
             <form method="POST" action="/admin/accounts/{{$account->id}}/update">
+                @csrf
                 <div class="form-group row">
                     <label for="firstName"
-                           class="col-md-1 col-form-label text-md-right">{{__('profile.edit_firstname')}}
+                           class="col-md-2 col-form-label text-md-right">{{__('accounts.edit_firstname')}}
                         &nbsp;*</label>
 
                     <div class="col-md-6">
                         <input id="firstName" type="text"
                                class="form-control{{ $errors->has('firstName') ? ' is-invalid' : '' }}"
-                               placeholder="{{__('profile.edit_firstname')}}" name="firstName"
+                               placeholder="{{__('accounts.edit_firstname')}}" name="firstName"
                                value="{{$account->firstName}}"
                                required
                                autofocus maxlength="45">
@@ -104,12 +112,12 @@
 
                 <div class="form-group row">
                     <label for="middleName"
-                           class="col-md-1 col-form-label text-md-right">{{__('profile.edit_middlename')}}</label>
+                           class="col-md-2 col-form-label text-md-right">{{__('accounts.edit_middlename')}}</label>
 
                     <div class="col-md-6">
                         <input id="middleName" type="text"
                                class="form-control{{ $errors->has('middleName') ? ' is-invalid' : '' }}"
-                               placeholder="{{__('profile.edit_middlename')}}" name="middleName"
+                               placeholder="{{__('accounts.edit_middlename')}}" name="middleName"
                                value="{{$account->middleName}}"
                                maxlength="45">
 
@@ -123,7 +131,7 @@
 
                 <div class="form-group row">
                     <label for="lastName"
-                           class="col-md-1 col-form-label text-md-right">{{ __('profile.edit_lastname')}}</label>
+                           class="col-md-2 col-form-label text-md-right">{{ __('profile.edit_lastname')}}</label>
 
                     <div class="col-md-6">
                         <input id="lastName" type="text"
@@ -142,7 +150,7 @@
 
                 <div class="form-group row">
                     <label for="gender"
-                           class="col-md-1 col-form-label text-md-right">{{__('profile.edit_gender')}}</label>
+                           class="col-md-2 col-form-label text-md-right">{{__('accounts.edit_gender')}}</label>
                     <div class="col-md-6">
                         <select name="gender" selected="{{$account->gender}}"
                                 class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
@@ -167,7 +175,7 @@
 
                 <div class="form-group row">
                     <label for="dateOfBirth"
-                           class="col-md-1 col-form-label text-md-right">{{ __('profile.edit_birthday')}}</label>
+                           class="col-md-2 col-form-label text-md-right">{{ __('accounts.edit_birthday')}}</label>
 
                     <div class="col-md-6">
                         <input type="date" name="dateOfBirth" value="{{$account->dateOfBirth}}"
@@ -183,7 +191,7 @@
 
                 <div class="form-group row">
                     <label for="email"
-                           class="col-md-1 col-form-label text-md-right">{{ __('profile.edit_email')}}</label>
+                           class="col-md-2 col-form-label text-md-right">{{ __('accounts.edit_email')}} *</label>
 
                     <div class="col-md-6">
                         <input type="email" name="email" value="{{$account->email}}"
@@ -199,7 +207,7 @@
 
                 <div class="form-group row">
                     <label for="accountRole"
-                           class="col-md-1 col-form-label text-md-right">Rol</label>
+                           class="col-md-2 col-form-label text-md-right">{{ __('accounts.edit_role')}} *</label>
                     <div class="col-md-6">
                         <select name="accountRole" selected="{{$account->accountRole}}"
                                 class="form-control{{ $errors->has('accountRole') ? ' is-invalid' : '' }}">
@@ -224,7 +232,7 @@
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-1">
                         <button id="submit" type="submit" class="btn btn-primary">
-                            {{__('profile.edit_update_profile')}}
+                            {{__('accounts.edit_update_profile')}}
                         </button>
                     </div>
                 </div>

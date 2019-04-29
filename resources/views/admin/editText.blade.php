@@ -7,7 +7,7 @@
     @csrf
     <input type="hidden" name="lang_file" value="{{$page}}">
     <input type="hidden" name="lang" value="{{$lang}}">
-
+<div class="inputFields">
     <?php
 $addedString = "";
 
@@ -33,7 +33,7 @@ function printTitle($key){
 
 function printInputFields($key, $item, $primaryKey){
     global $addedString;
-    echo "<p> $addedString $key - <input type='text' name='$primaryKey;$key' id='EditInput' value='".htmlspecialchars_decode($item)."'></p>";
+    echo "<p> $addedString $key&nbsp;-&nbsp;<input type='text' name='$primaryKey;$key' id='EditInput' value='".htmlspecialchars_decode($item)."'></p>";
 }
 
 ?>
@@ -41,7 +41,7 @@ function printInputFields($key, $item, $primaryKey){
     @foreach ($x as $key => $item)
     @if (!is_array($item))
     <?php global $addedString; $addedString = "";?>
-    <p>{{$key}} - <input type="text" name="{{$key}}" id="EditInput" value="{{htmlspecialchars_decode($item)}}"></p>
+    <p>{{$key}}&nbsp;-&nbsp;<input type="text" name="{{$key}}" id="EditInput" value="{{htmlspecialchars_decode($item)}}"></p>
     @else
     <?php 
         global $addedString; 
@@ -52,7 +52,7 @@ function printInputFields($key, $item, $primaryKey){
     @endif
 
     @endforeach
-
+</div>
     <input type="submit" value="submit">
 </form>
 

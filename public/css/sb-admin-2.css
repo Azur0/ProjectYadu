@@ -889,6 +889,15 @@ pre code {
   margin-left: 91.6666666667%;
 }
 
+#EditInput {
+  flex: 1;
+  min-width: 0px;
+}
+.inputFields p{
+  display: flex;
+  
+}
+
 @media (min-width: 576px) {
   .col-sm {
     flex-basis: 0;

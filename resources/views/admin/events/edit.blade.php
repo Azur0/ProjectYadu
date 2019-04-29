@@ -1,9 +1,7 @@
 @extends('layouts/admin/app')
 
 @section('custom_script')
-	<script type="text/javascript" src="/js/event_edit1.js" defer></script>
-	<script type="text/javascript" src="/js/event_edit2.js" defer></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=places&callback=initAutocomplete" async defer></script>
+	
 @endsection
 
 @section('content')
@@ -115,4 +113,7 @@
 			<input class="submit" type="submit" name="verzenden" value="Verzend">
 		</form>
 	</div>
+	<script type="text/javascript" src="/js/event_edit1.js" defer></script>
+	<script type="text/javascript" src="/js/event_edit2.js" defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=places&callback=initAutocomplete" async defer></script>
 @endsection

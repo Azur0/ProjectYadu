@@ -25,7 +25,10 @@ class EventsController extends Controller
 			$names = Event::distinct('eventName')->pluck('eventName');
 			return view('admin/events.index', compact(['tags', 'names'],'events'));	
 		}
-		
+		else
+		{
+			return redirect('/login');
+		}
 	}
 
 	public function create()
@@ -115,7 +118,8 @@ class EventsController extends Controller
 	{
 		if (Auth::check())
 		{
-			if (Auth::id() == 'Admin')
+			//dd(Auth::user());
+			if (Auth::user()->accountRole == 'Admin')
 			{
 				$data = array(
 					'event' => $event,

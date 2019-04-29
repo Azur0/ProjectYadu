@@ -15,21 +15,27 @@ use App\Http\Controllers\Controller;
 
 class EventsController extends Controller
 {
-
 	public function index()
 	{
 		if (Auth::check())
 		{
-			$events = Event::all();
+			if (Auth::user()->accountRole == 'Admin')
+			{
+				$events = Event::all();
 
-            $tags = EventTag::all();
-            $names = Event::distinct('eventName')->pluck('eventName');
-        	$currentDate = Carbon::now();
-            foreach($events as $event){
-                $event->city = self::cityFromPostalcode($event->Location->postalcode);
-                $event->currentDate = $currentDate;
-            }
-            return view('admin/events.index', compact(['tags', 'names'],'events'));  
+				$tags = EventTag::all();
+				$names = Event::distinct('eventName')->pluck('eventName');
+				$currentDate = Carbon::now();
+				foreach($events as $event){
+					$event->city = self::cityFromPostalcode($event->Location->postalcode);
+					$event->currentDate = $currentDate;
+				}
+				return view('admin/events.index', compact(['tags', 'names'],'events'));  
+			}
+			else
+			{
+				abort(403);
+			}
 		}
 		else
 		{
@@ -39,12 +45,27 @@ class EventsController extends Controller
 
 	public function create()
 	{
-		if(Auth::check() && Auth::user()->hasVerifiedEmail()) {
-			$Tags = EventTag::all();
-			$Picture = EventPicture::all();
-			return view('events.create')->withtags($Tags)->withpictures($Picture);
+		if (Auth::check())
+		{
+			if (Auth::user()->accountRole == 'Admin')
+			{
+				if(Auth::user()->hasVerifiedEmail())
+				{
+					$Tags = EventTag::all();
+					$Picture = EventPicture::all();
+					return view('events.create')->withtags($Tags)->withpictures($Picture);
+				}
+				return redirect('/events');
+			}
+			else
+			{
+				abort(403);
+			}
 		}
-		return redirect('/events');
+		else
+		{
+			return redirect('/login');
+		}
 	}
 
 	public function action(Request $request)
@@ -168,8 +189,6 @@ class EventsController extends Controller
 		{
 			if (Auth::user()->accountRole == 'Admin')
 			{
-				//dd($request['isHighlighted']);
-
 				$validator = Validator::make($request->all(), [
 					'activityName' => 'required|max:30',
 					'description' => 'required|max:150',
@@ -287,59 +306,59 @@ class EventsController extends Controller
 	private $distance = 0;
 
 	public function actionDistanceFilter(Request $request)
-    {
+	{
 
-        $tags = EventTag::where('tag', 'like', '%' . $request->inputTag .'%')->pluck('id');
-        $names = Event::where('eventName', 'like', '%' . $request->inputName .'%')->pluck('id');
-        $this->distance = $request->input('distance');
-        $unfiltered_events = Event::where('isDeleted', '==', 0)
-            ->where('startDate', '>=', $this->formatDate())
-            ->whereIn('id', $names)
-            ->whereIn('tag_id', $tags)
-            ->orderBy('startDate', 'asc')
-            ->get();
+		$tags = EventTag::where('tag', 'like', '%' . $request->inputTag .'%')->pluck('id');
+		$names = Event::where('eventName', 'like', '%' . $request->inputName .'%')->pluck('id');
+		$this->distance = $request->input('distance');
+		$unfiltered_events = Event::where('isDeleted', '==', 0)
+			->where('startDate', '>=', $this->formatDate())
+			->whereIn('id', $names)
+			->whereIn('tag_id', $tags)
+			->orderBy('startDate', 'asc')
+			->get();
 
-        $events = new Collection();
+		$events = new Collection();
 
-        foreach ($unfiltered_events as $event) {
-            //$date = self::dateToText($event->startDate);
+		foreach ($unfiltered_events as $event) {
+			//$date = self::dateToText($event->startDate);
 
-            $postalcode = self::cityFromPostalcode($event->Location->postalcode);
+			$postalcode = self::cityFromPostalcode($event->Location->postalcode);
 
-            $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
-            $Pic = (base64_encode($Picture[0]->picture));
+			$Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
+			$Pic = (base64_encode($Picture[0]->picture));
 
-            $owner = Account::where('id', '=', $event->owner_id)->get();
-            $eventInfo = Event::where('id', '=', $event->id)->get();
-            $ammount = 0;
-            if($eventInfo[0]->participants->count() != 0){
-                $ammount = $eventInfo[0]->participants->count();
-            }
-            $userDate = "";
-            //TODO found out how the lang is set in our project
-            if($request->session()->get('locale') == 'nl'){
-                $userDate = \Carbon\Carbon::parse($event->startDate)->format('d/m/Y - H:i');
-            }else{
-                $userDate = \Carbon\Carbon::parse($event->startDate)->format('m/d/Y - H:i');
-            }
-            $eventTag = EventTag::where('id', '=', $event->tag_id)->get();
-
-
+			$owner = Account::where('id', '=', $event->owner_id)->get();
+			$eventInfo = Event::where('id', '=', $event->id)->get();
+			$ammount = 0;
+			if($eventInfo[0]->participants->count() != 0){
+				$ammount = $eventInfo[0]->participants->count();
+			}
+			$userDate = "";
+			//TODO found out how the lang is set in our project
+			if($request->session()->get('locale') == 'nl'){
+				$userDate = \Carbon\Carbon::parse($event->startDate)->format('d/m/Y - H:i');
+			}else{
+				$userDate = \Carbon\Carbon::parse($event->startDate)->format('m/d/Y - H:i');
+			}
+			$eventTag = EventTag::where('id', '=', $event->tag_id)->get();
 
 
-            $event->setAttribute('tag', $eventTag[0]['tag']);
-            $event->setAttribute('user_date', $userDate);
-            $event->setAttribute('participants_ammount',$ammount);
-            $event->setAttribute('owner_firstName', $owner[0]['firstName']);
-            $event->setAttribute('owner_middleName', $owner[0]['middleName']);
-            $event->setAttribute('owner_lastName', $owner[0]['lastName']);
-            $event->setAttribute('picture', $Pic);
-            $event->setAttribute('loc', $postalcode);
-            //$event->setAttribute('date', $date);
-            $events->push($event);
-        }
-        return json_encode($events);
-    }
+
+
+			$event->setAttribute('tag', $eventTag[0]['tag']);
+			$event->setAttribute('user_date', $userDate);
+			$event->setAttribute('participants_ammount',$ammount);
+			$event->setAttribute('owner_firstName', $owner[0]['firstName']);
+			$event->setAttribute('owner_middleName', $owner[0]['middleName']);
+			$event->setAttribute('owner_lastName', $owner[0]['lastName']);
+			$event->setAttribute('picture', $Pic);
+			$event->setAttribute('loc', $postalcode);
+			//$event->setAttribute('date', $date);
+			$events->push($event);
+		}
+		return json_encode($events);
+	}
 
 	public function dateToText($timestamp)
 	{

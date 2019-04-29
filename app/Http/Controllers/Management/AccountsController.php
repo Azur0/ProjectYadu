@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Management;
 
 use App\AccountRole;
+use App\Http\Controllers\AccountController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Account;
@@ -20,7 +21,7 @@ class AccountsController extends Controller
             $accounts = Account::where('isDeleted', '0')->get();
             $deletedAccounts = Account::where('isDeleted', '1')->get();
 
-            return view('admin.accounts.index', compact(['accounts', 'deletedAccounts']));
+            return view('admin.accounts.index', compact(['accounts']));
         } else {
             abort(403);
         }
@@ -59,11 +60,8 @@ class AccountsController extends Controller
     public function destroy($id)
     {
         if (Auth::check() && Auth::user()->accountRole == 'Admin') {
-            $account = Account::where('id', $id)->firstOrFail();
 
-            $account->isDeleted = 1;
-
-            $account->save();
+            AccountController::deleteAccountFromId($id);
 
             return redirect('admin/accounts');
         } else {

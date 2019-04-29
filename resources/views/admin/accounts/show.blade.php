@@ -7,17 +7,10 @@
                                   src="data:image/jpeg;base64, {{base64_encode($account->avatar)}}"/>
                 <h1 class="my-auto">{{$account->firstName .' '. $account->middleName .' '. $account->lastName}}</h1>
                 <div class="ml-auto my-auto mr-3">
-                    @if($account->isDeleted == 0)
                         <button type="button" class="btn btn-danger my-auto" data-toggle="modal"
                                 data-target="#confirmDeleteAccount">
                             {{__('accounts.edit_delete_account')}}
                         </button>
-                    @else
-                        <button type="button" class="btn btn-success my-auto" data-toggle="modal"
-                                data-target="#confirmDeleteAccount">
-                            {{__('accounts.edit_restore_account')}}
-                        </button>
-                    @endif
 
 
                     <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
@@ -30,7 +23,6 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                @if($account->isDeleted == 0)
                                 <div class="modal-body">
                                     {{__('accounts.edit_delete_account_confirm_content')}}
                                 </div>
@@ -42,19 +34,6 @@
                                             data-dismiss="modal">{{__('accounts.edit_delete_account_negative')}}
                                     </button>
                                 </div>
-                                @else
-                                <div class="modal-body">
-                                    {{__('accounts.edit_restore_account_confirm_content')}}
-                                </div>
-                                <div class="modal-footer">
-                                    <a type="submit" href="{{url('/admin/accounts/'. $account->id .'/restore')}}"
-                                       class="btn btn-success">
-                                        {{__('accounts.edit_restore_account_positive')}}</a>
-                                    <button type="button" class="btn btn-primary"
-                                            data-dismiss="modal">{{__('accounts.edit_restore_account_negative')}}
-                                    </button>
-                                </div>
-                                @endif
                             </div>
                         </div>
                     </div>

@@ -66,21 +66,26 @@ class AccountController extends Controller
 	    $ID = Auth::user()->id;
         Auth::logout();
 
-        $account = Account::where('id', $ID)->firstOrFail();
+        $this->deleteAccountFromId($ID);
 
-        $account->email = $ID;
+        return redirect('/');
+    }
+
+    public static function deleteAccountFromId($id)
+    {
+        $account = Account::where('id', $id)->firstOrFail();
+
+        $account->email = $id;
         $account->password = '';
-        $account->firstname = 'Deleted user';
-        $account->middlename = null;
-        $account->lastname = null;
+        $account->firstname = encrypt('Deleted user');
+        $account->middlename = encrypt(null);
+        $account->lastname = encrypt(null);
         $account->avatar = null;
         $account->isDeleted = 1;
         $account->bio = null;
         $account->remember_token = null;
 
         $account->save();
-
-        return redirect('/');
     }
 
 }

@@ -8,7 +8,7 @@
         <a class="navbar-brand d-none d-lg-inline-block" href="/">
             <img src={{ asset('images/logoCircle.png')}} width="57" alt="logo">
         </a>
-        <p class="navbar-brand d-none d-lg-inline-block logo-text nav-item">{{__('navigation.nav_motto')}}</p>
+        <a href="/" class="navbar-brand d-none d-lg-inline-block logo-text nav-item">{{__('navigation.nav_motto')}}</a>
         <!-- Mobile logo -->
         <a class="navbar-brand-two mx-auto d-lg-none d-inline-block logo" href="/">
             <img src={{ asset('images/logoCircle.png')}} width="60" alt="logo">

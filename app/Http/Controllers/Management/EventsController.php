@@ -23,6 +23,9 @@ class EventsController extends Controller
 			$events = Event::all();
 			$tags = EventTag::all();
 			$names = Event::distinct('eventName')->pluck('eventName');
+            foreach($events as $event){
+                $event->city = self::cityFromPostalcode($event->Location->postalcode);
+            }
 			return view('admin/events.index', compact(['tags', 'names'],'events'));	
 		}
 		

@@ -21,6 +21,7 @@ class EventsController extends Controller
 		if (Auth::check())
 		{
 			$events = Event::all();
+
             $tags = EventTag::all();
             $names = Event::distinct('eventName')->pluck('eventName');
             foreach($events as $event){

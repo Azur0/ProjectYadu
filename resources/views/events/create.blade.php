@@ -96,6 +96,8 @@
     <script>
         $(document).ready(function () {
             fetch_customer_data();
+            update_counter_title(document.getElementById('title'));
+            update_counter_desc(document.getElementById('desc'));
         });
 
         function check(tag) {

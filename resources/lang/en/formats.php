@@ -4,5 +4,5 @@ return [
     'dateFormat' => 'm/d/Y',
     'timeFormat' => 'g:i A',
     'writtenDateFormat_short' => '%a %B %d %Y',
-    'writtenDateFormat_long' => '%A %B %d %Y'
+    'writtenDateFormat_long' => '%A %B %d %Y',
 ];

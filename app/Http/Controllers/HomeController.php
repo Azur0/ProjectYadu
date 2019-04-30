@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\DateToText;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -11,6 +12,7 @@ use Auth;
 
 class HomeController extends Controller
 {
+    use DateToText;
     /**
      * Create a new controller instance.
      *
@@ -54,7 +56,7 @@ class HomeController extends Controller
 			$event->date = self::dateToText($event->startDate);
 			$event->city = self::cityFromPostalcode($event->location->postalcode);
 		}
-		
+
         return view('home', compact('events','participation'));
     }
 
@@ -106,14 +108,6 @@ class HomeController extends Controller
 			return redirect('/');
 		}
 	}
-
-	private function dateToText($timestamp)
-    {
-        setlocale(LC_ALL, 'nl_NL.utf8');
-        $date = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp);
-        $formatted_date = ucfirst($date->formatLocalized('%a %d %B %Y'));
-        return $formatted_date;
-    }
 
     private function cityFromPostalcode($postalcode)
     {

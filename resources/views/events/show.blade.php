@@ -9,10 +9,9 @@
                      src="data:image/jpeg;base64, {{base64_encode($event->eventPicture->picture)}}"/><br>
                 <h3>{{__('events.show_date')}}</h3>
                 @php($timestamp = strtotime($event->startDate))
-                {{-- TODO: This currently cant be translated --}}
                 {{-- TODO: Controller logic in view --}}
                 <h5 class="mb-5">{{\App\Http\Controllers\DateTimeController::getDayNames(date("w", $timestamp))}} {{date("d-m-Y", $timestamp)}}
-                    om {{date("H:i", $timestamp)}}</h5>
+                    {{__('events.show_datetime_at')}} {{date(__('formats.timeFormat'), $timestamp)}}</h5>
             </div>
 
             <h3>{{__('events.show_initiator')}}</h3>

@@ -7,6 +7,7 @@ use App\EventPicture;
 use App\Event;
 use App\EventHasParticipants;
 use App\Http\Controllers\API\LocationController;
+use App\Traits\DateToText;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\EventTag;
@@ -18,9 +19,9 @@ use Illuminate\Support\Carbon;
 use App\Location;
 use Auth;
 
-
 class EventsController extends Controller
 {
+    use DateToText;
     /**
      * Display a listing of the resource.
      *
@@ -337,14 +338,6 @@ class EventsController extends Controller
             $events->push($event);
         }
         return json_encode($events);
-    }
-
-    public function dateToText($timestamp)
-    {
-        setlocale(LC_ALL, App::getLocale());
-        $date = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp);
-        $formatted_date = ucfirst($date->formatLocalized('%a %d %B %Y'));
-        return $formatted_date;
     }
 
     public function cityFromPostalcode($postalcode)

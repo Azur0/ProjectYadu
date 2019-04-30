@@ -51,8 +51,8 @@ Route::get('admin/accounts', 'Management\AccountsController@index');
 Route::get('admin/accounts/{id}', 'Management\AccountsController@show');
 Route::get('admin/accounts/{id}/activate', 'Management\AccountsController@activate');
 Route::get('admin/accounts/{id}/delete', 'Management\AccountsController@destroy');
-Route::get('admin/accounts/{id}/restore', 'Management\AccountsController@restore');
 Route::post('admin/accounts/{id}/update', 'Management\AccountsController@update');
+Route::get('admin/accounts/{id}/avatarreset', 'Management\AccountsController@resetavatar');
 
 Route::post('admin/accounts/action', 'Management\AccountsController@action')->name('admin_accounts_controller.action');
 

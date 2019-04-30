@@ -53,6 +53,8 @@ return [
     'email_verify_button' => 'Activate',
     'password_reset' => 'Password Reset',
     'password_reset_button' => 'Send Reset Password Email',
+    'avatar_reset' => 'Avatar',
+    'avatar_reset_button' => 'Reset Avatar',
 
     'index_no_event_found' => 'No accounts found',
     'index_loading_error' => 'Error loading accounts'

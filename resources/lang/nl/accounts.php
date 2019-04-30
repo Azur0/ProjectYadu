@@ -53,6 +53,8 @@ return [
     'email_verify_button' => 'Activeer',
     'password_reset' => 'Wachtwoord resetten',
     'password_reset_button' => 'Stuur wachtwoord reset email',
+    'avatar_reset' => 'Avatar',
+    'avatar_reset_button' => 'Avatar resetten',
 
     'index_no_event_found' => 'Geen accounts gevonden',
     'index_loading_error' => 'Error tijdens het laden van accounts'

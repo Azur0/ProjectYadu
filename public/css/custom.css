@@ -459,6 +459,10 @@ input[type=radio]:checked + .category span {
     padding: 1.25rem 2rem !important;
 }
 
+.accounts-table:hover {
+    cursor: pointer;
+}
+
 .accordion .card:first-of-type,
 .card:not(:first-of-type):not(:last-of-type) {
     border-bottom: 1px solid rgba(0, 0, 0, .125) !important;

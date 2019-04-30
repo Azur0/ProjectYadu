@@ -27,7 +27,7 @@
                     </thead>
                     <tbody>
                     @foreach($accounts as $account)
-                        <tr onclick="window.location='{{url('/admin/accounts/'. $account->id)}}';">
+                        <tr class="accounts-table" onclick="window.location='{{url('/admin/accounts/'. $account->id)}}';">
                             <th scope="row"><img class="img-fluid rounded-circle my-auto avatar"
                                                  src="data:image/jpeg;base64, {{base64_encode($account->avatar)}}"/>
                             </th>
@@ -52,7 +52,7 @@
     <script>
         //AJAX request
         function fetch_accounts() {
-            $('#accountsDisplay').html("<img class='loadingSpinner' src='{{public_path('\images\Spinner-1s-200px.gif')}}'>");
+            $('#accountsDisplay').html("<h1 class=\"text-center\">...</h1>");
             var inputName = $(filterByName).val();
             $.ajax({
                 url: "{{ route('admin_accounts_controller.action')}}",
@@ -85,7 +85,7 @@
                             "<tbody>";
                         data.forEach(function (element) {
                             html = html +
-                                "<tr onclick=\"window.location='" + element['url'] + " ';\">\n" +
+                                "<tr class=\"accounts-table\" onclick=\"window.location='" + element['url'] + " ';\">\n" +
                                 "   <th scope=\"row\"><img class=\"img-fluid rounded-circle my-auto avatar\"\n" +
                                 "       src=\"data:image/jpeg;base64, " + element['avatar'] + "\"/>\n" +
                                 "   </th>\n" +

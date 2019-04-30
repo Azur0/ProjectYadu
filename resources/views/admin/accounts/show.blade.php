@@ -53,11 +53,18 @@
                         @endif
                     </td>
                 </tr>
+                {{--<tr>--}}
+                    {{--<th>{{__('accounts.password_reset')}}</th>--}}
+                    {{--<td>--}}
+                        {{--<a href="{{url('/admin/accounts/'. $account->id .'/passwordreset')}}"--}}
+                           {{--class="btn-warning btn">{{__('accounts.password_reset_button')}}</a>--}}
+                    {{--</td>--}}
+                {{--</tr> TODO:add password reset button (password reset doesnt work yet)--}}
                 <tr>
-                    <th>{{__('accounts.password_reset')}}</th>
+                    <th>{{__('accounts.avatar_reset')}}</th>
                     <td>
-                        <a href="{{url('/admin/accounts/'. $account->id .'/passwordreset')}}"
-                           class="btn-warning btn">{{__('accounts.password_reset_button')}}</a>
+                        <a href="{{url('/admin/accounts/'. $account->id .'/avatarreset')}}"
+                           class="btn-warning btn">{{__('accounts.avatar_reset_button')}}</a>
                     </td>
                 </tr>
             </table>
@@ -157,7 +164,7 @@
                            class="col-md-2 col-form-label text-md-right">{{ __('accounts.edit_birthday')}}</label>
 
                     <div class="col-md-6">
-                        <input type="date" name="dateOfBirth" value="{{$account->dateOfBirth}}"
+                        <input type="date" name="dateOfBirth" max="{{ date('Y-m-d') }}" value="{{$account->dateOfBirth}}"
                                class="form-control{{ $errors->has('dateOfBirth') ? ' is-invalid' : '' }}">
 
                         @if ($errors->has('dateOfBirth'))

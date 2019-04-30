@@ -80,6 +80,7 @@ class AccountsController extends Controller
                 'email' => 'required|email',
                 'firstName' => 'required',
                 'accountRole' => 'required',
+                'dateOfBirth' => 'before:' . 'now',
             ]);
 
             $account->email = request()->email;
@@ -135,5 +136,21 @@ class AccountsController extends Controller
         }
 
         return json_encode($accounts);
+    }
+
+    public function resetavatar($id)
+    {
+        if (Auth::check() && Auth::user()->accountRole == 'Admin') {
+
+            $account = Account::where('id', $id)->firstOrFail();
+
+            $account->avatar = null;
+
+            $account->save();
+
+            return Redirect::back();
+        } else {
+            abort(403);
+        }
     }
 }

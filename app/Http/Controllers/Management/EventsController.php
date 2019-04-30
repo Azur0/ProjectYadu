@@ -253,7 +253,13 @@ class EventsController extends Controller
 	{
 		if (Auth::check())
 		{
-			//$this->authorize('update',$event);
+		    $event = Event::findOrFail($event->id);
+            if($event->participants()->count()){
+                $participants = $event->participants()->get();
+                foreach($participants as $participant){
+                    $event->participants()->detach($participant->id);
+                }
+            }
 			$event->delete();
 			return redirect('admin/events');
 		}

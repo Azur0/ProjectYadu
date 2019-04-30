@@ -32,7 +32,7 @@ class EditProfileRequest extends FormRequest
             'middleName' => ['nullable', 'max:45','string'],
             'lastName' => ['nullable', 'max:45','string'],
             'gender' => [new genderExists],
-            'dateOfBirth' => ['nullable', 'date'],
+            'dateOfBirth' => ['nullable', 'date', 'before:today'],
             'email' => ['required', 'string', 'email', 'max:255', new emailUniqueExceptSelf]
         ];
     }

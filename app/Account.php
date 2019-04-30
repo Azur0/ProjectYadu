@@ -9,14 +9,17 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Mail;
+use App\Traits\Encryptable;
 
 class Account extends Authenticatable implements MustVerifyEmailContract
 {
-    //
+    
     use Notifiable;
+    use Encryptable;
 
     protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender', 'avatar'];
-
+    protected $encryptable = ['firstName', 'middleName', 'lastName'];
+  
     public function getAvatarAttribute($key)
     {
         $avatar = $this->attributes['avatar'];
@@ -31,8 +34,14 @@ class Account extends Authenticatable implements MustVerifyEmailContract
         }
     }
 
-    public function gender(){
+    public function gender()
+    {
        return $this->belongsTo(Gender::class);
+	}
+
+	public function participates()
+    {
+        return $this->belongsToMany('App\Event', 'event_has_participants', 'account_id', 'event_id');
     }
 
     public function messages() {

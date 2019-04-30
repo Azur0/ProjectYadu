@@ -85,3 +85,8 @@ yarn-error.log
 .idea/modules.xml
 app/Http/Controllers/Auth/RegisterControllerbackup.php
 .idea/inspectionProfiles/profiles_settings.xml
+public/css/app.css
+public/css/sb-admin-2.css
+public/js/app.js
+public/js/sb-admin-2.js
+public/mix-manifest.json

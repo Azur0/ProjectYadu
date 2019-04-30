@@ -1,1 +1,1 @@
-<?php return [ 'days_monday' => 'Monday',  'days_tuesday' => 'Tuesday',  'days_wednesday' => 'Wednesday',  'days_thursday' => 'Thursday',  'days_friday' => 'Friday',  'days_saturday' => 'Saturday',  'days_sunday' => 'Sunday', ];
+<?php return [ 'days_monday' => 'Monday',  'days_tuesday' => 'Tuesday',  'days_wednesday' => 'Wednesday',  'days_thursday' => 'Thursday',  'days_friday' => 'Friday',  'days_saturday' => 'Saturday',  'days_sunday' => 'Sunday', 'edit_lang' => 'Edit', ];

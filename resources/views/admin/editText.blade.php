@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Edit pagina</h1>
+<h1>{{__('global.edit_lang')}} {{$page}}</h1>
 <form action="/admin" method="post">
     @csrf
     <input type="hidden" name="lang_file" value="{{$page}}">
@@ -52,7 +52,7 @@
 
     @endforeach
     </div>
-    <input type="submit" value="submit">
+    <input type="submit" value="submit" class="btn btn-primary">
 </form>
 
 @endsection

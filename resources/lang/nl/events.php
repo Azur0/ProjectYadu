@@ -68,4 +68,9 @@ return [
     'show_join' => 'Aanmelden',
     'show_leave' => 'Afmelden',
     'show_number_of_attendees' => ':amount van de :max deelnemers',
+
+///////////////////////////////// Share ////////////////////////////////////
+    'show_share' => 'Evenement delen',
+    'show_share_link' => 'De link is gekopieerd naar uw klembord.',
+    'show_share_close' => 'Sluiten',
 ];

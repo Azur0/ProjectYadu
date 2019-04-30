@@ -49,3 +49,5 @@ Route::resource('events', 'EventsController');
 
 Route::get('admin', function () { return view('admin.index');})->middleware('auth', 'isAdmin');
 
+Route::post('/language', 'LanguageController@setLanguage');
+

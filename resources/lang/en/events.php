@@ -68,4 +68,9 @@ return [
     'show_join' => 'Join',
     'show_leave' => 'Leave',
     'show_number_of_attendees' => ':amount of :max attendees',
+
+///////////////////////////////// Share ////////////////////////////////////
+    'show_share' => 'Share event',
+    'show_share_link' => 'The link has been copied to your clipboard.',
+    'show_share_close' => 'Close',
 ];

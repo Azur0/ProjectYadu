@@ -28,16 +28,19 @@
 							   value="{{ $data['event']->eventName }}">
 						<span id="chars_title"></span> characters remaining
 						@if ($errors->has('activityName'))
-							<div class="error">{{__('events.edit_error_title')}}</div>
+                            @foreach($errors->get('activityName') as $error)
+                                <div class="error">{{$error}}</div>
+                            @endforeach
 						@endif
-
 						<h5>{{__('events.edit_info_description')}}</h5>
 						<textarea id="desc" name="description" placeholder="Omschrijving.."
 								  oninput="update_counter_desc(this)"
 								  maxlength="150" required>{{ $data['event']->description }}</textarea>
 						<span id="chars_desc"></span> characters remaining
 						@if ($errors->has('description'))
-							<div class="error">{{__('events.edit_error_description')}}</div>
+                            @foreach($errors->get('description') as $error)
+                                <div class="error">{{$error}}</div>
+                            @endforeach
 						@endif
 					</div>
 					<div class="description">
@@ -58,7 +61,9 @@
 							<h5>Time</h5>
 							<input id="date" name="startTime" type="time" value="{{ $data['event']->startTime }}" required>
 							@if ($errors->has('startDate'))
-								<div class="error">{{__('events.edit_error_date')}}</div>
+                                @foreach($errors->get('startDate') as $error)
+                                    <div class="error">{{$error}}</div>
+                                @endforeach
 							@endif
 						</div>
 					</div>
@@ -70,7 +75,9 @@
 								   value="{{ $data['event']->numberOfPeople }}">
 							<span class="number_desc">{{__('events.edit_info_amountofparticipants_desc')}}</span>
 							@if ($errors->has('numberOfPeople'))
-								<div class="error">{{__('events.edit_error_amountofparticipants')}}</div>
+                                @foreach($errors->get('numberOfPeople') as $error)
+                                    <div class="error">{{$error}}</div>
+                                @endforeach
 							@endif
 						</div>
 					</div>
@@ -94,7 +101,9 @@
 								@endforeach
 							</div>
 							@if ($errors->has('tag'))
-								<div class="error">{{__('events.edit_error_category')}}</div>
+                                @foreach($errors->get('tag') as $error)
+                                    <div class="error">{{$error}}</div>
+                                @endforeach
 							@endif
 						</div>
 					</div>
@@ -115,7 +124,9 @@
 								@endforeach
 							</div>
 							@if ($errors->has('picture'))
-								<div class="error">{{__('events.edit_error_img')}}</div>
+                                @foreach($errors->get('picture') as $error)
+                                    <div class="error">{{$error}}</div>
+                                @endforeach
 							@endif
 						</div>
 					</div>
@@ -128,7 +139,9 @@
 								   value="{{ $data['event']->location()->first()->postalcode }} {{ $data['event']->location()->first()->houseNumber }}{{ $data['event']->location()->first()->houseNumberAddition }}">
 							<div id="map"></div>
 							@if ($errors->has('location'))
-								<div class="error">{{__('events.edit_error_location')}}</div>
+                                @foreach($errors->get('location') as $error)
+                                    <div class="error">{{$error}}</div>
+                                @endforeach
 							@endif
 						</div>
 					</div>

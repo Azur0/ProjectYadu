@@ -66,7 +66,7 @@
 					<div>
 						<div class="description">
 							<h5>{{__('events.edit_info_amountofparticipants')}}</h5>
-							<input type="number" name="numberOfPeople" min="1" max="25"
+							<input type="number" name="numberOfPeople" min="1" max="100"
 								   value="{{ $data['event']->numberOfPeople }}">
 							<span class="number_desc">{{__('events.edit_info_amountofparticipants_desc')}}</span>
 							@if ($errors->has('numberOfPeople'))

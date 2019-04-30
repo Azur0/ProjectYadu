@@ -30,7 +30,7 @@
 					<th scope="col">{{__('events.show_initiator')}}</th>
 					<th scope="col">{{__('events.show_date')}}</th>
 					<th scope="col">{{__('events.show_location')}}</th>
-					<th scope="col">{{__('events.show_attendees_ammount')}}</th>
+					<th scope="col">{{__('events.show_attendees_amount')}}</th>
 					<th scope="col"></th>
 					<th scope="col"></th>
 					<th scope="col"></th>

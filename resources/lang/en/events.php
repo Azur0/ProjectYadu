@@ -71,7 +71,7 @@ return [
     'show_join' => 'Join',
     'show_leave' => 'Leave',
     'show_number_of_attendees' => ':amount of :max attendees',
-    'show_attendees_ammount' => 'Amount of attendees',
+    'show_attendees_amount' => 'Amount of attendees',
     'show_max'=> 'Max amount of attendees',
     'show_edit' => 'Edit',
     'show_delete' => 'Delete',

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Management;
 
 use Illuminate\Http\Request;
-use App\Account;
+use App\Http\Controllers\Controller;
+
 use Auth;
 
 class AdminController extends Controller
@@ -26,6 +27,4 @@ class AdminController extends Controller
 			return redirect('/login');
 		}
     }
-
-
 }

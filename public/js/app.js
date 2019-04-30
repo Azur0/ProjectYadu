@@ -58934,8 +58934,6 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -58963,45 +58961,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const app = new Vue({
 //     el: '#app'
 // });
-// Vue JS chat scroll functionality on page load
-
-!function (e, n) {
-  "object" == ( false ? undefined : _typeof(exports)) && "undefined" != typeof module ? module.exports = n() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (n),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : undefined;
-}(this, function () {
-  "use strict";
-
-  var e = function e(_e) {
-    _e.scrollTop = _e.scrollHeight;
-  },
-      n = {
-    bind: function bind(n, t) {
-      var o = void 0,
-          i = !1;
-      n.addEventListener("scroll", function (e) {
-        o && window.clearTimeout(o), o = window.setTimeout(function () {
-          i = n.scrollTop + n.clientHeight + 1 < n.scrollHeight;
-        }, 200);
-      }), new MutationObserver(function (o) {
-        !1 === (t.value || {}).always && i || 1 != o[o.length - 1].addedNodes.length || e(n);
-      }).observe(n, {
-        childList: !0,
-        subtree: !0
-      });
-    },
-    inserted: e
-  },
-      t = {
-    install: function install(e, t) {
-      e.directive("chat-scroll", n);
-    }
-  };
-
-  return "undefined" != typeof window && window.Vue && window.Vue.use(t), t;
-});
 
 /***/ }),
 
@@ -59061,7 +59020,7 @@ if (token) {
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "812b12456aecb24b4a87",
+  key: "1da8de2224e1c0ab887b",
   cluster: "eu",
   encrypted: true
 });
@@ -59097,9 +59056,9 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Joel\Documents\GitHub\Project-Yadu-A1\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\Joel\Documents\GitHub\Project-Yadu-A1\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\Joel\Documents\GitHub\Project-Yadu-A1\resources\sass\sb-admin-2.scss */"./resources/sass/sb-admin-2.scss");
+__webpack_require__(/*! C:\Users\Burak\Documents\Project-Yadu-A1\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\Burak\Documents\Project-Yadu-A1\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\Burak\Documents\Project-Yadu-A1\resources\sass\sb-admin-2.scss */"./resources/sass/sb-admin-2.scss");
 
 
 /***/ })

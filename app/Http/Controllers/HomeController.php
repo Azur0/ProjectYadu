@@ -40,20 +40,20 @@ class HomeController extends Controller
 
 			if($event->isDeleted == 0)
 			{
-				$event->date = self::dateToText($event->startDate);
+				$event->date = self::dateToShortText($event->startDate);
 				$event->city = self::cityFromPostalcode($event->location->postalcode);
 				array_push($participation, $event);
 			}
 		}
 		foreach($participation as $event)
 		{
-			$event->date = self::dateToText($event->startDate);
+			$event->date = self::dateToShortText($event->startDate);
 			$event->city = self::cityFromPostalcode($event->location->postalcode);
 		}
 
 		foreach($events as $event)
 		{
-			$event->date = self::dateToText($event->startDate);
+			$event->date = self::dateToShortText($event->startDate);
 			$event->city = self::cityFromPostalcode($event->location->postalcode);
 		}
 
@@ -68,7 +68,7 @@ class HomeController extends Controller
 
 			foreach($events as $event)
 			{
-				$event->date = self::dateToText($event->startDate);
+				$event->date = self::dateToShortText($event->startDate);
 				$event->city = self::cityFromPostalcode($event->location->postalcode);
 			}
 
@@ -97,7 +97,7 @@ class HomeController extends Controller
 			}
 			foreach($events as $event)
 			{
-				$event->date = self::dateToText($event->startDate);
+				$event->date = self::dateToShortText($event->startDate);
 				$event->city = self::cityFromPostalcode($event->location->postalcode);
 			}
 

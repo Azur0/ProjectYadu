@@ -10,7 +10,7 @@
                 <h3>{{__('events.show_date')}}</h3>
                 @php($timestamp = strtotime($event->startDate))
                 {{-- TODO: Controller logic in view --}}
-                <h5 class="mb-5">{{\App\Http\Controllers\DateTimeController::getDayNames(date("w", $timestamp))}} {{date("d-m-Y", $timestamp)}}
+                <h5 class="mb-5">{{$event->writtenDate}}
                     {{__('events.show_datetime_at')}} {{date(__('formats.timeFormat'), $timestamp)}}</h5>
             </div>
 

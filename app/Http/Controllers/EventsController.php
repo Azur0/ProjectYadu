@@ -50,13 +50,13 @@ class EventsController extends Controller
 		foreach($events as $event)
 		{
 			$event->city = self::cityFromPostalcode($event->Location->postalcode);
-			$event->startDate = self::dateToText($event->startDate);
+			$event->startDate = self::dateToShortText($event->startDate);
 
 		}
 		foreach($regular_events as $event)
 		{
 			$event->city = self::cityFromPostalcode($event->Location->postalcode);
-			$event->startDate = self::dateToText($event->startDate);
+			$event->startDate = self::dateToShortText($event->startDate);
 
 		}
 		
@@ -159,6 +159,7 @@ class EventsController extends Controller
      */
     public function show(Event $event)
     {
+        $event->writtenDate = $this->dateToLongText($event->startDate);
         return view('events.show', compact('event'));
     }
 
@@ -325,7 +326,7 @@ class EventsController extends Controller
         $filtered_events = $this->areEvenstInRange($unfiltered_events);
 
         foreach ($filtered_events as $event) {
-            $date = self::dateToText($event->startDate);
+            $date = self::dateToShortText($event->startDate);
 
             $postalcode = self::cityFromPostalcode($event->Location->postalcode);
 

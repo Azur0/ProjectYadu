@@ -1,37 +1,7 @@
 @extends('layouts/admin/app')
 @section('custom_script')
 	<script type="text/javascript" src="/js/admin_event_filter.js" defer></script>
-	<!--<script type="text/javascript" src="/js/prevent_instant_form_submit.js" defer></script>-->
-	<script type="text/javascript">
-		//tijdelijke fix
-		var hold = false;
-		$(document).ready(function()
-		{
-			$(".form_submit_ays").on('submit',function(event)
-			{
-				if(hold == false)
-				{
-					if(confirm("Are you sure?"))
-					{
-						//delete
-						hold = true;
-					$(".button-remove").attr('disabled', 'disabled');
-					$(".button-remove").css({'background-color': 'grey'});
-					}
-					else
-					{
-						//prevent delete
-						event.preventDefault();
-						hold = false;
-					}	
-				}
-				else
-				{
-					event.preventDefault();
-				}
-			});
-		});
-	</script>
+	<script type="text/javascript" src="/js/prevent_instant_form_submit.js" defer></script>
 @endsection
 @section('content')
 

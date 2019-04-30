@@ -64,7 +64,7 @@
 						<td>{{ $event->tag->tag }}</td>
 						<td>{{ $event->eventName}}</td>
 						<td>{{ $event->owner->firstName }} {{ $event->owner->middleName }} {{ $event->owner->lastName }}</td>
-						<td>{{ \Carbon\Carbon::parse($event->startDate)->format(__('formats.dateFormat'))}}</td>
+						<td>{{ \Carbon\Carbon::parse($event->startDate)->format(__('formats.dateTimeFormat'))}}</td>
 						<td>{{ $event->location->postalcode }} - {{ $event->city }}</td>
 						<td>{{$event->participants->count()}}/{{$event->numberOfPeople}}</td>
 						<td><a href="/events/{{$event->id}}" class="button-show button-hover">{{__('events.show')}}</a></td>

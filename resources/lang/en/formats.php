@@ -1,4 +1,4 @@
 <?php
 return [
-    'dateFormat' => 'm/d/Y - H:i'
+    'dateTimeFormat' => 'm/d/Y - H:i'
 ];

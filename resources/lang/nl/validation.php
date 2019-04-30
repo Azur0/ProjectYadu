@@ -144,6 +144,7 @@ return [
     |
     */
     'attributes' => [
+        'activityName'          => 'evenement naam',
         'address'               => 'adres',
         'age'                   => 'leeftijd',
         'available'             => 'beschikbaar',

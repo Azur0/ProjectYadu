@@ -41,8 +41,15 @@
                 @foreach ($pages as $page)
                 <?php
                     $pageBasename = basename($page, '.php');
+                    
+                    $currentLocale = app()->getLocale();
+                    App::setLocale("nl");
+                    $x = __($pageBasename);
+                    App::setLocale($currentLocale);
                 ?>
-                <a class="collapse-item" href="{{ url('edit/nl/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
+                @if (!is_string($x))
+                    <a class="collapse-item" href="{{ url('edit/nl/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
+                @endif
                 @endforeach
                 
                 <h6 class="collapse-header">Engels:</h6>
@@ -52,8 +59,14 @@
                 @foreach ($pages as $page)
                 <?php
                     $pageBasename = basename($page, '.php');
+                    $currentLocale = app()->getLocale();
+                    App::setLocale("en");
+                    $x = __($pageBasename);
+                    App::setLocale($currentLocale);
                 ?>
+                @if (!is_string($x))
                 <a class="collapse-item" href="{{ url('edit/en/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
+                @endif
                 @endforeach
             </div>
         </div>

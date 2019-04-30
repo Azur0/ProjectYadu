@@ -15,7 +15,6 @@ class EditLangController extends Controller
         App::setLocale($lang);
         $x = __($page);
         App::setLocale($currentLocale);
-        // dd($x);
         return view("admin.editText", compact("x","page", "lang"));
     }
 
@@ -61,7 +60,7 @@ class EditLangController extends Controller
                 } else {
                     $valueFromInput = $input["$key"];    
                 }
-                $string = str_replace("'", "\'", $valueFromInput);
+                $valueFromInput = str_replace("'", "\'", $valueFromInput);
                 $fileMiddle .=" '$key' => '$valueFromInput', ";
             }
         }

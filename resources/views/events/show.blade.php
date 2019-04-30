@@ -81,6 +81,72 @@
                 <h3>{{__('events.show_description')}}</h3>
                 <p>{{$event->description}}</p>
             </div>
+
+            {{--Start section Share buttons--}}
+            <div class="mb-5">
+                <h3>{{__('events.show_share')}}</h3>
+                <div>
+                    <a id="share-whatsapp" class="fab fa-whatsapp" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
+                    <a id="share-facebook" class="fab fa-facebook" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
+                    <a id="share-twitter" class="fab fa-twitter" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
+                    {{--<a id="share-instagram" class="fab fa-instagram" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>--}}
+                    <a id="share-link" class="fa fa-link" data-toggle="modal" data-target="#confirmDeleteAccount" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
+                </div>
+            </div>
+
+            <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{__('events.show_share_link')}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <a id="page-url"></a>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">{{__('events.show_share_close')}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.getElementById("share-link").addEventListener('click', function(){
+                    let clipboard = document.createElement('input'),
+                        url = window.location.href;
+
+                    document.body.appendChild(clipboard);
+                    clipboard.value = url;
+                    clipboard.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(clipboard);
+
+                    document.getElementById("page-url").innerHTML = url;
+                });
+
+                document.getElementById("share-facebook").addEventListener('click', function(){
+                    let url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
+                    window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+                });
+
+                document.getElementById("share-twitter").addEventListener('click', function(){
+                    let url = `https://twitter.com/intent/tweet?text={{$event->eventName}}: ${window.location.href} %23Yadu`;
+                    window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+                });
+
+                document.getElementById("share-whatsapp").addEventListener('click', function(){
+                    let url = `https://wa.me/?text={{$event->eventName}}: ${window.location.href}`;
+                    window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+                });
+            </script>
+
+            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v3.2"></script>
+            {{--End section Share buttons--}}
+
         </div>
     </div>
 

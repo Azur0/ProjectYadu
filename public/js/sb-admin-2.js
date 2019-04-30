@@ -46777,7 +46777,7 @@ if (token) {
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "1da8de2224e1c0ab887b",
+  key: "812b12456aecb24b4a87",
   cluster: "eu",
   encrypted: true
 });
@@ -46853,7 +46853,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Burak\Documents\Project-Yadu-A1\resources\js\sb-admin-2.js */"./resources/js/sb-admin-2.js");
+module.exports = __webpack_require__(/*! C:\Users\Joel\Documents\GitHub\Project-Yadu-A1\resources\js\sb-admin-2.js */"./resources/js/sb-admin-2.js");
 
 
 /***/ })

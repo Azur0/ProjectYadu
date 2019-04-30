@@ -10,7 +10,22 @@ class AdminController extends Controller
 {
     public function index()
     {
-
-        return view('admin.index');
+        if (Auth::check())
+		{
+			if (Auth::user()->accountRole == 'Admin')
+			{
+				return view('admin.index');
+			}
+			else
+			{
+				abort(403);
+			}
+		}
+		else
+		{
+			return redirect('/login');
+		}
     }
+
+
 }

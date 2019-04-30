@@ -47,5 +47,5 @@ Auth::routes();
 
 Route::resource('events', 'EventsController');
 
-Route::get('admin', 'AdminController@index');
+Route::get('admin', 'Management/AdminController@index');
 

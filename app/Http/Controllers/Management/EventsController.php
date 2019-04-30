@@ -284,8 +284,6 @@ class EventsController extends Controller
 			}
 			//TODO: Add error 'You are not joined!'
 		}
-		//TODO: Add error 'You are not logged in!'
-		return redirect('/events/' . $id);
 	}
 	// -------------------------------------------------------------------------------
 	private function formatDate()

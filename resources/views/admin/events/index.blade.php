@@ -43,7 +43,7 @@
 					<tr >
 						<td>
 							@if(  $event->isHighlighted == 1)
-								<i class="fas fa-star"></i>
+								<i class="fas fa-star star"></i>
 							@endif
 						</td>
 						<td>
@@ -53,11 +53,11 @@
 							@endphp
 
 							@if($startDate == $currentDate)
-								<i class="fas fa-hourglass-half"></i>
+								<i class="fas fa-hourglass-half Hourglass_busy"></i>
 							@elseif($startDate < $currentDate)
-								<i class="fas fa-hourglass-end"></i>
+								<i class="fas fa-hourglass-end Hourglass_after"></i>
 							@else
-								<i class="fas fa-hourglass-start"></i>
+								<i class="fas fa-hourglass-start Hourglass_before"></i>
 							@endif
 						</td>
 						<td>{{ $event->id}}</td>
@@ -118,15 +118,15 @@
 						{
 							var highlighted = ""
 							if(element['isHighlighted'] == 1){
-								highlighted = "<i class='fas fa-star'></i>"
+								highlighted = '<i class="fas fa-star star"></i>';
 							}
 							var timeIcon = ""
 							if(element['dateInt'] == 0){
-								timeIcon = "<i class=\"fas fa-hourglass-half\"></i>"
+								timeIcon = '<i class="fas fa-hourglass-half Hourglass_busy"></i>';
 							}else if(element['dateInt'] ==1){
-								timeIcon = "<i class=\"fas fa-hourglass-end\"></i>"
+								timeIcon = '<i class="fas fa-hourglass-end Hourglass_after"></i>';
 							}else{
-								timeIcon = "<i class=\"fas fa-hourglass-start\"></i>"
+								timeIcon = '<i class="fas fa-hourglass-start Hourglass_before"></i>';
 							}
 
 							var middleName = ""

@@ -74,4 +74,9 @@ return [
     'show_max'=> 'Max hoeveelheid deelnemers',
     'show_edit' => 'Wijzigen',
     'show_delete' => 'Verwijderen',
+
+///////////////////////////////// Share ////////////////////////////////////
+    'show_share' => 'Evenement delen',
+    'show_share_link' => 'De link is gekopieerd naar uw klembord.',
+    'show_share_close' => 'Sluiten',
 ];

@@ -74,4 +74,9 @@ return [
     'show_max'=> 'Max ammount of attendees',
     'show_edit' => 'Edit',
     'show_delete' => 'Delete',
+
+///////////////////////////////// Share ////////////////////////////////////
+    'show_share' => 'Share event',
+    'show_share_link' => 'The link has been copied to your clipboard.',
+    'show_share_close' => 'Close',
 ];

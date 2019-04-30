@@ -15,4 +15,5 @@ return [
 
     'email' => 'EMAIL',
     'kvk' => 'KvK',
+    'social' => 'Social Media',
 ];

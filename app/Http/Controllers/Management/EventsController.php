@@ -192,7 +192,7 @@ class EventsController extends Controller
 				$validator = Validator::make($request->all(), [
 					'activityName' => 'required|max:30',
 					'description' => 'required|max:150',
-					'numberOfPeople' => 'required|min:1', //TODO: min en max nog doen
+					'numberOfPeople' => 'required|min:1|max:100',
 					'tag' => 'required',
 					'startDate' => 'required|date|after:now',
 					'startTime' => 'required',

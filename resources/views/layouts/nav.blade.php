@@ -8,7 +8,7 @@
         <a class="navbar-brand d-none d-lg-inline-block" href="/">
             <img src={{ asset('images/logoCircle.png')}} width="57" alt="logo">
         </a>
-        <p class="navbar-brand d-none d-lg-inline-block logo-text nav-item">{{__('navigation.nav_motto')}}</p>
+        <a href="/" class="navbar-brand d-none d-lg-inline-block logo-text nav-item">{{__('navigation.nav_motto')}}</a>
         <!-- Mobile logo -->
         <a class="navbar-brand-two mx-auto d-lg-none d-inline-block logo" href="/">
             <img src={{ asset('images/logoCircle.png')}} width="60" alt="logo">
@@ -31,8 +31,13 @@
             </li>
             @if(Auth::user())
 	            <li>
-	                <a href="/home" class="nav-link m-2 nav-item {{ request()->is('home') ? 'active' : '' }}">{{__('navigation.nav_dash')}}</a>
+	                <a href="/home" class="nav-link m-2 nav-item {{ request()->is('home') ? 'active' : '' }}">{{__('navigation.nav_dashboard')}}</a>
 	            </li>
+                @if(Auth::user()->accountRole == 'Admin')
+                <li>
+                    <a href="/admin" class="nav-link m-2 nav-item">{{__('navigation.nav_admin')}}</a>
+                </li>
+                @endif
 	            <li>
 	                <a href="/logout" class="nav-link m-2 nav-item">{{__('navigation.nav_logout')}}</a>
 	            </li>

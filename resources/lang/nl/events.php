@@ -96,4 +96,9 @@ return [
 	'edit_error_category' => 'Kies een type.',
 	'edit_error_img' => 'Kies een foto.',
 	'edit_error_location' => 'Het locatie-veld is verplicht.',
+
+///////////////////////////////// Share ////////////////////////////////////
+    'show_share' => 'Evenement delen',
+    'show_share_link' => 'De link is gekopieerd naar uw klembord.',
+    'show_share_close' => 'Sluiten',
 ];

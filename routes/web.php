@@ -47,7 +47,9 @@ Auth::routes();
 
 Route::resource('events', 'EventsController');
 
-Route::get('admin', function () { return view('admin.index'); });
+Route::get('admin', function () { return view('admin.index');})->middleware('auth', 'isAdmin');
+
+Route::post('/language', 'LanguageController@setLanguage');
 
 Route::resource('admin/events','Management\EventsController');
 Route::post('/admin/events/actionDistanceFilter', 'Management\EventsController@actionDistanceFilter')->name('admin_events_controller.actionDistanceFilter');

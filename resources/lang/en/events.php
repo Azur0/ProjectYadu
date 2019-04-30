@@ -96,4 +96,9 @@ return [
 	'edit_error_category' => 'Choose a category.',
 	'edit_error_img' => 'Choose an image.',
 	'edit_error_location' => 'The location-field is required.',
+
+///////////////////////////////// Share ////////////////////////////////////
+    'show_share' => 'Share event',
+    'show_share_link' => 'The link has been copied to your clipboard.',
+    'show_share_close' => 'Close',
 ];

@@ -53,3 +53,5 @@ Route::resource('events', 'EventsController');
 
 Route::get('admin', function () { return view('admin.index'); });
 
+Route::post('/language', 'LanguageController@setLanguage');
+

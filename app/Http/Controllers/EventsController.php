@@ -123,7 +123,6 @@ class EventsController extends Controller
         Event::create(
             [
                 'eventName' => $request['activityName'],
-                'status' => 'created',
                 'description' => $request['description'],
                 'startDate' => $request['startDate'],
                 'numberOfPeople' => $request['people'],

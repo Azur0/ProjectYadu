@@ -6,16 +6,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\App;
 use Hamcrest\Type\IsArray;
+use Illuminate\Support\Facades\Auth;
 
 class EditLangController extends Controller
 {
     public function index($lang, $page)
-    {
-        $currentLocale = app()->getLocale();
-        App::setLocale($lang);
-        $x = __($page);
-        App::setLocale($currentLocale);
-        return view("admin.editText", compact("x","page", "lang"));
+    {   
+        if (Auth::check() && Auth::user()->accountRole == 'Admin') {
+            $currentLocale = app()->getLocale();
+            App::setLocale($lang);
+            $x = __($page);
+            App::setLocale($currentLocale);
+            return view("admin.editText", compact("x","page", "lang"));
+
+        } else {
+            abort(403);
+        }
     }
 
     public function saveFile(Request $request){

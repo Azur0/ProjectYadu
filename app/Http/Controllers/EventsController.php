@@ -49,13 +49,13 @@ class EventsController extends Controller
 		foreach($events as $event)
 		{
 			$event->city = self::cityFromPostalcode($event->Location->postalcode);
-			$event->startDate = self::dateToText($event->startDate);
+			$event->writtenDate = self::dateToText($event->startDate);
 
 		}
 		foreach($regular_events as $event)
 		{
 			$event->city = self::cityFromPostalcode($event->Location->postalcode);
-			$event->startDate = self::dateToText($event->startDate);
+			$event->writtenDate = self::dateToText($event->startDate);
 
 		}
 		

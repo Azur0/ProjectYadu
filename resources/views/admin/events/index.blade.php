@@ -1,6 +1,7 @@
 @extends('layouts/admin/app')
 @section('custom_script')
 	<script type="text/javascript" src="/js/admin_event_filter.js" defer></script>
+	<script type="text/javascript" src="/js/prevent_instant_form_submit.js" defer></script>
 @endsection
 @section('content')
 
@@ -70,7 +71,7 @@
 						<td><a href="/events/{{$event->id}}" class="button-show button-hover">{{__('events.show')}}</a></td>
 						<td><a href="/admin/events/{{$event->id}}/edit" class="button button-hover">{{__('events.show_edit')}}</a></td>
 						<td>
-							<form method="POST" action="/admin/events/{{$event->id}}">
+							<form class="form_submit_ays" method="POST" action="/admin/events/{{$event->id}}">
 								@method('DELETE')
 								@csrf
 								<div class="field">

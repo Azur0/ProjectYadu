@@ -197,7 +197,6 @@ class EventsController extends Controller
 					'startDate' => 'required|date|after:now',
 					'startTime' => 'required',
 					'location' => 'required',
-					'numberOfPeople' => 'required',
 					'isHighlighted' => 'nullable|string'
 				]);
 

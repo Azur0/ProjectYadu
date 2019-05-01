@@ -75,12 +75,16 @@ class AccountsController extends Controller
     {
         if (Auth::check() && Auth::user()->accountRole == 'Admin') {
             $account = Account::where('id', $id)->firstOrFail();
+            $genders = Gender::all()->pluck('gender')->toArray();
+            $accountRoles = AccountRole::all()->pluck('role')->toArray();
 
             request()->validate([
-                'email' => 'required|email',
+                'email' => 'required|email|unique:accounts,email,' . $account->id,
                 'firstName' => 'required',
                 'accountRole' => 'required',
-                'dateOfBirth' => 'before:' . 'now',
+                'dateOfBirth' => 'nullable|before:' . 'now',
+                'gender' => 'in:' . implode(',', $genders),
+                'accountRole' => 'in:' . implode(',', $accountRoles),
             ]);
 
             $account->email = request()->email;

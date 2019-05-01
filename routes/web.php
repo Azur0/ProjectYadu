@@ -37,6 +37,8 @@ Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilt
 
 Auth::routes(['verify' => true]);
 
+Route::resource('/events','EventsController');
+
 //Profile
 Route::get('profile/edit', 'ProfileController@edit')->middleware('auth');
 Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');

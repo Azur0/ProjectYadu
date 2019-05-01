@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\DateToText;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -11,6 +12,7 @@ use Auth;
 
 class HomeController extends Controller
 {
+    use DateToText;
     /**
      * Create a new controller instance.
      *
@@ -38,23 +40,23 @@ class HomeController extends Controller
 
 			if($event->isDeleted == 0)
 			{
-				$event->date = self::dateToText($event->startDate);
+				$event->date = self::dateToShortText($event->startDate);
 				$event->city = self::cityFromPostalcode($event->location->postalcode);
 				array_push($participation, $event);
 			}
 		}
 		foreach($participation as $event)
 		{
-			$event->date = self::dateToText($event->startDate);
+			$event->date = self::dateToShortText($event->startDate);
 			$event->city = self::cityFromPostalcode($event->location->postalcode);
 		}
 
 		foreach($events as $event)
 		{
-			$event->date = self::dateToText($event->startDate);
+			$event->date = self::dateToShortText($event->startDate);
 			$event->city = self::cityFromPostalcode($event->location->postalcode);
 		}
-		
+
         return view('home', compact('events','participation'));
     }
 
@@ -66,7 +68,7 @@ class HomeController extends Controller
 
 			foreach($events as $event)
 			{
-				$event->date = self::dateToText($event->startDate);
+				$event->date = self::dateToShortText($event->startDate);
 				$event->city = self::cityFromPostalcode($event->location->postalcode);
 			}
 
@@ -95,7 +97,7 @@ class HomeController extends Controller
 			}
 			foreach($events as $event)
 			{
-				$event->date = self::dateToText($event->startDate);
+				$event->date = self::dateToShortText($event->startDate);
 				$event->city = self::cityFromPostalcode($event->location->postalcode);
 			}
 
@@ -106,14 +108,6 @@ class HomeController extends Controller
 			return redirect('/');
 		}
 	}
-
-	private function dateToText($timestamp)
-    {
-        setlocale(LC_ALL, 'nl_NL.utf8');
-        $date = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp);
-        $formatted_date = ucfirst($date->formatLocalized('%a %d %B %Y'));
-        return $formatted_date;
-    }
 
     private function cityFromPostalcode($postalcode)
     {

@@ -44,7 +44,6 @@ return [
     'create_title' => 'Titel',
     'create_description' => 'Beschrijving',
 
-
     'create_characters_remaining' => 'tekens over',
 
     'create_select_type_first' => 'Kies eerst het type event',
@@ -96,6 +95,7 @@ return [
 	'edit_error_category' => 'Kies een type.',
 	'edit_error_img' => 'Kies een foto.',
 	'edit_error_location' => 'Het locatie-veld is verplicht.',
+    'show_datetime_at' => 'om',
 
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Evenement delen',

@@ -96,6 +96,8 @@ return [
 	'edit_error_category' => 'Choose a category.',
 	'edit_error_img' => 'Choose an image.',
 	'edit_error_location' => 'The location-field is required.',
+    'show_datetime_at' => 'at',
+
 
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Share event',

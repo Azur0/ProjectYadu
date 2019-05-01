@@ -50,13 +50,15 @@ class EventsController extends Controller
 		foreach($events as $event)
 		{
 			$event->city = self::cityFromPostalcode($event->Location->postalcode);
-			$event->startDate = self::dateToShortText($event->startDate);
+			$event->writtenDate = self::dateToShortText($event->startDate);
+
 
 		}
 		foreach($regular_events as $event)
 		{
 			$event->city = self::cityFromPostalcode($event->Location->postalcode);
-			$event->startDate = self::dateToShortText($event->startDate);
+			$event->writtenDate = self::dateToShortText($event->startDate);
+
 
 		}
 		
@@ -124,7 +126,6 @@ class EventsController extends Controller
         Event::create(
             [
                 'eventName' => $request['activityName'],
-                'status' => 'created',
                 'description' => $request['description'],
                 'startDate' => $request['startDate'],
                 'numberOfPeople' => $request['people'],

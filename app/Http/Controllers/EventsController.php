@@ -7,6 +7,7 @@ use App\EventPicture;
 use App\Event;
 use App\EventHasParticipants;
 use App\Http\Controllers\API\LocationController;
+use App\Traits\DateToText;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\EventTag;
@@ -18,9 +19,9 @@ use Illuminate\Support\Carbon;
 use App\Location;
 use Auth;
 
-
 class EventsController extends Controller
 {
+    use DateToText;
     /**
      * Display a listing of the resource.
      *
@@ -49,13 +50,15 @@ class EventsController extends Controller
 		foreach($events as $event)
 		{
 			$event->city = self::cityFromPostalcode($event->Location->postalcode);
-			$event->writtenDate = self::dateToText($event->startDate);
+			$event->writtenDate = self::dateToShortText($event->startDate);
+
 
 		}
 		foreach($regular_events as $event)
 		{
 			$event->city = self::cityFromPostalcode($event->Location->postalcode);
-			$event->writtenDate = self::dateToText($event->startDate);
+			$event->writtenDate = self::dateToShortText($event->startDate);
+
 
 		}
 		
@@ -157,6 +160,7 @@ class EventsController extends Controller
      */
     public function show(Event $event)
     {
+        $event->writtenDate = $this->dateToLongText($event->startDate);
         return view('events.show', compact('event'));
     }
 
@@ -323,7 +327,7 @@ class EventsController extends Controller
         $filtered_events = $this->areEvenstInRange($unfiltered_events);
 
         foreach ($filtered_events as $event) {
-            $date = self::dateToText($event->startDate);
+            $date = self::dateToShortText($event->startDate);
 
             $postalcode = self::cityFromPostalcode($event->Location->postalcode);
 
@@ -336,14 +340,6 @@ class EventsController extends Controller
             $events->push($event);
         }
         return json_encode($events);
-    }
-
-    public function dateToText($timestamp)
-    {
-        setlocale(LC_ALL, App::getLocale());
-        $date = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp);
-        $formatted_date = ucfirst($date->formatLocalized('%a %d %B %Y'));
-        return $formatted_date;
     }
 
     public function cityFromPostalcode($postalcode)

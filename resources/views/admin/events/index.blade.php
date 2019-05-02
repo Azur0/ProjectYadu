@@ -7,7 +7,6 @@
 
 @section('custom_script')
 	<script type="text/javascript" src="/js/admin_event_filter.js" defer></script>
-	<script type="text/javascript" src="/js/prevent_instant_form_submit.js" defer></script>
 @endsection
 @section('content')
 
@@ -75,12 +74,37 @@
 						<td><a href="/events/{{$event->id}}" class="button-show button-hover">{{__('events.show')}}</a></td>
 						<td><a href="/admin/events/{{$event->id}}/edit" class="button button-hover">{{__('events.show_edit')}}</a></td>
 						<td>
-							<form class="form_submit_ays" method="POST" action="/admin/events/{{$event->id}}">
+							<form class="form_submit_ays" method="POST" id="deleteAccount" action="/admin/events/{{$event->id}}">
 								@method('DELETE')
 								@csrf
-								<div class="field">
-									<div class="control">
-										<button type="submit" class="button-remove button-hover">{{__('events.show_delete')}}</button>
+								<div>
+									<div class="col-md-4">
+										<button type="button" class="button-remove button-hover" data-toggle="modal" data-target="#confirmDeleteAccount">{{__('events.show_delete')}}</button>
+
+									</div>
+
+									<div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title">{{__('events.title_confirm')}}</h5>
+													<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													{{__('events.confirm_text')}}
+												</div>
+												<div class="modal-footer">
+													<input type="submit" form="deleteAccount" class="btn btn-danger"
+														   value="{{__('events.confirm_delete')}}">
+													<button type="button" class="btn btn-primary"
+															data-dismiss="modal">{{__('events.dismiss_delete')}}
+													</button>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</form>
@@ -150,7 +174,8 @@
 									"<td>"+element['participants_ammount'] +  "/" + element['numberOfPeople'] + "</td>" +
 									"<td><a href='/events/"+ element['id']+"' class='button-show button-hover'>{{__('events.show')}}</a></td>" +
 									"<td><a href='/admin/events/"+ element['id']+"/edit'class='button button-hover'>{{__('events.show_edit')}}</a></td>" +
-									"<td><form method='POST' action='/admin/events/"+element['id']+"'>" +
+									"<td>" +
+									"<form method='POST' action='/admin/events/"+element['id']+"'>" +
 									'@method('DELETE') @csrf' +
 									"<div class='field'><div class='control'>"+
 									"<button type='submit' class='button-remove button-hover'>{{__('events.show_delete')}}"+

@@ -75,6 +75,13 @@ return [
     'show_edit' => 'Wijzigen',
     'show_delete' => 'Verwijderen',
 
+    ///////////////////////////////// Show-delete ////////////////////////////////////
+    'dismiss_delete' => 'Annuleren',
+    'confirm_delete' => 'Bevestigen',
+    'title_confirm' => 'Bevestig',
+    'confirm_text' => 'Wilt u het evenement verwijderen?',
+
+
 ///////////////////////////////// Edit ////////////////////////////////////
 	'edit_header_info' => 'Evenement informatie',
 	'edit_info_title' => 'Titel',

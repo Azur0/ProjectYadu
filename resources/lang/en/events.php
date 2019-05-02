@@ -30,6 +30,8 @@ return [
     'index_search_name' => 'Search by name:',
     'index_no_event_found' => 'No events could be found near you.',
     'index_loading_error' => 'Events could not be loaded',
+    'index_search_placeholder' => 'Name',
+    'index_search_category_placeholder' => 'Category',
 
 ///////////////////////////////// Create //////////////////////////////////
 

@@ -14,14 +14,14 @@
 		<div class="card-header">
 			<div class="search">
 				<label for="filterByTag">{{__('events.index_select_category')}}</label>
-				<input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag"/>
+				<input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag" placeholder="{{__('events.index_search_category_placeholder')}}"/>
 				<datalist id="tags">
 					@foreach ($tags as $tag)
 						<option value="{{__('events.cat'.$tag->id)}}">
 					@endforeach
 				</datalist>
 				<label for="filterByName">{{__('events.index_search_name')}}</label>
-				<input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" placeholder="search" autocomplete="off"/>
+				<input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" placeholder="{{__('events.index_search_placeholder')}}" autocomplete="off"/>
 			</div>
 		</div>
 		<div class="card-body">

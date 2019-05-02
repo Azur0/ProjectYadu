@@ -30,6 +30,8 @@ return [
     'index_search_name' => 'Zoek op naam:',
     'index_no_event_found' => 'Er kan geen event worden gevonden in uw buurt.',
     'index_loading_error' => 'Er kan geen event worden geladen.',
+    'index_search_placeholder' => 'Naam',
+    'index_search_category_placeholder' => 'Categorie',
 
 ///////////////////////////////// Create //////////////////////////////////
 

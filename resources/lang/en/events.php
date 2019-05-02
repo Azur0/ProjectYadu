@@ -109,6 +109,7 @@ return [
     'edit_placeholder_title' => 'Title..',
     'edit_placeholder_description' => 'Description..',
     'edit_characters_remaining' => 'Characters remaining',
+    'edit_placeholder_location_Search_Box' => 'Search box',
 
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Share event',

@@ -109,6 +109,7 @@ return [
     'edit_placeholder_title' => 'Titel..',
     'edit_placeholder_description' => 'Omschrijving..',
     'edit_characters_remaining' => 'Overgebleven karakters',
+    'edit_placeholder_location_Search_Box' => 'Zoekvak',
 
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Evenement delen',

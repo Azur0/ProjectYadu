@@ -138,7 +138,7 @@
 					<div class="loc">
 						<h3>{{__('events.edit_header_location')}}</h3>
 						<div class="description location">
-							<input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required
+							<input id="pac-input" name="location" class="controls" type="text" placeholder="{{__('events.edit_placeholder_location_Search_Box')}}" required
 								   value="{{ $data['event']->location()->first()->postalcode }} {{ $data['event']->location()->first()->houseNumber }}{{ $data['event']->location()->first()->houseNumberAddition }}">
 							<div id="map"></div>
 							@if ($errors->has('location'))

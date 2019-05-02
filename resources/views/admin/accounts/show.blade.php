@@ -30,9 +30,9 @@
                                     {{__('accounts.edit_delete_account_confirm_content')}}
                                 </div>
                                 <div class="modal-footer">
-                                    <a type="submit" href="{{url('/admin/accounts/'. $account->id .'/delete')}}"
+                                    <button type="submit" onclick="window.location.href='{{url('/admin/accounts/'. $account->id .'/delete')}}'"
                                        class="btn btn-danger">
-                                        {{__('accounts.edit_delete_account_positive')}}</a>
+                                        {{__('accounts.edit_delete_account_positive')}}</button>
                                     <button type="button" class="btn btn-primary"
                                             data-dismiss="modal">{{__('accounts.edit_delete_account_negative')}}
                                     </button>

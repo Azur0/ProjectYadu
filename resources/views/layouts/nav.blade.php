@@ -35,7 +35,7 @@
 	            </li>
                 @if(Auth::user()->accountRole == 'Admin')
                 <li>
-                    <a href="/admin" class="nav-link m-2 nav-item">{{__('navigation.nav_admin')}}</a>
+                    <a href="/admin" class="nav-link m-2 nav-item nav-yadu">{{__('navigation.nav_admin')}}</a>
                 </li>
                 @endif
 	            <li>

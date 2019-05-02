@@ -41,7 +41,7 @@
                                     <span class="text-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
                                 @endif
                             </td>
-                            <td>{{date('d-m-Y', strtotime($account->created_at))}}</td>
+                            <td>{{$account->written_created_at}}</td>
                         </tr>
                     @endforeach
                     </tbody>

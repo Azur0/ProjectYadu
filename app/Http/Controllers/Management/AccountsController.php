@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Management;
 
 use App\AccountRole;
 use App\Http\Controllers\AccountController;
+use App\Rules\genderExists;
+use App\Traits\DateToText;
+use Carbon\Carbon;
 use function foo\func;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -16,10 +19,15 @@ use Illuminate\Validation\Validator;
 
 class AccountsController extends Controller
 {
+    use DateToText;
 
     public function index()
     {
         $accounts = Account::where('isDeleted', '0')->get();
+
+        foreach ($accounts as $account){
+            $account->written_created_at = date(__('formats.dateFormat'), strtotime($account->created_at));
+        }
 
         return view('admin.accounts.index', compact(['accounts']));
     }
@@ -27,6 +35,7 @@ class AccountsController extends Controller
     public function show($id)
     {
         $account = Account::where('id', $id)->firstOrFail();
+        $account->email_verified_at = self::dateToLongText($account->email_verified_at);
 
         $genders = Gender::all();
 
@@ -68,7 +77,7 @@ class AccountsController extends Controller
             'firstName' => 'required',
             'accountRole' => 'required',
             'dateOfBirth' => 'nullable|before:' . 'now',
-            'gender' => 'in:' . implode(',', $genders),
+            'gender' => new genderExists,
             'accountRole' => 'in:' . implode(',', $accountRoles),
         ]);
 

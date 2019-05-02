@@ -19,7 +19,7 @@
 	<hr class="sidebar-divider my-0">
 
 	<!-- Nav Item - Dashboard -->
-	<li class="nav-item active">
+	<li class="nav-item {{ request()->is('admin') ? 'active' : '' }}">
 		<a class="nav-link" href="{{ url('admin')  }}">
 			<i class="fas fa-fw fa-tachometer-alt"></i>
 			<span>Dashboard</span></a>
@@ -29,7 +29,7 @@
 	<hr class="sidebar-divider">
 
     <!-- Nav Item - Pages -->
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('edit/*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
             aria-controls="collapsePages">
             <i class="fas fa-fw fa-cog"></i>
@@ -84,7 +84,7 @@
 	</div>
 
     <!-- Nav Item - Users -->
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true"
             aria-controls="collapseUsers">
             <i class="fas fa-fw fa-users"></i>
@@ -99,7 +99,7 @@
     </li>
 
 	<!-- Nav Item - Events -->
-	<li class="nav-item">
+	<li class="nav-item {{ request()->is('admin/events') ? 'active' : '' }}">
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEvents" aria-expanded="true" aria-controls="collapseEvents">
 			<i class="fas fa-fw fa-users"></i>
 			<span>{{__('navigation.nav_eventsS')}}</span>

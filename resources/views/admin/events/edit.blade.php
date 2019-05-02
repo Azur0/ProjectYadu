@@ -26,20 +26,20 @@
 					<h3>{{__('events.edit_header_info')}}</h3>
 					<div class="description">
 						<h5>{{__('events.edit_info_title')}}</h5>
-						<input type="text" id="title" name="activityName" placeholder="Titel"
+						<input type="text" id="title" name="activityName" placeholder="{{__('events.edit_placeholder_title')}}"
 							   oninput="update_counter_title(this)" maxlength="30" required
 							   value="{{ $data['event']->eventName }}">
-						<span id="chars_title"></span> characters remaining
+						<span id="chars_title"></span> {{__('events.edit_characters_remaining')}}
 						@if ($errors->has('activityName'))
                             @foreach($errors->get('activityName') as $error)
                                 <div class="error">{{$error}}</div>
                             @endforeach
 						@endif
 						<h5>{{__('events.edit_info_description')}}</h5>
-						<textarea id="desc" name="description" placeholder="Omschrijving.."
+						<textarea id="desc" name="description" placeholder="{{__('events.edit_placeholder_description')}}"
 								  oninput="update_counter_desc(this)"
 								  maxlength="150" required>{{ $data['event']->description }}</textarea>
-						<span id="chars_desc"></span> characters remaining
+						<span id="chars_desc"></span> {{__('events.edit_characters_remaining')}}
 						@if ($errors->has('description'))
                             @foreach($errors->get('description') as $error)
                                 <div class="error">{{$error}}</div>

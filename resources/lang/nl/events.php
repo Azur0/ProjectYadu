@@ -106,6 +106,10 @@ return [
 	'edit_error_location' => 'Het locatie-veld is verplicht.',
     'show_datetime_at' => 'om',
 
+    'edit_placeholder_title' => 'Titel..',
+    'edit_placeholder_description' => 'Omschrijving..',
+    'edit_characters_remaining' => 'Overgebleven karakters',
+
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Evenement delen',
     'show_share_link' => 'De link is gekopieerd naar uw klembord.',

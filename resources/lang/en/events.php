@@ -106,6 +106,9 @@ return [
 	'edit_error_location' => 'The location-field is required.',
     'show_datetime_at' => 'at',
 
+    'edit_placeholder_title' => 'Title..',
+    'edit_placeholder_description' => 'Description..',
+    'edit_characters_remaining' => 'Characters remaining',
 
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Share event',

@@ -2,7 +2,9 @@
 
 @section('content')
     <div class="row ml-3 mb-3">
-        <a href="{{url('/admin/accounts')}}" class="btn btn-primary">{{__('accounts.back')}}</a>
+        <div class="backlink">
+            <a href="{{url('admin/accounts')}}"><i class="fas fa-arrow-left"></i> {{__('accounts.back')}}</a>
+        </div>
     </div>
     <div class="card">
         <div class="card-header">

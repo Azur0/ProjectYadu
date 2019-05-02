@@ -11,6 +11,9 @@
 
 @section('content')
 	
+	<div class="backlink">
+		<a href="/admin/events"><i class="fas fa-arrow-left"></i> overview</a>
+	</div>
 	<div class="card">
 		<div class="card-header">
 			{{ $data['event']->id }}: {{ $data['event']->eventName }}

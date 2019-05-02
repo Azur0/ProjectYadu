@@ -149,7 +149,7 @@
 						</div>
 					</div>
 					
-					<input class="submit" type="submit" name="verzenden" value="update">
+					<input class="submit" type="submit" name="verzenden" value="Update">
 				</form>
 			</div>
 		</div>

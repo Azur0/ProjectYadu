@@ -70,7 +70,7 @@ return [
     'show_join' => 'Aanmelden',
     'show_leave' => 'Afmelden',
     'show_number_of_attendees' => ':amount van de :max deelnemers',
-    'show_attendees_ammount' => 'Hoeveelheid deelnemers',
+    'show_attendees_amount' => 'Hoeveelheid deelnemers',
     'show_max'=> 'Max hoeveelheid deelnemers',
     'show_edit' => 'Wijzigen',
     'show_delete' => 'Verwijderen',

@@ -56,9 +56,9 @@
 					</div>
 					<div class="date">
 						<div class="description">
-							<h5>Date</h5>
+							<h5>{{__('events.edit_info_date')}}</h5>
 							<input id="date" name="startDate" type="date" value="{{ $data['event']->startDate }}" required>
-							<h5>Time</h5>
+							<h5>{{__('events.edit_info_time')}}</h5>
 							<input id="date" name="startTime" type="time" value="{{ $data['event']->startTime }}" required>
 							@if ($errors->has('startDate'))
                                 @foreach($errors->get('startDate') as $error)
@@ -108,7 +108,7 @@
 						</div>
 					</div>
 					<div class="pic">
-						<h3>{{__('events.edit_header_location')}}</h3>
+						<h3>{{__('events.edit_header_banner')}}</h3>
 						<div class="types">
 							<div id="box2" class="box">
 								@foreach($selectedTag->eventPictures()->get() as $picture)

@@ -1,4 +1,10 @@
 @extends('layouts/admin/app')
+
+@section('custom_css')
+	<link rel="stylesheet" href="{{ asset('css/admin_custom.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/filterCSS.css') }}">
+@endsection
+
 @section('custom_script')
 	<script type="text/javascript" src="/js/admin_event_filter.js" defer></script>
 	<script type="text/javascript" src="/js/prevent_instant_form_submit.js" defer></script>
@@ -86,8 +92,6 @@
 			</table>
 		</div>
 	</div>
-
-	
 
 	<script type="text/javascript">
 		//AJAX request

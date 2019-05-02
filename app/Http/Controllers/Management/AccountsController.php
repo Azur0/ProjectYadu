@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\AccountRole;
 use App\Http\Controllers\AccountController;
+use App\Rules\genderExists;
 use function foo\func;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -68,7 +69,7 @@ class AccountsController extends Controller
             'firstName' => 'required',
             'accountRole' => 'required',
             'dateOfBirth' => 'nullable|before:' . 'now',
-            'gender' => 'in:' . implode(',', $genders),
+            'gender' => new genderExists,
             'accountRole' => 'in:' . implode(',', $accountRoles),
         ]);
 

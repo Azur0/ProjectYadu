@@ -1,6 +1,9 @@
 @extends('layouts/admin/app')
 
 @section('content')
+    <div class="row ml-3 mb-3">
+        <a href="{{url('/admin/accounts')}}" class="btn btn-primary">{{__('accounts.back')}}</a>
+    </div>
     <div class="card">
         <div class="card-header">
             <div class="row"><img class="img-fluid rounded-circle my-auto mr-3 avatar-lg"

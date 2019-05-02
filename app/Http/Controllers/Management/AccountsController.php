@@ -19,104 +19,80 @@ class AccountsController extends Controller
 
     public function index()
     {
-        if (Auth::check() && Auth::user()->accountRole == 'Admin') {
-            $accounts = Account::where('isDeleted', '0')->get();
-            $deletedAccounts = Account::where('isDeleted', '1')->get();
+        $accounts = Account::where('isDeleted', '0')->get();
 
-            return view('admin.accounts.index', compact(['accounts']));
-        } else {
-            abort(403);
-        }
+        return view('admin.accounts.index', compact(['accounts']));
     }
 
     public function show($id)
     {
-        if (Auth::check() && Auth::user()->accountRole == 'Admin') {
-            $account = Account::where('id', $id)->firstOrFail();
+        $account = Account::where('id', $id)->firstOrFail();
 
-            $genders = Gender::all();
+        $genders = Gender::all();
 
-            $accountRoles = AccountRole::all();
+        $accountRoles = AccountRole::all();
 
-            return view('admin.accounts.show', compact(['account', 'genders', 'accountRoles']));
-        } else {
-            abort(403);
-        }
+        return view('admin.accounts.show', compact(['account', 'genders', 'accountRoles']));
     }
 
     public function activate($id)
     {
-        if (Auth::check() && Auth::user()->accountRole == 'Admin') {
-            $account = Account::where('id', $id)->firstOrFail();
+        $account = Account::where('id', $id)->firstOrFail();
 
-            $account->email_verified_at = date('Y-m-d H:i:s');
+        $account->email_verified_at = date('Y-m-d H:i:s');
 
-            $account->save();
+        $account->save();
 
-            return Redirect::back();
-        } else {
-            abort(403);
-        }
+        return Redirect::back();
     }
 
     public function destroy($id)
     {
-        if (Auth::check() && Auth::user()->accountRole == 'Admin') {
-            if (Account::where('id', $id)->firstOrFail()->accountRole != 'Admin') {
-                AccountController::deleteAccountFromId($id);
-            } else {
-                return Redirect::back()->with('adminError', __('accounts.edit_delete_account_admin_error'));
-            }
-
-            return redirect('admin/accounts');
+        if (Account::where('id', $id)->firstOrFail()->accountRole != 'Admin') {
+            AccountController::deleteAccountFromId($id);
         } else {
-            abort(403);
+            return Redirect::back()->with('adminError', __('accounts.edit_delete_account_admin_error'));
         }
+
+        return redirect('admin/accounts');
     }
 
     public function update($id)
     {
-        if (Auth::check() && Auth::user()->accountRole == 'Admin') {
+        $account = Account::where('id', $id)->firstOrFail();
+        $genders = Gender::all()->pluck('gender')->toArray();
+        $accountRoles = AccountRole::all()->pluck('role')->toArray();
 
-            $account = Account::where('id', $id)->firstOrFail();
-            $genders = Gender::all()->pluck('gender')->toArray();
-            $accountRoles = AccountRole::all()->pluck('role')->toArray();
+        request()->validate([
+            'email' => 'required|email|unique:accounts,email,' . $account->id,
+            'firstName' => 'required',
+            'accountRole' => 'required',
+            'dateOfBirth' => 'nullable|before:' . 'now',
+            'gender' => 'in:' . implode(',', $genders),
+            'accountRole' => 'in:' . implode(',', $accountRoles),
+        ]);
 
-            request()->validate([
-                'email' => 'required|email|unique:accounts,email,' . $account->id,
-                'firstName' => 'required',
-                'accountRole' => 'required',
-                'dateOfBirth' => 'nullable|before:' . 'now',
-                'gender' => 'in:' . implode(',', $genders),
-                'accountRole' => 'in:' . implode(',', $accountRoles),
-            ]);
-
-            if($account->accountRole != request()->accountRole && $account->accountRole == 'Admin'){
-                return Redirect::back()->with('adminRole', __('accounts.edit_change_role_admin_error'));
-            }
-
-            $account->email = request()->email;
-            $account->firstName = request()->firstName;
-            $account->middleName = request()->middleName;
-            $account->lastName = request()->lastName;
-            $account->dateOfBirth = request()->dateOfBirth;
-            $account->accountRole = request()->accountRole;
-
-            if (request()->gender == "-") {
-                $account->gender = null;
-            } else {
-                $account->gender = request()->gender;
-            }
-
-
-            $account->save();
-
-            return redirect('admin/accounts');
-
-
-        } else {
-            abort(403);
+        if ($account->accountRole != request()->accountRole && $account->accountRole == 'Admin') {
+            return Redirect::back()->with('adminRole', __('accounts.edit_change_role_admin_error'));
         }
+
+        $account->email = request()->email;
+        $account->firstName = request()->firstName;
+        $account->middleName = request()->middleName;
+        $account->lastName = request()->lastName;
+        $account->dateOfBirth = request()->dateOfBirth;
+        $account->accountRole = request()->accountRole;
+
+        if (request()->gender == "-") {
+            $account->gender = null;
+        } else {
+            $account->gender = request()->gender;
+        }
+
+
+        $account->save();
+
+        return redirect('admin/accounts');
     }
 
     public function action(Request $request)
@@ -155,17 +131,12 @@ class AccountsController extends Controller
 
     public function resetavatar($id)
     {
-        if (Auth::check() && Auth::user()->accountRole == 'Admin') {
+        $account = Account::where('id', $id)->firstOrFail();
 
-            $account = Account::where('id', $id)->firstOrFail();
+        $account->avatar = null;
 
-            $account->avatar = null;
+        $account->save();
 
-            $account->save();
-
-            return Redirect::back();
-        } else {
-            abort(403);
-        }
+        return Redirect::back();
     }
 }

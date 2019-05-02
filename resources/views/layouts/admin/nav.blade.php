@@ -84,7 +84,7 @@
 	</div>
 
     <!-- Nav Item - Users -->
-    <li class="nav-item {{ request()->is('') ? 'active' : '' }}">
+    <li class="nav-item {{ request()->is('admin/accounts') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true"
             aria-controls="collapseUsers">
             <i class="fas fa-fw fa-users"></i>

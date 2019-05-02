@@ -76,6 +76,12 @@ return [
     'show_edit' => 'Edit',
     'show_delete' => 'Delete',
 
+    ///////////////////////////////// Show-delete ////////////////////////////////////
+    'dismiss_delete' => 'Cancel',
+    'confirm_delete' => 'Confirm',
+    'title_confirm' => 'Confirm',
+    'confirm_text' => 'Do you want to delete the event?',
+
 ///////////////////////////////// Admin Edit ////////////////////////////////////
 	'edit_header_info' => 'Event Information',
 	'edit_info_title' => 'Title',

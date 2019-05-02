@@ -90,7 +90,7 @@
         <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Beheren:</h6>
-                <a class="collapse-item" href="{{ url('admin')  }}">Placeholder link</a>
+                <a class="collapse-item" href="{{ url('admin/accounts')  }}">Accounts</a>
             </div>
         </div>
     </li>
@@ -100,12 +100,12 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEvents" aria-expanded="true"
             aria-controls="collapseEvents">
             <i class="fas fa-fw fa-users"></i>
-            <span>Evenementen</span>
+            <span>{{__('navigation.nav_eventsS')}}</span>
         </a>
         <div id="collapseEvents" class="collapse" aria-labelledby="headingEvents" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Beheren:</h6>
-                <a class="collapse-item" href="{{ url('admin')  }}">Placeholder link</a>
+                <a class="collapse-item" href="{{ url('admin/events')  }}">{{__('navigation.nav_overview')}}</a>
             </div>
         </div>
     </li>

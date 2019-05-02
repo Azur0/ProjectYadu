@@ -55,3 +55,13 @@ Route::get('admin', function () { return view('admin.index');})->middleware('aut
 
 Route::post('/language', 'LanguageController@setLanguage');
 
+Route::get('admin/accounts', 'Management\AccountsController@index')->middleware('auth', 'isAdmin');
+Route::get('admin/accounts/{id}', 'Management\AccountsController@show')->middleware('auth', 'isAdmin');
+Route::get('admin/accounts/{id}/activate', 'Management\AccountsController@activate')->middleware('auth', 'isAdmin');
+Route::get('admin/accounts/{id}/delete', 'Management\AccountsController@destroy')->middleware('auth', 'isAdmin');
+Route::post('admin/accounts/{id}/update', 'Management\AccountsController@update')->middleware('auth', 'isAdmin');
+Route::get('admin/accounts/{id}/avatarreset', 'Management\AccountsController@resetavatar')->middleware('auth', 'isAdmin');
+
+Route::post('admin/accounts/action', 'Management\AccountsController@action')->name('admin_accounts_controller.action');
+
+Route::resource('admin/events','Management\EventsController');

@@ -49159,10 +49159,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Project-Yadu-A1\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\xampp\htdocs\Project-Yadu-A1\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Project-Yadu-A1\resources\sass\sb-admin-2.scss */"./resources/sass/sb-admin-2.scss");
-
+__webpack_require__(/*! D:\Avans\Jaar 2\Semster 2\Yadu\Project-Yadu-A1\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\Avans\Jaar 2\Semster 2\Yadu\Project-Yadu-A1\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\Avans\Jaar 2\Semster 2\Yadu\Project-Yadu-A1\resources\sass\sb-admin-2.scss */"./resources/sass/sb-admin-2.scss");
 
 
 /***/ })

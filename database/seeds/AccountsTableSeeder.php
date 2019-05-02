@@ -155,5 +155,19 @@ class AccountsTableSeeder extends Seeder
             'updated_at' => date("Y-m-d H:i:s"),
             'email_verified_at' => date("Y-m-d H:i:s")
         ]);
+
+        DB::table('accounts')->insert([
+            'accountRole' => 'Admin',
+            'gender' =>  'Male',
+            'email' => 'admin@yadu.com',
+            'password' => Hash::make('password'),
+            'firstName' => encrypt('Admin'),
+            'middleName' => encrypt(null),
+            'lastName' => encrypt('Admin'),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s")
+        ]);
     }
 }

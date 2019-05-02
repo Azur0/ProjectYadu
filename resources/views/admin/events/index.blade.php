@@ -69,12 +69,39 @@
 						<td><a href="/events/{{$event->id}}" class="button-show button-hover">{{__('events.show')}}</a></td>
 						<td><a href="/admin/events/{{$event->id}}/edit" class="button button-hover">{{__('events.show_edit')}}</a></td>
 						<td>
-							<form class="form_submit_ays" method="POST" action="/admin/events/{{$event->id}}">
+							<form class="form_submit_ays" method="POST" id="deleteAccount" action="/admin/events/{{$event->id}}">
 								@method('DELETE')
 								@csrf
-								<div class="field">
-									<div class="control">
-										<button type="submit" class="button-remove button-hover">{{__('events.show_delete')}}</button>
+								<div class="form-group row">
+									<div class="col-md-4 mt-2">
+										<button type="button" class="btn btn-danger float-right" data-toggle="modal"
+												data-target="#confirmDeleteAccount">
+											{{__('profile.edit_delete_account')}}
+										</button>
+									</div>
+
+									<div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title">{{__('profile.edit_delete_account_confirm_title')}}</h5>
+													<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													{{__('profile.edit_delete_account_confirm_content')}}
+												</div>
+												<div class="modal-footer">
+													<input type="submit" form="deleteAccount" class="btn btn-danger"
+														   value="{{__('profile.edit_delete_account_positive')}}">
+													<button type="button" class="btn btn-primary"
+															data-dismiss="modal">{{__('profile.edit_delete_account_negative')}}
+													</button>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</form>

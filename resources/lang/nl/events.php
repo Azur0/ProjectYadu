@@ -44,7 +44,6 @@ return [
     'create_title' => 'Titel',
     'create_description' => 'Beschrijving',
 
-
     'create_characters_remaining' => 'tekens over',
 
     'create_select_type_first' => 'Kies eerst het type event',
@@ -59,21 +58,16 @@ return [
     'create_error_max_participants_required' => 'Het max aantal mensen-veld is verplicht.',
 
 ///////////////////////////////// Show ////////////////////////////////////
-    'show' => 'Weergeven',
-    'show_lang' => 'Dutch',
+
     'show_location' => 'Locatie',
     'show_date' => 'Datum en tijd',
-    'show_title' => 'Titel',
     'show_description' => 'Beschijving',
     'show_initiator' => 'Initiatiefnemer',
     'show_attendees' => 'Wie gaan er mee?',
     'show_join' => 'Aanmelden',
     'show_leave' => 'Afmelden',
     'show_number_of_attendees' => ':amount van de :max deelnemers',
-    'show_attendees_ammount' => 'Hoeveelheid deelnemers',
-    'show_max'=> 'Max hoeveelheid deelnemers',
-    'show_edit' => 'Wijzigen',
-    'show_delete' => 'Verwijderen',
+    'show_datetime_at' => 'om',
 
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Evenement delen',

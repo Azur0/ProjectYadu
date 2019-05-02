@@ -23,6 +23,10 @@ Route::get('/about', function () { return view('about'); });
 Route::get('/contact', function () { return view('contact'); });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/edit/{lang}/{page}', 'EditLangController@index');
+Route::post('admin', 'EditLangController@saveFile');
+
 Route::get('/account/myevents', 'HomeController@myEvents');
 Route::get('/account/participating', 'HomeController@participating');
 
@@ -37,8 +41,6 @@ Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilt
 
 Auth::routes(['verify' => true]);
 
-Route::resource('/events','EventsController');
-
 //Profile
 Route::get('profile/edit', 'ProfileController@edit')->middleware('auth');
 Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
@@ -47,7 +49,11 @@ Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middle
 
 Auth::routes();
 
-Route::get('admin', function () { return view('admin.index'); });
+Route::resource('events', 'EventsController');
+
+Route::get('admin', function () { return view('admin.index');})->middleware('auth', 'isAdmin');
+
+Route::post('/language', 'LanguageController@setLanguage');
 
 Route::get('admin/accounts', 'Management\AccountsController@index');
 Route::get('admin/accounts/{id}', 'Management\AccountsController@show');

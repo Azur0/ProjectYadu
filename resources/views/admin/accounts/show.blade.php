@@ -7,10 +7,10 @@
                                   src="data:image/jpeg;base64, {{base64_encode($account->avatar)}}"/>
                 <h1 class="my-auto">{{$account->firstName .' '. $account->middleName .' '. $account->lastName}}</h1>
                 <div class="ml-auto my-auto mr-3">
-                        <button type="button" class="btn btn-danger my-auto" data-toggle="modal"
-                                data-target="#confirmDeleteAccount">
-                            {{__('accounts.edit_delete_account')}}
-                        </button>
+                    <button type="button" class="btn btn-danger my-auto" data-toggle="modal"
+                            data-target="#confirmDeleteAccount">
+                        {{__('accounts.edit_delete_account')}}
+                    </button>
 
 
                     <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
@@ -41,6 +41,11 @@
             </div>
         </div>
         <div class="card-body">
+            @if ( session('adminError'))
+                <span class="my-2 text-danger">
+                    <strong>{{ session('adminError') }}</strong>
+                </span>
+            @endif
             <table class="table mb-3">
                 <tr>
                     <th>{{__('accounts.email_verified')}}</th>
@@ -54,11 +59,11 @@
                     </td>
                 </tr>
                 {{--<tr>--}}
-                    {{--<th>{{__('accounts.password_reset')}}</th>--}}
-                    {{--<td>--}}
-                        {{--<a href="{{url('/admin/accounts/'. $account->id .'/passwordreset')}}"--}}
-                           {{--class="btn-warning btn">{{__('accounts.password_reset_button')}}</a>--}}
-                    {{--</td>--}}
+                {{--<th>{{__('accounts.password_reset')}}</th>--}}
+                {{--<td>--}}
+                {{--<a href="{{url('/admin/accounts/'. $account->id .'/passwordreset')}}"--}}
+                {{--class="btn-warning btn">{{__('accounts.password_reset_button')}}</a>--}}
+                {{--</td>--}}
                 {{--</tr> TODO:add password reset button (password reset doesnt work yet)--}}
                 <tr>
                     <th>{{__('accounts.avatar_reset')}}</th>
@@ -164,7 +169,8 @@
                            class="col-md-2 col-form-label text-md-right">{{ __('accounts.edit_birthday')}}</label>
 
                     <div class="col-md-6">
-                        <input type="date" name="dateOfBirth" max="{{ date('Y-m-d') }}" value="{{$account->dateOfBirth}}"
+                        <input type="date" name="dateOfBirth" max="{{ date('Y-m-d') }}"
+                               value="{{$account->dateOfBirth}}"
                                class="form-control{{ $errors->has('dateOfBirth') ? ' is-invalid' : '' }}">
 
                         @if ($errors->has('dateOfBirth'))
@@ -207,9 +213,12 @@
                             @endforeach
                         </select>
                         @if ($errors->has('accountRole'))
-
                             <span class="invalid-feedback force-show" role="alert">
                                         <strong>{{ $errors->first('accountRole') }}</strong>
+                                    </span>
+                        @elseif (session('adminRole'))
+                            <span class="invalid-feedback force-show" role="alert">
+                                        <strong>{{ session('adminRole') }}</strong>
                                     </span>
                         @endif
                     </div>

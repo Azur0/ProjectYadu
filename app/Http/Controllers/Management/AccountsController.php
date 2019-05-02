@@ -62,8 +62,11 @@ class AccountsController extends Controller
     public function destroy($id)
     {
         if (Auth::check() && Auth::user()->accountRole == 'Admin') {
-
-            AccountController::deleteAccountFromId($id);
+            if (Account::where('id', $id)->firstOrFail()->accountRole != 'Admin') {
+                AccountController::deleteAccountFromId($id);
+            } else {
+                return Redirect::back()->with('adminError', __('accounts.edit_delete_account_admin_error'));
+            }
 
             return redirect('admin/accounts');
         } else {
@@ -74,6 +77,7 @@ class AccountsController extends Controller
     public function update($id)
     {
         if (Auth::check() && Auth::user()->accountRole == 'Admin') {
+
             $account = Account::where('id', $id)->firstOrFail();
             $genders = Gender::all()->pluck('gender')->toArray();
             $accountRoles = AccountRole::all()->pluck('role')->toArray();
@@ -86,6 +90,10 @@ class AccountsController extends Controller
                 'gender' => 'in:' . implode(',', $genders),
                 'accountRole' => 'in:' . implode(',', $accountRoles),
             ]);
+
+            if($account->accountRole != request()->accountRole && $account->accountRole == 'Admin'){
+                return Redirect::back()->with('adminRole', __('accounts.edit_change_role_admin_error'));
+            }
 
             $account->email = request()->email;
             $account->firstName = request()->firstName;
@@ -100,9 +108,12 @@ class AccountsController extends Controller
                 $account->gender = request()->gender;
             }
 
+
             $account->save();
 
             return redirect('admin/accounts');
+
+
         } else {
             abort(403);
         }

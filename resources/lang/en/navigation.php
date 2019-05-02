@@ -18,6 +18,7 @@ return [
     'nav_about' => 'ABOUT US',
     'nav_contact' => 'CONTACT',
     'nav_dashboard' => 'DASHBOARD',
+    'nav_admin' => 'ADMIN PANEL',
     'nav_login' => 'LOGIN',
     'nav_logout' => 'LOGOUT',
 

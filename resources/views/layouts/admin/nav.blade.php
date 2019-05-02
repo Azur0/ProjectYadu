@@ -27,14 +27,47 @@
 
     <!-- Nav Item - Pages -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+            aria-controls="collapsePages">
             <i class="fas fa-fw fa-cog"></i>
             <span>Pagina's</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Beheren:</h6>
-                <a class="collapse-item" href="{{ url('admin')  }}">Placeholder link</a>
+                <h6 class="collapse-header">Nederlands:</h6>
+                <?php
+                    $pages = array_map('basename',  glob(base_path().'/resources/lang/nl/*.php*'));
+                ?>
+                @foreach ($pages as $page)
+                <?php
+                    $pageBasename = basename($page, '.php');
+                    
+                    $currentLocale = app()->getLocale();
+                    App::setLocale("nl");
+                    $x = __($pageBasename);
+                    App::setLocale($currentLocale);
+                ?>
+                @if (!is_string($x))
+                    <a class="collapse-item" href="{{ url('edit/nl/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
+                @endif
+                @endforeach
+                
+                <h6 class="collapse-header">Engels:</h6>
+                <?php
+                    $pages = array_map('basename',  glob(base_path().'/resources/lang/en/*.php*'));
+                ?>
+                @foreach ($pages as $page)
+                <?php
+                    $pageBasename = basename($page, '.php');
+                    $currentLocale = app()->getLocale();
+                    App::setLocale("en");
+                    $x = __($pageBasename);
+                    App::setLocale($currentLocale);
+                ?>
+                @if (!is_string($x))
+                <a class="collapse-item" href="{{ url('edit/en/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
+                @endif
+                @endforeach
             </div>
         </div>
     </li>
@@ -49,7 +82,8 @@
 
     <!-- Nav Item - Users -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true"
+            aria-controls="collapseUsers">
             <i class="fas fa-fw fa-users"></i>
             <span>Gebruikers</span>
         </a>
@@ -63,7 +97,8 @@
 
     <!-- Nav Item - Events -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEvents" aria-expanded="true" aria-controls="collapseEvents">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEvents" aria-expanded="true"
+            aria-controls="collapseEvents">
             <i class="fas fa-fw fa-users"></i>
             <span>{{__('navigation.nav_eventsS')}}</span>
         </a>

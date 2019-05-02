@@ -95,6 +95,10 @@ h6 {
   margin-bottom: 0.5rem;
 }
 
+h6.collapse-header {
+  border-bottom: 3px solid #85879630;
+}
+
 p {
   margin-top: 0;
   margin-bottom: 1rem;
@@ -887,6 +891,15 @@ pre code {
 
 .offset-11 {
   margin-left: 91.6666666667%;
+}
+
+#EditInput {
+  flex: 1;
+  min-width: 0px;
+}
+.inputFields p{
+  display: flex;
+  
 }
 
 @media (min-width: 576px) {

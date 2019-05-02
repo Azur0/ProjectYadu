@@ -40,6 +40,8 @@ return [
     'edit_delete_account' => 'Verwijder account',
     'edit_delete_account_positive' => 'Ja, verwijder dit account',
     'edit_delete_account_negative' => 'Nee, bewaar dit account!',
+    'edit_delete_account_admin_error' => 'Je kan geen admin verwijderen',
+    'edit_change_role_admin_error' => 'Je kan de rol van een admin account niet veranderen',
 
     'edit_restore_account_title' => 'Herstel account',
     'edit_restore_account_content' => 'Klik op de knop om dit account te herstellen.',

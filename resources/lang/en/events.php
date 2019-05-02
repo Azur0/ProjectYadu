@@ -59,21 +59,16 @@ return [
     'create_error_max_participants_required' => 'The amount of people field is required',
 
 ///////////////////////////////// Show ////////////////////////////////////
-    'show' => 'View',
-    'show_lang' => 'English',
+
     'show_location' => 'Location',
     'show_date' => 'Date and time',
-    'show_title' => 'Title',
     'show_description' => 'Description',
     'show_initiator' => 'Initiator',
     'show_attendees' => 'Who is coming?',
     'show_join' => 'Join',
     'show_leave' => 'Leave',
     'show_number_of_attendees' => ':amount of :max attendees',
-    'show_attendees_ammount' => 'Ammount of attendees',
-    'show_max'=> 'Max ammount of attendees',
-    'show_edit' => 'Edit',
-    'show_delete' => 'Delete',
+    'show_datetime_at' => 'at',
 
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Share event',

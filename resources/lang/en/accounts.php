@@ -40,6 +40,8 @@ return [
     'edit_delete_account' => 'Delete account',
     'edit_delete_account_positive' => 'Yes, delete it',
     'edit_delete_account_negative' => 'No, Keep it!',
+    'edit_delete_account_admin_error' => 'You can\'t delete an admin account',
+    'edit_change_role_admin_error' => 'Can\'t change role of an admin account',
 
     'edit_restore_account_title' => 'Restore account',
     'edit_restore_account_content' => 'Click the button to restore this account.',

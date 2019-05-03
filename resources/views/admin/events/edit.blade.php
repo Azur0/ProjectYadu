@@ -11,15 +11,20 @@
 
 @section('content')
 	
-	<div class="backlink">
-		<a href="/admin/events"><i class="fas fa-arrow-left"></i> overview</a>
-	</div>
+
+
 	<div class="card">
-		<div class="card-header">
-			{{ $data['event']->id }}: {{ $data['event']->eventName }}
-		</div>
+        <div class="backlink">
+            <a href="/admin/events"><i class="fas fa-arrow-left"></i> {{__('events.show_overview')}}</a>
+        </div>
+
 		<div class="card-body">
+
 			<div class="create-event">
+
+                    <h1>{{ $data['event']->id }}: {{ $data['event']->eventName }}</h1>
+
+
 				<form action="/admin/events/{{$data['event']->id}}" method="POST">
 					@method("PATCH")
 					@csrf
@@ -35,6 +40,8 @@
                                 <div class="error">{{$error}}</div>
                             @endforeach
 						@endif
+                    </div>
+                    <div class="description">
 						<h5>{{__('events.edit_info_description')}}</h5>
 						<textarea id="desc" name="description" placeholder="{{__('events.edit_placeholder_description')}}"
 								  oninput="update_counter_desc(this)"
@@ -135,7 +142,7 @@
 					</div>
 
 					
-					<div class="loc">
+					<div class="description">
 						<h3>{{__('events.edit_header_location')}}</h3>
 						<div class="description location">
 							<input id="pac-input" name="location" class="controls" type="text" placeholder="{{__('events.edit_placeholder_location_Search_Box')}}" required

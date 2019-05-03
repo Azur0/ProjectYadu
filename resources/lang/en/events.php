@@ -76,6 +76,8 @@ return [
     'show_max'=> 'Max amount of attendees',
     'show_edit' => 'Edit',
     'show_delete' => 'Delete',
+    'show_title' => 'Title',
+    'show_overview' => 'Overview',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Cancel',

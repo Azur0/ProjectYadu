@@ -68,6 +68,7 @@ return [
     'show_leave' => 'Afmelden',
     'show_number_of_attendees' => ':amount van de :max deelnemers',
     'show_datetime_at' => 'om',
+    'show_chat_swearword' => 'Scheldwoord gedecteerd',
 
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Evenement delen',

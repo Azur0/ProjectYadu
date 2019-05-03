@@ -217,7 +217,7 @@
 
         let warning = document.createElement("strong");
         warning.style.color = "red";
-        warning.innerHTML = "Swearword detected!";
+        warning.innerHTML = "{{ __('events.show_chat_swearword') }}";
 
         function insertAfter(referenceNode, newNode) {
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);

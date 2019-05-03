@@ -144,13 +144,13 @@
   width: 0;
   position: absolute;
   pointer-events: none;
-  border-bottom-color: #86BB71;
+  border-bottom-color: #e79535;
   border-width: 10px;
   margin-left: -10px;
 }
 
 .chat .chat-history .my-message {
-  background: #86BB71;
+  background: #e79535;
 }
 
 .chat .chat-history .other-message {
@@ -206,7 +206,7 @@
 }
 
 .online {
-  color: #86BB71;
+  color: #e79535;
 }
 
 .offline {
@@ -253,7 +253,7 @@
   --red: #e3342f;
   --orange: #E38968;
   --yellow: #ffed4a;
-  --green: #86BB71;
+  --green: #e79535;
   --teal: #4dc0b5;
   --cyan: #6cb2eb;
   --white: #fff;

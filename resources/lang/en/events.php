@@ -69,6 +69,7 @@ return [
     'show_leave' => 'Leave',
     'show_number_of_attendees' => ':amount of :max attendees',
     'show_datetime_at' => 'at',
+    'show_chat_swearword' => 'Swearword detected',
 
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Share event',

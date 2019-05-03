@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Crypt;
 
 class VerifyEmail extends Notification
 {
@@ -48,7 +49,7 @@ class VerifyEmail extends Notification
 
         return (new MailMessage)
             ->subject(Lang::getFromJson('Activeer account'))
-            ->greeting(Lang::getfromJson('Geachte '. $this->user['middleName'].' '.$this->user['lastName'].','))
+            ->greeting(Lang::getfromJson('Geachte '. Crypt::decrypt($this->user['middleName']) .' '. Crypt::decrypt($this->user['lastName']) .','))
             ->line(Lang::getFromJson('Dit e-mailtje is naar aanleiding van uw registratie bij Yadu.'))
             ->action(
                 Lang::getFromJson('Activeer account'),

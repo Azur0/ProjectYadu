@@ -68,6 +68,16 @@
 		.search
 		{
 			min-width: 700px;
+
+			label
+			{
+				width: unset;
+			}
+
+			input
+			{
+				width: unset;
+			}
 		}
 	}
 	.card-body

@@ -84,7 +84,7 @@ return [
     'confirm_text' => 'Wilt u het evenement verwijderen?',
 
 
-///////////////////////////////// Edit ////////////////////////////////////
+///////////////////////////////// Admin Edit ////////////////////////////////////
 	'edit_header_info' => 'Evenement informatie',
 	'edit_info_title' => 'Titel',
 	'edit_info_description' => 'Omschrijving',

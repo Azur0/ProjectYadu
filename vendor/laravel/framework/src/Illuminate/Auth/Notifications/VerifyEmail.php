@@ -49,7 +49,7 @@ class VerifyEmail extends Notification
 
         return (new MailMessage)
             ->subject(Lang::getFromJson('Activeer account'))
-            ->greeting(Lang::getfromJson('Geachte '. Crypt::decrypt($this->user['middleName']) .' '. Crypt::decrypt($this->user['lastName']) .','))
+            ->greeting(Lang::getfromJson('Geachte '. Crypt::decrypt($this->user['firstName']) .','))
             ->line(Lang::getFromJson('Dit e-mailtje is naar aanleiding van uw registratie bij Yadu.'))
             ->action(
                 Lang::getFromJson('Activeer account'),

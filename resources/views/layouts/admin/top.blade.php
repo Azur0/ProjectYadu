@@ -43,9 +43,9 @@
         <div class="topbar-divider d-none d-sm-block"></div>
 
         <!-- Nav Item - User Information -->
-        <li class="nav-item dropdown no-arrow">
+        <li class="nav-item dropdown no-arrow admin_user">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small ">{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}</span>
                 <img class="img-profile rounded-circle" src="data:image/png;base64,{{ chunk_split(base64_encode(Auth::user()->avatar)) }}">
             </a>
             <!--

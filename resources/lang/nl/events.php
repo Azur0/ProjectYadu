@@ -110,6 +110,7 @@ return [
     'edit_placeholder_description' => 'Omschrijving..',
     'edit_characters_remaining' => 'Overgebleven karakters',
     'edit_placeholder_location_Search_Box' => 'Zoekvak',
+    'edit_btn_update' => 'Bijwerken',
 
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Evenement delen',

@@ -149,7 +149,7 @@
 						</div>
 					</div>
 					
-					<input class="submit" type="submit" name="verzenden" value="Update">
+					<input class="submit" type="submit" name="verzenden" value="{{ __('events.edit_btn_update') }}">
 				</form>
 			</div>
 		</div>

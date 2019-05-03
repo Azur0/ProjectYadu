@@ -165,20 +165,20 @@
                     <div id="chat" class="chat-history" v-chat-scroll>
                         <ul>
 
-                            <li v-for="message in messages" v-bind:class="{'clearfix':(message.account.id !== {{ Auth::id() }})}">
-                                <div v-if="message.account.id === {{ Auth::id() }}">
+                            <li v-for="message in messages" v-bind:class="{'clearfix':(message.user_id !== {{ Auth::id() }})}">
+                                <div v-if="message.user_id === {{ Auth::id() }}">
                                     <div class="message-data">
-                                        <span class="message-data-name"><i class="fa fa-circle online"></i> @{{  message.account.firstName + ' ' + message.account.lastName}}</span>
+                                        <span class="message-data-name"><i class="fa fa-circle online"></i> @{{  message.firstName + ' ' + message.lastName }}</span>
                                         <span class="message-data-time">@{{ message.created_at }}</span>
                                     </div>
                                     <div class="message my-message">
                                         @{{ message.body }}
                                     </div>
                                 </div>
-                                <div v-else-if="message.account.id !== {{ Auth::id() }}">
+                                <div v-else-if="message.user_id !== {{ Auth::id() }}">
                                     <div class="message-data align-right">
                                         <span class="message-data-time">@{{ message.created_at }}</span>
-                                        <span class="message-data-name"></i> @{{  message.account.firstName + ' ' + message.account.lastName}}</span> <i class="fa fa-circle me"></i>
+                                        <span class="message-data-name"></i> @{{  message.firstName + ' ' + message.lastName }}</span> <i class="fa fa-circle me"></i>
                                     </div>
                                     <div class="message other-message float-right">
                                         @{{ message.body }}

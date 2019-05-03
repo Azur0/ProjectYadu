@@ -45,10 +45,8 @@ class NewMessage implements ShouldBroadcastNow
         return [
             'body' => $this->message->body,
             'created_at' => $this->message->created_at->toFormattedDateString(),
-            'account' => [
-                'firstName' => $this->message->account->firstName,
-                'lastName' => $this->message->account->lastName
-            ]
+            'firstName' => $this->message->account->firstName,
+            'lastName' => $this->message->account->lastName
         ];
     }
 }

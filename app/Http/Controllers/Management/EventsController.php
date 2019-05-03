@@ -21,7 +21,7 @@ class EventsController extends Controller
 		{
 			if (Auth::user()->accountRole == 'Admin')
 			{
-				$events = Event::orderBy('startDate','asc')->get();
+				$events = Event::orderBy('startDate','des')->get();
 
 				$tags = EventTag::all();
 				$names = Event::distinct('eventName')->pluck('eventName');
@@ -317,7 +317,7 @@ class EventsController extends Controller
         $unfiltered_events = Event::where('isDeleted', '==', 0)
             ->whereIn('id', $names)
             ->whereIn('tag_id', $tags)
-            ->orderBy('startDate', 'asc')
+            ->orderBy('startDate', 'des')
             ->get();
 
         $events = new Collection();

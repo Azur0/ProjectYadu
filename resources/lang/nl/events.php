@@ -75,6 +75,8 @@ return [
     'show_max'=> 'Max hoeveelheid deelnemers',
     'show_edit' => 'Wijzigen',
     'show_delete' => 'Verwijderen',
+    'show_title' => 'Titel',
+    'show_overview' => 'Overzicht',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Annuleren',

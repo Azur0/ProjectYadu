@@ -78,7 +78,7 @@
 								@method('DELETE')
 								@csrf
 								<div>
-									<div class="col-md-4">
+									<div >
 										<button type="button" class="button-remove button-hover" data-toggle="modal" data-target="#confirmDeleteAccount">{{__('events.show_delete')}}</button>
 
 									</div>

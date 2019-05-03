@@ -159,8 +159,8 @@ class AccountsTableSeeder extends Seeder
         DB::table('accounts')->insert([
             'accountRole' => 'Admin',
             'gender' =>  'Male',
-            'email' => 'Admin@admin.admin',
-            'password' => Hash::make('testtest'),
+            'email' => 'admin@yadu.com',
+            'password' => Hash::make('password'),
             'firstName' => encrypt('Admin'),
             'middleName' => encrypt(null),
             'lastName' => encrypt('Admin'),

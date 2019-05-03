@@ -65,7 +65,6 @@ return [
     'show_lang' => 'Dutch',
     'show_location' => 'Locatie',
     'show_date' => 'Datum en tijd',
-    'show_title' => 'Titel',
     'show_description' => 'Beschijving',
     'show_initiator' => 'Initiatiefnemer',
     'show_attendees' => 'Wie gaan er mee?',
@@ -117,3 +116,4 @@ return [
     'show_share_link' => 'De link is gekopieerd naar uw klembord.',
     'show_share_close' => 'Sluiten',
 ];
+

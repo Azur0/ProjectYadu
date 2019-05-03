@@ -17,8 +17,12 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
+
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
     @yield('custom_css')
+    <link rel="stylesheet" href="{{ URL::asset('/css/sb-admin-2.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/css/custom.css') }}">
+
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.js') }}"></script>

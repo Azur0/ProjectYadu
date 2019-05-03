@@ -66,7 +66,6 @@ return [
     'show_lang' => 'English',
     'show_location' => 'Location',
     'show_date' => 'Date and time',
-    'show_title' => 'Title',
     'show_description' => 'Description',
     'show_initiator' => 'Initiator',
     'show_attendees' => 'Who is coming?',

@@ -44,7 +44,6 @@ return [
     'create_title' => 'Titel',
     'create_description' => 'Beschrijving',
 
-
     'create_characters_remaining' => 'tekens over',
 
     'create_select_type_first' => 'Kies eerst het type event',
@@ -68,6 +67,7 @@ return [
     'show_join' => 'Aanmelden',
     'show_leave' => 'Afmelden',
     'show_number_of_attendees' => ':amount van de :max deelnemers',
+    'show_datetime_at' => 'om',
 
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Evenement delen',

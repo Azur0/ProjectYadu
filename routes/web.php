@@ -23,6 +23,10 @@ Route::get('/about', function () { return view('about'); });
 Route::get('/contact', function () { return view('contact'); });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/edit/{lang}/{page}', 'EditLangController@index');
+Route::post('admin', 'EditLangController@saveFile');
+
 Route::get('/account/myevents', 'HomeController@myEvents');
 Route::get('/account/participating', 'HomeController@participating');
 
@@ -47,5 +51,17 @@ Auth::routes();
 
 Route::resource('events', 'EventsController');
 
-Route::get('admin', function () { return view('admin.index'); });
+Route::get('admin', function () { return view('admin.index');})->middleware('auth', 'isAdmin');
 
+Route::post('/language', 'LanguageController@setLanguage');
+
+Route::get('admin/accounts', 'Management\AccountsController@index')->middleware('auth', 'isAdmin');
+Route::get('admin/accounts/{id}', 'Management\AccountsController@show')->middleware('auth', 'isAdmin');
+Route::get('admin/accounts/{id}/activate', 'Management\AccountsController@activate')->middleware('auth', 'isAdmin');
+Route::get('admin/accounts/{id}/delete', 'Management\AccountsController@destroy')->middleware('auth', 'isAdmin');
+Route::post('admin/accounts/{id}/update', 'Management\AccountsController@update')->middleware('auth', 'isAdmin');
+Route::get('admin/accounts/{id}/avatarreset', 'Management\AccountsController@resetavatar')->middleware('auth', 'isAdmin');
+
+Route::post('admin/accounts/action', 'Management\AccountsController@action')->name('admin_accounts_controller.action');
+
+Route::resource('admin/events','Management\EventsController');

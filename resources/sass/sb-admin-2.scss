@@ -18,3 +18,39 @@
 @import "login.scss";
 @import "error.scss";
 @import "footer.scss";
+
+// Custom CSS
+.button-remove {
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #c51f1a;
+  color: #EEEEEE;
+  padding: 2px 6px 2px 6px;
+  border:none;
+  box-shadow: none;
+}
+
+.button-show {
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #308d2c;
+  color: #EEEEEE;
+  padding: 2px 6px 2px 6px;
+  border:none;
+  box-shadow: none;
+}
+
+.button {
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #E79535;
+  color: #EEEEEE;
+  padding: 2px 6px 2px 6px;
+  border:none;
+  box-shadow: none;
+}
+
+.button-hover:hover{
+  color: #EEEEEE !important;
+  text-decoration: none !important;
+}

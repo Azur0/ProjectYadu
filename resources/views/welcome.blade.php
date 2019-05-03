@@ -25,7 +25,7 @@
 							<div class="carousel-caption d-md-block">
 								<h5>{{ $event->eventName }}</h5>
 								<p>{{ $event->description }}</p>
-								<h6>{{ $event->city }} {{ $event->startDate }}</h6>
+								<h6>{{ $event->city }} {{ $event->writtenDate }}</h6>
 								<a href="/events/{{ $event->id }}">{{ __('welcome.link_read_more') }}...</a>
 							</div>
 						</div>
@@ -56,7 +56,7 @@
 			@foreach($regular_events as $event)
 				<div class='col-md-6 col-lg-4 event'>
 					<a href='/events/{{ $event->id }}'>
-						@if( $event->status == 'Created' || $event->status == 'Ongoing')
+						@if( $event->startDate > \Carbon\Carbon::now())
 						<div class='card mb-4 box-shadow'>
 						@else
 						<div class='card mb-4 box-shadow greyified'>
@@ -64,7 +64,7 @@
 							<img class = 'card-img-top' src="data:image/png;base64,{{ chunk_split(base64_encode($event->eventPicture->picture)) }}" alt = 'Card image cap'>
 							<div class = 'event_info' > 
 								<h3>{{ str_limit($event->eventName, $limit = 25, $end = '...') }}</h3>
-								<p>{{ $event->startDate }}<br>{{ $event->city }}</p>
+								<p>{{ $event->writtenDate }}<br>{{ $event->city }}</p>
 							</div>
 						</div>
 					</a>

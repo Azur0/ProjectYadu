@@ -35,7 +35,9 @@ class AccountsController extends Controller
     public function show($id)
     {
         $account = Account::where('id', $id)->firstOrFail();
-        $account->email_verified_at = self::dateToLongText($account->email_verified_at);
+        if($account->email_verified_at){
+            $account->email_verified_at = self::dateToLongText($account->email_verified_at);
+        }
 
         $genders = Gender::all();
 

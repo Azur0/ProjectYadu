@@ -54,3 +54,21 @@
   color: #EEEEEE !important;
   text-decoration: none !important;
 }
+
+h6.collapse-header {
+  border-bottom: 3px solid #85879630;
+}
+
+#EditInput {
+  flex: 1;
+  min-width: 0px;
+}
+
+.inputFields {
+  margin: 1%;
+}
+
+
+.inputFields p{
+  display: flex;
+}

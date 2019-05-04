@@ -106,6 +106,9 @@ return [
 	'edit_error_img' => 'Kies een foto.',
 	'edit_error_location' => 'Het locatie-veld is verplicht.',
     'show_datetime_at' => 'om',
+    'show_chat_swearword' => 'Scheldwoord gedecteerd',
+    'show_chat_send' => 'Verstuur',
+    'show_chat_typemessage' => 'Schrijf je bericht',
 
     'edit_placeholder_title' => 'Titel..',
     'edit_placeholder_description' => 'Omschrijving..',

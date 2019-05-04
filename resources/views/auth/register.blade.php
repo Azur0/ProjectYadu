@@ -57,7 +57,7 @@
                             <label for="gender" class="col-md-4 col-form-label text-md-right">{{__('auth.register_gender')}}</label>
 
                             <div class="col-md-6">
-                                <select name="gender">
+                                <select name="gender" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
                                     <option value="-">-</option>
                                     @foreach($genders as $gender)
                                         <option value="{{ $gender->gender }}">{{ $gender->gender }}</option>

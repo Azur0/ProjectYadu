@@ -106,6 +106,9 @@ return [
 	'edit_error_img' => 'Choose an image.',
 	'edit_error_location' => 'The location-field is required.',
     'show_datetime_at' => 'at',
+    'show_chat_swearword' => 'Swearword detected',
+    'show_chat_send' => 'Send',
+    'show_chat_typemessage' => 'Type your message',
 
     'edit_placeholder_title' => 'Title..',
     'edit_placeholder_description' => 'Description..',

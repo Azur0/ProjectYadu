@@ -43,4 +43,8 @@ class Account extends Authenticatable implements MustVerifyEmailContract
     {
         return $this->belongsToMany('App\Event', 'event_has_participants', 'account_id', 'event_id');
     }
+
+    public function messages() {
+        return $this->hasMany('App\Message');
+    }
 }

@@ -36,6 +36,7 @@ class CreateAccountsTable extends Migration
             $table->tinyInteger('isDeleted')->default('0');
             $table->dateTime('email_verified_at')->nullable();
             $table->longText('bio')->nullable();
+            $table->string('api_token', 60)->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
 

@@ -11,6 +11,20 @@
 |
 */
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+//Broadcast::channel('App.User.{id}', function ($user, $id) {
+//    return (int) $user->id === (int) $id;
+//});
+
+Broadcast::channel('event.{id}', function ($user, $id) {
+    //$authorizedUser = App\Event::find($id)->participants()->where('account_id', $user->id)->firstOrFail()->id;
+
+    //if($user->id == $authorizedUser) {
+    //            return true;
+    //        }
+
+    if(empty(App\Event::find($id)->participants()->where('account_id', $user->id)->firstOrFail()->id)) {
+        return false;
+    }
+
+    return true;
 });

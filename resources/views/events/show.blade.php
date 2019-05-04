@@ -149,7 +149,7 @@
         </div>
     </div>
     <div class="row">
-    @if(Auth::check() && !empty($event->participants()->where('account_id', Auth::id())->first()))
+    @if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())))
         <!-- BEGIN CHAT TEMPLATE -->
             <div id="app" class="message-container clearfix" v-if="account">
 
@@ -206,12 +206,16 @@
 
             <!-- END CHAT TEMPLATE -->
         @else
-            <h3>Meld je aan bij dit event om te kunnen chatten!</h3>
+            <div class="col-md-6">
+                <h3 style="margin-top:30px;">
+                    Meld je aan bij dit event om te kunnen chatten!
+                </h3>
+            </div>
         @endif
     </div>
 
 @endsection
-@if(Auth::check() && !empty($event->participants()->where('account_id', Auth::id())->first()))
+@if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())))
 @section('scripts')
     <script>
 

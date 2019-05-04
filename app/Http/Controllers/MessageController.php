@@ -12,12 +12,6 @@ use App\Rules\swearWords;
 
 class MessageController extends Controller
 {
-//    public function index(Event $event) {
-//        return response()->json($event->messages()->with(['account' => function ($query) {
-//            return $query->select(['id', 'firstName', 'lastName']);
-//        }])->get());
-//    }
-
     public function index(Event $event) {
 
         $messages = $event->messages;

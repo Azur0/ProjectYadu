@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
 
-$green: #86BB71;
+$green: #e79535;
 $blue: #94C2ED;
 $orange: #E38968;
 $gray: #92959E;
@@ -15,6 +15,12 @@ $gray: #92959E;
   background: #444753;
   border-radius: 5px;
   margin-top:30px;
+}
+
+@media screen and (max-height: 400px) {
+  .message-container {
+    margin-top: -30px;
+  }
 }
 
 .people-list {

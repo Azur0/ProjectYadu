@@ -52,6 +52,11 @@
 					<div>
 						<a href="/profile/edit"><i class="fas fa-user-cog"></i> {{__('home.user_link_settings')}}</a>
 					</div>
+					@if(Auth::user()->accountRole == 'Admin')
+					<div>
+						<a href="/admin"><i class="fas fa-user-shield"></i> admin</a>
+					</div>
+					@endif
 				</div>
 			</div>
 			<div class="card">

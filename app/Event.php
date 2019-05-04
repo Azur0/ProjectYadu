@@ -3,10 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Events\EventDeleted;
+use App\Events\Eventedited;
 
 class Event extends Model
 {
-    protected $fillable = ['eventName','description', 'startDate', 'status', 'location_id', 'owner_id', 'tag_id', 'numberOfPeople', 'event_picture_id'];
+    protected $fillable = ['eventName','description', 'startDate', 'status', 'location_id', 'owner_id', 'tag_id', 'numberOfPeople', 'event_picture_id','isHighlighted'];
+
+    protected $dispatchesEvents = [
+        'deleting' => EventDeleted::class,
+        'updated' => EventEdited::class
+    ];
 
     public function eventPicture()
     {
@@ -21,6 +28,10 @@ class Event extends Model
     public function participants()
     {
         return $this->belongsToMany('App\Account', 'event_has_participants', 'event_id', 'account_id');
+    }
+
+    public function tag(){
+        return $this->belongsTo('App\EventTag', 'tag_id','id');
     }
 	
 	public function location(){

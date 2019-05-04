@@ -25,7 +25,7 @@
   text-decoration: none;
   background-color: #c51f1a;
   color: #EEEEEE;
-  padding: 2px 6px 2px 6px;
+  padding: 1px 6px 1px 6px;
   border:none;
   box-shadow: none;
 }
@@ -53,4 +53,59 @@
 .button-hover:hover{
   color: #EEEEEE !important;
   text-decoration: none !important;
+}
+
+
+@media screen and (max-width: 1331px)
+{
+	.card-header
+	{
+
+		height: 80px;
+		overflow-y: hidden;
+		overflow-x: scroll;
+
+		.search
+		{
+			min-width: 700px;
+
+			label
+			{
+				width: unset;
+			}
+
+			input
+			{
+				width: unset;
+			}
+		}
+	}
+	.card-body
+	{
+		overflow-y: hidden;
+		overflow-x: scroll;
+	}
+}
+
+.Hourglass_before
+{
+	color: #308D2C;
+}
+.Hourglass_busy
+{
+	color: #E79535;
+}
+.Hourglass_after
+{
+	color: #C51F1A;
+}
+.star
+{
+	color: #FFC01A;
+}
+
+.admin_user
+{
+	font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+	font-size: 18px !important;
 }

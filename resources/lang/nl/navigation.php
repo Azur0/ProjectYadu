@@ -21,6 +21,7 @@ return [
     'nav_admin' => 'ADMIN PANEEL',
     'nav_login' => 'INLOGGEN',
     'nav_logout' => 'UITLOGGEN',
+    'nav_pages' => 'Pagina\'s',
 
 ///////////////////////////////// Footer //////////////////////////////////
 

@@ -122,7 +122,7 @@ class AccountsTableSeeder extends Seeder
         ]);
 
         DB::table('accounts')->insert([
-            'accountRole' => 'User',
+            'accountRole' => 'Admin',
             'gender' =>  'Male',
             'email' => 'jeroen@yadu.com',
             'password' => Hash::make('password'),

@@ -65,3 +65,4 @@ Route::get('admin/accounts/{id}/avatarreset', 'Management\AccountsController@res
 Route::post('admin/accounts/action', 'Management\AccountsController@action')->name('admin_accounts_controller.action');
 
 Route::resource('admin/events','Management\EventsController');
+Route::post('/admin/events/actionDistanceFilter', 'Management\EventsController@actionDistanceFilter')->name('admin_events_controller.actionDistanceFilter');

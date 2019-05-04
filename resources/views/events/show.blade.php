@@ -191,9 +191,9 @@
                     <!-- end chat-history -->
 
                     <div class="chat-message clearfix">
-                        <textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows="3" v-model="messageBox" v-on:keyup.enter="postMessage"></textarea>
+                        <textarea name="message-to-send" id="message-to-send" placeholder="{{ __('events.show_chat_typemessage') }}" rows="3" v-model="messageBox" v-on:keyup.enter="postMessage"></textarea>
 
-                        <button @click.prevent="postMessage">Send</button>
+                        <button @click.prevent="postMessage">{{ __('events.show_chat_send') }}</button>
 
                     </div>
                     <!-- end chat-message -->

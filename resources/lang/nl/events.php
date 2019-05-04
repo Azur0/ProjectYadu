@@ -69,6 +69,8 @@ return [
     'show_number_of_attendees' => ':amount van de :max deelnemers',
     'show_datetime_at' => 'om',
     'show_chat_swearword' => 'Scheldwoord gedecteerd',
+    'show_chat_send' => 'Verstuur',
+    'show_chat_typemessage' => 'Schrijf je bericht',
 
 ///////////////////////////////// Share ////////////////////////////////////
     'show_share' => 'Evenement delen',

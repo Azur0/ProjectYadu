@@ -52,21 +52,6 @@
             if (25 == slider.value) {
                 val.innerHTML = "∞";
             } else {
-
-                $('#eventsToDisplay').html("");
-                data.forEach(function(element) {
-                    
-                    $('#eventsToDisplay').html($("#eventsToDisplay").html() +
-                        "<div class='col-md-6 col-lg-4 event'><a href='/events/" + element[
-                            'id'] +
-                        "'><div class='card mb-4 box-shadow'> <img class = 'card-img-top' src ='data:image/jpeg;base64, " +
-                        element['picture'] +
-                        "' alt = 'Card image cap'><div class = 'event_info' > <h3> " +
-                        element['eventName'] + "</h3><p>" + element['date'] +
-                        "<br>" + element['loc'] +
-                        "</p></div></div></a></div>");
-                });
-
                 val.innerHTML = this.value;
             }
             document.getElementById("box-move-with-distance").style.transform = "translate(-" + ((((this.value / 5) - 1) * 10) + 5) + "px) rotate(-136deg)";

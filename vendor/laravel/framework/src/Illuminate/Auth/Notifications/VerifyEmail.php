@@ -48,17 +48,17 @@ class VerifyEmail extends Notification
         }
 
         return (new MailMessage)
-            ->subject(Lang::getFromJson('Activeer account'))
-            ->greeting(Lang::getfromJson('Geachte '. Crypt::decrypt($this->user['firstName']) .','))
-            ->line(Lang::getFromJson('Dit e-mailtje is naar aanleiding van uw registratie bij Yadu.'))
+            ->subject(Lang::getFromJson('activationmail.title'))
+            ->greeting(Lang::getfromJson('activationmail.salutation'. Crypt::decrypt($this->user['firstName']) .','))
+            ->line(Lang::getFromJson('activationmail.start'))
             ->action(
-                Lang::getFromJson('Activeer account'),
+                Lang::getFromJson('activationmail.action'),
                 $this->verificationUrl($notifiable)
             )
-            ->line(Lang::getFromJson('De activatie dient gedaan te worden om uw account te activeren.'))
+            ->line(Lang::getFromJson('activationmail.instruction'))
             ->line(Lang::getFromJson(' '))
-            ->line(Lang::getFromJson('Met vriendelijk groet van,'))
-            ->salutation(Lang::getFromJson('Yadu'));
+            ->line(Lang::getFromJson('activationmail.closing'))
+            ->salutation(Lang::getFromJson('activationmail.signee'));
     }
 
     /**

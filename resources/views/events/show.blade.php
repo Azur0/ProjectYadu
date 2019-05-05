@@ -148,5 +148,139 @@
 
         </div>
     </div>
+    <div class="row">
+    @if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())))
+        <!-- BEGIN CHAT TEMPLATE -->
+            <div id="app" class="message-container clearfix" v-if="account">
+
+                <div class="chat">
+                    <div class="chat-header clearfix">
+                        <div class="chat-about">
+                            <h1 class="chat-with">Chat</h1>
+                        </div>
+                    </div>
+                    <!-- end chat-header -->
+
+                    <div id="chat" class="chat-history" v-chat-scroll>
+                        <ul>
+
+                            <li v-for="message in messages" v-bind:class="{'clearfix':(message.user_id !== {{ Auth::id() }})}">
+                                <div v-if="message.user_id === {{ Auth::id() }}">
+                                    <div class="message-data">
+                                        <span class="message-data-name"><i class="fa fa-circle online"></i> @{{  message.firstName + ' ' + message.lastName }}</span>
+                                        <span class="message-data-time">@{{ message.created_at }}</span>
+                                    </div>
+                                    <div class="message my-message">
+                                        @{{ message.body }}
+                                    </div>
+                                </div>
+                                <div v-else-if="message.user_id !== {{ Auth::id() }}">
+                                    <div class="message-data align-right">
+                                        <span class="message-data-time">@{{ message.created_at }}</span>
+                                        <span class="message-data-name"></i> @{{  message.firstName + ' ' + message.lastName }}</span> <i class="fa fa-circle me"></i>
+                                    </div>
+                                    <div class="message other-message float-right">
+                                        @{{ message.body }}
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                    <!-- end chat-history -->
+
+                    <div class="chat-message clearfix">
+                        <textarea name="message-to-send" id="message-to-send" placeholder="{{ __('events.show_chat_typemessage') }}" rows="3" v-model="messageBox" v-on:keyup.enter="postMessage"></textarea>
+
+                        <button @click.prevent="postMessage">{{ __('events.show_chat_send') }}</button>
+
+                    </div>
+                    <!-- end chat-message -->
+
+                </div>
+                <!-- end chat -->
+
+            </div>
+            <!-- end container -->
+
+            <!-- END CHAT TEMPLATE -->
+        @else
+            <div class="col-md-6">
+                <h3 style="margin-top:30px;">
+                    Meld je aan bij dit event om te kunnen chatten!
+                </h3>
+            </div>
+        @endif
+    </div>
 
 @endsection
+@if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())))
+@section('scripts')
+    <script>
+
+        let warning = document.createElement("strong");
+        warning.style.color = "red";
+        warning.innerHTML = "{{ __('events.show_chat_swearword') }}";
+
+        function insertAfter(referenceNode, newNode) {
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        }
+
+            const app = new Vue({
+            el: '#app',
+            data: {
+                messages: {},
+                messageBox: '',
+                event: {!! json_encode($event->getAttributes()) !!},
+                account: {!! Auth::check() ? json_encode(Auth::user()->only(['id', 'firstName', 'lastName', 'api_token'])) : 'null' !!}
+            },
+            mounted() {
+                this.getMessages();
+                this.listen();
+            },
+            methods: {
+                getMessages() {
+                    axios.get(`/api/events/${this.event.id}/messages`)
+                        .then((response) => {
+                            this.messages = response.data
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                postMessage() {
+                    axios.post(`/api/events/${this.event.id}/message`, {
+                        api_token: this.account.api_token,
+                        body: this.messageBox
+                    })
+                        .then((response) => {
+                            this.messages.push(response.data);
+                            this.messageBox = '';
+                            warning.remove();
+                        })
+                        .catch(function (error) {
+                            insertAfter(document.getElementById("message-to-send"), warning);
+                        });
+                },
+                listen() {
+                    Echo.private('event.'+this.event.id)
+                        .listen('NewMessage', (message) => {
+                            this.messages.push(message)
+                        })
+                }
+            }
+        });
+
+        // Disable newline on enter(except when holding shift)
+        $('textarea').keydown(function(e){
+            if (e.keyCode == 13 && !e.shiftKey)
+            {
+                // prevent default behavior
+                e.preventDefault();
+            }
+        });
+
+    </script>
+@endsection
+@endif

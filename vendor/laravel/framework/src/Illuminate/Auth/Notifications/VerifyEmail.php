@@ -49,7 +49,8 @@ class VerifyEmail extends Notification
 
         return (new MailMessage)
             ->subject(Lang::getFromJson('activationmail.title'))
-            ->greeting(Lang::getfromJson('activationmail.salutation'. Crypt::decrypt($this->user['firstName']) .','))
+            ->greeting(Lang::getfromJson('activationmail.salutation'))
+            ->greeting(Lang::getFromJson(Crypt::decrypt($this->user['firstName'])))
             ->line(Lang::getFromJson('activationmail.start'))
             ->action(
                 Lang::getFromJson('activationmail.action'),

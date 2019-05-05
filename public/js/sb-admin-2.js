@@ -46853,7 +46853,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Avans\Jaar 2\Semster 2\Yadu\Project-Yadu-A1\resources\js\sb-admin-2.js */"./resources/js/sb-admin-2.js");
+module.exports = __webpack_require__(/*! B:\Jaar 2, HBO-ICT\YaduProject\Project-Yadu-A1\resources\js\sb-admin-2.js */"./resources/js/sb-admin-2.js");
 
 
 /***/ })

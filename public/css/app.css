@@ -7,10 +7,16 @@
 }
 
 .message-container {
-  margin: 0 auto;
-  width: 750px;
+  width: 100%;
   background: #444753;
   border-radius: 5px;
+  margin-top: 30px;
+}
+
+@media screen and (max-height: 400px) {
+  .message-container {
+    margin-top: -30px;
+  }
 }
 
 .people-list {
@@ -64,7 +70,7 @@
 }
 
 .chat {
-  width: 490px;
+  width: 100%;
   float: left;
   background: #F2F5F8;
   border-top-right-radius: 5px;
@@ -10894,12 +10900,16 @@ a.text-dark:focus {
 }
 
 .backlink {
-  margin: 0 0 1em 0;
+  margin: 1em 1em 1em 1em;
 }
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+#map {
+  height: 350px !important;
 }
 
 .card-header {
@@ -11024,7 +11034,7 @@ a.text-dark:focus {
 @media only screen and (min-width: 1440px) {
   #welcome_carousel img {
     -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
+    transform: translateY(-50%);
   }
 }
 

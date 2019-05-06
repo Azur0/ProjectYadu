@@ -23,19 +23,20 @@ class CreateAccountsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('accountRole', 10)->default('user');
+            $table->string('accountRole', 10)->default('User');
             $table->string('gender', 15)->nullable();
             $table->string('email');
             $table->string('password');
-            $table->string('firstName', 45);
-            $table->string('middleName', 45)->nullable();
-            $table->string('lastName', 45)->nullable();
+            $table->string('firstName', 255);
+            $table->string('middleName', 255)->nullable();
+            $table->string('lastName', 255)->nullable();
             $table->date('dateOfBirth')->nullable();
             $table->binary('avatar')->nullable()->default(null);
             $table->tinyInteger('doForcePasswordChange')->default('0');
             $table->tinyInteger('isDeleted')->default('0');
             $table->dateTime('email_verified_at')->nullable();
             $table->longText('bio')->nullable();
+            $table->string('api_token', 60)->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
 

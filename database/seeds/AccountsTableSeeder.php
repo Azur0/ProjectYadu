@@ -20,14 +20,15 @@ class AccountsTableSeeder extends Seeder
             'gender' =>  'Male',
             'email' => 'joel@yadu.com',
             'password' => Hash::make('password'),
-            'firstName' => 'Joël',
-            'middleName' => null,
-            'lastName' => 'Rijfers',
+            'firstName' => encrypt('Joël'),
+            'middleName' => encrypt(null),
+            'lastname' => encrypt('Rijfers'),
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
-            'email_verified_at' => date("Y-m-d H:i:s")
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => str_random(60)
         ]);
 
         DB::table('accounts')->insert([
@@ -35,13 +36,14 @@ class AccountsTableSeeder extends Seeder
             'gender' =>  'Male',
             'email' => 'ruben@yadu.com',
             'password' => Hash::make('password'),
-            'firstName' => 'Ruben',
-            'middleName' => null,
-            'lastName' => 'Westerman',
+            'firstName' => encrypt('Ruben'),
+            'middleName' => encrypt(null),
+            'lastName' => encrypt('Westermann'),
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
-            'email_verified_at' => date("Y-m-d H:i:s")
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => str_random(60)
         ]);
 
         DB::table('accounts')->insert([
@@ -49,13 +51,14 @@ class AccountsTableSeeder extends Seeder
             'gender' =>  'Male',
             'email' => 'bramd@yadu.com',
             'password' => Hash::make('password'),
-            'firstName' => 'Bram',
-            'middleName' => null,
-            'lastName' => 'Dortmans',
+            'firstName' => encrypt('Bram'),
+            'middleName' => encrypt(null),
+            'lastName' => encrypt('Dortmans'),
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
-            'email_verified_at' => date("Y-m-d H:i:s")
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => str_random(60)
         ]);
 
         DB::table('accounts')->insert([
@@ -63,13 +66,14 @@ class AccountsTableSeeder extends Seeder
             'gender' =>  'Male',
             'email' => 'bramv@yadu.com',
             'password' => Hash::make('password'),
-            'firstName' => 'Bram',
-            'middleName' => null,
-            'lastName' => 'Vermeeren',
+            'firstName' => encrypt('Bram'),
+            'middleName' => encrypt(null),
+            'lastName' => encrypt('Vermeeren'),
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
-            'email_verified_at' => date("Y-m-d H:i:s")
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => str_random(60)
         ]);
 
         DB::table('accounts')->insert([
@@ -77,13 +81,14 @@ class AccountsTableSeeder extends Seeder
             'gender' =>  'Male',
             'email' => 'ayoub@yadu.com',
             'password' => Hash::make('password'),
-            'firstName' => 'Ayoub',
-            'middleName' => null,
-            'lastName' => 'Ik weet je achternaam niet',
+            'firstName' => encrypt('Ayoub'),
+            'middleName' => encrypt(null),
+            'lastName' => encrypt('Belali'),
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
-            'email_verified_at' => date("Y-m-d H:i:s")
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => str_random(60)
         ]);
 
         DB::table('accounts')->insert([
@@ -91,13 +96,14 @@ class AccountsTableSeeder extends Seeder
             'gender' =>  'Male',
             'email' => 'burak@yadu.com',
             'password' => Hash::make('password'),
-            'firstName' => 'Burak',
-            'middleName' => null,
-            'lastName' => 'Imre',
+            'firstName' => encrypt('Burak'),
+            'middleName' => encrypt(null),
+            'lastName' => encrypt('Imre'),
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
-            'email_verified_at' => date("Y-m-d H:i:s")
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => str_random(60)
         ]);
 
         DB::table('accounts')->insert([
@@ -105,27 +111,29 @@ class AccountsTableSeeder extends Seeder
             'gender' =>  'Male',
             'email' => 'dogen@yadu.com',
             'password' => Hash::make('password'),
-            'firstName' => 'Dogen',
-            'middleName' => null,
-            'lastName' => 'Arias Maat',
+            'firstName' => encrypt('Dogen'),
+            'middleName' => encrypt('Arias'),
+            'lastName' => encrypt('Maat'),
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
-            'email_verified_at' => date("Y-m-d H:i:s")
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => str_random(60)
         ]);
 
         DB::table('accounts')->insert([
-            'accountRole' => 'User',
+            'accountRole' => 'Admin',
             'gender' =>  'Male',
             'email' => 'jeroen@yadu.com',
             'password' => Hash::make('password'),
-            'firstName' => 'Jeroen',
-            'middleName' => null,
-            'lastName' => 'van Beuningen',
+            'firstName' => encrypt('Jeroen'),
+            'middleName' => encrypt('van'),
+            'lastName' => encrypt('Beuningen'),
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
-            'email_verified_at' => date("Y-m-d H:i:s")
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => str_random(60)
         ]);
 
         DB::table('accounts')->insert([
@@ -133,13 +141,14 @@ class AccountsTableSeeder extends Seeder
             'gender' =>  'Male',
             'email' => 'martijn@yadu.com',
             'password' => Hash::make('password'),
-            'firstName' => 'Martijn',
-            'middleName' => null,
-            'lastName' => 'Blom',
+            'firstName' => encrypt('Martijn'),
+            'middleName' => encrypt(null),
+            'lastName' => encrypt('Blom'),
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
-            'email_verified_at' => date("Y-m-d H:i:s")
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => str_random(60)
         ]);
 
         DB::table('accounts')->insert([
@@ -147,13 +156,29 @@ class AccountsTableSeeder extends Seeder
             'gender' =>  'Male',
             'email' => 'merijn@yadu.com',
             'password' => Hash::make('password'),
-            'firstName' => 'Merijn',
-            'middleName' => null,
-            'lastName' => 'Monfils',
+            'firstName' => encrypt('Merijn'),
+            'middleName' => encrypt(null),
+            'lastName' => encrypt('Monfils'),
             'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
-            'email_verified_at' => date("Y-m-d H:i:s")
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => bin2hex(openssl_random_pseudo_bytes(30))
+        ]);
+
+        DB::table('accounts')->insert([
+            'accountRole' => 'Admin',
+            'gender' =>  'Male',
+            'email' => 'admin@yadu.com',
+            'password' => Hash::make('password'),
+            'firstName' => encrypt('Admin'),
+            'middleName' => encrypt(null),
+            'lastName' => encrypt('Admin'),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => str_random(60),
         ]);
     }
 }

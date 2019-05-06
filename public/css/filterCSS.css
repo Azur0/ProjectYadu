@@ -48,13 +48,10 @@
     height: 50px;
     width: 50px;
     border-radius: 0 50% 50% 50%;
-    transform: rotate(-135deg);
-    margin: auto;
     left:0;
     right:0;
     top: 30px;
     bottom: 20px;
-
 }
 
 #rangeValueDisplay{

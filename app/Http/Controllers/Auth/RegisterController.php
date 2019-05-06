@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Account;
+use App\Rules\genderExists;
 use App\Http\Controllers\Controller;
 use App\Mail\Confirmation;
 use Illuminate\Support\Facades\Hash;
@@ -31,7 +32,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -64,9 +65,11 @@ class RegisterController extends Controller
             'middleName' => ['nullable', 'max:45','string'],
             'lastName' => ['nullable', 'max:45','string'],
             'dateOfBirth' => ['nullable', 'date'],
+            'gender' => new genderExists,
             'email' => ['required', 'string', 'email', 'max:255', 'unique:accounts'],
             'password' => ['required', 'string', 'min:8','confirmed']
         ]);
+        
     }
 
     /**
@@ -83,8 +86,9 @@ class RegisterController extends Controller
             'lastName' => $data['lastName'],
             'dateOfBirth' => $data['dateOfBirth'],
             'email' => $data['email'],
-            'genders' => ($data['gender'] == "-" ? 'unknown' : $data['gender']),
+            'gender' => ($data['gender'] == "-" ? null : $data['gender']),
             'password' => Hash::make($data['password']),
+            'api_token' => str_random(60),
         ]);
 
         return $account;

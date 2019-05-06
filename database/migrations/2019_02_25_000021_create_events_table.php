@@ -23,23 +23,19 @@ class CreateEventsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('status', 20);
             $table->unsignedInteger('tag_id');
             $table->unsignedInteger('location_id');
             $table->unsignedInteger('owner_id');
             $table->unsignedInteger('event_picture_id');
             $table->string('eventName', 45);
             $table->dateTime('startDate');
-            $table->dateTime('endDate')->nullable();
             $table->unsignedInteger('numberOfPeople');
             $table->text('description');
-
+            $table->tinyInteger('isHighlighted')->default('0');
             $table->tinyInteger('isDeleted')->default('0');
             $table->timestamps();
 
             $table->index(["location_id"], 'fk_activity_Location1_idx');
-
-            $table->index(["status"], 'fk_event_eventStatus1_idx');
 
             $table->index(["tag_id"], 'fk_event_eventTags1_idx');
 
@@ -54,11 +50,6 @@ class CreateEventsTable extends Migration
           
             $table->foreign('owner_id', 'fk_activity_accounts1_idx')
                 ->references('id')->on('accounts')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('status', 'fk_event_eventStatus1_idx')
-                ->references('status')->on('event_statuses')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 

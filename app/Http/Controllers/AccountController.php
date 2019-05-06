@@ -7,8 +7,12 @@ use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\EditProfileRequest;
 use Illuminate\Http\Request;
 use App\Gender;
+use App\Event;
+use App\EventHasParticipants;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use DB;
+
 
 class AccountController extends Controller
 {
@@ -30,15 +34,14 @@ class AccountController extends Controller
 
         $account->save();
 
-        //TODO: Redirect to success page!
-        return redirect('/');
+        return redirect('/profile/edit');
     }
 
     public function updateProfile(EditProfileRequest $request)
     {
 	    $validated = $request->validated();
 
-	    $account = Account::where('id', $request->accountId)->firstOrFail();
+	    $account = Account::where('id', Auth::id())->firstOrFail();
 
 	    if($validated['gender'] == "-"){
             $account->gender = null;
@@ -55,12 +58,34 @@ class AccountController extends Controller
 
         $account->save();
 
-        return redirect('/');
+        return redirect('/profile/edit');
     }
 
     public function deleteAccount(){
-        isAuthorized(request()->accountId);
-        dd('Hier moet Martijn zijn code komen');
-	    //TODO: Martijn zijn delete code!
+
+	    $ID = Auth::user()->id;
+        Auth::logout();
+
+        $this->deleteAccountFromId($ID);
+
+        return redirect('/');
     }
+
+    public static function deleteAccountFromId($id)
+    {
+        $account = Account::where('id', $id)->firstOrFail();
+
+        $account->email = $id;
+        $account->password = '';
+        $account->firstname = encrypt('Deleted user');
+        $account->middlename = encrypt(null);
+        $account->lastname = encrypt(null);
+        $account->avatar = null;
+        $account->isDeleted = 1;
+        $account->bio = null;
+        $account->remember_token = null;
+
+        $account->save();
+    }
+
 }

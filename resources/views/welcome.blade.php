@@ -1,45 +1,90 @@
-@extends('layouts/app')
+@extends('layouts/app_welcome')
 
 @section('content')
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum nisi quis orci dictum, eget molestie enim ullamcorper. Sed et lectus ut diam bibendum eleifend. Aliquam tellus lorem, aliquam vitae lorem sed, pulvinar molestie leo. Nunc a arcu sed mauris condimentum feugiat quis quis ipsum. Vivamus dignissim, ex ac lobortis vehicula, eros eros convallis lectus, quis pharetra ex ligula a magna. Curabitur eget ultrices tortor, vitae hendrerit felis. Etiam id rhoncus sapien, a lacinia velit. Sed sit amet vestibulum ligula. Aliquam tincidunt nisi a sapien volutpat blandit. Sed quis pretium lectus. In dolor elit, fermentum quis pellentesque ac, porta sit amet nibh. Quisque lacinia molestie ipsum in blandit.
-
-    Nam et enim nisi. Integer id nulla mi. Vestibulum cursus nisi vel massa vestibulum, quis rhoncus tortor lobortis. Suspendisse luctus, eros eu maximus volutpat, nibh nisl sodales tortor, in interdum justo lorem quis lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac vestibulum mauris. Nulla ultricies fermentum tellus, ut molestie libero rhoncus pulvinar. Ut nulla nisi, blandit quis orci sit amet, tristique iaculis velit. Vivamus eu neque molestie, condimentum orci vel, tincidunt lacus. Quisque interdum tincidunt accumsan.
-
-    Nunc pulvinar felis non libero dapibus imperdiet. Curabitur sit amet augue vel odio convallis ultrices eget id lorem. Suspendisse a eros sodales, auctor orci et, tempus lorem. In hac habitasse platea dictumst. Curabitur sit amet tempor urna. Quisque ac mi arcu. Nunc lacinia luctus neque, in eleifend massa eleifend sed. Nam lobortis neque orci, vitae convallis nunc maximus in. Etiam mauris leo, rhoncus vel semper in, fringilla vel elit.
-
-    In auctor felis mauris, porttitor auctor eros viverra non. Donec diam risus, rutrum a est sit amet, pulvinar faucibus nisl. Morbi sed nulla elementum, gravida eros id, tincidunt erat. Morbi aliquam pellentesque consequat. Sed venenatis justo sapien, sed dictum sem volutpat non. Fusce congue rhoncus eleifend. Maecenas non rutrum nisi. Donec nec ullamcorper orci. Donec elit ipsum, fringilla sit amet auctor sagittis, volutpat pellentesque velit.
-
-    Suspendisse et congue justo, vitae molestie est. Ut nunc tellus, fermentum sed sagittis et, volutpat vitae felis. Praesent nisl ipsum, dignissim ut diam at, eleifend tristique ex. Vestibulum in mi nec quam dictum varius. Duis vel ante vitae metus venenatis posuere eget tempor velit. Aenean hendrerit nulla arcu, ultricies porttitor risus feugiat eu. In eu est sapien. Morbi id blandit ipsum. Nulla dictum nisl vel iaculis luctus. Fusce ac augue nisl. Donec semper neque sed lectus aliquet sollicitudin.
-
-    In vitae semper urna. Etiam ullamcorper posuere tortor ut molestie. Morbi finibus enim sit amet augue ullamcorper, in aliquam ex pellentesque. Aliquam iaculis ex vel bibendum tempor. Cras quam felis, porta et nunc vitae, imperdiet faucibus augue. Nulla a egestas lacus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce turpis neque, consequat sit amet rutrum ut, egestas nec turpis. Maecenas tristique viverra odio vitae tempus. Fusce aliquam scelerisque auctor. Nullam eu quam erat. In vestibulum iaculis eros non aliquet. Sed ut urna et massa venenatis sagittis. Aenean aliquet quam felis, nec malesuada est egestas nec.
-
-    Phasellus varius facilisis rhoncus. Nulla et nibh et augue lacinia interdum in vitae tortor. Suspendisse nisl massa, porta ut nunc ac, fringilla facilisis justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed commodo eleifend posuere. Donec id nisi vestibulum, ultrices mi ut, malesuada odio. Pellentesque finibus venenatis eros et facilisis. Nam varius mi nec tortor luctus, lobortis aliquet eros fermentum. Vivamus auctor erat lorem, ac malesuada dolor porta eget. Aliquam erat volutpat. Praesent nec lobortis odio. Proin eu lobortis enim. Sed eros odio, maximus vel turpis nec, vulputate euismod tortor.
-
-    Vestibulum vel sollicitudin eros. Vestibulum fermentum id magna at pulvinar. Morbi ligula nibh, consequat vitae suscipit eget, mattis at massa. Vivamus vehicula commodo velit, id cursus sapien vestibulum eget. Morbi viverra rutrum mauris vitae suscipit. Mauris sed pharetra massa, sed ullamcorper dui. Maecenas efficitur enim at scelerisque dapibus. Mauris viverra consequat molestie. Proin id purus vitae mauris blandit posuere. Suspendisse sed sem enim. Etiam interdum ac odio in pulvinar. Quisque dignissim at mauris sit amet iaculis. Morbi at euismod nibh.
-
-    Vivamus nec efficitur orci. Maecenas suscipit turpis sem, ac tristique purus feugiat at. Proin volutpat nisi ac gravida dignissim. Phasellus ipsum ante, ullamcorper eu lacus et, venenatis suscipit velit. Etiam molestie at erat a laoreet. Suspendisse fringilla eleifend augue. Sed sodales arcu sit amet quam porttitor, quis feugiat felis mollis. Integer dignissim ipsum at lectus cursus, id vehicula leo consequat. Vestibulum vitae ultricies erat, sit amet tincidunt sapien.
-
-    Sed dui purus, efficitur elementum pulvinar sed, vulputate sit amet mi. Morbi mi enim, tincidunt at ipsum nec, eleifend luctus nisl. Etiam vitae iaculis metus. Morbi finibus dolor sit amet lorem pharetra molestie. Phasellus bibendum ipsum quam, vel aliquet leo pretium ut. Nullam pellentesque malesuada nibh quis pharetra. Sed velit odio, mattis ac arcu vitae, pharetra semper nulla. Vivamus euismod eget sem ut pretium. Sed porta velit ut urna semper convallis. Nulla et scelerisque odio. Phasellus quis nibh semper, laoreet quam sed, eleifend nibh. Mauris molestie lectus tellus, id laoreet justo blandit nec.
-
-    Phasellus posuere finibus nulla, quis blandit dolor. Nam vestibulum nisi ut metus vehicula, in lacinia felis convallis. Morbi faucibus diam a metus auctor tristique. Donec ut purus nunc. Donec vestibulum ultricies turpis sed interdum. Nulla aliquet pulvinar nibh, ac varius mauris gravida vehicula. Nunc aliquet varius enim quis interdum. Suspendisse vestibulum ullamcorper sapien, fermentum sodales dolor rutrum vitae.
-
-    Nulla velit ante, porttitor et nulla eu, gravida sodales risus. Nulla non odio id tortor ornare posuere. Duis ullamcorper ac neque dictum pellentesque. Morbi congue aliquam mauris et iaculis. Phasellus pulvinar risus sed arcu pretium, a tincidunt dui feugiat. Proin tempus maximus ipsum, dignissim molestie est efficitur quis. Aliquam a convallis est, a tincidunt purus.
-
-    Aenean nec posuere enim. Praesent lobortis, est ut commodo cursus, mauris nibh condimentum felis, et accumsan ante neque eget purus. Duis eu orci et felis auctor mollis a vitae dui. Nulla sed dolor fringilla, tincidunt mi ut, interdum mi. Nunc interdum quam non orci dapibus, sed auctor metus convallis. Suspendisse potenti. Nulla turpis justo, tempor a ex vitae, fermentum elementum nunc. Nullam sit amet consequat nisl. Curabitur vehicula turpis non congue volutpat. Mauris nec rhoncus enim, eu fringilla libero.
-
-    Suspendisse risus nisl, congue vel aliquet ut, venenatis ac augue. Mauris ac vulputate odio. Curabitur sit amet velit non mauris aliquet feugiat nec sed erat. Nam fringilla a justo ut scelerisque. Praesent mattis posuere risus sed tempus. Phasellus sit amet imperdiet nulla. In sollicitudin, ligula eget cursus venenatis, magna augue vestibulum ex, at luctus lorem enim vitae dolor. Nullam viverra erat et sodales pretium.
-
-    Sed eu nibh suscipit, lobortis magna at, commodo erat. Quisque tincidunt nisi quis nisi efficitur consequat. Praesent suscipit, magna sit amet vestibulum condimentum, massa sem ultrices sem, accumsan iaculis nulla dolor et lectus. Vivamus at urna at tortor placerat mattis nec a mi. In hac habitasse platea dictumst. Pellentesque dignissim vehicula enim, vitae ullamcorper turpis maximus quis. Vivamus id rhoncus risus, id scelerisque quam. Praesent et feugiat magna. Sed luctus eros vel eros efficitur, quis tincidunt metus tincidunt. Integer sagittis tristique pellentesque.
-
-    Curabitur metus purus, sagittis at ultricies in, sodales in risus. Etiam a iaculis sem. Donec feugiat vulputate finibus. Aenean id ullamcorper turpis. Pellentesque venenatis quis eros non dignissim. Nunc at sollicitudin felis. Mauris facilisis ligula a volutpat vehicula. Cras sit amet ligula facilisis, consequat ligula dignissim, commodo ligula.
-
-    Proin vitae sem metus. Morbi accumsan massa tellus, id fringilla ligula iaculis a. Mauris at lacus eu nibh vestibulum venenatis. Aliquam erat volutpat. In sollicitudin velit in euismod eleifend. Aenean gravida enim vitae nulla malesuada suscipit. Aenean bibendum maximus condimentum. Donec quis ipsum quis nibh ultricies iaculis eu maximus erat. Donec felis neque, condimentum et pharetra eu, bibendum at est. Etiam libero leo, vulputate in nunc eu, accumsan molestie orci. Curabitur suscipit est sed risus ornare dapibus. Sed at dapibus augue, in scelerisque dui. Donec id erat in nisl consectetur ullamcorper non a nisl. Integer elit purus, tincidunt vel euismod non, vestibulum ut tellus. Nunc elit nisl, hendrerit a ante sed, mattis lobortis sapien.
-
-    Aliquam id nisi id massa vestibulum porta scelerisque at ex. Quisque enim ante, consectetur at cursus in, malesuada vitae libero. Praesent felis felis, dapibus non ex ut, vehicula pharetra orci. Donec pellentesque ante ut interdum efficitur. Suspendisse eget odio pulvinar diam sollicitudin lacinia at eget arcu. Integer vitae ipsum lectus. Vestibulum porttitor eros eu augue facilisis faucibus at et nibh. Nullam a molestie sapien. In lacinia porttitor ante. Vestibulum in auctor augue. Nulla vitae dui lorem. Donec tincidunt, leo ac porta sodales, turpis arcu dignissim sem, non dapibus ante augue vitae augue. In cursus feugiat tempus.
-
-    Nulla facilisi. Donec a convallis nulla. Maecenas vel tempus nisi. Nullam vel mattis metus. Cras gravida tempus nisl, vel tincidunt neque sodales sit amet. Phasellus posuere convallis ultricies. Nunc placerat erat lacus. Quisque vel malesuada sem, eget venenatis arcu. In ultricies sit amet arcu nec faucibus.
-
-    Fusce mollis, magna eu vehicula tristique, nibh sapien suscipit augue, eu venenatis libero mi vitae lorem. Proin ac placerat dui. Aliquam iaculis urna ut nunc pharetra varius. Etiam sem velit, vulputate eget purus in, convallis varius metus. Donec convallis mollis nibh, in vehicula tellus iaculis eget. Cras euismod a leo at imperdiet. Fusce rutrum velit quis urna hendrerit aliquam. Phasellus convallis lorem tortor, at scelerisque leo pharetra ut. Cras luctus risus quis nisi egestas vulputate. Nullam placerat arcu at orci cursus gravida.
-</p>
+	<div id="welcome_carousel">
+		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				@foreach($events as $event)
+				@if ($loop->first)
+						<li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->index }}" class="active"></li>	
+					@else
+						<li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->index }}"></li>
+					@endif
+				@endforeach
+			</ol>
+			<div class="carousel-inner">
+				@foreach($events as $event)
+					@if ($loop->first)
+						<div class="carousel-item active">	
+					@else
+						<div class="carousel-item">
+					@endif		
+							<div class="carousel_img_container">
+								<img class="d-block w-100" src="data:image/png;base64,{{ chunk_split(base64_encode($event->eventPicture->picture)) }}" alt="First slide">
+							</div>
+							<div class="carousel-caption d-md-block">
+								<h5>{{ $event->eventName }}</h5>
+								<p>{{ $event->description }}</p>
+								<h6>{{ $event->city }} {{ $event->writtenDate }}</h6>
+								<a href="/events/{{ $event->id }}">{{ __('welcome.link_read_more') }}...</a>
+							</div>
+						</div>
+				@endforeach
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">{{ __('welcome.carousel_prev') }}</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">{{ __('welcome.carousel_next') }}</span>
+			</a>
+		</div>
+	</div>
+	<div class="container" id="welcome_info">
+		<h1>{{ __('welcome.welcome_header') }}</h1>
+		<h4>{{ __('welcome.welcome_content1') }}</h4>
+		<p>
+			{{ __('welcome.welcome_content2') }}
+		</p>
+		<a href="/about">{{ __('welcome.link_read_more') }}...</a>
+	</div>
+	<div class="container" id="welcome_recent">
+		<h2>{{ __('welcome.recent_events_header') }}</h2>
+		<div id="#eventsToDisplay" class="event_overview row">
+			<?php $plus = 0; ?>
+			@foreach($regular_events as $event)
+				<div class='col-md-6 col-lg-4 event'>
+					<a href='/events/{{ $event->id }}'>
+						@if( $event->startDate > \Carbon\Carbon::now())
+						<div class='card mb-4 box-shadow'>
+						@else
+						<div class='card mb-4 box-shadow greyified'>
+						@endif
+							<img class = 'card-img-top' src="data:image/png;base64,{{ chunk_split(base64_encode($event->eventPicture->picture)) }}" alt = 'Card image cap'>
+							<div class = 'event_info' > 
+								<h3>{{ str_limit($event->eventName, $limit = 25, $end = '...') }}</h3>
+								<p>{{ $event->writtenDate }}<br>{{ $event->city }}</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				<?php $plus = $plus + 1 ?>
+			@endforeach
+			@if($plus < 3)
+				<div class='col-md-6 col-lg-4 event'>
+					<a href="/events/create">
+						<div class='card mb-4 box-shadow'>
+							<img class = 'card-img-top' src="/images/plus.png" alt = 'Card image cap'>
+							<div class = 'event_info' > 
+								<h3>{{ __('welcome.recent_events_own') }}</h3>
+								<p><br><br></p>
+							</div>
+						</div>
+					</a>
+				</div>
+			@endif
+		</div>
+		<p>{{ __('welcome.recent_events_content') }} <a href="/events">{{ __('welcome.link_here') }}</a>.</p>
+	</div>
 @endsection

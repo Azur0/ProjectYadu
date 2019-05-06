@@ -23,7 +23,7 @@ class CreateAccountsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('accountRole', 10)->default('user');
+            $table->string('accountRole', 10)->default('User');
             $table->string('gender', 15)->nullable();
             $table->string('email');
             $table->string('password');

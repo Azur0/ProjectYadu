@@ -133,10 +133,13 @@
     overflow: hidden;
   }
 
-  #welcome_carousel .carousel-inner .carousel-item .carousel_img_container img {
-    min-width: 100%;
-    overflow-y: auto;
-  }
+	#welcome_carousel .carousel-inner .carousel-item .carousel_img_container img
+	{
+		min-width: 100%;
+		overflow-y: auto;
+		filter: blur(10px);
+		transform: scale(1.1);
+	}
 
   #welcome_carousel .carousel-inner .carousel-item a,
   #welcome_carousel .carousel-inner .carousel-item a:hover {

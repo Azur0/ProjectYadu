@@ -17,7 +17,7 @@ class Account extends Authenticatable implements MustVerifyEmailContract
     use Notifiable;
     use Encryptable;
 
-    protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender', 'avatar'];
+    protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender', 'avatar', 'api_token'];
     protected $encryptable = ['firstName', 'middleName', 'lastName'];
   
     public function getAvatarAttribute($key)

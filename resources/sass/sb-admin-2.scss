@@ -58,22 +58,36 @@
 h6.collapse-header {
   border-bottom: 3px solid #85879630;
 }
+.inputFields h4{
+	font-size: 20px;
+	margin-bottom: 0px;
+}
+.inputFields textarea{
+	width: 100%;
+}
 
 #EditInput {
   flex: 1;
   min-width: 0px;
 }
 
+.submit-edit{
+	margin-left: 20px;
+}
+
 .inputFields {
   margin: 1%;
 }
 
-
 .inputFields p{
   display: flex;
+}
 
 @media screen and (max-width: 1331px)
 {
+	.inputFields h4{
+		font-size: 20px;
+	}
 	.card-header
 	{
 

@@ -28,19 +28,20 @@
 
         function printTitle($key){
             global $addedString;
-            echo "<p><strong>$addedString $key</strong></p>";
+            echo "<h4><strong>$addedString $key</strong></h4>";
         }
 
         function printInputFields($key, $item, $primaryKey){
             global $addedString;
-            echo "<p> $addedString $key&nbsp;-&nbsp;<input type='text' name='$primaryKey;$key' id='EditInput' value='".htmlspecialchars_decode($item)."'></p>";
+            echo "<h4> $addedString $key </h4><textarea type='text' name='$primaryKey;$key' id='EditInput'>".htmlspecialchars_decode($item)."</textarea>";
         }
     ?>
 
     @foreach ($x as $key => $item)
         @if (!is_array($item))
             <?php global $addedString; $addedString = "";?>
-            <p>{{$key}}&nbsp;-&nbsp;<input type="text" name="{{$key}}" id="EditInput" value="{{htmlspecialchars_decode($item)}}"></p>
+            <h4>{{$key}}</h4>
+            <textarea type="text" name="{{$key}}" id="EditInput">{{htmlspecialchars_decode($item)}}</textarea>
         @else
             <?php 
                 global $addedString; 
@@ -52,7 +53,7 @@
 
     @endforeach
     </div>
-    <input type="submit" value="submit" class="btn btn-primary">
+    <input type="submit" value="submit" class="btn btn-primary submit-edit">
 </form>
 
 @endsection

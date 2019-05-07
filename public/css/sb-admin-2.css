@@ -12320,3 +12320,23 @@ h6.collapse-header {
   font-size: 18px !important;
 }
 
+#blanket {
+  background-color:#111;
+  opacity: 0.65;
+  *background:none;
+  position:absolute;
+  z-index: 1;
+  top:0px;
+  left:0px;
+  width:100%;
+}
+
+#popUpDiv {
+   position:absolute;
+   background:url(pop-back.jpg) no-repeat;
+   width:50%;
+   height:50%;
+   border:5px solid #000;
+   z-index: 2;
+}
+

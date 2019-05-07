@@ -121,7 +121,10 @@
 		</a>
 		<div id="collapseImages" class="collapse" aria-labelledby="headingImages" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="{{ url('admin/images')  }}">{{__('navigation.nav_images')}}</a>
+                {{-- <h6 class="collapse-header">Categoriën:</h6> --}}
+                <a class="collapse-item" href="{{ url('admin/images')  }}">{{__('navigation.nav_images')}}</a>
+                {{-- <h6 class="collapse-header">Extra:</h6>
+                <a class="collapse-item" href="{{ url('admin/images')  }}">{{__('navigation.nav_images')}}</a> --}}
 			</div>
 		</div>
 	</li>

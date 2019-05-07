@@ -32,5 +32,13 @@ class SendEventDeletedNotification
         Mail::to($event->event->owner->email)->send(
             new EventDeletedMail($event->event)
         );
+        if($event->event->participants->count() >0){
+            foreach($event->event->participants as $participant){
+                $event->event->owner->firstName = $participant->firstName;
+                Mail::to($participant->email)->send(
+                    new EventDeletedMail($event->event)
+                );
+            }
+        }
     }
 }

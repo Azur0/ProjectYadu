@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\Admin\EventEdited as EventEditedMail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Collection;
 
 class SendEventEditedNotification
 {
@@ -31,5 +32,13 @@ class SendEventEditedNotification
         Mail::to($event->event->owner->email)->send(
             new EventEditedMail($event->event)
         );
+        if($event->event->participants->count() >0){
+            foreach($event->event->participants as $participant){
+                $event->event->owner->firstName = $participant->firstName;
+                Mail::to($participant->email)->send(
+                    new EventEditedMail($event->event)
+                );
+            }
+        }
     }
 }

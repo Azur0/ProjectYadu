@@ -111,6 +111,19 @@
 				<!--<a class="collapse-item" href="{{ url('admin/events/create')  }}">Create</a>-->
 			</div>
 		</div>
+    </li>
+    
+    <!-- Nav Item - Images -->
+	<li class="nav-item {{ request()->is('admin/images') ? 'active' : '' }}">
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImages" aria-expanded="true" aria-controls="collapseImages">
+			<i class="fas fa-fw fa-users"></i>
+			<span>{{__('navigation.nav_images')}}</span>
+		</a>
+		<div id="collapseImages" class="collapse" aria-labelledby="headingImages" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<a class="collapse-item" href="{{ url('admin/images')  }}">{{__('navigation.nav_images')}}</a>
+			</div>
+		</div>
 	</li>
 
 	<!-- Divider

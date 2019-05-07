@@ -66,3 +66,6 @@ Route::post('admin/accounts/action', 'Management\AccountsController@action')->na
 
 Route::resource('admin/events','Management\EventsController');
 Route::post('/admin/events/actionDistanceFilter', 'Management\EventsController@actionDistanceFilter')->name('admin_events_controller.actionDistanceFilter');
+
+// admin/images
+Route::get('admin/images', 'Management\ImagesController@index')->middleware('auth', 'isAdmin');

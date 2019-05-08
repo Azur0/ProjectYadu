@@ -22,6 +22,7 @@ return [
     'nav_login' => 'LOGIN',
     'nav_logout' => 'LOGOUT',
     'nav_pages' => 'Pages',
+    'nav_links' => 'Links',
 
 ///////////////////////////////// Footer //////////////////////////////////
 

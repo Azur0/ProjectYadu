@@ -27,7 +27,9 @@
 
 	<!-- Divider -->
 	<hr class="sidebar-divider">
-
+    <div class="sidebar-heading">
+		Edit
+	</div>
     <!-- Nav Item - Pages -->
     <li class="nav-item {{ request()->is('edit/*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
@@ -74,6 +76,18 @@
             </div>
         </div>
     </li>
+
+    <li class="nav-item {{ request()->is('admin/links') ? 'active' : '' }}">
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLinks" aria-expanded="true" aria-controls="collapseLinks">
+			<i class="fas fa-fw fa-users"></i>
+			<span>{{__('navigation.nav_links')}}</span>
+		</a>
+		<div id="collapseLinks" class="collapse" aria-labelledby="headingLinks" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<a class="collapse-item" href="{{ url('admin/links')  }}">{{__('navigation.nav_links')}}</a>
+			</div>
+		</div>
+	</li>
 	
 	<!-- Divider -->
 	<hr class="sidebar-divider">

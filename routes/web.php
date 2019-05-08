@@ -24,8 +24,11 @@ Route::get('/contact', function () { return view('contact'); });
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/edit/{lang}/{page}', 'EditLangController@index');
-Route::post('admin', 'EditLangController@saveFile');
+Route::get('/edit/{lang}/{page}', 'EditLangController@index')->middleware('auth', 'isAdmin');
+Route::post('admin', 'EditLangController@saveFile')->middleware('auth', 'isAdmin');
+
+Route::get('admin/links', 'EditLinksController@index')->middleware('auth', 'isAdmin');
+Route::post('admin', 'EditLinksController@saveLinks')->middleware('auth', 'isAdmin');
 
 Route::get('/account/myevents', 'HomeController@myEvents');
 Route::get('/account/participating', 'HomeController@participating');

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Events\EventDeleted;
-use App\Events\Eventedited;
+use App\Events\EventEdited;
 
 class Event extends Model
 {

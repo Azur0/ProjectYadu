@@ -18,9 +18,11 @@ class EventLeft extends Mailable
      * @return void
      */
     public $event;
-    public function __construct($event)
+    public $user;
+    public function __construct($event,$user)
     {
         $this->event = $event;
+        $this->user = $user;
     }
 
     /**
@@ -32,7 +34,7 @@ class EventLeft extends Mailable
     {
         return $this->markdown('mail/event.event-left')->with([
             'salutation'=> Lang::get('mail.salutation'),
-            'ownerName'=>$this->event->owner->firstName
+            'ownerName'=>$this->user->firstName
         ]);
     }
 }

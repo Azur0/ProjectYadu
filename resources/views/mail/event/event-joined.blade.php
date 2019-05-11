@@ -1,12 +1,9 @@
 @component('mail::message')
-# Introduction
+    # {{__('mail.editTitle')}}
 
-The body of your message.
+    {{$salutation . $name}}
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+    {{$bodyText}}
 
-Thanks,<br>
-{{ config('app.name') }}
+    {{__('mail.closing')}}
 @endcomponent

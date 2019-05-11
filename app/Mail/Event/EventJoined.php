@@ -20,11 +20,13 @@ class EventJoined extends Mailable
     public $event;
     public $user;
     public $executor;
-    public function __construct($event,$user,$executor)
+    public $executorBool;
+    public function __construct($event,$user,$executor,$executorBool)
     {
         $this->event = $event;
         $this->user = $user;
         $this->executor = $executor;
+        $this->executorBool = $executorBool;
     }
 
     /**
@@ -35,12 +37,14 @@ class EventJoined extends Mailable
     public function build()
     {
         $bodyText = "";
-        if($this->executor == 1){
-            $bodyText = Lang::get('mail.joinedEvent') ." ". $this->event->name ."". Lang::get('mail.event');
+        if($this->executorBool == 1){
+            $bodyText = Lang::get('mail.joinedEvent') ." ". $this->event->eventName ."". Lang::get('mail.event');
         }else if($this->event->owner->id == $this->user->id){
-            $bodyText = $this->user->firstName ." ". Lang::get('mail.joinedYourEvent');
+            $bodyText =
+                $this->executor->firstName ." ". Lang::get('mail.joinedYourEvent') . " " . $this->event->eventName;
         }else{
-            $bodyText = $this->user->firstName ." ".Lang::get('mail.participantJoinedEvent') . " " . $this->event->name;
+            $bodyText =
+                $this->executor->firstName ." ".Lang::get('mail.participantJoinedEvent') . " " . $this->event->eventName;
         }
 
         return $this->markdown('mail/event.event-joined')->with([

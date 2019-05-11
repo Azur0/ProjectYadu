@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Events\AccountCreatedEvent;
+use App\Events\AccountEdited;
 use App\Events\EventJoined;
 use App\Events\EventLeft;
 use App\Listeners\AccountCreatedListener;
 use App\Events\EventDeleted;
 use App\Events\EventEdited;
+use App\Listeners\SendAccountEditedNotification;
 use App\Listeners\SendEventDeletedNotification;
 use App\Listeners\SendEventEditedNotification;
 use App\Listeners\SendEventJoinedNotification;
@@ -43,6 +45,10 @@ class EventServiceProvider extends ServiceProvider
 
         EventLeft::class => [
             SendEventLeftNotification::class,
+        ],
+
+        AccountEdited::class => [
+            SendAccountEditedNotification::class,
         ],
     ];
 

@@ -32,12 +32,12 @@ class SendEventLeftNotification
         //TODO: Mail owner that someone left his event -- You left this event mail
         $user = Account::findOrFail($event->userId);
         Mail::to($user->email)->send(
-            new EventLeftMail($event->event,$user)
+            new EventLeftMail($event->event,$user,0)
         );
 
         //TODO: Mail owner that someone left his event -- Someone left your event mail
         Mail::to($event->event->owner->email)->send(
-            new EventLeftMail($event->event,$event->event->owner)
+            new EventLeftMail($event->event,$event->event->owner,1)
         );
 
         //TODO: Mail the rest that someone left that event -- Someone left this event mail
@@ -46,12 +46,14 @@ class SendEventLeftNotification
                 if($participant->id != $user->id && $participant->id != $event->event->owner->id){
                     $event->event->owner->firstName = $participant->firstName;
                     Mail::to($participant->email)->send(
-                        new EventLeftMail($event->event,$participant)
+                        new EventLeftMail($event->event,$participant,0)
                     );
                 }
             }
         }
 
         //TODO: Mail if someone you follow left?
+
+        //TODO: Mail The people who follow you?
     }
 }

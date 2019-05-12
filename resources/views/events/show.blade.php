@@ -128,8 +128,11 @@
                 });
 
                 document.getElementById("share-facebook").addEventListener('click', function(){
+                    <?php
+                        LogShareEvent($event->id, "test") ?>
                     let url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
                     window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+
                 });
 
                 document.getElementById("share-twitter").addEventListener('click', function(){

@@ -1,5 +1,5 @@
 @component('mail::message')
-    # {{__('mail.editTitle')}}
+    # {{__($headText)}}
 
     {{$salutation . $name}}
 

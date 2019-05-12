@@ -18,9 +18,12 @@ return [
     "leftEvent" => "Je hebt je afgemeld voor",
     "leftYourEvent" => "heeft zich afgemeld voor je evenement",
     "participantLeftEvent" => "heeft zich afgemeld voor",
+    "eventJoinedHeader" => "Iemand heeft zich aangemeld voor een evenement",
+    "eventLeftHeader" => "Iemand heeft zich afgemeld voor een evenement",
 
     //Account
     "changedPassword" => "Je wachtwoord is veranderd",
     "changedEmail" => "Je emailadres is veranderd",
-    "changedPersonalInfo" => "Eén of meer van persoonlijk gegevens zijn veranderd",
+    "changedPersonalInfo" => "Eén of meer van persoonlijk gegevens zijns veranderd",
+    "editAccountHeader" => "Je accountgegevens zijn bewerkt",
 ];

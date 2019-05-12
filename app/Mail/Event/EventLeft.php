@@ -48,6 +48,7 @@ class EventLeft extends Mailable
         }
 
         return $this->markdown('mail/event.event-left')->with([
+            'headText' =>  Lang::get('mail.eventLeftHeader'),
             'salutation'=> Lang::get('mail.salutation'),
             'name'=>$this->user->firstName,
             'bodyText'=>$bodyText

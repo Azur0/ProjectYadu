@@ -2,24 +2,36 @@
 
 @section('content')
 <div>
-    <form action="{{ action('Management\ImagesController@check') }}" method="POST" enctype="multipart/form-data">
         <div class="types">
+            <h1>Placeholder type</h1>
                 <div class="box">
-                    @foreach ($tags as $Tag)
-                        <input type="radio" id="{{$Tag->tag}}" name="tag" value="{{$Tag->id}}"
-                               onclick="check({{$Tag->id }})">
-                        <label for="{{$Tag->tag}}" class="category">
-                            <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($Tag->imageDefault) . '"/>'; ?>
-                            <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($Tag->imageSelected) . '"/>'; ?>
-                            <span>{{__('events.cat'.$Tag->id)}}</span>
+                    @foreach ($tags as $tag)
+                        <input type="radio" id="{{$tag->tag}}" name="tag" value="{{$tag->id}}">
+                        <label for="{{$tag->tag}}" class="category">
+                            <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
+                            <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($tag->imageSelected) . '"/>'; ?>
                         </label>
                     @endforeach
                 </div>
                 @if ($errors->has('tag'))
-                    <div class="error">{{__('events.error_select_type')}}.</div>
+                    <div class="error">placeholder.</div>
                 @endif
             </div>
+            <div class="types">
+                <div class="box">
+                    @foreach ($pictures as $picture)
+                        <input type="radio" id="{{$picture->name}}" name="picture">
+                            <label for="{{$picture->picture}}" class="category">
+                            <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($picture->picture) . '"/>'; ?>
+                        </label
+                    @endforeach
+                </div>
+                @if ($errors->has('pictures'))
+                    <div class="error">placeholder.</div>
+                @endif
+            </div>
+    {{-- <form action="{{ action('Management\ImagesController@check') }}" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    </form>
+    </form> --}}
 </div>
 @endsection

@@ -82,7 +82,8 @@ class ImagesController extends Controller
 		if (Auth::check())
 		{
 			$tags = EventTag::all();
-			return view('admin/images.category', compact('tags'));
+			$pictures = EventPicture::all();
+			return view('admin/images.category')->withtags($tags)->withpictures($pictures);
 		}
 		else
 		{

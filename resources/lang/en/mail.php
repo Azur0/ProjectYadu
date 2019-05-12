@@ -18,4 +18,9 @@ return [
     "leftEvent" => "You have left",
     "leftYourEvent" => "has left your event",
     "participantLeftEvent" => "has left",
+
+    //Account
+    "changedPassword" => "Your password has been changed",
+    "changedEmail" => "Your email address has been changed",
+    "changedPersonalInfo" => "One or more of you personal details have been changed",
 ];

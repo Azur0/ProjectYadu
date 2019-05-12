@@ -31,16 +31,13 @@ class AccountEdited extends Mailable
     public function build()
     {
         $bodyText = '';
-        //TODO: Password changed
-        if(true){
-            $bodyText = '';
-            //TODO: Email changed
-        }else if(false){
-            $bodyText = '';
-            //TODO: Something else changed
+        if($this->account->password != $this->account->getOriginal('password')){
+            $bodyText = Lang::get('mail.changedPassword');
+        }else  if($this->account->email != $this->account->getOriginal('email')){
+            $bodyText = Lang::get('mail.changedEmail');
         }else{
-            $bodyText = '';
-        }
+            $bodyText = Lang::get('mail.changedPersonalInfo');
+       }
 
         return $this->markdown('mail/account.account-edited')->with([
             'salutation'=> Lang::get('mail.salutation'),

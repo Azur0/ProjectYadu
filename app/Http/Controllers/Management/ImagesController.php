@@ -16,9 +16,22 @@ class ImagesController extends Controller
 	{
 		if (Auth::check())
 		{
-            $tags = EventTag::all();
-			$names = Event::distinct('eventName')->pluck('eventName');
-            return view('admin/images.index', compact(['tags', 'names']));
+			$dir_path = "images/";
+			$allowed = array('jpg', 'jpeg', 'png');
+			$images = array();
+			if(is_dir($dir_path)) {
+				$files = scandir($dir_path);
+				foreach($files as $file) {
+					$fileExt = explode('.', $file);
+					$fileActualExt = strtolower(end($fileExt));
+					if(in_array($fileActualExt, $allowed)) {
+						array_push($images, $file);
+					}
+				}
+			} else {
+				// incorrect dir_path
+			}
+            return view('admin/images.index')->with(compact('images'));
 		}
 		else
 		{
@@ -27,9 +40,8 @@ class ImagesController extends Controller
 	}
 
 	public function check() {
+		return view('admin/images.index');
 		if(isset($_POST['submit'])) {
-			// $input = Input::only('name'); 
-			
 			$file = $_FILES;
 
 			$fileName = $_FILES['file']['name'];
@@ -46,8 +58,11 @@ class ImagesController extends Controller
 			if(in_array($fileActualExt, $allowed)) {
 				if($fileError === 0) {
 					if($fileSize < 5000) {
+						//TODO: selected file and the extension to write over the old image
+						// $input = Input::only('name'); 
+						// $name = $input['name'];
 						$fileNameNew = uniqid('', true).".".$fileActualExt;
-						$fileDestination = $fileNameNew;
+						$fileDestination = 'images/'.$fileNameNew;
 						move_uploaded_file($fileTmp, $fileDestination);
 						$message = "successful";
 						return view('admin/images.index');

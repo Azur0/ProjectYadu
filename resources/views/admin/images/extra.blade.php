@@ -3,22 +3,33 @@
 @section('content')
     <div>
         <div class="types">
+            <h1>Placeholder</h1>
                 <div class="box">
                     @foreach ($images as $image)
                         <input type="radio" name="image">
-                        <label for="{{$image}}" class="category">
-                            <img src="{{ asset("images/".$image) }}" class="img-responsive" width="200px">
+                        <label for="{{$image}}" onclick="resetview()" class="category">
+                                <a onclick="warning()"><span class="center badge badge-pill badge-warning removebadge">x</span></a>
+                                <img src="{{ asset("images/".$image) }}" class="img-responsive" width="100px">
                             <span>{{explode('.', $image)[0]}}</span>
                         </label>
                     @endforeach
                 </div>
             </div>
         </div>
-        <form action="{{ action('Management\ImagesController@check') }}" method="POST" enctype="multipart/form-data">
-            {{-- <input type="input" name="name"> --}}
+        {{-- <form action="{{ action('Management\ImagesController@check') }}" method="POST" enctype="multipart/form-data">
+            <input type="input" name="name">
             <input type="file" name="file">
             <button type="submit" name="submit">placeholder upload</button>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        </form>
-    </div>
+        </form> --}}
+    <script>
+        function resetview(){
+            let test = document.getElementsByClassName("types");
+            test.style.backgroundcolor = 'black';
+        }
+
+        function warning(){
+            alert("warschawing");
+        }
+    </script>
 @endsection

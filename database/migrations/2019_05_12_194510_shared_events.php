@@ -15,7 +15,7 @@ class SharedEvents extends Migration
     {
         Schema::create('shared_events', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('event_id');
             $table->string('platform');
             $table->timestamps();

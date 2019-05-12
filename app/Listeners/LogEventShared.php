@@ -17,16 +17,13 @@ class LogEventShared
 
     public function handle(EventShared $event)
     {
-        $userid = 0;
-
-        if(Auth::check()){
-            $userid = Auth::id();
-        }
-
         $sharedEvent = new SharedEvent();
+
         $sharedEvent->event_id = $event->eventid;
-        $sharedEvent->user_id = $userid;
         $sharedEvent->platform = $event->platform;
+        if(Auth::check()){
+            $sharedEvent->user_id = Auth::id();
+        }
 
         $sharedEvent->save();
     }

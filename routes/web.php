@@ -68,5 +68,6 @@ Route::resource('admin/events','Management\EventsController');
 Route::post('/admin/events/actionDistanceFilter', 'Management\EventsController@actionDistanceFilter')->name('admin_events_controller.actionDistanceFilter');
 
 // admin/images
-Route::get('admin/images', 'Management\ImagesController@index')->middleware('auth', 'isAdmin');
-Route::post('admin/images', 'Management\ImagesController@check');
+Route::get('admin/images/category', 'Management\ImagesController@showtype')->middleware('auth', 'isAdmin');
+Route::get('admin/images/extra', 'Management\ImagesController@showextra')->middleware('auth', 'isAdmin');
+Route::post('admin/images/extra', 'Management\ImagesController@check');

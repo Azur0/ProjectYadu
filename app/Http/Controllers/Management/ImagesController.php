@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Input;
 
 class ImagesController extends Controller
 {
-    public function index()
+    public function showextra()
 	{
 		if (Auth::check())
 		{
@@ -31,7 +31,7 @@ class ImagesController extends Controller
 			} else {
 				// incorrect dir_path
 			}
-            return view('admin/images.index')->with(compact('images'));
+            return view('admin/images.extra')->with(compact('images'));
 		}
 		else
 		{
@@ -40,7 +40,7 @@ class ImagesController extends Controller
 	}
 
 	public function check() {
-		return view('admin/images.index');
+
 		if(isset($_POST['submit'])) {
 			$file = $_FILES;
 
@@ -75,6 +75,17 @@ class ImagesController extends Controller
 			} else {
 				$error = "Placeholder wrong file";
 			}
+		}
+	}
+
+	public function showtype() {
+		if (Auth::check())
+		{
+			return view('admin/images.category');
+		}
+		else
+		{
+			return redirect('/login');
 		}
 	}
 }

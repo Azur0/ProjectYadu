@@ -30,7 +30,9 @@ class EventDeleted extends Mailable
      */
     public function build()
     {
-        return $this->markdown('admin/mail.event-deleted')->subject(Lang::get('mail.subjectEventDeleted'))->with([
+        return $this->markdown('admin/mail.event-deleted')
+            ->subject(Lang::get('mail.subjectEventDeleted'))
+            ->with([
             'salutation'=> Lang::get('mail.salutation'),
             'ownerName'=>$this->event->owner->firstName . ",",
         ]);

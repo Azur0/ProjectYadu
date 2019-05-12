@@ -81,7 +81,8 @@ class ImagesController extends Controller
 	public function showtype() {
 		if (Auth::check())
 		{
-			return view('admin/images.category');
+			$tags = EventTag::all();
+			return view('admin/images.category', compact('tags'));
 		}
 		else
 		{

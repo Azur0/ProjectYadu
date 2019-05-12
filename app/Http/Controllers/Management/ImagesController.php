@@ -47,7 +47,10 @@ class ImagesController extends Controller
 				if($fileError === 0) {
 					if($fileSize < 5000) {
 						$fileNameNew = uniqid('', true).".".$fileActualExt;
-						print_r($fileNameNew);
+						$fileDestination = $fileNameNew;
+						move_uploaded_file($fileTmp, $fileDestination);
+						$message = "successful";
+						return view('admin/images.index');
 					} else {
 						$error = "Placeholder too large";
 					}

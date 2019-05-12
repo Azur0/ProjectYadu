@@ -19,6 +19,18 @@
                 <img class="img-fluid rounded-circle my-auto avatar"
                      src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}"/>
                 <h5 class="my-auto ml-2">{{$event->owner->firstName .' '. $event->owner->middleName .' '. $event->owner->lastName}}</h5>
+                <a href="/profile/{{$event->owner_id}}/follow" class="btn btn-info btn-sm my-auto mx-2">
+                    @if (is_null($follow))
+                        Volgverzoek sturen
+                    @elseif ($follow->status == "pending")
+                        Volgverzoek pending
+                    @elseif ($follow->status == "accepted")
+                        Volgverzoek accepted
+                    @endif
+                </a>
+                @if (session('error'))
+                    <div class="alert alert-danger">Request already sent</div>
+                @endif
             </div>
             <br><br>
 

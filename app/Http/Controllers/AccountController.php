@@ -9,9 +9,12 @@ use Illuminate\Http\Request;
 use App\Gender;
 use App\Event;
 use App\EventHasParticipants;
+use App\AccountHasFollowers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use DB;
+use App\Mail\Follow as FollowMail;
 
 
 class AccountController extends Controller
@@ -88,4 +91,19 @@ class AccountController extends Controller
         $account->save();
     }
 
+    public function follow($id) {
+        $account = Account::where('id', $id)->first();
+
+        try {
+            $followRequest = AccountHasFollowers::create([
+                'account_id' => $id,
+                'follower_id' => Auth::id()
+            ]);
+        } catch (\Exception $exception){
+            return back()->withError($exception->getMessage());
+        }
+
+        Mail::to($account->email)->send(new FollowMail(Auth::user()));
+        return back();
+    }
 }

@@ -24,8 +24,8 @@ class LogEventShared
         }
 
         $sharedEvent = new SharedEvent();
-        $sharedEvent->eventid = $event->eventid;
-        $sharedEvent->userid = $userid;
+        $sharedEvent->event_id = $event->eventid;
+        $sharedEvent->user_id = $userid;
         $sharedEvent->platform = $event->platform;
 
         $sharedEvent->save();

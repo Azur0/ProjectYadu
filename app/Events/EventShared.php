@@ -17,9 +17,9 @@ class EventShared
     public $eventid;
     public $platform;
 
-    public function __construct($eventid, $platform)
+    public function __construct($array)
     {
-        $this->eventid = $eventid;
-        $this->platform = $platform;
+        $this->eventid = $array['eventid'];
+        $this->platform = $array['platform'];
     }
 }

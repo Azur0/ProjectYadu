@@ -1,7 +1,8 @@
 <?php
 
-use App\SharedEvent;
+use App\Events\EventShared;
 
 function LogShareEvent($eventid, $platform){
-    event(new SharedEvent($eventid, $platform));
+    $array = array("eventid" => $eventid, "platform" => $platform);
+    event(new EventShared($array));
 }

@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-
 use App\Events\EventDeleted;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Admin\EventDeleted as EventDeletedMail;

@@ -26,4 +26,11 @@ return [
     "changedEmail" => "Your email address has been changed",
     "changedPersonalInfo" => "One or more of you personal details have been changed",
     "editAccountHeader" => "Your account details have been edited",
+
+    //Subject
+    "subjectAccountEdited" => "Account has been edited",
+    "subjectEventEdited" => "Event has been edited",
+    "subjectEventDeleted" => "Event has been removed",
+    "subjectEventJoined" => "Event has been joined",
+    "subjectEventLeft" => "Event has been left",
 ];

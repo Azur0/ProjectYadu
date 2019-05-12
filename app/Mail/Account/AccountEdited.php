@@ -39,10 +39,11 @@ class AccountEdited extends Mailable
             $bodyText = Lang::get('mail.changedPersonalInfo');
        }
 
-        return $this->markdown('mail/account.account-edited')->with([
+        return $this->markdown('mail/account.account-edited')->subject(Lang::get('mail.subjectAccountEdited'))->with([
+            'header' =>  Lang::get('mail.editAccountHeader'),
             'headText' =>  Lang::get('mail.editAccountHeader'),
             'salutation'=> Lang::get('mail.salutation'),
-            'name'=>$this->account->firstName,
+            'name'=>$this->account->firstName . ",",
             'bodyText' => $bodyText
         ]);
     }

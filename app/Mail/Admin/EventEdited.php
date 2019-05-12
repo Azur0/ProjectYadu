@@ -30,9 +30,9 @@ class EventEdited extends Mailable
      */
     public function build()
     {
-        return $this->markdown('admin/mail.event-edited')->with([
+        return $this->markdown('admin/mail.event-edited')->subject(Lang::get('mail.subjectEventEdited'))->with([
             'salutation'=> Lang::get('mail.salutation'),
-            'ownerName'=>$this->event->owner->firstName,
+            'ownerName'=>$this->event->owner->firstName . ",",
 
         ]);
     }

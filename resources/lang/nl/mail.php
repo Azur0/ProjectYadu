@@ -26,4 +26,11 @@ return [
     "changedEmail" => "Je emailadres is veranderd",
     "changedPersonalInfo" => "Eén of meer van persoonlijk gegevens zijns veranderd",
     "editAccountHeader" => "Je accountgegevens zijn bewerkt",
+
+    //Subject
+    "subjectAccountEdited" => "Account is gewijzigd",
+    "subjectEventEdited" => "Evenement is gewijzigd",
+    "subjectEventDeleted" => "Evenement is verwijdert",
+    "subjectEventJoined" => "Er is aangemeld voor een evenement",
+    "subjectEventLeft" => "Er is afgemeld voor een evenement",
 ];

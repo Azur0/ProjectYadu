@@ -88,3 +88,7 @@ app/Http/Controllers/Auth/RegisterControllerbackup.php
 public/images/test.jpg
 .idea/Source code.iml
 
+public/js/app.js
+public/mix-manifest.json
+public/mix-manifest.json
+public/js/sb-admin-2.js

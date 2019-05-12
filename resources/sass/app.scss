@@ -63,7 +63,7 @@
 
 @media screen and (max-width: 991px) {
   .dashboard_event a {
-    display: block;
+	display: block;
   }
 }
 
@@ -94,10 +94,10 @@
 
 @media screen and (max-width: 580px) {
   .events {
-    display: block;
-    width: 100px;
-    min-width: 100%;
-    max-width: 100%;
+	display: block;
+	width: 100px;
+	min-width: 100%;
+	max-width: 100%;
   }
 }
 
@@ -118,19 +118,19 @@
 
 @media only screen and (min-width: 740px) {
   #welcome_carousel {
-    overflow: hidden;
+	overflow: hidden;
   }
 
   #welcome_carousel .carousel-inner {
-    height: 50vh !important;
+	height: 50vh !important;
   }
 
   #welcome_carousel .carousel-inner .carousel-item {
-    height: 50vh !important;
+	height: 50vh !important;
   }
 
   #welcome_carousel .carousel-inner .carousel-item .carousel_img_container {
-    overflow: hidden;
+	overflow: hidden;
   }
 
 	#welcome_carousel .carousel-inner .carousel-item .carousel_img_container img
@@ -143,24 +143,24 @@
 
   #welcome_carousel .carousel-inner .carousel-item a,
   #welcome_carousel .carousel-inner .carousel-item a:hover {
-    color: white;
+	color: white;
   }
 }
 
 @media only screen and (min-width: 1440px) {
   #welcome_carousel img {
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+			transform: translateY(-50%);
   }
 }
 
 @media only screen and (max-width: 739px) {
   #welcome_carousel .carousel-caption p {
-    display: none;
+	display: none;
   }
 
   #welcome_carousel .carousel-caption .d-none {
-    display: block !important;
+	display: block !important;
   }
 }
 
@@ -189,11 +189,36 @@
 
 @media only screen and (max-width: 739px) {
   #welcome_recent {
-    margin-bottom: 50px;
+	margin-bottom: 50px;
   }
 }
 
 .greyified {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
+}
+
+#account_tabs
+{
+	ul
+	{
+		width: 100%;
+		margin: 0;
+		padding: 0;
+
+		li
+		{
+			margin: 0 auto 1em;
+			display: inline;
+			text-decoration: none;
+			padding: 1em;
+
+			.active
+			{
+				border: solid #DEE2E6;
+				border-width: 2px 2px 0 2px;
+				padding: 5px;
+			}
+		}
+	}
 }

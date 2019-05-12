@@ -35,7 +35,7 @@
 		<div class="col-md-4">
 			<div class="card">
 				<div class="card-header">
-					<i class="fas fa-user"></i> {{__('home.user_title')}}
+					<a href="/account/{{  Auth::user()->id }}/profile"><i class="fas fa-user"></i> {{__('home.user_title')}}</a>
 				</div>
 				<div class="card-body">
 					@if (session('status'))

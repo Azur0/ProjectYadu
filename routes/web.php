@@ -29,6 +29,7 @@ Route::post('admin', 'EditLangController@saveFile');
 
 Route::get('/account/myevents', 'HomeController@myEvents');
 Route::get('/account/participating', 'HomeController@participating');
+Route::get('/account/{id}/profile', 'AccountController@publicProfile');
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
 

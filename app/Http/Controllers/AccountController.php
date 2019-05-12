@@ -16,6 +16,20 @@ use DB;
 
 class AccountController extends Controller
 {
+	public function publicProfile($id)
+	{
+		$isFollowing = false;
+		$account = Account::where('id', $id)->firstOrFail();
+		if($account->id != Auth::user()->id)
+		{
+			
+
+			$isFollowing = true;
+		}
+
+		return view('accounts.public_profile', compact('account','isFollowing'));
+	}
+
 	public function create()
 	{
 		$genders = \App\Gender::all();

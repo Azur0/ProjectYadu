@@ -30,6 +30,7 @@ class Follow extends Mailable
     public function build()
     {
         return $this->markdown('mail/follow')->with([
+            'ownerId'=>$this->user->id,
             'ownerName'=>$this->user->firstName
         ]);
     }

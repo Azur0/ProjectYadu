@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventsController;
+use App\socialmedia;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ app()->singleton('ipApi', function(){
 Route::get('/', 'EventsController@welcome');
 
 Route::get('/about', function () { return view('about'); });
-Route::get('/contact', function () { return view('contact'); });
+Route::get('/contact', function () { $socialmedia = socialmedia::all(); return view('contact', compact('socialmedia')); });
 
 Route::get('/home', 'HomeController@index')->name('home');
 

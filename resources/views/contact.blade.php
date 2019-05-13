@@ -40,16 +40,16 @@
             </div>
             <div class="contact-item">
                 <h5>{{__('contact.social')}}<h5>
-                <a href="https://nl.linkedin.com/in/carmentoelen">
+                <a href="{{$socialmedia->find('linkedin')->link}}">
                     <i class="fab fa-linkedin" style="font-size: 36px; color: #E79535"></i>
                 </a>
-                <a href="https://twitter.com/_Yadu_" class="contact-item">
+                <a href="{{$socialmedia->find('twitter')->link}}" class="contact-item">
                     <i class="fab fa-twitter" style="font-size: 36px; color: #E79535"></i>
                 </a>
-                <a href="https://www.facebook.com/yadu.nu/?ref=bookmarks" class="contact-item">
+                <a href="{{$socialmedia->find('facebook')->link}}" class="contact-item">
                     <i class="fab fa-facebook" style="font-size: 36px; color: #E79535"></i>
                 </a>
-                <a href="https://www.instagram.com/yadu.nu/" class="contact-item">
+                <a href="{{$socialmedia->find('instagram')->link}}" class="contact-item">
                     <i class="fab fa-instagram" style="font-size: 36px; color: #E79535"></i>
                 </a>
             </div>

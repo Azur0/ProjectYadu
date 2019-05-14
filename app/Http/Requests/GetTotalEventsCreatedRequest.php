@@ -23,7 +23,7 @@ class GetTotalEventsCreatedRequest extends FormRequest
         }
 
         if($this->fromDate == null){
-            $this->merge(['fromDate' => Carbon::parse(Event::min('created_at'))]);
+            $this->merge(['fromDate' => Carbon::today()->subYear()]);
         }else{
             $this->merge(['fromDate' => Carbon::parse($this->fromDate)]);
         }

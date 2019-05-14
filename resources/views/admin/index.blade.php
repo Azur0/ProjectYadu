@@ -1,7 +1,7 @@
 @extends('layouts/admin/app')
 
 @section('content')
-    
+
 <div class="container-fluid px-3">
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -71,13 +71,13 @@
                                 <div class="modal-body">
                                     <label for="fromDate">Van</label>
                                     <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="fromDate">
-                                    
+
                                     <label for="toDate">Tot</label>
                                     <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="toDate">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                                    <button type="button" onclick="updateChart()" class="btn btn-primary" data-dismiss="modal">Uitvoeren</button>
+                                    <button type="button" onclick="updateEventChart()" class="btn btn-primary" data-dismiss="modal">Uitvoeren</button>
                                 </div>
                             </div>
                         </div>
@@ -99,34 +99,34 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div id="map"></div>
-                    <script>
-                        var map;
-
-                        function initMap() {
-                            map = new google.maps.Map(document.getElementById('map'), {
-                                center: {
-                                    lat: -34.397,
-                                    lng: 150.644
-                                },
-                                zoom: 8
-                            });
-                        }
-                    </script>
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap" async defer></script>
-                    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak&callback=initMap" async defer></script> -->
-
+                    <canvas id="shares"></canvas>
                 </div>
             </div>
         </div>
+
+        <div id="map"></div>
+        <script>
+            var map;
+
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {
+                        lat: -34.397,
+                        lng: 150.644
+                    },
+                    zoom: 8
+                });
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap" async defer></script>
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak&callback=initMap" async defer></script> -->
 
 
     </div>
 </div>
 
 <script>
-    var ctx = document.getElementById('events');
-    var chart = new Chart(ctx, {
+    var eventChart = new Chart(document.getElementById('events'), {
         type: 'line',
         data: getEventData(null, null),
         options: {
@@ -179,12 +179,28 @@
         };
     }
 
-    function updateChart() {
-        var fromDate = document.getElementById("fromDate").value; 
-        var toDate = document.getElementById("toDate").value; 
-        chart.data = getEventData(fromDate, toDate);
-        chart.update();
+    function updateEventChart() {
+        var fromDate = document.getElementById("fromDate").value;
+        var toDate = document.getElementById("toDate").value;
+        eventChart.data = getEventData(fromDate, toDate);
+        eventChart.update();
     };
+
+    //ShareChart
+    var shareChart = new Chart(document.getElementById("shares"), {
+        type: 'doughnut',
+        data: {
+            labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+            datasets: [{
+                label: "Population (millions)",
+                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                data: [2478, 5267, 734, 784, 433]
+            }]
+        },
+        options: {
+            maintainAspectRatio: true
+        }
+    });
 </script>
 
 @endsection

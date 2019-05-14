@@ -49,20 +49,21 @@
     <div class='row'>
 
         <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
+            <div class="card shadow mb-4 h-100">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Accounts aangemaakt</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Evenementen aangemaakt</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <canvas id="accounts" height="100px"></canvas>
+                    <canvas id="events" height="100px"></canvas>
+                    <button onclick="updateChart()">Update</button>
                 </div>
             </div>
         </div>
 
         <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
+            <div class="card shadow mb-4 h-100">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Evenementen Hittemap</h6>
@@ -83,7 +84,8 @@
                             });
                         }
                     </script>
-                    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap" async defer></script> -->
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap" async defer></script>
+                    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak&callback=initMap" async defer></script> -->
 
                 </div>
             </div>
@@ -93,20 +95,11 @@
     </div>
 </div>
 
-
-
-
 <script>
-    var ctx = document.getElementById('accounts');
-    new Chart(ctx, {
+    var ctx = document.getElementById('events');
+    var chart = new Chart(ctx, {
         type: 'line',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei'],
-            datasets: [{
-                data: [5, 8, 16, 21, 36],
-                borderColor: `rgba(25, 93, 230, 1)`
-            }]
-        },
+        data: getEventData(),
         options: {
             legend: {
                 display: false
@@ -120,6 +113,47 @@
             }
         }
     });
+
+    function getEventData() {
+        var plotLabels = [];
+        var plotData = [];
+
+        $.ajax({
+            url: "{{ route('admin_charts_events') }}",
+            method: 'GET', //change to post
+            async: false,
+            data: {
+                //add data
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(data) {
+                data.forEach(function(item) {
+                    plotLabels.push(item.month + " " + item.year);
+                    plotData.push(item.totalEvents);
+                })
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+
+        return {
+            labels: plotLabels,
+            datasets: [{
+                data: plotData,
+                borderColor: `rgba(25, 93, 230, 1)`
+            }]
+        };
+    }
+
+    function updateChart() {
+        chart.data = getEventData();
+        console.log(chart);
+            chart.update();
+    };
 </script>
 
 @endsection

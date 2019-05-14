@@ -70,3 +70,5 @@ Route::post('/admin/events/actionDistanceFilter', 'Management\EventsController@a
 Route::resource('admin/swearWords','Management\ProhibitedWordsController');
 Route::get('admin/prohibitedWords', 'Management\ProhibitedWordsController@index')->middleware('auth', 'isAdmin');
 Route::get('admin/prohibitedWords/{word}/delete', 'Management\ProhibitedWordsController@destroy')->middleware('auth', 'isAdmin');
+Route::get('admin/prohibitedWords/{word}/update', 'Management\ProhibitedWordsController@update')->middleware('auth', 'isAdmin');
+Route::get('admin/prohibitedWords/{word}/create', 'Management\ProhibitedWordsController@create')->middleware('auth', 'isAdmin');

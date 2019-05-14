@@ -42,4 +42,20 @@ class ProhibitedWordsController extends Controller
 
         return redirect('admin/swearWords');
     }
+
+    public function update($word)
+    {
+        // if(!ProhibitedWord::where('word', '=', $word)->exists())
+            //
+
+        return redirect('admin/swearWords');
+    }
+
+    public function create($word)
+    {
+        if(!ProhibitedWord::where('word', '=', $word)->exists())
+            ProhibitedWordController::createProhibitedWord($word);
+
+        return redirect('admin/swearWords');
+    }
 }

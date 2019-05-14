@@ -116,10 +116,13 @@ return [
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
     'Delete_ProhibitedWord_error' => 'Can\'t delete prohibited word.',
+    'confirm_update' => 'Update',
 
     //Custom validation messages
     'genderExists'         => 'Unknown gender.',
     'swearWords'           => ':attribute is not allowed because it contains a swearword.',
+    'addWord' => 'Add prohibited word:',
+    'add' => 'Add',
 
     /*
     |--------------------------------------------------------------------------

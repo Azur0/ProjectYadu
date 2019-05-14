@@ -13,4 +13,17 @@ class ProhibitedWordController extends Controller
         ProhibitedWord::where('word', $word)->delete();
     }
 
+    public function updateProhibitedWord($word)
+    {
+        //
+    }
+
+    public static function createProhibitedWord($word)
+    {
+        $prohibitedWord = new prohibitedWord;
+
+        $prohibitedWord->word = $word;
+
+        $prohibitedWord->save();
+    }
 }

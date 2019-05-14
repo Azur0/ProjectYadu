@@ -35,7 +35,7 @@ class ProhibitedWordsController extends Controller
     public function destroy($word)
     {
         if (ProhibitedWord::where('word', $word)->firstOrFail()->accountRole != 'Admin') {
-            ProhibitedWordController::deleteAccountFromId($word);
+            ProhibitedWordController::deleteProhibitedWord($word);
         } else {
             return Redirect::back()->with('adminError', __('validation.Delete_ProhibitedWord_error'));
         }

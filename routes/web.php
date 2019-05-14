@@ -69,4 +69,4 @@ Route::post('/admin/events/actionDistanceFilter', 'Management\EventsController@a
 Route::post('/logger/eventshared', 'LogController@LogEventShared')->name('LogEventShared');
 
 //TODO: Change to POST
-Route::get('/charts/totaleventscreated', 'ChartController@GetTotalEventsCreated');
+Route::post('/charts/totaleventscreated', 'ChartController@GetTotalEventsCreated');

@@ -41,6 +41,7 @@ class ImagesController extends Controller
 	}
 
 	public function check() {
+		$error = "";
 		if(isset($_POST['submit'])) {
 			$file = $_FILES;
 			$fileName = $_FILES['file']['name'];
@@ -94,8 +95,17 @@ class ImagesController extends Controller
 		}
 	}
 
+	public function removeextra() {
+		// remove image
+		return redirect('/admin/images/extra')->withErrors("penis");
+	}
+
+	public function removetype() {
+		// remove image out of db
+	}
+
 	public function passthrough() {
 		// set picture to database
-		return view('admin/images.category');
+		// return view('admin/images.category');
 	}
 }

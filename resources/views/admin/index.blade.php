@@ -70,10 +70,10 @@
                                 </div>
                                 <div class="modal-body">
                                     <label for="fromDate">Van</label>
-                                    <input type="date" class="form-control" id="fromDate">
+                                    <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="fromDate">
                                     
                                     <label for="toDate">Tot</label>
-                                    <input type="date" class="form-control" id="toDate">
+                                    <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="toDate">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>

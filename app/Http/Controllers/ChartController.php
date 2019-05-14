@@ -20,7 +20,6 @@ class ChartController extends Controller
         $toYear = (int)$toDate->format('Y');
 
         $fromDate = Carbon::create($fromYear, $fromMonth, 1, 0,0,0);
-        $totalEvents = 0;
 
         $data = array();
 
@@ -36,21 +35,20 @@ class ChartController extends Controller
             while($fromMonth <= $amountOfMonthsToCheck){
 
                 $toDate = Carbon::create($fromYear, $fromMonth, 1, 0,0,0)->addMonth();
-                $eventsThisMonth = Event::where('isDeleted', 0)->whereBetween('created_at', [$fromDate, $toDate])->count();
+                $totalEvents = Event::where('isDeleted', 0)->where('created_at', '<', $toDate)->count();
 
                 $entry = array(
                     'date' => $toDate->subMonth()->format('Y-m-d H:i:s'),
                     'month' => $toDate->format('M'),
                     'monthNumber' => $fromMonth,
                     'year' => $fromYear,
-                    'totalEvents' => $totalEvents + $eventsThisMonth,
-                    'fromDate' => $fromDate,
-                    'toDate' => $toDate->addMonth(),
+                    'totalEvents' => $totalEvents
                 );
                 array_push($data,$entry);
 
                 $fromMonth++;
             }
+            $fromMonth = 1;
             $fromYear++;
         }
 

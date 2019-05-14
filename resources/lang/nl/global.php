@@ -22,4 +22,8 @@ return [
     'days_sunday' => 'Zondag',
     'edit_lang' => 'Wijzig',
 
+
+    'word' => 'Woord',
+    'created_at' => 'Gemaakt op',
+    'updated_at' => 'Bewerkt op',
 ];

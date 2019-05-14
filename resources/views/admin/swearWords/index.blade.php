@@ -25,11 +25,10 @@
 				<table class="table">
 					<thead>
 					<tr>
-						{{-- @TODO Translate --}}
 						<th scope="col">#</th>
-						<th scope="col">Word</th>
-						<th scope="col">Updated at</th>
-						<th scope="col">Created at</th>
+						<th scope="col">{{ __('global.word')}}</th>
+						<th scope="col">{{ __('global.created_at')}}</th>
+						<th scope="col">{{ __('global.updated_at')}}</th>
 					</tr>
 					</thead>
 

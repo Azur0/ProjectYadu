@@ -70,10 +70,10 @@
                                 </div>
                                 <div class="modal-body">
                                     <label for="fromDate">Van</label>
-                                    <input type="month" class="form-control" id="fromDate">
+                                    <input type="date" class="form-control" id="fromDate">
                                     
                                     <label for="toDate">Tot</label>
-                                    <input type="month" class="form-control" id="toDate">
+                                    <input type="date" class="form-control" id="toDate">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
@@ -149,7 +149,7 @@
 
         $.ajax({
             url: "{{ route('admin_charts_events') }}",
-            method: 'GET', //change to post
+            method: 'POST',
             async: false,
             data: {
                 fromDate: fromDate,

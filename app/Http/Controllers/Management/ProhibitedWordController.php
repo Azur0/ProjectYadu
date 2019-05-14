@@ -7,13 +7,14 @@ use App\EventPicture;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\EventTag;
+use App\ProhibitedWord;
 use App\Account;
 use Validator;
 use Illuminate\Support\Carbon;
 use Auth;
 use App\Http\Controllers\Controller;
 
-class SwearWordsController extends Controller
+class ProhibitedWordController extends Controller
 {
 	public function index()
 	{
@@ -21,7 +22,9 @@ class SwearWordsController extends Controller
 		{
 			if (Auth::user()->accountRole == 'Admin')
 			{
-				return view('admin/swearWords.index', compact(['tags', 'names'],'events'));
+                $ProhibitedWords = ProhibitedWord::orderBy('word','asc')->get();
+
+                return view('admin.swearWords.index', compact(['ProhibitedWords']));
 			}
 			else
 			{

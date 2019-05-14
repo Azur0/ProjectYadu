@@ -1,6 +1,13 @@
 @extends('layouts/admin/app')
 
 @section('content')
+
+    <form method="POST" action="/charts/monthlyshares">
+        @csrf
+        <input type="date" name="fromDate">
+        <button class="btn-primary" type="submit">Submit</button>
+    </form>
+
     
 <div class="container-fluid px-3">
 

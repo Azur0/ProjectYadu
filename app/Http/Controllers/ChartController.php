@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Http\Requests\GetMonthlySharesRequest;
 use App\Http\Requests\GetTotalEventsCreatedRequest;
 use App\SharedEvent;
 use App\SocialMediaPlatform;
@@ -59,20 +60,27 @@ class ChartController extends Controller
 
     public function GetMonthlyShares(GetMonthlySharesRequest $request){
 
-        $fromMonth = $request->fromMonth;
-        $toMonth = $request->toMonth;
+        $fromMonth = (int)$request->fromDate->format('n');
+        $fromYear = (int)$request->fromDate->format('Y');
+
+        $toMonth = (int)$request->toDate->format('n');
+        $toYear = (int)$request->toDate->format('Y');
+
+        $fromDate = Carbon::create($fromYear, $fromMonth, 1, 0,0,0);
+        $toDate = Carbon::create($toYear, $toMonth, 1, 0,0,0)->addMonth();
 
         $data = array();
-
-        $platforms = SocialMediaPlatform::all()->get();
+        $platforms = SocialMediaPlatform::all();
 
         foreach ($platforms as $platform){
             $entry = array(
                 'platform' => $platform->platform,
-                'shareCount' => SharedEvent::where('platform', $platform->platform)->whereBetween('created_at', $fromMonth, $toMonth)->count()
+                'shareCount' => SharedEvent::where('platform', $platform->platform)->whereBetween('created_at', [$fromDate, $toDate])->count(),
+                'fromMonth' => $fromDate->toDateString(),
+                'toMonth' => $toDate->toDateString(),
             );
+            array_push($data, $entry);
         }
-
         return $data;
     }
 }

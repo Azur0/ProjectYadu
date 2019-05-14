@@ -2,29 +2,40 @@
 
 namespace App\Http\Requests;
 
+use App\Event;
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetTotalEventsCreatedRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    protected function prepareForValidation()
+    {
+        if($this->toDate == null){
+            $this->merge(['toDate' => Carbon::now()]);
+        }else{
+            $this->merge(['toDate' => Carbon::parse($this->toDate)]);
+        }
+
+        if($this->fromDate == null){
+            $this->merge(['fromDate' => Carbon::today()->subYear()]);
+        }else{
+            $this->merge(['fromDate' => Carbon::parse($this->fromDate)]);
+        }
+
+
+    }
+
     public function rules()
     {
         return [
-            //TODO: Rules
+            'fromDate' => ['nullable', 'before:today'],
+            'toDate' => ['nullable', 'before:tomorrow']
         ];
     }
 }

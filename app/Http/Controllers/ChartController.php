@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Http\Requests\GetTotalEventsCreatedRequest;
+use App\SharedEvent;
+use App\SocialMediaPlatform;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -50,6 +52,25 @@ class ChartController extends Controller
             }
             $fromMonth = 1;
             $fromYear++;
+        }
+
+        return $data;
+    }
+
+    public function GetMonthlyShares(GetMonthlySharesRequest $request){
+
+        $fromMonth = $request->fromMonth;
+        $toMonth = $request->toMonth;
+
+        $data = array();
+
+        $platforms = SocialMediaPlatform::all()->get();
+
+        foreach ($platforms as $platform){
+            $entry = array(
+                'platform' => $platform->platform,
+                'shareCount' => SharedEvent::where('platform', $platform->platform)->whereBetween('created_at', $fromMonth, $toMonth)->count()
+            );
         }
 
         return $data;

@@ -52,11 +52,41 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Evenementen aangemaakt</h6>
+
+                    <!-- Button trigger modal -->
+                    <a role="button" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fas fa-calendar-alt fa-sm fa-fw"></i>
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Jadatumbereikperiodetijdseenheid</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <label for="fromDate">Van</label>
+                                    <input type="date" class="form-control" id="fromDate">
+                                    
+                                    <label for="toDate">Tot</label>
+                                    <input type="date" class="form-control" id="toDate">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                                    <button type="button" onclick="updateChart()" class="btn btn-primary" data-dismiss="modal">Uitvoeren</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                     <canvas id="events" height="100px"></canvas>
-                    <button onclick="updateChart()">Update</button>
                 </div>
             </div>
         </div>
@@ -98,7 +128,7 @@
     var ctx = document.getElementById('events');
     var chart = new Chart(ctx, {
         type: 'line',
-        data: getEventData(),
+        data: getEventData(null, null),
         options: {
             legend: {
                 display: false
@@ -113,16 +143,17 @@
         }
     });
 
-    function getEventData() {
+    function getEventData(fromDate, toDate) {
         var plotLabels = [];
         var plotData = [];
 
         $.ajax({
             url: "{{ route('admin_charts_events') }}",
-            method: 'GET', //change to post
+            method: 'POST',
             async: false,
             data: {
-                //add data
+                fromDate: fromDate,
+                toDate: toDate,
                 _token: '{{ csrf_token() }}'
             },
             dataType: 'json',
@@ -149,9 +180,10 @@
     }
 
     function updateChart() {
-        chart.data = getEventData();
-        console.log(chart);
-            chart.update();
+        var fromDate = document.getElementById("fromDate").value; 
+        var toDate = document.getElementById("toDate").value; 
+        chart.data = getEventData(fromDate, toDate);
+        chart.update();
     };
 </script>
 

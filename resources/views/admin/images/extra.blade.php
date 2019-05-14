@@ -6,8 +6,8 @@
             <h1>Placeholder</h1>
                 <div class="box">
                     @foreach ($images as $image)
-                        <input type="radio" name="image">
-                        <label for="{{$image}}" onclick="resetview()" class="category">
+                        <input type="radio" id="{{$image}}" name="image" value="{{$image}}">
+                        <label for="{{$image}}" class="category" name="selected">
                                 <a onclick="warning()"><span class="center badge badge-pill badge-warning removebadge">x</span></a>
                                 <img src="{{ asset("images/".$image) }}" class="img-responsive" width="100px">
                             <span>{{explode('.', $image)[0]}}</span>
@@ -16,20 +16,15 @@
                 </div>
             </div>
         </div>
-        {{-- <form action="{{ action('Management\ImagesController@check') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ action('Management\ImagesController@check') }}" method="POST" enctype="multipart/form-data">
             <input type="input" name="name">
             <input type="file" name="file">
             <button type="submit" name="submit">placeholder upload</button>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        </form> --}}
+        </form>
     <script>
-        function resetview(){
-            let test = document.getElementsByClassName("types");
-            test.style.backgroundcolor = 'black';
-        }
-
         function warning(){
-            alert("warschawing");
+            alert("alert");
         }
     </script>
 @endsection

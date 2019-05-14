@@ -40,10 +40,10 @@ class ImagesController extends Controller
 	}
 
 	public function check() {
-
+		$selected = Input::only('selected'); 
+		print_r($selected);
 		if(isset($_POST['submit'])) {
 			$file = $_FILES;
-
 			$fileName = $_FILES['file']['name'];
 			$fileTmp = $_FILES['file']['tmp_name'];
 			$fileSize = $_FILES['file']['size'];
@@ -58,14 +58,9 @@ class ImagesController extends Controller
 			if(in_array($fileActualExt, $allowed)) {
 				if($fileError === 0) {
 					if($fileSize < 5000) {
-						//TODO: selected file and the extension to write over the old image
-						// $input = Input::only('name'); 
-						// $name = $input['name'];
-						$fileNameNew = uniqid('', true).".".$fileActualExt;
-						$fileDestination = 'images/'.$fileNameNew;
+						$fileDestination = 'images/'.$fileName;
 						move_uploaded_file($fileTmp, $fileDestination);
-						$message = "successful";
-						return view('admin/images.index');
+						return view('admin/images.extra');
 					} else {
 						$error = "Placeholder too large";
 					}

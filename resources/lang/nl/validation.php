@@ -117,6 +117,7 @@ return [
     //Custom validation messages
     'genderExists'         => 'Onbekend geslacht.',
     'swearWords'           => ':attribute is niet toegestaan omdat deze een scheldwoord bevat.',
+    'Delete_ProhibitedWord_error' => 'Kan het scheldwoord niet verwijderen.',
 
     /*
     |--------------------------------------------------------------------------

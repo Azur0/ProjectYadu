@@ -115,6 +115,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'Delete_ProhibitedWord_error' => 'Can\'t delete prohibited word.',
 
     //Custom validation messages
     'genderExists'         => 'Unknown gender.',

@@ -10,16 +10,14 @@
 @section('content')
 
 	<div class="card">
-		{{--<div class="card-header">--}}
-			{{--<div class="input-group flex-nowrap">--}}
-				{{--<div class="input-group-prepend">--}}
-					{{--<span class="input-group-text" id="addon-wrapping"><i class="fa fa-search"></i></span>--}}
-				{{--</div>--}}
-				{{--<input oninput="fetch_accounts()" list="names" id="filterByName" name="filterByName"--}}
-					   {{--autocomplete="off" class="form-control" placeholder="{{ __('accounts.index_search')}}" aria-label="Email"--}}
-					   {{--aria-describedby="addon-wrapping">--}}
-			{{--</div>--}}
-		{{--</div>--}}
+		<div class="card-header">
+			<div class="input-group flex-nowrap">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="addon-wrapping" style="background-color: lawngreen"><i class="fa fa-plus"></i></span>
+				</div>
+				<input class="form-control" placeholder="{{ __('global.word')}}">
+			</div>
+		</div>
 		<div class="card-body">
 			<div id="">
 				<table class="table">
@@ -29,6 +27,8 @@
 						<th scope="col">{{ __('global.word')}}</th>
 						<th scope="col">{{ __('global.created_at')}}</th>
 						<th scope="col">{{ __('global.updated_at')}}</th>
+						<th scope="col"></th>
+						<th scope="col"></th>
 					</tr>
 					</thead>
 
@@ -40,6 +40,8 @@
 							<td>{{$ProhibitedWord->word}}</td>
 							<td>{{$ProhibitedWord->created_at}}</td>
 							<td>{{$ProhibitedWord->updated_at}}</td>
+							{{--<td><a href="/admin/events/{{$event->id}}/edit" class="button button-hover">{{__('events.show_edit')}}</a></td>--}}
+							<td> <button type="submit" onclick="window.location.href='{{url('/admin/prohibitedWords/'. $ProhibitedWord->word .'/delete')}}'" class="button-remove button-hover">{{__('events.show_delete')}}</button> </td>
 						</tr>
 					<?php $id++; ?>
 					@endforeach

@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers\Management;
 
-use App\Event;
-use App\EventPicture;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
-use App\EventTag;
+
 use App\ProhibitedWord;
-use App\Account;
+use App\Http\Controllers\ProhibitedWordController;
 use Validator;
-use Illuminate\Support\Carbon;
 use Auth;
 use App\Http\Controllers\Controller;
 
-class ProhibitedWordController extends Controller
+class ProhibitedWordsController extends Controller
 {
 	public function index()
 	{
@@ -36,4 +31,15 @@ class ProhibitedWordController extends Controller
 			return redirect('/login');
 		}
 	}
+
+    public function destroy($word)
+    {
+        if (ProhibitedWord::where('word', $word)->firstOrFail()->accountRole != 'Admin') {
+            ProhibitedWordController::deleteAccountFromId($word);
+        } else {
+            return Redirect::back()->with('adminError', __('validation.Delete_ProhibitedWord_error'));
+        }
+
+        return redirect('admin/swearWords');
+    }
 }

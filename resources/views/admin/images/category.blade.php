@@ -2,6 +2,7 @@
 
 @section('content')
 <div>
+    <form action="{{ action('Management\ImagesController@passthrough') }}" method="POST" enctype="multipart/form-data">
         <div class="types">
             <h1>Placeholder type</h1>
                 <div class="box">
@@ -19,7 +20,7 @@
             </div>
 
             <div class="pic">
-                    <h3>2. {{__('events.create_step2')}}</h3>
+                <h3>2. {{__('events.create_step2')}}</h3>
                     <div class="types">
                         <div id="box2" class="box">
                             
@@ -28,11 +29,9 @@
                             <div class="error">{{__('events.error_select_photo')}}</div>
                         @endif
                     </div>
-                </div>
-
-    {{-- <form action="{{ action('Management\ImagesController@check') }}" method="POST" enctype="multipart/form-data">
+            </div>
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    </form> --}}
+    </form>
 </div>
 <script>
         function fetch_customer_data(query) {

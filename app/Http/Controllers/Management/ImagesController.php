@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Management;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Management\ImagesController;
 use Auth;
 use App\Http\Controllers\Controller;
 use App\EventTag;
@@ -40,8 +41,6 @@ class ImagesController extends Controller
 	}
 
 	public function check() {
-		$selected = Input::only('selected'); 
-		print_r($selected);
 		if(isset($_POST['submit'])) {
 			$file = $_FILES;
 			$fileName = $_FILES['file']['name'];
@@ -54,23 +53,30 @@ class ImagesController extends Controller
 			$fileActualExt = strtolower(end($fileExt));
 		
 			$allowed = array('jpg', 'jpeg', 'png');
-		
-			if(in_array($fileActualExt, $allowed)) {
-				if($fileError === 0) {
-					if($fileSize < 5000) {
-						$fileDestination = 'images/'.$fileName;
-						move_uploaded_file($fileTmp, $fileDestination);
-						return view('admin/images.extra');
+
+			$selectedImage = Input::only('selected'); 
+
+			if($selectedImage !== null) {
+				if(in_array($fileActualExt, $allowed)) {
+					if($fileError === 0) {
+						if($fileSize < 5000) {
+							$fileDestination = 'images/'.$selectedImg;
+							move_uploaded_file($fileTmp, $fileDestination);
+							return view('admin/images.extra');
+						} else {
+							$error = "Placeholder too large";
+						}
 					} else {
-						$error = "Placeholder too large";
+						$error = "Placeholder error";
 					}
 				} else {
-					$error = "Placeholder error";
+					$error = "Placeholder wrong file";
 				}
 			} else {
-				$error = "Placeholder wrong file";
+				$error = "Placeholder no image selected";
 			}
 		}
+		return ImagesController::showextra()->with($error);
 	}
 
 	public function showtype() {
@@ -84,5 +90,10 @@ class ImagesController extends Controller
 		{
 			return redirect('/login');
 		}
+	}
+
+	public function passthrough() {
+		// set picture to database
+		return view('admin/images.category');
 	}
 }

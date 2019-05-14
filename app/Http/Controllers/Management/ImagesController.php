@@ -56,13 +56,15 @@ class ImagesController extends Controller
 
 			$selectedImage = Input::only('selected'); 
 
-			if($selectedImage !== null) {
+			if(isset($selectedImage)) {
 				if(in_array($fileActualExt, $allowed)) {
 					if($fileError === 0) {
 						if($fileSize < 5000) {
-							$fileDestination = 'images/'.$selectedImg;
+							$test = implode($selectedImage);
+							$fileDestination = 'images/'.$test;
 							move_uploaded_file($fileTmp, $fileDestination);
-							return view('admin/images.extra');
+							$error = "success";
+							return redirect('/admin/images/extra')->withErrors($error);
 						} else {
 							$error = "Placeholder too large";
 						}
@@ -70,13 +72,13 @@ class ImagesController extends Controller
 						$error = "Placeholder error";
 					}
 				} else {
-					$error = "Placeholder wrong file";
+					$error = "Placeholder ext not allowed";
 				}
 			} else {
-				$error = "Placeholder no image selected";
+				$error = "Placeholder selection is undefined";
 			}
 		}
-		return ImagesController::showextra()->with($error);
+		return redirect('/admin/images/extra')->withErrors($error);
 	}
 
 	public function showtype() {

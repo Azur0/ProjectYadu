@@ -3,6 +3,7 @@
 @section('content')
     <div>
         <form action="{{ action('Management\ImagesController@check') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="types">
                 <h1>Placeholder</h1>
                     <div class="box">
@@ -19,10 +20,9 @@
             </div>
             <input type="file" name="file">
             <button type="submit" name="submit">placeholder upload</button>
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
         </form>
-        @if (empty($errors !== null))
-            <div class="error">{{$error}}</div>
+        @if($errors->any())
+            <h4>{{$errors->first()}}</h4>
         @endif
     <script>
         function warning(){

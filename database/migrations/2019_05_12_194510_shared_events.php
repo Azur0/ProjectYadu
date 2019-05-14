@@ -19,6 +19,11 @@ class SharedEvents extends Migration
             $table->unsignedInteger('event_id');
             $table->string('platform');
             $table->timestamps();
+
+            $table->foreign('platform', 'fk_social_media_platforms')
+                ->references('platform')->on('social_media_platforms')
+                ->onDelete('no action')
+                ->onUpdate('no action');
         });
     }
 

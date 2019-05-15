@@ -198,27 +198,45 @@
   filter: grayscale(100%);
 }
 
-#account_tabs
+#user_header
 {
-	ul
+	min-height: 175px;
+
+	#user_header_interactable
 	{
-		width: 100%;
-		margin: 0;
-		padding: 0;
+		height: 70%;
+	}
 
-		li
+	#user_header_tabs
+	{
+		height: 30%;
+	}
+
+	#account_tabs
+	{
+		height: 100%;
+
+		ul
 		{
-			margin: 0 auto 1em;
-			display: inline;
-			text-decoration: none;
-			padding: 1em;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			height: 100%;
 
-			.active
+			li
 			{
-				border: solid #DEE2E6;
-				border-width: 2px 2px 0 2px;
-				padding: 5px;
+				margin: 0 auto;
+				display: inline-block;
+				text-decoration: none;
+				padding: 1em 1em 0 1em;
+				
+				.active
+				{
+					border: solid #DEE2E6;
+					border-width: 2px 2px 0 2px;
+				}
 			}
 		}
-	}
+	}	
 }
+

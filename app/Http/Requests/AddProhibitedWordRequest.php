@@ -24,7 +24,8 @@ class AddProhibitedWordRequest extends FormRequest
     public function rules()
     {
         return [
-            'newProhibitedWord' => ['required', 'min:1', 'max:45', 'string']
+            'newProhibitedWord' => ['required', 'min:1', 'max:45', 'string'],
+            'updatedProhibitedWord' => ['required', 'min:1', 'max:45', 'string']
         ];
     }
 }

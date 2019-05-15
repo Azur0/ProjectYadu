@@ -43,7 +43,8 @@
 							<td>{{$ProhibitedWord->created_at}}</td>
 							<td>{{$ProhibitedWord->updated_at}}</td>
 							<td>
-								<form class="form_submit_ays" method="GET" id="updateWord{{$id}}" action="/admin/prohibitedWords/{{$ProhibitedWord->word}}/Martijnn/update">
+								<form class="form_submit_ays" method="POST" id="updateWord{{$id}}" action="/admin/prohibitedWords/{{$ProhibitedWord->word}}/update">
+									@csrf
 									<div>
 										<div >
 											<button type="button" class="button button-hover" data-toggle="modal" data-target="#confirmUpdateAccount{{$id}}">{{__('events.show_edit')}}</button>
@@ -60,7 +61,7 @@
 													</div>
 													<div class="modal-body">
 														{{ __('global.word')}}: <br>
-														<input class="form-control" value="{{$ProhibitedWord->word}}">
+														<input class="form-control" name="updatedProhibitedWord" value="{{$ProhibitedWord->word}}">
 													</div>
 													<div class="modal-footer">
 														<input type="submit" form="updateWord{{$id}}" class="btn" style="background-color: limegreen; color: black;" value="{{__('validation.confirm_update')}}">

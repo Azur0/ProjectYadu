@@ -44,12 +44,14 @@ class ProhibitedWordsController extends Controller
         return redirect('admin/swearWords');
     }
 
-    public function update($oldWord, $newWord)
+    public function update($oldWord, AddProhibitedWordRequest $request)
     {
-        print_r($oldWord);
-        print_r($newWord);
-        if(!ProhibitedWord::where('word', '=', $newWord)->exists())
-            ProhibitedWordController::updateProhibitedWord($oldWord, $newWord);
+//        print_r($oldWord);
+//        print_r(" ");
+//        print_r($request->updatedProhibitedWord);
+
+        if(!ProhibitedWord::where('word', '=', $request->updatedProhibitedWord)->exists())
+            ProhibitedWordController::updateProhibitedWord($oldWord, $request->updatedProhibitedWord);
 
         return redirect('admin/swearWords');
     }

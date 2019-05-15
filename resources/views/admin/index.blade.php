@@ -158,7 +158,7 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div id="map" style="height: 300px;"></div>
+                    <div id="map" style="min-height: 220px" class="h-100 rounded"></div>
                 </div>
             </div>
         </div>
@@ -293,7 +293,7 @@
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 6.5,
+                zoom: 7,
                 center: {
                     lat: 52,
                     lng: 5.8

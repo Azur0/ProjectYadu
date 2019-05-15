@@ -11,10 +11,12 @@ class AccountSettingsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('accounts')->insert([
 
-            'created_at' => date("Y-m-d H:i:s"),
-
-        ]);
+        for($i=1;$i<11;$i++){
+            DB::table('account_settings')->insert([
+                'account_id' => $i,
+                'created_at' => date("Y-m-d H:i:s"),
+            ]);
+        }
     }
 }

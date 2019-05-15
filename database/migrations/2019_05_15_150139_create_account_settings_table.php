@@ -14,6 +14,7 @@ class CreateAccountSettingsTable extends Migration
     public function up()
     {
         Schema::create('account_settings', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->unsignedInteger('account_id');
             $table->tinyInteger('FollowNotificationCreateEvent')->default('1');

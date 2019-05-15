@@ -47,4 +47,8 @@ class Account extends Authenticatable implements MustVerifyEmailContract
     public function messages() {
         return $this->hasMany('App\Message');
     }
+
+    public function settings(){
+        return $this->hasOne('App\AccountSettings');
+    }
 }

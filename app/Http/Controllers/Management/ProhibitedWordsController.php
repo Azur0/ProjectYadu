@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Management;
 
 
+use App\Http\Requests\AddProhibitedWordRequest;
 use App\ProhibitedWord;
 use App\Http\Controllers\ProhibitedWordController;
 use Validator;
@@ -43,18 +44,20 @@ class ProhibitedWordsController extends Controller
         return redirect('admin/swearWords');
     }
 
-    public function update($word)
+    public function update($oldWord, $newWord)
     {
-        // if(!ProhibitedWord::where('word', '=', $word)->exists())
-            //
+        print_r($oldWord);
+        print_r($newWord);
+        if(!ProhibitedWord::where('word', '=', $newWord)->exists())
+            ProhibitedWordController::updateProhibitedWord($oldWord, $newWord);
 
         return redirect('admin/swearWords');
     }
 
-    public function create($word)
+    public function create(AddProhibitedWordRequest $request)
     {
-        if(!ProhibitedWord::where('word', '=', $word)->exists())
-            ProhibitedWordController::createProhibitedWord($word);
+        if(!ProhibitedWord::where('word', '=', $request->newProhibitedWord)->exists())
+            ProhibitedWordController::createProhibitedWord($request->newProhibitedWord);
 
         return redirect('admin/swearWords');
     }

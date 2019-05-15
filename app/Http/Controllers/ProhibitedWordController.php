@@ -13,9 +13,9 @@ class ProhibitedWordController extends Controller
         ProhibitedWord::where('word', $word)->delete();
     }
 
-    public function updateProhibitedWord($word)
+    public static function updateProhibitedWord($oldWord, $newWord)
     {
-        //
+        DB::table('prohibited_words')->where('word', $oldWord)->update(['word' => $newWord]);
     }
 
     public static function createProhibitedWord($word)

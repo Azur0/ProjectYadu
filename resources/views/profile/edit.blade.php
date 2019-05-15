@@ -148,7 +148,7 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header">Blocked users</div>
+                    <div class="card-header"> {{__('profile.edit_unblock_account_title')}}</div>
                     <div class="card-body">
                             @foreach ( $account->blockedUsers as $blockedUser )
                             <form method="POST" id="unblock{{$blockedUser->blockedAccount->firstName}}" action="/profile/unblockUser">
@@ -159,7 +159,7 @@
                                     <div class="col-md-4">
                                     <button type="button" class="btn btn-primary float-right" data-toggle="modal"
                                             data-target="#confirmUnblockAccount{{$blockedUser->blockedAccount->firstName}}">
-                                        Unblock
+                                        {{__('profile.edit_unblock_account_button')}}
                                     </button>
                                 </div>
 
@@ -174,13 +174,14 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                            Are you sure you want to unblock {{$blockedUser->blockedAccount->firstName}}?
+                                            {{__('profile.edit_unblock_account_areYouSure', ['name' => $blockedUser->blockedAccount->firstName])}}
+                                            
                                             </div>
                                             <div class="modal-footer">
                                                 <input type="submit" form="unblock{{$blockedUser->blockedAccount->firstName}}" class="btn btn-danger"
-                                                       value="Yes, unblock">
+                                                       value="{{__('profile.edit_unblock_account_positive', ['name' => $blockedUser->blockedAccount->firstName])}}">
                                                 <button type="button" class="btn btn-primary"
-                                                        data-dismiss="modal">No, Don't unblock
+                                                        data-dismiss="modal">{{__('profile.edit_unblock_account_negative', ['name' => $blockedUser->blockedAccount->firstName])}}
                                                 </button>
                                             </div>
                                         </div>

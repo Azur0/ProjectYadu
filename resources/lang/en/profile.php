@@ -37,5 +37,11 @@ return [
     'edit_delete_account_positive' => 'Yes, delete it',
     'edit_delete_account_negative' => 'No, Keep it!',
 
+    'edit_unblock_account_title' => 'Blocked users',
+    'edit_unblock_account_button' => 'Unblock',
+    'edit_unblock_account_negative' => 'No, don\'t unblock :name',
+    'edit_unblock_account_positive' => 'Yes, unblock :name',
+    'edit_unblock_account_areYouSure' => 'Are you sure you want to unblock :name?',
+    
 
 ];

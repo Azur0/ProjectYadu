@@ -37,5 +37,9 @@ return [
     'edit_delete_account_positive' => 'Ja, verwijder mijn account',
     'edit_delete_account_negative' => 'Nee, bewaar mijn account!',
 
-
+    'edit_unblock_account_title' => 'Geblokkeerde users',
+    'edit_unblock_account_button' => 'Deblokkeer',
+    'edit_unblock_account_negative' => 'Nee, deblokkeer :name niet',
+    'edit_unblock_account_positive' => 'Ja, deblokkeer :name',
+    'edit_unblock_account_areYouSure' => 'Weet je zeker dat je :name wilt deblokkeren?',
 ];

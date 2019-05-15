@@ -26,12 +26,10 @@ class AccountController extends Controller
 		$myEvents = Event::where('owner_id', $id)->where('isDeleted', '==', 0);
 		if($account->id != Auth::user()->id)
 		{
-
-
-			$isFollowing = true;
+			$follow = AccountHasFollowers::where('account_id', $account->id)->where('follower_id', Auth::id())->first();
 		}
 
-		return view('accounts.public_profile', compact('account','isFollowing','myEvents'));
+		return view('accounts.public_profile', compact('account','follow','myEvents'));
 	}
 
 	public function create()

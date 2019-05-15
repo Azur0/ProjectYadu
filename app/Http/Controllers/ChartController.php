@@ -53,32 +53,27 @@ class ChartController extends Controller
             $fromMonth = 1;
             $fromYear++;
         }
-
         return $data;
     }
 
     public function GetMonthlyShares(GetMonthlySharesRequest $request){
 
-        $fromMonth = (int)$request->fromDate->format('n');
-        $fromYear = (int)$request->fromDate->format('Y');
-
-        $toMonth = (int)$request->toDate->format('n');
-        $toYear = (int)$request->toDate->format('Y');
-
-        $fromDate = Carbon::create($fromYear, $fromMonth, 1, 0,0,0);
-        $toDate = Carbon::create($toYear, $toMonth, 1, 0,0,0)->addMonth();
-
         $data = array();
         $platforms = SocialMediaPlatform::all();
+
+        $data['dateInfo'] = array(
+            'fromDate' => $request->fromDate->toDateString(),
+            'toDate' => $request->toDate->toDateString()
+        );
+
+        $data['shareData'] = array();
 
         foreach ($platforms as $platform){
             $entry = array(
                 'platform' => ucfirst($platform->platform),
-                'shareCount' => SharedEvent::where('platform', $platform->platform)->whereBetween('created_at', [$fromDate, $toDate])->count(),
-                'fromMonth' => $fromDate->toDateString(),
-                'toMonth' => $toDate->toDateString(),
+                'shareCount' => SharedEvent::where('platform', $platform->platform)->whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count(),
             );
-            array_push($data, $entry);
+            array_push($data['shareData'], $entry);
         }
         return $data;
     }

@@ -14,20 +14,18 @@ class GetMonthlySharesRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $currentMonth = Carbon::parse(Carbon::now()->format('Y M'));
-
         if(Carbon::parse($this->fromDate) > Carbon::parse($this->toDate)){
             $this->merge(['fromDate' => null, 'toDate' => null]);
         }
 
         if($this->fromDate == null){
-            $this->merge(['fromDate' => $currentMonth]);
+            $this->merge(['fromDate' => Carbon::now()->subDay()]);
         }else{
             $this->merge(['fromDate' => Carbon::parse($this->fromDate)]);
         }
 
         if($this->toDate == null){
-            $this->merge(['toDate' => $currentMonth]);
+            $this->merge(['toDate' => Carbon::now()]);
         }else{
             $this->merge(['toDate' => Carbon::parse($this->toDate)]);
         }

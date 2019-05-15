@@ -11023,6 +11023,10 @@ a.text-dark:focus {
   #welcome_carousel .carousel-inner .carousel-item .carousel_img_container img {
     min-width: 100%;
     overflow-y: auto;
+    -webkit-filter: blur(10px);
+            filter: blur(10px);
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
   }
 
   #welcome_carousel .carousel-inner .carousel-item a,
@@ -11080,5 +11084,40 @@ a.text-dark:focus {
 .greyified {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
+}
+
+#user_header {
+  min-height: 175px;
+}
+
+#user_header #user_header_interactable {
+  height: 70%;
+}
+
+#user_header #user_header_tabs {
+  height: 30%;
+}
+
+#user_header #account_tabs {
+  height: 100%;
+}
+
+#user_header #account_tabs ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#user_header #account_tabs ul li {
+  margin: 0 auto;
+  display: inline-block;
+  text-decoration: none;
+  padding: 1em 1em 0 1em;
+}
+
+#user_header #account_tabs ul li .active {
+  border: solid #DEE2E6;
+  border-width: 2px 2px 0 2px;
 }
 

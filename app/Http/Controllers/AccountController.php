@@ -19,17 +19,17 @@ use App\Mail\Follow as FollowMail;
 
 class AccountController extends Controller
 {
-	public function publicProfile($id)
+	public function profileInfo($id)
 	{
 		$isFollowing = false;
 		$account = Account::where('id', $id)->firstOrFail();
-		$myEvents = Event::where('owner_id', $id)->where('isDeleted', '==', 0);
+		//$myEvents = Event::where('owner_id', $id)->where('isDeleted', '==', 0);
 		if($account->id != Auth::user()->id)
 		{
 			$follow = AccountHasFollowers::where('account_id', $account->id)->where('follower_id', Auth::id())->first();
 		}
 
-		return view('accounts.public_profile', compact('account','follow','myEvents'));
+		return view('accounts.profile.info', compact('account','follow','myEvents'));
 	}
 
 	public function create()
@@ -39,128 +39,135 @@ class AccountController extends Controller
 		return view('auth.register')->with('genders', $genders);
 	}
 
+	public function edit()
+	{
+		$genders = Gender::all();
+		$account = Account::where('id', Auth::id())->firstOrFail();
+
+		return view('accounts.profile.edit', compact(['account', 'genders']));
+	}
+
 	public function changePassword(ChangePasswordRequest $request)
-    {
-        $validated = $request->validated();
+	{
+		$validated = $request->validated();
 
-        $account = Account::where('id', Auth::id())
-            ->firstOrFail();
+		$account = Account::where('id', Auth::id())->firstOrFail();
+		$account->password = Hash::make($validated['newPassword']);
+		$account->save();
 
-        $account->password = Hash::make($validated['newPassword']);
+		return redirect('/profile/edit');
+	}
 
-        $account->save();
+	public function updateProfile(EditProfileRequest $request)
+	{
+		$validated = $request->validated();
 
-        return redirect('/profile/edit');
-    }
+		$account = Account::where('id', Auth::id())->firstOrFail();
 
-    public function updateProfile(EditProfileRequest $request)
-    {
-	    $validated = $request->validated();
+		if($validated['gender'] == "-")
+		{
+			$account->gender = null;
+		}
+		else
+		{
+			$account->gender = $validated['gender'];
+		}
 
-	    $account = Account::where('id', Auth::id())->firstOrFail();
+		$account->email = $validated['email'];
+		$account->firstName = $validated['firstName'];
+		$account->middleName = $validated['middleName'];
+		$account->lastName = $validated['lastName'];
+		$account->dateOfBirth = $validated['dateOfBirth'];
+		// $account->followerVisibility = $validated['followerVisibility'];
+		// $account->followingVisibility = $validated['followingVisibility'];
+		// $account->infoVisibility = $validated['infoVisibility'];
+		// $account->eventsVisibility = $validated['eventsVisibility']; 
+		// $account->participatingVisibility = $validated['participatingVisibility'];
 
-	    if($validated['gender'] == "-"){
-            $account->gender = null;
-        }
-	    else {
-            $account->gender = $validated['gender'];
-        }
+		$account->save();
 
-        $account->email = $validated['email'];
-        $account->firstName = $validated['firstName'];
-        $account->middleName = $validated['middleName'];
-        $account->lastName = $validated['lastName'];
-        $account->dateOfBirth = $validated['dateOfBirth'];
-        $account->followerVisibility = $validated['followerVisibility'];
-        $account->followingVisibility = $validated['followingVisibility'];
-        $account->infoVisibility = $validated['infoVisibility'];
-        $account->eventsVisibility = $validated['eventsVisibility']; 
-        $account->participatingVisibility = $validated['participatingVisibility'];
+		return redirect('/profile/edit');
+	}
 
-        $account->save();
+	public function deleteAccount(){
 
-        return redirect('/profile/edit');
-    }
+		$ID = Auth::user()->id;
+		Auth::logout();
 
-    public function deleteAccount(){
+		$this->deleteAccountFromId($ID);
 
-	    $ID = Auth::user()->id;
-        Auth::logout();
+		return redirect('/');
+	}
 
-        $this->deleteAccountFromId($ID);
+	public static function deleteAccountFromId($id)
+	{
+		$account = Account::where('id', $id)->firstOrFail();
 
-        return redirect('/');
-    }
+		$account->email = $id;
+		$account->password = '';
+		$account->firstname = encrypt('Deleted user');
+		$account->middlename = encrypt(null);
+		$account->lastname = encrypt(null);
+		$account->avatar = null;
+		$account->isDeleted = 1;
+		$account->bio = null;
+		$account->remember_token = null;
 
-    public static function deleteAccountFromId($id)
-    {
-        $account = Account::where('id', $id)->firstOrFail();
+		$account->save();
+	}
 
-        $account->email = $id;
-        $account->password = '';
-        $account->firstname = encrypt('Deleted user');
-        $account->middlename = encrypt(null);
-        $account->lastname = encrypt(null);
-        $account->avatar = null;
-        $account->isDeleted = 1;
-        $account->bio = null;
-        $account->remember_token = null;
+	public function follow($id) {
+		if($id == Auth::id()) {
+			return redirect('/');
+		}
+		else {
+			$account = Account::where('id', $id)->first();
 
-        $account->save();
-    }
+			try {
+				$followRequest = AccountHasFollowers::create([
+					'account_id' => $id,
+					'follower_id' => Auth::id()
+			]);
+			} catch (\Exception $exception){
+				return back()->withError($exception->getMessage());
+			}
 
-    public function follow($id) {
-        if($id == Auth::id()) {
-            return redirect('/');
-        }
-        else {
-            $account = Account::where('id', $id)->first();
+			Mail::to($account->email)->send(new FollowMail(Auth::user()));
+		}
 
-            try {
-                $followRequest = AccountHasFollowers::create([
-                    'account_id' => $id,
-                    'follower_id' => Auth::id()
-            ]);
-            } catch (\Exception $exception){
-                return back()->withError($exception->getMessage());
-            }
+		return back();
+	}
 
-            Mail::to($account->email)->send(new FollowMail(Auth::user()));
-        }
+	public function accept($id) {
+		$followRequest = AccountHasFollowers::where('account_id', Auth::id())->where('follower_id', $id)->first();
 
-        return back();
-    }
+		if(!is_null($followRequest)) {
+			if($followRequest->status == 'pending') {
+				$followRequest->status = 'accepted';
+				$followRequest->save();
+			}
+		}
 
-    public function accept($id) {
-        $followRequest = AccountHasFollowers::where('account_id', Auth::id())->where('follower_id', $id)->first();
+		return redirect('/');
+	}
 
-        if(!is_null($followRequest)) {
-            if($followRequest->status == 'pending') {
-                $followRequest->status = 'accepted';
-                $followRequest->save();
-            }
-        }
+	public function decline($id) {
+		$followRequest = AccountHasFollowers::where('account_id', Auth::id())->where('follower_id', $id)->first();
+		
+		if(!is_null($followRequest)) {
+			if($followRequest->status == 'pending') {
+				$followRequest->status = 'rejected';
+				$followRequest->save();
+			}
+		}
 
-        return redirect('/');
-    }
+		return redirect('/');
+	}
 
-    public function decline($id) {
-        $followRequest = AccountHasFollowers::where('account_id', Auth::id())->where('follower_id', $id)->first();
-        
-        if(!is_null($followRequest)) {
-            if($followRequest->status == 'pending') {
-                $followRequest->status = 'rejected';
-                $followRequest->save();
-            }
-        }
+	public function unfollow($id) {
+		$unfollowRequest = AccountHasFollowers::where('account_id', $id)->where('follower_id', Auth::id())->first();
+		$unfollowRequest->delete();
 
-        return redirect('/');
-    }
-
-    public function unfollow($id) {
-        $unfollowRequest = AccountHasFollowers::where('account_id', $id)->where('follower_id', Auth::id())->first();
-        $unfollowRequest->delete();
-
-        return back();
-    }
+		return back();
+	}
 }

@@ -137,6 +137,18 @@
 
 
     <div class='row mb-3'>
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4 h-100">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Categorien</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <canvas id="categories" height="220px"></canvas>
+                </div>
+            </div>
+        </div>
 
         <div class="col-xl-8 col-lg-7">
             <div class="card shadow mb-4 h-100">
@@ -151,164 +163,172 @@
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    var eventChart = new Chart(document.getElementById('events'), {
-        type: 'line',
-        data: getEventData(null, null),
-        options: {
-            legend: {
-                display: false
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
+    <script>
+        var eventChart = new Chart(document.getElementById('events'), {
+            type: 'line',
+            data: getEventData(null, null),
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        function getEventData(fromDate, toDate) {
+            var plotLabels = [];
+            var plotData = [];
+
+            $.ajax({
+                url: "{{ route('admin_charts_events') }}",
+                method: 'POST',
+                async: false,
+                data: {
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    data.forEach(function(item) {
+                        plotLabels.push(item.month + " " + item.year);
+                        plotData.push(item.totalEvents);
+                    })
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+
+            return {
+                labels: plotLabels,
+                datasets: [{
+                    data: plotData,
+                    borderColor: `rgba(25, 93, 230, 1)`
                 }]
-            }
+            };
         }
-    });
 
-    function getEventData(fromDate, toDate) {
-        var plotLabels = [];
-        var plotData = [];
+        function updateEventChart() {
+            var fromDate = document.getElementById("fromDate").value;
+            var toDate = document.getElementById("toDate").value;
+            eventChart.data = getEventData(fromDate, toDate);
+            eventChart.update();
+        };
 
-        $.ajax({
-            url: "{{ route('admin_charts_events') }}",
-            method: 'POST',
-            async: false,
-            data: {
-                fromDate: fromDate,
-                toDate: toDate,
-                _token: '{{ csrf_token() }}'
-            },
-            dataType: 'json',
-            success: function(data) {
-                data.forEach(function(item) {
-                    plotLabels.push(item.month + " " + item.year);
-                    plotData.push(item.totalEvents);
-                })
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
-                console.log(textStatus);
-                console.log(errorThrown);
+        //ShareChart
+        var shareChart = new Chart(document.getElementById("shares"), {
+            type: 'doughnut',
+            data: getShareData(null, null),
+            options: {
+                maintainAspectRatio: true
             }
         });
 
-        return {
-            labels: plotLabels,
-            datasets: [{
-                data: plotData,
-                borderColor: `rgba(25, 93, 230, 1)`
-            }]
-        };
-    }
+        function getShareData(fromDate, toDate) {
+            var plotLabels = [];
+            var plotData = [];
 
-    function updateEventChart() {
-        var fromDate = document.getElementById("fromDate").value;
-        var toDate = document.getElementById("toDate").value;
-        eventChart.data = getEventData(fromDate, toDate);
-        eventChart.update();
-    };
+            $.ajax({
+                url: "{{ route('admin_charts_shares') }}",
+                method: 'POST',
+                async: false,
+                data: {
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    data.forEach(function(item) {
+                        plotLabels.push(item.platform);
+                        plotData.push(item.shareCount);
+                    })
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
 
-    //ShareChart
-    var shareChart = new Chart(document.getElementById("shares"), {
-        type: 'doughnut',
-        data: getShareData(null, null),
-        options: {
-            maintainAspectRatio: true
+            return {
+                labels: plotLabels,
+                datasets: [{
+                    backgroundColor: ['#256eff', '#8c16b7', '#b2b2b2', '#ff495c', '#3ddc97'], //TODO: Change colors
+                    data: plotData
+                }]
+            };
         }
-    });
 
-    function getShareData(fromDate, toDate) {
-        var plotLabels = [];
-        var plotData = [];
-
-        $.ajax({
-            url: "{{ route('admin_charts_shares') }}",
-            method: 'POST',
-            async: false,
-            data: {
-                fromDate: fromDate,
-                toDate: toDate,
-                _token: '{{ csrf_token() }}'
-            },
-            dataType: 'json',
-            success: function(data) {
-                data.forEach(function(item) {
-                    plotLabels.push(item.platform);
-                    plotData.push(item.shareCount);
-                })
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
-                console.log(textStatus);
-                console.log(errorThrown);
-            }
-        });
-
-        return {
-            labels: plotLabels,
-            datasets: [{
-                backgroundColor: ['#256eff', '#8c16b7', '#b2b2b2', '#ff495c', '#3ddc97'],
-                data: plotData
-            }]
+        function updateShareChart() {
+            var fromDate = document.getElementById("fromShareDate").value;
+            var toDate = document.getElementById("toShareDate").value;
+            shareChart.data = getShareData(fromDate, toDate);
+            shareChart.update();
         };
-    }
 
-    function updateShareChart() {
-        var fromDate = document.getElementById("fromShareDate").value;
-        var toDate = document.getElementById("toShareDate").value;
-        shareChart.data = getShareData(fromDate, toDate);
-        shareChart.update();
-    };
-</script>
-
-
-<script>
-    var map, heatmap;
-
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 6.5,
-            center: {
-                lat: 52,
-                lng: 5.8
+        //CategoriesChart
+        var categoriesChart = new Chart(document.getElementById("categories"), {
+            type: 'doughnut',
+            data: getShareData(null, null),
+            options: {
+                maintainAspectRatio: true
             }
         });
-
-        heatmap = new google.maps.visualization.HeatmapLayer({
-            data: getPoints(),
-            map: map,
-            opacity: 0.5,
-            radius: 20
-        });
-    }
-
-    // Heatmap data: 500 Points
-    function getPoints() {
-        return [
-            new google.maps.LatLng(51.70594, 5.3195),
-            new google.maps.LatLng(51.71636, 5.35611),
-            new google.maps.LatLng(53.17316, 6.60374),
-            new google.maps.LatLng(53.05563, 4.79603),
-            new google.maps.LatLng(52.51405, 6.08675),
-            new google.maps.LatLng(51.65118, 5.46722),
-            new google.maps.LatLng(52.36537, 4.88569),
-            new google.maps.LatLng(52.36537, 4.88569),
-            new google.maps.LatLng(51.92046, 4.47919),
-            new google.maps.LatLng(51.589, 4.77809),
-            new google.maps.LatLng(51.688549, 5.28745),
-            new google.maps.LatLng(51.69019, 5.30195),
-        ];
-    }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=visualization&callback=initMap" async defer></script>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak&libraries=visualization&callback=initMap" async defer></script> -->
+    </script>
 
 
+    <script>
+        var map, heatmap;
 
-@endsection
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 6.5,
+                center: {
+                    lat: 52,
+                    lng: 5.8
+                }
+            });
+
+            heatmap = new google.maps.visualization.HeatmapLayer({
+                data: getPoints(),
+                map: map,
+                opacity: 0.5,
+                radius: 20
+            });
+        }
+
+        // Heatmap data: 500 Points
+        function getPoints() {
+            return [
+                new google.maps.LatLng(51.70594, 5.3195),
+                new google.maps.LatLng(51.71636, 5.35611),
+                new google.maps.LatLng(53.17316, 6.60374),
+                new google.maps.LatLng(53.05563, 4.79603),
+                new google.maps.LatLng(52.51405, 6.08675),
+                new google.maps.LatLng(51.65118, 5.46722),
+                new google.maps.LatLng(52.36537, 4.88569),
+                new google.maps.LatLng(52.36537, 4.88569),
+                new google.maps.LatLng(51.92046, 4.47919),
+                new google.maps.LatLng(51.589, 4.77809),
+                new google.maps.LatLng(51.688549, 5.28745),
+                new google.maps.LatLng(51.69019, 5.30195),
+            ];
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=visualization&callback=initMap" async defer></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak&libraries=visualization&callback=initMap" async defer></script> -->
+
+
+
+    @endsection

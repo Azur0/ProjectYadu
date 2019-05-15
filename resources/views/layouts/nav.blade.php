@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbg">
     <div class="d-flex flex-grow-1">
         <div class="navbar-header">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -14,8 +14,8 @@
             <img src={{ asset('images/logoCircle.png')}} width="60" alt="logo">
         </a>
     </div>
-    <div class="collapse navbar-collapse flex-grow-1 text-left" id="myNavbar">
-        <ul class="navbar-nav ml-auto flex-nowrap">
+    <div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
+        <ul class="nav navbar-nav ml-auto flex-nowrap">
             <li>
                 <a href="/" class="nav-link m-2 nav-item nav-yadu {{ request()->is('/') ? 'active' : '' }}">{{__('navigation.nav_home')}}</a>
             </li>

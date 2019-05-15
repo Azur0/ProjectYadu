@@ -44,6 +44,10 @@ Auth::routes(['verify' => true]);
 
 //Profile
 Route::get('profile/edit', 'ProfileController@edit')->middleware('auth');
+Route::get('/profile/{id}/follow', 'AccountController@follow')->middleware('auth');
+Route::get('/profile/{id}/accept', 'AccountController@accept')->middleware('auth');
+Route::get('/profile/{id}/decline', 'AccountController@decline')->middleware('auth');
+Route::get('/profile/{id}/unfollow', 'AccountController@unfollow')->middleware('auth');
 Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
 Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
 Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middleware('auth');

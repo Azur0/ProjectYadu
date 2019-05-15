@@ -9,9 +9,12 @@ use Illuminate\Http\Request;
 use App\Gender;
 use App\Event;
 use App\EventHasParticipants;
+use App\AccountHasFollowers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use DB;
+use App\Mail\Follow as FollowMail;
 
 
 class AccountController extends Controller
@@ -23,10 +26,10 @@ class AccountController extends Controller
 		$myEvents = Event::where('owner_id', $id)->where('isDeleted', '==', 0);
 		if($account->id != Auth::user()->id)
 		{
-			$isFollowing = true;
+			$follow = AccountHasFollowers::where('account_id', $account->id)->where('follower_id', Auth::id())->first();
 		}
 
-		return view('accounts.public_profile', compact('account','isFollowing','myEvents'));
+		return view('accounts.public_profile', compact('account','follow','myEvents'));
 	}
 
 	public function create()
@@ -106,4 +109,58 @@ class AccountController extends Controller
         $account->save();
     }
 
+    public function follow($id) {
+        if($id == Auth::id()) {
+            return redirect('/');
+        }
+        else {
+            $account = Account::where('id', $id)->first();
+
+            try {
+                $followRequest = AccountHasFollowers::create([
+                    'account_id' => $id,
+                    'follower_id' => Auth::id()
+            ]);
+            } catch (\Exception $exception){
+                return back()->withError($exception->getMessage());
+            }
+
+            Mail::to($account->email)->send(new FollowMail(Auth::user()));
+        }
+
+        return back();
+    }
+
+    public function accept($id) {
+        $followRequest = AccountHasFollowers::where('account_id', Auth::id())->where('follower_id', $id)->first();
+
+        if(!is_null($followRequest)) {
+            if($followRequest->status == 'pending') {
+                $followRequest->status = 'accepted';
+                $followRequest->save();
+            }
+        }
+
+        return redirect('/');
+    }
+
+    public function decline($id) {
+        $followRequest = AccountHasFollowers::where('account_id', Auth::id())->where('follower_id', $id)->first();
+        
+        if(!is_null($followRequest)) {
+            if($followRequest->status == 'pending') {
+                $followRequest->status = 'rejected';
+                $followRequest->save();
+            }
+        }
+
+        return redirect('/');
+    }
+
+    public function unfollow($id) {
+        $unfollowRequest = AccountHasFollowers::where('account_id', $id)->where('follower_id', Auth::id())->first();
+        $unfollowRequest->delete();
+
+        return back();
+    }
 }

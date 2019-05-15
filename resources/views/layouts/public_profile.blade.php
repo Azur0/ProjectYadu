@@ -19,13 +19,22 @@
 							<div id="user_header_interactable" class="row">
 								<div class="col">
 									@if($account->id != Auth::user()->id)
-										<form>
-										@if($account)
-											<i class="fas fa-user-plus"></i> Follow
-										@else
-											<i class="fas fa-user-plus"></i> Unfollow
+										@if(is_null($follow))
+											<a href="/profile/{{$account->id}}/follow" class="btn btn-info btn-sm my-auto mx-2">
+												<i class="fas fa-user-plus"></i> Follow
+											</a>
+										@elseif($follow->status == "pending")
+											<a href="/profile/{{$account->id}}/follow" class="btn btn-info btn-sm my-auto mx-2">
+                        						Follow request pending
+                    						</a>
+										@elseif($follow->status == "accepted")
+										<a href="/profile/{{$account->id}}/unfollow" class="btn btn-info btn-sm my-auto mx-2">
+										<i class="fas fa-user-plus"></i> Unfollow
+                    					</a>
 										@endif
-										</form>
+										@if (session('error'))
+                        					<div class="alert alert-danger">Request already sent</div>
+                    					@endif
 									@endif
 								</div>
 							</div>

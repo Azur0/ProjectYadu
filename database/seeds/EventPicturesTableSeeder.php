@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Traits\CrossEnvironmentDirectoryNames;
 
 class EventPicturesTableSeeder extends Seeder
 {
+    use CrossEnvironmentDirectoryNames;
     /**
      * Run the database seeds.
      *
@@ -33,7 +35,8 @@ class EventPicturesTableSeeder extends Seeder
     }
 
     private function seedCategory(string $directory, int $amount, int $tag_id){
-        $directoryPath = public_path() . "\images\seeder\EventPictures\\" . $directory . "\\";
+        $directoryPath = public_path() . "/images/seeder/EventPictures/" . $directory . "/";
+        $directoryPath = $this->FormatDirectoryName("/", $directoryPath);
 
         for ($i=1; $i <= $amount; $i++) {
             $filePath = $directoryPath . $i . ".jpg";

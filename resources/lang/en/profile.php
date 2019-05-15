@@ -9,7 +9,9 @@ return [
 */
 
 ///////////////////////////////// Show ////////////////////////////////////
-
+    'follow_request' => 'has sent you a follow request!',
+    'follow_request_accept' => 'Accept follow request',
+    'follow_request_decline' => 'Decline follow request',
 
 ///////////////////////////////// Edit ////////////////////////////////////
 

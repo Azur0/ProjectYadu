@@ -95,11 +95,11 @@
             <div class="card shadow mb-4 h-100">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Evenementen Hittemap</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Delen</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <canvas id="shares"></canvas>
+                    <canvas id="shares" height="220px"></canvas>
                 </div>
             </div>
         </div>

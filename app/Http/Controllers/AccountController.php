@@ -23,8 +23,6 @@ class AccountController extends Controller
 		$myEvents = Event::where('owner_id', $id)->where('isDeleted', '==', 0);
 		if($account->id != Auth::user()->id)
 		{
-
-
 			$isFollowing = true;
 		}
 
@@ -70,10 +68,15 @@ class AccountController extends Controller
         $account->middleName = $validated['middleName'];
         $account->lastName = $validated['lastName'];
         $account->dateOfBirth = $validated['dateOfBirth'];
+        $account->followerVisibility = $validated['followerVisibility'];
+        $account->followingVisibility = $validated['followingVisibility'];
+        $account->infoVisibility = $validated['infoVisibility'];
+        $account->eventsVisibility = $validated['eventsVisibility']; 
+        $account->participatingVisibility = $validated['participatingVisibility'];
 
         $account->save();
 
-        return redirect('/profile/edit');
+        return redirect('/profile/fdssfsgfd');
     }
 
     public function deleteAccount(){

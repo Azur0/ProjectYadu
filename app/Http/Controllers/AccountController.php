@@ -76,7 +76,7 @@ class AccountController extends Controller
 
         $account->save();
 
-        return redirect('/profile/fdssfsgfd');
+        return redirect('/profile/edit');
     }
 
     public function deleteAccount(){

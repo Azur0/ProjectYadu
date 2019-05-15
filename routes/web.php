@@ -70,7 +70,7 @@ Route::post('/admin/events/actionDistanceFilter', 'Management\EventsController@a
 // admin/images
 Route::get('admin/images/category', 'Management\ImagesController@showtype')->middleware('auth', 'isAdmin');
 Route::post('admin/images/category', 'Management\ImagesController@passthrough')->middleware('auth', 'isAdmin');
-// Route::delete('admin/images/category', 'Management\ImagesController@removetype')->middleware('auth','isAdmin');
+Route::delete('admin/images/category', 'Management\ImagesController@removetype')->middleware('auth','isAdmin');  
 Route::get('admin/images/extra', 'Management\ImagesController@showextra')->middleware('auth', 'isAdmin');
 Route::post('admin/images/extra', 'Management\ImagesController@check')->middleware('auth', 'isAdmin');
-Route::delete('admin/images/extra', 'Management\ImagesController@removeextra')->middleware('auth', 'isAdmin');
+// Route::delete('admin/images/extra', 'Management\ImagesController@removeextra')->middleware('auth', 'isAdmin');

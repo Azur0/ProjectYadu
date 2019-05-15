@@ -7,11 +7,41 @@
             <h1>Placeholder type</h1>
                 <div class="box">
                     @foreach ($tags as $tag)
+                    <div class="card"> 
                         <input type="radio" id="{{$tag->tag}}" name="tag" value="{{$tag->id}}" onclick="fetch_customer_data({{$tag->id }})">
                         <label for="{{$tag->tag}}" class="category">
+                                <form class="form_submit_ays" method="DELETE" id="deleteAccount" action="{{ action('Management\ImagesController@removetype') }}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <div>
+                                            <div>
+                                                <button type="button" class="button-remove button-hover" data-toggle="modal" data-target="#confirmDelete">x</button>
+                                            </div>
+                                            <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">placeholder title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            placeholder information
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <input type="submit" form="deleteAccount" class="btn btn-danger" value="placeholder confirm delete">
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Placeholder dismiss</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                             <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
                             <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($tag->imageSelected) . '"/>'; ?>
-                        </label>
+                        </label>  
+                    </div>                     
                     @endforeach
                 </div>
                 @if ($errors->has('tag'))
@@ -20,17 +50,16 @@
             </div>
 
             <div class="pic">
-                <h3>2. {{__('events.create_step2')}}</h3>
+                <h3>Placeholder secondary</h3>
                     <div class="types">
                         <div id="box2" class="box">
                             
                         </div>
                         @if ($errors->has('picture'))
-                            <div class="error">{{__('events.error_select_photo')}}</div>
+                            <div class="error">Placeholder error</div>
                         @endif
                     </div>
             </div>
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
     </form>
 </div>
 <script>
@@ -46,17 +75,42 @@
                 success: function (data) {
                     console.log(data);
                     if (data == "") {
-                        $('#box2').html("<h5><i>{{__('events.create_select_type_first')}}</i></h5>");
+                        $('#box2').html("<h5><i>Placeholder</i></h5>");
                     } else {
                         $('#box2').html("");
 
                         data.forEach(function (element) {
-                            $('#box2').html($("#box2").html() + "<input type='radio' id='" +
-                                element['id'] + "' class='picture " + element['tag_id'] +
-                                "' name='picture' value='" + element['id'] + "'> <label for='" +
-                                element['id'] + "' class='picture " + element['tag_id'] +
-                                "'> <img class='default' src='data:image/jpeg;base64," +
-                                element['picture'] + "'/> </label>");
+                            $('#box2').html($("#box2").html() + `<input type="radio" id="${element['id']}" class="picture ${element['tag_id']}"  
+                                name="picture" value="${element['id']}"> <label for="${element['id']}" class="picture ${element['tag_id']}">
+                                    <form class="form_submit_ays" method="DELETE" id="deleteAccount" action="{{ action('Management\ImagesController@removetype') }}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <div>
+                                            <div class="badgecontainer">
+                                                <button type="button" class="button-remove button-hover" data-toggle="modal" data-target="#confirmDelete">x</button>
+                                            </div>
+                                            <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">placeholder title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            placeholder information
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <input type="submit" form="deleteAccount" class="btn btn-danger" value="placeholder confirm delete">
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Placeholder dismiss</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                <img class="default" src="data:image/jpeg;base64, ${element['picture']}"> </label>`);
                         });
                     }
                 },

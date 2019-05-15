@@ -8,9 +8,10 @@
                 <h1>Placeholder</h1>
                     <div class="box">
                         @foreach ($images as $image)
+                        <div class="card">
                         <input type="radio" id="{{$image}}" name="image" value="{{$image}}" onclick=setSelected(this)>
                             <label for="{{$image}}" class="category">
-                                    <form class="form_submit_ays" method="POST" id="deleteAccount" action="{{ action('Management\ImagesController@removeextra') }}">
+                                    {{-- <form class="form_submit_ays" method="POST" id="deleteAccount" action="{{ action('Management\ImagesController@removeextra') }}">
                                             @method('DELETE')
                                             @csrf
                                             <div>
@@ -37,10 +38,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </form> --}}
                                     <img src="{{ asset("images/".$image) }}" class="img-responsive" width="100px">
                                 <span>{{explode('.', $image)[0]}}</span>
                             </label>
+                        </div>
                         @endforeach
                     </div>
                 </div>

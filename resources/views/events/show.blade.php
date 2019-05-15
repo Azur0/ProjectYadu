@@ -19,6 +19,7 @@
                 <img class="img-fluid rounded-circle my-auto avatar"
                      src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}"/>
                 <h5 class="my-auto ml-2">{{$event->owner->firstName .' '. $event->owner->middleName .' '. $event->owner->lastName}}</h5>
+                <a href="http://127.0.0.1:8000/profile/blockUser/{{$event->owner->id}}">block</a>
             </div>
             <br><br>
 

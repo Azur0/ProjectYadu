@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\BlockedUser;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\EditProfileRequest;
 use Illuminate\Http\Request;
@@ -88,4 +89,11 @@ class AccountController extends Controller
         $account->save();
     }
 
+    public function blockAccount($id){
+        BlockedUser::create([
+            'account_id' => Auth::id(),
+            'blockedAccount_id' => $id,
+        ]);
+        return back();
+    }
 }

@@ -37,13 +37,26 @@ class EventsController extends Controller
 
     public function welcome()
 	{
+        $blockedUsers = [];
+        $UsersBlockedYou = [];
+
+        if(Auth::id()){
+            $blockedUsers = BlockedUser::where('account_id', '=', Auth::id())->pluck('blockedAccount_id');
+            $UsersBlockedYou = BlockedUser::where('blockedAccount_id', '=', Auth::id())->pluck('account_id');
+        }
+
 		$events = Event::take(6)
-			->where('isDeleted', '==', 0)
+            ->where('isDeleted', '==', 0)
+            ->whereNotIn('owner_id', $blockedUsers)
+            ->whereNotIn('owner_id', $UsersBlockedYou)
 			->orderBy('isHighlighted', 'desc')
 			->orderBy('startDate', 'desc')
-			->get();
+            ->get();
+            
 		$regular_events = Event::take(3)
-			->where('isDeleted', '==', 0)
+            ->where('isDeleted', '==', 0)
+            ->whereNotIn('owner_id', $blockedUsers)
+            ->whereNotIn('owner_id', $UsersBlockedYou)
 			->where('isHighlighted', '==', 0)
 			->orderBy('startDate', 'desc')
 			->get();
@@ -52,15 +65,12 @@ class EventsController extends Controller
 		{
 			$event->city = self::cityFromPostalcode($event->Location->postalcode);
 			$event->writtenDate = self::dateToShortText($event->startDate);
-
-
-		}
+        }
+        
 		foreach($regular_events as $event)
 		{
 			$event->city = self::cityFromPostalcode($event->Location->postalcode);
 			$event->writtenDate = self::dateToShortText($event->startDate);
-
-
 		}
 		
 		return view('welcome', compact('events', 'regular_events'));
@@ -311,8 +321,14 @@ class EventsController extends Controller
 
         $tags = EventTag::where('tag', 'like', '%' . $request->inputTag . '%')->pluck('id');
         $names = Event::where('eventName', 'like', '%' . $request->inputName . '%')->pluck('id');
-        $blockedUsers = BlockedUser::where('account_id', '=', Auth::user()->id)->pluck('blockedAccount_id');
-        $UsersBlockedYou = BlockedUser::where('blockedAccount_id', '=', Auth::user()->id)->pluck('account_id');
+
+        $blockedUsers = [];
+        $UsersBlockedYou = [];
+        if(Auth::id()){
+            $blockedUsers = BlockedUser::where('account_id', '=', Auth::id())->pluck('blockedAccount_id');
+            $UsersBlockedYou = BlockedUser::where('blockedAccount_id', '=', Auth::id())->pluck('account_id');
+        }
+        
 
         $this->distance = $request->input('distance');
         $unfiltered_events = Event::where('isDeleted', '==', 0)

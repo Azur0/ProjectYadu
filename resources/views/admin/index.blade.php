@@ -45,7 +45,7 @@
         </div>
 
     </div>
-    <div class='row'>
+    <div class='row mb-3'>
 
         <div class="col-xl-8 col-lg-7">
             <div class="card shadow mb-4 h-100">
@@ -54,16 +54,16 @@
                     <h6 class="m-0 font-weight-bold text-primary">Evenementen aangemaakt</h6>
 
                     <!-- Button trigger modal -->
-                    <a role="button" data-toggle="modal" data-target="#exampleModal">
+                    <a role="button" data-toggle="modal" data-target="#eventModal">
                         <i class="fas fa-calendar-alt fa-sm fa-fw"></i>
                     </a>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Jadatumbereikperiodetijdseenheid</h5>
+                                    <h5 class="modal-title" id="eventModalLabel">Jadatumbereikperiodetijdseenheid</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -96,6 +96,36 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Delen</h6>
+
+                    <!-- Button trigger modal -->
+                    <a role="button" data-toggle="modal" data-target="#shareModal">
+                        <i class="fas fa-calendar-alt fa-sm fa-fw"></i>
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="shareModalLabel">Jadatumbereikperiodetijdseenheid</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <label for="fromDate">Van</label>
+                                    <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="fromShareDate">
+
+                                    <label for="toDate">Tot</label>
+                                    <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="toShareDate">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                                    <button type="button" onclick="updateShareChart()" class="btn btn-primary" data-dismiss="modal">Uitvoeren</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -103,25 +133,23 @@
                 </div>
             </div>
         </div>
-
-        <div id="map"></div>
-        <script>
-            var map;
-
-            function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: {
-                        lat: -34.397,
-                        lng: 150.644
-                    },
-                    zoom: 8
-                });
-            }
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap" async defer></script>
-        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak&callback=initMap" async defer></script> -->
+    </div>
 
 
+    <div class='row mb-3'>
+
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4 h-100">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Evenementen</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div id="map" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -189,18 +217,98 @@
     //ShareChart
     var shareChart = new Chart(document.getElementById("shares"), {
         type: 'doughnut',
-        data: {
-            labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-            datasets: [{
-                label: "Population (millions)",
-                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                data: [2478, 5267, 734, 784, 433]
-            }]
-        },
+        data: getShareData(null, null),
         options: {
             maintainAspectRatio: true
         }
     });
+
+    function getShareData(fromDate, toDate) {
+        var plotLabels = [];
+        var plotData = [];
+
+        $.ajax({
+            url: "{{ route('admin_charts_shares') }}",
+            method: 'POST',
+            async: false,
+            data: {
+                fromDate: fromDate,
+                toDate: toDate,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(data) {
+                data.forEach(function(item) {
+                    plotLabels.push(item.platform);
+                    plotData.push(item.shareCount);
+                })
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+
+        return {
+            labels: plotLabels,
+            datasets: [{
+                backgroundColor: ['#256eff', '#8c16b7', '#b2b2b2', '#ff495c', '#3ddc97'],
+                data: plotData
+            }]
+        };
+    }
+
+    function updateShareChart() {
+        var fromDate = document.getElementById("fromShareDate").value;
+        var toDate = document.getElementById("toShareDate").value;
+        shareChart.data = getShareData(fromDate, toDate);
+        shareChart.update();
+    };
 </script>
+
+
+<script>
+    var map, heatmap;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 6.5,
+            center: {
+                lat: 52,
+                lng: 5.8
+            }
+        });
+
+        heatmap = new google.maps.visualization.HeatmapLayer({
+            data: getPoints(),
+            map: map,
+            opacity: 0.5,
+            radius: 20
+        });
+    }
+
+    // Heatmap data: 500 Points
+    function getPoints() {
+        return [
+            new google.maps.LatLng(51.70594, 5.3195),
+            new google.maps.LatLng(51.71636, 5.35611),
+            new google.maps.LatLng(53.17316, 6.60374),
+            new google.maps.LatLng(53.05563, 4.79603),
+            new google.maps.LatLng(52.51405, 6.08675),
+            new google.maps.LatLng(51.65118, 5.46722),
+            new google.maps.LatLng(52.36537, 4.88569),
+            new google.maps.LatLng(52.36537, 4.88569),
+            new google.maps.LatLng(51.92046, 4.47919),
+            new google.maps.LatLng(51.589, 4.77809),
+            new google.maps.LatLng(51.688549, 5.28745),
+            new google.maps.LatLng(51.69019, 5.30195),
+        ];
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=visualization&callback=initMap" async defer></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak&libraries=visualization&callback=initMap" async defer></script> -->
+
+
 
 @endsection

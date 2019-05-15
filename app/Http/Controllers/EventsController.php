@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\EventPicture;
 use App\Event;
+use App\BlockedUser;
 use App\EventHasParticipants;
 use App\Http\Controllers\API\LocationController;
 use App\Traits\DateToText;
@@ -310,20 +311,21 @@ class EventsController extends Controller
 
         $tags = EventTag::where('tag', 'like', '%' . $request->inputTag . '%')->pluck('id');
         $names = Event::where('eventName', 'like', '%' . $request->inputName . '%')->pluck('id');
+        $blockedUsers = BlockedUser::where('account_id', '=', Auth::user()->id)->pluck('blockedAccount_id');
+        $UsersBlockedYou = BlockedUser::where('blockedAccount_id', '=', Auth::user()->id)->pluck('account_id');
+
         $this->distance = $request->input('distance');
         $unfiltered_events = Event::where('isDeleted', '==', 0)
             ->where('startDate', '>=', $this->formatDate())
+            ->whereNotIn('owner_id', $blockedUsers)
+            ->whereNotIn('owner_id', $UsersBlockedYou)
             ->whereIn('id', $names)
             ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
             ->get();
 
-        //TODO: Set initial amount of items to load and add 'load more' button
         $events = new Collection();
 
-        //TODO:3 Filters from Ruben
-
-        //TODO:2 Filter the unfiltered events (Or so called pre-filtered events)
         $filtered_events = $this->areEvenstInRange($unfiltered_events);
 
         foreach ($filtered_events as $event) {

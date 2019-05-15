@@ -249,7 +249,7 @@
                 },
                 dataType: 'json',
                 success: function(data) {
-                    data.forEach(function(item) {
+                    data.shareData.forEach(function(item) {
                         plotLabels.push(item.platform);
                         plotData.push(item.shareCount);
                     })

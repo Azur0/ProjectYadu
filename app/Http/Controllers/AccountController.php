@@ -19,6 +19,21 @@ use App\Mail\Follow as FollowMail;
 
 class AccountController extends Controller
 {
+	public function publicProfile($id)
+	{
+		$isFollowing = false;
+		$account = Account::where('id', $id)->firstOrFail();
+		$myEvents = Event::where('owner_id', $id)->where('isDeleted', '==', 0);
+		if($account->id != Auth::user()->id)
+		{
+
+
+			$isFollowing = true;
+		}
+
+		return view('accounts.public_profile', compact('account','isFollowing','myEvents'));
+	}
+
 	public function create()
 	{
 		$genders = \App\Gender::all();

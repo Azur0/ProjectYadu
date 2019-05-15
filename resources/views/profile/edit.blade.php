@@ -135,6 +135,95 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                            	<p>public profile display settings</p>
+                            </div>
+                            <div class="form-group row">
+                                <label for="followerVisibility"
+                                       class="col-md-4 col-form-label text-md-right">followerVisibility</label>
+                                <div class="col-md-6">
+                                    <select name="followerVisibility" selected="{{$account->followerVisibility}}"
+                                            class="form-control{{ $errors->has('followerVisibility') ? ' is-invalid' : '' }}">
+                                        <option value="private" selected>Private</option>
+                                        <option value="follower" selected>Followers only</option>
+                                        <option value="public" selected>Public</option>
+                                    </select>
+                                    @if ($errors->has('followerVisibility'))
+                                        <span class="invalid-feedback force-show" role="alert">
+                                        <strong>{{ $errors->first('followerVisibility') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="followingVisibility"
+                                       class="col-md-4 col-form-label text-md-right">followingVisibility</label>
+                                <div class="col-md-6">
+                                    <select name="followingVisibility" selected="{{$account->followingVisibility}}"
+                                            class="form-control{{ $errors->has('followingVisibility') ? ' is-invalid' : '' }}">
+                                        <option value="private" selected>Private</option>
+                                        <option value="follower" selected>Followers only</option>
+                                        <option value="public" selected>Public</option>
+                                    </select>
+                                    @if ($errors->has('followingVisibility'))
+                                        <span class="invalid-feedback force-show" role="alert">
+                                        <strong>{{ $errors->first('followingVisibility') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="infoVisibility"
+                                       class="col-md-4 col-form-label text-md-right">infoVisibility</label>
+                                <div class="col-md-6">
+                                    <select name="infoVisibility" selected="{{$account->infoVisibility}}"
+                                            class="form-control{{ $errors->has('infoVisibility') ? ' is-invalid' : '' }}">
+                                        <option value="private" selected>Private</option>
+                                        <option value="follower" selected>Followers only</option>
+                                        <option value="public" selected>Public</option>
+                                    </select>
+                                    @if ($errors->has('infoVisibility'))
+                                        <span class="invalid-feedback force-show" role="alert">
+                                        <strong>{{ $errors->first('infoVisibility') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="eventsVisibility"
+                                       class="col-md-4 col-form-label text-md-right">eventsVisibility</label>
+                                <div class="col-md-6">
+                                    <select name="eventsVisibility" selected="{{$account->eventsVisibility}}"
+                                            class="form-control{{ $errors->has('eventsVisibility') ? ' is-invalid' : '' }}">
+                                        <option value="private" selected>Private</option>
+                                        <option value="follower" selected>Followers only</option>
+                                        <option value="public" selected>Public</option>
+                                    </select>
+                                    @if ($errors->has('eventsVisibility'))
+                                        <span class="invalid-feedback force-show" role="alert">
+                                        <strong>{{ $errors->first('eventsVisibility') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="participatingVisibility"
+                                       class="col-md-4 col-form-label text-md-right">participatingVisibility</label>
+                                <div class="col-md-6">
+                                    <select name="participatingVisibility" selected="{{$account->participatingVisibility}}"
+                                            class="form-control{{ $errors->has('participatingVisibility') ? ' is-invalid' : '' }}">
+                                        <option value="private" selected>Private</option>
+                                        <option value="follower" selected>Followers only</option>
+                                        <option value="public" selected>Public</option>
+                                    </select>
+                                    @if ($errors->has('participatingVisibility'))
+                                        <span class="invalid-feedback force-show" role="alert">
+                                        <strong>{{ $errors->first('participatingVisibility') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button id="submit" type="submit" class="btn btn-primary">

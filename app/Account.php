@@ -17,7 +17,7 @@ class Account extends Authenticatable implements MustVerifyEmailContract
     use Notifiable;
     use Encryptable;
 
-    protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender', 'avatar', 'api_token'];
+    protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender', 'avatar', 'api_token','followerVisibility','followingVisibility','infoVisibility','eventsVisibility','participatingVisibility'];
     protected $encryptable = ['firstName', 'middleName', 'lastName'];
   
     public function getAvatarAttribute($key)
@@ -29,7 +29,8 @@ class Account extends Authenticatable implements MustVerifyEmailContract
 
             return fread(fopen($filePath, "r"), filesize($filePath));
         }
-        else {
+        else
+        {
             return $avatar;
         }
     }
@@ -46,5 +47,15 @@ class Account extends Authenticatable implements MustVerifyEmailContract
 
     public function messages() {
         return $this->hasMany('App\Message');
+    }
+
+    public function followers()
+    {
+    	return $this->hasMany('App\Account', 'account_has_followers', 'account_id', 'follower_id');
+    }
+
+    public function following()
+    {
+    	return $this->belongsToMany('App\Account', 'account_has_followers', 'account_id', 'follower_id');
     }
 }

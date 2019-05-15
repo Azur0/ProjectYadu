@@ -10,9 +10,6 @@
                     <div class="card"> 
                         <input type="radio" id="{{$tag->tag}}" name="tag" value="{{$tag->id}}" onclick="fetch_customer_data({{$tag->id }})">
                         <label for="{{$tag->tag}}" class="category">
-                                <form class="form_submit_ays" method="DELETE" id="deleteAccount" action="{{ action('Management\ImagesController@removetype') }}">
-                                        @method('DELETE')
-                                        @csrf
                                         <div>
                                             <div>
                                                 <button type="button" class="button-remove button-hover" data-toggle="modal" data-target="#confirmDelete">x</button>
@@ -30,14 +27,13 @@
                                                             placeholder information
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <input type="submit" form="deleteAccount" class="btn btn-danger" value="placeholder confirm delete">
+                                                            <input type="submit" form="deleteAccount" class="btn btn-danger" onclick="window.location.href='{{url('/admin/images/'.$tag->id.'/delete')}}'" value="placeholder confirm delete">
                                                             <button type="button" class="btn btn-primary" data-dismiss="modal">Placeholder dismiss</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
                             <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
                             <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($tag->imageSelected) . '"/>'; ?>
                         </label>  
@@ -63,6 +59,7 @@
     </form>
 </div>
 <script>
+    
         function fetch_customer_data(query) {
             $.ajax({
                 url: "{{ route('events_controller.action')}}",
@@ -82,14 +79,11 @@
                         data.forEach(function (element) {
                             $('#box2').html($("#box2").html() + `<input type="radio" id="${element['id']}" class="picture ${element['tag_id']}"  
                                 name="picture" value="${element['id']}"> <label for="${element['id']}" class="picture ${element['tag_id']}">
-                                    <form class="form_submit_ays" method="DELETE" id="deleteAccount" action="{{ action('Management\ImagesController@removetype') }}">
-                                        @method('DELETE')
-                                        @csrf
                                         <div>
                                             <div class="badgecontainer">
-                                                <button type="button" class="button-remove button-hover" data-toggle="modal" data-target="#confirmDelete">x</button>
+                                                <button type="button" class="button-remove button-hover" data-toggle="modal" data-target="#confirmDeleteTypeOff">x</button>
                                             </div>
-                                            <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog">
+                                            <div class="modal fade" id="confirmDeleteTypeOff" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -102,14 +96,13 @@
                                                             placeholder information
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <input type="submit" form="deleteAccount" class="btn btn-danger" value="placeholder confirm delete">
+                                                            <input type="submit" form="deleteTypeOff" class="btn btn-danger" value="placeholder confirm delete" onclick="deleteTypeOff()">
                                                             <button type="button" class="btn btn-primary" data-dismiss="modal">Placeholder dismiss</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
                                 <img class="default" src="data:image/jpeg;base64, ${element['picture']}"> </label>`);
                         });
                     }
@@ -125,4 +118,10 @@
             })
         }
     </script>
+    <script>
+        function deleteTypeOff() {
+        // window.location.href ={{url('/admin/images/'.$tag->id.'/delete')}};
+        console.log("{{ url('Management\ImagesController@removetype') }}");
+    }   
+        </script>
 @endsection

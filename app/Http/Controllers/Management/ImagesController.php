@@ -100,8 +100,10 @@ class ImagesController extends Controller
 		return redirect('/admin/images/extra')->withErrors("penis");
 	}
 
-	public function removetype() {
-		// remove image out of db
+	public function removetype($id) {
+		print_r("adfasdfsaf");
+		$tag = EventTag::findOrFail($id);
+		// return redirect('admin/images.category');
 	}
 
 	public function passthrough() {

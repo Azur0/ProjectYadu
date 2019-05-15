@@ -96,4 +96,9 @@ class AccountController extends Controller
         ]);
         return back();
     }
+
+    public function unblockAccount(Request $request){
+        BlockedUser::where('account_id','=',Auth::id())->where('blockedAccount_id','=',$request->id)->firstOrFail()->delete();
+        return back();
+    }
 }

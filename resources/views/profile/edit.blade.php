@@ -148,6 +148,54 @@
                 </div>
 
                 <div class="card">
+                    <div class="card-header">Blocked users</div>
+                    <div class="card-body">
+                            @foreach ( $account->blockedUsers as $blockedUser )
+                            <form method="POST" id="unblock{{$blockedUser->blockedAccount->firstName}}" action="/profile/unblockUser">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$blockedUser->blockedAccount->id}}">
+                            <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">{{$blockedUser->blockedAccount->firstName}} {{ $blockedUser->blockedAccount->middleName }} {{ $blockedUser->blockedAccount->lastName }}</label>
+                                    <div class="col-md-4">
+                                    <button type="button" class="btn btn-primary float-right" data-toggle="modal"
+                                            data-target="#confirmUnblockAccount{{$blockedUser->blockedAccount->firstName}}">
+                                        Unblock
+                                    </button>
+                                </div>
+
+                                <div class="modal fade" id="confirmUnblockAccount{{$blockedUser->blockedAccount->firstName}}" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">{{__('profile.edit_delete_account_confirm_title')}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            Are you sure you want to unblock {{$blockedUser->blockedAccount->firstName}}?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="submit" form="unblock{{$blockedUser->blockedAccount->firstName}}" class="btn btn-danger"
+                                                       value="Yes, unblock">
+                                                <button type="button" class="btn btn-primary"
+                                                        data-dismiss="modal">No, Don't unblock
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                            @endforeach
+
+                            
+                    </div>
+                </div>
+
+
+                <div class="card">
                     <div class="card-header">{{__('profile.edit_change_password_title')}}</div>
                     <div class="card-body">
                         <form method="POST" action="/profile/changePassword">

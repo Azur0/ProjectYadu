@@ -47,6 +47,8 @@ Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middle
 Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
 Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middleware('auth');
 Route::get('/profile/blockUser/{id}', 'AccountController@blockAccount')->middleware('auth');
+Route::post('/profile/unblockUser/', 'AccountController@unblockAccount')->middleware('auth');
+
 
 Auth::routes();
 

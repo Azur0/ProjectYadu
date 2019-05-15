@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 class ChartController extends Controller
 {
     public function GetTotalEventsCreated(GetTotalEventsCreatedRequest $request){
-
         $fromDate = $request->fromDate;
         $fromMonth = (int)$fromDate->format('n');
         $fromYear = (int)$fromDate->format('Y');
@@ -74,7 +73,7 @@ class ChartController extends Controller
 
         foreach ($platforms as $platform){
             $entry = array(
-                'platform' => $platform->platform,
+                'platform' => ucfirst($platform->platform),
                 'shareCount' => SharedEvent::where('platform', $platform->platform)->whereBetween('created_at', [$fromDate, $toDate])->count(),
                 'fromMonth' => $fromDate->toDateString(),
                 'toMonth' => $toDate->toDateString(),

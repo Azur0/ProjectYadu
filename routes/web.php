@@ -70,4 +70,5 @@ Route::post('/logger/eventshared', 'LogController@LogEventShared')->name('LogEve
 
 Route::post('/charts/totaleventscreated', 'ChartController@GetTotalEventsCreated')->name('admin_charts_events')->middleware('auth', 'isAdmin');
 Route::post('/charts/monthlyshares', 'ChartController@GetMonthlyShares')->name('admin_charts_shares')->middleware('auth', 'isAdmin');
+Route::post('/charts/activeeventlocations', 'ChartController@GetActiveEventLocations')->name('admin_charts_locations')->middleware('auth', 'isAdmin');
 

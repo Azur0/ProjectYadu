@@ -301,29 +301,40 @@
             });
 
             heatmap = new google.maps.visualization.HeatmapLayer({
-                data: getPoints(),
+                data: getPoints(null, null),
                 map: map,
                 opacity: 0.5,
                 radius: 20
             });
         }
 
-        // Heatmap data: 500 Points
-        function getPoints() {
-            return [
-                new google.maps.LatLng(51.70594, 5.3195),
-                new google.maps.LatLng(51.71636, 5.35611),
-                new google.maps.LatLng(53.17316, 6.60374),
-                new google.maps.LatLng(53.05563, 4.79603),
-                new google.maps.LatLng(52.51405, 6.08675),
-                new google.maps.LatLng(51.65118, 5.46722),
-                new google.maps.LatLng(52.36537, 4.88569),
-                new google.maps.LatLng(52.36537, 4.88569),
-                new google.maps.LatLng(51.92046, 4.47919),
-                new google.maps.LatLng(51.589, 4.77809),
-                new google.maps.LatLng(51.688549, 5.28745),
-                new google.maps.LatLng(51.69019, 5.30195),
-            ];
+        // Heatmap data
+        function getPoints(fromDate, toDate) {
+            var plotLatLng = [];
+
+            $.ajax({
+                url: "{{ route('admin_charts_locations') }}",
+                method: 'POST',
+                async: false,
+                data: {
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    data.forEach(function(item) {
+                        console.log(item);
+                        plotLatLng.push(new google.maps.LatLng(item.lat, item.lng));
+                    })
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+            return plotLatLng;
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=visualization&callback=initMap" async defer></script>

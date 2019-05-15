@@ -83,4 +83,23 @@ class ChartController extends Controller
         }
         return $data;
     }
+
+    public function GetActiveEventLocations(){
+
+        // $fromDate = $request->fromDate;
+        // $toDate = $request->toDate;
+        
+        $data = array();
+        $events = Event::all();
+
+        foreach ($events as $event){
+            $entry = array(
+                'lat' => $event->location->locLatitude,
+                'lng' => $event->location->locLongtitude
+            );
+            array_push($data, $entry);
+        }
+
+        return $data;
+    }
 }

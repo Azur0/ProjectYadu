@@ -20,13 +20,13 @@ class EventLeft extends Mailable
     public $event;
     public $user;
     public $executor;
-    public $executorBool;
-    public function __construct($event,$user,$executor,$executorBool)
+    public $type;
+    public function __construct($event,$user,$executor,$type)
     {
         $this->event = $event;
         $this->user = $user;
         $this->executor = $executor;
-        $this->executorBool = $executorBool;
+        $this->type = $type;
     }
 
     /**
@@ -37,12 +37,12 @@ class EventLeft extends Mailable
     public function build()
     {
         $bodyText = "";
-        if($this->executorBool == 1){
+        if($this->type == 1){
             $bodyText = Lang::get('mail.leftEvent') ." ". $this->event->eventName ."". Lang::get('mail.event');
         }else if($this->event->owner->id == $this->user->id){
             $bodyText =
                 $this->executor->firstName ." ". Lang::get('mail.leftYourEvent') . " " . $this->event->eventName ;
-        }else{
+        }else {
             $bodyText =
                 $this->executor->firstName ." ".Lang::get('mail.participantLeftEvent') . " " . $this->event->eventName;
         }

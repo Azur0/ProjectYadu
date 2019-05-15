@@ -43,7 +43,7 @@ class SendEventLeftNotification
         //TODO: Mail the rest that someone left that event -- Someone left this event mail
         if($event->event->participants->count() >0){
             foreach($event->event->participants as $participant){
-                if($participant->id != $executor->id && $participant->id != $event->event->owner->id){
+                if($participant->id != $executor->id && $participant->id != $event->event->owner->id && !$executor->followers->containts($participant)){
                     $event->event->owner->firstName = $participant->firstName;
                     Mail::to($participant->email)->send(
                         new EventLeftMail($event->event,$participant,$executor,0)
@@ -53,7 +53,15 @@ class SendEventLeftNotification
         }
 
         //TODO: Mail if someone you follow left?
-
-        //TODO: Mail The people who follow you?
+        if($executor->followers->count() >0){
+            foreach($executor->followers as $follower){
+                if($follower->id != $executor->id && $follower->id != $event->event->owner->id){
+                    $event->event->owner->firstName = $follower->firstName;
+                    Mail::to($follower->email)->send(
+                        new EventLeftMail($event->event,$follower,$executor,0)
+                    );
+                }
+            }
+        }
     }
 }

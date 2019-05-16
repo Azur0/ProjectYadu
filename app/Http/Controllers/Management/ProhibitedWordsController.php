@@ -46,20 +46,18 @@ class ProhibitedWordsController extends Controller
 
     public function update($oldWord, AddProhibitedWordRequest $request)
     {
-//        print_r($oldWord);
-//        print_r(" ");
-//        print_r($request->updatedProhibitedWord);
-
-        if(!ProhibitedWord::where('word', '=', $request->updatedProhibitedWord)->exists())
-            ProhibitedWordController::updateProhibitedWord($oldWord, $request->updatedProhibitedWord);
+        if(preg_match('/^[a-z0-9 .\-]+$/i', $request->updatedProhibitedWord))
+            if(!ProhibitedWord::where('word', '=', $request->updatedProhibitedWord)->exists())
+                ProhibitedWordController::updateProhibitedWord($oldWord, $request->updatedProhibitedWord);
 
         return redirect('admin/swearWords');
     }
 
     public function create(AddProhibitedWordRequest $request)
     {
-        if(!ProhibitedWord::where('word', '=', $request->newProhibitedWord)->exists())
-            ProhibitedWordController::createProhibitedWord($request->newProhibitedWord);
+        if(preg_match('/^[a-z0-9 .\-]+$/i', $request->newProhibitedWord))
+            if(!ProhibitedWord::where('word', '=', $request->newProhibitedWord)->exists())
+                ProhibitedWordController::createProhibitedWord($request->newProhibitedWord);
 
         return redirect('admin/swearWords');
     }

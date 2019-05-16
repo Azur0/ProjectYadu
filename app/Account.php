@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Events\AccountCreatedEvent;
+use App\Events\AccountCreation;
 use App\Mail\Confirmation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -19,7 +20,11 @@ class Account extends Authenticatable implements MustVerifyEmailContract
 
     protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender', 'avatar', 'api_token'];
     protected $encryptable = ['firstName', 'middleName', 'lastName'];
-  
+
+    protected $dispatchesEvents = [
+        'created' => AccountCreation::class
+    ];
+
     public function getAvatarAttribute($key)
     {
         $avatar = $this->attributes['avatar'];

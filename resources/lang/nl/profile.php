@@ -22,6 +22,16 @@ return [
     'edit_email' => 'E-Mailadres',
     'edit_update_profile' => 'Profiel bijwerken',
 
+    'edit_change_account_settings_title' => 'Account instellingen - meldt',
+    'edit_change_account_settings_follow_notification_creation' => 'Wanneer een evenement is aangemaakt door iemand die je volgt',
+    'edit_change_account_settings_follow_notification_join' => 'Wanneer iemand die je volgt meegaat doet aan een evenement',
+    'edit_change_account_settings_invite_notification' => 'Wanneer je wordt uitgenodigde ',
+    'edit_change_account_settings_event_edited' => 'Wanneer het evenement waaraan u deelneemt, wordt bewerkt',
+    'edit_change_account_settings_event_deleted' => 'Wanneer het evenement waaraan u deelneemt wordt verwijderd',
+    // Check of this is necessary
+    'edit_change_account_settings_event_created' => 'Wanneer evenement is gemaakt',
+    'edit_change_account_settings' => 'Wijzig instellingen',
+
     'edit_change_password_title' => 'Wachtwoord wijzigen',
     'edit_current_password' => 'Huidig wachtwoord',
     'edit_new_password' => 'Nieuw wachtwoord',

@@ -17,4 +17,70 @@ class ProfileController extends Controller
 
         return view('profile.edit', compact(['account', 'genders']));
     }
+
+    public function update(Request $request, $id){
+        if (Auth::check())
+        {
+            $validator = Validator::make($request->all(),
+                [
+                    'FollowNotificationCreateEvent' => 'nullable|string',
+                    'FollowNotificationJoinEvent' => 'nullable|string',
+                    'NotificationInvite' => 'nullable|string',
+                    'NotificationEventEdited' => 'nullable|string',
+                    'NotificationEventDeleted' => 'nullable|string',
+                    'NotificationEventCreated' => 'nullable|string',
+                    ]);
+            if ($validator->fails())
+            {
+                return redirect("")
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $FollowNotificationCreateEvent = 0;
+            if($request['FollowNotificationCreateEvent'] == "on")
+            {
+                $FollowNotificationCreateEvent = 1;
+            }
+            $FollowNotificationJoinEvent = 0;
+            if($request['FollowNotificationJoinEvent'] == "on")
+            {
+                $FollowNotificationJoinEvent = 1;
+            }
+            $NotificationInvite = 0;
+            if($request['NotificationInvite'] == "on")
+            {
+                $NotificationInvite = 1;
+            }
+            $NotificationEventEdited = 0;
+            if($request['NotificationEventEdited'] == "on")
+            {
+                $NotificationEventEdited = 1;
+            }
+            $NotificationEventDeleted = 0;
+            if($request['NotificationEventDeleted'] == "on")
+            {
+                $NotificationEventDeleted = 1;
+            }
+            $NotificationEventCreated = 0;
+            if($request['NotificationEventCreated'] == "on")
+            {
+                $NotificationEventCreated = 1;
+            }
+
+            $account = Account::where('id', $id)->firstorfail();
+            $account->settings->update(
+                [
+                    'FollowNotificationCreateEvent' => $FollowNotificationCreateEvent,
+                    'FollowNotificationJoinEvent' => $FollowNotificationJoinEvent,
+                    'NotificationInvite' => $NotificationInvite,
+                    'NotificationEventEdited' => $NotificationEventEdited,
+                    'NotificationEventDeleted' => $NotificationEventDeleted,
+                    'NotificationEventCreated' => $NotificationEventCreated,
+                ]
+            );
+            $genders = Gender::all();
+            return view('profile.edit', compact(['account', 'genders']));
+        }
+    }
 }

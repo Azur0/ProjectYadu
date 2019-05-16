@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\AccountSettings;
 use App\Gender;
+use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -69,8 +71,11 @@ class ProfileController extends Controller
             }
 
             $account = Account::where('id', $id)->firstorfail();
-            $account->settings->update(
+            $accountSettings = AccountSettings::where('account_id', $id)->firstorfail();
+
+            $accountSettings->update(
                 [
+
                     'FollowNotificationCreateEvent' => $FollowNotificationCreateEvent,
                     'FollowNotificationJoinEvent' => $FollowNotificationJoinEvent,
                     'NotificationInvite' => $NotificationInvite,
@@ -79,6 +84,7 @@ class ProfileController extends Controller
                     'NotificationEventCreated' => $NotificationEventCreated,
                 ]
             );
+            //dd($accountSettings);
             $genders = Gender::all();
             return view('profile.edit', compact(['account', 'genders']));
         }

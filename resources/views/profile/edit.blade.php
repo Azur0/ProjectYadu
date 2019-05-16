@@ -153,8 +153,8 @@
                     </div>
                     <div class="card-body">
                         <form method="POST" action="/profile/updateAccountSettings/{{$account->id}}">
-                            @method("PATCH")
                             @csrf
+                            @method("PATCH")
                             <div class="form-group row">
                                 <label for="FollowNotificationCreateEvent"
                                        class="col-md-6 col-form-label text-md-right">{{__('profile.edit_change_account_settings_follow_notification_creation')}}

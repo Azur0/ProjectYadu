@@ -27,13 +27,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/edit/{lang}/{page}', 'EditLangController@index');
 Route::post('admin', 'EditLangController@saveFile');
 
-Route::get('/account/myevents', 'HomeController@myEvents');
-Route::get('/account/participating', 'HomeController@participating');
-Route::get('/account/{id}/profile', 'AccountController@profileInfo');
-Route::get('/account/{id}/followers', 'AccountController@profileFollower');
-Route::get('/account/{id}/following', 'AccountController@profileFollowing');
-Route::get('/account/{id}/events', 'AccountController@profileInfo');
-Route::get('/account/{id}/participating', 'AccountController@profileParticipating');
+Route::get('/account/myevents', 'HomeController@myEvents')->middleware('auth');
+Route::get('/account/participating', 'HomeController@participating')->middleware('auth');
+Route::get('/account/{id}/profile/{contentType}', 'AccountController@profileInfo')->middleware('auth');
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
 

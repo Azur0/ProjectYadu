@@ -12,6 +12,17 @@ return [
     'follow_request' => 'has sent you a follow request!',
     'follow_request_accept' => 'Accept follow request',
     'follow_request_decline' => 'Decline follow request',
+    
+    'head_info' => 'Info',
+    'head_Events' => 'Events',
+    'head_Participating' => 'Participating',
+    'head_Followers' => 'Followers',
+    'head_following' => 'Following',
+    'info_name' => 'Name',
+    'info_rol' => 'Role',
+    'info_stats' => 'Stats',
+    'info_hosted' => 'Events hosted',
+    'info_participated' => 'Events participated in',
 
 ///////////////////////////////// Edit ////////////////////////////////////
 

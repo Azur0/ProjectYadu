@@ -19,7 +19,7 @@ use App\Mail\Follow as FollowMail;
 
 class AccountController extends Controller
 {
-	public function profileInfo($id)
+	public function profileInfo($id, $contentType)
 	{
 		$isFollowing = false;
 		$account = Account::where('id', $id)->firstOrFail();
@@ -28,8 +28,27 @@ class AccountController extends Controller
 		{
 			$follow = AccountHasFollowers::where('account_id', $account->id)->where('follower_id', Auth::id())->first();
 		}
-
-		return view('accounts.profile.info', compact('account','follow','myEvents'));
+		
+		switch ($contentType)
+		{
+			case 'events':
+				return view('accounts.profile.events', compact('account','follow'));
+				break;
+			case 'participating':
+				return view('accounts.profile.participating', compact('account','follow'));
+				break;
+			case 'followers':
+				return view('accounts.profile.followers', compact('account','follow'));
+				break;
+			case 'following':
+				return view('accounts.profile.following', compact('account','follow'));
+				break;
+			case 'info':
+				return view('accounts.profile.info', compact('account','follow'));
+				break;
+			default:
+			return redirect('/account/'.$id.'/profile/info');
+		}
 	}
 
 	public function create()

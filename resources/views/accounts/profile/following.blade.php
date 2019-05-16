@@ -2,16 +2,29 @@
 
 @section('profilecontent')
 <div class="row">
-	<h3>follow</h3>
+	<div class="col">
+		<h3>following</h3>
 
-	@foreach( $account->following as $following)
-		<div id="user_avatar">
-			<img src="data:image/png;base64,{{ chunk_split(base64_encode($account->avatar)) }}">
-			<div>
-				{{ $account->firstName }} {{ $account->middleName }} {{ $account->lastName }}
+		@foreach( $account->following as $following)
+			<div class="profile_related_user ">
+				<a href="/account/{{ $account->id }}/profile/info">
+					<div class="row">
+					<div class="col-4">
+						<div class="profile_image">
+							<img src="data:image/png;base64,{{ chunk_split(base64_encode($following->avatar)) }}">
+						</div>
+					</div>
+					<div class="col-8">
+						<h6>{{ $following->firstName }} {{ $following->middleName }} {{ $following->lastName }}</h6>
+					</div>
+					</div>
+				</a>
 			</div>
+		@endforeach
+		<div>
+			
 		</div>
-	@endforeach
+	</div>
 </div>
 
 @endsection

@@ -40,33 +40,33 @@
 							</div>
 							<div id="user_header_tabs" class="row align-items-end">
 								<div class="col">
-									<div id="account_tabs" class="row">
+									<div id="account_tabs">
 										<ul><!--nav nav-tabs-->
 											@if( $account->id == Auth::user()->id )
-												<li class="active"><a href=""><i class="fas fa-user"></i> My Info</a></li>
-												<li><a href="/account/{{ $account->id }}/profile/Events"><i class="fas fa-calendar-alt"></i> My Events</a></li>
-												<li><a href="/account/{{ $account->id }}/profile/Events"><i class="fas fa-calendar-alt"></i> Participating</a></li>
-												<li><a href="/account/{{ $account->id }}/profile/Followers"><i class="fas fa-users"></i> Followers</a></li>
-												<li><a href="/account/{{ $account->id }}/profile/Following"><i class="fas fa-user-friends"></i> Following</a></li>
+												<li><a href="/account/{{ $account->id }}/profile/info"><i class="fas fa-user"></i> My Info</a></li>
+												<li><a href="/account/{{ $account->id }}/profile/events"><i class="fas fa-calendar-alt"></i> My Events</a></li>
+												<li><a href="/account/{{ $account->id }}/profile/events"><i class="fas fa-calendar-alt"></i> Participating</a></li>
+												<li><a href="/account/{{ $account->id }}/profile/followers"><i class="fas fa-users"></i> Followers</a></li>
+												<li><a href="/account/{{ $account->id }}/profile/following"><i class="fas fa-user-friends"></i> Following</a></li>
 											@else
 												@if($account->infoVisibility == 'public' || ($account->infoVisibility == 'follower' && $isFollowing == true))
-													<li class="active"><a href=""><i class="fas fa-user"></i> Info</a></li>
+													<li><a href="/account/{{ $account->id }}/profile/info"><i class="fas fa-user"></i> Info</a></li>
 												@endif
 
 												@if($account->eventsVisibility == 'public' || ($account->eventsVisibility == 'follower' && $isFollowing == true))
-													<li><a href="/account/{{ $account->id }}/profile/Events"><i class="fas fa-calendar-alt"></i> Events</a></li>
+													<li><a href="/account/{{ $account->id }}/profile/events"><i class="fas fa-calendar-alt"></i> Events</a></li>
 												@endif
 												
 												@if($account->participatingVisibility == 'public' || ($account->participatingVisibility == 'public' && $isFollowing == true))
-													<li><a href="/account/{{ $account->id }}/profile/Events"><i class="fas fa-calendar-alt"></i> Participating</a></li>
+													<li><a href="/account/{{ $account->id }}/profile/participating"><i class="fas fa-calendar-alt"></i> Participating</a></li>
 												@endif
 												
 												@if($account->followerVisibility == 'public' || ($account->followerVisibility == 'follower' && $isFollowing == true))
-													<li><a href="/account/{{ $account->id }}/profile/Followers"><i class="fas fa-users"></i> Followers</a></li>
+													<li><a href="/account/{{ $account->id }}/profile/followers"><i class="fas fa-users"></i> Followers</a></li>
 												@endif
 												
 												@if($account->followingVisibility == 'public' || ($account->followingVisibility == 'follower' && $isFollowing == true))
-													<li><a href="/account/{{ $account->id }}/profile/Following"><i class="fas fa-user-friends"></i> Following</a></li>
+													<li><a href="/account/{{ $account->id }}/profile/following"><i class="fas fa-user-friends"></i> Following</a></li>
 												@endif
 											@endif
 										</ul>

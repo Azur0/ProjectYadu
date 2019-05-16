@@ -4,6 +4,7 @@
 <div class="row">
 	<div class="col">
 		<h3>info</h3>
+		<p>naam: {{ $account->firstName }} {{ $account->middleName }} {{ $account->lastName }}</p>
 		<p>role: {{ $account->accountRole }}</p>
 	</div>
 	<div class="col">

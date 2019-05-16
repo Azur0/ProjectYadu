@@ -11121,3 +11121,33 @@ a.text-dark:focus {
   border-width: 2px 2px 0 2px;
 }
 
+.profile_related_user {
+  width: 25%;
+  display: inline-block;
+  padding: 1em;
+  border: 1px solid #E6E6E6;
+}
+
+.profile_related_user .profile_image {
+  border: 5px solid white;
+  border-radius: 500px;
+  overflow: hidden;
+}
+
+.profile_related_user .profile_image img {
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (max-width: 1200px) {
+  .profile_related_user {
+    width: 49%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .profile_related_user {
+    width: 100%;
+  }
+}
+

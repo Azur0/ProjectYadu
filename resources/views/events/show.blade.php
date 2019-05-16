@@ -16,8 +16,9 @@
 
             <h3>{{__('events.show_initiator')}}</h3>
             <div class="row my-1">
-                <img class="img-fluid rounded-circle my-auto avatar"
-                     src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}"/>
+                <a href="/account/{{$event->owner->id}}/profile/info">
+                	<img class="img-fluid rounded-circle my-auto avatar" src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}"/>
+                </a>
                 <h5 class="my-auto ml-2">{{$event->owner->firstName .' '. $event->owner->middleName .' '. $event->owner->lastName}}</h5>
             </div>
             <br><br>
@@ -44,9 +45,11 @@
             </div>
             @foreach($event->participants as $participant)
                 <div class="row my-1">
-                    <img class="img-fluid rounded-circle my-auto avatar"
-                         src="data:image/jpeg;base64, {{base64_encode($participant->avatar)}}"/>
+                    <a href="/account/{{$participant->id}}/profile/info">
+                    	<img class="img-fluid rounded-circle my-auto avatar" src="data:image/jpeg;base64, {{base64_encode($participant->avatar)}}"/>
+                    </a>
                     <h5 class="my-auto ml-2">{{$participant->firstName .' '. $participant->middleName .' '. $participant->lastName}}</h5>
+                    
                 </div>
             @endforeach
         </div>

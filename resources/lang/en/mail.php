@@ -8,7 +8,7 @@ return [
     "deleteTitle" => "One of your events has being deleted.",
     "deleteText1" => "Event ",
     "deleteText2" => " is deleted.",
-    "closing" => "Have a nice day",
+    "closing" => "Have a nice day.",
 
     // Event
     "event" => "event",

@@ -20,10 +20,7 @@ class AccountController extends Controller
 {
 	public function profileInfo($id, $contentType)
 	{
-		$follow = false;
-
 		$account = Account::where('id', $id)->firstOrFail();
-		//$myEvents = Event::where('owner_id', $id)->where('isDeleted', '==', 0);
 		if($account->id != Auth::user()->id)
 		{
 			$follow = AccountHasFollowers::where('account_id', $account->id)->where('follower_id', Auth::id())->first();
@@ -34,9 +31,11 @@ class AccountController extends Controller
 			case 'events':
 				$privacy = $account->eventsVisibility;
 
-				if($privacy == 'public' || ($privacy == 'follower' && $follow == true) || $account->id == Auth::id())
+				if($account->id == Auth::id() || $privacy == 'public' || ($privacy == 'follower' && $follow->status == "accepted"))
 				{
-					return view('accounts.profile.events', compact('account','follow'));
+					$events = Event::all()->where('owner_id', auth()->user()->id)->where('isDeleted', '==', 0);
+
+					return view('accounts.profile.events', compact('account','follow','events'));
 				}
 				else
 				{
@@ -47,9 +46,21 @@ class AccountController extends Controller
 			case 'participating':
 				$privacy = $account->participatingVisibility;
 
-				if($privacy == 'public' || ($privacy == 'follower' && $follow == true) || $account->id == Auth::id())
+				if($account->id == Auth::id() || $privacy == 'public' || ($privacy == 'follower' && $follow->status == "accepted"))
 				{
-					return view('accounts.profile.participating', compact('account','follow'));
+					$events = array();
+					$part = EventHasParticipants::get()->where('account_id', '==', $account->id);
+
+					foreach($part as $par)
+					{
+						$event = Event::find($par->event_id);
+						if($event->isDeleted == 0)
+						{
+							array_push($events, Event::find($par->event_id));
+						}
+					}
+
+					return view('accounts.profile.participating', compact('account','follow','events'));
 				}
 				else
 				{
@@ -59,7 +70,9 @@ class AccountController extends Controller
 			case 'followers':
 				$privacy = $account->followerVisibility;
 
-				if($privacy == 'public' || ($privacy == 'follower' && $follow == true) || $account->id == Auth::id())
+				//$followers = 
+
+				if($account->id == Auth::id() || $privacy == 'public' || ($privacy == 'follower' && $follow->status == "accepted"))
 				{
 					return view('accounts.profile.followers', compact('account','follow'));
 				}
@@ -71,7 +84,7 @@ class AccountController extends Controller
 			case 'following':
 				$privacy = $account->followingVisibility;
 
-				if($privacy == 'public' || ($privacy == 'follower' && $follow == true) || $account->id == Auth::id())
+				if($account->id == Auth::id() || $privacy == 'public' || ($privacy == 'follower' && $follow->status == "accepted"))
 				{
 					return view('accounts.profile.following', compact('account','follow'));
 				}
@@ -86,8 +99,6 @@ class AccountController extends Controller
 			default:
 			return redirect('/account/'.$id.'/profile/info');
 		}
-
-
 	}
 
 	public function create()

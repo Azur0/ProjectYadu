@@ -45,27 +45,27 @@
 											@if( $account->id == Auth::user()->id )
 												<li><a href="/account/{{ $account->id }}/profile/info"><i class="fas fa-user"></i> My Info</a></li>
 												<li><a href="/account/{{ $account->id }}/profile/events"><i class="fas fa-calendar-alt"></i> My Events</a></li>
-												<li><a href="/account/{{ $account->id }}/profile/events"><i class="fas fa-calendar-alt"></i> Participating</a></li>
+												<li><a href="/account/{{ $account->id }}/profile/participating"><i class="fas fa-calendar-alt"></i> Participating</a></li>
 												<li><a href="/account/{{ $account->id }}/profile/followers"><i class="fas fa-users"></i> Followers</a></li>
 												<li><a href="/account/{{ $account->id }}/profile/following"><i class="fas fa-user-friends"></i> Following</a></li>
 											@else
-												@if($account->infoVisibility == 'public' || ($account->infoVisibility == 'follower' && $isFollowing == true))
+												@if($account->infoVisibility == 'public' || ($account->infoVisibility == 'follower' && $follow->status == "accepted"))
 													<li><a href="/account/{{ $account->id }}/profile/info"><i class="fas fa-user"></i> Info</a></li>
 												@endif
 
-												@if($account->eventsVisibility == 'public' || ($account->eventsVisibility == 'follower' && $isFollowing == true))
+												@if($account->eventsVisibility == 'public' || ($account->eventsVisibility == 'follower' && $follow->status == "accepted"))
 													<li><a href="/account/{{ $account->id }}/profile/events"><i class="fas fa-calendar-alt"></i> Events</a></li>
 												@endif
 												
-												@if($account->participatingVisibility == 'public' || ($account->participatingVisibility == 'public' && $isFollowing == true))
+												@if($account->participatingVisibility == 'public' || ($account->participatingVisibility == 'public' && $follow->status == "accepted"))
 													<li><a href="/account/{{ $account->id }}/profile/participating"><i class="fas fa-calendar-alt"></i> Participating</a></li>
 												@endif
 												
-												@if($account->followerVisibility == 'public' || ($account->followerVisibility == 'follower' && $isFollowing == true))
+												@if($account->followerVisibility == 'public' || ($account->followerVisibility == 'follower' && $follow->status == "accepted"))
 													<li><a href="/account/{{ $account->id }}/profile/followers"><i class="fas fa-users"></i> Followers</a></li>
 												@endif
 												
-												@if($account->followingVisibility == 'public' || ($account->followingVisibility == 'follower' && $isFollowing == true))
+												@if($account->followingVisibility == 'public' || ($account->followingVisibility == 'follower' && $follow->status == "accepted"))
 													<li><a href="/account/{{ $account->id }}/profile/following"><i class="fas fa-user-friends"></i> Following</a></li>
 												@endif
 											@endif

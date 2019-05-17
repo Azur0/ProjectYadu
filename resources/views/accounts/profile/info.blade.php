@@ -11,6 +11,8 @@
 		<h3>stats</h3>
 		<p>events hosted: </p>
 		<p>events participated: </p>
+		<p>Followers: </p>
+		<p>Following: </p>
 	</div>
 </div>
 @endsection

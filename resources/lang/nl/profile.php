@@ -12,6 +12,9 @@ return [
     'follow_request' => 'heeft je een volgverzoek verstuurd!',
     'follow_request_accept' => 'Volgverzoek accepteren',
     'follow_request_decline' => 'Volgverzoek weigeren',
+    'follow' => 'Volgen',
+    'follow_pending' => 'Volgverzoek verstuurd',
+    'follow_accepted' => 'Ontvolgen',
 
     'head_me_info' => 'My Info',
     'head_info' => 'Info',

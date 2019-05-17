@@ -21,15 +21,15 @@
 									@if($account->id != Auth::user()->id)
 										@if(is_null($follow))
 											<a href="/profile/{{$account->id}}/follow" class="btn btn-info btn-sm my-auto mx-2">
-												<i class="fas fa-user-plus"></i> Follow
+												<i class="fas fa-user-plus"></i> {{ __('profile.follow') }}
 											</a>
 										@elseif($follow->status == "pending")
-											<a href="/profile/{{$account->id}}/follow" class="btn btn-info btn-sm my-auto mx-2">
-                        						Follow request pending
+											<a href="#" class="btn btn-info btn-sm my-auto mx-2" disabled>
+												{{ __('profile.follow_pending') }}
                     						</a>
 										@elseif($follow->status == "accepted")
 										<a href="/profile/{{$account->id}}/unfollow" class="btn btn-info btn-sm my-auto mx-2">
-										<i class="fas fa-user-plus"></i> Unfollow
+										<i class="fas fa-user-minus"></i> {{ __('profile.unfollow') }}
                     					</a>
 										@endif
 										@if (session('error'))

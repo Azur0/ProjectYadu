@@ -12,6 +12,9 @@ return [
     'follow_request' => 'has sent you a follow request!',
     'follow_request_accept' => 'Accept follow request',
     'follow_request_decline' => 'Decline follow request',
+    'follow' => 'Follow',
+    'follow_pending' => 'Follow request pending',
+    'follow_accepted' => 'Unfollow',
     
     'head_me_info' => 'My Info',
     'head_info' => 'Info',

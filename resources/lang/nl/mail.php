@@ -6,6 +6,7 @@ return [
     "editText1" => "Evenement ",
     "editText2" => " is aangepast.",
     "deleteTitle" => "Een van je evenementen is verwijdert.",
+    "deleteTitleParticipant" => "Een evenement waar je voor hebt aangemeld is verwijdert",
     "deleteText1" => "Evenement ",
     "deleteText2" => " is verwijdert.",
     "closing" => "Nog een fijne dag veder.",

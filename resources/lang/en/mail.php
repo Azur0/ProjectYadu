@@ -6,6 +6,7 @@ return [
     "editText1" => "Event ",
     "editText2" => " has being edited.",
     "deleteTitle" => "One of your events has being deleted.",
+    "deleteTitleParticipant" => "An event which you had joined is removed",
     "deleteText1" => "Event ",
     "deleteText2" => " is deleted.",
     "closing" => "Have a nice day.",

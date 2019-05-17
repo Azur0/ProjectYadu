@@ -7,7 +7,6 @@
 
     {{-- Body --}}
     {{ $slot }}
-
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer', ['url' => config('app.url')])

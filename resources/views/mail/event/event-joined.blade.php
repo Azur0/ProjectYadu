@@ -1,9 +1,9 @@
 @component('mail::message')
-    # {{__($headText)}}
+# {{__($headText)}}
 
-    {{$salutation . $name}}
+{{$salutation . $name}}
 
-    {{$bodyText}}
+{{$bodyText}}
 
-    {{__('mail.closing')}}
+{{__('mail.closing')}}
 @endcomponent

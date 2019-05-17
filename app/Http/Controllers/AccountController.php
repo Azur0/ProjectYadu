@@ -16,12 +16,11 @@ use Illuminate\Support\Facades\Mail;
 use DB;
 use App\Mail\Follow as FollowMail;
 
-
 class AccountController extends Controller
 {
 	public function profileInfo($id, $contentType)
 	{
-		$isFollowing = false;
+		$follow = false;
 		$account = Account::where('id', $id)->firstOrFail();
 		//$myEvents = Event::where('owner_id', $id)->where('isDeleted', '==', 0);
 		if($account->id != Auth::user()->id)
@@ -32,6 +31,7 @@ class AccountController extends Controller
 		switch ($contentType)
 		{
 			case 'events':
+				if($account->eventsVisibility == 'private'){}
 				return view('accounts.profile.events', compact('account','follow'));
 				break;
 			case 'participating':
@@ -49,6 +49,8 @@ class AccountController extends Controller
 			default:
 			return redirect('/account/'.$id.'/profile/info');
 		}
+
+		
 	}
 
 	public function create()

@@ -7,9 +7,7 @@
 		<div class="row">
 			<div class="col">
 			
-			@foreach( $events as $event)
-						
-			@endforeach
+			
 			</div>
 		</div>
 	</div>

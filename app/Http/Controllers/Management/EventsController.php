@@ -253,13 +253,14 @@ class EventsController extends Controller
 		if (Auth::check())
 		{
 		    $event = Event::findOrFail($event->id);
+		    /*
             if($event->participants()->count()){
                 $participants = $event->participants()->get();
                 foreach($participants as $participant){
                     $event->participants()->detach($participant->id);
                 }
-            }
-			$event->delete();
+            }*/
+			$event->isDeleted = Carbon::now();
 			return redirect('admin/events');
 		}
 	}

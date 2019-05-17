@@ -12,7 +12,7 @@ return [
 
     // Event
     "event" => "evenement",
-    "joinedEvent" => "Je aangemeld voor",
+    "joinedEvent" => "Je hebt je aangemeld voor",
     "joinedYourEvent" => "heeft zich aangemeld voor je evenement",
     "participantJoinedEvent" => "heeft zich aangemeld voor",
     "leftEvent" => "Je hebt je afgemeld voor",
@@ -20,6 +20,8 @@ return [
     "participantLeftEvent" => "heeft zich afgemeld voor",
     "eventJoinedHeader" => "Iemand heeft zich aangemeld voor een evenement",
     "eventLeftHeader" => "Iemand heeft zich afgemeld voor een evenement",
+    "eventInfoTitle" => "Eventement informatie",
+    "eventOwner" => "Eigenaar evenement",
 
     //Account
     "changedPassword" => "Je wachtwoord is veranderd",

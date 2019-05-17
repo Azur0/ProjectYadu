@@ -38,7 +38,7 @@ class EventJoined extends Mailable
     {
         $bodyText = "";
         if($this->type == 1){
-            $bodyText = Lang::get('mail.joinedEvent') ." ". $this->event->eventName ."". Lang::get('mail.event');
+            $bodyText = Lang::get('mail.joinedEvent') ." ". $this->event->eventName ." ". Lang::get('mail.event');
         }else if($this->event->owner->id == $this->user->id){
             $bodyText =
                 $this->executor->firstName ." ". Lang::get('mail.joinedYourEvent') . " " . $this->event->eventName;

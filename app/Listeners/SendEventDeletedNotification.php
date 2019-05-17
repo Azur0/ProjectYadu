@@ -29,15 +29,19 @@ class SendEventDeletedNotification
      */
     public function handle(EventDeleted $event)
     {
+        dd($event->event->participants->count());
+        $event->event->userName = $event->event->owner->firstName;
         Mail::to($event->event->owner->email)->send(
             new EventDeletedMail($event->event)
         );
         if($event->event->participants->count() >0){
             foreach($event->event->participants as $participant){
-                $event->event->owner->firstName = $participant->firstName;
-                Mail::to($participant->email)->send(
-                    new EventDeletedMail($event->event)
-                );
+                if($participant->id != $event->event->owner->id){
+                    $event->event->userName = $participant->firstName;
+                    Mail::to($participant->email)->send(
+                        new EventDeletedMail($event->event)
+                    );
+                }
             }
         }
     }

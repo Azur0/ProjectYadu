@@ -20,6 +20,8 @@ return [
     "participantLeftEvent" => "has left",
     "eventJoinedHeader" => "Someone joined an event",
     "eventLeftHeader" => "Someone Left an event",
+    "eventInfoTitle" => "Event information",
+    "eventOwner" => "Event owner",
 
     //Account
     "changedPassword" => "Your password has been changed",

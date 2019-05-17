@@ -21,6 +21,7 @@ class AccountController extends Controller
 	public function profileInfo($id, $contentType)
 	{
 		$follow = false;
+
 		$account = Account::where('id', $id)->firstOrFail();
 		//$myEvents = Event::where('owner_id', $id)->where('isDeleted', '==', 0);
 		if($account->id != Auth::user()->id)
@@ -31,17 +32,53 @@ class AccountController extends Controller
 		switch ($contentType)
 		{
 			case 'events':
-				if($account->eventsVisibility == 'private'){}
-				return view('accounts.profile.events', compact('account','follow'));
+				$privacy = $account->eventsVisibility;
+
+				if($privacy == 'public' || ($privacy == 'follower' && $follow == true) || $account->id == Auth::id())
+				{
+					return view('accounts.profile.events', compact('account','follow'));
+				}
+				else
+				{
+					return abort(403);
+				}
+							
 				break;
 			case 'participating':
-				return view('accounts.profile.participating', compact('account','follow'));
+				$privacy = $account->participatingVisibility;
+
+				if($privacy == 'public' || ($privacy == 'follower' && $follow == true) || $account->id == Auth::id())
+				{
+					return view('accounts.profile.participating', compact('account','follow'));
+				}
+				else
+				{
+					return abort(403);
+				}
 				break;
 			case 'followers':
-				return view('accounts.profile.followers', compact('account','follow'));
+				$privacy = $account->followerVisibility;
+
+				if($privacy == 'public' || ($privacy == 'follower' && $follow == true) || $account->id == Auth::id())
+				{
+					return view('accounts.profile.followers', compact('account','follow'));
+				}
+				else
+				{
+					return abort(403);
+				}
 				break;
 			case 'following':
-				return view('accounts.profile.following', compact('account','follow'));
+				$privacy = $account->followingVisibility;
+
+				if($privacy == 'public' || ($privacy == 'follower' && $follow == true) || $account->id == Auth::id())
+				{
+					return view('accounts.profile.following', compact('account','follow'));
+				}
+				else
+				{
+					return abort(403);
+				}
 				break;
 			case 'info':
 				return view('accounts.profile.info', compact('account','follow'));
@@ -50,7 +87,7 @@ class AccountController extends Controller
 			return redirect('/account/'.$id.'/profile/info');
 		}
 
-		
+
 	}
 
 	public function create()

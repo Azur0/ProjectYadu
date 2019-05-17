@@ -7,7 +7,7 @@
 
 		@foreach( $account->following as $following)
 			<div class="profile_related_user ">
-				<a href="/account/{{ $follower->id }}/profile/info">
+				<a href="/account/{{ $following->id }}/profile/info">
 					<div class="row">
 					<div class="col-4">
 						<div class="profile_image">

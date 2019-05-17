@@ -6,16 +6,19 @@
 		<h3>follow</h3>
 
 		@foreach( $account->followers as $follower)
-			<div class="profile_related_user">
-				<div class="avatar">
-					<img src="data:image/png;base64,{{ chunk_split(base64_encode($account->avatar)) }}">
-				</div>
-				<div>
-					
-				</div>
-				<div>
-					{{ $follower->firstName }} {{ $follower->middleName }} {{ $follower->lastName }}
-				</div>
+			<div class="profile_related_user ">
+				<a href="/account/{{ $account->id }}/profile/info">
+					<div class="row">
+					<div class="col-4">
+						<div class="profile_image">
+							<img src="data:image/png;base64,{{ chunk_split(base64_encode($follower->avatar)) }}">
+						</div>
+					</div>
+					<div class="col-8">
+						<h6>{{ $follower->firstName }} {{ $follower->middleName }} {{ $follower->lastName }}</h6>
+					</div>
+					</div>
+				</a>
 			</div>
 		@endforeach
 	</div>

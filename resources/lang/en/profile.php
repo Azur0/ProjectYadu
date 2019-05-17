@@ -13,16 +13,20 @@ return [
     'follow_request_accept' => 'Accept follow request',
     'follow_request_decline' => 'Decline follow request',
     
+    'head_me_info' => 'My Info',
     'head_info' => 'Info',
-    'head_Events' => 'Events',
-    'head_Participating' => 'Participating',
-    'head_Followers' => 'Followers',
+    'head_events' => 'Events',
+    'head_my_events' => 'My events',
+    'head_participating' => 'Participating',
+    'head_followers' => 'Followers',
     'head_following' => 'Following',
     'info_name' => 'Name',
     'info_rol' => 'Role',
     'info_stats' => 'Stats',
-    'info_hosted' => 'Events hosted',
-    'info_participated' => 'Events participated in',
+    'info_hosted' => 'Amount of events hosted',
+    'info_hosted_by' => 'Hosted events by',
+    'info_participated' => 'Amount of events participated in',
+    'info_participated_in' => 'Is participating in:',
 
 ///////////////////////////////// Edit ////////////////////////////////////
 

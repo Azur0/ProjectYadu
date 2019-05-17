@@ -70,11 +70,15 @@ class AccountController extends Controller
 			case 'followers':
 				$privacy = $account->followerVisibility;
 
-				//$followers = 
-
 				if($account->id == Auth::id() || $privacy == 'public' || ($privacy == 'follower' && $follow->status == "accepted"))
 				{
-					return view('accounts.profile.followers', compact('account','follow'));
+					$followers = array();
+					$get = AccountHasFollowers::get()->where('account_id', $account->id)->where('status', 'accepted');
+					foreach($get as $fol)
+					{
+						array_push($followers, Account::find($fol->follower_id));
+					}
+					return view('accounts.profile.followers', compact('account','follow','followers'));
 				}
 				else
 				{
@@ -86,7 +90,13 @@ class AccountController extends Controller
 
 				if($account->id == Auth::id() || $privacy == 'public' || ($privacy == 'follower' && $follow->status == "accepted"))
 				{
-					return view('accounts.profile.following', compact('account','follow'));
+					$following = array();
+					$get = AccountHasFollowers::get()->where('follower_id', $account->id)->where('status', 'accepted');
+					foreach($get as $fol)
+					{
+						array_push($following, Account::find($fol->account_id));
+					}
+					return view('accounts.profile.following', compact('account','follow','following'));
 				}
 				else
 				{
@@ -94,7 +104,14 @@ class AccountController extends Controller
 				}
 				break;
 			case 'info':
-				return view('accounts.profile.info', compact('account','follow'));
+				$stats = array(0,0,0,0);
+
+				$stats[0] = sizeof(Event::get()->where('account_id', '==', $account->id));
+				$stats[1] = sizeof(EventHasParticipants::get()->where('account_id', '==', $account->id));
+				$stats[2] = sizeof(AccountHasFollowers::get()->where('account_id', '==', $account->id)->where('status', '==', 'accepted'));
+				$stats[3] = sizeof(AccountHasFollowers::get()->where('follower_id', '==', $account->id)->where('status', '==', 'accepted'));
+
+				return view('accounts.profile.info', compact('account','follow','stats'));
 				break;
 			default:
 			return redirect('/account/'.$id.'/profile/info');

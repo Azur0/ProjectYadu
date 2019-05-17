@@ -3,16 +3,20 @@
 @section('profilecontent')
 <div class="row">
 	<div class="col">
-		<h3>info</h3>
-		<p>naam: {{ $account->firstName }} {{ $account->middleName }} {{ $account->lastName }}</p>
-		<p>role: {{ $account->accountRole }}</p>
+		<h3>{{__('profile.head_info')}}</h3>
+		<p>
+			{{__('profile.info_name')}}: {{ $account->firstName }} {{ $account->middleName }} {{ $account->lastName }}<br>
+			{{__('profile.info_rol')}}: {{ $account->accountRole }}
+		</p>
 	</div>
 	<div class="col">
-		<h3>stats</h3>
-		<p>events hosted: </p>
-		<p>events participated: </p>
-		<p>Followers: </p>
-		<p>Following: </p>
+		<h3>{{__('profile.info_stats')}}</h3>
+		<p>
+			{{__('profile.info_hosted')}}: {{ $stats[0] }}<br>
+			{{__('profile.info_participated')}}: {{ $stats[1] }}<br>
+			{{__('profile.head_followers')}}: {{ $stats[2] }}<br>
+			{{__('profile.head_following')}}: {{ $stats[3] }}
+		</p>
 	</div>
 </div>
 @endsection

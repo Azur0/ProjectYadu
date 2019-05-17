@@ -3,7 +3,7 @@
 @section('profilecontent')
 <div class="row">
 	<div class="col">
-		<h3>participating</h3>
+		<h3>{{__('profile.info_participated_in')}}</h3>
 
 		<div class="row">
 			<div class="col">

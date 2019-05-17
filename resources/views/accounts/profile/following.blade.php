@@ -3,9 +3,9 @@
 @section('profilecontent')
 <div class="row">
 	<div class="col">
-		<h3>following</h3>
+		<h3>{{__('profile.head_following')}}</h3>
 
-		@foreach( $account->following as $following)
+		@foreach( $following as $following)
 			<div class="profile_related_user ">
 				<a href="/account/{{ $following->id }}/profile/info">
 					<div class="row">

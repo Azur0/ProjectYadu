@@ -37,10 +37,11 @@ class SendEventJoinedNotification
         );
 
         //TODO: Mail owner that someone joined his event -- Someone joined your event mail
+        /*
         Mail::to($event->event->owner->email)->send(
             new EventJoinedMail($event->event,$event->event->owner,$executor,0)
         );
-
+        */
         //TODO: Mail the rest that someone joined that event -- Someone joined this event mail
         if($event->event->participants->count() >0){
             foreach($event->event->participants as $participant){

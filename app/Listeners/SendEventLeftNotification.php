@@ -36,10 +36,11 @@ class SendEventLeftNotification
         );
 
         //TODO: Mail owner that someone left his event -- Someone left your event mail
+        /*
         Mail::to($event->event->owner->email)->send(
             new EventLeftMail($event->event,$event->event->owner,$executor,0)
         );
-
+        */
         //TODO: Mail the rest that someone left that event -- Someone left this event mail
         if($event->event->participants->count() >0){
             foreach($event->event->participants as $participant){

@@ -31,10 +31,6 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-        EventDeleted::class => [
-            SendEventDeletedNotification::class,
-        ],
-
         EventEdited::class => [
             SendEventEditedNotification::class,
         ],

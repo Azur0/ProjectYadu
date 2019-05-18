@@ -54,6 +54,6 @@ class Account extends Authenticatable implements MustVerifyEmailContract
     }
 
     public function followers(){
-        return $this->hasMany('App\AccountHasFollowers','account_id','id');
+        return $this->hasMany('App\AccountHasFollowers');
     }
 }

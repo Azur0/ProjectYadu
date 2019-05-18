@@ -55,14 +55,16 @@ class SendEventJoinedNotification
                 }
             }
         }
-
+        //dd($executor->followers[0]->follower);
         //Mail if someone you follow joined?
         if($executor->followers->count() >0){
             foreach($executor->followers as $follower){
 
+
                 //TODO: check of follower request is accepted
-                $follower = Account::findOrFail($follower->id);
                 dd($follower);
+                //if status == accepted
+                $follower = $follower->follower;
                 if($follower->id != $executor->id && $follower->id != $event->event->owner->id){
                     //$event->event->userName = $follower->firstName;
                     Mail::to($follower->email)->send(

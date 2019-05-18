@@ -12,6 +12,6 @@ class AccountHasFollowers extends Model
 
     public function follower()
     {
-        return $this->belongsTo(Account::class,'id','follower_id');
+        return $this->hasOne(Account::class,'id','follower_id');
     }
 }

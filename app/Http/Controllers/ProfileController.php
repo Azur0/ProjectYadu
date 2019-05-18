@@ -75,7 +75,6 @@ class ProfileController extends Controller
 
             $accountSettings->update(
                 [
-
                     'FollowNotificationCreateEvent' => $FollowNotificationCreateEvent,
                     'FollowNotificationJoinEvent' => $FollowNotificationJoinEvent,
                     'NotificationInvite' => $NotificationInvite,
@@ -84,7 +83,7 @@ class ProfileController extends Controller
                     'NotificationEventCreated' => $NotificationEventCreated,
                 ]
             );
-            //dd($accountSettings);
+            dd($accountSettings);
             $genders = Gender::all();
             return view('profile.edit', compact(['account', 'genders']));
         }

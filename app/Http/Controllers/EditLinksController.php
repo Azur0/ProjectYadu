@@ -18,7 +18,6 @@ class EditLinksController extends Controller
     }
 
     public function saveLinks(Request $request){
-        dd($request);
         $socialmedia = socialmedia::findOrFail($request->name);
         $socialmedia->link = $request->link;
         $socialmedia->save();

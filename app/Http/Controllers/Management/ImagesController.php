@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Management;
 
-use Illuminate\Http\Request;
 use Auth;
 use App\Http\Controllers\Controller;
 use App\EventTag;
 use App\EventPicture;
 use App\Event;
-use Illuminate\Support\Facades\Input;	
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Database\Eloquent\Collection;
 
 class ImagesController extends Controller
 {
@@ -95,14 +96,31 @@ class ImagesController extends Controller
 		}
 	}
 
-	public function removeextra() {
-		// remove image
-		return redirect('/admin/images/extra')->withErrors("penis");
+	public function overrideremove(Request $request) {
+		// events are connected but still remove the image
+		$events = Event::where('tag_id', '=', $request->input('query'))->get();
+		return;
+	}	
+
+	public function removetype(Request $request) {
+		// no events are connected.
+		$events = Event::where('tag_id', '=', $request->input('query'))->get();
+		return $events;
 	}
 
-	public function removetype($id) {
-		$tag = EventTag::findOrFail($id);
-		return redirect('admin/images/category')->withErrors("test".$id);;
+	public function checkremove(Request $request) {
+		$events = Event::where('tag_id', '=', $request->input('query'))->get();
+		return json_encode($events);
+	}
+
+	public function deleteCategoryPicture(Request $request) {
+		$selectedPicture = EventPicture::where('id', '=', $request->input('query'))->firstOrFail();
+		try{
+			$selectedPicture->delete();
+		} catch(Exception $e) {
+			return json_encode($e);
+		}
+		return json_encode("successfull");
 	}
 
 	public function passthrough() {

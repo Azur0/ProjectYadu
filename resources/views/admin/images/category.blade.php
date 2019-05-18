@@ -10,30 +10,11 @@
                     <div class="card"> 
                         <input type="radio" id="{{$tag->tag}}" name="tag" value="{{$tag->id}}" onclick="fetch_customer_data({{$tag->id }})">
                         <label for="{{$tag->tag}}" class="category">
-                                        <div>
-                                            <div>
-                                                <button type="button" class="button-remove button-hover" data-toggle="modal" data-target="#confirmDelete">x</button>
-                                            </div>
-                                            <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">placeholder title</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            placeholder information
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <input type="submit" form="deleteAccount" class="btn btn-danger" onclick="window.location.href='{{url('/admin/images/category/'.$tag->id.'')}}'" value="placeholder confirm delete">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Placeholder dismiss</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div>
+                                    <div>
+                                        <button type="button" onclick="removeType({{$tag->id}})" class="button-remove button-hover">x</button>
+                                    </div>
+                                </div>
                             <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
                             <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($tag->imageSelected) . '"/>'; ?>
                         </label>  
@@ -58,11 +39,63 @@
             </div>
     </form>
     @if($errors->any())
-            <h4>{{$errors->first()}}</h4>
+        <h4>{{$errors->first()}}</h4>
     @endif
 </div>
+
 <script>
-    
+    function removeType(id) {
+        console.log("starting ajax call");
+        $.ajax({
+            url: "{{ route('imagescontroller.checkremove')}}",
+            method: 'GET',
+            data: {
+                query: id,
+            },
+            dataType: 'json',
+            success: function (data) {
+                if(typeof(data[0]) != "undefined"){
+                    console.log(data[0]);
+                    if (confirm('Placeholder are you sure?')) {
+                        $.ajax({
+                        url: "{{ route('imagescontroller.overrideremove')}}",
+                        method: 'POST',
+                        data: {
+                            query: id,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: 'json',
+                        success: function() {
+                            // alert("placeholder overwrite successful");
+                            console.log(data[0]);
+                        }
+                        });
+                    } 
+                } else {
+                    $.ajax({
+                        url: "{{ route('imagescontroller.removetype')}}",
+                        method: "POST",
+                        data: {
+                            query: id,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function() {
+                            alert("Placeholder successful removal");
+                        }
+                    });
+                }
+            },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('jqXHR:');
+                    console.log(jqXHR);
+                    console.log('textStatus:');
+                    console.log(textStatus);
+                    console.log('errorThrown:');
+                    console.log(errorThrown);
+                }
+        });
+    }
+       
         function fetch_customer_data(query) {
             $.ajax({
                 url: "{{ route('events_controller.action')}}",
@@ -73,7 +106,6 @@
                 },
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data);
                     if (data == "") {
                         $('#box2').html("<h5><i>Placeholder</i></h5>");
                     } else {
@@ -84,26 +116,7 @@
                                 name="picture" value="${element['id']}"> <label for="${element['id']}" class="picture ${element['tag_id']}">
                                         <div>
                                             <div class="badgecontainer">
-                                                <button type="button" class="button-remove button-hover" data-toggle="modal" data-target="#confirmDeleteTypeOff">x</button>
-                                            </div>
-                                            <div class="modal fade" id="confirmDeleteTypeOff" tabindex="-1" role="dialog">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">placeholder title</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            placeholder information
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <input type="submit" form="deleteTypeOff" class="btn btn-danger" value="placeholder confirm delete" onclick="deleteTypeOff()">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Placeholder dismiss</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <button type="button" class="button-remove button-hover" value="${element['id']}" onclick="deleteTypeOff(this.value)">x</button>
                                             </div>
                                         </div>
                                 <img class="default" src="data:image/jpeg;base64, ${element['picture']}"> </label>`);
@@ -120,11 +133,25 @@
                 }
             })
         }
+
+    function deleteTypeOff(id) {
+        $.ajax({
+            url: "{{ route('events_controller.deleteCategoryPicture')}}",
+                method: 'POST',
+                data: {
+                    query: id,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: async function (data) { 
+                    let id = $('input[name=tag]:checked').val();
+                    fetch_customer_data(id);
+                    alert("Success");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Picture in use");
+                }
+        }) 
+    }
     </script>
-    <script>
-        function deleteTypeOff() {
-        // window.location.href ={{url('/admin/images/'.$tag->id.'/delete')}};
-        console.log("{{ url('Management\ImagesController@removetype') }}");
-    }   
-        </script>
 @endsection

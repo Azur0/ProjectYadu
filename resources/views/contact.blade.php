@@ -30,8 +30,8 @@
         <div class="col-sm-6 text-left">
             <div class="contact-item">
                 <h5>{{__('contact.email')}}</h5>
-                <a href="mailto:info@YADU.nu" class="contact-item">
-                    <span>info@YADU.nu</span>
+                <a href="mailto:{{$socialmedia->find('email')->link}}" class="contact-item">
+                    <span>{{$socialmedia->find('email')->link}}</span>
                 </a>
             </div>
             <div class="contact-item">

@@ -7,28 +7,29 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Link</th>
+                <th scope="col">{{__('contact.admin_id')}}</th>
+                <th scope="col">{{__('contact.admin_name')}}</th>
+                <th scope="col">{{__('contact.admin_link')}}</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody id="linksToDisplay">
+            <?php $y=0 ?>
             @foreach ($socialmedia as $social)
             <tr>
-                <td>1</td>
+                <td>{{$y+=1}}</td>
                 <td>{{$social->name}}</td>
                 <td>{{$social->link}}</td>
                 <td><button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#change{{$social->name}}Link"
-                        data-whatever="@mdo">{{__('events.show_edit')}}</button>
+                        data-whatever="@mdo">{{__('contact.show_edit')}}</button>
 
                     <div class="modal fade" id="change{{$social->name}}Link" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit {{$social->name}} link</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">{{__('contact.show_edit_link',['name'=>$social->name])}}</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -45,9 +46,9 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('contact.edit_close')}}</button>
                                     <button type="submit" form="submitEdit{{$social->name}}" value="Submit"
-                                        class="btn btn-primary">Update</button>
+                                        class="btn btn-primary">{{__('contact.edit_update')}}</button>
                                 </div>
                             </div>
                         </div>

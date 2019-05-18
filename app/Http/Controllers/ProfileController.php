@@ -83,7 +83,6 @@ class ProfileController extends Controller
                     'NotificationEventCreated' => $NotificationEventCreated,
                 ]
             );
-            dd($accountSettings);
             $genders = Gender::all();
             return view('profile.edit', compact(['account', 'genders']));
         }

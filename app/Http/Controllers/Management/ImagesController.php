@@ -108,7 +108,7 @@ class ImagesController extends Controller
 		return $events;
 	}
 
-	public function checkremove(Request $request) {
+	public function checkforevent(Request $request) {
 		$events = Event::where('tag_id', '=', $request->input('query'))->get();
 		return json_encode($events);
 	}
@@ -120,7 +120,7 @@ class ImagesController extends Controller
 		} catch(Exception $e) {
 			return json_encode($e);
 		}
-		return json_encode("successfull");
+		return json_encode("");
 	}
 
 	public function passthrough() {

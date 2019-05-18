@@ -2,7 +2,6 @@
 
 @section('content')
 <div>
-    <form action="{{ action('Management\ImagesController@passthrough') }}" method="POST" enctype="multipart/form-data">
         <div class="types">
             <h1>Placeholder type</h1>
                 <div class="box">
@@ -20,6 +19,11 @@
                         </label>  
                     </div>                     
                     @endforeach
+                    <div class="card">
+                        <input type="radio" value="newtype" onclick="">
+                        <label for="add" class="category">Placeholder</label>  
+                    </div>    
+                    <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">Drop</form>
                 </div>
                 @if ($errors->has('tag'))
                     <div class="error">placeholder.</div>
@@ -37,17 +41,17 @@
                         @endif
                     </div>
             </div>
-    </form>
     @if($errors->any())
         <h4>{{$errors->first()}}</h4>
     @endif
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
 
 <script>
     function removeType(id) {
         console.log("starting ajax call");
         $.ajax({
-            url: "{{ route('imagescontroller.checkremove')}}",
+            url: "{{ route('imagescontroller.checkforevent')}}",
             method: 'GET',
             data: {
                 query: id,
@@ -55,10 +59,9 @@
             dataType: 'json',
             success: function (data) {
                 if(typeof(data[0]) != "undefined"){
-                    console.log(data[0]);
-                    if (confirm('Placeholder are you sure?')) {
+                    if (confirm('Placeholder events are tied are you sure? This will remove all connecting pictures.')) {
                         $.ajax({
-                        url: "{{ route('imagescontroller.overrideremove')}}",
+                        url: "{{ route('imagescontroller.overrideremove') }}",
                         method: 'POST',
                         data: {
                             query: id,
@@ -122,14 +125,6 @@
                                 <img class="default" src="data:image/jpeg;base64, ${element['picture']}"> </label>`);
                         });
                     }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log('jqXHR:');
-                    console.log(jqXHR);
-                    console.log('textStatus:');
-                    console.log(textStatus);
-                    console.log('errorThrown:');
-                    console.log(errorThrown);
                 }
             })
         }
@@ -143,12 +138,12 @@
                     _token: '{{ csrf_token() }}'
                 },
                 dataType: 'json',
-                success: async function (data) { 
+                success: function (data) { 
                     let id = $('input[name=tag]:checked').val();
                     fetch_customer_data(id);
                     alert("Success");
                 },
-                error: function (jqXHR, textStatus, errorThrown) {
+                error: function () {
                     alert("Picture in use");
                 }
         }) 

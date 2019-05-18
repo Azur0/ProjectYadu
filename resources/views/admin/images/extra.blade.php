@@ -9,7 +9,7 @@
                     <div class="box">
                         @foreach ($images as $image)
                         <div class="card">
-                        <input type="radio" id="{{$image}}" name="image" value="{{$image}}" onclick=setSelected( this)>
+                        <input type="radio" id="{{$image}}" name="image" value="{{$image}}" onclick=setSelected(this)>
                             <label for="{{$image}}" class="category">
                                     {{-- <form class="form_submit_ays" method="POST" id="deleteAccount" action="{{ action('Management\ImagesController@removeextra') }}">
                                             @method('DELETE')
@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <input type="file" name="file">
+            <input type="file" name="file" accept="image/png, image/jpeg, image/jpg">
             <button type="submit" name="submit">placeholder upload</button>
         </form>
         @if($errors->any())

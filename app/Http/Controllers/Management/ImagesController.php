@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Management;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Management\ImagesController;
 use Auth;
 use App\Http\Controllers\Controller;
 use App\EventTag;
@@ -57,7 +56,13 @@ class ImagesController extends Controller
 
 			$selectedImage = Input::only('selected'); 
 
-			if(isset($selectedImage)) {
+			if(empty(implode($selectedImage))) {
+				$error = "ERROR NOTHING CHOSEN";
+				return redirect('/admin/images/extra')->withErrors($error);
+			} else {
+
+				$error = "FILE:" . $file . $fileName . $fileTmp . $fileSize . $fileError . $fileType;
+				return redirect('/admin/images/extra')->withErrors($error);
 				if(in_array($fileActualExt, $allowed)) {
 					if($fileError === 0) {
 						if($fileSize < 5000) {
@@ -75,8 +80,6 @@ class ImagesController extends Controller
 				} else {
 					$error = "Placeholder ext not allowed";
 				}
-			} else {
-				$error = "Placeholder selection is undefined";
 			}
 		}
 		return redirect('/admin/images/extra')->withErrors($error);

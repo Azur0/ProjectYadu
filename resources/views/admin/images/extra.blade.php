@@ -9,7 +9,7 @@
                     <div class="box">
                         @foreach ($images as $image)
                         <div class="card">
-                        <input type="radio" id="{{$image}}" name="image" value="{{$image}}" onclick=setSelected(this)>
+                        <input type="radio" id="{{$image}}" name="image" value="{{$image}}" onclick=setSelected( this)>
                             <label for="{{$image}}" class="category">
                                     {{-- <form class="form_submit_ays" method="POST" id="deleteAccount" action="{{ action('Management\ImagesController@removeextra') }}">
                                             @method('DELETE')
@@ -59,11 +59,12 @@
         }
         
         function setSelected(item){
-            $prev = document.querySelector(".selected");
-            if($prev !== null) {
-                $prev.setAttribute("name","");
+            let tmp = document.querySelector(".selected");
+            console.log("temp:".tmp, "item:".item);
+            item.setAttribute("name", "selected");
+            if(tmp !== null){
+                tmp.setAttribute("name", "image");
             }
-            item.setAttribute("name","selected");
         }
     </script>
 @endsection

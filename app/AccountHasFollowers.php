@@ -5,13 +5,13 @@ class AccountHasFollowers extends Model
 {
     protected $fillable = ['account_id', 'follower_id'];
 
-    public function user()
+    public function account()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(Account::class, 'id','account_id');
     }
 
     public function follower()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(Account::class,'id','follower_id');
     }
 }

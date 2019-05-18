@@ -31,7 +31,7 @@ class SendEventJoinedNotification
     {
         //Mail owner that someone joined his event -- You joined this event mail
         $executor = Account::findOrFail($event->userId);
-
+        //dd($executor->followers);
         Mail::to($executor->email)->send(
             new EventJoinedMail($event->event,$executor,$executor,1)
         );
@@ -48,7 +48,7 @@ class SendEventJoinedNotification
                 //TODO: check of follower request is accepted
 
                 if($participant->id != $executor->id && $participant->id != $event->event->owner->id && !$executor->followers->containts($participant)){
-                    $event->event->owner->firstName = $participant->firstName;
+                    //$event->event->userName = $participant->firstName;
                     Mail::to($participant->email)->send(
                         new EventJoinedMail($event->event,$participant,$executor,0)
                     );
@@ -59,10 +59,12 @@ class SendEventJoinedNotification
         //Mail if someone you follow joined?
         if($executor->followers->count() >0){
             foreach($executor->followers as $follower){
-                //TODO: check of follower request is accepted
 
+                //TODO: check of follower request is accepted
+                $follower = Account::findOrFail($follower->id);
+                dd($follower);
                 if($follower->id != $executor->id && $follower->id != $event->event->owner->id){
-                    $event->event->owner->firstName = $follower->firstName;
+                    //$event->event->userName = $follower->firstName;
                     Mail::to($follower->email)->send(
                         new EventJoinedMail($event->event,$follower,$executor,0)
                     );

@@ -31,6 +31,7 @@ class SendEventLeftNotification
     {
         //Mail owner that someone left his event -- You left this event mail
         $executor = Account::findOrFail($event->userId);
+        //dd($executor->followers);
         Mail::to($executor->email)->send(
             new EventLeftMail($event->event,$executor,$executor,1)
         );
@@ -47,7 +48,7 @@ class SendEventLeftNotification
                 //TODO: check of follower request is accepted
 
                 if($participant->id != $executor->id && $participant->id != $event->event->owner->id && !$executor->followers->containts($participant)){
-                    $event->event->owner->firstName = $participant->firstName;
+                    //$event->event->owner->firstName = $participant->firstName;
                     Mail::to($participant->email)->send(
                         new EventLeftMail($event->event,$participant,$executor,0)
                     );
@@ -61,7 +62,7 @@ class SendEventLeftNotification
                 //TODO: check of follower request is accepted
 
                 if($follower->id != $executor->id && $follower->id != $event->event->owner->id){
-                    $event->event->owner->firstName = $follower->firstName;
+                   // $event->event->owner->firstName = $follower->firstName;
                     Mail::to($follower->email)->send(
                         new EventLeftMail($event->event,$follower,$executor,0)
                     );

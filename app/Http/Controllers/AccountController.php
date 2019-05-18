@@ -106,7 +106,7 @@ class AccountController extends Controller
 			case 'info':
 				$stats = array(0,0,0,0);
 
-				$stats[0] = sizeof(Event::get()->where('account_id', '==', $account->id));
+				$stats[0] = sizeof(Event::get()->where('owner_id', '==', $account->id));
 				$stats[1] = sizeof(EventHasParticipants::get()->where('account_id', '==', $account->id));
 				$stats[2] = sizeof(AccountHasFollowers::get()->where('account_id', '==', $account->id)->where('status', '==', 'accepted'));
 				$stats[3] = sizeof(AccountHasFollowers::get()->where('follower_id', '==', $account->id)->where('status', '==', 'accepted'));

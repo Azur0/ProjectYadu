@@ -3,14 +3,59 @@
 @section('content')
 
 <h1>Edit Links</h1>
-<form action="/admin" method="post">
-    @csrf
-    <div class="inputFields">
-    @foreach ($socialmedia as $social)
-    <h3>{{$social->name}} <input type="text" name="{{$social->name}}" id="{{$social->name}}" value="{{$social->link}}"></h3>
-    @endforeach
-    </div>
-    <input type="submit" value="submit" class="btn btn-primary submit-edit">
-</form>
+<div class="card-body">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Link</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="linksToDisplay">
+            @foreach ($socialmedia as $social)
+            <tr>
+
+
+                <td>1</td>
+                <td>{{$social->name}}</td>
+                <td>{{$social->link}}</td>
+
+                <td><button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#change{{$social->name}}Link"
+                        data-whatever="@mdo">{{__('events.show_edit')}}</button></td>
+            </tr>
+            <div class="modal fade" id="change{{$social->name}}Link" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit {{$social->name}} link</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <form action="/admin" method="post" id="submitEdit{{$social->name}}">
+                                    @csrf
+                                    <label for="{{$social->name}}" class="col-form-label">Link:</label>
+                                    <input type="text" class="form-control" id="{{$social->name}}" value="{{$social->link}}">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" form="submitEdit{{$social->name}}" value="Submit"
+                                class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
 @endsection

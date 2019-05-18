@@ -18,14 +18,11 @@ class EditLinksController extends Controller
     }
 
     public function saveLinks(Request $request){
-        $socialmedia = socialmedia::all();
-        foreach($socialmedia as $media){
-            if($media->link != $request[$media->name]){
-                $media->link = $request[$media->name];
-                $media->save();
-            }
-        }
-        return redirect('/admin');
+        dd($request);
+        $socialmedia = socialmedia::findOrFail($request->name);
+        $socialmedia->link = $request->link;
+        $socialmedia->save();
+        return back();
     }
     
 }

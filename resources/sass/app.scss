@@ -31,6 +31,19 @@
   color: #E79535
 }
 
+.event-media-icons {
+  font-size: 36px;
+  color: #E79535 !important;
+  margin-right: 2%;
+  margin-bottom: 50px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.event-media-icons:hover {
+  opacity: 0.8;
+}
+
 #map {
   height: 350px !important;
 }

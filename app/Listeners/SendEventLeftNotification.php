@@ -45,9 +45,18 @@ class SendEventLeftNotification
         //Mail the rest that someone left that event -- Someone left this event mail
         if($event->event->participants->count() >0){
             foreach($event->event->participants as $participant){
-                //TODO: check of follower request is accepted
-
-                if($participant->id != $executor->id && $participant->id != $event->event->owner->id && !$executor->followers->containts($participant)){
+                //TODO: check of follower request is accepted - to test
+                $isNotAFollower = true;
+                if($executor->followers->containts($participant)){
+                    foreach($executor->followers as $follower){
+                        if($follower->follower_id == $participant->id){
+                            if($follower->status == 'accepted'){
+                                $isNotAFollower = false;
+                            }
+                        }
+                    }
+                }
+                if($participant->id != $executor->id && $participant->id != $event->event->owner->id && $isNotAFollower){
                     //$event->event->owner->firstName = $participant->firstName;
                     Mail::to($participant->email)->send(
                         new EventLeftMail($event->event,$participant,$executor,0)
@@ -59,13 +68,15 @@ class SendEventLeftNotification
         //Mail if someone you follow left?
         if($executor->followers->count() >0){
             foreach($executor->followers as $follower){
-                //TODO: check of follower request is accepted
-
-                if($follower->id != $executor->id && $follower->id != $event->event->owner->id){
-                   // $event->event->owner->firstName = $follower->firstName;
-                    Mail::to($follower->email)->send(
-                        new EventLeftMail($event->event,$follower,$executor,0)
-                    );
+                //TODO: check of follower request is accepted - to test
+                if($follower->status == 'accepted') {
+                    $follower = $follower->follower;
+                    if ($follower->id != $executor->id && $follower->id != $event->event->owner->id) {
+                        // $event->event->owner->firstName = $follower->firstName;
+                        Mail::to($follower->email)->send(
+                            new EventLeftMail($event->event, $follower, $executor, 0)
+                        );
+                    }
                 }
             }
         }

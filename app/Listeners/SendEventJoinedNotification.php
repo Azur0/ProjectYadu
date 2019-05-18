@@ -45,9 +45,18 @@ class SendEventJoinedNotification
         //Mail the rest that someone joined that event -- Someone joined this event mail
         if($event->event->participants->count() >0){
             foreach($event->event->participants as $participant){
-                //TODO: check of follower request is accepted
-
-                if($participant->id != $executor->id && $participant->id != $event->event->owner->id && !$executor->followers->containts($participant)){
+                //TODO: check of follower request is accepted - to test
+                $isNotAFollower = true;
+                if($executor->followers->containts($participant)){
+                    foreach($executor->followers as $follower){
+                        if($follower->follower_id == $participant->id){
+                            if($follower->status == 'accepted'){
+                                $isNotAFollower = false;
+                            }
+                        }
+                    }
+                }
+                if($participant->id != $executor->id && $participant->id != $event->event->owner->id && $isNotAFollower){
                     //$event->event->userName = $participant->firstName;
                     Mail::to($participant->email)->send(
                         new EventJoinedMail($event->event,$participant,$executor,0)
@@ -59,17 +68,16 @@ class SendEventJoinedNotification
         //Mail if someone you follow joined?
         if($executor->followers->count() >0){
             foreach($executor->followers as $follower){
-
-
-                //TODO: check of follower request is accepted
-                dd($follower);
-                //if status == accepted
-                $follower = $follower->follower;
-                if($follower->id != $executor->id && $follower->id != $event->event->owner->id){
-                    //$event->event->userName = $follower->firstName;
-                    Mail::to($follower->email)->send(
-                        new EventJoinedMail($event->event,$follower,$executor,0)
-                    );
+                //TODO: check of follower request is accepted - to test
+                if($follower->status == 'accepted'){
+                    //if status == accepted
+                    $follower = $follower->follower;
+                    if($follower->id != $executor->id && $follower->id != $event->event->owner->id){
+                        //$event->event->userName = $follower->firstName;
+                        Mail::to($follower->email)->send(
+                            new EventJoinedMail($event->event,$follower,$executor,0)
+                        );
+                    }
                 }
             }
         }

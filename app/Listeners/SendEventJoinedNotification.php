@@ -82,4 +82,21 @@ class SendEventJoinedNotification
             }
         }
     }
+
+    private function sendMailToExecutor(){
+
+    }
+
+    private function sendMailToOwner(){
+
+    }
+
+    private function sendMailToParticipants(){
+
+    }
+
+    private function sendMailToFollowers(){
+
+    }
+
 }

@@ -29,7 +29,7 @@ class SendEventJoinedNotification
      */
     public function handle(EventJoined $event)
     {
-        //TODO: Mail owner that someone joined his event -- You joined this event mail
+        //Mail owner that someone joined his event -- You joined this event mail
         $executor = Account::findOrFail($event->userId);
 
         Mail::to($executor->email)->send(
@@ -42,9 +42,11 @@ class SendEventJoinedNotification
             new EventJoinedMail($event->event,$event->event->owner,$executor,0)
         );
         */
-        //TODO: Mail the rest that someone joined that event -- Someone joined this event mail
+        //Mail the rest that someone joined that event -- Someone joined this event mail
         if($event->event->participants->count() >0){
             foreach($event->event->participants as $participant){
+                //TODO: check of follower request is accepted
+
                 if($participant->id != $executor->id && $participant->id != $event->event->owner->id && !$executor->followers->containts($participant)){
                     $event->event->owner->firstName = $participant->firstName;
                     Mail::to($participant->email)->send(
@@ -54,9 +56,11 @@ class SendEventJoinedNotification
             }
         }
 
-        //TODO: Mail if someone you follow joined?
+        //Mail if someone you follow joined?
         if($executor->followers->count() >0){
             foreach($executor->followers as $follower){
+                //TODO: check of follower request is accepted
+
                 if($follower->id != $executor->id && $follower->id != $event->event->owner->id){
                     $event->event->owner->firstName = $follower->firstName;
                     Mail::to($follower->email)->send(

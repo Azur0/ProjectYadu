@@ -31,10 +31,10 @@ class EventDeleted extends Mailable
     public function build()
     {
         $title = '';
-        if($this->event->userName == $this->event->owner->firstName){
-            $title = Lang::get('mail.deleteTitle');
-        }else {
+        if($this->event->userName != $this->event->owner->firstName){
             $title = Lang::get('mail.deleteTitleParticipant');
+        }else {
+            $title = Lang::get('mail.deleteTitle');
         }
 
         return $this->markdown('admin/mail.event-deleted')

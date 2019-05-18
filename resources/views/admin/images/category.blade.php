@@ -27,7 +27,7 @@
                                                             placeholder information
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <input type="submit" form="deleteAccount" class="btn btn-danger" onclick="window.location.href='{{url('/admin/images/'.$tag->id.'/delete')}}'" value="placeholder confirm delete">
+                                                            <input type="submit" form="deleteAccount" class="btn btn-danger" onclick="window.location.href='{{url('/admin/images/category/'.$tag->id.'')}}'" value="placeholder confirm delete">
                                                             <button type="button" class="btn btn-primary" data-dismiss="modal">Placeholder dismiss</button>
                                                         </div>
                                                     </div>
@@ -57,6 +57,9 @@
                     </div>
             </div>
     </form>
+    @if($errors->any())
+            <h4>{{$errors->first()}}</h4>
+    @endif
 </div>
 <script>
     

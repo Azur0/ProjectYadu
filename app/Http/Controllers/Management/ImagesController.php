@@ -60,9 +60,6 @@ class ImagesController extends Controller
 				$error = "ERROR NOTHING CHOSEN";
 				return redirect('/admin/images/extra')->withErrors($error);
 			} else {
-
-				$error = "FILE:" . $file . $fileName . $fileTmp . $fileSize . $fileError . $fileType;
-				return redirect('/admin/images/extra')->withErrors($error);
 				if(in_array($fileActualExt, $allowed)) {
 					if($fileError === 0) {
 						if($fileSize < 5000) {
@@ -104,9 +101,8 @@ class ImagesController extends Controller
 	}
 
 	public function removetype($id) {
-		print_r("adfasdfsaf");
 		$tag = EventTag::findOrFail($id);
-		// return redirect('admin/images.category');
+		return redirect('admin/images/category')->withErrors("test".$id);;
 	}
 
 	public function passthrough() {

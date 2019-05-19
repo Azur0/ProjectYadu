@@ -98,6 +98,7 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
+       
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
@@ -105,7 +106,10 @@ class EventsController extends Controller
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
             'startTime' => 'required',
-            'location' => 'required',
+            'lng' => 'required',
+            'lat' => 'required',
+            'houseNumber' => 'required',
+            'postalCode' => 'required',
             'picture' => 'required'
         ]);
 
@@ -116,12 +120,20 @@ class EventsController extends Controller
                 $validator->errors()->add('picture', 'Something is wrong with this field!');
             }
         });
-
         if ($validator->fails()) {
             return redirect('/events/create')
                 ->withErrors($validator)
                 ->withInput();
         }
+
+        $location = Location::create([
+            'locLongtitude' => $request['lng'],
+            'locLatitude' => $request['lat'],
+            'houseNumber' => $request['houseNumber'],
+            'postalcode' => $request['postalCode'],
+        ]);
+        
+        // dd($location);
 
         Event::create(
             [
@@ -130,7 +142,7 @@ class EventsController extends Controller
                 'startDate' => $request['startDate'],
                 'numberOfPeople' => $request['people'],
                 'tag_id' => $request['tag'],
-                'location_id' => '1',
+                'location_id' => $location->id,
                 'owner_id' => auth()->user()->id,
                 'event_picture_id' => $request['picture']
             ]

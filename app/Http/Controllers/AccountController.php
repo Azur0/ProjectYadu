@@ -89,15 +89,23 @@ class AccountController extends Controller
         $account->save();
     }
 
-    public function blockAccount($id){
+    public function blockAccount(Request $request){
+        $request->validate([
+            'id' => 'required',
+        ]);
+        
         BlockedUser::create([
             'account_id' => Auth::id(),
-            'blockedAccount_id' => $id,
+            'blockedAccount_id' => $request->id,
         ]);
         return back();
     }
 
     public function unblockAccount(Request $request){
+        $request->validate([
+            'id' => 'required',
+        ]);
+
         BlockedUser::where('account_id','=',Auth::id())->where('blockedAccount_id','=',$request->id)->firstOrFail()->delete();
         return back();
     }

@@ -146,29 +146,27 @@ class AccountController extends Controller
 
 	public function updateProfile(EditProfileRequest $request)
 	{
-		$validated = $request->validated();
-
 		$account = Account::where('id', Auth::id())->firstOrFail();
 
-		if($validated['gender'] == "-")
+		if($request['gender'] == "-")
 		{
 			$account->gender = null;
 		}
 		else
 		{
-			$account->gender = $validated['gender'];
+			$account->gender = $request['gender'];
 		}
 
-		$account->email = $validated['email'];
-		$account->firstName = $validated['firstName'];
-		$account->middleName = $validated['middleName'];
-		$account->lastName = $validated['lastName'];
-		$account->dateOfBirth = $validated['dateOfBirth'];
-		// $account->followerVisibility = $validated['followerVisibility'];
-		// $account->followingVisibility = $validated['followingVisibility'];
-		// $account->infoVisibility = $validated['infoVisibility'];
-		// $account->eventsVisibility = $validated['eventsVisibility']; 
-		// $account->participatingVisibility = $validated['participatingVisibility'];
+		$account->email = $request['email'];
+		$account->firstName = $request['firstName'];
+		$account->middleName = $request['middleName'];
+		$account->lastName = $request['lastName'];
+		$account->dateOfBirth = $request['dateOfBirth'];
+		$account->followerVisibility = $request['followerVisibility'];
+		$account->followingVisibility = $request['followingVisibility'];
+		$account->infoVisibility = $request['infoVisibility'];
+		$account->eventsVisibility = $request['eventsVisibility'];
+		$account->participatingVisibility = $request['participatingVisibility'];
 
 		$account->save();
 

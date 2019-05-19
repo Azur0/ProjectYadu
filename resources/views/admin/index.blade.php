@@ -280,11 +280,47 @@
         //CategoriesChart
         var categoriesChart = new Chart(document.getElementById("categories"), {
             type: 'doughnut',
-            data: getShareData(null, null),
+            data: getCategoryData(null, null),
             options: {
                 maintainAspectRatio: true
             }
         });
+
+        function getCategoryData(fromDate, toDate) {
+            var plotLabels = [];
+            var plotData = [];
+
+            $.ajax({
+                url: "{{ route('admin_charts_categories') }}",
+                method: 'POST',
+                async: false,
+                data: {
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    data.categoryData.forEach(function(item) {
+                        plotLabels.push(item.category);
+                        plotData.push(item.count);
+                    })
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+
+            return {
+                labels: plotLabels,
+                datasets: [{
+                    backgroundColor: ['#256eff', '#8c16b7', '#b2b2b2', '#ff495c', '#3ddc97'], //TODO: Change colors
+                    data: plotData
+                }]
+            };
+        }
     </script>
 
 

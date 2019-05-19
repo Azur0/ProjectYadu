@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Event;
-use App\Http\Requests\GetMonthlySharesRequest;
+use App\EventTag;
+use App\Http\Requests\GetChartDateRangeRequest;
 use App\Http\Requests\GetTotalEventsCreatedRequest;
 use App\SharedEvent;
 use App\SocialMediaPlatform;
@@ -56,16 +57,10 @@ class ChartController extends Controller
         return $data;
     }
 
-    public function GetMonthlyShares(GetMonthlySharesRequest $request){
+    public function GetShares(GetChartDateRangeRequest $request){
 
-        $data = array();
+        $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
         $platforms = SocialMediaPlatform::all();
-
-        $data['dateInfo'] = array(
-            'fromDate' => $request->fromDate->toDateString(),
-            'toDate' => $request->toDate->toDateString()
-        );
-
         $data['shareData'] = array();
 
         foreach ($platforms as $platform){
@@ -74,6 +69,25 @@ class ChartController extends Controller
                 'shareCount' => SharedEvent::where('platform', $platform->platform)->whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count(),
             );
             array_push($data['shareData'], $entry);
+        }
+        return $data;
+    }
+
+    public function GetCategories(GetChartDateRangeRequest $request){
+        $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
+        $categories = EventTag::pluck('tag');
+        $data['categoryData'] = array();
+
+        for($i = 0; $i < sizeof($categories); $i++ ){
+            $tag_id = EventTag::where('tag', $categories[$i])->pluck('id');
+            $entry = array(
+                'category' => ucfirst($categories[$i]),
+                'count' => Event::where('tag_id', $tag_id)->whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count()
+            );
+
+            if($entry['count'] > 0){
+                array_push($data['categoryData'], $entry);
+            }
         }
         return $data;
     }
@@ -94,6 +108,15 @@ class ChartController extends Controller
             array_push($data, $entry);
         }
 
+        return $data;
+    }
+
+    private function MakeDataArray($toDate, $fromDate){
+        $data = array();
+        $data['dateInfo'] = array(
+            'fromDate' => $fromDate->toDateString(),
+            'toDate' => $toDate->toDateString()
+        );
         return $data;
     }
 }

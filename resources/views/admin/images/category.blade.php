@@ -136,9 +136,9 @@
 
                         data.forEach(function (element) {
                             $('#box2').html($("#box2").html() + `<div class="flexbox divider"><input type="radio" id="${element['id']}" class="picture ${element['tag_id']}"  
-                                name="picture" value="${element['id']}"> <label for="${element['id']}" class="picture ${element['tag_id']}">
+                                name="eventpicture" value="${element['id']}"> <label for="${element['id']}" class="picture ${element['tag_id']}">
                                         <div>
-                                            <button type="button" id="eventpicture" class="badge btn-danger my-auto" data-toggle="modal"
+                                            <button type="button" id="eventpicture" onclick="setchecked(${element['id']})" class="badge btn-danger my-auto" data-toggle="modal"
                                                 data-target="#confirmDeleteAccount">x
                                             </button>
                                             <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
@@ -172,7 +172,12 @@
             })
         }
 
-    function deleteeventpicture(id) {
+    function setchecked(id) {
+        document.getElementById(id).checked = true;
+    }
+
+    function deleteeventpicture() {
+        let id = $('input[name=eventpicture]:checked').val();
         $.ajax({
             url: "{{ route('events_controller.deleteeventpicture')}}",
                 method: 'POST',

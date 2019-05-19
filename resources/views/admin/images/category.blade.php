@@ -2,6 +2,34 @@
 
 @section('content')
 <div>
+        <div class="card">
+                @if(count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if($message = Session::get('success'))
+                    <div class="alert alert-succes alert-block">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
+                <form action="{{ route('imagescontroller.addtype') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="text" name="filename">
+                    <div>
+                        <input class="btn btn-info" type="file" name="typefile1" accept="image/png, image/jpeg, image/jpg">
+                    </div>
+                    <div>
+                        <input class="btn btn-info" type="file" name="typefile2" accept="image/png, image/jpeg, image/jpg">
+                    </div>
+                    <button type="submittype" name="submittype">placeholder upload</button>
+                </form>
+            </div>  
         <div class="types">
             <h1>Placeholder type</h1>
                 <div class="box">
@@ -19,14 +47,6 @@
                         </label>  
                     </div>                     
                     @endforeach
-                    <div class="card">
-                        <form action="{{ route('imagescontroller.addtype') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <input type="text" name="filename">
-                            <input class="btn btn-info" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
-                            <button type="submittype" name="submittype">placeholder upload</button>
-                        </form>
-                    </div>    
                 </div>
                 @if ($errors->has('tag'))
                     <div class="error">placeholder.</div>

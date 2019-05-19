@@ -39,28 +39,33 @@ class ImagesController extends Controller
 		}
 	}
 
-	public function addtype() {
-		if(isset($_POST['submittype'])){
-			if(file_exists($_FILES['file']['tmp_name']) || is_uploaded_file($_FILES['file']['tmp_name'])){
-				$name = implode(Input::only('filename'));
-				$fileTmp = $_FILES['file']['tmp_name'];
-				$event_tag = new EventTag;
-				if($name == ""){
-					return redirect('/admin/images/category')->withErrors("placeholder no name");
-				}
-				$event_tag->tag = $name;
-				$event_tag->imageDefault = file_get_contents($fileTmp);
-				$event_tag->imageSelected = file_get_contents($fileTmp);
-				$event_tag->created_at = Carbon::now();
-				$event_tag->save();
-				return redirect('/admin/images/category')->withErrors("placeholder success");
-			}
-			return redirect('/admin/images/category')->withErrors("placeholder no file");
-		}
-		return redirect('/admin/images/category');
+	public function addtype(Request $request) {
+		$this->validate($request, [
+			'typefile1' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+			'typefile2' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+			'filename' => 'required|string'
+		]);
+		$image1 = $request->file('typefile1');
+		$image2 = $request->file('typefile2');
+		$name = $request->input('filename');
+		$event_tag = new EventTag;
+		$event_tag->tag = $name;
+		$event_tag->imageDefault = file_get_contents($image1);
+		$event_tag->imageSelected = file_get_contents($image2);
+		$event_tag->created_at = Carbon::now();
+		$event_tag->save();
+		return back()->with('success', 'placeholder successful');
 	}
 
-	public function check() {
+	public function check(Request $request) {
+		dd($request);
+		$this->validate($request, [
+			'typefile1' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+			'typefile2' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+			'filename' => 'required|string'
+		]);
+
+
 		$error = "";
 		if(isset($_POST['submit'])) {
 			if (!isset($_FILES['file'])) {

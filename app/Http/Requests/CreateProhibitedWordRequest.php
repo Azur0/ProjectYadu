@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddProhibitedWordRequest extends FormRequest
+class CreateProhibitedWordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,13 @@ class AddProhibitedWordRequest extends FormRequest
     public function rules()
     {
         return [
-            'newProhibitedWord' => ['required', 'min:1', 'max:45', 'string'],
-            'updatedProhibitedWord' => ['required', 'min:1', 'max:45', 'string']
+            'newProhibitedWord' => [
+                'required',
+                'unique:prohibited_words,word',
+                'min:1',
+                'max:45',
+                'string',
+                'regex:^[a-z0-9]+$^']
         ];
     }
 }

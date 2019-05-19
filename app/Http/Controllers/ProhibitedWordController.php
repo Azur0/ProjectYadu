@@ -8,6 +8,8 @@ use DB;
 
 class ProhibitedWordController extends Controller
 {
+    //TODO: Delete deze controller!
+
     public static function deleteProhibitedWord($word)
     {
         ProhibitedWord::where('word', $word)->delete();
@@ -16,14 +18,5 @@ class ProhibitedWordController extends Controller
     public static function updateProhibitedWord($oldWord, $newWord)
     {
         DB::table('prohibited_words')->where('word', $oldWord)->update(['word' => $newWord]);
-    }
-
-    public static function createProhibitedWord($word)
-    {
-        $prohibitedWord = new prohibitedWord;
-
-        $prohibitedWord->word = $word;
-
-        $prohibitedWord->save();
     }
 }

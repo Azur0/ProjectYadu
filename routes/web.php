@@ -43,7 +43,7 @@ Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilt
 Auth::routes(['verify' => true]);
 
 //Profile
-Route::get('profile/edit', 'AccountController@edit')->middleware('auth');
+Route::get('/profile/edit', 'AccountController@edit')->middleware('auth');
 Route::get('/profile/{id}/follow', 'AccountController@follow')->middleware('auth');
 Route::get('/profile/{id}/accept', 'AccountController@accept')->middleware('auth');
 Route::get('/profile/{id}/decline', 'AccountController@decline')->middleware('auth');

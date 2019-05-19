@@ -34,12 +34,11 @@ class EditProfileRequest extends FormRequest
             'gender' => [new genderExists],
             'dateOfBirth' => ['nullable', 'date', 'before:today'],
             'email' => ['required', 'string', 'email', 'max:255', new emailUniqueExceptSelf],
-            'followerVisibility' => ['required', 'regex:(private|public|follower)'],
-            'profileVisibilityRule' => ['required', 'regex:(private|public|follower)'],
-            'followingVisibility' => ['required', 'regex:(private|public|follower)'],
-            'infoVisibility' => ['required', 'regex:(private|public|follower)'],
-            'eventsVisibility' => ['required', 'regex:(private|public|follower)'],
-            'participatingVisibility' => ['required', 'regex:(private|public|follower)'],
+            'followerVisibility' => ['required', 'regex:^(private|public|follower)$^'],
+            'followingVisibility' => ['required', 'regex:^(private|public|follower)$^'],
+            'infoVisibility' => ['required', 'regex:^(private|public|follower)$^'],
+            'eventsVisibility' => ['required', 'regex:^(private|public|follower)$^'],
+            'participatingVisibility' => ['required', 'regex:^(private|public|follower)$^'],
         ];
     }
 }

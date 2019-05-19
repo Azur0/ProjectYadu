@@ -58,57 +58,13 @@ class ImagesController extends Controller
 	}
 
 	public function check(Request $request) {
-		dd($request);
 		$this->validate($request, [
-			'typefile1' => 'required|image|mimes:jpg,png,jpeg|max:2048',
-			'typefile2' => 'required|image|mimes:jpg,png,jpeg|max:2048',
-			'filename' => 'required|string'
+			'selected' => 'required',
+			'file' => 'required|image|mimes:jpg,png,jpeg|max:2048'
 		]);
-
-
-		$error = "";
-		if(isset($_POST['submit'])) {
-			if (!isset($_FILES['file'])) {
-				return redirect('/admin/images/extra')->withErrors("placeholder no file set");
-			}
-			$file = $_FILES;
-			$fileName = $_FILES['file']['name'];
-			$fileTmp = $_FILES['file']['tmp_name'];
-			$fileSize = $_FILES['file']['size'];
-			$fileError = $_FILES['file']['error'];
-			$fileType = $_FILES['file']['type'];
-		
-			$fileExt = explode('.', $fileName);
-			$fileActualExt = strtolower(end($fileExt));
-			
-			$allowed = array('jpg', 'jpeg', 'png');
-
-			$selectedImage = Input::only('selected'); 
-
-			if(empty(implode($selectedImage))) {
-				$error = "Placeholder nothing selected";
-				return redirect('/admin/images/extra')->withErrors($error);
-			} else {
-				if(in_array($fileActualExt, $allowed)) {
-					if($fileError === 0) {
-						if($fileSize < 5000) {
-							$test = implode($selectedImage);
-							$fileDestination = 'images/'.$test;
-							move_uploaded_file($fileTmp, $fileDestination);
-							$error = "success";
-							return redirect('/admin/images/extra')->withErrors($error);
-						} else {
-							$error = "Placeholder too large";
-						}
-					} else {
-						$error = "Placeholder error";
-					}
-				} else {
-					$error = "Placeholder nothing or that ext is not allowed";
-				}
-			}
-		}
-		return redirect('/admin/images/extra')->withErrors($error);
+		$location = "images/".$request->selected;
+		move_uploaded_file($request->file->getPathname(), $location);
+		return back()->with('success', 'placeholder successful');
 	}
 
 	public function showtype() {

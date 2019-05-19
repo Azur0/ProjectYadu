@@ -2,7 +2,7 @@
 
 @section('content')
 <div>
-        <div class="card">
+    <div class="card">
                 @if(count($errors) > 0)
                     <div class="alert alert-danger">
                         <ul>

@@ -2,7 +2,22 @@
 
 @section('content')
     <div>
-        <form action="{{ action('Management\ImagesController@check') }}" method="POST" enctype="multipart/form-data">
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if($message = Session::get('success'))
+            <div class="alert alert-succes alert-block">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif        
+        <form action="{{ route('imagescontroller.check') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="types">
                 <h1>Placeholder</h1>
@@ -18,12 +33,10 @@
                         @endforeach
                     </div>
                 </div>
+                <input type="radio" name="image">
                 <input type="file" name="file" accept="image/png, image/jpeg, image/jpg">
                 <button type="submit" name="submit">placeholder upload</button>
             </form>
-            @if($errors->any())
-            <h4>{{$errors->first()}}</h4>
-            @endif
         </div>
     <script>
         function setSelected(item){

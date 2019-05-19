@@ -6,11 +6,5 @@
 */
 
 return [
-    'from' => 'van',
-    'till' => 'tot',
-
-    'dashboard_title' => 'Dashboard',
-
-
 ];
 

@@ -5,7 +5,7 @@
 <div class="container-fluid px-3">
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">#Dashboard</h1>
+        <h1 class="h3 mb-0 text-gray-800">{{__('charts.charts_title')}}</h1>
         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
     </div>
 
@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">#Chat berichten (Maand)</div>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{__('charts.amount_chatmessages')}}</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">#18</div>
                         </div>
                         <div class="col-auto">
@@ -33,7 +33,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">#Nieuwe accounts (Maand)</div>
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{__('charts.amount_new_accounts')}}</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">#5</div>
                         </div>
                         <div class="col-auto">
@@ -51,7 +51,7 @@
             <div class="card shadow mb-4 h-100">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">#Evenementen aangemaakt</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{__('charts.amount_total_events')}}</h6>
 
                     <!-- Button trigger modal -->
                     <a role="button" data-toggle="modal" data-target="#eventModal">
@@ -63,21 +63,21 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="eventModalLabel">#Jadatumbereikperiodetijdseenheid</h5>
+                                    <h5 class="modal-title" id="eventModalLabel">{{__('charts.time_range')}}</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <label for="fromDate">#Van</label>
+                                    <label for="fromDate">{{__('charts.from')}}</label>
                                     <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="fromDate">
 
-                                    <label for="toDate">#Tot</label>
+                                    <label for="toDate">{{__('charts.till')}}</label>
                                     <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="toDate">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">#Sluiten</button>
-                                    <button type="button" onclick="updateEventChart()" class="btn btn-primary" data-dismiss="modal">#Uitvoeren</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('charts.close')}}</button>
+                                    <button type="button" onclick="updateEventChart()" class="btn btn-primary" data-dismiss="modal">{{__('charts.execute')}}</button>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
             <div class="card shadow mb-4 h-100">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">#Delen</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{__('charts.shared_events')}}</h6>
 
                     <!-- Button trigger modal -->
                     <a role="button" data-toggle="modal" data-target="#shareModal">
@@ -107,21 +107,21 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="shareModalLabel">#Jadatumbereikperiodetijdseenheid</h5>
+                                    <h5 class="modal-title" id="shareModalLabel">{{__('charts.time_range')}}</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <label for="fromDate">#Van</label>
+                                    <label for="fromDate">{{__('charts.from')}}</label>
                                     <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="fromShareDate">
 
-                                    <label for="toDate">#Tot</label>
+                                    <label for="toDate">{{__('charts.till')}}</label>
                                     <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="toShareDate">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">#Sluiten</button>
-                                    <button type="button" onclick="updateShareChart()" class="btn btn-primary" data-dismiss="modal">#Uitvoeren</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('charts.close')}}</button>
+                                    <button type="button" onclick="updateShareChart()" class="btn btn-primary" data-dismiss="modal">{{__('charts.execute')}}</button>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +141,7 @@
             <div class="card shadow mb-4 h-100">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">#Categorien</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{__('charts.event_categories')}}</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -154,7 +154,7 @@
             <div class="card shadow mb-4 h-100">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">#Evenementen</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{__('charts.event_heatmap')}}</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">

@@ -30,8 +30,6 @@ class ImagesController extends Controller
 						array_push($images, $file);
 					}
 				}
-			} else {
-				// incorrect dir_path
 			}
             return view('admin/images.extra')->with(compact('images'));
 		}
@@ -43,26 +41,30 @@ class ImagesController extends Controller
 
 	public function addtype() {
 		if(isset($_POST['submittype'])){
-			if(isset($_FILES['file'])){
-				// $name = Input::All();
-				$name = "test";
+			if(file_exists($_FILES['file']['tmp_name']) || is_uploaded_file($_FILES['file']['tmp_name'])){
+				$name = implode(Input::only('filename'));
+				$fileTmp = $_FILES['file']['tmp_name'];
 				$event_tag = new EventTag;
+				if($name == ""){
+					return redirect('/admin/images/category')->withErrors("placeholder no name");
+				}
 				$event_tag->tag = $name;
-				$event_tag->imageDefault = $_FILES['file']['tmp_name'];
+				$event_tag->imageDefault = file_get_contents($fileTmp);
+				$event_tag->imageSelected = file_get_contents($fileTmp);
 				$event_tag->created_at = Carbon::now();
 				$event_tag->save();
-				return redirect('/admin/images/category')->withErrors("IS IT UPLOADED?");
+				return redirect('/admin/images/category')->withErrors("placeholder success");
 			}
-			return redirect('/admin/images/category')->withErrors("fucking file is empty?");
+			return redirect('/admin/images/category')->withErrors("placeholder no file");
 		}
-		return redirect('/admin/images/category')->withErrors("no submit pressed");
+		return redirect('/admin/images/category');
 	}
 
 	public function check() {
 		$error = "";
 		if(isset($_POST['submit'])) {
 			if (!isset($_FILES['file'])) {
-				return redirect('/admin/images/extra')->withErrors("no file set");
+				return redirect('/admin/images/extra')->withErrors("placeholder no file set");
 			}
 			$file = $_FILES;
 			$fileName = $_FILES['file']['name'];
@@ -79,7 +81,7 @@ class ImagesController extends Controller
 			$selectedImage = Input::only('selected'); 
 
 			if(empty(implode($selectedImage))) {
-				$error = "ERROR NOTHING CHOSEN";
+				$error = "Placeholder nothing selected";
 				return redirect('/admin/images/extra')->withErrors($error);
 			} else {
 				if(in_array($fileActualExt, $allowed)) {
@@ -97,7 +99,7 @@ class ImagesController extends Controller
 						$error = "Placeholder error";
 					}
 				} else {
-					$error = "Placeholder ext not allowed";
+					$error = "Placeholder nothing or that ext is not allowed";
 				}
 			}
 		}

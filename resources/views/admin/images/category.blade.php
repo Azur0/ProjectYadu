@@ -22,7 +22,8 @@
                     <div class="card">
                         <form action="{{ route('imagescontroller.addtype') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="file" name="uploadtype" accept="image/png, image/jpeg, image/jpg">
+                            <input type="text" name="filename">
+                            <input class="btn btn-info" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
                             <button type="submittype" name="submittype">placeholder upload</button>
                         </form>
                     </div>    

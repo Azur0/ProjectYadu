@@ -130,10 +130,8 @@ class EventsController extends Controller
             'locLongtitude' => $request['lng'],
             'locLatitude' => $request['lat'],
             'houseNumber' => $request['houseNumber'],
-            'postalcode' => $request['postalCode'],
+            'postalcode' => str_replace(' ', '', $request['postalCode']),
         ]);
-        
-        // dd($location);
 
         Event::create(
             [

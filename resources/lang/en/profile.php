@@ -23,6 +23,7 @@ return [
     'head_participating' => 'Participating',
     'head_followers' => 'Followers',
     'head_following' => 'Following',
+    'head_hidden' => 'User has hidden their user info',
     'info_name' => 'Name',
     'info_rol' => 'Role',
     'info_stats' => 'Stats',

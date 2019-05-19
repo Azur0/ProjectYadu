@@ -197,3 +197,19 @@
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
 }
+
+#http_error
+{
+	text-align: center;
+	margin: 4em auto;
+
+	h1
+	{
+		font-size: 120px;
+	}
+
+	a
+	{
+		font-size: 30px;
+	}
+}

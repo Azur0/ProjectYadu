@@ -121,8 +121,6 @@ return [
     //Custom validation messages
     'genderExists'         => 'Unknown gender.',
     'swearWords'           => ':attribute is not allowed because it contains a swearword.',
-    'addWord' => 'Add prohibited word:',
-    'add' => 'Add',
 
     /*
     |--------------------------------------------------------------------------

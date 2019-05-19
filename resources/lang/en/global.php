@@ -21,9 +21,4 @@ return [
     'days_saturday' => 'Saturday',
     'days_sunday' => 'Sunday',
     'edit_lang' => 'Edit',
-
-
-    'word' => 'Word',
-    'created_at' => 'created at',
-    'updated_at' => 'updated at',
     ];

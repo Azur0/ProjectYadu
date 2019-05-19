@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Management;
 
 
 use App\Http\Requests\CreateProhibitedWordRequest;
+use App\Http\Requests\DestroyProhibitedWordRequest;
+use App\Http\Requests\UpdateProhibitedWordRequest;
 use App\ProhibitedWord;
 use App\Http\Controllers\ProhibitedWordController;
 use Validator;
@@ -14,50 +16,27 @@ class ProhibitedWordsController extends Controller
 {
     public function index()
     {
-        if (Auth::check()) {
-            if (Auth::user()->accountRole == 'Admin') {
-                $ProhibitedWords = ProhibitedWord::orderBy('word', 'asc')->get();
-
-                return view('admin.swearWords.index', compact(['ProhibitedWords']));
-            } else {
-                abort(403);
-            }
-        } else {
-            return redirect('/login');
-        }
+        $prohibitedWords = ProhibitedWord::orderBy('word', 'asc')->get();
+        return view('admin.swearWords.index', compact(['prohibitedWords']));
     }
 
-    public function destroy($word)
+    public function destroy(DestroyProhibitedWordRequest $request)
     {
-        if (ProhibitedWord::where('word', $word)->firstOrFail()->accountRole != 'Admin') {
-            ProhibitedWordController::deleteProhibitedWord($word);
-        } else {
-            return Redirect::back()->with('adminError', __('validation.Delete_ProhibitedWord_error'));
-        }
-
+        ProhibitedWord::where('word', $request['prohibitedWordToDelete'])->delete();
         return redirect('admin/swearWords');
     }
 
-    public function update($oldWord, CreateProhibitedWordRequest $request)
+    public function update(UpdateProhibitedWordRequest $request)
     {
-        if (preg_match('/^[a-z0-9 .\-]+$/i', $request->updatedProhibitedWord))
-            if (!ProhibitedWord::where('word', '=', $request->updatedProhibitedWord)->exists())
-                ProhibitedWordController::updateProhibitedWord($oldWord, $request->updatedProhibitedWord);
+        $oldWord = $request['originalProhibitedWord'];
+        $newWord = $request['updatedProhibitedWord'];
 
+        ProhibitedWord::where('word', $oldWord)->update(['word' => $newWord]);
         return redirect('admin/swearWords');
     }
 
     public function create(CreateProhibitedWordRequest $request)
     {
-
-        //Deze logic hoort in de request, niet in de controller. Daar zijn ze immers voor bedoeld.
-//        if (preg_match('/^[a-z0-9 .\-]+$/i', $request->newProhibitedWord)) {
-//            if (!ProhibitedWord::where('word', '=', $request->newProhibitedWord)->exists())
-//              // Waarom?? Je hebt hier al een controller...
-//                ProhibitedWordController::createProhibitedWord($request->newProhibitedWord);
-//            }
-//        }
-
         $prohibitedWord = new prohibitedWord();
         $prohibitedWord->word = $request['newProhibitedWord'];
         $prohibitedWord->save();

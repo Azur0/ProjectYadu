@@ -36,14 +36,14 @@
 
 					<tbody>
 					<?php $id = 1; ?>
-					@foreach($ProhibitedWords as $ProhibitedWord)
+					@foreach($prohibitedWords as $prohibitedWord)
 						<tr>
 							<td>{{$id}}</td>
-							<td>{{$ProhibitedWord->word}}</td>
-							<td>{{$ProhibitedWord->created_at}}</td>
-							<td>{{$ProhibitedWord->updated_at}}</td>
+							<td>{{$prohibitedWord->word}}</td>
+							<td>{{$prohibitedWord->created_at}}</td>
+							<td>{{$prohibitedWord->updated_at}}</td>
 							<td>
-								<form class="form_submit_ays" method="POST" id="updateWord{{$id}}" action="/admin/prohibitedWords/{{$ProhibitedWord->word}}/update">
+								<form class="form_submit_ays" method="POST" id="updateWord{{$id}}" action="/admin/prohibitedWords/update">
 									@csrf
 									<div>
 										<div >
@@ -61,7 +61,8 @@
 													</div>
 													<div class="modal-body">
 														{{ __('global.word')}}: <br>
-														<input class="form-control" name="updatedProhibitedWord" value="{{$ProhibitedWord->word}}">
+														<input class="form-control" name="updatedProhibitedWord" value="{{$prohibitedWord->word}}">
+														<input hidden name="originalProhibitedWord" value="{{$prohibitedWord->word}}">
 													</div>
 													<div class="modal-footer">
 														<input type="submit" form="updateWord{{$id}}" class="btn" style="background-color: limegreen; color: black;" value="{{__('validation.confirm_update')}}">
@@ -73,7 +74,13 @@
 									</div>
 								</form>
 							</td>
-							<td> <button type="submit" onclick="window.location.href='{{url('/admin/prohibitedWords/'. $ProhibitedWord->word .'/delete')}}'" class="button-remove button-hover">{{__('events.show_delete')}}</button> </td>
+							<td>
+							<form method="POST" action="/admin/prohibitedWords/delete">
+								@csrf
+								<input hidden name="prohibitedWordToDelete" value="{{$prohibitedWord->word}}">
+								<button type="submit" class="button-remove button-hover">{{__('events.show_delete')}}</button>
+							</form>
+							</td>
 						</tr>
 					<?php $id++; ?>
 					@endforeach

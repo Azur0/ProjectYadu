@@ -17,6 +17,7 @@ class SocialmediaTableSeeder extends Seeder
             'twitter'=>'https://twitter.com/_Yadu_',
             'facebook'=>'https://www.facebook.com/yadu.nu/?ref=bookmarks',
             'instagram'=>'https://www.instagram.com/yadu.nu/',
+            'email'=>'info@YADU.nu',
         ];
         foreach($socialmedia as $name => $link) {
             DB::table('socialmedia')->insert([

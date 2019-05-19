@@ -14,6 +14,7 @@ return [
     // Event
     "event" => "evenement",
     "joinedEvent" => "Je hebt je aangemeld voor",
+    "eventJoinedYourHeader" => "Iemand heeft zich aangemeld voor een van evenementen",
     "joinedYourEvent" => "heeft zich aangemeld voor je evenement",
     "participantJoinedEvent" => "heeft zich aangemeld voor",
     "leftEvent" => "Je hebt je afgemeld voor",

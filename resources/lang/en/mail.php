@@ -14,6 +14,7 @@ return [
     // Event
     "event" => "event",
     "joinedEvent" => "You have joined",
+    "eventJoinedYourHeader" => "Someone joined your event",
     "joinedYourEvent" => "has joined your event",
     "participantJoinedEvent" => "has joined",
     "leftEvent" => "You have left",

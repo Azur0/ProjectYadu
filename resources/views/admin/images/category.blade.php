@@ -1,6 +1,7 @@
 @extends('layouts/admin/app')
 
 @section('content')
+<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
 <div>
         <div class="types">
             <h1>Placeholder type</h1>
@@ -20,10 +21,12 @@
                     </div>                     
                     @endforeach
                     <div class="card">
-                        <input type="radio" value="newtype" onclick="">
-                        <label for="add" class="category">Placeholder</label>  
+                        <form action="{{ route('imagescontroller.addtype') }}" method="POST" class="dropzone dz-clickable alert alert-success" id="dropzone">
+                            @csrf
+                            <input type="file" name="file" accept="image/png, image/jpeg, image/jpg">
+                            <button type="submit" name="submit">placeholder upload</button>
+                        </form>
                     </div>    
-                    <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">Drop</form>
                 </div>
                 @if ($errors->has('tag'))
                     <div class="error">placeholder.</div>
@@ -46,10 +49,35 @@
     @endif
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+<script>
+    $(document).ready(function() {
+            Dropzone.options.dropzone = {
+                autoProcessQueue: false,
+                acceptedFiles: '.png, .jpg, .jpeg',
+                init: function(){
+                    let submittype = document.querySelector('#submittype');
+                    submittype.addEventListener('click', function() {
+                        this.processQueue();
+                    });
+                    this.on('complete', function() {
+                        if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0){
+                            this.removeAllFiles();
+                        }
+                    });
+                    this.on("queuecomplete", function (file) {
+                        alert("All files have uploaded ");
+                    });
+                },
+                uploadMultiple: false,
+                addRemoveLinks: true,
+                maxFiles: 1,
+                maxFileSize: 1000,
+            };
+    });
+</script>
 
 <script>
     function removeType(id) {
-        console.log("starting ajax call");
         $.ajax({
             url: "{{ route('imagescontroller.checkforevent')}}",
             method: 'GET',

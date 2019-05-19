@@ -40,6 +40,12 @@ class ImagesController extends Controller
 		}
 	}
 
+	public function addtype() {
+		if(!empty($_FILES)) {
+			
+		}
+	}
+
 	public function check() {
 		$error = "";
 		if(isset($_POST['submit'])) {

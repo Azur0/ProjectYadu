@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <input type="file" name="file" accept="image/png, image/jpeg, image/jpg">
+            <input type="file" name="uploadextra" accept="image/png, image/jpeg, image/jpg">
             <button type="submit" name="submit">placeholder upload</button>
         </form>
         @if($errors->any())

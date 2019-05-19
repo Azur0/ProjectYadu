@@ -8,6 +8,7 @@ use App\EventTag;
 use App\EventPicture;
 use App\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -41,14 +42,28 @@ class ImagesController extends Controller
 	}
 
 	public function addtype() {
-		if(!empty($_FILES)) {
-			
+		if(isset($_POST['submittype'])){
+			if(isset($_FILES['file'])){
+				// $name = Input::All();
+				$name = "test";
+				$event_tag = new EventTag;
+				$event_tag->tag = $name;
+				$event_tag->imageDefault = $_FILES['file']['tmp_name'];
+				$event_tag->created_at = Carbon::now();
+				$event_tag->save();
+				return redirect('/admin/images/category')->withErrors("IS IT UPLOADED?");
+			}
+			return redirect('/admin/images/category')->withErrors("fucking file is empty?");
 		}
+		return redirect('/admin/images/category')->withErrors("no submit pressed");
 	}
 
 	public function check() {
 		$error = "";
 		if(isset($_POST['submit'])) {
+			if (!isset($_FILES['file'])) {
+				return redirect('/admin/images/extra')->withErrors("no file set");
+			}
 			$file = $_FILES;
 			$fileName = $_FILES['file']['name'];
 			$fileTmp = $_FILES['file']['tmp_name'];
@@ -58,7 +73,7 @@ class ImagesController extends Controller
 		
 			$fileExt = explode('.', $fileName);
 			$fileActualExt = strtolower(end($fileExt));
-		
+			
 			$allowed = array('jpg', 'jpeg', 'png');
 
 			$selectedImage = Input::only('selected'); 

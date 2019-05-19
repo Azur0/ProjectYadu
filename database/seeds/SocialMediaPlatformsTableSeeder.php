@@ -11,7 +11,7 @@ class SocialMediaPlatformsTableSeeder extends Seeder
      */
     public function run()
     {
-        $platforms = array("twitter", "instagram", "facebook", "whatsapp", "link");
+        $platforms = array("twitter", "facebook", "whatsapp", "link");
 
         foreach ($platforms as $platform)
         {

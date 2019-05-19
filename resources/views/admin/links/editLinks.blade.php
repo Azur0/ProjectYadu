@@ -18,7 +18,7 @@
             @foreach ($socialmedia as $social)
             <tr>
                 <td>{{$y+=1}}</td>
-                <td>{{$social->name}}</td>
+                <td>{{ucfirst($social->name)}}</td>
                 <td>{{$social->link}}</td>
                 <td><button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#change{{$social->name}}Link"

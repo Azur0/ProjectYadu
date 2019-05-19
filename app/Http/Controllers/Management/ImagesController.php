@@ -97,7 +97,7 @@ class ImagesController extends Controller
 		return json_encode($events);
 	}
 
-	public function deleteCategoryPicture(Request $request) {
+	public function deleteeventpicture(Request $request) {
 		$selectedPicture = EventPicture::where('id', '=', $request->input('query'))->firstOrFail();
 		try{
 			$selectedPicture->delete();

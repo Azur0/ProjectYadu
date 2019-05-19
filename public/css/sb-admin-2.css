@@ -12325,10 +12325,20 @@ h6.collapse-header {
   width: 50px;
 }
 
-.badgecontainer {
-  float: left;
+.badge {
   position: relative;
-  left: 0px;
-  top: 26px;
+  left: 167px;
+  top: -2px;
+  z-index: 1;
+}
+
+.divider {
+  margin: 5px;
+}
+
+#eventpicture {
+  position: relative;
+  left: 167px;
+  top: 22px;
   z-index: 1;
 }

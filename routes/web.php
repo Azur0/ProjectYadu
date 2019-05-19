@@ -73,7 +73,7 @@ Route::post('admin/images/category', 'Management\ImagesController@passthrough')-
 Route::post('admin/images/category/addtype', 'Management\ImagesController@addtype')->name('imagescontroller.addtype')->middleware('auth', 'isAdmin');
 Route::post('admin/images/category/remove', 'Management\ImagesController@removetype')->name('imagescontroller.removetype')->middleware('auth', 'isAdmin');
 Route::get('admin/images/category/check', 'Management\ImagesController@checkforevent')->name('imagescontroller.checkforevent')->middleware('auth','isAdmin'); 
-Route::post('admin/images/category/removeTypeOff', 'Management\ImagesController@deleteCategoryPicture')->name('events_controller.deleteCategoryPicture')->middleware('auth', 'isAdmin');;
+Route::post('admin/images/category/deleteeventpicture', 'Management\ImagesController@deleteeventpicture')->name('events_controller.deleteeventpicture')->middleware('auth', 'isAdmin');;
 Route::post('admin/images/category/overrideremove', 'Management\ImagesController@overrideremove')->name('imagescontroller.overrideremove')->middleware('auth', 'isAdmin');
 
 // admin/images/extra

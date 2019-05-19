@@ -34,12 +34,12 @@
             <h1>Placeholder type</h1>
                 <div class="box">
                     @foreach ($tags as $tag)
-                    <div class="card"> 
+                    <div class="card divider"> 
                         <input type="radio" id="{{$tag->tag}}" name="tag" value="{{$tag->id}}" onclick="fetch_customer_data({{$tag->id }})">
                         <label for="{{$tag->tag}}" class="category">
                                 <div>
                                     <div>
-                                        <button type="button" onclick="removeType({{$tag->id}})" class="button-remove button-hover">x</button>
+                                        <button type="button" onclick="removeType({{$tag->id}})" class="badge eventpicture btn-danger my-auto">x</button>
                                     </div>
                                 </div>
                             <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
@@ -135,23 +135,46 @@
                         $('#box2').html("");
 
                         data.forEach(function (element) {
-                            $('#box2').html($("#box2").html() + `<input type="radio" id="${element['id']}" class="picture ${element['tag_id']}"  
+                            $('#box2').html($("#box2").html() + `<div class="flexbox divider"><input type="radio" id="${element['id']}" class="picture ${element['tag_id']}"  
                                 name="picture" value="${element['id']}"> <label for="${element['id']}" class="picture ${element['tag_id']}">
                                         <div>
-                                            <div class="badgecontainer">
-                                                <button type="button" class="button-remove button-hover" value="${element['id']}" onclick="deleteTypeOff(this.value)">x</button>
+                                            <button type="button" id="eventpicture" class="badge btn-danger my-auto" data-toggle="modal"
+                                                data-target="#confirmDeleteAccount">x
+                                            </button>
+                                            <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">placeholder title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            placeholder are u sure
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" onclick="deleteeventpicture(this.value)" value="${element['id']}"
+                                                            class="btn btn-danger" data-dismiss="modal">placeholder confirm</button>
+                                                            <button type="button" class="btn btn-primary"
+                                                                    data-dismiss="modal">placeholder negative
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                <img class="default" src="data:image/jpeg;base64, ${element['picture']}"> </label>`);
+                                <img class="default" src="data:image/jpeg;base64, ${element['picture']}"> </label></div>`);
                         });
                     }
                 }
             })
         }
 
-    function deleteTypeOff(id) {
+    function deleteeventpicture(id) {
         $.ajax({
-            url: "{{ route('events_controller.deleteCategoryPicture')}}",
+            url: "{{ route('events_controller.deleteeventpicture')}}",
                 method: 'POST',
                 data: {
                     query: id,
@@ -161,10 +184,14 @@
                 success: function (data) { 
                     let id = $('input[name=tag]:checked').val();
                     fetch_customer_data(id);
-                    alert("Success");
                 },
-                error: function () {
-                    alert("Picture in use");
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('jqXHR:');
+                    console.log(jqXHR);
+                    console.log('textStatus:');
+                    console.log(textStatus);
+                    console.log('errorThrown:');
+                    console.log(errorThrown);
                 }
         }) 
     }

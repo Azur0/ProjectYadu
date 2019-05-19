@@ -17,7 +17,7 @@
                 <strong>{{ $message }}</strong>
             </div>
         @endif        
-        <form action="{{ route('imagescontroller.check') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('imagescontroller.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="types">
                 <h1>Placeholder</h1>

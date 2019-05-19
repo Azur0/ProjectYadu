@@ -57,7 +57,7 @@ class ImagesController extends Controller
 		return back()->with('success', 'placeholder successful');
 	}
 
-	public function check(Request $request) {
+	public function update(Request $request) {
 		$this->validate($request, [
 			'selected' => 'required',
 			'file' => 'required|image|mimes:jpg,png,jpeg|max:2048'

@@ -78,4 +78,4 @@ Route::post('admin/images/category/overrideremove', 'Management\ImagesController
 
 // admin/images/extra
 Route::get('admin/images/extra', 'Management\ImagesController@showextra')->middleware('auth', 'isAdmin');
-Route::post('admin/images/extra', 'Management\ImagesController@check')->name('imagescontroller.check')->middleware('auth', 'isAdmin');
+Route::post('admin/images/extra', 'Management\ImagesController@update')->name('imagescontroller.update')->middleware('auth', 'isAdmin');

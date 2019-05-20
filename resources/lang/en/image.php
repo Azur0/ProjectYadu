@@ -19,4 +19,8 @@ return [
     'error_nodata' => 'No data to read, go add some!',
     'adding_successsful' => 'Adding file succeeded',
     'update_successful' => 'Upload successful',
+    'add_tag_title' => 'Insert a new tag here',
+    'add_tag_name' => 'Describe the category',
+    'add_tag_default' => 'Basic picture',
+    'add_tag_selected' => 'Selected picture',
 ];

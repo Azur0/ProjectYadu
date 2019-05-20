@@ -12344,15 +12344,38 @@ h6.collapse-header {
 }
 
 .input-label {
-  background: #009688;
-  color: #fff;
+  background: lightgray;
+  color: black;
   padding: 30px;
   transition: 0.3s;
 }
 
-.input-label:hover {
-  background: #26a69a;
+.background-label {
+  background: lightgray;
+  color: black;
+  padding: 30px;
+  transition: 0.3s;
+}
+
+.background-label:hover {
+  background: #ff9900;
+  font-weight: bold;
   cursor: pointer;
+}
+
+.input-label:hover {
+  background: #ff9900;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form { 
+  margin: 0 auto; 
+  width:20%;
+  }
+
+.formitem {
+  width: 100%;
 }
 
 .fa {

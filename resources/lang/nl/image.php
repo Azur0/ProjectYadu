@@ -19,4 +19,8 @@ return [
     'error_nodata' => 'Geen data om weer te geven. Voeg wat foto\'s toe',
     'adding_successsful' => 'Bestand toevoegen gelukt',
     'update_successful' => 'Uploaden geslaagd',
+    'add_tag_title' => 'Voeg hier een nieuwe categorie toe',
+    'add_tag_name' => 'Beschrijf hier de categorie',
+    'add_tag_default' => 'Basis foto',
+    'add_tag_selected' => 'Selectie foto',
 ];

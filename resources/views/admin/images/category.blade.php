@@ -19,28 +19,38 @@
                         <strong>{{ $message }}</strong>
                     </div>
                 @endif
-                <div class="form-div">
-                <form action="{{ route('imagescontroller.addtype') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="text" name="filename">
-                    <div>
-                        <label for="file1" class="input-label first">
-                            <i class="fa fa-upload"></i>
-                            placeholder default:
-                        </label>
-                        <input id="file1" class="btn btn-info" type="file" name="typefile1" accept="image/png, image/jpeg, image/jpg">
+                <div class="card">
+                    <div class="card-header">
+                    <h1>{{__('image.add_tag_title')}}</h1>
                     </div>
-                    <div>
-                        <label for="file2" class="input-label second">
-                            <i class="fa fa-upload"></i>
-                            placeholder selected: 
-                        </label>
-                        <input id="file2" class="btn btn-info" type="file"  name="typefile2" accept="image/png, image/jpeg, image/jpg">
+                    <div class="form card-body">
+                        <form class="form-group" action="{{ route('imagescontroller.addtype') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="responsive">
+                            <label class="background-label formitem">
+                                    <i class="fa fa-input"></i>
+                            <label>{{__('image.add_tag_name')}}</label>
+                            <input required autofocus class="w3-input w3-border" type="text" name="filename">
+                            </div>
+                            <div class="responsive">
+                                <label for="file1" class="input-label first formitem">
+                                    <i class="fa fa-upload"></i>
+                                    {{__('image.add_tag_default')}}
+                                </label>
+                                <input id="file1" class="btn btn-info" type="file" name="typefile1" accept="image/png, image/jpeg, image/jpg">
+                            </div>
+                            <div class="responsive">
+                                <label for="file2" class="input-label second formitem">
+                                    <i class="fa fa-upload"></i>
+                                    {{__('image.add_tag_selected')}}
+                                </label>
+                                <input id="file2" class="btn btn-info" type="file"  name="typefile2" accept="image/png, image/jpeg, image/jpg">
+                            </label>
+                            <button type="submittype" class="btn btn-primary submit-edit" name="submittype">{{__('image.button_upload_dual')}}</button>
+                        </form>
                     </div>
-                    <button type="submittype" name="submittype">{{__('image.button_upload_dual')}}</button>
-                </form>
                 </div>
-            </div>  
+            </div>
         <div class="types">
             <h1>{{__('image.header_type_tag')}}</h1>
                 <div class="box">
@@ -90,7 +100,7 @@
                         <strong>{{ $message }}</strong>
                     </div>
                 @endif
-            <div class="pic">
+            <div class="pic" hidden>
                 <h3>{{__('image.header_eventpictures')}}</h3>
                     <div class="types">
                         <div id="box2" class="box">
@@ -211,6 +221,7 @@ $(document).ready(function() {
     }
        
         function fetch_customer_data(query) {
+            document.querySelector('.pic').hidden = false;
             $.ajax({
                 url: "{{ route('events_controller.action')}}",
                 method: 'POST',

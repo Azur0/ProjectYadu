@@ -155,6 +155,36 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">{{__('charts.event_heatmap')}}</h6>
+
+                    <!-- Button trigger modal -->
+                    <a role="button" data-toggle="modal" data-target="#heatmapModal">
+                        <i class="fas fa-calendar-alt fa-sm fa-fw"></i>
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="heatmapModal" tabindex="-1" role="dialog" aria-labelledby="heatmapModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="heatmapModalLabel">{{__('charts.time_range')}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <label for="fromDate">{{__('charts.from')}}</label>
+                                    <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="fromHeatmapDate">
+
+                                    <label for="toDate">{{__('charts.till')}}</label>
+                                    <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="toHeatmapDate">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('charts.close')}}</button>
+                                    <button type="button" onclick="updateHeatmap()" class="btn btn-primary" data-dismiss="modal">{{__('charts.execute')}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -329,9 +359,7 @@
             var i;
             for (i = 0; i < amount; i++) {
                 colors.push('hsl(' + Math.floor(colorstep * i) + ', 68%, 50%)');
-                console.log('hsl(' + Math.floor(colorstep * i) + ', 68%, 50%)');
             }
-            console.log(colors);
             return colors;
         }
     </script>
@@ -372,6 +400,7 @@
                 },
                 dataType: 'json',
                 success: function(data) {
+                    console.log(data);
                     data.forEach(function(item) {
                         plotLatLng.push(new google.maps.LatLng(item.lat, item.lng));
                     })
@@ -383,6 +412,13 @@
                 }
             });
             return plotLatLng;
+        }
+
+        function updateHeatmap() {
+            var fromDate = document.getElementById("fromHeatmapDate").value;
+            var toDate = document.getElementById("toHeatmapDate").value;
+
+            heatmap.setData(getPoints(fromDate, toDate));
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=visualization&callback=initMap" async defer></script>

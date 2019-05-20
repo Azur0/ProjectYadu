@@ -201,7 +201,7 @@
                 dataType: 'json',
                 success: function(data) {
                     data.forEach(function(item) {
-                        plotLabels.push(item.month + " " + item.year);
+                        plotLabels.push(item.date);
                         plotData.push(item.totalEvents);
                     })
                 },

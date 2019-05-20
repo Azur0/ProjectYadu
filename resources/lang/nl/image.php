@@ -16,4 +16,5 @@ return [
     'error_picture' => 'Er ging iets fout bij het laden van de foto',
     'error_nodata' => 'Er ging iets fout bij het uitlezen van de data',
     'adding_successsful' => 'Bestand toevoegen gelukt',
+    'update_successful' => 'Uploaden geslaagd',
 ];

@@ -16,4 +16,5 @@ return [
     'error_picture' => 'Something went wrong upon reading the picture',
     'error_nodata' => 'Reading data went wrong',
     'adding_successsful' => 'Adding file succeeded',
+    'update_successful' => 'Upload successful',
 ];

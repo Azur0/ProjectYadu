@@ -16,7 +16,7 @@ return [
     'error_empty_tags' => 'Geen categoriën opgehaald.',
     'error_empty_eventpictures' => 'Geen verbonden images gevonden',
     'error_picture' => 'Er ging iets fout bij het laden van de foto',
-    'error_nodata' => 'Er ging iets fout bij het uitlezen van de data',
+    'error_nodata' => 'Geen data om weer te geven. Voeg wat foto\'s toe',
     'adding_successsful' => 'Bestand toevoegen gelukt',
     'update_successful' => 'Uploaden geslaagd',
 ];

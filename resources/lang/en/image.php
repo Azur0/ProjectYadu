@@ -16,7 +16,7 @@ return [
     'error_empty_tags' => 'No tags found',
     'error_empty_eventpictures' => 'No connected images found',
     'error_picture' => 'Something went wrong upon reading the picture',
-    'error_nodata' => 'Reading data went wrong',
+    'error_nodata' => 'No data to read, go add some!',
     'adding_successsful' => 'Adding file succeeded',
     'update_successful' => 'Upload successful',
 ];

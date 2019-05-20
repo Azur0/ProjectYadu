@@ -87,15 +87,6 @@
                         </div>
                         @if ($errors->has('picture'))
                             <div class="error">{{__('image.error_empty_eventpictures')}}</div>
-                            <div class="imageform">
-                                <form action="{{ url('admin/images/category/addeventpicture/${query}') }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <div>
-                                        <input class="btn btn-info" type="file" name="eventfile" accept="image/png, image/jpeg, image/jpg">
-                                    </div>
-                                    <button type="submittype" name="submittype">{{__('image.button_upload_dual')}}</button>
-                                </form>
-                            </div>
                         @endif
                     </div>
             </div>
@@ -192,7 +183,13 @@
                 dataType: 'json',
                 success: function (data) {
                     if (data == "") {
-                        $('#box2').html("<h5><i>{{__('image.error_nodata')}}</i></h5>");
+                        $('#box2').html(`<h5><i>{{__('image.error_nodata')}}</i></h5><form action="{{ url('admin/images/category/addeventpicture/${query}') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div>
+                                        <input class="btn btn-info" type="file" name="eventfile" accept="image/png, image/jpeg, image/jpg">
+                                    </div>
+                                    <button type="submittype" name="submittype">{{__('image.button_upload_dual')}}</button>
+                                </form>`);
                     } else {
                         $('#box2').html("");
 

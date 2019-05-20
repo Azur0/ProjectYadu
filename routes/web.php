@@ -74,7 +74,7 @@ Route::post('admin/images/category/removetype', 'Management\ImagesController@rem
 Route::post('admin/images/category/checktiedpictures', 'Management\ImagesController@checktiedpictures')->name('imagescontroller.checktiedpictures')->middleware('auth', 'isAdmin');
 Route::post('admin/images/category/deleteeventpicture', 'Management\ImagesController@deleteeventpicture')->name('events_controller.deleteeventpicture')->middleware('auth', 'isAdmin');
 Route::post('admin/images/category/trueremove', 'Management\ImagesController@trueremove')->name('imagescontroller.trueremove')->middleware('auth', 'isAdmin');
-// Route::post('admin/images/category/addeventpicture', 'Management\ImagesController@addeventpicture')->name('imagescontroller.addeventpicture')->middleware('auth', 'isAdmin');
+Route::post('admin/images/category/addeventpicture', 'Management\ImagesController@addeventpicture')->name('imagescontroller.addeventpicture')->middleware('auth', 'isAdmin');
 
 // admin/images/extra
 Route::get('admin/images/extra', 'Management\ImagesController@showextra')->middleware('auth', 'isAdmin');

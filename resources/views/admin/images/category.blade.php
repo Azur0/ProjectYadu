@@ -84,6 +84,9 @@
                         @endif
                     </div>
             </div>
+            <div class="imageform">
+
+            </div>
 </div>
 <script>
     function removeType() {
@@ -150,8 +153,9 @@
                                 _token: '{{ csrf_token() }}'
                             },
                             dataType: 'json',
-                            success: function() {
-                                location.reload();
+                            success: function(data) {
+                                // location.reload();
+                                console.log(data);
                             }
                         });
                     });
@@ -219,6 +223,13 @@
                                         </div>
                                 <img class="default" src="data:image/jpeg;base64, ${element['picture']}"> </label></div>`);
                         });
+                        $('#box2').html($("#box2").html() + `<form action="{{ route('imagescontroller.addeventpicture') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div>
+                                        <input class="btn btn-info" type="file" name="eventfile" accept="image/png, image/jpeg, image/jpg">
+                                    </div>
+                                    <button type="submittype" name="submittype">{{__('image.button_upload_dual')}}</button>
+                                </form>`);
                     }
                 }
             })

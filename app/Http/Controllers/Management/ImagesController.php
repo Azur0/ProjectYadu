@@ -98,6 +98,18 @@ class ImagesController extends Controller
 		return json_encode($eventpictures);
 	}
 
+	public function trueremove(Request $request) {
+		return $request;
+	}
+
+	public function addeventpicture(Request $request) {
+		dd($request);
+		$this->validate($request, [
+			'selected' => 'required',
+			'file' => 'required|image|mimes:jpg,png,jpeg|max:2048'
+		]);
+	}
+
 	public function deleteeventpicture(Request $request) {
 		$selectedPicture = EventPicture::where('id', '=', $request->input('query'))->firstOrFail();
 		try{

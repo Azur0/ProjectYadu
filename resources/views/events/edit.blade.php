@@ -61,16 +61,21 @@
                 <input type="hidden" name="postalCode" id="postalCode"
                     value="{{$data['event']->location()->first()->postalcode}}">
                 <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required
-                    value="{{ $data['event']->location()->first()->postalcode }} {{ $data['event']->location()->first()->houseNumber }}{{ $data['event']->location()->first()->houseNumberAddition }}">
+                @if (old('location')==null)
+                    value="{{ $data['event']->location()->first()->postalcode }} {{ $data['event']->location()->first()->houseNumber }}{{ $data['event']->location()->first()->houseNumberAddition }}"
+                    @else
+                    value="{{old('location')}}"
+                @endif
+                >
                 <div id="map"></div>
                 @if ($errors->has('lat'))
-                <div class="error">Het locatie-veld is verplicht.</div>
+                <div class="error">{{__('events.create_error_location_required')}}</div>
                 @endif
                 @if ($errors->has('houseNumber'))
-                <div class="error">Dit adress bevat geen huisnummer.</div>
+                <div class="error">{{__('events.create_error_house_number')}}</div>
                 @endif
                 @if ($errors->has('postalCode'))
-                <div class="error">Dit adress heeft geen geldige postcode.</div>
+                <div class="error">{{__('events.create_error_postalcode')}}</div>
                 @endif
             </div>
         </div>

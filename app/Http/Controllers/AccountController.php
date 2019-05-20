@@ -13,7 +13,7 @@ use App\EventHasParticipants;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use DB;
-
+use App\AccountHasFollowers;
 
 class AccountController extends Controller
 {
@@ -93,7 +93,14 @@ class AccountController extends Controller
         $request->validate([
             'id' => 'required',
         ]);
-        
+        if(Auth::user()->followers->pluck('id')->contains($request->id)){
+            AccountHasFollowers::where('account_id', '=', Auth::id())->where('follower_id', '=', $request->id)->delete();
+        }
+
+        if(Auth::user()->following->pluck('id')->contains($request->id)){
+            AccountHasFollowers::where('follower_id', '=', Auth::id())->where('account_id', '=', $request->id)->delete();
+        }
+
         BlockedUser::create([
             'account_id' => Auth::id(),
             'blockedAccount_id' => $request->id,

@@ -52,4 +52,14 @@ class Account extends Authenticatable implements MustVerifyEmailContract
     {
         return $this->hasMany('App\BlockedUser');
     }
+
+    public function followers()
+    {
+    	return $this->belongsToMany('App\Account', 'account_has_followers', 'account_id', 'follower_id');
+    }
+    
+    public function following()
+    {
+    	return $this->belongsToMany('App\Account', 'account_has_followers', 'follower_id', 'account_id');
+    }
 }

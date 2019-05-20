@@ -9,16 +9,49 @@
         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
     </div>
 
+    <div class="d-flex flex-row">
+        <div class="col-md-10 float-right">
+            <h3>#Rapport van datum tot datum</h3>
+        </div>
+        <div>
+            <!-- Button trigger modal -->
+            <button class="btn-primary" data-toggle="modal" data-target="#reportModal">{{__('charts.change_date_range')}}</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="reportModalLabel">{{__('charts.time_range')}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="fromDate">{{__('charts.from')}}</label>
+                            <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="dateRangeFromDate">
+
+                            <label for="toDate">{{__('charts.till')}}</label>
+                            <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="dateRangeToDate">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('charts.close')}}</button>
+                            <button type="button" onclick="changeDateRange()" class="btn btn-primary" data-dismiss="modal">{{__('charts.execute')}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
-
-
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{__('charts.amount_chatmessages')}}</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">#18</div>
+                            <div id="chatmessages" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -34,7 +67,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{__('charts.amount_new_accounts')}}</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">#5</div>
+                            <div id="newAccounts" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -52,37 +85,6 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">{{__('charts.amount_total_events')}}</h6>
-
-                    <!-- Button trigger modal -->
-                    <a role="button" data-toggle="modal" data-target="#eventModal">
-                        <i class="fas fa-calendar-alt fa-sm fa-fw"></i>
-                    </a>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="eventModalLabel">{{__('charts.time_range')}}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <label for="fromDate">{{__('charts.from')}}</label>
-                                    <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="fromDate">
-
-                                    <label for="toDate">{{__('charts.till')}}</label>
-                                    <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="toDate">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('charts.close')}}</button>
-                                    <button type="button" onclick="updateEventChart()" class="btn btn-primary" data-dismiss="modal">{{__('charts.execute')}}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -96,36 +98,6 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">{{__('charts.shared_events')}}</h6>
-
-                    <!-- Button trigger modal -->
-                    <a role="button" data-toggle="modal" data-target="#shareModal">
-                        <i class="fas fa-calendar-alt fa-sm fa-fw"></i>
-                    </a>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="shareModalLabel">{{__('charts.time_range')}}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <label for="fromDate">{{__('charts.from')}}</label>
-                                    <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="fromShareDate">
-
-                                    <label for="toDate">{{__('charts.till')}}</label>
-                                    <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="toShareDate">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('charts.close')}}</button>
-                                    <button type="button" onclick="updateShareChart()" class="btn btn-primary" data-dismiss="modal">{{__('charts.execute')}}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -134,7 +106,6 @@
             </div>
         </div>
     </div>
-
 
     <div class='row mb-3'>
         <div class="col-xl-4 col-lg-5">
@@ -155,36 +126,6 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">{{__('charts.event_heatmap')}}</h6>
-
-                    <!-- Button trigger modal -->
-                    <a role="button" data-toggle="modal" data-target="#heatmapModal">
-                        <i class="fas fa-calendar-alt fa-sm fa-fw"></i>
-                    </a>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="heatmapModal" tabindex="-1" role="dialog" aria-labelledby="heatmapModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="heatmapModalLabel">{{__('charts.time_range')}}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <label for="fromDate">{{__('charts.from')}}</label>
-                                    <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="fromHeatmapDate">
-
-                                    <label for="toDate">{{__('charts.till')}}</label>
-                                    <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="toHeatmapDate">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('charts.close')}}</button>
-                                    <button type="button" onclick="updateHeatmap()" class="btn btn-primary" data-dismiss="modal">{{__('charts.execute')}}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -195,9 +136,14 @@
     </div>
 
     <script>
+        //Manually update cards on page load
+        updateChatmessagesSend();
+        updateAccountsCreated();
+
+        //EventChart
         var eventChart = new Chart(document.getElementById('events'), {
             type: 'line',
-            data: getEventData(null, null),
+            data: getEventData(),
             options: {
                 legend: {
                     display: false
@@ -211,6 +157,101 @@
                 }
             }
         });
+
+        //ShareChart
+        var shareChart = new Chart(document.getElementById("shares"), {
+            type: 'doughnut',
+            data: getShareData(),
+            options: {
+                maintainAspectRatio: true
+            }
+        });
+
+        //CategoriesChart
+        var categoriesChart = new Chart(document.getElementById("categories"), {
+            type: 'doughnut',
+            data: getCategoryData(),
+            options: {
+                maintainAspectRatio: true
+            }
+        });
+
+        function changeDateRange() {
+            let fromDate = document.getElementById("dateRangeFromDate").value;
+            let toDate = document.getElementById("dateRangeToDate").value;
+            updateCharts(fromDate, toDate);
+        }
+
+        function updateCharts(fromDate, toDate) {
+            updateChatmessagesSend(fromDate, toDate);
+            updateAccountsCreated(fromDate, toDate);
+            updateEventChart(fromDate, toDate);
+            updateShareChart(fromDate, toDate);
+            updateCategoryChart(fromDate, toDate);
+            updateHeatmap(fromDate, toDate);
+        }
+
+        function updateChatmessagesSend(fromDate, toDate) {
+            document.getElementById("newAccounts").innerHTML = "{{__('charts.loading')}}";
+            $.ajax({
+                url: "{{ route('admin_charts_chatmessages') }}",
+                method: 'POST',
+                async: true,
+                data: {
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    document.getElementById("chatmessages").innerHTML = data.messageData.messageCount;
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+
+        function updateAccountsCreated(fromDate, toDate) {
+            document.getElementById("newAccounts").innerHTML = "{{__('charts.loading')}}";
+
+            $.ajax({
+                url: "{{ route('admin_charts_accounts_created') }}",
+                method: 'POST',
+                async: true,
+                data: {
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    document.getElementById("newAccounts").innerHTML = data.accountData.accountCount;
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+
+        function updateEventChart(fromDate, toDate) {
+            eventChart.data = getEventData(fromDate, toDate);
+            eventChart.update();
+        }
+
+        function updateCategoryChart(fromDate, toDate) {
+            categoriesChart.data = getCategoryData(fromDate, toDate);
+            categoriesChart.update();
+        }
+
+        function updateShareChart(fromDate, toDate) {
+            shareChart.data = getShareData(fromDate, toDate);
+            shareChart.update();
+        };
 
         function getEventData(fromDate, toDate) {
             var plotLabels = [];
@@ -228,7 +269,7 @@
                 dataType: 'json',
                 success: function(data) {
                     data.forEach(function(item) {
-                        plotLabels.push(item.month + " " + item.year);
+                        plotLabels.push(item.date);
                         plotData.push(item.totalEvents);
                     })
                 },
@@ -248,25 +289,9 @@
             };
         }
 
-        function updateEventChart() {
-            var fromDate = document.getElementById("fromDate").value;
-            var toDate = document.getElementById("toDate").value;
-            eventChart.data = getEventData(fromDate, toDate);
-            eventChart.update();
-        };
-
-        //ShareChart
-        var shareChart = new Chart(document.getElementById("shares"), {
-            type: 'doughnut',
-            data: getShareData(null, null),
-            options: {
-                maintainAspectRatio: true
-            }
-        });
-
         function getShareData(fromDate, toDate) {
-            var plotLabels = [];
-            var plotData = [];
+            let plotLabels = [];
+            let plotData = [];
 
             $.ajax({
                 url: "{{ route('admin_charts_shares') }}",
@@ -300,25 +325,9 @@
             };
         }
 
-        function updateShareChart() {
-            var fromDate = document.getElementById("fromShareDate").value;
-            var toDate = document.getElementById("toShareDate").value;
-            shareChart.data = getShareData(fromDate, toDate);
-            shareChart.update();
-        };
-
-        //CategoriesChart
-        var categoriesChart = new Chart(document.getElementById("categories"), {
-            type: 'doughnut',
-            data: getCategoryData(null, null),
-            options: {
-                maintainAspectRatio: true
-            }
-        });
-
         function getCategoryData(fromDate, toDate) {
-            var plotLabels = [];
-            var plotData = [];
+            let plotLabels = [];
+            let plotData = [];
 
             $.ajax({
                 url: "{{ route('admin_charts_categories') }}",
@@ -353,19 +362,16 @@
         }
 
         function getColors(amount) {
-            var colors = [];
+            let colors = [];
 
-            var colorstep = 360 / amount;
-            var i;
+            let colorstep = 360 / amount;
+            let i;
             for (i = 0; i < amount; i++) {
                 colors.push('hsl(' + Math.floor(colorstep * i) + ', 68%, 50%)');
             }
             return colors;
         }
-    </script>
 
-
-    <script>
         var map, heatmap;
 
         function initMap() {
@@ -400,7 +406,6 @@
                 },
                 dataType: 'json',
                 success: function(data) {
-                    console.log(data);
                     data.forEach(function(item) {
                         plotLatLng.push(new google.maps.LatLng(item.lat, item.lng));
                     })
@@ -414,10 +419,7 @@
             return plotLatLng;
         }
 
-        function updateHeatmap() {
-            var fromDate = document.getElementById("fromHeatmapDate").value;
-            var toDate = document.getElementById("toHeatmapDate").value;
-
+        function updateHeatmap(fromDate, toDate) {
             heatmap.setData(getPoints(fromDate, toDate));
         }
     </script>

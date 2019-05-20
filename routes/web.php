@@ -73,4 +73,5 @@ Route::post('/charts/shares', 'ChartController@GetShares')->name('admin_charts_s
 Route::post('/charts/activeeventlocations', 'ChartController@GetActiveEventLocations')->name('admin_charts_locations')->middleware('auth', 'isAdmin');
 Route::post('/charts/categories', 'ChartController@GetCategories')->name('admin_charts_categories')->middleware('auth', 'isAdmin');
 Route::post('/charts/chatmessages', 'ChartController@GetChatmessages')->name('admin_charts_chatmessages')->middleware('auth', 'isAdmin');
+Route::post('/charts/accountscreated', 'ChartController@GetAccountsCreated')->name('admin_charts_accounts_created')->middleware('auth', 'isAdmin');
 

@@ -6,6 +6,8 @@ return [
     'close' => 'Sluiten',
     'execute' => 'Uitvoeren',
     'time_range' => 'Selecteer datumbereik',
+    'loading' => 'Laden...',
+    'change_date_range' => 'Verander datumbereik',
 
     'charts_title' => 'Dashboard',
     'amount_chatmessages' => 'Aantal chat berichten',

@@ -123,10 +123,11 @@
                 if(data == "success"){
                     location.reload();
                 } else {
-                    if(data) {
+                    console.log(data);
+                    if(data.length > 0) {
                         document.querySelector('.eventheader').innerHTML = "{{__('image.modal_delete_event_connected')}}";
                     }
-                    if(imagedata) {
+                    if(imagedata.length > 0) {
                         document.querySelector('.pictureheader').innerHTML = "{{__('image.modal_delete_image_connected')}}";
                     }
 

@@ -71,10 +71,9 @@ Route::post('/admin/events/actionDistanceFilter', 'Management\EventsController@a
 Route::get('admin/images/category', 'Management\ImagesController@showtype')->name('imagescontroller.index')->middleware('auth', 'isAdmin');
 Route::post('admin/images/category', 'Management\ImagesController@passthrough')->middleware('auth', 'isAdmin');
 Route::post('admin/images/category/addtype', 'Management\ImagesController@addtype')->name('imagescontroller.addtype')->middleware('auth', 'isAdmin');
-Route::post('admin/images/category/remove', 'Management\ImagesController@removetype')->name('imagescontroller.removetype')->middleware('auth', 'isAdmin');
-Route::get('admin/images/category/check', 'Management\ImagesController@checkforevent')->name('imagescontroller.checkforevent')->middleware('auth','isAdmin'); 
+Route::post('admin/images/category/removetype', 'Management\ImagesController@removetype')->name('imagescontroller.removetype')->middleware('auth', 'isAdmin');
 Route::post('admin/images/category/deleteeventpicture', 'Management\ImagesController@deleteeventpicture')->name('events_controller.deleteeventpicture')->middleware('auth', 'isAdmin');;
-Route::post('admin/images/category/overrideremove', 'Management\ImagesController@overrideremove')->name('imagescontroller.overrideremove')->middleware('auth', 'isAdmin');
+// Route::post('admin/images/category/addeventpicture', 'Management\ImagesController@addeventpicture')->name('imagescontroller.addeventpicture')->middleware('auth', 'isAdmin');
 
 // admin/images/extra
 Route::get('admin/images/extra', 'Management\ImagesController@showextra')->middleware('auth', 'isAdmin');

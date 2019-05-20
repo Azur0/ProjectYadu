@@ -35,13 +35,30 @@
                 <div class="box">
                     @foreach ($tags as $tag)
                     <div class="card divider"> 
-                        <input type="radio" id="{{$tag->tag}}" name="tag" value="{{$tag->id}}" onclick="fetch_customer_data({{$tag->id }})">
-                        <label for="{{$tag->tag}}" class="category">
-                                <div>
-                                    <div>
-                                        <button type="button" onclick="removeType({{$tag->id}})" class="badge eventpicture btn-danger my-auto">x</button>
+                        <input type="radio" id="{{$tag->id}}" name="tag" value="{{$tag->id}}" onclick="fetch_customer_data({{$tag->id}})">
+                        <label for="{{$tag->id}}" class="category">
+                                <div class="ml-auto my-auto mr-3">
+                                        <button type="button" class="badge btn-danger my-auto" id="{{$tag->id}}" onclick="setchecked({{$tag->id}})" data-toggle="modal" data-target="#confirmDeleteTag">x</button>
+                                        <div class="modal fade" id="confirmDeleteTag" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">placeholder title</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        placeholder are u sure
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" onclick="removeType({{$tag->id}})" class="btn btn-danger">placeholder positive</button>
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">placeholder negative</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
                             <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
                             <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($tag->imageSelected) . '"/>'; ?>
                         </label>  
@@ -52,7 +69,6 @@
                     <div class="error">placeholder.</div>
                 @endif
             </div>
-
             <div class="pic">
                 <h3>Placeholder secondary</h3>
                     <div class="types">
@@ -64,49 +80,19 @@
                         @endif
                     </div>
             </div>
-    @if($errors->any())
-        <h4>{{$errors->first()}}</h4>
-    @endif
 </div>
 <script>
-    function removeType(id) {
+    function removeType() {
+        let id = $('input[name=tag]:checked').val();
         $.ajax({
-            url: "{{ route('imagescontroller.checkforevent')}}",
+            url: "{{ route('imagescontroller.removetype')}}",
             method: 'GET',
             data: {
                 query: id,
             },
             dataType: 'json',
             success: function (data) {
-                if(typeof(data[0]) != "undefined"){
-                    if (confirm('Placeholder events are tied are you sure? This will remove all connecting pictures.')) {
-                        $.ajax({
-                        url: "{{ route('imagescontroller.overrideremove') }}",
-                        method: 'POST',
-                        data: {
-                            query: id,
-                            _token: '{{ csrf_token() }}'
-                        },
-                        dataType: 'json',
-                        success: function() {
-                            // alert("placeholder overwrite successful");
-                            console.log(data[0]);
-                        }
-                        });
-                    } 
-                } else {
-                    $.ajax({
-                        url: "{{ route('imagescontroller.removetype')}}",
-                        method: "POST",
-                        data: {
-                            query: id,
-                            _token: '{{ csrf_token() }}'
-                        },
-                        success: function() {
-                            alert("Placeholder successful removal");
-                        }
-                    });
-                }
+                
             },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log('jqXHR:');
@@ -130,7 +116,7 @@
                 dataType: 'json',
                 success: function (data) {
                     if (data == "") {
-                        $('#box2').html("<h5><i>Placeholder</i></h5>");
+                        $('#box2').html("<h5><i>Placeholder no data</i></h5>");
                     } else {
                         $('#box2').html("");
 
@@ -139,9 +125,9 @@
                                 name="eventpicture" value="${element['id']}"> <label for="${element['id']}" class="picture ${element['tag_id']}">
                                         <div>
                                             <button type="button" id="eventpicture" onclick="setchecked(${element['id']})" class="badge btn-danger my-auto" data-toggle="modal"
-                                                data-target="#confirmDeleteAccount">x
+                                                data-target="#confirmDeleteEventPicture">x
                                             </button>
-                                            <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
+                                            <div class="modal fade" id="confirmDeleteEventPicture" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -189,14 +175,6 @@
                 success: function (data) { 
                     let id = $('input[name=tag]:checked').val();
                     fetch_customer_data(id);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log('jqXHR:');
-                    console.log(jqXHR);
-                    console.log('textStatus:');
-                    console.log(textStatus);
-                    console.log('errorThrown:');
-                    console.log(errorThrown);
                 }
         }) 
     }

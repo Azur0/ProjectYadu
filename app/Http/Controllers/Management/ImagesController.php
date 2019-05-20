@@ -80,21 +80,10 @@ class ImagesController extends Controller
 		}
 	}
 
-	public function overrideremove(Request $request) {
-		// events are connected but still remove the image
-		$events = Event::where('tag_id', '=', $request->input('query'))->get();
-		return;
-	}	
-
 	public function removetype(Request $request) {
 		// no events are connected.
 		$events = Event::where('tag_id', '=', $request->input('query'))->get();
 		return $events;
-	}
-
-	public function checkforevent(Request $request) {
-		$events = Event::where('tag_id', '=', $request->input('query'))->get();
-		return json_encode($events);
 	}
 
 	public function deleteeventpicture(Request $request) {
@@ -105,10 +94,5 @@ class ImagesController extends Controller
 			return json_encode($e);
 		}
 		return json_encode("");
-	}
-
-	public function passthrough() {
-		// set picture to database
-		// return view('admin/images.category');
 	}
 }

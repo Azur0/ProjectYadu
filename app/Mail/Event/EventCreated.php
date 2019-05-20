@@ -18,9 +18,11 @@ class EventCreated extends Mailable
      * @return void
      */
     public $event;
-    public function __construct($event)
+    public $user;
+    public function __construct($event,$user)
     {
         $this->event = $event;
+        $this->user = $user;
     }
 
     /**
@@ -35,7 +37,7 @@ class EventCreated extends Mailable
             ->with([
                 'title' => Lang::get('mail.eventCreatedTitle'),
                 'salutation'=> Lang::get('mail.salutation'),
-                'userName'=>$this->event->userName . ",",
+                'userName'=>$this->user->firstName . ",",
                 'body' => Lang::get('mail.eventCreatedText1')
                     .$this->event->eventName,
                 'infoTitle' => Lang::get('mail.eventInfoTitle'),

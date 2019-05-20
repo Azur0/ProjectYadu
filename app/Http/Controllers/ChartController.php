@@ -6,6 +6,7 @@ use App\Event;
 use App\EventTag;
 use App\Http\Requests\GetChartDateRangeRequest;
 use App\Http\Requests\GetTotalEventsCreatedRequest;
+use App\Message;
 use App\SharedEvent;
 use App\SocialMediaPlatform;
 use Carbon\Carbon;
@@ -57,6 +58,13 @@ class ChartController extends Controller
         return $data;
     }
 
+    public function GetChatmessages(GetChartDateRangeRequest $request){
+        $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
+        $messageCount = Message::whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count();
+        $data['messageData'] = array('messageCount' => $messageCount);
+        return $data;
+    }
+
     public function GetShares(GetChartDateRangeRequest $request){
 
         $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
@@ -94,6 +102,7 @@ class ChartController extends Controller
 
     public function GetActiveEventLocations(){
 
+        //TODO: Add dates
         // $fromDate = $request->fromDate;
         // $toDate = $request->toDate;
         

@@ -99,7 +99,28 @@ class ImagesController extends Controller
 	}
 
 	public function trueremove(Request $request) {
-		return $request;
+		// rechange tag events
+		$events = Event::where('tag_id', '=', $request->input('query'))->get();
+		if(!$events->isEmpty()){
+			// set different tag_id in table events
+			$tag = EventTag::where('id', '!=', $request->input('query'))->firstOrFail();
+			$picture = EventPicture::where('tag_id', '=', $tag->id)->firstOrFail();
+			foreach($events as $e){
+				// check event tag_id with a different id in database
+				$e->tag_id = $tag->id;
+				$e->event_picture_id = $picture->id;
+				$e->save();
+			}
+			// delete all pictures from previous tag 
+			$eventpictures = EventPicture::where('tag_id', '=', $request->input('query'))->get();
+			foreach($eventpictures as $picture){
+				$picture->delete();
+			}
+			// finally delete the tag itself
+			$tag = EventTag::where('id', '=', $request->input('query'))->firstOrFail();
+			$tag->delete();
+		}
+		return json_encode("");
 	}
 
 	public function addeventpicture(Request $request, $id) {

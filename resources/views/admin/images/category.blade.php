@@ -160,8 +160,7 @@
                             },
                             dataType: 'json',
                             success: function(data) {
-                                // location.reload();
-                                console.log(data);
+                                location.reload();
                             }
                         });
                     });
@@ -169,15 +168,7 @@
                         location.reload();
                     })
                 }
-            },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log('jqXHR:');
-                    console.log(jqXHR);
-                    console.log('textStatus:');
-                    console.log(textStatus);
-                    console.log('errorThrown:');
-                    console.log(errorThrown);
-                }
+            }
         });
     }
        

@@ -314,7 +314,7 @@
             return {
                 labels: plotLabels,
                 datasets: [{
-                    backgroundColor: ['#256eff', '#8c16b7', '#b2b2b2', '#ff495c', '#3ddc97'], //TODO: Change colors
+                    backgroundColor: getColors(plotLabels.length),
                     data: plotData
                 }]
             };
@@ -366,10 +366,23 @@
             return {
                 labels: plotLabels,
                 datasets: [{
-                    backgroundColor: ['#256eff', '#8c16b7', '#b2b2b2', '#ff495c', '#3ddc97'], //TODO: Change colors
+                    backgroundColor: getColors(plotLabels.length),
                     data: plotData
                 }]
             };
+        }
+
+        function getColors(amount) {
+            var colors = [];
+
+            var colorstep = 360 / amount;
+            var i;
+            for (i = 0; i < amount; i++) {
+                colors.push('hsl(' + Math.floor(colorstep * i) + ', 68%, 50%)');
+                console.log('hsl(' + Math.floor(colorstep * i) + ', 68%, 50%)');
+            }
+            console.log(colors);
+            return colors;
         }
     </script>
 
@@ -410,7 +423,6 @@
                 dataType: 'json',
                 success: function(data) {
                     data.forEach(function(item) {
-                        console.log(item);
                         plotLatLng.push(new google.maps.LatLng(item.lat, item.lng));
                     })
                 },

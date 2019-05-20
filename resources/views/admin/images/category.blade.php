@@ -48,12 +48,14 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body" id="center">
-                                                        placeholder are u sure
+                                                    <div class="modal-body">
+                                                        <div class="eventsbody"></div>
+                                                        <div class="imagebody"></div>
+                                                        <div class="confirmation">placeholder are u sure</div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" id="approve" onclick="removeType({{$tag->id}})" class="btn btn-danger">placeholder positive</button>
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">placeholder negative</button>
+                                                        <button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">placeholder negative</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -84,6 +86,20 @@
 <script>
     function removeType() {
         let id = $('input[name=tag]:checked').val();
+        let imagedata;
+        $.ajax({
+            url: "{{ route('imagescontroller.checktiedpictures')}}",
+            method: 'POST',
+            data: {
+                query: id,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(data) {
+                imagedata = data;
+            }
+        });
+
         $.ajax({
             url: "{{ route('imagescontroller.removetype')}}",
             method: 'POST',
@@ -97,15 +113,34 @@
                     location.reload();
                 } else {
                     let approve = document.getElementById('approve');
+                    let deny = document.getElementById('deny');
                     approve.setAttribute('data-dismiss', 'modal');
-                    let center = document.getElementById('center');
-                    center.appendChild(document.createElement('ul'));
+                    let eventsbody = document.querySelector('.eventsbody');
+                    let imagebody = document.querySelector('.imagebody')
+                    eventsbody.appendChild(document.createElement('ul'));
                     data.forEach(function (element) {
-                        $(center).html($("#box2").html() + `<li>${element['eventName']}</li>`);
+                        $(eventsbody).html(`<li>${element['eventName']}</li>`);
+                    });
+                    imagedata.forEach(function (element) {
+                        $(imagebody).html(`<label class="picture ${element['tag_id']}"><img class="responsive" src="data:image/jpeg;base64, ${element['picture']}"></label>`);
                     });
                     approve.addEventListener('click', function() {
-                        location.reload();
+                        $.ajax({
+                            url: "{{ route('imagescontroller.trueremove')}}",
+                            method: 'POST',
+                            data: {
+                                query: id,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            dataType: 'json',
+                            success: function() {
+                                location.reload();
+                            }
+                        });
                     });
+                    deny.addEventListener('click', function() {
+                        location.reload();
+                    })
                 }
             },
                 error: function (jqXHR, textStatus, errorThrown) {

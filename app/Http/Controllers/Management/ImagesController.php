@@ -83,15 +83,19 @@ class ImagesController extends Controller
 	public function removetype(Request $request) {
 		$events = Event::where('tag_id', '=', $request->input('query'))->get();
 		if($events->isEmpty()) {
-			$eventpictures = EventPicture::where('tag_id', '=', $request->input('query'))->get();
-			if($eventpictures->isEmpty()) {
-				$tag = EventTag::where('id', '=', $request->input('query'))->firstOrFail();
-				$tag->delete();
-				return json_encode("success");
-			}
-			return $eventpictures;
+			$tag = EventTag::where('id', '=', $request->input('query'))->firstOrFail();
+			$tag->delete();
+			return json_encode("success");
+		} 
+		return json_encode($events);
+	}
+
+	public function checktiedpictures(Request $request) {
+		$eventpictures = EventPicture::where('tag_id', '=', $request->input('query'))->get();
+		foreach ($eventpictures as $pic) {
+			$pic->picture = base64_encode($pic->picture);
 		}
-		return $events;
+		return json_encode($eventpictures);
 	}
 
 	public function deleteeventpicture(Request $request) {

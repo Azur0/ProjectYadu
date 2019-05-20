@@ -82,7 +82,8 @@ class ImagesController extends Controller
 
 	public function removetype(Request $request) {
 		$events = Event::where('tag_id', '=', $request->input('query'))->get();
-		if($events->isEmpty()) {
+		$pictures = EventPicture::where('tag_id', '=', $request->input('query'))->get();
+		if($events->isEmpty() && $pictures->isEmpty()) {
 			$tag = EventTag::where('id', '=', $request->input('query'))->firstOrFail();
 			$tag->delete();
 			return json_encode("success");
@@ -101,7 +102,8 @@ class ImagesController extends Controller
 	public function trueremove(Request $request) {
 		// rechange tag events
 		$events = Event::where('tag_id', '=', $request->input('query'))->get();
-		if(!$events->isEmpty()){
+		$pictures = EventPicture::where('tag_id', '=', $request->input('query'))->get();
+		if(!$events->isEmpty() || !$pictures->isEmpty()){
 			// set different tag_id in table events
 			$tag = EventTag::where('id', '!=', $request->input('query'))->firstOrFail();
 			$picture = EventPicture::where('tag_id', '=', $tag->id)->firstOrFail();

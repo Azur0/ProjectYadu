@@ -161,14 +161,30 @@
                             dataType: 'json',
                             success: function(data) {
                                 location.reload();
-                            }
+                            },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('jqXHR:');
+                    console.log(jqXHR);
+                    console.log('textStatus:');
+                    console.log(textStatus);
+                    console.log('errorThrown:');
+                    console.log(errorThrown);
+                }
                         });
                     });
                     deny.addEventListener('click', function() {
                         location.reload();
                     })
                 }
-            }
+            },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('jqXHR:');
+                    console.log(jqXHR);
+                    console.log('textStatus:');
+                    console.log(textStatus);
+                    console.log('errorThrown:');
+                    console.log(errorThrown);
+                }
         });
     }
        

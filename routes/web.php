@@ -69,6 +69,7 @@ Route::post('/admin/events/actionDistanceFilter', 'Management\EventsController@a
 Route::post('/logger/eventshared', 'LogController@LogEventShared')->name('LogEventShared');
 
 Route::post('/charts/totaleventscreated', 'ChartController@GetTotalEventsCreated')->name('admin_charts_events')->middleware('auth', 'isAdmin');
-Route::post('/charts/monthlyshares', 'ChartController@GetMonthlyShares')->name('admin_charts_shares')->middleware('auth', 'isAdmin');
+Route::post('/charts/shares', 'ChartController@GetShares')->name('admin_charts_shares')->middleware('auth', 'isAdmin');
 Route::post('/charts/activeeventlocations', 'ChartController@GetActiveEventLocations')->name('admin_charts_locations')->middleware('auth', 'isAdmin');
+Route::post('/charts/categories', 'ChartController@GetCategories')->name('admin_charts_categories')->middleware('auth', 'isAdmin');
 

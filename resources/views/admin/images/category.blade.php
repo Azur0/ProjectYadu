@@ -248,10 +248,6 @@ $(document).ready(function() {
                                     </div>
                                 </form>
                             </div>`);
-                            $("#file3").on('change',function(){
-                                console.log("uploaded");
-                                document.getElementById("myForm").submit();
-                            });
                     } else {
                         $('#box2').html("");
 
@@ -288,14 +284,23 @@ $(document).ready(function() {
                                         </div>
                                 <img class="default" src="data:image/jpeg;base64, ${element['picture']}"> </label></div>`);
                         });
-                        $('#box2').html($("#box2").html() + `<form action="{{ url('admin/images/category/addeventpicture/${query}') }}" method="POST" enctype="multipart/form-data">
+                        $('#box2').html($("#box2").html() + `
+                        <div class="card">
+                                <form id="myForm" action="{{ url('admin/images/category/addeventpicture/${query}') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <div>
-                                        <input class="btn btn-info" type="file" name="eventfile" accept="image/png, image/jpeg, image/jpg">
+                                    <div class="responsive">
+                                        <label for="file3" class="input-label first formitem">
+                                            <i class="fa fa-upload"></i>
+                                            {{__('image.add_tag_default')}}
+                                        </label>
+                                        <input id="file3" class="btn btn-info" type="file" name="default" accept="image/png, image/jpeg, image/jpg">
                                     </div>
-                                    <button type="submittype" name="submittype">{{__('image.button_upload_dual')}}</button>
-                                </form>`);
+                                </form>
+                            </div>`);
                     }
+                    $("#file3").on('change',function(){
+                                document.getElementById("myForm").submit();
+                            });
                 }
             })
         }

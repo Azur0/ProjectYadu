@@ -2,6 +2,9 @@
 
 return [
     "salutation" => "Greetings ",
+    "eventCreatedTitle" => "An event has being created",
+    "eventCreatedText1" => "The event that has being created is ",
+    "eventCreatedText2" => "",
     "editTitle" => "One of your events has being edited.",
     "editText1" => "Event ",
     "editText2" => " has being edited.",

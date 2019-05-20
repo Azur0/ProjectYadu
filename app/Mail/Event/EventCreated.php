@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Lang;
 
 class EventCreated extends Mailable
 {
@@ -29,9 +30,15 @@ class EventCreated extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail/event.event-created')->with([
-            'salutation'=> Lang::get('mail.salutation'),
-            'ownerName'=>$this->event->owner->firstName,
+        return $this->markdown('mail/event.event-created')
+            ->subject(Lang::get('mail.subjectEventCreated'))
+            ->with([
+                'title' => Lang::get('mail.eventCreatedTitle'),
+                'salutation'=> Lang::get('mail.salutation'),
+                'ownerName'=>$this->event->owner->firstName,
+                'body' => Lang::get('mail.eventCreatedText1')
+                    .$this->event->eventName,
+                'closing' => Lang::get('mail.closing')
         ]);
     }
 }

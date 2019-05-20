@@ -2,6 +2,9 @@
 
 return [
     "salutation" => "Goedendag ",
+    "eventCreatedTitle" => "Er is een evenement aangemaakt",
+    "eventCreatedText1" => "Het evenement dat is aangemaakt is ",
+    "eventCreatedText2" => "",
     "editTitle" => "Een van je evenement is aangepast.",
     "editText1" => "Evenement ",
     "editText2" => " is aangepast.",

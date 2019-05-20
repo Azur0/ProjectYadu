@@ -49,8 +49,10 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="eventsbody"></div>
-                                                        <div class="imagebody"></div>
+                                                        <h3 class="eventheader"></h3>
+                                                        <div class="eventsbody" id="eventbox"></div>
+                                                        <h3 class="pictureheader"></h3>
+                                                        <div class="imagebody" id="imagebox"></div>
                                                         <div class="confirmation">{{__('image.modal_delete_tag_center')}}</div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -112,18 +114,38 @@
                 if(data == "success"){
                     location.reload();
                 } else {
+                    if(data) {
+                        document.querySelector('.eventheader').innerHTML = "placeholder linked events";
+                    }
+                    if(imagedata) {
+                        document.querySelector('.pictureheader').innerHTML = "placeholder linked images";
+                    }
+
+                    // get buttons
                     let approve = document.getElementById('approve');
                     let deny = document.getElementById('deny');
                     approve.setAttribute('data-dismiss', 'modal');
+
+                    // get div bodies
                     let eventsbody = document.querySelector('.eventsbody');
                     let imagebody = document.querySelector('.imagebody')
                     eventsbody.appendChild(document.createElement('ul'));
+                    console.log("called start");
+                    // set bodies
                     data.forEach(function (element) {
-                        $(eventsbody).html(`<li>${element['eventName']}</li>`);
+                        console.log("called eventslist");
+                        $(eventsbody).html($("#eventbox").html() + `<li>${element['eventName']}</li>`);
                     });
+                    eventsbody.appendChild(document.createElement('br'));
                     imagedata.forEach(function (element) {
-                        $(imagebody).html(`<label class="picture ${element['tag_id']}"><img class="responsive" src="data:image/jpeg;base64, ${element['picture']}"></label>`);
+                        console.log("called imagelist");
+                        $(imagebody).html($("#imagebox").html() + `<label class="picture"><img class="responsive" src="data:image/jpeg;base64, ${element['picture']}"></label>`);
                     });
+
+                    // change center text
+                    document.querySelector(".confirmation").innerHTML = "placeholder dit zal tags en aangewezen fotos verwijderen";
+
+                    // set reload and ajax on event click
                     approve.addEventListener('click', function() {
                         $.ajax({
                             url: "{{ route('imagescontroller.trueremove')}}",

@@ -81,8 +81,16 @@ class ImagesController extends Controller
 	}
 
 	public function removetype(Request $request) {
-		// no events are connected.
 		$events = Event::where('tag_id', '=', $request->input('query'))->get();
+		if($events->isEmpty()) {
+			$eventpictures = EventPicture::where('tag_id', '=', $request->input('query'))->get();
+			if($eventpictures->isEmpty()) {
+				$tag = EventTag::where('id', '=', $request->input('query'))->firstOrFail();
+				$tag->delete();
+				return json_encode("success");
+			}
+			return $eventpictures;
+		}
 		return $events;
 	}
 

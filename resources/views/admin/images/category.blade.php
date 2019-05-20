@@ -48,11 +48,11 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div class="modal-body" id="center">
                                                         placeholder are u sure
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" onclick="removeType({{$tag->id}})" class="btn btn-danger">placeholder positive</button>
+                                                        <button type="submit" id="approve" onclick="removeType({{$tag->id}})" class="btn btn-danger">placeholder positive</button>
                                                         <button type="button" class="btn btn-primary" data-dismiss="modal">placeholder negative</button>
                                                     </div>
                                                 </div>
@@ -86,13 +86,27 @@
         let id = $('input[name=tag]:checked').val();
         $.ajax({
             url: "{{ route('imagescontroller.removetype')}}",
-            method: 'GET',
+            method: 'POST',
             data: {
                 query: id,
+                _token: '{{ csrf_token() }}'
             },
             dataType: 'json',
             success: function (data) {
-                
+                if(data == "success"){
+                    location.reload();
+                } else {
+                    let approve = document.getElementById('approve');
+                    approve.setAttribute('data-dismiss', 'modal');
+                    let center = document.getElementById('center');
+                    center.appendChild(document.createElement('ul'));
+                    data.forEach(function (element) {
+                        $(center).html($("#box2").html() + `<li>${element['eventName']}</li>`);
+                    });
+                    approve.addEventListener('click', function() {
+                        location.reload();
+                    });
+                }
             },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log('jqXHR:');

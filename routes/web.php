@@ -46,7 +46,7 @@ Route::get('profile/edit', 'ProfileController@edit')->middleware('auth');
 Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
 Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
 Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middleware('auth');
-Route::patch('/profile/updateAccountSettings/{id}', 'ProfileController@update')->middleware('auth');
+Route::patch('/profile/updateAccountSettings/{id}', 'AccountController@updateSettings')->middleware('auth');
 
 Auth::routes();
 

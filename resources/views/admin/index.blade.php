@@ -153,6 +153,13 @@
                         ticks: {
                             beginAtZero: true
                         }
+                    }],
+                    xAxes: [{
+                        type: 'time',
+                        time: {
+                            unit: 'month',
+                            tooltipFormat: 'lll',
+                        }
                     }]
                 }
             }
@@ -269,8 +276,13 @@
                 dataType: 'json',
                 success: function(data) {
                     data.forEach(function(item) {
-                        plotLabels.push(item.date);
-                        plotData.push(item.totalEvents);
+                        //     plotLabels.push(Date.parse(item.date));
+                        //     plotData.push(item.totalEvents);
+                        console.log(new Date(item.date));
+                        plotData.push({
+                            t: Date.parse(item.date),
+                            y: item.totalEvents
+                        });
                     })
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -279,6 +291,14 @@
                     console.log(errorThrown);
                 }
             });
+
+            // [{
+            //     x: new Date(),
+            //     y: 1
+            // }, {
+            //     t: new Date(),
+            //     y: 10
+            // }]
 
             return {
                 labels: plotLabels,

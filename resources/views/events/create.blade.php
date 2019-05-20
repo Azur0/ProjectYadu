@@ -47,8 +47,14 @@
                 <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required
                     value="{{ old('location') }}">
                 <div id="map"></div>
-                @if ($errors->has('location'))
-                <div class="error">{{__('events.create_error_location_required')}}</div>
+                @if ($errors->has('lat'))
+                <div class="error">Het locatie-veld is verplicht.</div>
+                @endif
+                @if ($errors->has('houseNumber'))
+                <div class="error">Dit adress bevat geen huisnummer.</div>
+                @endif
+                @if ($errors->has('postalCode'))
+                <div class="error">Dit adress heeft geen geldige postcode.</div>
                 @endif
             </div>
         </div>

@@ -219,7 +219,10 @@ class EventsController extends Controller
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
             'startTime' => 'required',
-            'location' => 'required',
+            'lng' => 'required',
+            'lat' => 'required',
+            'houseNumber' => 'required',
+            'postalCode' => 'required',
             'numberOfPeople' => 'required'
         ]);
 
@@ -241,6 +244,7 @@ class EventsController extends Controller
         $event = Event::where('id', $id)->firstorfail();
 
         if (Auth::id() == $event->owner_id) {
+            $location = Location::where('id', $event->location_id)->firstorfail();
             $event->update(
                 [
                     'eventName' => $request['activityName'],
@@ -248,11 +252,17 @@ class EventsController extends Controller
                     'startDate' => $request['startDate'],
                     'numberOfPeople' => $request['numberOfPeople'],
                     'tag_id' => $request['tag'],
-                    'location_id' => '1',
                     'event_picture_id' => $request['picture']
                 ]
             );
-            //TODO: set location
+            
+            $location->update([
+                'locLongtitude' => $request['lng'],
+                'locLatitude' => $request['lat'],
+                'houseNumber' => $request['houseNumber'],
+                'postalcode' => str_replace(' ', '', $request['postalCode']),
+            ]);
+
             return redirect('/events');
         }
         else {

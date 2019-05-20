@@ -60,10 +60,10 @@ class ImagesController extends Controller
 	public function update(Request $request) {
 		$this->validate($request, [
 			'selected' => 'required',
-			'file' => 'required|image|mimes:jpg,png,jpeg|max:2048'
+			'default' => 'required|image|mimes:jpg,png,jpeg|max:2048'
 		]);
 		$location = "images/".$request->selected;
-		move_uploaded_file($request->file->getPathname(), $location);
+		move_uploaded_file($request->file('default'), $location);
 		return back()->with('success', __('image.update_successful'));
 	}
 

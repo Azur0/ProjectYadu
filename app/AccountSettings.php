@@ -12,8 +12,7 @@ class AccountSettings extends Model
     'FollowNotificationJoinEvent',
     'NotificationInvite',
     'NotificationEventEdited',
-    'NotificationEventDeleted',
-    'NotificationEventCreated'];
+    'NotificationEventDeleted'];
     public function account()
     {
         return $this->belongsTo('App\Account', 'account_id', 'id');

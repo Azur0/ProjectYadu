@@ -30,7 +30,6 @@ class ProfileController extends Controller
                     'NotificationInvite' => 'nullable|string',
                     'NotificationEventEdited' => 'nullable|string',
                     'NotificationEventDeleted' => 'nullable|string',
-                    'NotificationEventCreated' => 'nullable|string',
                     ]);
             if ($validator->fails())
             {
@@ -64,11 +63,7 @@ class ProfileController extends Controller
             {
                 $NotificationEventDeleted = 1;
             }
-            $NotificationEventCreated = 0;
-            if($request['NotificationEventCreated'] == "on")
-            {
-                $NotificationEventCreated = 1;
-            }
+
 
             $account = Account::where('id', $id)->firstorfail();
             $accountSettings = AccountSettings::where('account_id', $id)->firstorfail();
@@ -80,7 +75,6 @@ class ProfileController extends Controller
                     'NotificationInvite' => $NotificationInvite,
                     'NotificationEventEdited' => $NotificationEventEdited,
                     'NotificationEventDeleted' => $NotificationEventDeleted,
-                    'NotificationEventCreated' => $NotificationEventCreated,
                 ]
             );
             $genders = Gender::all();

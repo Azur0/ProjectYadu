@@ -231,21 +231,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="NotificationEventCreated"
-                                       class="col-md-6 col-form-label text-md-right">{{__('profile.edit_change_account_settings_event_created')}}
-                                </label>
-                                <div class="col-md-3">
-                                    <div class="custom-control custom-switch">
-                                        @if($account->settings->NotificationEventCreated == 0)
-                                            <input type="checkbox" name="NotificationEventCreated" class="custom-control-input" id="customSwitches5">
-                                        @else
-                                            <input type="checkbox" name="NotificationEventCreated" class="custom-control-input" id="customSwitches5" checked>
-                                        @endif
-                                        <label class="custom-control-label" for="customSwitches5"></label>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button id="submit" type="submit" class="btn btn-primary">

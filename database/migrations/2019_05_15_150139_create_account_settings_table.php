@@ -22,8 +22,6 @@ class CreateAccountSettingsTable extends Migration
             $table->tinyInteger('NotificationInvite')->default('1');
             $table->tinyInteger('NotificationEventEdited')->default('1');
             $table->tinyInteger('NotificationEventDeleted')->default('1');
-            // Check of this is necessary
-            $table->tinyInteger('NotificationEventCreated')->default('1');
             $table->timestamps();
 
             $table->foreign('account_id', 'fk_settings_accounts1_idx')

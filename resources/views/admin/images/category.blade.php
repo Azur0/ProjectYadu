@@ -73,6 +73,12 @@
                     <div class="error">{{__('image.error_empty_tags')}}</div>
                 @endif
             </div>
+            @if($message = Session::get('eventsuccess'))
+                    <div class="alert alert-succes alert-block">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
             <div class="pic">
                 <h3>{{__('image.header_eventpictures')}}</h3>
                     <div class="types">

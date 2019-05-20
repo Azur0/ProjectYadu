@@ -110,7 +110,7 @@ class ImagesController extends Controller
 		$event_picture->tag_id = $id;
 		$event_picture->picture = file_get_contents($request->file('eventfile'));
 		$event_picture->save();
-		return back();
+		return back()->with('eventsuccess', __('image.update_successful'));
 	}
 
 	public function deleteeventpicture(Request $request) {

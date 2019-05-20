@@ -1,6 +1,7 @@
 @extends('layouts/admin/app')
 
 @section('content')
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 <div>
     <div class="card">
                 @if(count($errors) > 0)
@@ -18,17 +19,27 @@
                         <strong>{{ $message }}</strong>
                     </div>
                 @endif
+                <div class="form-div">
                 <form action="{{ route('imagescontroller.addtype') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="text" name="filename">
                     <div>
-                        <input class="btn btn-info" type="file" name="typefile1" accept="image/png, image/jpeg, image/jpg">
+                        <label for="file1" class="input-label first">
+                            <i class="fa fa-upload"></i>
+                            placeholder default:
+                        </label>
+                        <input id="file1" class="btn btn-info" type="file" name="typefile1" accept="image/png, image/jpeg, image/jpg">
                     </div>
                     <div>
-                        <input class="btn btn-info" type="file" name="typefile2" accept="image/png, image/jpeg, image/jpg">
+                        <label for="file2" class="input-label second">
+                            <i class="fa fa-upload"></i>
+                            placeholder selected: 
+                        </label>
+                        <input id="file2" class="btn btn-info" type="file"  name="typefile2" accept="image/png, image/jpeg, image/jpg">
                     </div>
                     <button type="submittype" name="submittype">{{__('image.button_upload_dual')}}</button>
                 </form>
+                </div>
             </div>  
         <div class="types">
             <h1>{{__('image.header_type_tag')}}</h1>
@@ -94,6 +105,16 @@
 
             </div>
 </div>
+<script>
+$(document).ready(function() {
+    $("#file1").on("change", function() {
+        $('.first').html(`<i class="fa fa-upload"></i>placeholder default: ${$(this)[0].files[0].name}`);
+    });
+    $("#file2").on("change", function() {
+        $('.second').html(`<i class="fa fa-upload"></i>placeholder selected: ${$(this)[0].files[0].name}`);
+    });
+})
+</script>
 <script>
     function removeType() {
         let id = $('input[name=tag]:checked').val();

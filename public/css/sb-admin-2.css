@@ -12342,3 +12342,23 @@ h6.collapse-header {
   top: 22px;
   z-index: 1;
 }
+
+.input-label {
+  background: #009688;
+  color: #fff;
+  padding: 30px;
+  transition: 0.3s;
+}
+
+.input-label:hover {
+  background: #26a69a;
+  cursor: pointer;
+}
+
+.fa {
+  margin-right: 5px;
+}
+
+#file1, #file2 {
+  display: none;
+}

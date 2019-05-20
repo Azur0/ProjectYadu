@@ -61,7 +61,10 @@ class ChartController extends Controller
                 'platform' => ucfirst($platform->platform),
                 'shareCount' => SharedEvent::where('platform', $platform->platform)->whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count(),
             );
-            array_push($data['shareData'], $entry);
+
+            if ($entry['shareCount'] > 0) {
+                array_push($data['shareData'], $entry);
+            }
         }
         return $data;
     }

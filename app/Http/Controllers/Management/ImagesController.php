@@ -102,12 +102,15 @@ class ImagesController extends Controller
 		return $request;
 	}
 
-	public function addeventpicture(Request $request) {
-		dd($request);
+	public function addeventpicture(Request $request, $id) {
 		$this->validate($request, [
-			'selected' => 'required',
-			'file' => 'required|image|mimes:jpg,png,jpeg|max:2048'
+			'eventfile' => 'required|image|mimes:jpg,png,jpeg|max:2048'
 		]);
+		$event_picture = new EventPicture;
+		$event_picture->tag_id = $id;
+		$event_picture->picture = file_get_contents($request->file('eventfile'));
+		$event_picture->save();
+		return back();
 	}
 
 	public function deleteeventpicture(Request $request) {

@@ -223,7 +223,7 @@
                                         </div>
                                 <img class="default" src="data:image/jpeg;base64, ${element['picture']}"> </label></div>`);
                         });
-                        $('#box2').html($("#box2").html() + `<form action="{{ route('imagescontroller.addeventpicture') }}" method="POST" enctype="multipart/form-data">
+                        $('#box2').html($("#box2").html() + `<form action="{{ url('admin/images/category/addeventpicture/${query}') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div>
                                         <input class="btn btn-info" type="file" name="eventfile" accept="image/png, image/jpeg, image/jpg">

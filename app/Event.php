@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\EventCreated;
 use Illuminate\Database\Eloquent\Model;
 use App\Events\EventDeleted;
 use App\Events\Eventedited;
@@ -12,7 +13,8 @@ class Event extends Model
 
     protected $dispatchesEvents = [
         'deleting' => EventDeleted::class,
-        'updated' => EventEdited::class
+        'updated' => EventEdited::class,
+        'created' => EventCreated::class
     ];
 
     public function eventPicture()

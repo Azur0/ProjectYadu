@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Events\AccountCreatedEvent;
 use App\Events\AccountCreation;
+use App\Events\EventCreated;
 use App\Listeners\AccountCreatedListener;
 use App\Events\EventDeleted;
 use App\Events\EventEdited;
 use App\Listeners\CreateEventAccountSettings;
+use App\Listeners\SendEventCreatedNotification;
 use App\Listeners\SendEventDeletedNotification;
 use App\Listeners\SendEventEditedNotification;
 use Illuminate\Support\Facades\Event;
@@ -37,6 +39,10 @@ class EventServiceProvider extends ServiceProvider
 
         AccountCreation::class => [
             CreateEventAccountSettings::class,
+        ],
+
+        EventCreated::class => [
+          SendEventCreatedNotification::class,
         ],
     ];
 

@@ -11,6 +11,8 @@ return [
     'modal_delete_eventpicture_center' => 'Weet je zeker dat je deze foto wilt verwijderen, dit kan niet ongedaan worden.',
     'modal_delete_confirmation' => 'Bevestigen',
     'modal_delete_dismiss' => 'Annuleren',
+    'modal_delete_event_connected' => 'Er zijn events vastgebonden aan de gekozen categorie, deze wordt gewijzigd bij de events voor het verwijderen.',
+    'modal_delete_image_connected' => 'Er zijn foto\'s vastgebonden aan de gekozen categorie, deze worden verwijderd.',
     'error_empty_tags' => 'Geen categoriën opgehaald.',
     'error_empty_eventpictures' => 'Geen verbonden images gevonden',
     'error_picture' => 'Er ging iets fout bij het laden van de foto',

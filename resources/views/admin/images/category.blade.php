@@ -49,9 +49,9 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h3 class="eventheader"></h3>
+                                                        <h5 class="text-warning bg-danger eventheader"></h5>
                                                         <div class="eventsbody" id="eventbox"></div>
-                                                        <h3 class="pictureheader"></h3>
+                                                        <h5 class="text-warning bg-danger pictureheader"></h5>
                                                         <div class="imagebody" id="imagebox"></div>
                                                         <div class="confirmation">{{__('image.modal_delete_tag_center')}}</div>
                                                     </div>
@@ -115,10 +115,10 @@
                     location.reload();
                 } else {
                     if(data) {
-                        document.querySelector('.eventheader').innerHTML = "placeholder linked events";
+                        document.querySelector('.eventheader').innerHTML = "{{__('image.modal_delete_event_connected')}}";
                     }
                     if(imagedata) {
-                        document.querySelector('.pictureheader').innerHTML = "placeholder linked images";
+                        document.querySelector('.pictureheader').innerHTML = "{{__('image.modal_delete_image_connected')}}";
                     }
 
                     // get buttons
@@ -130,20 +130,15 @@
                     let eventsbody = document.querySelector('.eventsbody');
                     let imagebody = document.querySelector('.imagebody')
                     eventsbody.appendChild(document.createElement('ul'));
-                    console.log("called start");
+
                     // set bodies
                     data.forEach(function (element) {
-                        console.log("called eventslist");
                         $(eventsbody).html($("#eventbox").html() + `<li>${element['eventName']}</li>`);
                     });
                     eventsbody.appendChild(document.createElement('br'));
                     imagedata.forEach(function (element) {
-                        console.log("called imagelist");
                         $(imagebody).html($("#imagebox").html() + `<label class="picture"><img class="responsive" src="data:image/jpeg;base64, ${element['picture']}"></label>`);
                     });
-
-                    // change center text
-                    document.querySelector(".confirmation").innerHTML = "placeholder dit zal tags en aangewezen fotos verwijderen";
 
                     // set reload and ajax on event click
                     approve.addEventListener('click', function() {

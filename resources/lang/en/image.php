@@ -11,6 +11,8 @@ return [
     'modal_delete_eventpicture_center' => 'Are you really sure you want to remove this image, this cannot be undone.',
     'modal_delete_confirmation' => 'Confirm',
     'modal_delete_dismiss' => 'Cancel',
+    'modal_delete_event_connected' => 'There are events linked, these will be changed during the tag deletion.',
+    'modal_delete_image_connected' => 'There are images linked, these will be removed.',
     'error_empty_tags' => 'No tags found',
     'error_empty_eventpictures' => 'No connected images found',
     'error_picture' => 'Something went wrong upon reading the picture',

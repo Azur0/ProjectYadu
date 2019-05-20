@@ -30,21 +30,21 @@
                             <label class="background-label formitem">
                                     <i class="fa fa-input"></i>
                             <label>{{__('image.add_tag_name')}}</label>
-                            <input required autofocus class="w3-input w3-border" type="text" name="filename">
+                            <input required autofocus class="w3-input w3-border" type="text" name="naam">
                             </div>
                             <div class="responsive">
                                 <label for="file1" class="input-label first formitem">
                                     <i class="fa fa-upload"></i>
                                     {{__('image.add_tag_default')}}
                                 </label>
-                                <input id="file1" class="btn btn-info" type="file" name="typefile1" accept="image/png, image/jpeg, image/jpg">
+                                <input id="file1" class="btn btn-info" type="file" name="default" accept="image/png, image/jpeg, image/jpg">
                             </div>
                             <div class="responsive">
                                 <label for="file2" class="input-label second formitem">
                                     <i class="fa fa-upload"></i>
                                     {{__('image.add_tag_selected')}}
                                 </label>
-                                <input id="file2" class="btn btn-info" type="file"  name="typefile2" accept="image/png, image/jpeg, image/jpg">
+                                <input id="file2" class="btn btn-info" type="file"  name="selectie" accept="image/png, image/jpeg, image/jpg">
                             </label>
                             <button type="submittype" class="btn btn-primary submit-edit" name="submittype">{{__('image.button_upload_dual')}}</button>
                         </form>
@@ -232,13 +232,26 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function (data) {
                     if (data == "") {
-                        $('#box2').html(`<h5><i>{{__('image.error_nodata')}}</i></h5><form action="{{ url('admin/images/category/addeventpicture/${query}') }}" method="POST" enctype="multipart/form-data">
+                        $('#box2').html(`
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i>{{__('image.error_nodata')}}</i></h5>
+                            </div>
+                                <form action="{{ url('admin/images/category/addeventpicture/${query}') }}" method="POST" id="myForm" enctype="multipart/form-data">
                                     @csrf
-                                    <div>
-                                        <input class="btn btn-info" type="file" name="eventfile" accept="image/png, image/jpeg, image/jpg">
+                                    <div class="responsive">
+                                        <label for="file3" class="input-label first formitem">
+                                            <i class="fa fa-upload"></i>
+                                            {{__('image.add_tag_default')}}
+                                        </label>
+                                        <input id="file3" class="btn btn-info" type="file" name="default" accept="image/png, image/jpeg, image/jpg">
                                     </div>
-                                    <button type="submittype" name="submittype">{{__('image.button_upload_dual')}}</button>
-                                </form>`);
+                                </form>
+                            </div>`);
+                            $("#file3").on('change',function(){
+                                console.log("uploaded");
+                                document.getElementById("myForm").submit();
+                            });
                     } else {
                         $('#box2').html("");
 

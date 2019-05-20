@@ -12371,7 +12371,6 @@ h6.collapse-header {
 
 .form { 
   margin: 0 auto; 
-  width:20%;
   }
 
 .formitem {
@@ -12382,6 +12381,6 @@ h6.collapse-header {
   margin-right: 5px;
 }
 
-#file1, #file2 {
+#file1, #file2, #file3 {
   display: none;
 }

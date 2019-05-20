@@ -41,13 +41,13 @@ class ImagesController extends Controller
 
 	public function addtype(Request $request) {
 		$this->validate($request, [
-			'typefile1' => 'required|image|mimes:jpg,png,jpeg|max:2048',
-			'typefile2' => 'required|image|mimes:jpg,png,jpeg|max:2048',
-			'filename' => 'required|string'
+			'default' => 'required|image|mimes:jpg,png,jpeg|max:4048',
+			'selectie' => 'required|image|mimes:jpg,png,jpeg|max:4048',
+			'naam' => 'required|string'
 		]);
-		$image1 = $request->file('typefile1');
-		$image2 = $request->file('typefile2');
-		$name = $request->input('filename');
+		$image1 = $request->file('default');
+		$image2 = $request->file('selectie');
+		$name = $request->input('naam');
 		$event_tag = new EventTag;
 		$event_tag->tag = $name;
 		$event_tag->imageDefault = file_get_contents($image1);
@@ -127,11 +127,11 @@ class ImagesController extends Controller
 
 	public function addeventpicture(Request $request, $id) {
 		$this->validate($request, [
-			'eventfile' => 'required|image|mimes:jpg,png,jpeg|max:2048'
+			'default' => 'required|image|mimes:jpg,png,jpeg|max:2048'
 		]);
 		$event_picture = new EventPicture;
 		$event_picture->tag_id = $id;
-		$event_picture->picture = file_get_contents($request->file('eventfile'));
+		$event_picture->picture = file_get_contents($request->file('default'));
 		$event_picture->save();
 		return back()->with('eventsuccess', __('image.update_successful'));
 	}

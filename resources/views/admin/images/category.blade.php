@@ -27,11 +27,11 @@
                     <div>
                         <input class="btn btn-info" type="file" name="typefile2" accept="image/png, image/jpeg, image/jpg">
                     </div>
-                    <button type="submittype" name="submittype">placeholder upload</button>
+                    <button type="submittype" name="submittype">{{__('image.button_upload_dual')}}</button>
                 </form>
             </div>  
         <div class="types">
-            <h1>Placeholder type</h1>
+            <h1>{{__('image.header_type_tag')}}</h1>
                 <div class="box">
                     @foreach ($tags as $tag)
                     <div class="card divider"> 
@@ -43,7 +43,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">placeholder title</h5>
+                                                        <h5 class="modal-title">{{__('image.modal_delete_title')}}</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -51,11 +51,11 @@
                                                     <div class="modal-body">
                                                         <div class="eventsbody"></div>
                                                         <div class="imagebody"></div>
-                                                        <div class="confirmation">placeholder are u sure</div>
+                                                        <div class="confirmation">{{__('image.modal_delete_tag_center')}}</div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" id="approve" onclick="removeType({{$tag->id}})" class="btn btn-danger">placeholder positive</button>
-                                                        <button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">placeholder negative</button>
+                                                        <button type="submit" id="approve" onclick="removeType({{$tag->id}})" class="btn btn-danger">{{__('image.modal_delete_confirmation')}}</button>
+                                                        <button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">{{__('image.modal_delete_dismiss')}}</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -68,17 +68,17 @@
                     @endforeach
                 </div>
                 @if ($errors->has('tag'))
-                    <div class="error">placeholder.</div>
+                    <div class="error">{{__('image.error_empty_tags')}}</div>
                 @endif
             </div>
             <div class="pic">
-                <h3>Placeholder secondary</h3>
+                <h3>{{__('image.header_eventpictures')}}</h3>
                     <div class="types">
                         <div id="box2" class="box">
                             
                         </div>
                         @if ($errors->has('picture'))
-                            <div class="error">Placeholder error</div>
+                            <div class="error">{{__('image.error_empty_eventpictures')}}</div>
                         @endif
                     </div>
             </div>
@@ -165,7 +165,7 @@
                 dataType: 'json',
                 success: function (data) {
                     if (data == "") {
-                        $('#box2').html("<h5><i>Placeholder no data</i></h5>");
+                        $('#box2').html("<h5><i>{{__('image.error_nodata')}}</i></h5>");
                     } else {
                         $('#box2').html("");
 
@@ -180,20 +180,20 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title">placeholder title</h5>
+                                                            <h5 class="modal-title">{{__('image.modal_delete_title')}}</h5>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                     aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            placeholder are u sure
+                                                                {{__('image.modal_delete_eventpicture_center')}}
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="submit" onclick="deleteeventpicture(this.value)" value="${element['id']}"
-                                                            class="btn btn-danger" data-dismiss="modal">placeholder confirm</button>
+                                                            class="btn btn-danger" data-dismiss="modal">{{__('image.modal_delete_confirmation')}}</button>
                                                             <button type="button" class="btn btn-primary"
-                                                                    data-dismiss="modal">placeholder negative
+                                                                    data-dismiss="modal">{{__('image.modal_delete_dismiss')}}
                                                             </button>
                                                         </div>
                                                     </div>

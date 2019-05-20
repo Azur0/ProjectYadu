@@ -54,7 +54,7 @@ class ImagesController extends Controller
 		$event_tag->imageSelected = file_get_contents($image2);
 		$event_tag->created_at = Carbon::now();
 		$event_tag->save();
-		return back()->with('success', 'placeholder successful');
+		return back()->with('success', __('image.adding_successsful'));
 	}
 
 	public function update(Request $request) {
@@ -64,7 +64,7 @@ class ImagesController extends Controller
 		]);
 		$location = "images/".$request->selected;
 		move_uploaded_file($request->file->getPathname(), $location);
-		return back()->with('success', 'placeholder successful');
+		return back()->with('success', __('image.update_successful'));
 	}
 
 	public function showtype() {

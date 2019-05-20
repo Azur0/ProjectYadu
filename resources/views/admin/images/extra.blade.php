@@ -20,7 +20,7 @@
         <form action="{{ route('imagescontroller.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="types">
-                <h1>Placeholder</h1>
+                <h1>{{__('image.header_extra')}}</h1>
                     <div class="box">
                         @foreach ($images as $image)
                         <div class="card">
@@ -35,7 +35,7 @@
                 </div>
                 <input type="radio" name="image">
                 <input type="file" name="file" accept="image/png, image/jpeg, image/jpg">
-                <button type="submit" name="submit">placeholder upload</button>
+                <button type="submit" name="submit">{{__('image.button_upload_single')}}</button>
             </form>
         </div>
     <script>

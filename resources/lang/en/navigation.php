@@ -23,6 +23,8 @@ return [
     'nav_logout' => 'LOGOUT',
     'nav_pages' => 'Pages',
     'nav_images' => 'Images',
+    'nav_header_category' => 'Categories:',
+    'nav_header_extra' => 'Extra:',
 
 ///////////////////////////////// Footer //////////////////////////////////
 

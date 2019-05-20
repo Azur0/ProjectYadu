@@ -23,6 +23,8 @@ return [
     'nav_logout' => 'UITLOGGEN',
     'nav_pages' => 'Pagina\'s',
     'nav_images' => 'Foto\'s',
+    'nav_header_category' => 'Categoriën:',
+    'nav_header_extra' => 'Extra\'s:',
 
 ///////////////////////////////// Footer //////////////////////////////////
 

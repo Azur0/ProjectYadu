@@ -18,7 +18,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{__('charts.amount_chatmessages')}}</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">#18</div>
+                            <div id="chatmessages" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -34,7 +34,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{__('charts.amount_new_accounts')}}</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">#5</div>
+                            <div id="newAccounts" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -165,6 +165,9 @@
     </div>
 
     <script>
+        updateAccountsCreated(null,null);
+        updateChatmessagesSend(null,null);
+
         var eventChart = new Chart(document.getElementById('events'), {
             type: 'line',
             data: getEventData(null, null),
@@ -216,6 +219,53 @@
                     borderColor: `rgba(25, 93, 230, 1)`
                 }]
             };
+        }
+
+        function updateChatmessagesSend(fromDate, toDate){
+            $.ajax({
+                url: "{{ route('admin_charts_chatmessages') }}",
+                method: 'POST',
+                async: true,
+                data: {
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    document.getElementById("chatmessages").innerHTML = data.messageData.messageCount;
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+
+        function updateAccountsCreated(fromDate, toDate){
+
+            document.getElementById("newAccounts").innerHTML = "{{__('charts.loading')}}";
+
+            $.ajax({
+                url: "{{ route('admin_charts_accounts_created') }}",
+                method: 'POST',
+                async: true,
+                data: {
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    document.getElementById("newAccounts").innerHTML = data.accountData.accountCount;
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
         }
 
         function updateEventChart() {

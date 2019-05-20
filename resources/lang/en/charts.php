@@ -6,6 +6,7 @@ return [
     'close' => 'Close',
     'execute' => 'Execute',
     'time_range' => 'Select date range',
+    'loading' => 'Loading...',
 
     'charts_title' => 'Dashboard',
     'amount_chatmessages' => 'Amount of chatmessages',

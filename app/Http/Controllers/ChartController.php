@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Account;
 use App\Event;
 use App\EventTag;
 use App\Http\Requests\GetChartDateRangeRequest;
@@ -62,6 +63,13 @@ class ChartController extends Controller
         $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
         $messageCount = Message::whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count();
         $data['messageData'] = array('messageCount' => $messageCount);
+        return $data;
+    }
+
+    public function GetAccountsCreated(GetChartDateRangeRequest $request){
+        $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
+        $accountCount = Account::where('isDeleted',0)->whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count();
+        $data['accountData'] = array('accountCount' => $accountCount);
         return $data;
     }
 

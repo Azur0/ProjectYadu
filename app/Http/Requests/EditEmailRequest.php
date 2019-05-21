@@ -4,8 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditLinkRequest extends FormRequest
+class EditEmailRequest extends FormRequest
 {
+
     public function authorize()
     {
         return true;
@@ -15,7 +16,8 @@ class EditLinkRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:10'],
-            'link' => ['email', 'url', 'max:60'],
+            'email' => ['required','email', 'max:60']
         ];
     }
+
 }

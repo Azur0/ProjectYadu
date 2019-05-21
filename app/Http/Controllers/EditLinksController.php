@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EditLinkRequest;
+use App\Http\Requests\EditEmailRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\App;
@@ -18,17 +19,17 @@ class EditLinksController extends Controller
         return view("admin.links.editLinks",compact('socialmedia'));
     }
 
-    public function saveLinks(EditLinkRequest $request){
+    public function saveLink(EditLinkRequest $request){
         $socialmedia = socialmedia::findOrFail($request['name']);
-
-        if($request['type'] == "email"){
-            $socialmedia->link = $request['email'];
-        }else{
-            $socialmedia->link = $request['link'];
-        }
+        $socialmedia->link = $request['link'];
         $socialmedia->save();
-        
         return back();
     }
     
+    public function saveEmail(EditEmailRequest $request){
+        $socialmedia = socialmedia::findOrFail($request['name']);
+        $socialmedia->link = $request['email'];
+        $socialmedia->save();
+        return back();
+    }
 }

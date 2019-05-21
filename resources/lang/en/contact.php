@@ -25,5 +25,6 @@ return [
     'admin_id' => 'ID',
     'admin_name' => 'Name',
     'admin_link' => 'Link',
+    'admin_status' => 'Type',
     
 ];

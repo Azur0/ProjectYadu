@@ -1,12 +1,24 @@
 @extends('layouts/admin/app')
 
 @section('content')
+
 @if ($errors->has('email'))
+@foreach($errors->get('email') as $error)
 <div class="alert alert-danger alert-dismissible fade show" style="float:right; margin-right: 10px;">
-    <strong>Error!</strong> The @if ($errors->has('email')) email @else link @endif you provided was not correct.
+    <strong>Error!</strong> {{$error}}
     <button type="button" class="close" data-dismiss="alert">&times;</button>
 </div>
+@endforeach
 @endif
+@if ($errors->has('link'))
+@foreach($errors->get('link') as $error)
+<div class="alert alert-danger alert-dismissible fade show" style="float:right; margin-right: 10px;">
+    <strong>Error!</strong> {{$error}}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
+@endforeach
+@endif
+
 <h1>Edit Links</h1>
 <div class="card-body">
     <table class="table table-hover">
@@ -44,11 +56,11 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <form method="POST" action="/admin" id="submitEdit{{$social->name}}">
+                                        <form method="POST" action="/admin/{{$social->type}}"
+                                            id="submitEdit{{$social->name}}">
                                             @csrf
                                             <label for="{{$social->name}}" class="col-form-label">Link:</label>
                                             <input type="hidden" name="name" value="{{$social->name}}">
-                                            <input type="hidden" name="type" value="{{$social->type}}">
                                             <input type="text" class="form-control" name="{{$social->type}}"
                                                 value="{{$social->link}}">
                                         </form>

@@ -25,7 +25,12 @@ class AccountController extends Controller
 		{
 			$follow = AccountHasFollowers::where('account_id', $account->id)->where('follower_id', Auth::id())->first();
 		}
-		
+		else
+		{
+			$follow = [];
+		}
+
+		dd($follow);
 		switch ($contentType)
 		{
 			case 'events':

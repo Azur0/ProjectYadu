@@ -1,7 +1,12 @@
 @extends('layouts/admin/app')
 
 @section('content')
-
+@if ($errors->has('link'))
+<div class="alert alert-danger alert-dismissible fade show" style="float:right; margin-right: 10px;">
+    <strong>Error!</strong> The link you provided was not correct.
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
+@endif
 <h1>Edit Links</h1>
 <div class="card-body">
     <table class="table table-hover">
@@ -29,7 +34,8 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">{{__('contact.show_edit_link',['name'=>$social->name])}}</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">
+                                        {{__('contact.show_edit_link',['name'=>$social->name])}}</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -46,7 +52,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('contact.edit_close')}}</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">{{__('contact.edit_close')}}</button>
                                     <button type="submit" form="submitEdit{{$social->name}}" value="Submit"
                                         class="btn btn-primary">{{__('contact.edit_update')}}</button>
                                 </div>

@@ -41,6 +41,6 @@ class Event extends Model
 	}
 
 	public function messages() {
-        return $this->hasMany('App\Message');
+        return $this->hasMany('App\ChatMessage');
     }
 }

@@ -26,5 +26,10 @@ class AccountHasFollowersTableSeeder extends Seeder
             'follower_id' => 6,
             'status' => 'rejected'
         ]);
+        DB::table('account_has_followers')->insert([
+            'account_id' => 12,
+            'follower_id' => 13,
+            'status' => 'accepted'
+        ]);
     }
 }

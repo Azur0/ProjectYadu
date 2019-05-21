@@ -13,8 +13,10 @@ return [
 
     // Event
     "event" => "event",
-    "joinedEvent" => "You have joined",
+    "joinedEvent" => "You have a joined",
+    "youJoinedEventHeader" => "You have joined an event",
     "eventJoinedYourHeader" => "Someone joined your event",
+
     "joinedYourEvent" => "has joined your event",
     "participantJoinedEvent" => "has joined",
     "leftEvent" => "You have left",
@@ -22,6 +24,8 @@ return [
     "participantLeftEvent" => "has left",
     "eventJoinedHeader" => "Someone joined an event",
     "eventLeftHeader" => "Someone Left an event",
+    "youLeftEventHeader" => "You have left an event",
+    "eventLeftYourHeader" => "Someone left your event",
     "eventInfoTitle" => "Event information",
     "eventOwner" => "Event owner",
 

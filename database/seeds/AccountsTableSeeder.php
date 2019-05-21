@@ -180,5 +180,35 @@ class AccountsTableSeeder extends Seeder
             'email_verified_at' => date("Y-m-d H:i:s"),
             'api_token' => str_random(60),
         ]);
+
+        DB::table('accounts')->insert([
+            'accountRole' => 'Admin',
+            'gender' =>  'Male',
+            'email' => 'daannederlandse@gmail.com',
+            'password' => Hash::make('password'),
+            'firstName' => encrypt('Daan'),
+            'middleName' => encrypt(null),
+            'lastName' => encrypt('Nederlandse'),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => str_random(60),
+        ]);
+
+        DB::table('accounts')->insert([
+            'accountRole' => 'Admin',
+            'gender' =>  'Male',
+            'email' => 'lucaslatijnse@gmail.com',
+            'password' => Hash::make('password'),
+            'firstName' => encrypt('Lucas'),
+            'middleName' => encrypt(null),
+            'lastName' => encrypt('Latijnse'),
+            'avatar' => fread(fopen($filePath, "r"), filesize($filePath)),
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+            'email_verified_at' => date("Y-m-d H:i:s"),
+            'api_token' => str_random(60),
+        ]);
     }
 }

@@ -48,17 +48,17 @@ class VerifyEmail extends Notification
         }
 
         return (new MailMessage)
-            ->subject(Lang::getFromJson('activationmail.title'))
+            ->subject(Lang::getFromJson('activationmail.email_reset_password_title'))
             ->greeting(Lang::getFromJson(Crypt::decrypt($this->user['firstName'])))
-            ->line(Lang::getFromJson('activationmail.start'))
+            ->line(Lang::getFromJson('activationmail.email_reset_password_start'))
             ->action(
-                Lang::getFromJson('activationmail.action'),
+                Lang::getFromJson('activationmail.email_reset_password_action'),
                 $this->verificationUrl($notifiable)
             )
-            ->line(Lang::getFromJson('activationmail.instruction'))
+            ->line(Lang::getFromJson('activationmail.email_reset_password_instruction'))
             ->line(Lang::getFromJson(' '))
-            ->line(Lang::getFromJson('activationmail.closing'))
-            ->salutation(Lang::getFromJson('activationmail.signee'));
+            ->line(Lang::getFromJson('activationmail.email_reset_password_closing'))
+            ->salutation(Lang::getFromJson('activationmail.email_reset_password_signee'));
     }
 
     /**

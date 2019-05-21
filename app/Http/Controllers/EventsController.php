@@ -19,6 +19,7 @@ use function PhpParser\filesInDir;
 use Illuminate\Support\Carbon;
 use App\Location;
 use Auth;
+use App\AccountHasFollowers;
 
 class EventsController extends Controller
 {
@@ -65,8 +66,7 @@ class EventsController extends Controller
 		{
 			$event->city = self::cityFromPostalcode($event->Location->postalcode);
 			$event->writtenDate = self::dateToShortText($event->startDate);
-        }
-        
+		}
 		foreach($regular_events as $event)
 		{
 			$event->city = self::cityFromPostalcode($event->Location->postalcode);
@@ -171,8 +171,9 @@ class EventsController extends Controller
      */
     public function show(Event $event)
     {
+        $follow = AccountHasFollowers::where('account_id', $event->owner_id)->where('follower_id', Auth::id())->first();
         $event->writtenDate = $this->dateToLongText($event->startDate);
-        return view('events.show', compact('event'));
+        return view('events.show', compact('event', 'follow'));
     }
 
     /**

@@ -14,35 +14,44 @@
                 {{__('events.show_datetime_at')}} {{date(__('formats.timeFormat'), $timestamp)}}</h5>
         </div>
 
-        <h3>{{__('events.show_initiator')}}</h3>
-        <div class="row my-1">
-            <img class="img-fluid rounded-circle my-auto avatar"
-                src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}" />
-            <h5 class="my-auto ml-2">
-                {{$event->owner->firstName .' '. $event->owner->middleName .' '. $event->owner->lastName}}</h5>
+            <h3>{{__('events.show_initiator')}}</h3>
+            <div class="row my-1">
+                <a href="/account/{{$event->owner->id}}/profile/info">
+                	<img class="img-fluid rounded-circle my-auto avatar" src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}"/>
+                </a>
+                <h5 class="my-auto ml-2">{{$event->owner->firstName .' '. $event->owner->middleName .' '. $event->owner->lastName}}</h5>
+            </div>
+            <br><br>
 
-
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-v"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                @if(Auth::user()->blockedUsers->pluck('blockedAccount_id')->contains($event->owner->id))
-                <form action="/profile/unblockUser" method="post">
-                @csrf
-                <input type="hidden" name="id" value="{{$event->owner->id}}">
-                <button type="submit" class="dropdown-item">{{__('profile.edit_unblock_account_button')}}</button>
-                </form>
-                @else
-                <form action="/profile/blockUser" method="post">
-                @csrf
-                <input type="hidden" name="id" value="{{$event->owner->id}}">
-                <button type="submit" class="dropdown-item">{{__('profile.edit_block_account_button')}}</button>
-                </form>
+            <div class="row">
+                <h3>{{__('events.show_attendees')}}</h3>
+                @if(Auth::check())
+                    @if($event->owner->id != auth()->user()->id)
+                        @if($event->participants->contains(auth()->user()->id))
+                            <a href="/events/{{$event->id}}/leave"
+                               class="btn btn-danger btn-sm my-auto mx-2">{{__('events.show_leave')}}</a>
+                        @elseif($event->participants->count() < $event->numberOfPeople)
+                            <a href="/events/{{$event->id}}/join"
+                               class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
+                        @endif
+                    @endif
                 @endif
             </div>
+            <p class="text-md-right">{{__('events.show_number_of_attendees', ['amount' => $event->participants->count(), 'max' => $event->numberOfPeople])}}</p>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar"
+                     style="width: {{$event->participants->count() / $event->numberOfPeople * 100}}%" aria-valuemin="0"
+                     aria-valuenow="{{$event->participants->count()}}" aria-valuemax="{{$event->numberOfPeople}}"></div>
+            </div>
+            @foreach($event->participants as $participant)
+                <div class="row my-1">
+                    <a href="/account/{{$participant->id}}/profile/info">
+                    	<img class="img-fluid rounded-circle my-auto avatar" src="data:image/jpeg;base64, {{base64_encode($participant->avatar)}}"/>
+                    </a>
+                    <h5 class="my-auto ml-2">{{$participant->firstName .' '. $participant->middleName .' '. $participant->lastName}}</h5>
+                    
+                </div>
+            @endforeach
         </div>
         <br><br>
 

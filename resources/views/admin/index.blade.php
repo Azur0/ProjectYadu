@@ -109,7 +109,7 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <canvas id="categories" height="220px"></canvas>
+                <canvas id="categories" height="250px"></canvas>
             </div>
         </div>
     </div>

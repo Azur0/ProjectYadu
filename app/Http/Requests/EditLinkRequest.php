@@ -15,7 +15,8 @@ class EditLinkRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:10'],
-            'link' => ['required', 'url', 'max:60']
+            'link' => ['url', 'max:60'],
+            'email' => ['email', 'max:60']
         ];
     }
 }

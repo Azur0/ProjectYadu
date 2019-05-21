@@ -20,8 +20,14 @@ class EditLinksController extends Controller
 
     public function saveLinks(EditLinkRequest $request){
         $socialmedia = socialmedia::findOrFail($request['name']);
-        $socialmedia->link = $request['link'];
+
+        if($request['type'] == "email"){
+            $socialmedia->link = $request['email'];
+        }else{
+            $socialmedia->link = $request['link'];
+        }
         $socialmedia->save();
+        
         return back();
     }
     

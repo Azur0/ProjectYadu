@@ -1,9 +1,9 @@
 @extends('layouts/admin/app')
 
 @section('content')
-@if ($errors->has('link'))
+@if ($errors->has('email'))
 <div class="alert alert-danger alert-dismissible fade show" style="float:right; margin-right: 10px;">
-    <strong>Error!</strong> The link you provided was not correct.
+    <strong>Error!</strong> The @if ($errors->has('email')) email @else link @endif you provided was not correct.
     <button type="button" class="close" data-dismiss="alert">&times;</button>
 </div>
 @endif
@@ -15,6 +15,7 @@
                 <th scope="col">{{__('contact.admin_id')}}</th>
                 <th scope="col">{{__('contact.admin_name')}}</th>
                 <th scope="col">{{__('contact.admin_link')}}</th>
+                <th scope="col">{{__('contact.admin_status')}}</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -25,6 +26,7 @@
                 <td>{{$y+=1}}</td>
                 <td>{{ucfirst($social->name)}}</td>
                 <td>{{$social->link}}</td>
+                <td>{{ucfirst($social->type)}}</td>
                 <td><button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#change{{$social->name}}Link"
                         data-whatever="@mdo">{{__('contact.show_edit')}}</button>
@@ -46,7 +48,8 @@
                                             @csrf
                                             <label for="{{$social->name}}" class="col-form-label">Link:</label>
                                             <input type="hidden" name="name" value="{{$social->name}}">
-                                            <input type="text" class="form-control" name="link"
+                                            <input type="hidden" name="type" value="{{$social->type}}">
+                                            <input type="text" class="form-control" name="{{$social->type}}"
                                                 value="{{$social->link}}">
                                         </form>
                                     </div>

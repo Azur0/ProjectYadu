@@ -20,10 +20,19 @@ class SocialmediaTableSeeder extends Seeder
             'email'=>'info@YADU.nu',
         ];
         foreach($socialmedia as $name => $link) {
-            DB::table('socialmedia')->insert([
-                'name' => $name,
-                'link' => $link,
-            ]);
+            if($name == "email"){
+                DB::table('socialmedia')->insert([
+                    'name' => $name,
+                    'link' => $link,
+                    'type' => "email"
+                ]);
+            }
+            else {
+                DB::table('socialmedia')->insert([
+                    'name' => $name,
+                    'link' => $link,
+                ]);
+            }
         }
     }
 }

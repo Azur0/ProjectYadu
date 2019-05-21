@@ -19,7 +19,8 @@
                 <a href="/account/{{$event->owner->id}}/profile/info">
                 	<img class="img-fluid rounded-circle my-auto avatar" src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}"/>
                 </a>
-                <h5 class="my-auto ml-2">{{$event->owner->firstName .' '. $event->owner->middleName .' '. $event->owner->lastName}}</h5>
+                <h5 class="my-auto ml-2"><a href="/account/{{$event->owner->id}}/profile/info">{{$event->owner->firstName .' '. $event->owner->middleName .' '. $event->owner->lastName}}</a></h5>
+                
             </div>
             <br><br>
 
@@ -48,7 +49,11 @@
                     <a href="/account/{{$participant->id}}/profile/info">
                     	<img class="img-fluid rounded-circle my-auto avatar" src="data:image/jpeg;base64, {{base64_encode($participant->avatar)}}"/>
                     </a>
-                    <h5 class="my-auto ml-2">{{$participant->firstName .' '. $participant->middleName .' '. $participant->lastName}}</h5>
+                    <p>
+	                    <h5 class="my-auto ml-2">
+	                    	<a href="/account/{{$participant->id}}/profile/info">{{$participant->firstName .' '. $participant->middleName .' '. $participant->lastName}}</a>
+	                    </h5>
+                	</p>
                     
                 </div>
             @endforeach

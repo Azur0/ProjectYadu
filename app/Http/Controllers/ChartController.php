@@ -6,29 +6,37 @@ use App\Account;
 use App\Event;
 use App\EventTag;
 use App\Http\Requests\GetChartDateRangeRequest;
-use App\Http\Requests\GetTotalEventsCreatedRequest;
 use App\Message;
 use App\SharedEvent;
 use App\SocialMediaPlatform;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 
 class ChartController extends Controller
 {
+    public function UpdateDateString(GetChartDateRangeRequest $request){
+        $format = __('formats.dateFormat');
+        $fromDate = strtotime($request['fromDate']);
+        $toDate = strtotime($request['toDate']);
+
+        return __('charts.report_date', ['from' => date($format, $fromDate), 'till' => date($format, $toDate)]);
+    }
+
     public function GetTotalEventsCreated(GetChartDateRangeRequest $request)
     {
         $fromDate = Carbon::parse($request['fromDate']);
         $toDate = Carbon::parse($request['toDate'])->addDay();
+        $difference = $toDate->diffInDays($fromDate);
         $data = array();
 
-        while ($fromDate < $toDate) {
-            $totalEvents = Event::where('isDeleted', 0)->where('created_at', '<', $toDate)->count();
+        for($i = 0; $i < $difference; $i++){
+            $totalEvents = Event::where('isDeleted', 0)->where('created_at', '<', $fromDate->copy()->addDays($i))->count();
             $entry = array(
-                'date' => $toDate->format('c'),
+                'date' => $fromDate->format('c'),
                 'totalEvents' => $totalEvents
             );
             array_push($data, $entry);
-            $fromDate->addDay();
         }
         return $data;
     }

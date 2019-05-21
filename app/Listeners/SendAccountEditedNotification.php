@@ -28,9 +28,7 @@ class SendAccountEditedNotification
      */
     public function handle(AccountEdited $event)
     {
-        if($event->account->remember_token != $event->account->getOriginal('remember_token')){
-
-        }else{
+        if($event->account->remember_token == $event->account->getOriginal('remember_token')){
             Mail::to($event->account->email)->send(
                 new AccountEditedMail($event->account)
             );

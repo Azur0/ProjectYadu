@@ -52,14 +52,13 @@
                 <div id="map"></div>
                 @if ($errors->has('lat'))
                 <div class="error">{{__('events.create_error_location_required')}}</div>
-                @endif
-                @if ($errors->has('houseNumber'))
+                @elseif($errors->has('houseNumber'))
                 <div class="error">{{__('events.create_error_house_number')}}</div>
-                @endif
-                @if ($errors->has('postalCode'))
+                @elseif ($errors->has('postalCode'))
                 <div class="error">{{__('events.create_error_postalcode')}}</div>
                 @endif
             </div>
+           
         </div>
         <div class="date">
             <h3>4. {{__('events.create_step4')}}</h3>

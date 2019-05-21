@@ -60,13 +60,14 @@
                     value="{{$data['event']->location()->first()->houseNumber}}">
                 <input type="hidden" name="postalCode" id="postalCode"
                     value="{{$data['event']->location()->first()->postalcode}}">
-                <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required
-                @if (old('location')==null)
-                    value="{{ $data['event']->location()->first()->postalcode }} {{ $data['event']->location()->first()->houseNumber }}{{ $data['event']->location()->first()->houseNumberAddition }}"
-                    @else
-                    value="{{old('location')}}"
-                @endif
-                >
+                <input type="hidden" name="locality" id="locality"
+                    value="{{$data['event']->location()->first()->locality}}">
+                <input type="hidden" name="route" id="route" value="{{$data['event']->location()->first()->route}}">
+
+                <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required @if
+                    (old('location')==null)
+                    value="{{ $data['event']->location()->first()->route }} {{ $data['event']->location()->first()->houseNumber }}, {{ $data['event']->location()->first()->locality }}"
+                    @else value="{{old('location')}}" @endif>
                 <div id="map"></div>
                 @if ($errors->has('lat'))
                 <div class="error">{{__('events.create_error_location_required')}}</div>
@@ -181,11 +182,9 @@ function update_counter_desc(textarea) {
 
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
 function initAutocomplete() {
-    var Eventlat = {{$data['event']->location()->first()->locLatitude}};
-    var Eventlng = {{$data['event']->location()->first()->locLongtitude}};
+    var Eventlat = <?php echo $data['event']->location()->first()->locLatitude ?>;
+    var Eventlng = <?php echo $data['event']->location()->first()->locLongtitude ?>;
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {
             lat: Eventlat,
@@ -206,7 +205,7 @@ function initAutocomplete() {
     });
     var markers = [];
     var myLatlng = new google.maps.LatLng(Eventlat, Eventlng);
-    
+
     var marker = new google.maps.Marker({
         position: myLatlng,
         title: "Hello World!"
@@ -254,11 +253,17 @@ function initAutocomplete() {
 
             var myAddressNumber = "";
             var myPostalCode = "";
+            var myRoute = "";
+            var myLocality = "";
             for (i = 0; i < place.address_components.length; i++) {
                 if (place.address_components[i].types == "street_number") {
                     myAddressNumber = place.address_components[i].long_name;
                 } else if (place.address_components[i].types == "postal_code") {
                     myPostalCode = place.address_components[i].long_name;
+                } else if (place.address_components[i].types[0] == "locality") {
+                    myLocality = place.address_components[i].long_name;
+                } else if (place.address_components[i].types == "route") {
+                    myRoute = place.address_components[i].long_name;
                 }
             }
 
@@ -267,6 +272,8 @@ function initAutocomplete() {
 
             $('#houseNumber').val(myAddressNumber);
             $('#postalCode').val(myPostalCode);
+            $('#route').val(myRoute);
+            $('#locality').val(myLocality);
 
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.

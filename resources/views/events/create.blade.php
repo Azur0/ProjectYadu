@@ -44,6 +44,9 @@
                 <input type="hidden" name="lat" id="lat" value="">
                 <input type="hidden" name="houseNumber" id="houseNumber" value="">
                 <input type="hidden" name="postalCode" id="postalCode" value="">
+                <input type="hidden" name="locality" id="locality" value="">
+                <input type="hidden" name="route" id="route" value="">
+
                 <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required
                     value="{{ old('location') }}">
                 <div id="map"></div>
@@ -223,22 +226,30 @@ function initAutocomplete() {
                 title: place.name,
                 position: place.geometry.location
             }));
-           
+
             var myAddressNumber = "";
             var myPostalCode = "";
+            var myRoute = "";
+            var myLocality = "";
             for (i = 0; i < place.address_components.length; i++) {
-                if(place.address_components[i].types == "street_number"){
+                if (place.address_components[i].types == "street_number") {
                     myAddressNumber = place.address_components[i].long_name;
                 } else if (place.address_components[i].types == "postal_code") {
                     myPostalCode = place.address_components[i].long_name;
+                } else if (place.address_components[i].types[0] == "locality") {
+                    myLocality = place.address_components[i].long_name;
+                } else if (place.address_components[i].types == "route") {
+                    myRoute = place.address_components[i].long_name;
                 }
             }
-            
+
             $('#lng').val(place.geometry.location.lng);
             $('#lat').val(place.geometry.location.lat);
 
             $('#houseNumber').val(myAddressNumber);
             $('#postalCode').val(myPostalCode);
+            $('#route').val(myRoute);
+            $('#locality').val(myLocality);
 
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.

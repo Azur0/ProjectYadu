@@ -25,6 +25,8 @@ class CreateLocationsTable extends Migration
             $table->increments('id');
             $table->string('houseNumber', 10);
             $table->string('postalcode', 45);
+            $table->string('route', 100);
+            $table->string('locality', 100);
             $table->string('locLatitude', 45);
             $table->string('locLongtitude', 45);
             $table->timestamps();

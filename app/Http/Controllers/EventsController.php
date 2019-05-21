@@ -49,14 +49,14 @@ class EventsController extends Controller
 
 		foreach($events as $event)
 		{
-			$event->city = self::cityFromPostalcode($event->Location->postalcode);
+			$event->city = $event->location->locality;
 			$event->writtenDate = self::dateToShortText($event->startDate);
 
 
 		}
 		foreach($regular_events as $event)
 		{
-			$event->city = self::cityFromPostalcode($event->Location->postalcode);
+			$event->city = $event->location->locality;
 			$event->writtenDate = self::dateToShortText($event->startDate);
 
 
@@ -106,10 +106,13 @@ class EventsController extends Controller
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
             'startTime' => 'required',
-            'lng' => 'required',
-            'lat' => 'required',
-            'houseNumber' => 'required',
-            'postalCode' => 'required',
+            'lng' => 'required|max:45',
+            'lat' => 'required|max:45',
+            'houseNumber' => 'required|max:10',
+            'postalCode' => 'required|max:45',
+            'location' => 'required',
+            'route'=> 'required',
+            'locality' => 'required',
             'picture' => 'required'
         ]);
 
@@ -131,6 +134,8 @@ class EventsController extends Controller
             'locLatitude' => $request['lat'],
             'houseNumber' => $request['houseNumber'],
             'postalcode' => str_replace(' ', '', $request['postalCode']),
+            'route' => $request['route'],
+            'locality' => $request['locality'],
         ]);
 
         Event::create(
@@ -219,10 +224,12 @@ class EventsController extends Controller
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
             'startTime' => 'required',
-            'lng' => 'required',
-            'lat' => 'required',
-            'houseNumber' => 'required',
-            'postalCode' => 'required',
+            'lng' => 'required|max:45',
+            'lat' => 'required|max:45',
+            'houseNumber' => 'required|max:10',
+            'postalCode' => 'required|max:45',
+            'route'=> 'required',
+            'locality' => 'required',
             'numberOfPeople' => 'required'
         ]);
 
@@ -261,6 +268,8 @@ class EventsController extends Controller
                 'locLatitude' => $request['lat'],
                 'houseNumber' => $request['houseNumber'],
                 'postalcode' => str_replace(' ', '', $request['postalCode']),
+                'route'=> $request['route'],
+                'locality' => $request['locality'],
             ]);
 
             return redirect('/events');
@@ -349,7 +358,7 @@ class EventsController extends Controller
         foreach ($filtered_events as $event) {
             $date = self::dateToShortText($event->startDate);
 
-            $postalcode = self::cityFromPostalcode($event->Location->postalcode);
+            $postalcode = $event->location->locality;
 
             $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
             $Pic = (base64_encode($Picture[0]->picture));
@@ -360,34 +369,5 @@ class EventsController extends Controller
             $events->push($event);
         }
         return json_encode($events);
-    }
-
-    public function cityFromPostalcode($postalcode)
-    {
-        if (!self::isValidPostalcode($postalcode)) {
-            return "Invalid postal code";
-        }
-
-        $url = "https://nominatim.openstreetmap.org/search?q={$postalcode}&format=json&addressdetails=1";
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        $json = json_decode($result, true);
-        if (isset($json[0]['address']['suburb'])) {
-            return $json[0]['address']['suburb'];
-        } else {
-            return "City not found";
-        }
-    }
-
-    public function isValidPostalcode($postalcode)
-    {
-        $regex = '/^([1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9])[a-zA-Z]{2}$/';
-        return preg_match($regex, $postalcode);
     }
 }

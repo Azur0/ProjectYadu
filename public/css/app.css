@@ -11023,6 +11023,10 @@ a.text-dark:focus {
   #welcome_carousel .carousel-inner .carousel-item .carousel_img_container img {
     min-width: 100%;
     overflow-y: auto;
+    -webkit-filter: blur(10px);
+            filter: blur(10px);
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
   }
 
   #welcome_carousel .carousel-inner .carousel-item a,

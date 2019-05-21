@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\ChatMessage;
 use App\Event;
 use App\EventTag;
 use App\Http\Requests\GetChartDateRangeRequest;
-use App\Message;
 use App\SharedEvent;
 use App\SocialMediaPlatform;
-use DateTime;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class ChartController extends Controller
 {
@@ -26,7 +24,7 @@ class ChartController extends Controller
     public function GetChatmessages(GetChartDateRangeRequest $request)
     {
         $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
-        $messageCount = Message::whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count();
+        $messageCount = ChatMessage::whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count();
         $data['messageData'] = array('messageCount' => $messageCount);
         return $data;
     }

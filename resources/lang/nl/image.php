@@ -25,4 +25,5 @@ return [
     'add_tag_selected' => 'Selectie foto',
     'add_event_picture_first' => 'Upload een nieuwe event foto',
     'add_event_picture_second' => 'Upload event foto',
+    'file_too_large' => 'Bestand is te groot, graag onder 10MB',
 ];

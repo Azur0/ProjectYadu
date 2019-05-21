@@ -25,4 +25,5 @@ return [
     'add_tag_selected' => 'Selected picture',
     'add_event_picture_first' => 'Upload a new event picture',
     'add_event_picture_second' => 'Upload new picture',
+    'file_too_large' => 'File too large, please compress file to under 10MB',
 ];

@@ -20,7 +20,7 @@ class ChartController extends Controller
         $fromDate = strtotime($request['fromDate']);
         $toDate = strtotime($request['toDate']);
 
-        return __('charts.report_date', ['from' => date($format, $fromDate), 'till' => date($format, $toDate)]);
+        return array(__('charts.report_date', ['from' => date($format, $fromDate), 'till' => date($format, $toDate)]));
     }
 
     public function GetTotalEventsCreated(GetChartDateRangeRequest $request)

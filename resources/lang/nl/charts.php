@@ -8,6 +8,8 @@ return [
     'time_range' => 'Selecteer datumbereik',
     'loading' => 'Laden...',
     'change_date_range' => 'Verander datumbereik',
+    'report_date' => 'Rapport van :from tot en met :till',
+    'report_date_past_month' => 'Rapport van de afgelopen maand',
 
     'charts_title' => 'Dashboard',
     'amount_chatmessages' => 'Aantal chat berichten',

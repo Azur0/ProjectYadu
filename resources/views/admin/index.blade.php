@@ -4,14 +4,16 @@
 
     <div class="container-fluid px-3">
 
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="d-sm-flex flex-row align-items-center justify-content-between mb-2">
+            <div class="col">
             <h1 class="h3 mb-0 text-gray-800">{{__('charts.charts_title')}}</h1>
             <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+            </div>
         </div>
 
         <div class="d-flex flex-row">
             <div class="col-md-10 float-right">
-                <h3>#Rapport van datum tot datum</h3>
+                <h5 id="reportDate">{{__('charts.report_date_past_month')}}</h5>
             </div>
             <div>
                 <!-- Button trigger modal -->
@@ -191,11 +193,35 @@
             }
 
             function updateCharts(fromDate, toDate) {
+                updateDateString(fromDate, toDate);
+
                 updateChatmessagesSend(fromDate, toDate);
                 updateAccountsCreated(fromDate, toDate);
                 updateEventChart(fromDate, toDate);
                 updateShareChart(fromDate, toDate);
                 updateCategoryChart(fromDate, toDate);
+            }
+
+            function updateDateString(fromDate, toDate){
+                $.ajax({
+                    url: "{{ route('admin_charts_update_date_string') }}",
+                    method: 'POST',
+                    async: true,
+                    data: {
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        document.getElementById("reportDate").innerHTML = data;
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    }
+                });
             }
 
             function updateChatmessagesSend(fromDate, toDate) {

@@ -58,5 +58,10 @@ return [
     'edit_delete_account_positive' => 'Yes, delete it',
     'edit_delete_account_negative' => 'No, Keep it!',
 
-
+    'edit_privacy_head' => 'Privacy Settings',
+    'edit_privacy_participatingVisibility' => 'Participating Visibility',
+    'edit_privacy_eventsVisibility' => 'Events Visibility',
+    'edit_privacy_infoVisibility' => 'Info Visibility',
+    'edit_privacy_followingVisibility' => 'Following Visibility',
+    'edit_privacy_followerVisibility' => 'Follower Visibility',
 ];

@@ -58,5 +58,10 @@ return [
     'edit_delete_account_positive' => 'Ja, verwijder mijn account',
     'edit_delete_account_negative' => 'Nee, bewaar mijn account!',
 
-
+    'edit_privacy_head' => 'Privacy Instellingen',
+    'edit_privacy_participatingVisibility' => 'No, Keep it!',
+    'edit_privacy_eventsVisibility' => 'No, Keep it!',
+    'edit_privacy_infoVisibility' => 'Profiel informatie zichtbaarheid',
+    'edit_privacy_followingVisibility' => 'Volgende zichtbaarheid',
+    'edit_privacy_followerVisibility' => 'Volger zichtbaarheid',
 ];

@@ -135,11 +135,11 @@
 							</div>
 
 							<div class="form-group row">
-								<p>public profile display settings</p>
+								<p>{{__('profile.edit_privacy_head')}}</p>
 							</div>
 							<div class="form-group row">
 								<label for="followerVisibility"
-									   class="col-md-4 col-form-label text-md-right">followerVisibility</label>
+									   class="col-md-4 col-form-label text-md-right">{{__('profile.edit_privacy_followerVisibility')}}</label>
 								<div class="col-md-6">
 									<select name="followerVisibility" selected="{{$account->followerVisibility}}"
 											class="form-control{{ $errors->has('followerVisibility') ? ' is-invalid' : '' }}">
@@ -166,7 +166,7 @@
 							</div>
 							<div class="form-group row">
 								<label for="followingVisibility"
-									   class="col-md-4 col-form-label text-md-right">followingVisibility</label>
+									   class="col-md-4 col-form-label text-md-right">{{__('profile.edit_privacy_followingVisibility')}}</label>
 								<div class="col-md-6">
 									<select name="followingVisibility" selected="{{$account->followingVisibility}}" class="form-control{{ $errors->has('followingVisibility') ? ' is-invalid' : '' }}">
 										@if( $account->followingVisibility == 'private' )
@@ -192,7 +192,7 @@
 							</div>
 							<div class="form-group row">
 								<label for="infoVisibility"
-									   class="col-md-4 col-form-label text-md-right">infoVisibility</label>
+									   class="col-md-4 col-form-label text-md-right">{{__('profile.edit_privacy_infoVisibility')}}</label>
 								<div class="col-md-6">
 									<select name="infoVisibility" selected="{{$account->infoVisibility}}"
 											class="form-control{{ $errors->has('infoVisibility') ? ' is-invalid' : '' }}">
@@ -219,7 +219,7 @@
 							</div>
 							<div class="form-group row">
 								<label for="eventsVisibility"
-									   class="col-md-4 col-form-label text-md-right">eventsVisibility</label>
+									   class="col-md-4 col-form-label text-md-right">{{__('profile.edit_privacy_eventsVisibility')}}</label>
 								<div class="col-md-6">
 									<select name="eventsVisibility" selected="{{$account->eventsVisibility}}"
 											class="form-control{{ $errors->has('eventsVisibility') ? ' is-invalid' : '' }}">
@@ -246,7 +246,7 @@
 							</div>
 							<div class="form-group row">
 								<label for="participatingVisibility"
-									   class="col-md-4 col-form-label text-md-right">participatingVisibility</label>
+									   class="col-md-4 col-form-label text-md-right">{{__('profile.edit_privacy_participatingVisibility')}}</label>
 								<div class="col-md-6">
 									<select name="participatingVisibility" selected="{{$account->participatingVisibility}}"
 											class="form-control{{ $errors->has('participatingVisibility') ? ' is-invalid' : '' }}">

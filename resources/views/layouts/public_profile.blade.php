@@ -46,8 +46,7 @@
 													<i class="fas fa-ellipsis-v"></i>
 												</button>
 												<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-													@if($account)
-													<!--Auth::user()->blockedUsers->pluck('blockedAccount_id')->contains($account->id)-->
+													@if(Auth::user()->blockedUsers->pluck('blockedAccount_id')->contains($account->id))
 														<form action="/profile/unblockUser" method="post">
 															@csrf
 															<input type="hidden" name="id" value="{{$account->id}}">

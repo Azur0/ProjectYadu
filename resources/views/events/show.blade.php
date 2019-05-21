@@ -208,7 +208,7 @@
         @else
             <div class="col-md-6">
                 <h3 style="margin-top:30px;">
-                    Meld je aan bij dit event om te kunnen chatten!
+                    {{__('events.show_chat_login')}}
                 </h3>
             </div>
         @endif

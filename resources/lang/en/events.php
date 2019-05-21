@@ -78,6 +78,7 @@ return [
     'show_delete' => 'Delete',
     'show_title' => 'Title',
     'show_overview' => 'Overview',
+    'show_chat_login' => 'Log in and join this event to chat!',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Cancel',

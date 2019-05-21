@@ -4,7 +4,7 @@ return [
     'button_upload_dual' => 'Upload bestanden',
     'button_upload_single' => 'Upload bestand',
     'header_type_tag' => 'Categoriën voor uitjes',
-    'header_extra' => 'Alle foto\'s in de public/images folder',
+    'header_extra' => 'Wijzig hier de foto\'s die weergegeven worden op Yadu',
     'header_eventpictures' => 'Verbonden images bij gekozen categorie',
     'modal_delete_title' => 'Weet je zeker dat je dit wilt verwijderen?',
     'modal_delete_tag_center' => 'Weet je zeker dat je deze categorie type wilt verwijderen, dit kan niet ongedaan worden.',

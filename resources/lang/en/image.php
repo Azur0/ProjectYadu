@@ -4,7 +4,7 @@ return [
     'button_upload_dual' => 'Upload files',
     'button_upload_single' => 'Upload file',
     'header_type_tag' => 'Event tags',
-    'header_extra' => 'All loaded images from the public/images folder',
+    'header_extra' => 'Change images here which are displayed on the website',
     'header_eventpictures' => 'Images connected to tags',
     'modal_delete_title' => 'Are you sure you want to delete this?',
     'modal_delete_tag_center' => 'Are you really sure you want to remove this tag, this cannot be undone.',

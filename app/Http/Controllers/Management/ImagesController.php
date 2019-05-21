@@ -40,11 +40,15 @@ class ImagesController extends Controller
 	}
 
 	public function addtype(Request $request) {
-		$this->validate($request, [
-			'defaultImage' => 'required|image|mimes:jpg,png,jpeg|max:10240',
-			'selectedImage' => 'required|image|mimes:jpg,png,jpeg|max:10240',
+		if($request->file('defaultImage')->getSize() > 10240 || $request->file('selectedImage')->getSize() > 10240){
+			return back()->withErrors('File too large');
+		}
+		$thing = $this->validate($request, [
+			'defaultImage' => 'required|image|max:10240|mimes:jpg,png,jpeg',
+			'selectedImage' => 'required|image|max:10240|mimes:jpg,png,jpeg',
 			'naam' => 'required|string|min:1|max:45'
 		]);
+
 		$image1 = $request->file('defaultImage');
 		$image2 = $request->file('selectedImage');
 		$name = $request->input('naam');
@@ -58,9 +62,12 @@ class ImagesController extends Controller
 	}
 
 	public function update(Request $request) {
+		if($request->file('default')->getSize() > 10240){
+			return back()->withErrors('File too large');
+		}
 		$this->validate($request, [
 			'selected' => 'required',
-			'default' => 'required|image|mimes:jpg,png,jpeg|max:2048'
+			'default' => 'required|image|max:10240|mimes:jpg,png,jpeg'
 		]);
 		$location = "images/".$request->selected;
 		move_uploaded_file($request->file('default'), $location);

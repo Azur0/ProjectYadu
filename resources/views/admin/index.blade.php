@@ -204,6 +204,28 @@
             updateHeatmap(fromDate, toDate);
         }
 
+        function updateDateString(fromDate, toDate) {
+            $.ajax({
+                url: "{{ route('admin_charts_update_date_string') }}",
+                method: 'POST',
+                async: true,
+                data: {
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    document.getElementById("reportDate").innerHTML = data;
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+
         function updateChatmessagesSend(fromDate, toDate) {
             document.getElementById("newAccounts").innerHTML = "{{__('charts.loading')}}";
             $.ajax({
@@ -256,15 +278,15 @@
             eventChart.update();
         }
 
-        function updateCategoryChart(fromDate, toDate) {
-            categoriesChart.data = getCategoryData(fromDate, toDate);
-            categoriesChart.update();
-        }
-
         function updateShareChart(fromDate, toDate) {
             shareChart.data = getShareData(fromDate, toDate);
             shareChart.update();
         };
+
+        function updateCategoryChart(fromDate, toDate) {
+            categoriesChart.data = getCategoryData(fromDate, toDate);
+            categoriesChart.update();
+        }
 
         function getEventData(fromDate, toDate) {
             var plotLabels = [];
@@ -303,30 +325,6 @@
                 }]
             };
         }
-
-
-        function updateDateString(fromDate, toDate) {
-            $.ajax({
-                url: "{{ route('admin_charts_update_date_string') }}",
-                method: 'POST',
-                async: true,
-                data: {
-                    fromDate: fromDate,
-                    toDate: toDate,
-                    _token: '{{ csrf_token() }}'
-                },
-                dataType: 'json',
-                success: function (data) {
-                    document.getElementById("reportDate").innerHTML = data;
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                }
-            });
-        }
-
 
         function getShareData(fromDate, toDate) {
             let plotLabels = [];
@@ -462,10 +460,7 @@
             heatmap.setData(getPoints(fromDate, toDate));
         }
     </script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=visualization&callback=initMap" async defer></script> -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak&libraries=visualization&callback=initMap"
-            async defer></script>
-
-
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=visualization&callback=initMap" async defer></script>
+    {{--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak&libraries=visualization&callback=initMap"--}}
+            {{--async defer></script>--}}
 @endsection

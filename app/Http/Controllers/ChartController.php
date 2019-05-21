@@ -23,6 +23,22 @@ class ChartController extends Controller
         return array(__('charts.report_date', ['from' => date($format, $fromDate), 'till' => date($format, $toDate)]));
     }
 
+    public function GetChatmessages(GetChartDateRangeRequest $request)
+    {
+        $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
+        $messageCount = Message::whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count();
+        $data['messageData'] = array('messageCount' => $messageCount);
+        return $data;
+    }
+
+    public function GetAccountsCreated(GetChartDateRangeRequest $request)
+    {
+        $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
+        $accountCount = Account::where('isDeleted', 0)->whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count();
+        $data['accountData'] = array('accountCount' => $accountCount);
+        return $data;
+    }
+
     public function GetTotalEventsCreated(GetChartDateRangeRequest $request)
     {
         $fromDate = Carbon::parse($request['fromDate']);
@@ -42,25 +58,8 @@ class ChartController extends Controller
         return $data;
     }
 
-    public function GetChatmessages(GetChartDateRangeRequest $request)
-    {
-        $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
-        $messageCount = Message::whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count();
-        $data['messageData'] = array('messageCount' => $messageCount);
-        return $data;
-    }
-
-    public function GetAccountsCreated(GetChartDateRangeRequest $request)
-    {
-        $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
-        $accountCount = Account::where('isDeleted', 0)->whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count();
-        $data['accountData'] = array('accountCount' => $accountCount);
-        return $data;
-    }
-
     public function GetShares(GetChartDateRangeRequest $request)
     {
-
         $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
         $platforms = SocialMediaPlatform::all();
         $data['shareData'] = array();
@@ -100,7 +99,6 @@ class ChartController extends Controller
 
     public function GetActiveEventLocations()
     {
-
         if (request()->fromDate == null) {
             $fromDate = strtotime("-1 months");
         } else {

@@ -45,15 +45,19 @@ class ChartController extends Controller
         $toDate = Carbon::parse($request['toDate'])->addDay();
         $difference = $toDate->diffInDays($fromDate);
         $data = array();
+        $previousTotalEvents = 0;
 
         for($i = 0; $i < $difference; $i++){
             $totalEvents = Event::where('isDeleted', 0)->where('created_at', '<', $fromDate->copy()->addDays($i))->count();
-
             $entry = array(
                 'date' => $fromDate->copy()->addDays($i)->format('c'),
                 'totalEvents' => $totalEvents
             );
-            array_push($data, $entry);
+
+            if($previousTotalEvents < $totalEvents) {
+                array_push($data, $entry);
+            }
+            $previousTotalEvents = $totalEvents;
         }
         return $data;
     }

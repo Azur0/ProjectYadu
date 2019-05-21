@@ -7,10 +7,11 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Lang;
+use App\Traits\DateToText;
 
 class EventDeleted extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels,DateToText;
 
     /**
      * Create a new message instance.
@@ -46,7 +47,7 @@ class EventDeleted extends Mailable
                 'body' => Lang::get('mail.deleteText1').$this->event->eventName . Lang::get('mail.deleteText2'),
                 'infoTitle' => Lang::get('mail.eventInfoTitle'),
                 'eventName' => Lang::get('events.show_title'). ": " . $this->event->eventName,
-                'eventDate' => Lang::get('events.show_date').": " . \Carbon\Carbon::parse($this->event->startDate)
+                'eventDate' => Lang::get('events.show_date').": " . self::dateToShortText($this->event->startDate)
                         ->format(__('formats.dateTimeFormat')),
                 'ownerName' => Lang::get('mail.eventOwner').": " . $this->event->owner->firstName,
                 'numberOfPeople' => Lang::get('events.show_attendees_amount').": " . $this->event->participants->count(),

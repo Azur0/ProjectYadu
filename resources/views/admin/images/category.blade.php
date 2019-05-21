@@ -20,7 +20,7 @@
                         <strong>{{ $message }}</strong>
                     </div>
                 @endif
-                <div class="card">
+                <div>
                     <div class="card-header">
                     <h1>{{__('image.add_tag_title')}}</h1>
                     </div>
@@ -119,10 +119,10 @@
 <script>
 $(document).ready(function() {
     $("#file1").on("change", function() {
-        $('.first').html(`<i class="fa fa-upload"></i>{{__('image.image.add_tag_default')}}: ${$(this)[0].files[0].name}`);
+        $('.first').html(`<i class="fa fa-upload"></i>Default image: ${$(this)[0].files[0].name}`);
     });
     $("#file2").on("change", function() {
-        $('.second').html(`<i class="fa fa-upload"></i>{{__('image.image.add_tag_selected')}}: ${$(this)[0].files[0].name}`);
+        $('.second').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
     });
 })
 </script>
@@ -243,7 +243,7 @@ $(document).ready(function() {
                                     <div class="responsive">
                                         <label for="file3" class="input-label first formitem">
                                             <i class="fa fa-upload"></i>
-                                            {{__('image.add_tag_default')}}
+                                            {{__('image.add_event_picture_first')}}
                                         </label>
                                         <input id="file3" class="btn btn-info" type="file" name="default" accept="image/png, image/jpeg, image/jpg">
                                     </div>
@@ -291,7 +291,7 @@ $(document).ready(function() {
                                     <div class="responsive" id="incard">
                                         <label for="file3" class="input-label first formitem">
                                             <i class="fa fa-upload"></i>
-                                            {{__('image.add_tag_default')}}
+                                            {{__('image.add_event_picture_second')}}
                                         </label>
                                         <input id="file3" class="btn btn-info" type="file" name="default" accept="image/png, image/jpeg, image/jpg">
                                     </div>

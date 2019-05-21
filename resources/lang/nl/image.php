@@ -23,4 +23,6 @@ return [
     'add_tag_name' => 'Beschrijf hier de categorie',
     'add_tag_default' => 'Basis foto',
     'add_tag_selected' => 'Selectie foto',
+    'add_event_picture_first' => 'Upload een nieuwe event foto',
+    'add_event_picture_second' => 'Upload event foto',
 ];

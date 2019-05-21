@@ -23,4 +23,6 @@ return [
     'add_tag_name' => 'Describe the category',
     'add_tag_default' => 'Basic picture',
     'add_tag_selected' => 'Selected picture',
+    'add_event_picture_first' => 'Upload a new event picture',
+    'add_event_picture_second' => 'Upload new picture',
 ];

@@ -85,11 +85,11 @@
             <div class="mb-5">
                 <h3>{{__('events.show_share')}}</h3>
                 <div>
-                    <a id="share-whatsapp" class="fab fa-whatsapp" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
-                    <a id="share-facebook" class="fab fa-facebook" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
-                    <a id="share-twitter" class="fab fa-twitter" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
-                    {{--<a id="share-instagram" class="fab fa-instagram" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>--}}
-                    <a id="share-link" class="fa fa-link" data-toggle="modal" data-target="#confirmDeleteAccount" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
+                    <a id="share-whatsapp" class="fab fa-whatsapp event-media-icons"></a>
+                    <a id="share-facebook" class="fab fa-facebook event-media-icons"></a>
+                    <a id="share-twitter" class="fab fa-twitter event-media-icons"></a>
+                    {{--<a id="share-instagram" class="fab fa-instagram event-media-icons"></a>--}}
+                    <a id="share-link" class="fa fa-link event-media-icons" data-toggle="modal" data-target="#confirmDeleteAccount"></a>
                 </div>
             </div>
 

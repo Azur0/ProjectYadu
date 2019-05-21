@@ -46,6 +46,7 @@ class ChartController extends Controller
         $difference = $toDate->diffInDays($fromDate);
         $data = array();
         $previousTotalEvents = 0;
+        $firstRun = true;
 
         for($i = 0; $i < $difference; $i++){
             $totalEvents = Event::where('isDeleted', 0)->where('created_at', '<', $fromDate->copy()->addDays($i))->count();
@@ -54,8 +55,9 @@ class ChartController extends Controller
                 'totalEvents' => $totalEvents
             );
 
-            if($previousTotalEvents < $totalEvents) {
+            if($previousTotalEvents < $totalEvents || $firstRun) {
                 array_push($data, $entry);
+                $firstRun = false;
             }
             $previousTotalEvents = $totalEvents;
         }

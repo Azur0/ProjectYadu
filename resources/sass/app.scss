@@ -206,6 +206,17 @@
 	#user_header_interactable
 	{
 		height: 70%;
+
+		@media only screen and (max-width: 767px)
+		{
+			height: unset;
+			text-align: center;
+
+			.col-md-auto
+			{
+				margin: 5px 0;
+			}
+		}
 	}
 
 	#user_header_tabs
@@ -216,6 +227,11 @@
 	#account_tabs
 	{
 		height: 100%;
+
+		@media only screen and (max-width: 767px)
+		{
+			text-align: center;
+		}
 
 		ul
 		{

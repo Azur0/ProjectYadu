@@ -7,7 +7,7 @@
 			<div class="card">
 				<div class="card-body">
 					<div id="user_header" class="row">
-						<div class="col-md-3">
+						<div class="col-md-auto">
 							<div id="user_avatar">
 								<img src="data:image/png;base64,{{ chunk_split(base64_encode($account->avatar)) }}">
 								<div>
@@ -15,27 +15,55 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-9">
+						<div class="col">
 							<div id="user_header_interactable" class="row">
 								<div class="col">
-									@if($account->id != Auth::user()->id)
-										@if(is_null($follow))
-											<a href="/profile/{{$account->id}}/follow" class="btn btn-info btn-sm my-auto mx-2">
-												<i class="fas fa-user-plus"></i> {{ __('profile.follow') }}
-											</a>
-										@elseif($follow->status == "pending")
-											<a href="#" class="btn btn-info btn-sm my-auto mx-2" disabled>
-												{{ __('profile.follow_pending') }}
-                    						</a>
-										@elseif($follow->status == "accepted")
-										<a href="/profile/{{$account->id}}/unfollow" class="btn btn-info btn-sm my-auto mx-2">
-										<i class="fas fa-user-minus"></i> {{ __('profile.unfollow') }}
-                    					</a>
-										@endif
-										@if (session('error'))
-                        					<div class="alert alert-danger">Request already sent</div>
-                    					@endif
-									@endif
+									<div class="row">
+										<div class="col-md-auto">
+											@if($account->id != Auth::user()->id)
+												@if(is_null($follow))
+													<a href="/profile/{{$account->id}}/follow" class="btn btn-primary">
+														<i class="fas fa-user-plus"></i> {{ __('profile.follow') }}
+													</a>
+												@elseif($follow->status == "pending")
+													<a href="#" class="btn btn-primary" disabled>
+														{{ __('profile.follow_pending') }}
+													</a>
+												@elseif($follow->status == "accepted")
+													<a href="/profile/{{$account->id}}/unfollow" class="btn btn-primary">
+														<i class="fas fa-user-minus"></i> {{ __('profile.unfollow') }}
+													</a>
+												@endif
+												@if (session('error'))
+													<div class="alert alert-danger">Request already sent</div>
+												@endif
+											@endif
+										</div>
+										<div class="col-md-auto">
+											<div class="dropdown">
+												<button class="btn btn-primary dropdown" type="button" id="dropdownMenuButton"
+													data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="fas fa-ellipsis-v"></i>
+												</button>
+												<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+													@if($account)
+													<!--Auth::user()->blockedUsers->pluck('blockedAccount_id')->contains($account->id)-->
+														<form action="/profile/unblockUser" method="post">
+															@csrf
+															<input type="hidden" name="id" value="{{$account->id}}">
+															<button type="submit" class="dropdown-item">{{__('profile.edit_unblock_account_button')}}</button>
+														</form>
+													@else
+														<form action="/profile/blockUser" method="post">
+															@csrf
+															<input type="hidden" name="id" value="{{$account->id}}">
+															<button type="submit" class="dropdown-item">{{__('profile.edit_block_account_button')}}</button>
+														</form>
+													@endif
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div id="user_header_tabs" class="row align-items-end">

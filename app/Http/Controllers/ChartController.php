@@ -34,7 +34,7 @@ class ChartController extends Controller
             $totalEvents = Event::where('isDeleted', 0)->where('created_at', '<', $fromDate->copy()->addDays($i))->count();
 
             $entry = array(
-                'date' => $fromDate->format('c'),
+                'date' => $fromDate->copy()->addDays($i)->format('c'),
                 'totalEvents' => $totalEvents
             );
             array_push($data, $entry);

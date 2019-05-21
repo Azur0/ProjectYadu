@@ -5,11 +5,11 @@ namespace App;
 use App\Events\EventCreated;
 use Illuminate\Database\Eloquent\Model;
 use App\Events\EventDeleted;
-use App\Events\Eventedited;
+use App\Events\EventEdited;
 
 class Event extends Model
 {
-    protected $fillable = ['eventName','description', 'startDate', 'status', 'location_id', 'owner_id', 'tag_id', 'numberOfPeople', 'event_picture_id','isHighlighted'];
+    protected $fillable = ['eventName','description', 'startDate', 'status', 'location_id', 'owner_id', 'tag_id', 'numberOfPeople', 'event_picture_id','isHighlighted', 'isDeleted'];
 
     protected $dispatchesEvents = [
         'deleting' => EventDeleted::class,

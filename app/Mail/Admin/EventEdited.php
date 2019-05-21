@@ -30,9 +30,14 @@ class EventEdited extends Mailable
      */
     public function build()
     {
-        return $this->markdown('admin/mail.event-edited')->with([
+        return $this->markdown('admin/mail.event-edited')
+            ->subject(Lang::get('mail.subjectEventEdited'))
+            ->with([
+                'title' => Lang::get('mail.editTitle'),
             'salutation'=> Lang::get('mail.salutation'),
-            'ownerName'=>$this->event->owner->firstName,
+            'ownerName'=>$this->event->owner->firstName . ",",
+                'body' => Lang::get('mail.editText1').$this->event->eventName . Lang::get('mail.editText2'),
+                'closing' => Lang::get('mail.closing')
 
         ]);
     }

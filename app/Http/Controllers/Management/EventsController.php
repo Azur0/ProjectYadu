@@ -21,7 +21,7 @@ class EventsController extends Controller
 		{
 			if (Auth::user()->accountRole == 'Admin')
 			{
-				$events = Event::orderBy('startDate','des')->get();
+				$events = Event::where('isDeleted', 0)->orderBy('startDate','des')->get();
 
 				$tags = EventTag::all();
 				$names = Event::distinct('eventName')->pluck('eventName');
@@ -253,13 +253,9 @@ class EventsController extends Controller
 		if (Auth::check())
 		{
 		    $event = Event::findOrFail($event->id);
-            if($event->participants()->count()){
-                $participants = $event->participants()->get();
-                foreach($participants as $participant){
-                    $event->participants()->detach($participant->id);
-                }
-            }
-			$event->delete();
+			$event->update([
+			   'isDeleted' => 1
+            ]);
 			return redirect('admin/events');
 		}
 	}

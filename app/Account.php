@@ -4,6 +4,7 @@ namespace App;
 
 use App\Events\AccountCreatedEvent;
 use App\Events\AccountCreation;
+use App\Events\AccountEdited;
 use App\Mail\Confirmation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -22,7 +23,9 @@ class Account extends Authenticatable implements MustVerifyEmailContract
     protected $encryptable = ['firstName', 'middleName', 'lastName'];
 
     protected $dispatchesEvents = [
+
         'created' => AccountCreation::class
+        'updating' => AccountEdited::class
     ];
 
     public function getAvatarAttribute($key)
@@ -53,7 +56,12 @@ class Account extends Authenticatable implements MustVerifyEmailContract
         return $this->hasMany('App\Message');
     }
 
+
     public function settings(){
         return $this->hasOne('App\AccountSettings');
+	}
+
+    public function followers(){
+        return $this->hasMany('App\AccountHasFollowers');
     }
 }

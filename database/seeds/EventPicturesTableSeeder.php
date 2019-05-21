@@ -35,7 +35,7 @@ class EventPicturesTableSeeder extends Seeder
     }
 
     private function seedCategory(string $directory, int $amount, int $tag_id){
-        $directoryPath = public_path() . "/images/seeder/EventPictures/" . $directory . "/";
+        $directoryPath = public_path() . "/images/seeder/eventpictures/" . $directory . "/";
         $directoryPath = $this->FormatDirectoryName("/", $directoryPath);
 
         for ($i=1; $i <= $amount; $i++) {

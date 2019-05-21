@@ -22,7 +22,7 @@ class EditLinksController extends Controller
         $socialmedia = socialmedia::findOrFail($request['name']);
         $socialmedia->link = $request['link'];
         $socialmedia->save();
-        return $request;
+        return back();
     }
     
 }

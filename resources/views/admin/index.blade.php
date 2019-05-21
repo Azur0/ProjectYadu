@@ -6,46 +6,43 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">{{__('charts.charts_title')}}</h1>
-        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-    </div>
+        <!-- Button trigger modal -->
+        <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#reportModal">{{__('charts.change_date_range')}}</button>
 
-    <div class="d-flex flex-row">
-        <div class="col-md-10 float-right">
-            <h3>#Rapport van datum tot datum</h3>
-        </div>
-        <div>
-            <!-- Button trigger modal -->
-            <button class="btn-primary" data-toggle="modal" data-target="#reportModal">{{__('charts.change_date_range')}}</button>
+        <!-- Modal -->
+        <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reportModalLabel">{{__('charts.time_range')}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="fromDate">{{__('charts.from')}}</label>
+                        <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="dateRangeFromDate">
 
-            <!-- Modal -->
-            <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="reportModalLabel">{{__('charts.time_range')}}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <label for="fromDate">{{__('charts.from')}}</label>
-                            <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="dateRangeFromDate">
-
-                            <label for="toDate">{{__('charts.till')}}</label>
-                            <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="dateRangeToDate">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('charts.close')}}</button>
-                            <button type="button" onclick="changeDateRange()" class="btn btn-primary" data-dismiss="modal">{{__('charts.execute')}}</button>
-                        </div>
+                        <label for="toDate">{{__('charts.till')}}</label>
+                        <input type="date" class="form-control" max="{{ date('Y-m-d', strtotime('today')) }}" id="dateRangeToDate">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('charts.close')}}</button>
+                        <button type="button" onclick="changeDateRange()" class="btn btn-primary" data-dismiss="modal">{{__('charts.execute')}}</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="d-flex flex-row">
+        <div class="col-md-10 float-right">
+            <h3>#Rapport van datum tot datum</h3>
+        </div>
+    </div>
+
     <div class="row">
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-6 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -61,7 +58,7 @@
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -129,7 +126,7 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div id="map" style="min-height: 220px" class="h-100 rounded"></div>
+                    <div id="map" style="min-height: 400px" class="h-100 rounded"></div>
                 </div>
             </div>
         </div>
@@ -151,7 +148,8 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            autoSkip: true
                         }
                     }],
                     xAxes: [{
@@ -159,6 +157,7 @@
                         time: {
                             unit: 'month',
                             tooltipFormat: 'lll',
+                            round: false,
                         }
                     }]
                 }
@@ -173,6 +172,8 @@
                 maintainAspectRatio: true
             }
         });
+
+        
 
         //CategoriesChart
         var categoriesChart = new Chart(document.getElementById("categories"), {
@@ -276,9 +277,6 @@
                 dataType: 'json',
                 success: function(data) {
                     data.forEach(function(item) {
-                        //     plotLabels.push(Date.parse(item.date));
-                        //     plotData.push(item.totalEvents);
-                        console.log(new Date(item.date));
                         plotData.push({
                             t: Date.parse(item.date),
                             y: item.totalEvents
@@ -443,8 +441,8 @@
             heatmap.setData(getPoints(fromDate, toDate));
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=visualization&callback=initMap" async defer></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak&libraries=visualization&callback=initMap" async defer></script> -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=visualization&callback=initMap" async defer></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak&libraries=visualization&callback=initMap" async defer></script>
 
 
 

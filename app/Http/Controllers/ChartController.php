@@ -24,9 +24,9 @@ class ChartController extends Controller
         $data = array();
 
         while ($fromDate < $toDate) {
-            $totalEvents = Event::where('isDeleted', 0)->where('created_at', '<', $toDate)->count();
+            $totalEvents = Event::where('isDeleted', 0)->whereBetween('created_at', [$fromDate, $toDate])->count();
             $entry = array(
-                'date' => $toDate->format('c'),
+                'date' => $fromDate->format('c'),
                 'totalEvents' => $totalEvents
             );
             array_push($data, $entry);

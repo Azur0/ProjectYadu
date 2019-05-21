@@ -23,11 +23,12 @@ class CreateLocationsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('houseNumber');
-            $table->string('houseNumberAddition', 2)->nullable();
+            $table->string('houseNumber', 10);
             $table->string('postalcode', 45);
-            $table->string('locLatitude', 45)->nullable();
-            $table->string('locLongtitude', 45)->nullable();
+            $table->string('route', 100);
+            $table->string('locality', 100);
+            $table->string('locLatitude', 45);
+            $table->string('locLongtitude', 45);
             $table->timestamps();
         });
     }

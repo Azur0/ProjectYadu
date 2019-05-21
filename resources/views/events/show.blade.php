@@ -114,7 +114,22 @@
             </div>
 
             <script>
+
+                function LogEventShared(platform){
+                    $.ajax({
+                        url: "{{route('LogEventShared')}}",
+                        method: 'POST',
+                        data: {
+                            eventid: "{{$event->id}}",
+                            platform: platform,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: 'json',
+                    });
+                }
+
                 document.getElementById("share-link").addEventListener('click', function(){
+                    LogEventShared("link");
                     let clipboard = document.createElement('input'),
                         url = window.location.href;
 
@@ -128,16 +143,20 @@
                 });
 
                 document.getElementById("share-facebook").addEventListener('click', function(){
+                    LogEventShared("facebook");
                     let url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
                     window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+
                 });
 
                 document.getElementById("share-twitter").addEventListener('click', function(){
+                    LogEventShared("twitter");
                     let url = `https://twitter.com/intent/tweet?text={{$event->eventName}}: ${window.location.href} %23Yadu`;
                     window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
                 });
 
                 document.getElementById("share-whatsapp").addEventListener('click', function(){
+                    LogEventShared("whatsapp");
                     let url = `https://wa.me/?text={{$event->eventName}}: ${window.location.href}`;
                     window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
                 });

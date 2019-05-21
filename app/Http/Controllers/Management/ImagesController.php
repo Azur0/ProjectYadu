@@ -43,7 +43,7 @@ class ImagesController extends Controller
 		$this->validate($request, [
 			'defaultImage' => 'required|image|mimes:jpg,png,jpeg|max:10240',
 			'selectedImage' => 'required|image|mimes:jpg,png,jpeg|max:10240',
-			'naam' => 'required|string'
+			'naam' => 'required|string|min:1|max:45'
 		]);
 		$image1 = $request->file('defaultImage');
 		$image2 = $request->file('selectedImage');

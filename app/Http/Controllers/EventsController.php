@@ -6,6 +6,8 @@ use App\Account;
 use App\EventPicture;
 use App\Event;
 use App\BlockedUser;
+use App\Events\EventJoined;
+use App\Events\EventLeft;
 use App\EventHasParticipants;
 use App\Http\Controllers\API\LocationController;
 use App\Traits\DateToText;
@@ -20,6 +22,7 @@ use Illuminate\Support\Carbon;
 use App\Location;
 use Auth;
 use App\AccountHasFollowers;
+
 
 class EventsController extends Controller
 {
@@ -280,6 +283,7 @@ class EventsController extends Controller
             $event = Event::findOrFail($id);
             if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->attach(auth()->user()->id);
+                event(new EventJoined($event,auth()->user()->id));
             }
             //TODO: Add error 'You already joined!'
         }
@@ -293,6 +297,7 @@ class EventsController extends Controller
             $event = Event::findOrFail($id);
             if ($event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->detach(auth()->user()->id);
+                event(new EventLeft($event,auth()->user()->id));
             }
             //TODO: Add error 'You are not joined!'
         }

@@ -1,10 +1,22 @@
 @component('mail::message')
+#{{$title}}
 
-    # {{__('mail.deleteTitle')}}
-    {{$salutation . $ownerName}}
+{{$salutation}} {{$userName}}
 
-    {{__('mail.deleteText1') . $event->eventName . __('mail.deleteText2')}}
+{{$body}}
 
-    {{__('mail.closing')}}
+###{{$infoTitle}}
+@component('mail::panel',['url'=>''])
+{{$eventName}}
 
+{{$eventDate}}
+
+{{$ownerName}}
+
+{{$numberOfPeople}}
+
+{{$description}}
+@endcomponent
+
+{{$closing}}
 @endcomponent

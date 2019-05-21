@@ -193,5 +193,20 @@ class EventsTableSeeder extends Seeder
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
+
+        DB::table('events')->insert([
+            'tag_id' => 12,
+            'location_id' => 12,
+            'owner_id' => 12,
+            'event_picture_id' => 185,
+            'eventName' => 'Test mail',
+            'startDate' => date('Y-m-d', strtotime($date. ' + 10 days')),
+            'numberOfPeople' => 20,
+            'description' => 'Gebruik deze voor het testen van de mails',
+            'isDeleted' => 0,
+            'isHighlighted' => 0,
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s")
+        ]);
     }
 }

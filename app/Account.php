@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Events\AccountCreatedEvent;
+use App\Events\AccountEdited;
 use App\Mail\Confirmation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -19,7 +20,11 @@ class Account extends Authenticatable implements MustVerifyEmailContract
 
     protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender', 'avatar', 'api_token','followerVisibility','followingVisibility','infoVisibility','eventsVisibility','participatingVisibility'];
     protected $encryptable = ['firstName', 'middleName', 'lastName'];
-  
+
+    protected $dispatchesEvents = [
+        'updating' => AccountEdited::class
+    ];
+
     public function getAvatarAttribute($key)
     {
         $avatar = $this->attributes['avatar'];
@@ -56,11 +61,11 @@ class Account extends Authenticatable implements MustVerifyEmailContract
 
     public function followers()
     {
-    	return $this->belongsToMany('App\Account', 'account_has_followers', 'account_id', 'follower_id');
+    	return $this->hasMany('App\AccountHasFollowers');
     }
     
     public function following()
     {
-    	return $this->belongsToMany('App\Account', 'account_has_followers', 'follower_id', 'account_id');
+    	return $this->belongsToMany('App\Account', 'account_has_followers', 'follower_id', 'account_id');        
     }
 }

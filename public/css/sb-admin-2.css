@@ -12384,3 +12384,8 @@ h6.collapse-header {
 #file1, #file2, #file3 {
   display: none;
 }
+
+#incard {
+  margin-top: 45px;
+  margin-left: 20px;
+}

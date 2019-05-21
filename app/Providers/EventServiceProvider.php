@@ -3,11 +3,17 @@
 namespace App\Providers;
 
 use App\Events\AccountCreatedEvent;
+use App\Events\AccountEdited;
+use App\Events\EventJoined;
+use App\Events\EventLeft;
 use App\Listeners\AccountCreatedListener;
 use App\Events\EventDeleted;
 use App\Events\EventEdited;
+use App\Listeners\SendAccountEditedNotification;
 use App\Listeners\SendEventDeletedNotification;
 use App\Listeners\SendEventEditedNotification;
+use App\Listeners\SendEventJoinedNotification;
+use App\Listeners\SendEventLeftNotification;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -25,12 +31,20 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-        EventDeleted::class => [
-            SendEventDeletedNotification::class,
-        ],
-
         EventEdited::class => [
             SendEventEditedNotification::class,
+        ],
+
+        EventJoined::class => [
+            SendEventJoinedNotification::class,
+        ],
+
+        EventLeft::class => [
+            SendEventLeftNotification::class,
+        ],
+
+        AccountEdited::class => [
+            SendAccountEditedNotification::class,
         ],
     ];
 

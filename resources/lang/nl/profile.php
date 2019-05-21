@@ -16,10 +16,10 @@ return [
     'follow_pending' => 'Volgverzoek verstuurd',
     'follow_accepted' => 'Ontvolgen',
 
-    'head_me_info' => 'My Info',
+    'head_me_info' => 'Mijn Info',
     'head_info' => 'Info',
     'head_events' => 'Evenementen',
-    'head_my_events' => 'My evenementen',
+    'head_my_events' => 'Mijn Evenementen',
     'head_participating' => 'Meedoen',
     'head_followers' => 'Volgers',
     'head_following' => 'Volgend',

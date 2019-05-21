@@ -62,13 +62,13 @@ class ImagesController extends Controller
 	}
 
 	public function update(Request $request) {
-		if($request->file('default')->getSize() > 10240){
-			return back()->withErrors('File too large');
-		}
 		$this->validate($request, [
 			'selected' => 'required',
 			'default' => 'required|image|max:10240|mimes:jpg,png,jpeg'
-		]);
+			]);
+		if($request->file('default')->getSize() > 10240){
+			return back()->withErrors('File too large');
+		}
 		$location = "images/".$request->selected;
 		move_uploaded_file($request->file('default'), $location);
 		return back()->with('success', __('image.update_successful'));

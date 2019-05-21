@@ -129,6 +129,25 @@
 </div>
 
 <script>
+    Chart.plugins.register({
+        afterDraw: function(chart) {
+            if (chart.data.datasets[0].data.length === 0) {
+                // No data is present
+                var ctx = chart.chart.ctx;
+                var width = chart.chart.width;
+                var height = chart.chart.height
+                chart.clear();
+
+                ctx.save();
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.font = "32px Sans-Serif";
+                ctx.fillText('{{__('charts.no_data')}}', width / 2, height / 2);
+                ctx.restore();
+            }
+        }
+    });
+
     //Manually update cards on page load
     updateChatmessagesSend();
     updateAccountsCreated();
@@ -345,13 +364,16 @@
             }
         });
 
-        return {
+        var haha = {
             labels: plotLabels,
             datasets: [{
                 backgroundColor: getColors(plotLabels.length),
                 data: plotData
             }]
         };
+
+        console.log(haha);
+        return haha;
     }
 
     function getCategoryData(fromDate, toDate) {

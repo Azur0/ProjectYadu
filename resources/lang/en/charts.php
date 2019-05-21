@@ -10,6 +10,7 @@ return [
     'change_date_range' => 'Change date range',
     'report_date' => 'Report from :FROM till :TILL',
     'report_date_past_month' => 'Report from the past month',
+    'no_data' => 'No data',
 
     'charts_title' => 'Dashboard',
     'amount_chatmessages' => 'Amount of chatmessages',

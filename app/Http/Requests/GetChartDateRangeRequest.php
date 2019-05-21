@@ -36,8 +36,8 @@ class GetChartDateRangeRequest extends FormRequest
     public function rules()
     {
         return [
-            'fromDate' => ['nullable', 'before:today'],
-            'toDate' => ['nullable', 'before:tomorrow']
+            'fromDate' => ['nullable', 'date', 'before:today'],
+            'toDate' => ['nullable', 'date', 'before:tomorrow']
         ];
     }
 }

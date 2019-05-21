@@ -39,6 +39,7 @@
 												@endif
 											@endif
 										</div>
+										@if($account->id != Auth::user()->id)
 										<div class="col-md-auto">
 											<div class="dropdown">
 												<button class="btn btn-primary dropdown" type="button" id="dropdownMenuButton"
@@ -62,6 +63,7 @@
 												</div>
 											</div>
 										</div>
+										@endif
 									</div>
 								</div>
 							</div>

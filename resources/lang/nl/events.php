@@ -65,7 +65,7 @@ return [
     'show_lang' => 'Dutch',
     'show_location' => 'Locatie',
     'show_date' => 'Datum en tijd',
-    'show_description' => 'Beschijving',
+    'show_description' => 'Beschrijving',
     'show_initiator' => 'Initiatiefnemer',
     'show_attendees' => 'Wie gaan er mee?',
     'show_join' => 'Aanmelden',
@@ -77,6 +77,7 @@ return [
     'show_delete' => 'Verwijderen',
     'show_title' => 'Titel',
     'show_overview' => 'Overzicht',
+    'show_chat_login' => 'Log in en meld je aan bij dit event om te kunnen chatten!',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Annuleren',

@@ -47,7 +47,7 @@
 						<img src="data:image/png;base64,{{ chunk_split(base64_encode(Auth::user()->avatar)) }}">
 					</div>
 					<h3>	
-						{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}
+						<a href="/account/{{  Auth::user()->id }}/profile/info">{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}</a>
 					</h3>
 					<div>
 						<a href="/profile/edit"><i class="fas fa-user-cog"></i> {{__('home.user_link_settings')}}</a>

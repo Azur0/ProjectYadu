@@ -39,16 +39,16 @@ class EventLeft extends Mailable
         $headText = "";
         $bodyText = "";
         if($this->type == 1){
-            $bodyText = Lang::get('mail.leftEvent') ." ". $this->event->eventName ." ". Lang::get('mail.event');
+            $bodyText = Lang::get('mail.leftEvent') ." ". $this->event->eventName ." ". Lang::get('mail.event'). ".";
             $headText = Lang::get('mail.youLeftEventHeader');
         }else if($this->event->owner->id == $this->user->id){
             $headText = Lang::get('mail.eventLeftYourHeader');
             $bodyText =
-                $this->executor->firstName ." ". Lang::get('mail.leftYourEvent') . " " . $this->event->eventName ;
+                $this->executor->firstName ." ". Lang::get('mail.leftYourEvent') . " " . $this->event->eventName . ".";
         }else {
             $headText = Lang::get('mail.eventLeftHeader');
             $bodyText =
-                $this->executor->firstName ." ".Lang::get('mail.participantLeftEvent') . " " . $this->event->eventName;
+                $this->executor->firstName ." ".Lang::get('mail.participantLeftEvent') . " " . $this->event->eventName. ".";
         }
 
         return $this->markdown('mail/event.event-left')

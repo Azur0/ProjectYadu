@@ -259,27 +259,33 @@ class AccountController extends Controller
 		$request->validate([
 			'id' => 'required',
 		]);
-		if(Auth::user()->followers->pluck('id')->contains($request->id)){
-			AccountHasFollowers::where('account_id', '=', Auth::id())->where('follower_id', '=', $request->id)->delete();
-		}
+		if(Auth::id()!=$request['id']){
 
-		if(Auth::user()->following->pluck('id')->contains($request->id)){
-			AccountHasFollowers::where('follower_id', '=', Auth::id())->where('account_id', '=', $request->id)->delete();
-		}
+			if(Auth::user()->followers->pluck('id')->contains($request->id)){
+				AccountHasFollowers::where('account_id', '=', Auth::id())->where('follower_id', '=', $request->id)->delete();
+			}
 
-		BlockedUser::create([
-			'account_id' => Auth::id(),
-			'blockedAccount_id' => $request->id,
-		]);
-		return back();
+			if(Auth::user()->following->pluck('id')->contains($request->id)){
+				AccountHasFollowers::where('follower_id', '=', Auth::id())->where('account_id', '=', $request->id)->delete();
+			}
+
+			BlockedUser::create([
+				'account_id' => Auth::id(),
+				'blockedAccount_id' => $request->id,
+			]);
+			return back();
+		}
+		return abort(404);
 	}
 
 	public function unblockAccount(Request $request){
 		$request->validate([
 			'id' => 'required',
 		]);
-
-		BlockedUser::where('account_id','=',Auth::id())->where('blockedAccount_id','=',$request->id)->firstOrFail()->delete();
-		return back();
+		if(Auth::id()!=$request['id']){
+			BlockedUser::where('account_id','=',Auth::id())->where('blockedAccount_id','=',$request->id)->firstOrFail()->delete();
+			return back();
+		}
+		return abort(404);
 	}
 }

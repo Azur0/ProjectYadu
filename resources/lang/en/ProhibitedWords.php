@@ -15,4 +15,5 @@ return [
     'confirm_update' => 'Update',
     'show_delete' => 'Delete',
     'dismiss_delete' => 'Cancel',
+    'ProhibitedWord_error' => 'Invalid word and/or the word is already a prohibited word.',
 ];

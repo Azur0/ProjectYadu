@@ -15,4 +15,5 @@ return [
     'confirm_update' => 'Updaten',
     'show_delete' => 'Verwijderen',
     'dismiss_delete' => 'Annuleren',
+    'ProhibitedWord_error' => 'Ongeldig woord en/of het woord is al een scheldwoord.',
 ];

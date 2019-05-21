@@ -41,8 +41,8 @@ class ImagesController extends Controller
 
 	public function addtype(Request $request) {
 		$this->validate($request, [
-			'default' => 'required|image|mimes:jpg,png,jpeg|max:4048',
-			'selectie' => 'required|image|mimes:jpg,png,jpeg|max:4048',
+			'default' => 'required|image|mimes:jpg,png,jpeg|max:10240',
+			'selectie' => 'required|image|mimes:jpg,png,jpeg|max:10240',
 			'naam' => 'required|string'
 		]);
 		$image1 = $request->file('default');

@@ -474,7 +474,5 @@
         heatmap.setData(getPoints(fromDate, toDate));
     }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&libraries=visualization&callback=initMap" async defer></script>
-{{--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak&libraries=visualization&callback=initMap"--}}
-{{--async defer></script>--}}
+<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_KEY')}}&libraries=visualization&callback=initMap" async defer></script>
 @endsection

@@ -9,8 +9,6 @@ return [
     */
 
     'word' => 'Woord',
-    'created_at' => 'Gemaakt op',
-    'updated_at' => 'Geupdate op',
     'addWord' => 'Voeg scheldwoord toe:',
     'add' => 'Toevoegen',
     'show_edit' => 'Bewerken',

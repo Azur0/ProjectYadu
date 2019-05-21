@@ -27,8 +27,6 @@
 					<tr>
 						<th scope="col">#</th>
 						<th scope="col">{{ __('ProhibitedWords.word')}}</th>
-						<th scope="col">{{ __('ProhibitedWords.created_at')}}</th>
-						<th scope="col">{{ __('ProhibitedWords.updated_at')}}</th>
 						<th scope="col"></th>
 						<th scope="col"></th>
 					</tr>
@@ -40,8 +38,6 @@
 						<tr>
 							<td>{{$id}}</td>
 							<td>{{$prohibitedWord->word}}</td>
-							<td>{{$prohibitedWord->created_at}}</td>
-							<td>{{$prohibitedWord->updated_at}}</td>
 							<td>
 								<form class="form_submit_ays" method="POST" id="updateWord{{$id}}" action="/admin/prohibitedWords/update">
 									@csrf

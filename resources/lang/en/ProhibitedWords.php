@@ -9,8 +9,6 @@ return [
     */
 
     'word' => 'Word',
-    'created_at' => 'created at',
-    'updated_at' => 'updated at',
     'addWord' => 'Add prohibited word:',
     'add' => 'Add',
     'show_edit' => 'Edit',

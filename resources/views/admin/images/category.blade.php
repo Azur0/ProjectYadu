@@ -38,14 +38,14 @@
                                     <i class="fa fa-upload"></i>
                                     {{__('image.add_tag_default')}}
                                 </label>
-                                <input id="file1" class="btn btn-info" type="file" name="default" accept="image/png, image/jpeg, image/jpg">
+                                <input id="file1" class="btn btn-info" type="file" name="defaultImage" accept="image/png, image/jpeg, image/jpg">
                             </div>
                             <div class="responsive">
                                 <label for="file2" class="input-label second formitem">
                                     <i class="fa fa-upload"></i>
                                     {{__('image.add_tag_selected')}}
                                 </label>
-                                <input id="file2" class="btn btn-info" type="file"  name="selectie" accept="image/png, image/jpeg, image/jpg">
+                                <input id="file2" class="btn btn-info" type="file"  name="selectedImage" accept="image/png, image/jpeg, image/jpg">
                             </label>
                             <button type="submittype" class="btn btn-primary submit-edit" name="submittype">{{__('image.button_upload_dual')}}</button>
                         </form>

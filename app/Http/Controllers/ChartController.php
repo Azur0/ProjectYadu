@@ -9,9 +9,9 @@ use App\Http\Requests\GetChartDateRangeRequest;
 use App\Message;
 use App\SharedEvent;
 use App\SocialMediaPlatform;
+use DateTime;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Lang;
 
 class ChartController extends Controller
 {
@@ -32,6 +32,7 @@ class ChartController extends Controller
 
         for($i = 0; $i < $difference; $i++){
             $totalEvents = Event::where('isDeleted', 0)->where('created_at', '<', $fromDate->copy()->addDays($i))->count();
+
             $entry = array(
                 'date' => $fromDate->format('c'),
                 'totalEvents' => $totalEvents
@@ -100,19 +101,31 @@ class ChartController extends Controller
     public function GetActiveEventLocations()
     {
 
-        //TODO: Add dates
-        // $fromDate = $request->fromDate;
-        // $toDate = $request->toDate;
+        if (request()->fromDate == null) {
+            $fromDate = strtotime("-1 months");
+        } else {
+            $fromDate = strtotime(request()->fromDate);
+        }
+
+        if (request()->toDate == null) {
+            $toDate = strtotime("today");
+        } else {
+            $toDate = strtotime(request()->toDate);
+        }
 
         $data = array();
         $events = Event::all();
 
         foreach ($events as $event) {
-            $entry = array(
-                'lat' => $event->location->locLatitude,
-                'lng' => $event->location->locLongtitude
-            );
-            array_push($data, $entry);
+            $created = strtotime($event->created_at);
+            $start = strtotime($event->startDate);
+            if (($created > $fromDate && $created < $toDate) || ($start > $fromDate && $start < $toDate)) {
+                $entry = array(
+                    'lat' => $event->location->locLatitude,
+                    'lng' => $event->location->locLongtitude
+                );
+                array_push($data, $entry);
+            }
         }
 
         return $data;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditLinkRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\App;
@@ -17,11 +18,11 @@ class EditLinksController extends Controller
         return view("admin.links.editLinks",compact('socialmedia'));
     }
 
-    public function saveLinks(Request $request){
-        $socialmedia = socialmedia::findOrFail($request->name);
-        $socialmedia->link = $request->link;
+    public function saveLinks(EditLinkRequest $request){
+        $socialmedia = socialmedia::findOrFail($request['name']);
+        $socialmedia->link = $request['link'];
         $socialmedia->save();
-        return back();
+        return $request;
     }
     
 }

@@ -54,7 +54,7 @@ class SendEventJoinedNotification
                 $isNotAFollower = true;
                 foreach($executor->followers as $follower){
                     if($follower->follower_id == $participant->id){
-                        if($follower->status == 'accepted') {
+                        if($follower->status == 'accepted' && $follower->follower->FollowNotificationJoinEvent != 1) {
                             $isNotAFollower = false;
                         }
                     }
@@ -73,7 +73,7 @@ class SendEventJoinedNotification
             foreach($executor->followers as $follower){
                 if($follower->status == 'accepted'){
                     $follower = $follower->follower;
-                    if($follower->id != $executor->id && $follower->id != $event->event->owner->id){
+                    if($follower->id != $executor->id && $follower->id != $event->event->owner->id && $follower->settings->FollowNotificationJoinEvent == 1){
                         Mail::to($follower->email)->send(
                             new EventJoinedMail($event->event,$follower,$executor,0)
                         );

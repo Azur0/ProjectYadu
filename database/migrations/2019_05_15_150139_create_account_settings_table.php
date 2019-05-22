@@ -17,9 +17,15 @@ class CreateAccountSettingsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->unsignedInteger('account_id');
+
+            // Follower
             $table->tinyInteger('FollowNotificationCreateEvent')->default('1');
             $table->tinyInteger('FollowNotificationJoinEvent')->default('1');
+
+            // Exists?
             $table->tinyInteger('NotificationInvite')->default('1');
+
+            // Your own
             $table->tinyInteger('NotificationEventEdited')->default('1');
             $table->tinyInteger('NotificationEventDeleted')->default('1');
             $table->timestamps();

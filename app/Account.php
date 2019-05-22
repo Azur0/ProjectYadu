@@ -24,7 +24,7 @@ class Account extends Authenticatable implements MustVerifyEmailContract
 
     protected $dispatchesEvents = [
 
-        'created' => AccountCreation::class
+        'created' => AccountCreation::class,
         'updating' => AccountEdited::class
     ];
 

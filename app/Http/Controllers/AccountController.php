@@ -30,7 +30,6 @@ class AccountController extends Controller
 			$follow = [];
 		}
 
-		dd($follow);
 		switch ($contentType)
 		{
 			case 'events':

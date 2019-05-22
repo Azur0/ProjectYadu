@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventsController;
+use App\socialmedia;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,16 @@ app()->singleton('ipApi', function(){
 Route::get('/', 'EventsController@welcome');
 
 Route::get('/about', function () { return view('about'); });
-Route::get('/contact', function () { return view('contact'); });
+Route::get('/contact', function () { $socialmedia = socialmedia::all(); return view('contact', compact('socialmedia')); });
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/edit/{lang}/{page}', 'EditLangController@index');
-Route::post('admin', 'EditLangController@saveFile');
+Route::get('/edit/{lang}/{page}', 'EditLangController@index')->middleware('auth', 'isAdmin');
+Route::post('admin', 'EditLangController@saveFile')->middleware('auth', 'isAdmin');
+
+Route::get('admin/links', 'EditLinksController@index')->middleware('auth', 'isAdmin');
+Route::post('admin/link', 'EditLinksController@saveLink')->middleware('auth', 'isAdmin');
+Route::post('admin/email', 'EditLinksController@saveEmail')->middleware('auth', 'isAdmin');
 
 Route::get('/account/myevents', 'HomeController@myEvents');
 Route::get('/account/participating', 'HomeController@participating');

@@ -21,6 +21,9 @@ Route::get('/', 'EventsController@welcome');
 
 Route::get('/about', function () { return view('about'); });
 Route::get('/contact', function () { return view('contact'); });
+Route::get('/cookies', function () { return view('cookies'); });
+Route::get('/privacy', function () { return view('privacy'); });
+Route::get('/terms', function () { return view('terms'); });
 
 Route::get('/home', 'HomeController@index')->name('home');
 

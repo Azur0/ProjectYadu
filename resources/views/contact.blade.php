@@ -39,7 +39,7 @@
                 <span>62039482</span>
             </div>
             <div class="contact-item">
-                <h5>{{__('contact.social')}}<h5>
+                <h5>{{__('contact.social')}}</h5>
                 <a href="https://nl.linkedin.com/in/carmentoelen">
                     <i class="fab fa-linkedin media-icons"></i>
                 </a>

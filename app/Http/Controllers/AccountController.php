@@ -63,14 +63,11 @@ class AccountController extends Controller
     }
 
     public function updateAvatar(EditAvatarRequest $request){
-
-	    //return $request;
-
         $file = $request->file('avatar');
-        $contents = $file->openFile()->fread($file->getSize());
+        $image = $file->openFile()->fread($file->getSize());
 
         $account = Account::where('id', $request['accountId'])->firstOrFail();
-        $account->avatar = $contents;
+        $account->avatar = $image;
         $account->save();
 
         return redirect('/profile/edit');

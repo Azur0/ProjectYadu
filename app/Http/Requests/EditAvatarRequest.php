@@ -9,7 +9,6 @@ class EditAvatarRequest extends FormRequest
 {
     public function authorize()
     {
-        //TODO: Test this
         return $this->accountId == Auth::id();
     }
 
@@ -17,7 +16,7 @@ class EditAvatarRequest extends FormRequest
     {
         return [
             'accountId' => ['required'],
-            'avatar' => ['required', 'mimes:jpeg,jpg,png']
+            'avatar' => ['required', 'mimes:jpeg,jpg,png', 'dimensions:max_width=400, max_height=400, ratio=1', 'max:10240']
         ];
     }
 }

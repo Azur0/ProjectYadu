@@ -20,27 +20,26 @@
                         <div class="col-xl-7 mt-3">
                             <form method="POST" action="/profile/updateAvatar" enctype="multipart/form-data">
                                 @csrf
+
                                 <input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
                                 <div class="form-group row w-100">
-                                    <div class="w-100">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"
                                                       id="inputGroupFileAddon01">{{__('profile.edit_edit_avatar_upload')}}</span>
                                             </div>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" name="avatar" id="avatar">
+                                                <input type="file" class="custom-file-input" name="avatar" id="avatar" aria-describedby="inputGroupFileAddon01">
                                                 <label class="custom-file-label"
-                                                       for="inputGroupFile01">{{__('profile.edit_edit_avatar_choose_image')}}</label>
+                                                       for="avatar">{{__('profile.edit_edit_avatar_choose_image')}}</label>
                                             </div>
                                         </div>
 
                                         @if ($errors->has('avatar'))
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $errors->first('avatar') }}</strong>
                                         </span>
                                         @endif
-                                    </div>
                                 </div>
                                 <input class="btn btn-primary" type="submit"
                                        value="{{__('profile.edit_update_avatar')}}" name="submit">

@@ -13,6 +13,11 @@ return [
 
 ///////////////////////////////// Edit ////////////////////////////////////
 
+    'edit_avatar_title' => 'Edit avatar',
+    'edit_edit_avatar_upload' => 'Upload',
+    'edit_edit_avatar_choose_image' => 'Choose image',
+    'edit_update_avatar' => 'Update avatar',
+
     'edit_edit_profile_title' => 'Edit profile',
     'edit_firstname' => 'Firstname',
     'edit_middlename' => 'Middlename',

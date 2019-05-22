@@ -13,6 +13,11 @@ return [
 
 ///////////////////////////////// Edit ////////////////////////////////////
 
+    'edit_avatar_title' => 'Avatar wijzigen',
+    'edit_edit_avatar_upload' => 'Uploaden',
+    'edit_edit_avatar_choose_image' => 'Kies afbeelding',
+    'edit_update_avatar' => 'Avatar bijwerken',
+
     'edit_edit_profile_title' => 'Profiel bewerken',
     'edit_firstname' => 'Voornaam',
     'edit_middlename' => 'Tussenvoegsel',

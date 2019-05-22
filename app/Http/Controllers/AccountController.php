@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\EditAvatarRequest;
 use App\Http\Requests\EditProfileRequest;
 use Illuminate\Http\Request;
 use App\Gender;
@@ -56,6 +57,20 @@ class AccountController extends Controller
         $account->lastName = $validated['lastName'];
         $account->dateOfBirth = $validated['dateOfBirth'];
 
+        $account->save();
+
+        return redirect('/profile/edit');
+    }
+
+    public function updateAvatar(EditAvatarRequest $request){
+
+	    //return $request;
+
+        $file = $request->file('avatar');
+        $contents = $file->openFile()->fread($file->getSize());
+
+        $account = Account::where('id', $request['accountId'])->firstOrFail();
+        $account->avatar = $contents;
         $account->save();
 
         return redirect('/profile/edit');

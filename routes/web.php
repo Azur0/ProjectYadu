@@ -46,6 +46,7 @@ Route::get('profile/edit', 'ProfileController@edit')->middleware('auth');
 Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
 Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
 Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middleware('auth');
+Route::post('/profile/updateAvatar', 'AccountController@updateAvatar')->middleware('auth');
 
 Auth::routes();
 

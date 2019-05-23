@@ -176,7 +176,7 @@
                             </div>
                             <div class="form-group row justify-content-md-center">
                                 <label for="FollowNotificationJoinEvent"
-                                       class="col-md-6 col-form-label text-md-right">{{__('profile.edit_change_account_settings_follow_notification_join')}}
+                                       class="col col-form-label text-md-right">{{__('profile.edit_change_account_settings_follow_notification_join')}}
                                 </label>
                                 <div class="col">
                                     <div class="custom-control custom-switch">
@@ -232,9 +232,9 @@
                                 <div class="col">
                                     <div class="custom-control custom-switch">
                                         @if($account->settings->NotificationJoinAndLeaveEvent == 0)
-                                            <input type="checkbox" name="FollowNotificationJoinEvent" class="custom-control-input" id="customSwitches5">
+                                            <input type="checkbox" name="NotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches5">
                                         @else
-                                            <input type="checkbox" name="FollowNotificationJoinEvent" class="custom-control-input" id="customSwitches5" checked>
+                                            <input type="checkbox" name="NotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches5" checked>
                                         @endif
                                         <label class="custom-control-label" for="customSwitches5"></label>
                                     </div>

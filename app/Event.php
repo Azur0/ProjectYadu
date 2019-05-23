@@ -12,7 +12,7 @@ class Event extends Model
     protected $fillable = ['eventName','description', 'startDate', 'status', 'location_id', 'owner_id', 'tag_id', 'numberOfPeople', 'event_picture_id','isHighlighted', 'isDeleted'];
 
     protected $dispatchesEvents = [
-        'deleting' => EventDeleted::class,
+        //'deleting' => EventDeleted::class,
         'updated' => EventEdited::class,
         'created' => EventCreated::class
     ];

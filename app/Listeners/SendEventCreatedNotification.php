@@ -33,14 +33,15 @@ class SendEventCreatedNotification
         );
 
         //TODO: for when followers is merged - test this
-        /*
-        foreach($event->event->owner->follower as $follower){
-            if($follower->status == 'accepted'){
+
+        foreach($event->event->owner->followers as $follower){
+            if($follower->status == 'accepted' && $follower->follower->settings->FollowNotificationCreateEvent == 1){
+
                 Mail::to($follower->follower->email)->send(
                     new EventCreatedMail($event->event,$follower->follower)
                 );
             }
         }
-        */
+
     }
 }

@@ -54,18 +54,23 @@
         <div class="loc">
             <h3>3. Kies de (verzamel)locatie </h3>
             <div class="description location">
-                <input type="hidden" name="lng" id="lng" value="{{$data['event']->location()->first()->locLatitude}}">
-                <input type="hidden" name="lat" id="lat" value="{{$data['event']->location()->first()->locLongtitude}}">
-                <input type="hidden" name="houseNumber" id="houseNumber"
-                    value="{{$data['event']->location()->first()->houseNumber}}">
-                <input type="hidden" name="postalCode" id="postalCode"
-                    value="{{$data['event']->location()->first()->postalcode}}">
-                <input type="hidden" name="locality" id="locality"
-                    value="{{$data['event']->location()->first()->locality}}">
-                <input type="hidden" name="route" id="route" value="{{$data['event']->location()->first()->route}}">
+                <input type="hidden" name="lng" id="lng" @if(old('lng')==null)
+                    value="{{$data['event']->location()->first()->locLatitude}}" @else value="{{old('lng')}}" @endif>
+                <input type="hidden" name="lat" id="lat" @if(old('lat')==null)
+                    value="{{$data['event']->location()->first()->locLongtitude}}" @else value="{{old('lat')}}" @endif>
+                <input type="hidden" name="houseNumber" id="houseNumber" @if(old('houseNumber')==null)
+                    value="{{$data['event']->location()->first()->houseNumber}}" @else value="{{old('houseNumber')}}"
+                    @endif>
+                <input type="hidden" name="postalCode" id="postalCode" @if(old('postalCode')==null)
+                    value="{{$data['event']->location()->first()->postalcode}}" @else value="{{old('postalCode')}}"
+                    @endif>
+                <input type="hidden" name="locality" id="locality" @if(old('locality')==null)
+                    value="{{$data['event']->location()->first()->locality}}" @else value="{{old('locality')}}" @endif>
+                <input type="hidden" name="route" id="route" @if(old('route')==null)
+                    value="{{$data['event']->location()->first()->route}}" @else value="{{old('route')}}" @endif>
 
-                <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required @if
-                    (old('location')==null)
+                <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required
+                    @if(old('location')==null)
                     value="{{ $data['event']->location()->first()->route }} {{ $data['event']->location()->first()->houseNumber }}, {{ $data['event']->location()->first()->locality }}"
                     @else value="{{old('location')}}" @endif>
                 <div id="map"></div>

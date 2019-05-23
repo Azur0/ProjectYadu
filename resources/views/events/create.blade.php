@@ -40,12 +40,12 @@
         <div class="loc">
             <h3>3. {{__('events.create_step3')}}</h3>
             <div class="description location">
-                <input type="hidden" name="lng" id="lng" value="">
-                <input type="hidden" name="lat" id="lat" value="">
-                <input type="hidden" name="houseNumber" id="houseNumber" value="">
-                <input type="hidden" name="postalCode" id="postalCode" value="">
-                <input type="hidden" name="locality" id="locality" value="">
-                <input type="hidden" name="route" id="route" value="">
+                <input type="hidden" name="lng" id="lng" value="{{old('lng')}}">
+                <input type="hidden" name="lat" id="lat" value="{{old('lat')}}">
+                <input type="hidden" name="houseNumber" id="houseNumber" value="{{old('houseNumber')}}">
+                <input type="hidden" name="postalCode" id="postalCode" value="{{old('postalCode')}}">
+                <input type="hidden" name="locality" id="locality" value="{{old('locality')}}">
+                <input type="hidden" name="route" id="route" value="{{old('route')}}">
 
                 <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required
                     value="{{ old('location') }}">
@@ -58,7 +58,7 @@
                 <div class="error">{{__('events.create_error_postalcode')}}</div>
                 @endif
             </div>
-           
+
         </div>
         <div class="date">
             <h3>4. {{__('events.create_step4')}}</h3>
@@ -170,8 +170,8 @@ function update_counter_desc(textarea) {
 function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {
-            lat: 51.6978162,
-            lng: 5.3036748
+            lat: <?php if(old('lat')!= null){echo old('lat');} else{ echo "51.6978162"; } ?>,
+            lng: <?php if(old('lng')!= null){echo old('lng');} else{ echo "5.3036748"; } ?>
         },
         zoom: 13,
         mapTypeId: 'roadmap'
@@ -188,6 +188,22 @@ function initAutocomplete() {
     });
 
     var markers = [];
+
+    var oldEvent = <?php if(old('lat')!= null){ echo "true";} else{ echo "false";} ?>;
+    if (oldEvent==true) {
+        var Eventlat = <?php if(old('lat')!= null){echo old('lat');} else{ echo "''"; } ?>;
+        var Eventlng = <?php if(old('lng')!= null){echo old('lng');} else{ echo "''"; } ?>;
+        var myLatlng = new google.maps.LatLng(Eventlat, Eventlng);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            title: "Hello World!"
+        });
+        console.log(marker);
+        marker.setMap(map);
+        markers.push(marker);
+    }
+
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {

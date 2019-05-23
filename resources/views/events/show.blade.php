@@ -74,7 +74,7 @@
 
                 }
             </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap"
+            <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_KEY')}}&callback=initMap"
                     async defer></script>
             <div class="mb-5">
                 <h3>{{__('events.show_description')}}</h3>

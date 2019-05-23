@@ -24,7 +24,7 @@
 					@csrf
 					<input name="newProhibitedWord" class="form-control" placeholder="{{ __('ProhibitedWords.word')}}">
 				</form>
-				<input type="submit" form="createWord" class="btn" style="background-color: limegreen; margin-left: 2%; color: black;" value="{{__('ProhibitedWords.add')}}">
+				<input type="submit" form="createWord" class="btn" style="background-color: limegreen; margin-left: 2%; color: white;" value="{{__('ProhibitedWords.add')}}">
 			</div>
 		</div>
 		<div class="card-body">
@@ -68,7 +68,7 @@
 														<input hidden name="originalProhibitedWord" value="{{$prohibitedWord->word}}">
 													</div>
 													<div class="modal-footer">
-														<input type="submit" form="updateWord{{$id}}" class="btn" style="background-color: limegreen; color: black;" value="{{__('ProhibitedWords.confirm_update')}}">
+														<input type="submit" form="updateWord{{$id}}" class="btn" style="background-color: limegreen; color: white;" value="{{__('ProhibitedWords.confirm_update')}}">
 														<button type="button" class="btn btn-primary" data-dismiss="modal">{{__('ProhibitedWords.dismiss_delete')}} </button>
 													</div>
 												</div>

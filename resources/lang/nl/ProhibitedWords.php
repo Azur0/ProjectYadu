@@ -10,7 +10,7 @@ return [
 
     'word' => 'Woord',
     'addWord' => 'Voeg scheldwoord toe:',
-    'add' => 'Toevoegen',
+    'add' => 'Toevoegen scheldwoord',
     'show_edit' => 'Bewerken',
     'confirm_update' => 'Updaten',
     'show_delete' => 'Verwijderen',

@@ -10,7 +10,7 @@ return [
 
     'word' => 'Word',
     'addWord' => 'Add prohibited word:',
-    'add' => 'Add',
+    'add' => 'Add prohibited word',
     'show_edit' => 'Edit',
     'confirm_update' => 'Update',
     'show_delete' => 'Delete',

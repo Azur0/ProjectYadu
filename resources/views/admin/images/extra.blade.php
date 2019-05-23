@@ -57,4 +57,11 @@
             }
         }
     </script>
+    <script>
+        $(document).ready(function() {
+            $("#file1").on("change", function() {
+                $('.first').html(`<i class="fa fa-upload"></i>{{__('image.add_tag_default')}}: ${$(this)[0].files[0].name}`);
+            });
+        })
+        </script>
 @endsection

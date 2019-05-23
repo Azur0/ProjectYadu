@@ -47,8 +47,7 @@ class EventDeleted extends Mailable
                 'body' => Lang::get('mail.deleteText1').$this->event->eventName . Lang::get('mail.deleteText2'),
                 'infoTitle' => Lang::get('mail.eventInfoTitle'),
                 'eventName' => Lang::get('events.show_title'). ": " . $this->event->eventName,
-                'eventDate' => Lang::get('events.show_date').": " . self::dateToShortText($this->event->startDate)
-                        ->format(__('formats.dateTimeFormat')),
+                'eventDate' => Lang::get('events.show_date').": " . self::dateToLongText($this->event->startDate),
                 'ownerName' => Lang::get('mail.eventOwner').": " . $this->event->owner->firstName,
                 'numberOfPeople' => Lang::get('events.show_attendees_amount').": " . $this->event->participants->count(),
                 'description' => Lang::get('events.show_description').": " . $this->event->description,

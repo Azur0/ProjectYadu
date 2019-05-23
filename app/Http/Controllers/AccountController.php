@@ -113,7 +113,7 @@ class AccountController extends Controller
             $accountSettings->update(
                 [
                     'FollowNotificationCreateEvent' => $FollowNotificationCreateEvent,
-                    'FollowNotificationJoinEvent' => $FollowNotificationJoinAndLeaveEvent,
+                    'FollowNotificationJoinAndLeaveEvent' => $FollowNotificationJoinAndLeaveEvent,
                     'NotificationEventEdited' => $NotificationEventEdited,
                     'NotificationEventDeleted' => $NotificationEventDeleted,
                     'NotificationJoinAndLeaveEvent' => $NotificationJoinAndLeaveEvent,

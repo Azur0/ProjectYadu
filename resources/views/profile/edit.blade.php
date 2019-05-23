@@ -181,9 +181,9 @@
                                 <div class="col">
                                     <div class="custom-control custom-switch">
                                         @if($account->settings->FollowNotificationJoinAndLeaveEvent == 0)
-                                            <input type="checkbox" name="FollowNotificationJoinEvent" class="custom-control-input" id="customSwitches1">
+                                            <input type="checkbox" name="FollowNotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches1">
                                         @else
-                                            <input type="checkbox" name="FollowNotificationJoinEvent" class="custom-control-input" id="customSwitches1" checked>
+                                            <input type="checkbox" name="FollowNotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches1" checked>
                                         @endif
                                         <label class="custom-control-label" for="customSwitches1"></label>
                                     </div>

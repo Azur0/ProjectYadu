@@ -7,10 +7,11 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Lang;
+use App\Traits\DateToText;
 
 class EventCreated extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels,DateToText;
 
     /**
      * Create a new message instance.
@@ -42,7 +43,7 @@ class EventCreated extends Mailable
                     .$this->event->eventName,
                 'infoTitle' => Lang::get('mail.eventInfoTitle'),
                 'eventName' => Lang::get('events.show_title'). ": " . $this->event->eventName,
-                'eventDate' => Lang::get('events.show_date').": " . \Carbon\Carbon::parse($this->event->startDate)
+                'eventDate' => Lang::get('events.show_date').": " . self::dateToLongText($this->event->startDate)
                         ->format(__('formats.dateTimeFormat')),
                 'ownerName' => Lang::get('mail.eventOwner').": " . $this->event->owner->firstName,
                 'numberOfPeople' => Lang::get('events.show_attendees_amount').": " . $this->event->participants->count(),

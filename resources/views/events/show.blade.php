@@ -88,7 +88,6 @@
                     <a id="share-whatsapp" class="fab fa-whatsapp event-media-icons"></a>
                     <a id="share-facebook" class="fab fa-facebook event-media-icons"></a>
                     <a id="share-twitter" class="fab fa-twitter event-media-icons"></a>
-                    {{--<a id="share-instagram" class="fab fa-instagram event-media-icons"></a>--}}
                     <a id="share-link" class="fa fa-link event-media-icons" data-toggle="modal" data-target="#confirmDeleteAccount"></a>
                 </div>
             </div>

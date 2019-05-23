@@ -127,6 +127,14 @@
 		</div>
 	</li>
 
+	<!-- Nav Item - Swear words -->
+	<li class="nav-item {{ request()->is('admin/swearWords') ? 'active' : '' }}">
+		<a class="nav-link collapsed" href="{{ url('admin/swearWords')  }}">
+			<i class="fas fa-fw fa-users"></i>
+			<span>{{__('navigation.nav_swearWords')}}</span>
+		</a>
+	</li>
+
 	<!-- Divider
 	<hr class="sidebar-divider d-none d-md-block">
 

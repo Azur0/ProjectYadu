@@ -4,9 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SetLanguageRequest extends FormRequest
+class DestroyProhibitedWordRequest extends FormRequest
 {
-
     public function authorize()
     {
         return true;
@@ -15,7 +14,10 @@ class SetLanguageRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'prohibitedWordToDelete' => [
+                'required',
+                'exists:prohibited_words,word'
+            ]
         ];
     }
 }

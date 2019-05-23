@@ -74,6 +74,13 @@ Route::post('admin/accounts/action', 'Management\AccountsController@action')->na
 
 Route::resource('admin/events','Management\EventsController');
 Route::post('/admin/events/actionDistanceFilter', 'Management\EventsController@actionDistanceFilter')->name('admin_events_controller.actionDistanceFilter');
+
+Route::resource('admin/swearWords','Management\ProhibitedWordsController');
+Route::get('admin/prohibitedWords', 'Management\ProhibitedWordsController@index')->middleware('auth', 'isAdmin');
+Route::post('admin/prohibitedWords/delete', 'Management\ProhibitedWordsController@destroy')->middleware('auth', 'isAdmin');
+Route::post('admin/prohibitedWords/update', 'Management\ProhibitedWordsController@update')->middleware('auth', 'isAdmin');
+Route::post('admin/prohibitedWords/create', 'Management\ProhibitedWordsController@create')->middleware('auth', 'isAdmin');
+
 Route::post('/logger/eventshared', 'LogController@LogEventShared')->name('LogEventShared');
 
 Route::post('/charts/totaleventscreated', 'ChartController@GetTotalEventsCreated')->name('admin_charts_events')->middleware('auth', 'isAdmin');
@@ -83,5 +90,3 @@ Route::post('/charts/categories', 'ChartController@GetCategories')->name('admin_
 Route::post('/charts/chatmessages', 'ChartController@GetChatmessages')->name('admin_charts_chatmessages')->middleware('auth', 'isAdmin');
 Route::post('/charts/accountscreated', 'ChartController@GetAccountsCreated')->name('admin_charts_accounts_created')->middleware('auth', 'isAdmin');
 Route::post('/charts/updatedatesting', 'ChartController@UpdateDateString')->name('admin_charts_update_date_string')->middleware('auth', 'isAdmin');
-
-

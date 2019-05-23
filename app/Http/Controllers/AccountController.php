@@ -150,5 +150,4 @@ class AccountController extends Controller
 
         $account->save();
     }
-
 }

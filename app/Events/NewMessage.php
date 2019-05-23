@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Message;
+use App\ChatMessage;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -25,7 +25,7 @@ class NewMessage implements ShouldBroadcastNow
      *
      * @return void
      */
-    public function __construct(Message $message)
+    public function __construct(ChatMessage $message)
     {
         $this->message = $message;
     }

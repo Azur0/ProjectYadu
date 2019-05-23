@@ -55,6 +55,8 @@ return [
     'create_error_select_photo' => 'Please select a photo',
     'create_error_select_type' => 'Please select a event type',
     'create_error_location_required' => 'The location field is required',
+    'create_error_house_number'         => 'This address does not contain a house number.',
+    'create_error_postalcode'         => 'This address does not contain a valid postal code.',
     'create_error_invalid_datetime' => 'This date/time is invalid',
     'create_error_title_required' => 'The title field is required',
     'create_error_description_required' => 'The description field is required',

@@ -167,7 +167,7 @@
         </div>
     </div>
     <div class="row">
-    @if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())))
+    @if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
         <!-- BEGIN CHAT TEMPLATE -->
             <div id="app" class="message-container clearfix" v-if="account">
 
@@ -233,7 +233,7 @@
     </div>
 
 @endsection
-@if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())))
+@if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
 @section('scripts')
     <script>
 

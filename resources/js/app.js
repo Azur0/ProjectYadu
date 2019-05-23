@@ -8,7 +8,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-window.chartjs = require('chart.js');
+window.chartjs = require('./charts.js');
 
 /**
  * The following block of code may be used to automatically register your
@@ -65,3 +65,16 @@ window.chartjs = require('chart.js');
         };
     return "undefined" != typeof window && window.Vue && window.Vue.use(t), t
 });
+
+// File name function
+let input = document.getElementById('avatar');
+let infoArea = document.getElementById('custom-file-label');
+
+input.addEventListener('change', changeFilename);
+
+function changeFilename(event) {
+    let input = event.srcElement;
+    let fileName = input.files[0].name;
+
+    infoArea.textContent = fileName;
+}

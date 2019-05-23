@@ -12326,3 +12326,12 @@ h6.collapse-header {
   margin-left: 2%;
   color: white;
 }
+
+.btn_prohibitedWord:hover
+{
+  color: white;
+}
+
+.btn_inline{
+  float: right; margin-right: 2%;
+}

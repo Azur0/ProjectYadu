@@ -35,7 +35,6 @@
 						<th scope="col">#</th>
 						<th scope="col">{{ __('ProhibitedWords.word')}}</th>
 						<th scope="col"></th>
-						<th scope="col"></th>
 					</tr>
 					</thead>
 
@@ -46,10 +45,16 @@
 							<td>{{$id}}</td>
 							<td>{{$prohibitedWord->word}}</td>
 							<td>
-								<form class="form_submit_ays" method="POST" id="updateWord{{$id}}" action="/admin/prohibitedWords/update">
+								<form method="POST" action="/admin/prohibitedWords/delete" class="btn_inline">
+									@csrf
+									<input hidden name="prohibitedWordToDelete" value="{{$prohibitedWord->word}}">
+									<button type="submit" class="button-remove button-hover">{{__('ProhibitedWords.show_delete')}}</button>
+								</form>
+
+								<form class="form_submit_ays btn_inline" method="POST" id="updateWord{{$id}}" action="/admin/prohibitedWords/update">
 									@csrf
 									<div>
-										<div >
+										<div>
 											<button type="button" class="button button-hover" data-toggle="modal" data-target="#confirmUpdateProhibitedWord{{$id}}">{{__('ProhibitedWords.show_edit')}}</button>
 										</div>
 										<div class="modal fade" id="confirmUpdateProhibitedWord{{$id}}" tabindex="-1" role="dialog">
@@ -76,13 +81,6 @@
 										</div>
 									</div>
 								</form>
-							</td>
-							<td>
-							<form method="POST" action="/admin/prohibitedWords/delete">
-								@csrf
-								<input hidden name="prohibitedWordToDelete" value="{{$prohibitedWord->word}}">
-								<button type="submit" class="button-remove button-hover">{{__('ProhibitedWords.show_delete')}}</button>
-							</form>
 							</td>
 						</tr>
 					<?php $id++; ?>

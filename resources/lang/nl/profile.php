@@ -24,15 +24,15 @@ return [
 
     'edit_change_account_settings_title' => 'Account instellingen - meldingen',
     // Follow notification
-    'edit_change_account_settings_follow_notification_title' => '',
+    'edit_change_account_settings_follow_notification_title' => 'Over volgen',
     'edit_change_account_settings_follow_notification_creation' => 'Wanneer een evenement is aangemaakt door iemand die je volgt',
     'edit_change_account_settings_follow_notification_join' => 'Wanneer iemand die je volgt zich aanmeldt of afmeldt voor een evenement',
     // Event notification
-    'edit_change_account_settings_event_notification_title' => '',
+    'edit_change_account_settings_event_notification_title' => 'Over evenementen',
     'edit_change_account_settings_event_edited' => 'Wanneer het evenement waaraan u deelneemt, wordt bewerkt',
     'edit_change_account_settings_event_deleted' => 'Wanneer het evenement waaraan u deelneemt wordt verwijderd',
     // Participant notification
-    'edit_change_account_settings_notification_title' => '',
+    'edit_change_account_settings_notification_title' => 'Over deelnemen',
     'edit_change_account_settings_notification_join' => 'Wanneer iemand zich aanmeldt of afmeldt voor een evenement',
     // Button change notification settings
     'edit_change_account_settings' => 'Wijzig instellingen',

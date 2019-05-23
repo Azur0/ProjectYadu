@@ -8,11 +8,11 @@ class AccountSettings extends Model
 {
     protected $fillable = [
         'account_id',
-    'FollowNotificationCreateEvent',
-    'FollowNotificationJoinEvent',
-    'NotificationInvite',
-    'NotificationEventEdited',
-    'NotificationEventDeleted'];
+        'FollowNotificationCreateEvent',
+        'FollowNotificationJoinAndLeaveEvent',
+        'NotificationEventEdited',
+        'NotificationEventDeleted',
+        'NotificationJoinAndLeaveEvent'];
     public function account()
     {
         return $this->belongsTo('App\Account', 'account_id', 'id');

@@ -69,10 +69,10 @@ class AccountController extends Controller
             $validator = Validator::make($request->all(),
                 [
                     'FollowNotificationCreateEvent' => 'nullable|string',
-                    'FollowNotificationJoinEvent' => 'nullable|string',
-                    'NotificationInvite' => 'nullable|string',
+                    'FollowNotificationJoinAndLeaveEvent' => 'nullable|string',
                     'NotificationEventEdited' => 'nullable|string',
                     'NotificationEventDeleted' => 'nullable|string',
+                    'NotificationJoinAndLeaveEvent' => 'nullable|string',
                 ]);
             if ($validator->fails())
             {
@@ -86,15 +86,10 @@ class AccountController extends Controller
             {
                 $FollowNotificationCreateEvent = 1;
             }
-            $FollowNotificationJoinEvent = 0;
-            if($request['FollowNotificationJoinEvent'] == "on")
+            $FollowNotificationJoinAndLeaveEvent = 0;
+            if($request['FollowNotificationJoinAndLeaveEvent'] == "on")
             {
-                $FollowNotificationJoinEvent = 1;
-            }
-            $NotificationInvite = 0;
-            if($request['NotificationInvite'] == "on")
-            {
-                $NotificationInvite = 1;
+                $FollowNotificationJoinAndLeaveEvent = 1;
             }
             $NotificationEventEdited = 0;
             if($request['NotificationEventEdited'] == "on")
@@ -106,7 +101,11 @@ class AccountController extends Controller
             {
                 $NotificationEventDeleted = 1;
             }
-
+            $NotificationJoinAndLeaveEvent = 0;
+            if($request['NotificationJoinAndLeaveEvent'] == "on")
+            {
+                $NotificationJoinAndLeaveEvent = 1;
+            }
 
             $account = Account::where('id', $id)->firstorfail();
             $accountSettings = AccountSettings::where('account_id', $id)->firstorfail();
@@ -114,10 +113,10 @@ class AccountController extends Controller
             $accountSettings->update(
                 [
                     'FollowNotificationCreateEvent' => $FollowNotificationCreateEvent,
-                    'FollowNotificationJoinEvent' => $FollowNotificationJoinEvent,
-                    'NotificationInvite' => $NotificationInvite,
+                    'FollowNotificationJoinEvent' => $FollowNotificationJoinAndLeaveEvent,
                     'NotificationEventEdited' => $NotificationEventEdited,
                     'NotificationEventDeleted' => $NotificationEventDeleted,
+                    'NotificationJoinAndLeaveEvent' => $NotificationJoinAndLeaveEvent,
                 ]
             );
             $genders = Gender::all();

@@ -20,14 +20,13 @@ class CreateAccountSettingsTable extends Migration
 
             // Follower
             $table->tinyInteger('FollowNotificationCreateEvent')->default('1');
-            $table->tinyInteger('FollowNotificationJoinEvent')->default('1');
-
-            // Exists?
-            $table->tinyInteger('NotificationInvite')->default('1');
-
+            $table->tinyInteger('FollowNotificationJoinAndLeaveEvent')->default('1');
             // Your own
             $table->tinyInteger('NotificationEventEdited')->default('1');
             $table->tinyInteger('NotificationEventDeleted')->default('1');
+            // Participant
+            $table->tinyInteger('NotificationJoinAndLeaveEvent')->default('1');
+
             $table->timestamps();
 
             $table->foreign('account_id', 'fk_settings_accounts1_idx')

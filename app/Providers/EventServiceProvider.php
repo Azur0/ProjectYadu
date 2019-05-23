@@ -46,6 +46,7 @@ class EventServiceProvider extends ServiceProvider
 
         EventCreated::class => [
           SendEventCreatedNotification::class,
+        ],
 
         EventJoined::class => [
             SendEventJoinedNotification::class,

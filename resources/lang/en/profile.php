@@ -22,15 +22,21 @@ return [
     'edit_email' => 'E-mail address',
     'edit_update_profile' => 'Update profile',
 
-    'edit_change_account_settings_title' => 'Account settings - Notify',
+    'edit_change_account_settings_title' => 'Account settings - Notifications',
+    // Follow notification
+    'edit_change_account_settings_follow_notification_title' =>'',
     'edit_change_account_settings_follow_notification_creation' => 'When event is created by someone you follow',
-    'edit_change_account_settings_follow_notification_join' => 'When event is joined by someone you follow',
-    'edit_change_account_settings_invite_notification' => 'When invited',
+    'edit_change_account_settings_follow_notification_join' => 'When event is joined or left by someone you follow',
+    // Event notification
+    'edit_change_account_settings_event_notification_title' =>'',
     'edit_change_account_settings_event_edited' => 'When event you participate in is edited',
     'edit_change_account_settings_event_deleted' => 'When event you participate in is deleted',
-    // Check of this is necessary
-    'edit_change_account_settings_event_created' => 'When event is created',
+    // Participant notification
+    'edit_change_account_settings_notification_title' =>'',
+    'edit_change_account_settings_notification_join' => 'When event is joined or left by someone else',
+    // Button change notification settings
     'edit_change_account_settings' => 'Change settings',
+
 
     'edit_change_password_title' => 'Change password',
     'edit_current_password' => 'Current password',

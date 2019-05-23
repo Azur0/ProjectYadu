@@ -86,7 +86,6 @@ $(document).ready(function() {
 
 //AJAX request
 function fetch_events() {
-    var sliceEventNameAt = 25;
     $('#eventsToDisplay').html("<img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>");
     var distance;
     distance = $("#rangeValue").val();
@@ -116,9 +115,6 @@ function fetch_events() {
 
                 data.forEach(function(element) {
                     var eventNameSliced = element['eventName'];
-                    if (element['eventName'].length > sliceEventNameAt) {
-                        eventNameSliced = element['eventName'].slice(0, sliceEventNameAt) + '...';
-                    }
                     $('#eventsToDisplay').html($("#eventsToDisplay").html() +
                         "<div class='col-md-6 col-lg-4 event'><a href='/events/" + element[
                             'id'] +

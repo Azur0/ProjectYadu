@@ -48,7 +48,7 @@ class CreateReportedUsersTable extends Migration
                 ->onUpdate('no action');
 
             $table->foreign('chatmessage_id', 'fk_reports_chatMessage1_idx')
-                ->references('id')->on('chatmessages')
+                ->references('id')->on('chat_messages')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 

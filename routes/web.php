@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventsController;
+use App\socialmedia;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,16 @@ app()->singleton('ipApi', function(){
 Route::get('/', 'EventsController@welcome');
 
 Route::get('/about', function () { return view('about'); });
-Route::get('/contact', function () { return view('contact'); });
+Route::get('/contact', function () { $socialmedia = socialmedia::all(); return view('contact', compact('socialmedia')); });
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/edit/{lang}/{page}', 'EditLangController@index');
-Route::post('admin', 'EditLangController@saveFile');
+Route::get('/edit/{lang}/{page}', 'EditLangController@index')->middleware('auth', 'isAdmin');
+Route::post('admin', 'EditLangController@saveFile')->middleware('auth', 'isAdmin');
+
+Route::get('admin/links', 'EditLinksController@index')->middleware('auth', 'isAdmin');
+Route::post('admin/link', 'EditLinksController@saveLink')->middleware('auth', 'isAdmin');
+Route::post('admin/email', 'EditLinksController@saveEmail')->middleware('auth', 'isAdmin');
 
 Route::get('/account/myevents', 'HomeController@myEvents');
 Route::get('/account/participating', 'HomeController@participating');
@@ -72,3 +77,13 @@ Route::get('admin/prohibitedWords', 'Management\ProhibitedWordsController@index'
 Route::post('admin/prohibitedWords/delete', 'Management\ProhibitedWordsController@destroy')->middleware('auth', 'isAdmin');
 Route::post('admin/prohibitedWords/update', 'Management\ProhibitedWordsController@update')->middleware('auth', 'isAdmin');
 Route::post('admin/prohibitedWords/create', 'Management\ProhibitedWordsController@create')->middleware('auth', 'isAdmin');
+
+Route::post('/logger/eventshared', 'LogController@LogEventShared')->name('LogEventShared');
+
+Route::post('/charts/totaleventscreated', 'ChartController@GetTotalEventsCreated')->name('admin_charts_events')->middleware('auth', 'isAdmin');
+Route::post('/charts/shares', 'ChartController@GetShares')->name('admin_charts_shares')->middleware('auth', 'isAdmin');
+Route::post('/charts/activeeventlocations', 'ChartController@GetActiveEventLocations')->name('admin_charts_locations')->middleware('auth', 'isAdmin');
+Route::post('/charts/categories', 'ChartController@GetCategories')->name('admin_charts_categories')->middleware('auth', 'isAdmin');
+Route::post('/charts/chatmessages', 'ChartController@GetChatmessages')->name('admin_charts_chatmessages')->middleware('auth', 'isAdmin');
+Route::post('/charts/accountscreated', 'ChartController@GetAccountsCreated')->name('admin_charts_accounts_created')->middleware('auth', 'isAdmin');
+Route::post('/charts/updatedatesting', 'ChartController@UpdateDateString')->name('admin_charts_update_date_string')->middleware('auth', 'isAdmin');

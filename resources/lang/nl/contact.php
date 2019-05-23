@@ -16,4 +16,14 @@ return [
     'email' => 'EMAIL',
     'kvk' => 'KvK',
     'social' => 'Social Media',
+
+    'show_edit' => 'Wijzigen',
+    'show_edit_link' => 'Wijzig :name link',
+    'edit_update' => 'Opslaan',
+    'edit_close' => 'Sluiten',
+
+    'admin_id' => 'ID',
+    'admin_name' => 'Naam',
+    'admin_link' => 'Link',
+    'admin_status' => 'Type',
 ];

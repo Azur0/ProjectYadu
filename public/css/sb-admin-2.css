@@ -12320,3 +12320,9 @@ h6.collapse-header {
   font-size: 18px !important;
 }
 
+.btn_prohibitedWord
+{
+  background-color: limegreen;
+  margin-left: 2%;
+  color: white;
+}

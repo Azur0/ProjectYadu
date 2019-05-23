@@ -21,6 +21,9 @@ app()->singleton('ipApi', function(){
 Route::get('/', 'EventsController@welcome');
 
 Route::get('/about', function () { return view('about'); });
+Route::get('/cookies', function () { return view('cookies'); });
+Route::get('/privacy', function () { return view('privacy'); });
+Route::get('/terms', function () { return view('terms'); });
 Route::get('/contact', function () { $socialmedia = socialmedia::all(); return view('contact', compact('socialmedia')); });
 
 Route::get('/home', 'HomeController@index')->name('home');

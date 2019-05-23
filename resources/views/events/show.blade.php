@@ -93,11 +93,11 @@
             <div class="mb-5">
                 <h3>{{__('events.show_share')}}</h3>
                 <div>
-                    <a id="share-whatsapp" class="fab fa-whatsapp" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
-                    <a id="share-facebook" class="fab fa-facebook" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
-                    <a id="share-twitter" class="fab fa-twitter" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
-                    {{--<a id="share-instagram" class="fab fa-instagram" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>--}}
-                    <a id="share-link" class="fa fa-link" data-toggle="modal" data-target="#confirmDeleteAccount" style="font-size: 36px; color: #E79535; margin-right: 2%; margin-bottom: 50px; cursor: pointer; text-decoration: none;"></a>
+                    <a id="share-whatsapp" class="fab fa-whatsapp event-media-icons"></a>
+                    <a id="share-facebook" class="fab fa-facebook event-media-icons"></a>
+                    <a id="share-twitter" class="fab fa-twitter event-media-icons"></a>
+                    {{--<a id="share-instagram" class="fab fa-instagram event-media-icons"></a>--}}
+                    <a id="share-link" class="fa fa-link event-media-icons" data-toggle="modal" data-target="#confirmDeleteAccount"></a>
                 </div>
             </div>
 
@@ -122,7 +122,22 @@
             </div>
 
             <script>
+
+                function LogEventShared(platform){
+                    $.ajax({
+                        url: "{{route('LogEventShared')}}",
+                        method: 'POST',
+                        data: {
+                            eventid: "{{$event->id}}",
+                            platform: platform,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: 'json',
+                    });
+                }
+
                 document.getElementById("share-link").addEventListener('click', function(){
+                    LogEventShared("link");
                     let clipboard = document.createElement('input'),
                         url = window.location.href;
 
@@ -136,16 +151,20 @@
                 });
 
                 document.getElementById("share-facebook").addEventListener('click', function(){
+                    LogEventShared("facebook");
                     let url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
                     window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+
                 });
 
                 document.getElementById("share-twitter").addEventListener('click', function(){
+                    LogEventShared("twitter");
                     let url = `https://twitter.com/intent/tweet?text={{$event->eventName}}: ${window.location.href} %23Yadu`;
                     window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
                 });
 
                 document.getElementById("share-whatsapp").addEventListener('click', function(){
+                    LogEventShared("whatsapp");
                     let url = `https://wa.me/?text={{$event->eventName}}: ${window.location.href}`;
                     window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
                 });
@@ -216,7 +235,7 @@
         @else
             <div class="col-md-6">
                 <h3 style="margin-top:30px;">
-                    Meld je aan bij dit event om te kunnen chatten!
+                    {{__('events.show_chat_login')}}
                 </h3>
             </div>
         @endif

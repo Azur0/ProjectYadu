@@ -10908,6 +10908,29 @@ a.text-dark:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.contact-item a:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.media-icons {
+  font-size: 36px;
+  color: #E79535;
+}
+
+.event-media-icons {
+  font-size: 36px;
+  color: #E79535 !important;
+  margin-right: 2%;
+  margin-bottom: 50px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.event-media-icons:hover {
+  opacity: 0.8;
+}
+
 #map {
   height: 350px !important;
 }

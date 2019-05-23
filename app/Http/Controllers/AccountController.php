@@ -258,4 +258,5 @@ class AccountController extends Controller
 
 		return back();
 	}
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\BlockedUser;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\EditProfileRequest;
 use Illuminate\Http\Request;
@@ -228,7 +229,6 @@ class AccountController extends Controller
 
 	public function accept($id) {
 		$followRequest = AccountHasFollowers::where('account_id', Auth::id())->where('follower_id', $id)->first();
-
 		if(!is_null($followRequest)) {
 			if($followRequest->status == 'pending') {
 				$followRequest->status = 'accepted';
@@ -257,6 +257,40 @@ class AccountController extends Controller
 		$unfollowRequest->delete();
 
 		return back();
+	}
+
+	public function blockAccount(Request $request){
+		$request->validate([
+			'id' => 'required',
+		]);
+		if(Auth::id()!=$request['id']){
+
+			if(Auth::user()->followers->pluck('id')->contains($request->id)){
+				AccountHasFollowers::where('account_id', '=', Auth::id())->where('follower_id', '=', $request->id)->delete();
+			}
+
+			if(Auth::user()->following->pluck('id')->contains($request->id)){
+				AccountHasFollowers::where('follower_id', '=', Auth::id())->where('account_id', '=', $request->id)->delete();
+			}
+
+			BlockedUser::create([
+				'account_id' => Auth::id(),
+				'blockedAccount_id' => $request->id,
+			]);
+			return back();
+		}
+		return abort(404);
+	}
+
+	public function unblockAccount(Request $request){
+		$request->validate([
+			'id' => 'required',
+		]);
+		if(Auth::id()!=$request['id']){
+			BlockedUser::where('account_id','=',Auth::id())->where('blockedAccount_id','=',$request->id)->firstOrFail()->delete();
+			return back();
+		}
+		return abort(404);
 	}
 
 }

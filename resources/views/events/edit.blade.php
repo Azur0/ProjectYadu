@@ -54,8 +54,8 @@
         <div class="loc">
             <h3>3. Kies de (verzamel)locatie </h3>
             <div class="description location">
-                <input type="hidden" name="lng" id="lng" value="{{$data['event']->location()->first()->locLatitude}}">
-                <input type="hidden" name="lat" id="lat" value="{{$data['event']->location()->first()->locLongtitude}}">
+                <input type="hidden" name="lng" id="lng" value="{{$data['event']->location()->first()->locLongtitude}}">
+                <input type="hidden" name="lat" id="lat" value="{{$data['event']->location()->first()->locLatitude}}">
                 <input type="hidden" name="houseNumber" id="houseNumber"
                     value="{{$data['event']->location()->first()->houseNumber}}">
                 <input type="hidden" name="postalCode" id="postalCode"
@@ -64,8 +64,8 @@
                     value="{{$data['event']->location()->first()->locality}}">
                 <input type="hidden" name="route" id="route" value="{{$data['event']->location()->first()->route}}">
 
-                <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required @if
-                    (old('location')==null)
+                <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required
+                    @if(old('location')==null)
                     value="{{ $data['event']->location()->first()->route }} {{ $data['event']->location()->first()->houseNumber }}, {{ $data['event']->location()->first()->locality }}"
                     @else value="{{old('location')}}" @endif>
                 <div id="map"></div>

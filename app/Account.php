@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use App\Events\AccountCreatedEvent;
@@ -54,7 +53,18 @@ class Account extends Authenticatable implements MustVerifyEmailContract
         return $this->hasMany('App\Message');
     }
 
-    public function followers(){
-        return $this->hasMany('App\AccountHasFollowers');
+    public function blockedUsers()
+    {
+        return $this->hasMany('App\BlockedUser');
+    }
+
+    public function followers()
+    {
+    	return $this->hasMany('App\AccountHasFollowers');
+    }
+    
+    public function following()
+    {
+    	return $this->belongsToMany('App\Account', 'account_has_followers', 'follower_id', 'account_id');        
     }
 }

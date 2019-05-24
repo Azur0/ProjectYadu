@@ -10,6 +10,7 @@ use App\EventTag;
 use App\Account;
 use Validator;
 use Illuminate\Support\Carbon;
+use App\Location;
 use Auth;
 use App\Http\Controllers\Controller;
 
@@ -192,11 +193,17 @@ class EventsController extends Controller
 				$validator = Validator::make($request->all(), [
 					'activityName' => 'required|max:30',
 					'description' => 'required|max:150',
-					'numberOfPeople' => 'required|min:1|max:100',
+					'numberOfPeople' => 'required', //TODO: min en max nog doen
 					'tag' => 'required',
 					'startDate' => 'required|date|after:now',
 					'startTime' => 'required',
-					'location' => 'required',
+					'lng' => 'required|max:45',
+					'lat' => 'required|max:45',
+					'houseNumber' => 'required|max:10',
+					'postalCode' => 'required|max:45',
+					'route'=> 'required',
+					'locality' => 'required',
+					'numberOfPeople' => 'required',
 					'isHighlighted' => 'nullable|string'
 				]);
 
@@ -224,6 +231,16 @@ class EventsController extends Controller
 				}
 
 				$event = Event::where('id', $id)->firstorfail();
+				$location = Location::where('id', $event->location_id)->firstorfail();
+
+				$location->update([
+					'locLongtitude' => $request['lng'],
+					'locLatitude' => $request['lat'],
+					'houseNumber' => $request['houseNumber'],
+					'postalcode' => str_replace(' ', '', $request['postalCode']),
+					'route'=> $request['route'],
+					'locality' => $request['locality'],
+				]);
 
 				$event->update(
 					[
@@ -232,12 +249,10 @@ class EventsController extends Controller
 						'startDate' => $request['startDate'],
 						'numberOfPeople' => $request['numberOfPeople'],
 						'tag_id' => $request['tag'],
-						'location_id' => '1',
 						'event_picture_id' => $request['picture'],
 						'isHighlighted' => $highlight
 					]
 				);
-				//TODO: set location
 				return redirect('/admin/events');
 			}
 			else

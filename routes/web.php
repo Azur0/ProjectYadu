@@ -59,6 +59,9 @@ Route::get('/profile/{id}/unfollow', 'AccountController@unfollow')->middleware('
 Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
 Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
 Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middleware('auth');
+Route::post('/profile/blockUser', 'AccountController@blockAccount')->middleware('auth');
+Route::post('/profile/unblockUser/', 'AccountController@unblockAccount')->middleware('auth');
+
 
 Auth::routes();
 

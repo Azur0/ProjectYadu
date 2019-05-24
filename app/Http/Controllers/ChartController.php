@@ -101,35 +101,18 @@ class ChartController extends Controller
         return $data;
     }
 
-    public function GetActiveEventLocations()
+    public function GetActiveEventLocations(GetChartDateRangeRequest $request)
     {
-        if (request()->fromDate == null) {
-            $fromDate = strtotime("-1 months");
-        } else {
-            $fromDate = strtotime(request()->fromDate);
-        }
-
-        if (request()->toDate == null) {
-            $toDate = strtotime("now");
-        } else {
-            $toDate = strtotime(request()->toDate);
-        }
-
         $data = array();
-        $events = Event::all();
+        $events = Event::where('isDeleted',0)->whereBetween('startDate', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->get();
 
         foreach ($events as $event) {
-            $created = strtotime($event->created_at);
-            $start = strtotime($event->startDate);
-            if (($created > $fromDate && $created < $toDate) || ($start > $fromDate && $start < $toDate)) {
-                $entry = array(
-                    'lat' => $event->location->locLatitude,
-                    'lng' => $event->location->locLongtitude
-                );
-                array_push($data, $entry);
-            }
+            $entry = array(
+                'lat' => $event->location->locLatitude,
+                'lng' => $event->location->locLongtitude
+            );
+            array_push($data, $entry);
         }
-
         return $data;
     }
 

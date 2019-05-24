@@ -14,7 +14,7 @@
                         <a href="/contact">{{__('navigation.footer_contact')}}</a>
                     </li>
                     <li class="nav-link-footer">
-                        <a href="/terms-and-conditions">{{__('navigation.footer_tos')}}</a>
+                        <a href="/terms">{{__('navigation.footer_tos')}}</a>
                     </li>
                     <li class="nav-link-footer">
                         <a href="/cookies">{{__('navigation.footer_cookies')}}</a>

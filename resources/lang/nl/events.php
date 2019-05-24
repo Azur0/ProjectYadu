@@ -54,10 +54,15 @@ return [
     'create_error_select_photo' => 'Kies een foto',
     'create_error_select_type' => 'Kies een type',
     'create_error_location_required' => 'Het locatie-veld is verplicht.',
+    'create_error_house_number'         => 'Dit adres bevat geen huisnummer.',
+    'create_error_postalcode'         => 'Dit adres heeft geen geldige postcode.',
     'create_error_invalid_datetime' => 'Deze datum/tijd is ongeldig.',
     'create_error_title_required' => 'Het titel-veld is verplicht.',
     'create_error_description_required' => 'Het omschrijving-veld is verplicht.',
     'create_error_max_participants_required' => 'Het max aantal mensen-veld is verplicht.',
+    
+    
+   
 
 ///////////////////////////////// Show ////////////////////////////////////
     'show' => 'Weergeven',
@@ -65,7 +70,7 @@ return [
     'show_lang' => 'Dutch',
     'show_location' => 'Locatie',
     'show_date' => 'Datum en tijd',
-    'show_description' => 'Beschijving',
+    'show_description' => 'Beschrijving',
     'show_initiator' => 'Initiatiefnemer',
     'show_attendees' => 'Wie gaan er mee?',
     'show_join' => 'Aanmelden',
@@ -77,6 +82,7 @@ return [
     'show_delete' => 'Verwijderen',
     'show_title' => 'Titel',
     'show_overview' => 'Overzicht',
+    'show_chat_login' => 'Log in en meld je aan bij dit event om te kunnen chatten!',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Annuleren',

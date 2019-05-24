@@ -110,9 +110,9 @@ class ChartController extends Controller
         }
 
         if (request()->toDate == null) {
-            $toDate = strtotime("tomorrow");
+            $toDate = strtotime("now");
         } else {
-            $toDate = strtotime('+1 days', request()->toDate);
+            $toDate = strtotime(request()->toDate);
         }
 
         $data = array();
@@ -121,7 +121,7 @@ class ChartController extends Controller
         foreach ($events as $event) {
             $created = strtotime($event->created_at);
             $start = strtotime($event->startDate);
-            if (($created >= $fromDate && $created <= $toDate) || ($start >= $fromDate && $start <= $toDate)) {
+            if (($created > $fromDate && $created < $toDate) || ($start > $fromDate && $start < $toDate)) {
                 $entry = array(
                     'lat' => $event->location->locLatitude,
                     'lng' => $event->location->locLongtitude

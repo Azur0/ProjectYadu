@@ -302,13 +302,13 @@
 		border: 5px solid white;
 		border-radius: 500px;
 		overflow: hidden;
-
+	}
 		img
 		{
 			width: 100%;
 			height: 100%;
 		}
-	}
+	
 	@media only screen and (max-width: 1200px)
 	{
 		width: 49%;
@@ -317,9 +317,9 @@
 	@media only screen and (max-width: 767px)
 	{
 		width: 100%;
-
-#http_error
-{
+	}
+}
+#http_error {
 	text-align: center;
 	margin: 4em auto;
 

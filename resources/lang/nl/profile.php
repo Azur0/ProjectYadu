@@ -16,10 +16,10 @@ return [
     'follow_pending' => 'Volgverzoek verstuurd',
     'follow_accepted' => 'Ontvolgen',
 
-    'head_me_info' => 'My Info',
+    'head_me_info' => 'Mijn Info',
     'head_info' => 'Info',
     'head_events' => 'Evenementen',
-    'head_my_events' => 'My evenementen',
+    'head_my_events' => 'Mijn Evenementen',
     'head_participating' => 'Meedoen',
     'head_followers' => 'Volgers',
     'head_following' => 'Volgend',
@@ -64,4 +64,11 @@ return [
     'edit_unblock_account_negative' => 'Nee, deblokkeer :name niet',
     'edit_unblock_account_positive' => 'Ja, deblokkeer :name',
     'edit_unblock_account_areYouSure' => 'Weet je zeker dat je :name wilt deblokkeren?',
+    
+    'edit_privacy_head' => 'Privacy Instellingen',
+    'edit_privacy_participatingVisibility' => 'No, Keep it!',
+    'edit_privacy_eventsVisibility' => 'No, Keep it!',
+    'edit_privacy_infoVisibility' => 'Profiel informatie zichtbaarheid',
+    'edit_privacy_followingVisibility' => 'Volgende zichtbaarheid',
+    'edit_privacy_followerVisibility' => 'Volger zichtbaarheid',
 ];

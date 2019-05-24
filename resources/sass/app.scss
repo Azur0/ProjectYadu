@@ -222,6 +222,16 @@
   filter: grayscale(100%);
 }
 
+.event_overview
+{
+	h3
+	{
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+}
+
 #user_header
 {
 	min-height: 175px;
@@ -307,5 +317,19 @@
 	@media only screen and (max-width: 767px)
 	{
 		width: 100%;
+
+#http_error
+{
+	text-align: center;
+	margin: 4em auto;
+
+	h1
+	{
+		font-size: 120px;
+	}
+
+	a
+	{
+		font-size: 30px;
 	}
 }

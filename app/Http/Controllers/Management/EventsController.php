@@ -27,7 +27,7 @@ class EventsController extends Controller
 				$names = Event::distinct('eventName')->pluck('eventName');
 				$currentDate = Carbon::now();
 				foreach($events as $event){
-					$event->city = self::cityFromPostalcode($event->Location->postalcode);
+					$event->city = $event->location->locality;
 					$event->currentDate = $currentDate;
 				}
 				return view('admin/events.index', compact(['tags', 'names'],'events'));  
@@ -252,10 +252,17 @@ class EventsController extends Controller
 	{
 		if (Auth::check())
 		{
-		    $event = Event::findOrFail($event->id);
+			$event = Event::findOrFail($event->id);
+            if($event->participants()->count()){
+                $participants = $event->participants()->get();
+                foreach($participants as $participant){
+                    $event->participants()->detach($participant->id);
+                }
+            }
 			$event->update([
 			   'isDeleted' => 1
             ]);
+      
 			return redirect('admin/events');
 		}
 	}
@@ -321,7 +328,7 @@ class EventsController extends Controller
         foreach ($unfiltered_events as $event) {
             //$date = self::dateToText($event->startDate);
 
-            $postalcode = self::cityFromPostalcode($event->Location->postalcode);
+            $postalcode =  $event->location->locality;
 
             $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
             $Pic = (base64_encode($Picture[0]->picture));
@@ -373,32 +380,4 @@ class EventsController extends Controller
 		return $formatted_date;
 	}
 
-	public function cityFromPostalcode($postalcode)
-	{
-		if (!self::isValidPostalcode($postalcode)) {
-			return "Invalid postal code";
-		}
-
-		$url = "https://nominatim.openstreetmap.org/search?q={$postalcode}&format=json&addressdetails=1";
-
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$result = curl_exec($ch);
-		curl_close($ch);
-
-		$json = json_decode($result, true);
-		if (isset($json[0]['address']['suburb'])) {
-			return $json[0]['address']['suburb'];
-		} else {
-			return "City not found";
-		}
-	}
-
-	public function isValidPostalcode($postalcode)
-	{
-		$regex = '/^([1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9])[a-zA-Z]{2}$/';
-		return preg_match($regex, $postalcode);
-	}
 }

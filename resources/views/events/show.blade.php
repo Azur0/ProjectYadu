@@ -19,7 +19,8 @@
                 <a href="/account/{{$event->owner->id}}/profile/info">
                 	<img class="img-fluid rounded-circle my-auto avatar" src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}"/>
                 </a>
-                <h5 class="my-auto ml-2">{{$event->owner->firstName .' '. $event->owner->middleName .' '. $event->owner->lastName}}</h5>
+                <h5 class="my-auto ml-2"><a href="/account/{{$event->owner->id}}/profile/info">{{$event->owner->firstName .' '. $event->owner->middleName .' '. $event->owner->lastName}}</a></h5>
+                
             </div>
             <br><br>
 
@@ -48,7 +49,11 @@
                     <a href="/account/{{$participant->id}}/profile/info">
                     	<img class="img-fluid rounded-circle my-auto avatar" src="data:image/jpeg;base64, {{base64_encode($participant->avatar)}}"/>
                     </a>
-                    <h5 class="my-auto ml-2">{{$participant->firstName .' '. $participant->middleName .' '. $participant->lastName}}</h5>
+                    <p>
+	                    <h5 class="my-auto ml-2">
+	                    	<a href="/account/{{$participant->id}}/profile/info">{{$participant->firstName .' '. $participant->middleName .' '. $participant->lastName}}</a>
+	                    </h5>
+                	</p>
                     
                 </div>
             @endforeach
@@ -77,7 +82,7 @@
 
                 }
             </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap"
+            <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_KEY')}}&callback=initMap"
                     async defer></script>
             <div class="mb-5">
                 <h3>{{__('events.show_description')}}</h3>
@@ -91,7 +96,6 @@
                     <a id="share-whatsapp" class="fab fa-whatsapp event-media-icons"></a>
                     <a id="share-facebook" class="fab fa-facebook event-media-icons"></a>
                     <a id="share-twitter" class="fab fa-twitter event-media-icons"></a>
-                    {{--<a id="share-instagram" class="fab fa-instagram event-media-icons"></a>--}}
                     <a id="share-link" class="fa fa-link event-media-icons" data-toggle="modal" data-target="#confirmDeleteAccount"></a>
                 </div>
             </div>
@@ -117,7 +121,22 @@
             </div>
 
             <script>
+
+                function LogEventShared(platform){
+                    $.ajax({
+                        url: "{{route('LogEventShared')}}",
+                        method: 'POST',
+                        data: {
+                            eventid: "{{$event->id}}",
+                            platform: platform,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: 'json',
+                    });
+                }
+
                 document.getElementById("share-link").addEventListener('click', function(){
+                    LogEventShared("link");
                     let clipboard = document.createElement('input'),
                         url = window.location.href;
 
@@ -131,16 +150,20 @@
                 });
 
                 document.getElementById("share-facebook").addEventListener('click', function(){
+                    LogEventShared("facebook");
                     let url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
                     window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+
                 });
 
                 document.getElementById("share-twitter").addEventListener('click', function(){
+                    LogEventShared("twitter");
                     let url = `https://twitter.com/intent/tweet?text={{$event->eventName}}: ${window.location.href} %23Yadu`;
                     window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
                 });
 
                 document.getElementById("share-whatsapp").addEventListener('click', function(){
+                    LogEventShared("whatsapp");
                     let url = `https://wa.me/?text={{$event->eventName}}: ${window.location.href}`;
                     window.open(url,'popUpWindow','height=500,width=700,left=400,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
                 });
@@ -152,7 +175,7 @@
         </div>
     </div>
     <div class="row">
-    @if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())))
+    @if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
         <!-- BEGIN CHAT TEMPLATE -->
             <div id="app" class="message-container clearfix" v-if="account">
 
@@ -218,7 +241,7 @@
     </div>
 
 @endsection
-@if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())))
+@if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
 @section('scripts')
     <script>
 

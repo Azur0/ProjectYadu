@@ -65,5 +65,10 @@ return [
     'edit_unblock_account_positive' => 'Yes, unblock :name',
     'edit_unblock_account_areYouSure' => 'Are you sure you want to unblock :name?',
     
-
+    'edit_privacy_head' => 'Privacy Settings',
+    'edit_privacy_participatingVisibility' => 'Participating Visibility',
+    'edit_privacy_eventsVisibility' => 'Events Visibility',
+    'edit_privacy_infoVisibility' => 'Info Visibility',
+    'edit_privacy_followingVisibility' => 'Following Visibility',
+    'edit_privacy_followerVisibility' => 'Follower Visibility',
 ];

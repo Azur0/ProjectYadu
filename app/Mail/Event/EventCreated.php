@@ -36,15 +36,22 @@ class EventCreated extends Mailable
      */
     public function build()
     {
+        $title = '';
+        if($this->event->owner->id != $this->user->id){
+            $title = $this->event->owner->firstName  . " ". Lang::get('mail.eventFollowerCreatedTitle');
+        }else{
+            $title = Lang::get('mail.eventCreatedTitle');
+        }
+
         $this->event= Event::findOrFail($this->event->id);
         return $this->markdown('mail/event.event-created')
-            ->subject(Lang::get('mail.eventCreatedTitle'))
+            ->subject($title)
             ->with([
-                'title' => Lang::get('mail.eventCreatedTitle'),
+                'title' => $title,
                 'salutation'=> Lang::get('mail.salutation'),
                 'userName'=>$this->user->firstName . ",",
-                'body' => Lang::get('mail.eventCreatedText1')
-                    .$this->event->eventName,
+                'body' => Lang::get('mail.eventCreatedText1')." "
+                    .$this->event->eventName.Lang::get('mail.eventCreatedText2'),
                 'infoTitle' => Lang::get('mail.eventInfoTitle'),
                 'eventName' => Lang::get('events.show_title'). ": " . $this->event->eventName,
                 'eventDate' => Lang::get('events.show_date').": " . self::dateToLongText($this->event->startDate),

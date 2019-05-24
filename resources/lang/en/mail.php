@@ -2,14 +2,20 @@
 
 return [
     "salutation" => "Greetings ",
-    "eventCreatedTitle" => "An event has being created",
-    "eventCreatedText1" => "The event that has being created is ",
-    "eventCreatedText2" => "",
-    "editTitle" => "One of your events has being edited.",
+    "eventCreatedTitle" => "You have created an event.",
+    "eventFollowerCreatedTitle" => "has created an event",
+    "eventCreatedText1" => "The event that is created:",
+    "eventCreatedText2" => ".",
+
+    "editTitle" => "One of your events has been edited.",
+    "editTitleParticipant" => "One of the events ",
     "editText1" => "Event ",
     "editText2" => " has being edited.",
-    "deleteTitle" => "One of your events has being deleted.",
-    "deleteTitleParticipant" => "An event which you had joined is removed",
+
+    "deleteTitle1" => "You have removed the event",
+    "deleteTitle2" => "from your events.",
+
+    "deleteTitleParticipant" => "An event which you were a participant of has been removed.",
     "deleteText1" => "Event ",
     "deleteText2" => " is deleted.",
     "closing" => "Have a nice day.",

@@ -40,6 +40,7 @@ class SendEventEditedNotification
             if ($event->event->participants->count() > 0) {
                 foreach ($event->event->participants as $participant) {
                     $event->event->owner->firstName = $participant->firstName;
+                    $event->event->userName = $participant->firstName;
                     if($participant->settings->NotificationEventEdited == 1){
                         Mail::to($participant->email)->send(
                             new EventEditedMail($event->event)

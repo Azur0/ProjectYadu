@@ -39,7 +39,7 @@ class EventDeleted extends Mailable
         }
 
         return $this->markdown('admin/mail.event-deleted')
-            ->subject(Lang::get('mail.subjectEventDeleted'))
+            ->subject($title)
             ->with([
                 'title' => $title,
             'salutation'=> Lang::get('mail.salutation'),

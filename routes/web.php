@@ -59,9 +59,9 @@ Route::get('/profile/{id}/unfollow', 'AccountController@unfollow')->middleware('
 Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
 Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
 Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middleware('auth');
+Route::patch('/profile/updateAccountSettings/{id}', 'AccountController@updateSettings')->middleware('auth');
 Route::post('/profile/blockUser', 'AccountController@blockAccount')->middleware('auth');
 Route::post('/profile/unblockUser/', 'AccountController@unblockAccount')->middleware('auth');
-
 
 Auth::routes();
 
@@ -71,6 +71,7 @@ Route::get('admin', function () { return view('admin.index');})->middleware('aut
 
 Route::post('/language', 'LanguageController@setLanguage');
 
+// Why did you not use resource for index/show/delete/update?
 Route::get('admin/accounts', 'Management\AccountsController@index')->middleware('auth', 'isAdmin');
 Route::get('admin/accounts/{id}', 'Management\AccountsController@show')->middleware('auth', 'isAdmin');
 Route::get('admin/accounts/{id}/activate', 'Management\AccountsController@activate')->middleware('auth', 'isAdmin');

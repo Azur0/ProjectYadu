@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+
+use App\Events\AccountCreatedEvent;
+use App\Events\AccountCreation;
+use App\Events\EventCreated;
+use App\Listeners\CreateEventAccountSettings;
+use App\Listeners\SendEventCreatedNotification;
 use App\Events\EventShared;
 use App\Events\EventEdited;
 use App\Listeners\LogEventShared;
@@ -32,8 +38,17 @@ class EventServiceProvider extends ServiceProvider
             SendEventEditedNotification::class,
         ],
 
+        AccountCreation::class => [
+            CreateEventAccountSettings::class,
+        ],
+
+        EventCreated::class => [
+          SendEventCreatedNotification::class,
+		],
+
         EventShared::class => [
             LogEventShared::class,
+
         ],
 
         EventJoined::class => [

@@ -331,6 +331,111 @@
                     </div>
                 </div>
 
+				<!-- Notification settings -->
+				<div class="card">
+					<div class="card-header">
+						{{__('profile.edit_change_account_settings_title')}}
+					</div>
+					<div class="card-body">
+						<form method="POST" action="/profile/updateAccountSettings/{{$account->id}}">
+							@csrf
+							@method("PATCH")
+							<div class="form-group row justify-content-md-center">
+								<h5>{{__('profile.edit_change_account_settings_follow_notification_title')}}</h5>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<label for="FollowNotificationCreateEvent"
+									   class="col col-form-label text-md-right">{{__('profile.edit_change_account_settings_follow_notification_creation')}}
+								</label>
+
+								<div class="col">
+									<div class="custom-control custom-switch">
+										@if($account->settings->FollowNotificationCreateEvent == 0)
+											<input type="checkbox" name="FollowNotificationCreateEvent" class="custom-control-input" id="customSwitches">
+										@else
+											<input type="checkbox" name="FollowNotificationCreateEvent" class="custom-control-input" id="customSwitches" checked>
+										@endif
+										<label class="custom-control-label" for="customSwitches"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<label for="FollowNotificationJoinEvent"
+									   class="col col-form-label text-md-right">{{__('profile.edit_change_account_settings_follow_notification_join')}}
+								</label>
+								<div class="col">
+									<div class="custom-control custom-switch">
+										@if($account->settings->FollowNotificationJoinAndLeaveEvent == 0)
+											<input type="checkbox" name="FollowNotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches1">
+										@else
+											<input type="checkbox" name="FollowNotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches1" checked>
+										@endif
+										<label class="custom-control-label" for="customSwitches1"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<h5>{{__('profile.edit_change_account_settings_event_notification_title')}}</h5>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<label for="NotificationEventEdited"
+									   class="col col-form-label text-md-right">{{__('profile.edit_change_account_settings_event_edited')}}
+								</label>
+								<div class="col">
+									<div class="custom-control custom-switch">
+										@if($account->settings->NotificationEventEdited == 0)
+											<input type="checkbox" name="NotificationEventEdited" class="custom-control-input" id="customSwitches3">
+										@else
+											<input type="checkbox" name="NotificationEventEdited" class="custom-control-input" id="customSwitches3" checked>
+										@endif
+										<label class="custom-control-label" for="customSwitches3"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<label for="NotificationEventDeleted"
+									   class="col col-form-label text-md-right">{{__('profile.edit_change_account_settings_event_deleted')}}
+								</label>
+								<div class="col">
+									<div class="custom-control custom-switch">
+										@if($account->settings->NotificationEventDeleted == 0)
+											<input type="checkbox" name="NotificationEventDeleted" class="custom-control-input" id="customSwitches4">
+										@else
+											<input type="checkbox" name="NotificationEventDeleted" class="custom-control-input" id="customSwitches4" checked>
+										@endif
+										<label class="custom-control-label" for="customSwitches4"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<h5>{{__('profile.edit_change_account_settings_notification_title')}}</h5>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<label for="FollowNotificationJoinEvent"
+									   class="col col-form-label text-md-right">{{__('profile.edit_change_account_settings_notification_join')}}
+								</label>
+								<div class="col">
+									<div class="custom-control custom-switch">
+										@if($account->settings->NotificationJoinAndLeaveEvent == 0)
+											<input type="checkbox" name="NotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches5">
+										@else
+											<input type="checkbox" name="NotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches5" checked>
+										@endif
+										<label class="custom-control-label" for="customSwitches5"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row mb-0">
+								<div class="col-md-6 offset-md-4">
+									<button id="submit" type="submit" class="btn btn-primary">
+										{{__('profile.edit_change_account_settings')}}
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
 				<div class="card">
 					<div class="card-header">{{__('profile.edit_change_password_title')}}</div>
 					<div class="card-body">

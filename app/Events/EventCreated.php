@@ -2,12 +2,10 @@
 
 namespace App\Events;
 
-
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 
-
-class EventEdited
+class EventCreated
 {
     use Dispatchable, SerializesModels;
 

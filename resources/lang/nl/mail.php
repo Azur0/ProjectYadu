@@ -2,10 +2,20 @@
 
 return [
     "salutation" => "Goedendag ",
+
+    "eventCreatedTitle" => "Je hebt een evenement aangemaakt.",
+    "eventFollowerCreatedTitle" => "heeft een evenement aangemaakt",
+    "eventCreatedText1" => "Het evenement dat is aangemaakt is ",
+    "eventCreatedText2" => ".",
+
     "editTitle" => "Een van je evenementen is aangepast.",
+    "editTitleParticipant" => "One of the events ",
     "editText1" => "Evenement ",
     "editText2" => " is aangepast.",
-    "deleteTitle" => "Een van je evenementen is verwijdert.",
+
+    "deleteTitle1" => "Je hebt het evenement ",
+    "deleteTitle2" => "verwijdert.",
+
     "deleteTitleParticipant" => "Een evenement waar je voor hebt aangemeld is verwijdert",
     "deleteText1" => "Evenement ",
     "deleteText2" => " is verwijdert.",

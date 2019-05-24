@@ -31,29 +31,39 @@ class SendEventEditedNotification
     public function handle(EventEdited $event)
     {
         if($event->event->isDeleted == 0) {
-            Mail::to($event->event->owner->email)->send(
-                new EventEditedMail($event->event)
-            );
+            if($event->event->owner->settings->NotificationEventEdited ==1){
+                Mail::to($event->event->owner->email)->send(
+                    new EventEditedMail($event->event)
+                );
+            }
+
             if ($event->event->participants->count() > 0) {
                 foreach ($event->event->participants as $participant) {
                     $event->event->owner->firstName = $participant->firstName;
-                    Mail::to($participant->email)->send(
-                        new EventEditedMail($event->event)
-                    );
+                    $event->event->userName = $participant->firstName;
+                    if($participant->settings->NotificationEventEdited == 1){
+                        Mail::to($participant->email)->send(
+                            new EventEditedMail($event->event)
+                        );
+                    }
                 }
             }
         }else{
             $event->event->userName = $event->event->owner->firstName;
-            Mail::to($event->event->owner->email)->send(
-                new EventDeletedMail($event->event)
-            );
+            if($event->event->owner->settings->NotificationEventDeleted ==1) {
+                Mail::to($event->event->owner->email)->send(
+                    new EventDeletedMail($event->event)
+                );
+            }
             if ($event->event->participants->count() > 0) {
                 foreach ($event->event->participants as $participant) {
                     if ($participant->id != $event->event->owner->id) {
                         $event->event->userName = $participant->firstName;
-                        Mail::to($participant->email)->send(
-                            new EventDeletedMail($event->event)
-                        );
+                        if($participant->settings->NotificationEventDeleted == 1) {
+                            Mail::to($participant->email)->send(
+                                new EventDeletedMail($event->event)
+                            );
+                        }
                     }
                 }
             }

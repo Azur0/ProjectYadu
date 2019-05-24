@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\AccountSettings;
 use App\BlockedUser;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\EditProfileRequest;
@@ -15,7 +16,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use DB;
+use Validator;
 use App\Mail\Follow as FollowMail;
+
 
 class AccountController extends Controller
 {
@@ -239,6 +242,66 @@ class AccountController extends Controller
 		return redirect('/');
 	}
 
+    public function updateSettings(Request $request, $id){
+        if (Auth::check())
+        {
+            $validator = Validator::make($request->all(),
+                [
+                    'FollowNotificationCreateEvent' => 'nullable|string',
+                    'FollowNotificationJoinAndLeaveEvent' => 'nullable|string',
+                    'NotificationEventEdited' => 'nullable|string',
+                    'NotificationEventDeleted' => 'nullable|string',
+                    'NotificationJoinAndLeaveEvent' => 'nullable|string',
+                ]);
+            if ($validator->fails())
+            {
+                return redirect("")
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $FollowNotificationCreateEvent = 0;
+            if($request['FollowNotificationCreateEvent'] == "on")
+            {
+                $FollowNotificationCreateEvent = 1;
+            }
+            $FollowNotificationJoinAndLeaveEvent = 0;
+            if($request['FollowNotificationJoinAndLeaveEvent'] == "on")
+            {
+                $FollowNotificationJoinAndLeaveEvent = 1;
+            }
+            $NotificationEventEdited = 0;
+            if($request['NotificationEventEdited'] == "on")
+            {
+                $NotificationEventEdited = 1;
+            }
+            $NotificationEventDeleted = 0;
+            if($request['NotificationEventDeleted'] == "on")
+            {
+                $NotificationEventDeleted = 1;
+            }
+            $NotificationJoinAndLeaveEvent = 0;
+            if($request['NotificationJoinAndLeaveEvent'] == "on")
+            {
+                $NotificationJoinAndLeaveEvent = 1;
+            }
+
+            $account = Account::where('id', $id)->firstorfail();
+            $accountSettings = AccountSettings::where('account_id', $id)->firstorfail();
+
+            $accountSettings->update(
+                [
+                    'FollowNotificationCreateEvent' => $FollowNotificationCreateEvent,
+                    'FollowNotificationJoinAndLeaveEvent' => $FollowNotificationJoinAndLeaveEvent,
+                    'NotificationEventEdited' => $NotificationEventEdited,
+                    'NotificationEventDeleted' => $NotificationEventDeleted,
+                    'NotificationJoinAndLeaveEvent' => $NotificationJoinAndLeaveEvent,
+                ]
+            );
+            return back();
+        }
+    }
+
 	public function decline($id) {
 		$followRequest = AccountHasFollowers::where('account_id', Auth::id())->where('follower_id', $id)->first();
 		
@@ -248,6 +311,7 @@ class AccountController extends Controller
 				$followRequest->save();
 			}
 		}
+
 
 		return redirect('/');
 	}

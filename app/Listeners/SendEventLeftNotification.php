@@ -53,13 +53,14 @@ class SendEventLeftNotification
             foreach($event->event->participants as $participant){
                 $isNotAFollower = true;
                 foreach($executor->followers as $follower){
-                    if($follower->follower_id == $participant->id){
-                        if($follower->status == 'accepted'){
+                    if($follower->follower_id == $participant->id ){
+                        if($follower->status == 'accepted' && $follower->follower->settings->FollowNotificationJoinAndLeaveEvent != 1){
                             $isNotAFollower = false;
                         }
                     }
                 }
-                if($participant->id != $executor->id && $participant->id != $event->event->owner->id && $isNotAFollower){
+                if($participant->id != $executor->id && $participant->id != $event->event->owner->id && $isNotAFollower
+                    && $participant->settings->NotificationJoinAndLeaveEvent == 1){
                     Mail::to($participant->email)->send(
                         new EventLeftMail($event->event,$participant,$executor,0)
                     );
@@ -73,7 +74,7 @@ class SendEventLeftNotification
             foreach($executor->followers as $follower){
                 if($follower->status == 'accepted') {
                     $follower = $follower->follower;
-                    if ($follower->id != $executor->id && $follower->id != $event->event->owner->id) {
+                    if ($follower->id != $executor->id && $follower->id != $event->event->owner->id && $follower->settings->FollowNotificationJoinAndLeaveEvent == 1) {
                         Mail::to($follower->email)->send(
                             new EventLeftMail($event->event, $follower, $executor, 0)
                         );

@@ -35,7 +35,7 @@ class EventDeleted extends Mailable
         if($this->event->userName != $this->event->owner->firstName){
             $title = Lang::get('mail.deleteTitleParticipant');
         }else {
-            $title = Lang::get('mail.deleteTitle');
+            $title = Lang::get('mail.deleteTitle1'). " ". $this->event->eventName . " " . Lang::get('mail.deleteTitle2');
         }
 
         return $this->markdown('admin/mail.event-deleted')

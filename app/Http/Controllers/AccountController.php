@@ -298,8 +298,7 @@ class AccountController extends Controller
                     'NotificationJoinAndLeaveEvent' => $NotificationJoinAndLeaveEvent,
                 ]
             );
-            $genders = Gender::all();
-            return view('profile.edit', compact(['account', 'genders']));
+            return back();
         }
     }
 

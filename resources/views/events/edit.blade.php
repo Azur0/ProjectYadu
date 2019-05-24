@@ -64,8 +64,8 @@
                     value="{{$data['event']->location()->first()->locality}}">
                 <input type="hidden" name="route" id="route" value="{{$data['event']->location()->first()->route}}">
 
-                <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required @if
-                    (old('location')==null)
+                <input id="pac-input" name="location" class="controls" type="text" placeholder="Search Box" required
+                    @if(old('location')==null)
                     value="{{ $data['event']->location()->first()->route }} {{ $data['event']->location()->first()->houseNumber }}, {{ $data['event']->location()->first()->locality }}"
                     @else value="{{old('location')}}" @endif>
                 <div id="map"></div>

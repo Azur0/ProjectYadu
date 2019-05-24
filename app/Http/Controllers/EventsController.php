@@ -302,7 +302,15 @@ class EventsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Event::findOrFail($id);
+        
+        if($event->owner_id == Auth::id()) {
+            $event->update([
+                'isDeleted' => 1
+            ]);;
+        }
+
+        return redirect('account/myevents');
     }
 
     public function join($id)

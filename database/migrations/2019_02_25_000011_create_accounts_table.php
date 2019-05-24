@@ -23,7 +23,7 @@ class CreateAccountsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('accountRole', 10)->default('user');
+            $table->string('accountRole', 10)->default('User');
             $table->string('gender', 15)->nullable();
             $table->string('email');
             $table->string('password');
@@ -36,8 +36,14 @@ class CreateAccountsTable extends Migration
             $table->tinyInteger('isDeleted')->default('0');
             $table->dateTime('email_verified_at')->nullable();
             $table->longText('bio')->nullable();
+            $table->string('api_token', 60)->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->enum('followerVisibility', ['public', 'follower', 'private'])->default('private');
+            $table->enum('followingVisibility', ['public', 'follower', 'private'])->default('private');
+            $table->enum('infoVisibility', ['public', 'follower', 'private'])->default('private');
+            $table->enum('eventsVisibility', ['public', 'follower', 'private'])->default('private');
+            $table->enum('participatingVisibility', ['public', 'follower', 'private'])->default('private');
 
             $table->index(["accountRole"], 'fk_accounts_accountRoles1_idx');
 

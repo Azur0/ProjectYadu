@@ -21,6 +21,10 @@ return [
     'nav_admin' => 'ADMIN PANEEL',
     'nav_login' => 'INLOGGEN',
     'nav_logout' => 'UITLOGGEN',
+    'nav_pages' => 'Pagina\'s',
+    'nav_swearWords' => 'Scheldwoorden',
+    'nav_socialmedia' => 'Socialmedia',
+    'nav_links' => 'Links',    
 
 ///////////////////////////////// Footer //////////////////////////////////
 

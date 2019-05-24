@@ -24,8 +24,9 @@ class EventsTableSeeder extends Seeder
             'numberOfPeople' => 10,
             'description' => 'Wie gaat er mee naar het zwembad in den bosch? We gaan heel de middag zwemmen en daarna een patatje eten.',
             'isDeleted' => 0,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'isHighlighted' => 1,
+            'created_at' => date("Y-m-d H:i:s", strtotime('-1 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-1 months'))
         ]);
 
         DB::table('events')->insert([
@@ -38,8 +39,9 @@ class EventsTableSeeder extends Seeder
             'numberOfPeople' => 5,
             'description' => 'Onbeperkt tapas eten. Er is weer een actie bij La Cubanita, wie heeft er zin om mee te gaan?',
             'isDeleted' => 0,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'isHighlighted' => 1,
+            'created_at' => date("Y-m-d H:i:s", strtotime('-1 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-1 months'))
         ]);
 
         DB::table('events')->insert([
@@ -52,6 +54,7 @@ class EventsTableSeeder extends Seeder
             'numberOfPeople' => 25,
             'description' => 'Ook deze week is iedereen weer uitgenodigd voor de wekelijkse borrel!',
             'isDeleted' => 0,
+            'isHighlighted' => 1,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -62,10 +65,11 @@ class EventsTableSeeder extends Seeder
             'owner_id' => 4,
             'event_picture_id' => 52,
             'eventName' => 'Koffie in het buurthuis',
-            'startDate' => date('Y-m-d', strtotime($date. ' + 10 days')),
+            'startDate' => date('Y-m-d', strtotime($date. ' - 10 days')),
             'numberOfPeople' => 5,
             'description' => 'Alle mensen uit het dorp zijn van harte welkom om \'s middags op de koffie te komen om even bij te praten in het buurthuis.',
             'isDeleted' => 0,
+            'isHighlighted' => 0,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -76,12 +80,13 @@ class EventsTableSeeder extends Seeder
             'owner_id' => 5,
             'event_picture_id' => 59,
             'eventName' => 'Wandelen in het bos',
-            'startDate' => date('Y-m-d', strtotime($date. ' + 10 days')),
+            'startDate' => date('Y-m-d', strtotime($date. ' - 10 days')),
             'numberOfPeople' => 4,
             'description' => 'Ik ga volgende week wandelen in het bos in Zwolle. Als iemand het leuk vind om mee te gaan kom dan gerust mee.',
             'isDeleted' => 0,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'isHighlighted' => 0,
+            'created_at' => date("Y-m-d H:i:s", strtotime('-2 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-2 months'))
         ]);
 
         DB::table('events')->insert([
@@ -94,8 +99,9 @@ class EventsTableSeeder extends Seeder
             'numberOfPeople' => 2,
             'description' => 'Het is weer bijna koopavond en ik heb dringend nieuwe broeken nodig, maar het is wel zo gezellig om samen te gaan shoppen. Wie gaat er mee?',
             'isDeleted' => 0,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'isHighlighted' => 0,
+            'created_at' => date("Y-m-d H:i:s", strtotime('-1 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-1 months'))
         ]);
 
         DB::table('events')->insert([
@@ -108,6 +114,7 @@ class EventsTableSeeder extends Seeder
             'numberOfPeople' => 4,
             'description' => 'Ik heb nog 4 vrijkaartjes voor het oorlogsmuseum in Amsterdam. Heeft iemand zin om mee te gaan?',
             'isDeleted' => 0,
+            'isHighlighted' => 0,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -122,6 +129,7 @@ class EventsTableSeeder extends Seeder
             'numberOfPeople' => 5,
             'description' => 'Ik had zin om een filmpje te pakken, maar ik weet nog niet welke. Meldt je vooral aan en als je nog een leuke film weet laat het even weten.',
             'isDeleted' => 0,
+            'isHighlighted' => 0,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -136,8 +144,9 @@ class EventsTableSeeder extends Seeder
             'numberOfPeople' => 3,
             'description' => 'De jaarlijkse tweakers security meetup is er weer, maar ik zoek nog een paar mensen die met mij mee willen gaan.',
             'isDeleted' => 0,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'isHighlighted' => 0,
+            'created_at' => date("Y-m-d H:i:s", strtotime('-2 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-2 months'))
         ]);
 
         DB::table('events')->insert([
@@ -150,6 +159,7 @@ class EventsTableSeeder extends Seeder
             'numberOfPeople' => 2,
             'description' => 'Ik heb een nieuwe drone gekocht, maar heb er niet zo veel verstand van. Vind iemand het leuk om mij te helpen met uitzoeken hoe het werkt?',
             'isDeleted' => 0,
+            'isHighlighted' => 0,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
@@ -164,8 +174,9 @@ class EventsTableSeeder extends Seeder
             'numberOfPeople' => 4,
             'description' => 'Ik organiseer een tafeltennis avond bij mij thuis. Voor eten en drinken word gezorgd!',
             'isDeleted' => 0,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'isHighlighted' => 0,
+            'created_at' => date("Y-m-d H:i:s", strtotime('-3 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-3 months'))
         ]);
 
         DB::table('events')->insert([
@@ -178,6 +189,22 @@ class EventsTableSeeder extends Seeder
             'numberOfPeople' => 20,
             'description' => 'Het is weer lekker weer dus we gaan lekker een dagje skaten in het park. Wie komt er ook?',
             'isDeleted' => 0,
+            'isHighlighted' => 0,
+            'created_at' => date("Y-m-d H:i:s", strtotime('-2 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-2 months'))
+        ]);
+
+        DB::table('events')->insert([
+            'tag_id' => 12,
+            'location_id' => 12,
+            'owner_id' => 12,
+            'event_picture_id' => 185,
+            'eventName' => 'Test mail',
+            'startDate' => date('Y-m-d', strtotime($date. ' + 10 days')),
+            'numberOfPeople' => 20,
+            'description' => 'Gebruik deze voor het testen van de mails',
+            'isDeleted' => 0,
+            'isHighlighted' => 0,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);

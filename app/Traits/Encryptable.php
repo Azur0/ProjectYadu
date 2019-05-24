@@ -10,7 +10,7 @@ trait Encryptable
         $value = parent::getAttribute($key);
 
         if (in_array($key, $this->encryptable)) {
-            $value = Crypt::decrypt($value);
+            return Crypt::decrypt($value);
         }
         return $value;
     }

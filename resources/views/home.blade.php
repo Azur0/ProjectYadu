@@ -35,7 +35,7 @@
 		<div class="col-md-4">
 			<div class="card">
 				<div class="card-header">
-					<i class="fas fa-user"></i> {{__('home.user_title')}}
+					<a href="/account/{{  Auth::user()->id }}/profile/info"><i class="fas fa-user"></i> {{__('home.user_title')}}</a>
 				</div>
 				<div class="card-body">
 					@if (session('status'))
@@ -47,11 +47,16 @@
 						<img src="data:image/png;base64,{{ chunk_split(base64_encode(Auth::user()->avatar)) }}">
 					</div>
 					<h3>	
-						{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}
+						<a href="/account/{{  Auth::user()->id }}/profile/info">{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}</a>
 					</h3>
 					<div>
 						<a href="/profile/edit"><i class="fas fa-user-cog"></i> {{__('home.user_link_settings')}}</a>
 					</div>
+					@if(Auth::user()->accountRole == 'Admin')
+					<div>
+						<a href="/admin"><i class="fas fa-user-shield"></i> admin</a>
+					</div>
+					@endif
 				</div>
 			</div>
 			<div class="card">

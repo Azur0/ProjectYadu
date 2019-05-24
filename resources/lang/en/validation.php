@@ -115,6 +115,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'confirm_update' => 'Update',
 
     //Custom validation messages
     'genderExists'         => 'Unknown gender.',
@@ -148,6 +149,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'activityName'          => 'event name',
+    ],
 
 ];

@@ -1,4 +1,248 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Lato:400,700);@charset "UTF-8";
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.message-container {
+  width: 100%;
+  background: #444753;
+  border-radius: 5px;
+  margin-top: 30px;
+}
+
+@media screen and (max-height: 400px) {
+  .message-container {
+    margin-top: -30px;
+  }
+}
+
+.people-list {
+  width: 260px;
+  float: left;
+}
+
+.people-list .search {
+  padding: 20px;
+}
+
+.people-list input {
+  border-radius: 3px;
+  border: none;
+  padding: 14px;
+  color: white;
+  background: #6A6C75;
+  width: 90%;
+  font-size: 14px;
+}
+
+.people-list .fa-search {
+  position: relative;
+  left: -25px;
+}
+
+.people-list ul {
+  padding: 20px;
+  height: 770px;
+}
+
+.people-list ul li {
+  padding-bottom: 20px;
+}
+
+.people-list img {
+  float: left;
+}
+
+.people-list .about {
+  float: left;
+  margin-top: 8px;
+}
+
+.people-list .about {
+  padding-left: 8px;
+}
+
+.people-list .status {
+  color: #92959E;
+}
+
+.chat {
+  width: 100%;
+  float: left;
+  background: #F2F5F8;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: #434651;
+}
+
+.chat .chat-header {
+  padding: 20px;
+  border-bottom: 2px solid white;
+}
+
+.chat .chat-header img {
+  float: left;
+}
+
+.chat .chat-header .chat-about {
+  float: left;
+  padding-left: 10px;
+  margin-top: 6px;
+}
+
+.chat .chat-header .chat-with {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.chat .chat-header .chat-num-messages {
+  color: #92959E;
+}
+
+.chat .chat-header .fa-star {
+  float: right;
+  color: #D8DADF;
+  font-size: 20px;
+  margin-top: 12px;
+}
+
+.chat .chat-history {
+  padding: 30px 30px 20px;
+  border-bottom: 2px solid white;
+  overflow-y: scroll;
+  height: 575px;
+}
+
+.chat .chat-history ul {
+  padding: 0px;
+  list-style: none;
+}
+
+.chat .chat-history .message-data {
+  margin-bottom: 15px;
+}
+
+.chat .chat-history .message-data-time {
+  color: #a8aab1;
+  padding-left: 6px;
+}
+
+.chat .chat-history .message {
+  color: white;
+  padding: 18px 20px;
+  line-height: 26px;
+  font-size: 16px;
+  border-radius: 7px;
+  margin-bottom: 30px;
+  width: 90%;
+  position: relative;
+}
+
+.chat .chat-history .message:after {
+  bottom: 100%;
+  left: 7%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: #e79535;
+  border-width: 10px;
+  margin-left: -10px;
+}
+
+.chat .chat-history .my-message {
+  background: #e79535;
+}
+
+.chat .chat-history .other-message {
+  background: #94C2ED;
+}
+
+.chat .chat-history .other-message:after {
+  border-bottom-color: #94C2ED;
+  left: 93%;
+}
+
+.chat .chat-message {
+  padding: 30px;
+}
+
+.chat .chat-message textarea {
+  width: 100%;
+  border: none;
+  padding: 10px 20px;
+  font: 14px/22px "Lato", Arial, sans-serif;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  resize: none;
+}
+
+.chat .chat-message .fa-file-o,
+.chat .chat-message .fa-file-image-o {
+  font-size: 16px;
+  color: gray;
+  cursor: pointer;
+}
+
+.chat .chat-message button {
+  float: right;
+  color: #94C2ED;
+  font-size: 16px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  background: #F2F5F8;
+}
+
+.chat .chat-message button:hover {
+  color: #75b1e8;
+}
+
+.online,
+.offline,
+.me {
+  margin-right: 3px;
+  font-size: 10px;
+}
+
+.online {
+  color: #e79535;
+}
+
+.offline {
+  color: #E38968;
+}
+
+.me {
+  color: #94C2ED;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.float-right {
+  float: right;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -8,14 +252,14 @@
  */
 
 :root {
-  --blue: #3490dc;
+  --blue: #94C2ED;
   --indigo: #6574cd;
   --purple: #9561e2;
   --pink: #f66D9b;
   --red: #e3342f;
-  --orange: #f6993f;
+  --orange: #E38968;
   --yellow: #ffed4a;
-  --green: #38c172;
+  --green: #e79535;
   --teal: #4dc0b5;
   --cyan: #6cb2eb;
   --white: #fff;
@@ -10656,12 +10900,39 @@ a.text-dark:focus {
 }
 
 .backlink {
-  margin: 0 0 1em 0;
+  margin: 1em 1em 1em 1em;
 }
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.contact-item a:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.media-icons {
+  font-size: 36px;
+  color: #E79535;
+}
+
+.event-media-icons {
+  font-size: 36px;
+  color: #E79535 !important;
+  margin-right: 2%;
+  margin-bottom: 50px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.event-media-icons:hover {
+  opacity: 0.8;
+}
+
+#map {
+  height: 350px !important;
 }
 
 .card-header {
@@ -10775,6 +11046,10 @@ a.text-dark:focus {
   #welcome_carousel .carousel-inner .carousel-item .carousel_img_container img {
     min-width: 100%;
     overflow-y: auto;
+    -webkit-filter: blur(10px);
+            filter: blur(10px);
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
   }
 
   #welcome_carousel .carousel-inner .carousel-item a,
@@ -10786,7 +11061,7 @@ a.text-dark:focus {
 @media only screen and (min-width: 1440px) {
   #welcome_carousel img {
     -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
+    transform: translateY(-50%);
   }
 }
 
@@ -10832,5 +11107,70 @@ a.text-dark:focus {
 .greyified {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
+}
+
+#user_header {
+  min-height: 175px;
+}
+
+#user_header #user_header_interactable {
+  height: 70%;
+}
+
+#user_header #user_header_tabs {
+  height: 30%;
+}
+
+#user_header #account_tabs {
+  height: 100%;
+}
+
+#user_header #account_tabs ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#user_header #account_tabs ul li {
+  margin: 0 auto;
+  display: inline-block;
+  text-decoration: none;
+  padding: 1em 1em 0 1em;
+}
+
+#user_header #account_tabs ul li .active {
+  border: solid #DEE2E6;
+  border-width: 2px 2px 0 2px;
+}
+
+.profile_related_user {
+  width: 25%;
+  display: inline-block;
+  padding: 1em;
+  border: 1px solid #E6E6E6;
+}
+
+.profile_related_user .profile_image {
+  border: 5px solid white;
+  border-radius: 500px;
+  overflow: hidden;
+}
+
+.profile_related_user .profile_image img {
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (max-width: 1200px) {
+  .profile_related_user {
+    width: 49%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .profile_related_user {
+    width: 100%;
+  }
 }
 

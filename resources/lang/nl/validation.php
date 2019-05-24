@@ -117,6 +117,7 @@ return [
     //Custom validation messages
     'genderExists'         => 'Onbekend geslacht.',
     'swearWords'           => ':attribute is niet toegestaan omdat deze een scheldwoord bevat.',
+    'confirm_update' => 'Bijwerken',
 
     /*
     |--------------------------------------------------------------------------
@@ -144,6 +145,7 @@ return [
     |
     */
     'attributes' => [
+        'activityName'          => 'evenement naam',
         'address'               => 'adres',
         'age'                   => 'leeftijd',
         'available'             => 'beschikbaar',

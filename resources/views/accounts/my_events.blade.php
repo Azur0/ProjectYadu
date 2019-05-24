@@ -24,7 +24,7 @@
 							<td>{{ $event->date }}</td>
 							<td>{{ $event->location->postalcode }} {{ $event->city }}</td>
 							<td>
-								<a href="/events/{{$event->id}}/edit"><i class="fas fa-edit"></i></a>
+								<a class="editButton" href="/events/{{$event->id}}/edit"><i class="fas fa-edit"></i></a>
 								<form id="deleteEvent{{$event->id}}" method="POST" action="/events/{{$event->id}}">
 								@method('DELETE')
 								@csrf

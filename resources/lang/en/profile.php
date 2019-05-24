@@ -9,7 +9,28 @@ return [
 */
 
 ///////////////////////////////// Show ////////////////////////////////////
-
+    'follow_request' => 'has sent you a follow request!',
+    'follow_request_accept' => 'Accept follow request',
+    'follow_request_decline' => 'Decline follow request',
+    'follow' => 'Follow',
+    'follow_pending' => 'Follow request pending',
+    'follow_accepted' => 'Unfollow',
+    
+    'head_me_info' => 'My Info',
+    'head_info' => 'Info',
+    'head_events' => 'Events',
+    'head_my_events' => 'My events',
+    'head_participating' => 'Participating',
+    'head_followers' => 'Followers',
+    'head_following' => 'Following',
+    'head_hidden' => 'User has hidden their user info',
+    'info_name' => 'Name',
+    'info_rol' => 'Role',
+    'info_stats' => 'Stats',
+    'info_hosted' => 'Amount of events hosted',
+    'info_hosted_by' => 'Hosted events by',
+    'info_participated' => 'Amount of events participated in',
+    'info_participated_in' => 'Is participating in:',
 
 ///////////////////////////////// Edit ////////////////////////////////////
 
@@ -53,5 +74,17 @@ return [
     'edit_delete_account_positive' => 'Yes, delete it',
     'edit_delete_account_negative' => 'No, Keep it!',
 
-
+    'edit_unblock_account_title' => 'Blocked users',
+    'edit_unblock_account_button' => 'Unblock',
+    'edit_block_account_button' => 'Block',
+    'edit_unblock_account_negative' => 'No, don\'t unblock :name',
+    'edit_unblock_account_positive' => 'Yes, unblock :name',
+    'edit_unblock_account_areYouSure' => 'Are you sure you want to unblock :name?',
+    
+    'edit_privacy_head' => 'Privacy Settings',
+    'edit_privacy_participatingVisibility' => 'Participating Visibility',
+    'edit_privacy_eventsVisibility' => 'Events Visibility',
+    'edit_privacy_infoVisibility' => 'Info Visibility',
+    'edit_privacy_followingVisibility' => 'Following Visibility',
+    'edit_privacy_followerVisibility' => 'Follower Visibility',
 ];

@@ -16,9 +16,11 @@
 
             <h3>{{__('events.show_initiator')}}</h3>
             <div class="row my-1">
-                <img class="img-fluid rounded-circle my-auto avatar"
-                     src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}"/>
-                <h5 class="my-auto ml-2">{{$event->owner->firstName .' '. $event->owner->middleName .' '. $event->owner->lastName}}</h5>
+                <a href="/account/{{$event->owner->id}}/profile/info">
+                	<img class="img-fluid rounded-circle my-auto avatar" src="data:image/jpeg;base64, {{base64_encode($event->owner->avatar)}}"/>
+                </a>
+                <h5 class="my-auto ml-2"><a href="/account/{{$event->owner->id}}/profile/info">{{$event->owner->firstName .' '. $event->owner->middleName .' '. $event->owner->lastName}}</a></h5>
+                
             </div>
             <br><br>
 
@@ -44,9 +46,15 @@
             </div>
             @foreach($event->participants as $participant)
                 <div class="row my-1">
-                    <img class="img-fluid rounded-circle my-auto avatar"
-                         src="data:image/jpeg;base64, {{base64_encode($participant->avatar)}}"/>
-                    <h5 class="my-auto ml-2">{{$participant->firstName .' '. $participant->middleName .' '. $participant->lastName}}</h5>
+                    <a href="/account/{{$participant->id}}/profile/info">
+                    	<img class="img-fluid rounded-circle my-auto avatar" src="data:image/jpeg;base64, {{base64_encode($participant->avatar)}}"/>
+                    </a>
+                    <p>
+	                    <h5 class="my-auto ml-2">
+	                    	<a href="/account/{{$participant->id}}/profile/info">{{$participant->firstName .' '. $participant->middleName .' '. $participant->lastName}}</a>
+	                    </h5>
+                	</p>
+                    
                 </div>
             @endforeach
         </div>
@@ -74,7 +82,7 @@
 
                 }
             </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuigrcHjZ0tW0VErNr7_U4Pq_gLCknnD0&callback=initMap"
+            <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_KEY')}}&callback=initMap"
                     async defer></script>
             <div class="mb-5">
                 <h3>{{__('events.show_description')}}</h3>
@@ -88,7 +96,6 @@
                     <a id="share-whatsapp" class="fab fa-whatsapp event-media-icons"></a>
                     <a id="share-facebook" class="fab fa-facebook event-media-icons"></a>
                     <a id="share-twitter" class="fab fa-twitter event-media-icons"></a>
-                    {{--<a id="share-instagram" class="fab fa-instagram event-media-icons"></a>--}}
                     <a id="share-link" class="fa fa-link event-media-icons" data-toggle="modal" data-target="#confirmDeleteAccount"></a>
                 </div>
             </div>
@@ -168,7 +175,7 @@
         </div>
     </div>
     <div class="row">
-    @if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())))
+    @if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
         <!-- BEGIN CHAT TEMPLATE -->
             <div id="app" class="message-container clearfix" v-if="account">
 
@@ -234,7 +241,7 @@
     </div>
 
 @endsection
-@if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())))
+@if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
 @section('scripts')
     <script>
 

@@ -25,6 +25,9 @@ return [
     'nav_images' => 'Images',
     'nav_header_category' => 'Categories:',
     'nav_header_extra' => 'Extra:',
+    'nav_swearWords' => 'Swear words',
+    'nav_socialmedia' => 'Socialmedia',
+    'nav_links' => 'Links',
 
 ///////////////////////////////// Footer //////////////////////////////////
 

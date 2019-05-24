@@ -208,4 +208,18 @@ h6.collapse-header {
 #incard {
   margin-top: 45px;
   margin-left: 20px;
+.btn_prohibitedWord
+{
+	background-color: limegreen;
+	margin-left: 2%;
+	color: white;
+}
+
+.btn_prohibitedWord:hover
+{
+	color: white;
+}
+
+.btn_inline{
+	float: right; margin-right: 2%;
 }

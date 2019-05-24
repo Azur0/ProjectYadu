@@ -25,6 +25,9 @@ return [
     'nav_images' => 'Foto\'s',
     'nav_header_category' => 'Categoriën:',
     'nav_header_extra' => 'Extra\'s:',
+    'nav_swearWords' => 'Scheldwoorden',
+    'nav_socialmedia' => 'Socialmedia',
+    'nav_links' => 'Links',    
 
 ///////////////////////////////// Footer //////////////////////////////////
 

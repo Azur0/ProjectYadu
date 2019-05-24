@@ -54,8 +54,8 @@
         <div class="loc">
             <h3>3. Kies de (verzamel)locatie </h3>
             <div class="description location">
-                <input type="hidden" name="lng" id="lng" value="{{$data['event']->location()->first()->locLatitude}}">
-                <input type="hidden" name="lat" id="lat" value="{{$data['event']->location()->first()->locLongtitude}}">
+                <input type="hidden" name="lng" id="lng" value="{{$data['event']->location()->first()->locLongtitude}}">
+                <input type="hidden" name="lat" id="lat" value="{{$data['event']->location()->first()->locLatitude}}">
                 <input type="hidden" name="houseNumber" id="houseNumber"
                     value="{{$data['event']->location()->first()->houseNumber}}">
                 <input type="hidden" name="postalCode" id="postalCode"

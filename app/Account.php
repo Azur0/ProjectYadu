@@ -18,7 +18,7 @@ class Account extends Authenticatable implements MustVerifyEmailContract
     use Notifiable;
     use Encryptable;
 
-    protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender', 'avatar', 'api_token'];
+    protected $fillable = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'email', 'password','gender', 'avatar', 'api_token','followerVisibility','followingVisibility','infoVisibility','eventsVisibility','participatingVisibility'];
     protected $encryptable = ['firstName', 'middleName', 'lastName'];
 
     protected $dispatchesEvents = [
@@ -34,7 +34,8 @@ class Account extends Authenticatable implements MustVerifyEmailContract
 
             return fread(fopen($filePath, "r"), filesize($filePath));
         }
-        else {
+        else
+        {
             return $avatar;
         }
     }

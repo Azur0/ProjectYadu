@@ -91397,7 +91397,6 @@ __webpack_require__(/*! C:\Users\joelr\Documents\GitHub\Project-Yadu-A1\resource
 __webpack_require__(/*! C:\Users\joelr\Documents\GitHub\Project-Yadu-A1\resources\sass\app.scss */"./resources/sass/app.scss");
 module.exports = __webpack_require__(/*! C:\Users\joelr\Documents\GitHub\Project-Yadu-A1\resources\sass\sb-admin-2.scss */"./resources/sass/sb-admin-2.scss");
 
-
 /***/ })
 
 /******/ });

@@ -11909,6 +11909,7 @@ form.user .btn-user {
 
 @keyframes noise-anim {
   0% {
+
     clip: rect(39px, 9999px, 25px, 0);
   }
 

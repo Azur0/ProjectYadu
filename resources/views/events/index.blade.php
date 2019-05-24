@@ -14,7 +14,7 @@
         <input type="range" ticks="[5, 10, 15, 20, 25]" min="5" max="25" step="5" value="20" class="slider"
                id="rangeValue">
         <div class="labels">
-            <label class="rangeTextLeft">5 KM</label>
+            <label class="rangeTextLeft">5km</label>
             <label class="rangeTextCenter">10 KM</label>
             <label class="rangeTextCenter">15 KM</label>
             <label class="rangeTextCenter">20 KM</label>

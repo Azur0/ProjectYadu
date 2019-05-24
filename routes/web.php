@@ -35,8 +35,9 @@ Route::get('admin/links', 'EditLinksController@index')->middleware('auth', 'isAd
 Route::post('admin/link', 'EditLinksController@saveLink')->middleware('auth', 'isAdmin');
 Route::post('admin/email', 'EditLinksController@saveEmail')->middleware('auth', 'isAdmin');
 
-Route::get('/account/myevents', 'HomeController@myEvents');
-Route::get('/account/participating', 'HomeController@participating');
+Route::get('/account/myevents', 'HomeController@myEvents')->middleware('auth');
+Route::get('/account/participating', 'HomeController@participating')->middleware('auth');
+Route::get('/account/{id}/profile/{contentType}', 'AccountController@profileInfo')->middleware('auth');
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
 
@@ -50,7 +51,11 @@ Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilt
 Auth::routes(['verify' => true]);
 
 //Profile
-Route::get('profile/edit', 'ProfileController@edit')->middleware('auth');
+Route::get('/profile/edit', 'AccountController@edit')->middleware('auth');
+Route::get('/profile/{id}/follow', 'AccountController@follow')->middleware('auth');
+Route::get('/profile/{id}/accept', 'AccountController@accept')->middleware('auth');
+Route::get('/profile/{id}/decline', 'AccountController@decline')->middleware('auth');
+Route::get('/profile/{id}/unfollow', 'AccountController@unfollow')->middleware('auth');
 Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
 Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
 Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middleware('auth');

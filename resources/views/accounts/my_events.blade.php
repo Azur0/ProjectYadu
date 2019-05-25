@@ -24,7 +24,12 @@
 							<td>{{ $event->date }}</td>
 							<td>{{ $event->location->postalcode }} {{ $event->city }}</td>
 							<td>
-								<a href="/events/{{$event->id}}/edit"><i class="fas fa-edit" style="font-size:20px; margin-right: 10px; color:#2578AF;"></i></a>
+								<a class="editButton" href="/events/{{$event->id}}/edit"><i class="fas fa-edit"></i></a>
+								<form id="deleteEvent{{$event->id}}" method="POST" action="/events/{{$event->id}}">
+								@method('DELETE')
+								@csrf
+									<button type="submit" class="deleteButton" form="deleteEvent{{$event->id}}"><i class="fas fa-trash-alt"></i></input>
+								</form>
 							</td>
 						</tr>
 					@endforeach

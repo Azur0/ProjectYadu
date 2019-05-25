@@ -2,12 +2,10 @@
 
 namespace App\Events;
 
-
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 
-
-class EventEdited
+class AccountCreation
 {
     use Dispatchable, SerializesModels;
 
@@ -16,9 +14,10 @@ class EventEdited
      *
      * @return void
      */
-    public $event;
-    public function __construct($event)
+    public $account;
+    public function __construct($account)
     {
-        $this->event = $event;
+        $this->account = $account;
     }
+
 }

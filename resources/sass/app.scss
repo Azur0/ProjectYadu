@@ -302,13 +302,13 @@
 		border: 5px solid white;
 		border-radius: 500px;
 		overflow: hidden;
-
+	}
 		img
 		{
 			width: 100%;
 			height: 100%;
 		}
-	}
+	
 	@media only screen and (max-width: 1200px)
 	{
 		width: 49%;
@@ -320,8 +320,7 @@
 	}
 }
 
-#http_error
-{
+#http_error {
 	text-align: center;
 	margin: 4em auto;
 
@@ -334,4 +333,25 @@
 	{
 		font-size: 30px;
 	}
+}
+
+.editButton {
+  float: left;
+}
+
+.editButton i {
+  font-size:20px;
+  margin-right:10px;
+  color:#2578AF;
+}
+
+.deleteButton {
+  background-color: transparent;
+  border: none;
+}
+
+.deleteButton i {
+  font-size:20px;
+  margin-right: 10px;
+  color:#b10808;
 }

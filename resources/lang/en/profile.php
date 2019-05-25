@@ -43,6 +43,22 @@ return [
     'edit_email' => 'E-mail address',
     'edit_update_profile' => 'Update profile',
 
+    'edit_change_account_settings_title' => 'Account settings - Notifications',
+    // Follow notification
+    'edit_change_account_settings_follow_notification_title' =>'About following',
+    'edit_change_account_settings_follow_notification_creation' => 'When event is created by someone you follow',
+    'edit_change_account_settings_follow_notification_join' => 'When event is joined or left by someone you follow',
+    // Event notification
+    'edit_change_account_settings_event_notification_title' =>'About events',
+    'edit_change_account_settings_event_edited' => 'When event you participate in is edited',
+    'edit_change_account_settings_event_deleted' => 'When event you participate in is deleted',
+    // Participant notification
+    'edit_change_account_settings_notification_title' =>'About participating',
+    'edit_change_account_settings_notification_join' => 'When event is joined or left by someone else',
+    // Button change notification settings
+    'edit_change_account_settings' => 'Change settings',
+
+
     'edit_change_password_title' => 'Change password',
     'edit_current_password' => 'Current password',
     'edit_new_password' => 'New password',
@@ -58,6 +74,13 @@ return [
     'edit_delete_account_positive' => 'Yes, delete it',
     'edit_delete_account_negative' => 'No, Keep it!',
 
+    'edit_unblock_account_title' => 'Blocked users',
+    'edit_unblock_account_button' => 'Unblock',
+    'edit_block_account_button' => 'Block',
+    'edit_unblock_account_negative' => 'No, don\'t unblock :name',
+    'edit_unblock_account_positive' => 'Yes, unblock :name',
+    'edit_unblock_account_areYouSure' => 'Are you sure you want to unblock :name?',
+    
     'edit_privacy_head' => 'Privacy Settings',
     'edit_privacy_participatingVisibility' => 'Participating Visibility',
     'edit_privacy_eventsVisibility' => 'Events Visibility',

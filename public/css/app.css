@@ -11181,7 +11181,7 @@ a.text-dark:focus {
   overflow: hidden;
 }
 
-.profile_related_user .profile_image img {
+.profile_related_user img {
   width: 100%;
   height: 100%;
 }

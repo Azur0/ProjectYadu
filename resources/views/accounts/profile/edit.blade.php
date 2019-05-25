@@ -283,6 +283,158 @@
 						</form>
 					</div>
 				</div>
+				<div class="card">
+                    <div class="card-header"> {{__('profile.edit_unblock_account_title')}}</div>
+                    <div class="card-body">
+                            @foreach ( $account->blockedUsers as $blockedUser )
+                            <form method="POST" id="unblock{{$blockedUser->blockedAccount->firstName}}" action="/profile/unblockUser">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$blockedUser->blockedAccount->id}}">
+                            <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">{{$blockedUser->blockedAccount->firstName}} {{ $blockedUser->blockedAccount->middleName }} {{ $blockedUser->blockedAccount->lastName }}</label>
+                                    <div class="col-md-4">
+                                    <button type="button" class="btn btn-primary float-right" data-toggle="modal"
+                                            data-target="#confirmUnblockAccount{{$blockedUser->blockedAccount->firstName}}">
+                                        {{__('profile.edit_unblock_account_button')}}
+                                    </button>
+                                </div>
+
+                                <div class="modal fade" id="confirmUnblockAccount{{$blockedUser->blockedAccount->firstName}}" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">{{__('profile.edit_delete_account_confirm_title')}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            {{__('profile.edit_unblock_account_areYouSure', ['name' => $blockedUser->blockedAccount->firstName])}}
+                                            
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="submit" form="unblock{{$blockedUser->blockedAccount->firstName}}" class="btn btn-danger"
+                                                       value="{{__('profile.edit_unblock_account_positive', ['name' => $blockedUser->blockedAccount->firstName])}}">
+                                                <button type="button" class="btn btn-primary"
+                                                        data-dismiss="modal">{{__('profile.edit_unblock_account_negative', ['name' => $blockedUser->blockedAccount->firstName])}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                            @endforeach
+
+                            
+                    </div>
+                </div>
+
+				<!-- Notification settings -->
+				<div class="card">
+					<div class="card-header">
+						{{__('profile.edit_change_account_settings_title')}}
+					</div>
+					<div class="card-body">
+						<form method="POST" action="/profile/updateAccountSettings/{{$account->id}}">
+							@csrf
+							@method("PATCH")
+							<div class="form-group row justify-content-md-center">
+								<h5>{{__('profile.edit_change_account_settings_follow_notification_title')}}</h5>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<label for="FollowNotificationCreateEvent"
+									   class="col col-form-label text-md-right">{{__('profile.edit_change_account_settings_follow_notification_creation')}}
+								</label>
+
+								<div class="col">
+									<div class="custom-control custom-switch">
+										@if($account->settings->FollowNotificationCreateEvent == 0)
+											<input type="checkbox" name="FollowNotificationCreateEvent" class="custom-control-input" id="customSwitches">
+										@else
+											<input type="checkbox" name="FollowNotificationCreateEvent" class="custom-control-input" id="customSwitches" checked>
+										@endif
+										<label class="custom-control-label" for="customSwitches"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<label for="FollowNotificationJoinEvent"
+									   class="col col-form-label text-md-right">{{__('profile.edit_change_account_settings_follow_notification_join')}}
+								</label>
+								<div class="col">
+									<div class="custom-control custom-switch">
+										@if($account->settings->FollowNotificationJoinAndLeaveEvent == 0)
+											<input type="checkbox" name="FollowNotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches1">
+										@else
+											<input type="checkbox" name="FollowNotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches1" checked>
+										@endif
+										<label class="custom-control-label" for="customSwitches1"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<h5>{{__('profile.edit_change_account_settings_event_notification_title')}}</h5>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<label for="NotificationEventEdited"
+									   class="col col-form-label text-md-right">{{__('profile.edit_change_account_settings_event_edited')}}
+								</label>
+								<div class="col">
+									<div class="custom-control custom-switch">
+										@if($account->settings->NotificationEventEdited == 0)
+											<input type="checkbox" name="NotificationEventEdited" class="custom-control-input" id="customSwitches3">
+										@else
+											<input type="checkbox" name="NotificationEventEdited" class="custom-control-input" id="customSwitches3" checked>
+										@endif
+										<label class="custom-control-label" for="customSwitches3"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<label for="NotificationEventDeleted"
+									   class="col col-form-label text-md-right">{{__('profile.edit_change_account_settings_event_deleted')}}
+								</label>
+								<div class="col">
+									<div class="custom-control custom-switch">
+										@if($account->settings->NotificationEventDeleted == 0)
+											<input type="checkbox" name="NotificationEventDeleted" class="custom-control-input" id="customSwitches4">
+										@else
+											<input type="checkbox" name="NotificationEventDeleted" class="custom-control-input" id="customSwitches4" checked>
+										@endif
+										<label class="custom-control-label" for="customSwitches4"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<h5>{{__('profile.edit_change_account_settings_notification_title')}}</h5>
+							</div>
+							<div class="form-group row justify-content-md-center">
+								<label for="FollowNotificationJoinEvent"
+									   class="col col-form-label text-md-right">{{__('profile.edit_change_account_settings_notification_join')}}
+								</label>
+								<div class="col">
+									<div class="custom-control custom-switch">
+										@if($account->settings->NotificationJoinAndLeaveEvent == 0)
+											<input type="checkbox" name="NotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches5">
+										@else
+											<input type="checkbox" name="NotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches5" checked>
+										@endif
+										<label class="custom-control-label" for="customSwitches5"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row mb-0">
+								<div class="col-md-6 offset-md-4">
+									<button id="submit" type="submit" class="btn btn-primary">
+										{{__('profile.edit_change_account_settings')}}
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 
 				<div class="card">
 					<div class="card-header">{{__('profile.edit_change_password_title')}}</div>

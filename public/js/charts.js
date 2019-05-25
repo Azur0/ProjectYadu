@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-//Bitch
+
 
 /***/ }),
 
@@ -104,7 +104,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Bram Dortmans\php\Project-Yadu-A1\resources\js\charts.js */"./resources/js/charts.js");
+module.exports = __webpack_require__(/*! C:\Users\MerijnOmen\Desktop\Avans\Projecten\2018-2019\YaDu\Project-Yadu-A1\resources\js\charts.js */"./resources/js/charts.js");
 
 
 /***/ })

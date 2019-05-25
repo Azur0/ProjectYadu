@@ -10960,6 +10960,7 @@ a.text-dark:focus {
 #user_avatar img {
   border-radius: 80px;
   width: 150px;
+  height: 150px;
 }
 
 .dashboard_event {
@@ -11109,6 +11110,12 @@ a.text-dark:focus {
   filter: grayscale(100%);
 }
 
+.event_overview h3 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 #user_header {
   min-height: 175px;
 }
@@ -11117,12 +11124,29 @@ a.text-dark:focus {
   height: 70%;
 }
 
+@media only screen and (max-width: 767px) {
+  #user_header #user_header_interactable {
+    height: unset;
+    text-align: center;
+  }
+
+  #user_header #user_header_interactable .col-md-auto {
+    margin: 5px 0;
+  }
+}
+
 #user_header #user_header_tabs {
   height: 30%;
 }
 
 #user_header #account_tabs {
   height: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+  #user_header #account_tabs {
+    text-align: center;
+  }
 }
 
 #user_header #account_tabs ul {
@@ -11145,7 +11169,7 @@ a.text-dark:focus {
 }
 
 .profile_related_user {
-  width: 25%;
+  width: 23%;
   display: inline-block;
   padding: 1em;
   border: 1px solid #E6E6E6;
@@ -11172,5 +11196,18 @@ a.text-dark:focus {
   .profile_related_user {
     width: 100%;
   }
+}
+
+#http_error {
+  text-align: center;
+  margin: 4em auto;
+}
+
+#http_error h1 {
+  font-size: 120px;
+}
+
+#http_error a {
+  font-size: 30px;
 }
 

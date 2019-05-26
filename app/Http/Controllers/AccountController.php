@@ -7,6 +7,7 @@ use App\AccountSettings;
 use App\BlockedUser;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\EditProfileRequest;
+use App\Http\Requests\EditPrivacySettingsRequest;
 use Illuminate\Http\Request;
 use App\Gender;
 use App\Event;
@@ -170,6 +171,21 @@ class AccountController extends Controller
 		$account->middleName = $request['middleName'];
 		$account->lastName = $request['lastName'];
 		$account->dateOfBirth = $request['dateOfBirth'];
+		$account->followerVisibility = $request['followerVisibility'];
+		$account->followingVisibility = $request['followingVisibility'];
+		$account->infoVisibility = $request['infoVisibility'];
+		$account->eventsVisibility = $request['eventsVisibility'];
+		$account->participatingVisibility = $request['participatingVisibility'];
+
+		$account->save();
+
+		return redirect('/profile/edit');
+	}
+
+	public function updatePrivacySettings(EditPrivacySettingsRequest $request)
+	{
+		$account = Account::where('id', Auth::id())->firstOrFail();
+
 		$account->followerVisibility = $request['followerVisibility'];
 		$account->followingVisibility = $request['followingVisibility'];
 		$account->infoVisibility = $request['infoVisibility'];

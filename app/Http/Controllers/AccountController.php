@@ -171,11 +171,6 @@ class AccountController extends Controller
 		$account->middleName = $request['middleName'];
 		$account->lastName = $request['lastName'];
 		$account->dateOfBirth = $request['dateOfBirth'];
-		$account->followerVisibility = $request['followerVisibility'];
-		$account->followingVisibility = $request['followingVisibility'];
-		$account->infoVisibility = $request['infoVisibility'];
-		$account->eventsVisibility = $request['eventsVisibility'];
-		$account->participatingVisibility = $request['participatingVisibility'];
 
 		$account->save();
 

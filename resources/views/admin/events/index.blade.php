@@ -74,16 +74,16 @@
 						<td><a href="/events/{{$event->id}}" class="button-show button-hover">{{__('events.show')}}</a></td>
 						<td><a href="/admin/events/{{$event->id}}/edit" class="button button-hover">{{__('events.show_edit')}}</a></td>
 						<td>
-							<form class="form_submit_ays" method="POST" id="deleteAccount" action="/admin/events/{{$event->id}}">
+							<form class="form_submit_ays" method="POST" id="deleteAccount{{$event->id}}" action="/admin/events/{{$event->id}}">
 								@method('DELETE')
 								@csrf
 								<div>
 									<div >
-										<button type="button" class="button-remove button-hover" data-toggle="modal" data-target="#confirmDeleteAccount">{{__('events.show_delete')}}</button>
+										<button type="button" class="button-remove button-hover" data-toggle="modal" data-target="#confirmDeleteAccount{{$event->id}}">{{__('events.show_delete')}}</button>
 
 									</div>
 
-									<div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
+									<div class="modal fade" id="confirmDeleteAccount{{$event->id}}" tabindex="-1" role="dialog">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header">
@@ -97,7 +97,7 @@
 													{{__('events.confirm_text')}}
 												</div>
 												<div class="modal-footer">
-													<input type="submit" form="deleteAccount" class="btn btn-danger"
+													<input type="submit" form="deleteAccount{{$event->id}}" class="btn btn-danger"
 														   value="{{__('events.confirm_delete')}}">
 													<button type="button" class="btn btn-primary"
 															data-dismiss="modal">{{__('events.dismiss_delete')}}

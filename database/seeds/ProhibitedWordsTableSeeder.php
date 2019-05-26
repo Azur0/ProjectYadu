@@ -1,14 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class ProhibitedWordsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $words = array(
@@ -39,6 +35,8 @@ class ProhibitedWordsTableSeeder extends Seeder
         foreach($words as $word) {
             DB::table('prohibited_words')->insert([
                 'word' => $word,
+                'updated_at' => Carbon::now(),
+                'created_at' => Carbon::now()
             ]);
         }
     }

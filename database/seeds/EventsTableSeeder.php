@@ -25,8 +25,8 @@ class EventsTableSeeder extends Seeder
             'description' => 'Wie gaat er mee naar het zwembad in den bosch? We gaan heel de middag zwemmen en daarna een patatje eten.',
             'isDeleted' => 0,
             'isHighlighted' => 1,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'created_at' => date("Y-m-d H:i:s", strtotime('-1 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-1 months'))
         ]);
 
         DB::table('events')->insert([
@@ -40,8 +40,8 @@ class EventsTableSeeder extends Seeder
             'description' => 'Onbeperkt tapas eten. Er is weer een actie bij La Cubanita, wie heeft er zin om mee te gaan?',
             'isDeleted' => 0,
             'isHighlighted' => 1,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'created_at' => date("Y-m-d H:i:s", strtotime('-1 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-1 months'))
         ]);
 
         DB::table('events')->insert([
@@ -85,8 +85,8 @@ class EventsTableSeeder extends Seeder
             'description' => 'Ik ga volgende week wandelen in het bos in Zwolle. Als iemand het leuk vind om mee te gaan kom dan gerust mee.',
             'isDeleted' => 0,
             'isHighlighted' => 0,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'created_at' => date("Y-m-d H:i:s", strtotime('-2 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-2 months'))
         ]);
 
         DB::table('events')->insert([
@@ -100,8 +100,8 @@ class EventsTableSeeder extends Seeder
             'description' => 'Het is weer bijna koopavond en ik heb dringend nieuwe broeken nodig, maar het is wel zo gezellig om samen te gaan shoppen. Wie gaat er mee?',
             'isDeleted' => 0,
             'isHighlighted' => 0,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'created_at' => date("Y-m-d H:i:s", strtotime('-1 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-1 months'))
         ]);
 
         DB::table('events')->insert([
@@ -145,8 +145,8 @@ class EventsTableSeeder extends Seeder
             'description' => 'De jaarlijkse tweakers security meetup is er weer, maar ik zoek nog een paar mensen die met mij mee willen gaan.',
             'isDeleted' => 0,
             'isHighlighted' => 0,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'created_at' => date("Y-m-d H:i:s", strtotime('-2 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-2 months'))
         ]);
 
         DB::table('events')->insert([
@@ -175,8 +175,8 @@ class EventsTableSeeder extends Seeder
             'description' => 'Ik organiseer een tafeltennis avond bij mij thuis. Voor eten en drinken word gezorgd!',
             'isDeleted' => 0,
             'isHighlighted' => 0,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
+            'created_at' => date("Y-m-d H:i:s", strtotime('-3 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-3 months'))
         ]);
 
         DB::table('events')->insert([
@@ -188,6 +188,21 @@ class EventsTableSeeder extends Seeder
             'startDate' => date('Y-m-d', strtotime($date. ' + 10 days')),
             'numberOfPeople' => 20,
             'description' => 'Het is weer lekker weer dus we gaan lekker een dagje skaten in het park. Wie komt er ook?',
+            'isDeleted' => 0,
+            'isHighlighted' => 0,
+            'created_at' => date("Y-m-d H:i:s", strtotime('-2 months')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('-2 months'))
+        ]);
+
+        DB::table('events')->insert([
+            'tag_id' => 12,
+            'location_id' => 12,
+            'owner_id' => 12,
+            'event_picture_id' => 185,
+            'eventName' => 'Test mail',
+            'startDate' => date('Y-m-d', strtotime($date. ' + 10 days')),
+            'numberOfPeople' => 20,
+            'description' => 'Gebruik deze voor het testen van de mails',
             'isDeleted' => 0,
             'isHighlighted' => 0,
             'created_at' => date("Y-m-d H:i:s"),

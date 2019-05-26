@@ -21,5 +21,4 @@ class EventEdited
     {
         $this->event = $event;
     }
-
 }

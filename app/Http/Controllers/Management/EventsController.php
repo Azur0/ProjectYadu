@@ -10,6 +10,7 @@ use App\EventTag;
 use App\Account;
 use Validator;
 use Illuminate\Support\Carbon;
+use App\Location;
 use Auth;
 use App\Http\Controllers\Controller;
 
@@ -21,13 +22,13 @@ class EventsController extends Controller
 		{
 			if (Auth::user()->accountRole == 'Admin')
 			{
-				$events = Event::orderBy('startDate','des')->get();
+				$events = Event::where('isDeleted', 0)->orderBy('startDate','desc')->get();
 
 				$tags = EventTag::all();
 				$names = Event::distinct('eventName')->pluck('eventName');
 				$currentDate = Carbon::now();
 				foreach($events as $event){
-					$event->city = self::cityFromPostalcode($event->Location->postalcode);
+					$event->city = $event->location->locality;
 					$event->currentDate = $currentDate;
 				}
 				return view('admin/events.index', compact(['tags', 'names'],'events'));  
@@ -192,11 +193,17 @@ class EventsController extends Controller
 				$validator = Validator::make($request->all(), [
 					'activityName' => 'required|max:30',
 					'description' => 'required|max:150',
-					'numberOfPeople' => 'required|min:1|max:100',
+					'numberOfPeople' => 'required', //TODO: min en max nog doen
 					'tag' => 'required',
 					'startDate' => 'required|date|after:now',
 					'startTime' => 'required',
-					'location' => 'required',
+					'lng' => 'required|max:45',
+					'lat' => 'required|max:45',
+					'houseNumber' => 'required|max:10',
+					'postalCode' => 'required|max:45',
+					'route'=> 'required',
+					'locality' => 'required',
+					'numberOfPeople' => 'required',
 					'isHighlighted' => 'nullable|string'
 				]);
 
@@ -224,6 +231,16 @@ class EventsController extends Controller
 				}
 
 				$event = Event::where('id', $id)->firstorfail();
+				$location = Location::where('id', $event->location_id)->firstorfail();
+
+				$location->update([
+					'locLongtitude' => $request['lng'],
+					'locLatitude' => $request['lat'],
+					'houseNumber' => $request['houseNumber'],
+					'postalcode' => str_replace(' ', '', $request['postalCode']),
+					'route'=> $request['route'],
+					'locality' => $request['locality'],
+				]);
 
 				$event->update(
 					[
@@ -232,12 +249,10 @@ class EventsController extends Controller
 						'startDate' => $request['startDate'],
 						'numberOfPeople' => $request['numberOfPeople'],
 						'tag_id' => $request['tag'],
-						'location_id' => '1',
 						'event_picture_id' => $request['picture'],
 						'isHighlighted' => $highlight
 					]
 				);
-				//TODO: set location
 				return redirect('/admin/events');
 			}
 			else
@@ -252,14 +267,12 @@ class EventsController extends Controller
 	{
 		if (Auth::check())
 		{
-		    $event = Event::findOrFail($event->id);
-            if($event->participants()->count()){
-                $participants = $event->participants()->get();
-                foreach($participants as $participant){
-                    $event->participants()->detach($participant->id);
-                }
-            }
-			$event->delete();
+			$event = Event::findOrFail($event->id);
+            
+			$event->update([
+			   'isDeleted' => 1
+            ]);
+      
 			return redirect('admin/events');
 		}
 	}
@@ -325,7 +338,7 @@ class EventsController extends Controller
         foreach ($unfiltered_events as $event) {
             //$date = self::dateToText($event->startDate);
 
-            $postalcode = self::cityFromPostalcode($event->Location->postalcode);
+            $postalcode =  $event->location->locality;
 
             $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
             $Pic = (base64_encode($Picture[0]->picture));
@@ -377,32 +390,4 @@ class EventsController extends Controller
 		return $formatted_date;
 	}
 
-	public function cityFromPostalcode($postalcode)
-	{
-		if (!self::isValidPostalcode($postalcode)) {
-			return "Invalid postal code";
-		}
-
-		$url = "https://nominatim.openstreetmap.org/search?q={$postalcode}&format=json&addressdetails=1";
-
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$result = curl_exec($ch);
-		curl_close($ch);
-
-		$json = json_decode($result, true);
-		if (isset($json[0]['address']['suburb'])) {
-			return $json[0]['address']['suburb'];
-		} else {
-			return "City not found";
-		}
-	}
-
-	public function isValidPostalcode($postalcode)
-	{
-		$regex = '/^([1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9])[a-zA-Z]{2}$/';
-		return preg_match($regex, $postalcode);
-	}
 }

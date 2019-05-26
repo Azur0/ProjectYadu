@@ -1,11 +1,9 @@
 @component('mail::message')
+#{{$title}}
 
-    # {{__('mail.editTitle')}}
+{{$salutation}} {{$ownerName}}
 
-    {{$salutation . $ownerName}}
+{{$body}}
 
-    {{__('mail.editText1') . $event->eventName . __('mail.editText2')}}
-
-    {{__('mail.closing')}}
-
+{{$closing}}
 @endcomponent

@@ -21,5 +21,10 @@ class DatabaseSeeder extends Seeder
         $this->call(EventPicturesTableSeeder::class);
         $this->call(EventsTableSeeder::class);
         $this->call(ProhibitedWordsTableSeeder::class);
+        $this->call(AccountSettingsTableSeeder::class);
+        $this->call(SocialmediaTableSeeder::class);
+        $this->call(SocialMediaPlatformsTableSeeder::class);
+        $this->call(AccountHasFollowersTableSeeder::class);
+
     }
 }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\EventPicture;
 use App\Event;
+use App\BlockedUser;
+use App\Events\EventJoined;
+use App\Events\EventLeft;
 use App\EventHasParticipants;
 use App\Http\Controllers\API\LocationController;
 use App\Traits\DateToText;
@@ -18,6 +21,8 @@ use function PhpParser\filesInDir;
 use Illuminate\Support\Carbon;
 use App\Location;
 use Auth;
+use App\AccountHasFollowers;
+
 
 class EventsController extends Controller
 {
@@ -36,30 +41,39 @@ class EventsController extends Controller
 
     public function welcome()
 	{
+        $blockedUsers = [];
+        $UsersBlockedYou = [];
+
+        if(Auth::id()){
+            $blockedUsers = BlockedUser::where('account_id', '=', Auth::id())->pluck('blockedAccount_id');
+            $UsersBlockedYou = BlockedUser::where('blockedAccount_id', '=', Auth::id())->pluck('account_id');
+        }
+
 		$events = Event::take(6)
-			->where('isDeleted', '==', 0)
+            ->where('isDeleted', '==', 0)
+            ->whereNotIn('owner_id', $blockedUsers)
+            ->whereNotIn('owner_id', $UsersBlockedYou)
 			->orderBy('isHighlighted', 'desc')
 			->orderBy('startDate', 'desc')
-			->get();
+            ->get();
+            
 		$regular_events = Event::take(3)
-			->where('isDeleted', '==', 0)
+            ->where('isDeleted', '==', 0)
+            ->whereNotIn('owner_id', $blockedUsers)
+            ->whereNotIn('owner_id', $UsersBlockedYou)
 			->where('isHighlighted', '==', 0)
 			->orderBy('startDate', 'desc')
 			->get();
 
 		foreach($events as $event)
 		{
-			$event->city = self::cityFromPostalcode($event->Location->postalcode);
+			$event->city = $event->location->locality;
 			$event->writtenDate = self::dateToShortText($event->startDate);
-
-
 		}
 		foreach($regular_events as $event)
 		{
-			$event->city = self::cityFromPostalcode($event->Location->postalcode);
+			$event->city = $event->location->locality;
 			$event->writtenDate = self::dateToShortText($event->startDate);
-
-
 		}
 		
 		return view('welcome', compact('events', 'regular_events'));
@@ -98,6 +112,7 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
+       
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
@@ -105,7 +120,13 @@ class EventsController extends Controller
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
             'startTime' => 'required',
+            'lng' => 'required|max:45',
+            'lat' => 'required|max:45',
+            'houseNumber' => 'required|max:10',
+            'postalCode' => 'required|max:45',
             'location' => 'required',
+            'route'=> 'required',
+            'locality' => 'required',
             'picture' => 'required'
         ]);
 
@@ -116,12 +137,20 @@ class EventsController extends Controller
                 $validator->errors()->add('picture', 'Something is wrong with this field!');
             }
         });
-
         if ($validator->fails()) {
             return redirect('/events/create')
                 ->withErrors($validator)
                 ->withInput();
         }
+
+        $location = Location::create([
+            'locLongtitude' => $request['lng'],
+            'locLatitude' => $request['lat'],
+            'houseNumber' => $request['houseNumber'],
+            'postalcode' => str_replace(' ', '', $request['postalCode']),
+            'route' => $request['route'],
+            'locality' => $request['locality'],
+        ]);
 
         Event::create(
             [
@@ -130,7 +159,7 @@ class EventsController extends Controller
                 'startDate' => $request['startDate'],
                 'numberOfPeople' => $request['people'],
                 'tag_id' => $request['tag'],
-                'location_id' => '1',
+                'location_id' => $location->id,
                 'owner_id' => auth()->user()->id,
                 'event_picture_id' => $request['picture']
             ]
@@ -160,8 +189,12 @@ class EventsController extends Controller
      */
     public function show(Event $event)
     {
+        $follow = null;
+        if(Auth::check()){
+            $follow = AccountHasFollowers::where('account_id', $event->owner_id)->where('follower_id', Auth::id())->first();
+        }
         $event->writtenDate = $this->dateToLongText($event->startDate);
-        return view('events.show', compact('event'));
+        return view('events.show', compact('event', 'follow'));
     }
 
     /**
@@ -209,7 +242,12 @@ class EventsController extends Controller
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
             'startTime' => 'required',
-            'location' => 'required',
+            'lng' => 'required|max:45',
+            'lat' => 'required|max:45',
+            'houseNumber' => 'required|max:10',
+            'postalCode' => 'required|max:45',
+            'route'=> 'required',
+            'locality' => 'required',
             'numberOfPeople' => 'required'
         ]);
 
@@ -231,6 +269,7 @@ class EventsController extends Controller
         $event = Event::where('id', $id)->firstorfail();
 
         if (Auth::id() == $event->owner_id) {
+            $location = Location::where('id', $event->location_id)->firstorfail();
             $event->update(
                 [
                     'eventName' => $request['activityName'],
@@ -238,11 +277,19 @@ class EventsController extends Controller
                     'startDate' => $request['startDate'],
                     'numberOfPeople' => $request['numberOfPeople'],
                     'tag_id' => $request['tag'],
-                    'location_id' => '1',
                     'event_picture_id' => $request['picture']
                 ]
             );
-            //TODO: set location
+            
+            $location->update([
+                'locLongtitude' => $request['lng'],
+                'locLatitude' => $request['lat'],
+                'houseNumber' => $request['houseNumber'],
+                'postalcode' => str_replace(' ', '', $request['postalCode']),
+                'route'=> $request['route'],
+                'locality' => $request['locality'],
+            ]);
+
             return redirect('/events');
         }
         else {
@@ -258,7 +305,15 @@ class EventsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Event::findOrFail($id);
+        
+        if($event->owner_id == Auth::id()) {
+            $event->update([
+                'isDeleted' => 1
+            ]);;
+        }
+
+        return redirect('account/myevents');
     }
 
     public function join($id)
@@ -268,6 +323,7 @@ class EventsController extends Controller
             $event = Event::findOrFail($id);
             if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->attach(auth()->user()->id);
+                event(new EventJoined($event,auth()->user()->id));
             }
             //TODO: Add error 'You already joined!'
         }
@@ -281,6 +337,7 @@ class EventsController extends Controller
             $event = Event::findOrFail($id);
             if ($event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->detach(auth()->user()->id);
+                event(new EventLeft($event,auth()->user()->id));
             }
             //TODO: Add error 'You are not joined!'
         }
@@ -310,26 +367,33 @@ class EventsController extends Controller
 
         $tags = EventTag::where('tag', 'like', '%' . $request->inputTag . '%')->pluck('id');
         $names = Event::where('eventName', 'like', '%' . $request->inputName . '%')->pluck('id');
+
+        $blockedUsers = [];
+        $UsersBlockedYou = [];
+        if(Auth::id()){
+            $blockedUsers = BlockedUser::where('account_id', '=', Auth::id())->pluck('blockedAccount_id');
+            $UsersBlockedYou = BlockedUser::where('blockedAccount_id', '=', Auth::id())->pluck('account_id');
+        }
+        
+
         $this->distance = $request->input('distance');
         $unfiltered_events = Event::where('isDeleted', '==', 0)
             ->where('startDate', '>=', $this->formatDate())
+            ->whereNotIn('owner_id', $blockedUsers)
+            ->whereNotIn('owner_id', $UsersBlockedYou)
             ->whereIn('id', $names)
             ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
             ->get();
 
-        //TODO: Set initial amount of items to load and add 'load more' button
         $events = new Collection();
 
-        //TODO:3 Filters from Ruben
-
-        //TODO:2 Filter the unfiltered events (Or so called pre-filtered events)
         $filtered_events = $this->areEvenstInRange($unfiltered_events);
 
         foreach ($filtered_events as $event) {
             $date = self::dateToShortText($event->startDate);
 
-            $postalcode = self::cityFromPostalcode($event->Location->postalcode);
+            $postalcode = $event->location->locality;
 
             $Picture = eventPicture::where('id', '=', $event->event_picture_id)->get();
             $Pic = (base64_encode($Picture[0]->picture));
@@ -340,34 +404,5 @@ class EventsController extends Controller
             $events->push($event);
         }
         return json_encode($events);
-    }
-
-    public function cityFromPostalcode($postalcode)
-    {
-        if (!self::isValidPostalcode($postalcode)) {
-            return "Invalid postal code";
-        }
-
-        $url = "https://nominatim.openstreetmap.org/search?q={$postalcode}&format=json&addressdetails=1";
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        $json = json_decode($result, true);
-        if (isset($json[0]['address']['suburb'])) {
-            return $json[0]['address']['suburb'];
-        } else {
-            return "City not found";
-        }
-    }
-
-    public function isValidPostalcode($postalcode)
-    {
-        $regex = '/^([1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9])[a-zA-Z]{2}$/';
-        return preg_match($regex, $postalcode);
     }
 }

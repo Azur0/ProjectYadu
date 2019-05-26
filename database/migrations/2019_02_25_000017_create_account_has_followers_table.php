@@ -25,6 +25,7 @@ class CreateAccountHasFollowersTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('account_id');
             $table->unsignedInteger('follower_id');
+            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
 
             $table->index(["account_id"], 'fk_account_has_account_account2_idx');

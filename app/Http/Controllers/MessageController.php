@@ -6,7 +6,7 @@ use App\Account;
 use Illuminate\Http\Request;
 use App\Events\NewMessage;
 use App\Event;
-use App\Message;
+use App\ChatMessage;
 use Auth;
 use App\Rules\swearWords;
 
@@ -36,7 +36,7 @@ class MessageController extends Controller
             'user_id' => Auth::id()
         ]);
 
-        $message = Message::where('id', $message->id)->with(['account' => function ($query) {
+        $message = ChatMessage::where('id', $message->id)->with(['account' => function ($query) {
             return $query->select(['id', 'firstName', 'lastName']);
         }])->first();
 

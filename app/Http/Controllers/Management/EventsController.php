@@ -22,7 +22,7 @@ class EventsController extends Controller
 		{
 			if (Auth::user()->accountRole == 'Admin')
 			{
-				$events = Event::where('isDeleted', 0)->orderBy('startDate','des')->get();
+				$events = Event::where('isDeleted', 0)->orderBy('startDate','desc')->get();
 
 				$tags = EventTag::all();
 				$names = Event::distinct('eventName')->pluck('eventName');

@@ -23,7 +23,7 @@ return [
     'head_participating' => 'Meedoen',
     'head_followers' => 'Volgers',
     'head_following' => 'Volgend',
-    'head_hidden' => 'Gebruiker heeft zijn info afgeschermt',
+    'head_hidden' => 'Gebruiker heeft zijn info afgeschermd',
     'info_name' => 'Naam',
     'info_rol' => 'Rol',
     'info_stats' => 'Statistieken',

@@ -52,6 +52,8 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Show category types --}}
         <div class="types">
             <h1>{{__('image.header_type_tag')}}</h1>
                 <div class="box">
@@ -59,8 +61,11 @@
                     <div class="card divider"> 
                         <input type="radio" id="{{$tag->id}}" name="tag" value="{{$tag->id}}" onclick="fetch_customer_data({{$tag->id}})">
                         <label for="{{$tag->id}}" class="category">
-                                <div class="ml-auto my-auto mr-3">
-                                        <button type="button" class="badge btn-danger my-auto" id="{{$tag->id}}" onclick="setchecked({{$tag->id}})" data-toggle="modal" data-target="#confirmDeleteTag">x</button>
+                            <div class="ml-auto my-auto mr-3">
+                                <button type="button" class="btn btn-danger" id="{{$tag->id}}" onclick="setchecked({{$tag->id}})" data-toggle="modal" data-target="#confirmDeleteTag"><i class="far fa-trash-alt"></i></button>
+                                <button type="button" class="btn btn-warning" id="{{$tag->id}}" onclick="location.href='/images/categroy/edittagpicture';"><i class="far fa-edit"></i></button>
+                                        
+                                        {{-- Popup for deleting --}}
                                         <div class="modal fade" id="confirmDeleteTag" tabindex="-1" role="dialog">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -84,9 +89,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                            <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
-                            <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($tag->imageSelected) . '"/>'; ?>
+
+
+                                <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
+                                <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($tag->imageSelected) . '"/>'; ?>
+                            </div>
                         </label>  
                     </div>                     
                     @endforeach
@@ -253,37 +260,40 @@ $(document).ready(function() {
                         $('#box2').html("");
 
                         data.forEach(function (element) {
-                            $('#box2').html($("#box2").html() + `<div class="flexbox divider"><input type="radio" id="${element['id']}" class="picture ${element['tag_id']}"  
-                                name="eventpicture" value="${element['id']}"> <label for="${element['id']}" class="picture ${element['tag_id']}">
-                                        <div>
-                                            <button type="button" id="eventpicture" onclick="setchecked(${element['id']})" class="badge btn-danger my-auto" data-toggle="modal"
-                                                data-target="#confirmDeleteEventPicture">x
-                                            </button>
-                                            <div class="modal fade" id="confirmDeleteEventPicture" tabindex="-1" role="dialog">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">{{__('image.modal_delete_title')}}</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                                {{__('image.modal_delete_eventpicture_center')}}
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" onclick="deleteeventpicture(this.value)" value="${element['id']}"
-                                                            class="btn btn-danger" data-dismiss="modal">{{__('image.modal_delete_confirmation')}}</button>
-                                                            <button type="button" class="btn btn-primary"
-                                                                    data-dismiss="modal">{{__('image.modal_delete_dismiss')}}
-                                                            </button>
-                                                        </div>
+                            $('#box2').html($("#box2").html() + `
+                                <div class="box divider">
+                                <input type="radio" id="${element['id']}" class="picture ${element['tag_id']}" name="eventpicture" value="${element['id']}"> 
+                                <label for="${element['id']}" class="picture ${element['tag_id']}">
+                                        <button type="button" onclick="setchecked(${element['id']})" class="btn btn-danger eventpicturebutton" data-toggle="modal"data-target="#confirmDeleteEventPicture"><i class="far fa-trash-alt"></i></button>
+                                        <button type="button" onclick="location.href='/images/categroy/edittagpicture';" class="btn btn-warning eventpicturebutton" id="${element['id']}"><i class="far fa-edit"></i></button>
+
+                                        <div class="modal fade" id="confirmDeleteEventPicture" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">{{__('image.modal_delete_title')}}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {{__('image.modal_delete_eventpicture_center')}}
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" onclick="deleteeventpicture(this.value)" value="${element['id']}"
+                                                                class="btn btn-danger" data-dismiss="modal">{{__('image.modal_delete_confirmation')}}</button>
+                                                        <button type="button" class="btn btn-primary"
+                                                                        data-dismiss="modal">{{__('image.modal_delete_dismiss')}}
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                <img class="default" src="data:image/jpeg;base64, ${element['picture']}"> </label></div>`);
+                                    
+                                    <img class="default" src="data:image/jpeg;base64, ${element['picture']}">
+                                </label>
+                                </div>`);
                         });
                         $('#box2').html($("#box2").html() + `
                                 <form id="myForm" action="{{ url('admin/images/category/addeventpicture/${query}') }}" method="POST" enctype="multipart/form-data">

@@ -12331,6 +12331,18 @@ h6.collapse-header {
   margin: 10px;
 }
 
+.tagimage {
+  float: left;
+  margin-right: 5px;
+  background-color: #EEEEEE;
+  border: black 1px solid;
+  cursor: pointer;
+}
+
+.tagimage a {
+  cursor: pointer;
+}
+
 .eventpicturebutton {
   position: relative;
   top: 38px;

@@ -154,7 +154,7 @@ class ImagesController extends Controller
 	}
 
 	public function edittagpicture($id) {
-		$selectedCategory = EventTag::where('id', '=', $id)->firstOrFail();
-		return view('admin/images.editpicture')->with(compact('selectedCategory'));
+		$tag = EventTag::where('id', '=', $id)->firstOrFail();
+		return view('admin/images.editpicture', compact('tag'));
 	}
 }

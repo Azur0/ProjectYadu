@@ -90,7 +90,6 @@
                                             </div>
                                         </div>
 
-
                                 <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
                                 <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($tag->imageSelected) . '"/>'; ?>
                             </div>
@@ -162,7 +161,6 @@ $(document).ready(function() {
                 if(data == "success"){
                     location.reload();
                 } else {
-                    console.log(data);
                     if(data.length > 0) {
                         document.querySelector('.eventheader').innerHTML = "{{__('image.modal_delete_event_connected')}}";
                     }
@@ -201,30 +199,14 @@ $(document).ready(function() {
                             dataType: 'json',
                             success: function(data) {
                                 location.reload();
-                            },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log('jqXHR:');
-                    console.log(jqXHR);
-                    console.log('textStatus:');
-                    console.log(textStatus);
-                    console.log('errorThrown:');
-                    console.log(errorThrown);
-                }
+                            }
                         });
                     });
                     deny.addEventListener('click', function() {
                         location.reload();
                     })
                 }
-            },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log('jqXHR:');
-                    console.log(jqXHR);
-                    console.log('textStatus:');
-                    console.log(textStatus);
-                    console.log('errorThrown:');
-                    console.log(errorThrown);
-                }
+            }
         });
     }
        
@@ -264,9 +246,10 @@ $(document).ready(function() {
                                 <div class="box divider">
                                 <input type="radio" id="${element['id']}" class="picture ${element['tag_id']}" name="eventpicture" value="${element['id']}"> 
                                 <label for="${element['id']}" class="picture ${element['tag_id']}">
-                                        <button type="button" onclick="setchecked(${element['id']})" class="btn btn-danger eventpicturebutton" data-toggle="modal"data-target="#confirmDeleteEventPicture"><i class="far fa-trash-alt"></i></button>
-                                        <button type="button" class="btn btn-warning eventpicturebutton" id="${element['id']}"><i class="far fa-edit" style="width:14px"></i></button>
+                                        <button type="button" onclick="setchecked(${element['id']})" class="btn btn-danger eventpicturebutton" data-toggle="modal" data-target="#confirmDeleteEventPicture"><i class="far fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-warning eventpicturebutton" id="${element['id']}" onclick="loadpicture(${element['id']})" data-toggle="modal" data-target="#editeventpicture"><i class="far fa-edit" style="width:14px"></i></button>
 
+                                        {{-- Popup for deleting --}}
                                         <div class="modal fade" id="confirmDeleteEventPicture" tabindex="-1" role="dialog">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -290,8 +273,38 @@ $(document).ready(function() {
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {{-- Popup for editing --}}
+                                        <div class="modal fade" id="editeventpicture" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">{{__('image.modal_edit_eventpicture_title')}}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="responsive">
+                                                            <div class="card" id="popid${element['id']}">
+                                                            </div>
+                                                            <label for="file1" class="input-label first formitem">
+                                                                <i class="fa fa-upload"></i>
+                                                                {{__('image.add_tag_default')}}
+                                                            </label>
+                                                            <input id="file1" class="btn btn-info" type="file" name="default" accept="image/png, image/jpeg, image/jpg">
+                                                            <button type="submit" class="btn btn-primary submit-edit" name="submittype">{{__('image.button_upload_single')}}</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">{{__('image.modal_delete_dismiss')}}</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
                                     
-                                    <img class="default" src="data:image/jpeg;base64, ${element['picture']}">
+                                    <img class="default" src="data:image/jpeg;base64, ${element['picture']}" id="id${element['id']}">
                                 </label>
                                 </div>`);
                         });
@@ -313,6 +326,14 @@ $(document).ready(function() {
                 }
             })
         }
+
+    function loadpicture(id) {
+        let selectedpicture = document.getElementById(`id${id}`);
+        let popup = document.getElementById(`popid${id}`);
+        let img = document.createElement("img");
+        img.src = selectedpicture.src;
+        popup.appendChild(img);
+    }
 
     function setchecked(id) {
         document.getElementById(id).checked = true;

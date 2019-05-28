@@ -122,10 +122,9 @@
             <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
             <div title="Add to Calendar" class="addeventatc">
                 Add to Calendar
-                
                 <span class="start">{{date('m/d/Y h:i A', strtotime($event->startDate))}}</span>
                 <span class="end">{{date('m/d/Y h:i A', strtotime($event->startDate))}}</span>
-                <span class="timezone">Netherland/Amsterdam</span>
+                <span class="timezone">Europe/Amsterdam</span>
                 <span class="title">{{$event->eventName}}</span>
                 <span class="description">{{$event->description}}</span>
                 <span class="location">{{ $event->location()->first()->route }} {{ $event->location()->first()->houseNumber }}, {{ $event->location()->first()->locality }}</span>

@@ -152,4 +152,9 @@ class ImagesController extends Controller
 		}
 		return json_encode("");
 	}
+
+	public function edittagpicture($id) {
+		$selectedCategory = EventTag::where('id', '=', $id)->firstOrFail();
+		return view('admin/images.editpicture')->with(compact('selectedCategory'));
+	}
 }

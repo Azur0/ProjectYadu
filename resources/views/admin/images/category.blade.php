@@ -63,7 +63,7 @@
                         <label for="{{$tag->id}}" class="category">
                             <div class="ml-auto my-auto mr-3">
                                 <button type="button" class="btn btn-danger" id="{{$tag->id}}" onclick="setchecked({{$tag->id}})" data-toggle="modal" data-target="#confirmDeleteTag"><i class="far fa-trash-alt"></i></button>
-                                <button type="button" class="btn btn-warning" id="{{$tag->id}}" onclick="location.href='/images/categroy/edittagpicture';"><i class="far fa-edit"></i></button>
+                                <button type="button" class="btn btn-warning" id="{{$tag->id}}" onclick="location.href='{{ route('imagescontroller.edittagpicture', $tag->id) }}'"><i class="far fa-edit" style="width:14px"></i></button>
                                         
                                         {{-- Popup for deleting --}}
                                         <div class="modal fade" id="confirmDeleteTag" tabindex="-1" role="dialog">
@@ -265,7 +265,7 @@ $(document).ready(function() {
                                 <input type="radio" id="${element['id']}" class="picture ${element['tag_id']}" name="eventpicture" value="${element['id']}"> 
                                 <label for="${element['id']}" class="picture ${element['tag_id']}">
                                         <button type="button" onclick="setchecked(${element['id']})" class="btn btn-danger eventpicturebutton" data-toggle="modal"data-target="#confirmDeleteEventPicture"><i class="far fa-trash-alt"></i></button>
-                                        <button type="button" onclick="location.href='/images/categroy/edittagpicture';" class="btn btn-warning eventpicturebutton" id="${element['id']}"><i class="far fa-edit"></i></button>
+                                        <button type="button" class="btn btn-warning eventpicturebutton" id="${element['id']}"><i class="far fa-edit" style="width:14px"></i></button>
 
                                         <div class="modal fade" id="confirmDeleteEventPicture" tabindex="-1" role="dialog">
                                             <div class="modal-dialog" role="document">

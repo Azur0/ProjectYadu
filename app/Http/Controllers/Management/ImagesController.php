@@ -157,4 +157,24 @@ class ImagesController extends Controller
 		$tag = EventTag::where('id', '=', $id)->firstOrFail();
 		return view('admin/images.editpicture', compact('tag'));
 	}
+
+	public function updatetagpicture(Request $request) {
+		$this->validate($request, [
+			'image' => 'image|mimes:jpg,png,jpeg|max:2048',
+			'naam' => 'required|string|min:1|max:45'
+			]);
+		$selectedPicture = EventTag::where('id', '=', $request->input('id'))->firstOrFail();
+		$selectedPicture->tag = $request->input('naam');
+		if(empty($request->file('image'))){
+			$selectedPicture->save();
+			return redirect('/admin/images/category')->with('success', __('image.edit_successsful'));
+		}
+		if($request->input('type') == "default") {
+			$selectedPicture->imageDefault = file_get_contents($request->file('image'));
+		} else {
+			$selectedPicture->imageSelected = file_get_contents($request->file('image'));
+		}
+		$selectedPicture->save();
+		return redirect('/admin/images/category')->with('success', __('image.adding_successsful'));
+	}
 }

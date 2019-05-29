@@ -32,7 +32,7 @@ class MessageController extends Controller
         ]);
 
         $message = $event->messages()->create([
-            'body' => $request->body,
+           'body' => $request->body,
             'user_id' => Auth::id()
         ]);
 

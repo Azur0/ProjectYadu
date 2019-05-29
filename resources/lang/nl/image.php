@@ -22,7 +22,7 @@ return [
     'update_successful' => 'Uploaden geslaagd',
     'add_tag_title' => 'Voeg hier een nieuwe categorie toe',
     'add_tag_name' => 'Beschrijf hier de categorie',
-    'add_tag_default' => 'Basis foto',
+    'add_tag_default' => 'Standaard foto',
     'add_tag_selected' => 'Selectie foto',
     'edit_tag_name' => 'Wijzig de naam',
     'add_event_picture_first' => 'Upload een nieuwe event foto',

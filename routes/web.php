@@ -94,6 +94,7 @@ Route::post('admin/images/category/trueremove', 'Management\ImagesController@tru
 Route::post('admin/images/category/addeventpicture/{id}', 'Management\ImagesController@addeventpicture')->name('imagescontroller.addeventpicture')->middleware('auth', 'isAdmin');
 Route::get('admin/images/category/edittagpicture/{id}', 'Management\ImagesController@edittagpicture')->name('imagescontroller.edittagpicture')->middleware('auth', 'isAdmin');
 Route::post('admin/images/category/updatetagpicture', 'Management\ImagesController@updatetagpicture')->name('imagescontroller.updatetagpicture')->middleware('auth', 'isAdmin');
+Route::post('admin/images/category/updateeventpicture', 'Management\ImagesController@updateeventpicture')->name('imagescontroller.updateeventpicture')->middleware('auth', 'isAdmin');
 
 // admin/images/extra
 Route::get('admin/images/extra', 'Management\ImagesController@showextra')->middleware('auth', 'isAdmin');

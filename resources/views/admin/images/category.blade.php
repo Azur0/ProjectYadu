@@ -130,6 +130,15 @@ $(document).ready(function() {
     $("#file2").on("change", function() {
         $('.second').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
     });
+    $("#file3").on("change", function() {
+        $('.second').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
+    });
+    $("#file4").on("change", function() {
+        $('.second').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
+    });
+    $("#file5").on("change", function() {
+        $('.second').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
+    });
 })
 </script>
 <script>
@@ -234,7 +243,7 @@ $(document).ready(function() {
                                             <i class="fa fa-upload"></i>
                                             {{__('image.add_event_picture_first')}}
                                         </label>
-                                        <input id="file3" class="btn btn-info" type="file" name="default" accept="image/png, image/jpeg, image/jpg">
+                                        <input id="file3" class="btn btn-info" type="file" name="eventpicture" accept="image/png, image/jpeg, image/jpg">
                                     </div>
                                 </form>
                             </div>`);
@@ -286,14 +295,16 @@ $(document).ready(function() {
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="responsive">
-                                                            <div class="card" id="popid${element['id']}">
-                                                            </div>
-                                                            <label for="file1" class="input-label first formitem">
+                                                            <form class="form-group" action="{{ route('imagescontroller.updateeventpicture') }}" method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <label for="file5" class="input-label first formitem">
                                                                 <i class="fa fa-upload"></i>
                                                                 {{__('image.add_tag_default')}}
                                                             </label>
-                                                            <input id="file1" class="btn btn-info" type="file" name="default" accept="image/png, image/jpeg, image/jpg">
-                                                            <button type="submit" class="btn btn-primary submit-edit" name="submittype">{{__('image.button_upload_single')}}</button>
+                                                            <input id="file5" class="btn btn-info" type="file" name="updateevent" accept="image/png, image/jpeg, image/jpg">
+                                                            <input type="hidden" value="${element['id']}" name="id">
+                                                            <button type="updateevent" class="btn btn-primary submit-edit" name="updateevent">{{__('image.button_upload_single')}}</button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -312,11 +323,11 @@ $(document).ready(function() {
                                 <form id="myForm" action="{{ url('admin/images/category/addeventpicture/${query}') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="responsive" id="incard">
-                                        <label for="file3" class="input-label first formitem">
+                                        <label for="file4" class="input-label first formitem">
                                             <i class="fa fa-upload"></i>
                                             {{__('image.add_event_picture_second')}}
                                         </label>
-                                        <input id="file3" class="btn btn-info" type="file" name="default" accept="image/png, image/jpeg, image/jpg">
+                                        <input id="file4" class="btn btn-info" type="file" name="eventpicture" accept="image/png, image/jpeg, image/jpg">
                                     </div>
                                 </form>`);
                     }

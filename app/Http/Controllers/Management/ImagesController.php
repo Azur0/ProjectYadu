@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ImagesController extends Controller
 {
+
     public function showextra()
 	{
 		if (Auth::check())
@@ -134,11 +135,14 @@ class ImagesController extends Controller
 
 	public function addeventpicture(Request $request, $id) {
 		$this->validate($request, [
-			'default' => 'required|image|mimes:jpg,png,jpeg|max:2048'
+			'eventpicture' => 'required|image|mimes:jpg,png,jpeg|max:2048'
 		]);
+		if($request->file('eventpicture')->getSize() > 10000000){
+			return back()->withErrors(__('image.file_too_large'));
+		}
 		$event_picture = new EventPicture;
 		$event_picture->tag_id = $id;
-		$event_picture->picture = file_get_contents($request->file('default'));
+		$event_picture->picture = file_get_contents($request->file('eventpicture'));
 		$event_picture->save();
 		return back()->with('eventsuccess', __('image.update_successful'));
 	}
@@ -163,6 +167,9 @@ class ImagesController extends Controller
 			'image' => 'image|mimes:jpg,png,jpeg|max:2048',
 			'naam' => 'required|string|min:1|max:45'
 			]);
+		if($request->file('image')->getSize() > 10000000){
+			return redirect('/admin/images/category')->withErrors(__('image.file_too_large'));
+		}
 		$selectedPicture = EventTag::where('id', '=', $request->input('id'))->firstOrFail();
 		$selectedPicture->tag = $request->input('naam');
 		if(empty($request->file('image'))){
@@ -176,5 +183,18 @@ class ImagesController extends Controller
 		}
 		$selectedPicture->save();
 		return redirect('/admin/images/category')->with('success', __('image.adding_successsful'));
+	}
+
+	public function updateeventpicture(Request $request) {
+		$this->validate($request, [
+			'updateevent' => 'image|mimes:jpg,png,jpeg|max:2048',
+			]);
+		if($request->file('updateevent')->getSize() > 10000000){
+			return redirect('/admin/images/category')->withErrors(__('image.file_too_large'));
+		}
+		$selectedPicture = EventPicture::where('id', '=', $request->input('id'))->firstOrFail();
+		$selectedPicture->picture = file_get_contents($request->file('updateevent'));
+		$selectedPicture->save();
+		return redirect('admin/images/category')->with('eventsuccess', __('image.update_successful'));
 	}
 }

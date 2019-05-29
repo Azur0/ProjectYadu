@@ -217,9 +217,9 @@
                     <!-- end chat-history -->
 
                     <div class="chat-message clearfix">
-                        <textarea name="message-to-send" id="message-to-send" placeholder="{{ __('events.show_chat_typemessage') }}" rows="3" v-model.trim="messageBox" v-on:keyup.enter="postMessage" required></textarea>
+                        <textarea name="message-to-send" id="message-to-send" placeholder="{{ __('events.show_chat_typemessage') }}" rows="3" v-model="messageBox" v-on:keyup.enter="postMessage"></textarea>
 
-                        <button id="sendButton" @click.prevent="postMessage">{{ __('events.show_chat_send') }}</button>
+                        <button @click.prevent="postMessage">{{ __('events.show_chat_send') }}</button>
 
                     </div>
                     <!-- end chat-message -->
@@ -247,6 +247,7 @@
 
         let warning = document.createElement("strong");
         warning.style.color = "red";
+        warning.innerHTML = "{{ __('events.show_chat_swearword') }}";
 
         function insertAfter(referenceNode, newNode) {
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
@@ -275,13 +276,6 @@
                         });
                 },
                 postMessage() {
-                    let btn = $("#sendButton");
-                    setTimeout(function(){
-                        btn.prop('disabled', true);
-                        setTimeout(function(){
-                            btn.prop('disabled', false);
-                        },1000);
-                    })
                     axios.post(`/api/events/${this.event.id}/message`, {
                         api_token: this.account.api_token,
                         body: this.messageBox
@@ -291,14 +285,7 @@
                             this.messageBox = '';
                             warning.remove();
                         })
-                        .catch((error) => {
-                            if(error.response.data.errors.body[0] == 'body is not allowed because it contains a swearword.' || error.response.data.errors.body[0] == 'body is niet toegestaan omdat deze een scheldwoord bevat.') {
-                                warning.innerHTML = "{{ __('events.show_chat_swearword') }}";
-                            } else if(error.response.data.errors.body[0] == 'The body field is required.' || error.response.data.errors.body[0] == 'body is verplicht.') {
-                                warning.innerHTML = "{{ __('events.show_chat_entertext') }}";
-                            } else if(error.response.data.errors.body[0] == 'The body may not be greater than 180 characters.' || error.response.data.errors.body[0] == 'body mag niet uit meer dan 180 tekens bestaan.') {
-                                warning.innerHTML = "{{ __('events.show_chat_characterlimit') }}";
-                            }
+                        .catch(function (error) {
                             insertAfter(document.getElementById("message-to-send"), warning);
                         });
                 },

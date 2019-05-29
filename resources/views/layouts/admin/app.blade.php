@@ -18,10 +18,8 @@
 
     <!-- Custom styles for this template-->
 
-    <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
     @yield('custom_css')
     <link rel="stylesheet" href="{{ URL::asset('/css/sb-admin-2.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('/css/custom.css') }}">
 
 
     <!-- Custom scripts for all pages-->

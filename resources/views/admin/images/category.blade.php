@@ -130,15 +130,6 @@ $(document).ready(function() {
     $("#file2").on("change", function() {
         $('.second').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
     });
-    $("#file3").on("change", function() {
-        $('.second').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
-    });
-    $("#file4").on("change", function() {
-        $('.second').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
-    });
-    $("#file5").on("change", function() {
-        $('.second').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
-    });
 })
 </script>
 <script>
@@ -239,7 +230,7 @@ $(document).ready(function() {
                                 <form action="{{ url('admin/images/category/addeventpicture/${query}') }}" method="POST" id="myForm" enctype="multipart/form-data">
                                     @csrf
                                     <div class="responsive">
-                                        <label for="file3" class="input-label first formitem">
+                                        <label for="file3" class="input-label third formitem">
                                             <i class="fa fa-upload"></i>
                                             {{__('image.add_event_picture_first')}}
                                         </label>
@@ -297,7 +288,7 @@ $(document).ready(function() {
                                                         <div class="responsive">
                                                             <form class="form-group" action="{{ route('imagescontroller.updateeventpicture') }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
-                                                            <label for="file5" class="input-label first formitem">
+                                                            <label for="file5" class="input-label fifth formitem">
                                                                 <i class="fa fa-upload"></i>
                                                                 {{__('image.add_tag_default')}}
                                                             </label>
@@ -323,7 +314,7 @@ $(document).ready(function() {
                                 <form id="myForm" action="{{ url('admin/images/category/addeventpicture/${query}') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="responsive" id="incard">
-                                        <label for="file4" class="input-label first formitem">
+                                        <label for="file4" class="input-label fourth formitem">
                                             <i class="fa fa-upload"></i>
                                             {{__('image.add_event_picture_second')}}
                                         </label>
@@ -333,6 +324,19 @@ $(document).ready(function() {
                     }
                     $("#file3").on('change',function(){
                         document.getElementById("myForm").submit();
+                    });
+                    $("#file4").on('change',function(){
+                        document.getElementById("myForm").submit();
+                    });
+                    $("#file3").on("change", function() {
+                        
+                        $('.third').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
+                    });
+                    $("#file4").on("change", function() {
+                        $('.fourth').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
+                    });
+                    $("#file5").on("change", function() {
+                        $('.fifth').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
                     });
                 }
             })

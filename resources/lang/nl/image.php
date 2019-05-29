@@ -23,7 +23,7 @@ return [
     'add_tag_title' => 'Voeg hier een nieuwe categorie toe',
     'add_tag_name' => 'Beschrijf hier de categorie',
     'add_tag_default' => 'Standaard foto',
-    'add_tag_selected' => 'Selectie foto',
+    'add_tag_selected' => 'Selected foto',
     'edit_tag_name' => 'Wijzig de naam',
     'add_event_picture_first' => 'Upload een nieuwe event foto',
     'add_event_picture_second' => 'Upload event foto',

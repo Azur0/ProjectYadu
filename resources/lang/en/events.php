@@ -110,8 +110,6 @@ return [
 	'edit_error_location' => 'The location-field is required.',
     'show_datetime_at' => 'at',
     'show_chat_swearword' => 'Swearword detected',
-    'show_chat_entertext' => 'Please enter some text',
-    'show_chat_characterlimit' => 'The character limit is 180 characters',
     'show_chat_send' => 'Send',
     'show_chat_typemessage' => 'Type your message',
 

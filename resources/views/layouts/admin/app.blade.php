@@ -24,7 +24,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
     @yield('custom_script')
 </head>
 

@@ -753,3 +753,7 @@ h6.collapse-header {
 	height: 100px;
 }
 
+.collapse-item {
+	overflow: hidden !important;
+	text-overflow: ellipsis;
+}

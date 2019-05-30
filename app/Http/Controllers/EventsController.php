@@ -313,7 +313,7 @@ class EventsController extends Controller
             ]);;
         }
 
-        return redirect('account/myevents');
+        return redirect('account/myevents')->withSuccess('success', '');
     }
 
     public function join($id)

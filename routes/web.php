@@ -48,6 +48,8 @@ Route::get('events/{id}/leave', 'EventsController@leave');
 Route::post('/events/action', 'EventsController@action')->name('events_controller.action');
 Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilter')->name('events_controller.actionDistanceFilter');
 
+Route::post('/events/destroy/{id}', 'EventsController@destroy')->middleware('auth');
+
 Auth::routes(['verify' => true]);
 
 //Profile

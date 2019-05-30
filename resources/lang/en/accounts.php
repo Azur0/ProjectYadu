@@ -61,5 +61,12 @@ return [
     'avatar_reset_button' => 'Reset Avatar',
 
     'index_no_event_found' => 'No accounts found',
-    'index_loading_error' => 'Error loading accounts'
+    'index_loading_error' => 'Error loading accounts',
+
+    ///////////////////////////////// Activation ////////////////////////////////////
+
+    'activation_header' => 'Account activated!',
+    'activation_message' => 'Thanks for activating your account, go find an event to join!',
+    'activation_button' => 'Goto Yadu',
+
 ];

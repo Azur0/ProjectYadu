@@ -154,7 +154,7 @@ class AccountController extends Controller
 	}
 
 	public function activate() {
-		return redirect('/')->with('activationsuccess', 'test');
+		return redirect('/')->with('activationsuccess', __('account.activation_message'));
 	}
 
 	public function updateProfile(EditProfileRequest $request)

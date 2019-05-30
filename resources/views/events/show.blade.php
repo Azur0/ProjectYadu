@@ -31,18 +31,18 @@
                         @if($event->participants->contains(auth()->user()->id))
                             <a href="/events/{{$event->id}}/leave"
                                class="btn btn-danger btn-sm my-auto mx-2">{{__('events.show_leave')}}</a>
-                        @elseif($event->participants->count() < $event->numberOfPeople)
+                        @elseif($event->participants->count()+1 < $event->numberOfPeople)
                             <a href="/events/{{$event->id}}/join"
                                class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
                         @endif
                     @endif
                 @endif
             </div>
-            <p class="text-md-right">{{__('events.show_number_of_attendees', ['amount' => $event->participants->count(), 'max' => $event->numberOfPeople])}}</p>
+            <p class="text-md-right">{{__('events.show_number_of_attendees', ['amount' => $event->participants->count()+1, 'max' => $event->numberOfPeople])}}</p>
             <div class="progress">
                 <div class="progress-bar" role="progressbar"
-                     style="width: {{$event->participants->count() / $event->numberOfPeople * 100}}%" aria-valuemin="0"
-                     aria-valuenow="{{$event->participants->count()}}" aria-valuemax="{{$event->numberOfPeople}}"></div>
+                     style="width: {{$event->participants->count()+1 / $event->numberOfPeople * 100}}%" aria-valuemin="0"
+                     aria-valuenow="{{$event->participants->count()+1}}" aria-valuemax="{{$event->numberOfPeople}}"></div>
             </div>
             @foreach($event->participants as $participant)
                 <div class="row my-1">

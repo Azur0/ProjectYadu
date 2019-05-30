@@ -41,14 +41,14 @@ class ImagesController extends Controller
 	}
 
 	public function addtype(Request $request) {
-		if($request->file('defaultImage')->getSize() > 10000000 || $request->file('selectedImage')->getSize() > 10000000){
-			return back()->withErrors(__('image.file_too_large'));
-		}
 		$thing = $this->validate($request, [
 			'defaultImage' => 'required|image|max:10240|mimes:jpg,png,jpeg',
 			'selectedImage' => 'required|image|max:10240|mimes:jpg,png,jpeg',
 			'naam' => 'required|string|min:1|max:45'
-		]);
+			]);
+		if($request->file('defaultImage')->getSize() > 10000000 || $request->file('selectedImage')->getSize() > 10000000){
+			return back()->withErrors(__('image.file_too_large'));
+		}
 
 		$image1 = $request->file('defaultImage');
 		$image2 = $request->file('selectedImage');

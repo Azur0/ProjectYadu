@@ -153,7 +153,7 @@ class AccountController extends Controller
 		return redirect('/profile/edit');
 	}
 
-	public function activateAccount() {
+	public function activate() {
 		return redirect('/')->with('activationsuccess', 'test');
 	}
 

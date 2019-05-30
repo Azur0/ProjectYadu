@@ -87,4 +87,9 @@
 		</div>
 		<p>{{ __('welcome.recent_events_content') }} <a href="/events">{{ __('welcome.link_here') }}</a>.</p>
 	</div>
+	
+@if($message = Session::get('activationsuccess'))
+    
+@endif
+
 @endsection

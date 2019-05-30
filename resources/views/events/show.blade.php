@@ -41,7 +41,7 @@
             <p class="text-md-right">{{__('events.show_number_of_attendees', ['amount' => $event->participants->count()+1, 'max' => $event->numberOfPeople])}}</p>
             <div class="progress">
                 <div class="progress-bar" role="progressbar"
-                     style="width: {{$event->participants->count()+1 / $event->numberOfPeople * 100}}%" aria-valuemin="0"
+                     style="width: {{($event->participants->count()+1) / $event->numberOfPeople * 100}}%" aria-valuemin="0"
                      aria-valuenow="{{$event->participants->count()+1}}" aria-valuemax="{{$event->numberOfPeople}}"></div>
             </div>
             @foreach($event->participants as $participant)

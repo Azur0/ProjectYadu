@@ -31,6 +31,7 @@ return [
     'info_hosted_by' => 'Aantal evenementen gehost',
     'info_participated' => 'Aantal evenementen aan meegedaan',
     'info_participated_in' => 'Doet mee aan:',
+    'info_event_deleted' => 'Event succesvol verwijderd',
 
 ///////////////////////////////// Edit ////////////////////////////////////
 

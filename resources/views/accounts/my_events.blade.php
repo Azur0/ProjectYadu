@@ -5,6 +5,12 @@
 		<div class="backlink">
 			<a href="/home"><i class="fas fa-arrow-left"></i> {{__('home.link_dashboard')}}</a>
 		</div>
+		@if($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>{{ $message }}</strong>
+            </div>
+		@endif
 		<div class="card">
 			<div class="card-header"><i class="fas fa-calendar-alt"></i> {{__('home.my_events_title')}}</div>
 			<div class="card-body">

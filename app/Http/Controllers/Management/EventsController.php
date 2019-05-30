@@ -272,7 +272,7 @@ class EventsController extends Controller
 			$event->update([
 			   'isDeleted' => 1
             ]);
-      
+				
 			return redirect('admin/events');
 		}
 	}

@@ -65,9 +65,9 @@
                     </td>
                 </tr>
                 <tr>
-                	<th>block</th>
+                	<th>Logins</th>
                     <td>
-                        <a href="{{url('/admin/accounts/'. $account->id .'/suspensions')}}" class="btn btn-warning">logins</a>
+                        <a href="{{url('/admin/accounts/'. $account->id .'/logins')}}" class="btn btn-warning">logins</a>
                     </td>
                 </tr>
                 {{--<tr>--}}

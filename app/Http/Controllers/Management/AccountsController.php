@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Management;
 
+use DB;
 use App\AccountRole;
-use App\LoginAttempt;
+use App\Login;
 use App\Http\Controllers\AccountController;
 use App\Rules\genderExists;
 use App\Traits\DateToText;
@@ -152,11 +153,12 @@ class AccountsController extends Controller
         return Redirect::back();
     }
 
-    public function loginAttempts($id)
+    public function logins($id)
     {
     	$account = Account::where('id', $id)->firstOrFail();
-    	$loginAttempts = 
-
-        return view('admin.accounts.show', compact('account', 'loginAttempts') );
+    	$logins = Login::where('account_id', $id)->orderBy('created_at', 'DESC')->get();
+    	$amount = Login::where('account_id', $id)->get()->groupBy('ip');
+    	dd($amount);
+        return view('admin.accounts.logins', compact('account', 'logins', 'amount') );
     }
 }

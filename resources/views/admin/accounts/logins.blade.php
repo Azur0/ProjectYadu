@@ -46,6 +46,7 @@
 		<div class="card-body">
 			<div class="row">
 				<div class="col">
+					<h3>Logins per IP</h3>
 					<table class="table table-hover">
 						<thead>
 						<tr>
@@ -55,24 +56,25 @@
 						</tr>
 						</thead>
 						<tbody>
-							{{ $amount }}
-						{{-- @foreach($amount as $login)
-							<tr>
-								<td>{{ $login->ip }}</td>
-								<td>{{ $login->created_at }}</td>
-								<td><a><i class="fas fa-unlock-alt"> block</i></a></td>
-							</tr>
-						@endforeach --}}
+							{{-- {{ $amount->teachSpread }} --}}
+							@foreach($amount as $login)
+								<tr>
+									<th scope="col">{{ $login->pluck('ip') }}</th>
+									<th scope="col">{{ $login->count() }}</th>
+									<td><a><i class="fas fa-unlock-alt"> block</i></a></td>
+								</tr>
+							@endforeach
 						</tbody>
 					</table>
 				</div>
 
 				<div class="col">
+					<h3>logins</h3>
 					<table class="table table-hover">
 						<thead>
 						<tr>
 							<th scope="col">IP</th>
-							<th scope="col">{{__('home.participating_table_colname_date')}}</th>
+							<th scope="col">Login {{__('home.participating_table_colname_date')}}</th>
 							<th scope="col"></th>
 						</tr>
 						</thead>

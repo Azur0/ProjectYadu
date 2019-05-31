@@ -158,7 +158,7 @@ class AccountsController extends Controller
     	$account = Account::where('id', $id)->firstOrFail();
     	$logins = Login::where('account_id', $id)->orderBy('created_at', 'DESC')->get();
     	$amount = Login::where('account_id', $id)->get()->groupBy('ip');
-    	dd($amount);
+    	//dd($amount);
         return view('admin.accounts.logins', compact('account', 'logins', 'amount') );
     }
 }

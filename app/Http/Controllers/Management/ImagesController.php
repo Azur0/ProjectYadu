@@ -167,8 +167,10 @@ class ImagesController extends Controller
 			'image' => 'image|mimes:jpg,png,jpeg|max:2048',
 			'naam' => 'required|string|min:1|max:45'
 			]);
-		if($request->file('image')->getSize() > 10000000){
-			return redirect('/admin/images/category')->withErrors(__('image.file_too_large'));
+		if(!empty($request->file('image'))){
+			if($request->file('image')->getSize() > 10000000){
+				return redirect('/admin/images/category')->withErrors(__('image.file_too_large'));
+			}
 		}
 		$selectedPicture = EventTag::where('id', '=', $request->input('id'))->firstOrFail();
 		$selectedPicture->tag = $request->input('naam');

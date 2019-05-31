@@ -20,6 +20,7 @@ return [
     'error_nodata' => 'No data to read, go add some!',
     'adding_successsful' => 'Adding file succeeded',
     'update_successful' => 'Upload successful',
+    'edit_successfull' => 'Changes approved',
     'add_tag_title' => 'Insert a new tag here',
     'add_tag_name' => 'Describe the category',
     'add_tag_default' => 'Standard picture',

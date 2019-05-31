@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Management;
 
 use App\AccountRole;
+use App\LoginAttempt;
 use App\Http\Controllers\AccountController;
 use App\Rules\genderExists;
 use App\Traits\DateToText;
@@ -149,5 +150,13 @@ class AccountsController extends Controller
         $account->save();
 
         return Redirect::back();
+    }
+
+    public function loginAttempts($id)
+    {
+    	$account = Account::where('id', $id)->firstOrFail();
+    	$loginAttempts = 
+
+        return view('admin.accounts.show', compact('account', 'loginAttempts') );
     }
 }

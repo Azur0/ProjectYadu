@@ -219,14 +219,12 @@ class AccountController extends Controller
 
 		$account->save();
 	}
-    //Check this   <----------------------------------------------------------------------------------------------------
 	public function follow($id) {
 		if($id == Auth::id()) {
 			return redirect('/');
 		}
 		else {
 			$account = Account::where('id', $id)->first();
-            //dd(Str::random(32));
 			try {
 				$followRequest = AccountHasFollowers::create([
 					'account_id' => $id,
@@ -242,9 +240,8 @@ class AccountController extends Controller
 
 		return back();
 	}
-    //Check this   <----------------------------------------------------------------------------------------------------
+
 	public function accept($id) {
-        //dd($id);
 		$followRequest = AccountHasFollowers::where('verification_string', $id)->first();
 		if(!is_null($followRequest)) {
 			if($followRequest->status == 'pending') {
@@ -255,7 +252,7 @@ class AccountController extends Controller
 
 		return redirect('/');
 	}
-    //Check this   <----------------------------------------------------------------------------------------------------
+
     public function decline($id) {
         $followRequest = AccountHasFollowers::where('verification_string', $id)->first();
 

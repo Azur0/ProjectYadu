@@ -40,13 +40,13 @@ class EventJoined extends Mailable
         $bodyText = "";
         if($this->type == 1){
             $bodyText = Lang::get('mail.joinedEvent') ." ". $this->event->eventName ." ". Lang::get('mail.event'). ".";
-            $headText = Lang::get('mail.youJoinedEventHeader');
+            $headText = $this->user->firstName." ".Lang::get('mail.youJoinedEventHeader');
         }else if($this->event->owner->id == $this->user->id){
-            $headText = Lang::get('mail.eventJoinedYourHeader');
+            $headText = $this->user->firstName." ".Lang::get('mail.eventJoinedYourHeader');
             $bodyText =
                 $this->executor->firstName ." ". Lang::get('mail.joinedYourEvent') . " " . $this->event->eventName. ".";
         }else {
-            $headText = Lang::get('mail.eventJoinedHeader');
+            $headText = $this->user->firstName." ".Lang::get('mail.eventJoinedHeader');
             $bodyText =
                 $this->executor->firstName ." ".Lang::get('mail.participantJoinedEvent') . " " . $this->event->eventName. ".";
         }

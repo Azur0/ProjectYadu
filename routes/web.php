@@ -70,7 +70,7 @@ Route::resource('events', 'EventsController');
 
 Route::get('admin', function () { return view('admin.index');})->middleware('auth', 'isAdmin');
 
-Route::post('/language', 'LanguageController@setLanguage');
+Route::post('/language', 'Universal\LanguageController@setLanguage');
 
 // Why did you not use resource for index/show/delete/update?
 Route::get('admin/accounts', 'Management\AccountsController@index')->middleware('auth', 'isAdmin');
@@ -91,7 +91,7 @@ Route::post('admin/prohibitedWords/delete', 'Management\ProhibitedWordsControlle
 Route::post('admin/prohibitedWords/update', 'Management\ProhibitedWordsController@update')->middleware('auth', 'isAdmin');
 Route::post('admin/prohibitedWords/create', 'Management\ProhibitedWordsController@create')->middleware('auth', 'isAdmin');
 
-Route::post('/logger/eventshared', 'LogController@LogEventShared')->name('LogEventShared');
+Route::post('/logger/eventshared', 'Universal\LogController@LogEventShared')->name('LogEventShared');
 
 Route::post('/charts/totaleventscreated', 'ChartController@GetTotalEventsCreated')->name('admin_charts_events')->middleware('auth', 'isAdmin');
 Route::post('/charts/shares', 'ChartController@GetShares')->name('admin_charts_shares')->middleware('auth', 'isAdmin');

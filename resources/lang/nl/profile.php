@@ -57,6 +57,12 @@ return [
     'edit_change_account_settings_notification_join' => 'Wanneer iemand zich aanmeldt of afmeldt voor een evenement',
     // Button change notification settings
     'edit_change_account_settings' => 'Wijzig instellingen',
+    // Preference settings
+    'edit_change_account_settings_language_preference_title' => 'E-mail taal',
+    'edit_change_account_settings_language_preference' => 'E-mail taal',
+    'English' => 'Engels',
+    'Dutch' => 'Nederlands',
+    'edit_change_account_setting' => 'Wijzig instelling',
 
     'edit_change_password_title' => 'Wachtwoord wijzigen',
     'edit_current_password' => 'Huidig wachtwoord',

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use DB;
+use Illuminate\Support\Str;
 use Validator;
 use App\Mail\Follow as FollowMail;
 
@@ -218,31 +219,33 @@ class AccountController extends Controller
 
 		$account->save();
 	}
-
+    //Check this   <----------------------------------------------------------------------------------------------------
 	public function follow($id) {
 		if($id == Auth::id()) {
 			return redirect('/');
 		}
 		else {
 			$account = Account::where('id', $id)->first();
-
+            //dd(Str::random(32));
 			try {
 				$followRequest = AccountHasFollowers::create([
 					'account_id' => $id,
-					'follower_id' => Auth::id()
+					'follower_id' => Auth::id(),
+                    'verification_string' => Str::random(32)
 			]);
 			} catch (\Exception $exception){
 				return back()->withError($exception->getMessage());
 			}
 
-			Mail::to($account->email)->send(new FollowMail(Auth::user()));
+			Mail::to($account->email)->send(new FollowMail(Auth::user(),$followRequest));
 		}
 
 		return back();
 	}
-
+    //Check this   <----------------------------------------------------------------------------------------------------
 	public function accept($id) {
-		$followRequest = AccountHasFollowers::where('account_id', Auth::id())->where('follower_id', $id)->first();
+        //dd($id);
+		$followRequest = AccountHasFollowers::where('verification_string', $id)->first();
 		if(!is_null($followRequest)) {
 			if($followRequest->status == 'pending') {
 				$followRequest->status = 'accepted';
@@ -252,6 +255,18 @@ class AccountController extends Controller
 
 		return redirect('/');
 	}
+    //Check this   <----------------------------------------------------------------------------------------------------
+    public function decline($id) {
+        $followRequest = AccountHasFollowers::where('verification_string', $id)->first();
+
+        if(!is_null($followRequest)) {
+            if($followRequest->status == 'pending') {
+                $followRequest->status = 'rejected';
+                $followRequest->save();
+            }
+        }
+        return redirect('/');
+    }
 
     public function updateSettings(Request $request, $id){
         if (Auth::check())
@@ -313,19 +328,6 @@ class AccountController extends Controller
         }
     }
 
-	public function decline($id) {
-		$followRequest = AccountHasFollowers::where('account_id', Auth::id())->where('follower_id', $id)->first();
-		
-		if(!is_null($followRequest)) {
-			if($followRequest->status == 'pending') {
-				$followRequest->status = 'rejected';
-				$followRequest->save();
-			}
-		}
-
-
-		return redirect('/');
-	}
 
 	public function unfollow($id) {
 		$unfollowRequest = AccountHasFollowers::where('account_id', $id)->where('follower_id', Auth::id())->first();

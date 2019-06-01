@@ -17,9 +17,11 @@ class Follow extends Mailable
      * @return void
      */
     public $user;
-    public function __construct($user)
+    public $followRequest;
+    public function __construct($user,$followRequest)
     {
         $this->user = $user;
+        $this->followRequest = $followRequest;
     }
 
     /**
@@ -30,7 +32,7 @@ class Follow extends Mailable
     public function build()
     {
         return $this->markdown('mail/follow')->with([
-            'ownerId'=>$this->user->id,
+            'ownerId'=>$this->followRequest->verification_string,
             'ownerName'=>$this->user->firstName
         ]);
     }

@@ -51,7 +51,7 @@ class EventLeft extends Mailable
                 $this->executor->firstName ." ".Lang::get('mail.participantLeftEvent') . " " . $this->event->eventName. ".";
         }
 
-        return $this->markdown('mail/event.event-left')
+        return $this->markdown('mail/shortInformationMail')
             ->subject($headText)
             ->with([
             'headText' =>  $headText,

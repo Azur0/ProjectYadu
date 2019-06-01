@@ -39,7 +39,7 @@ class AccountEdited extends Mailable
             $bodyText = Lang::get('mail.changedPersonalInfo');
        }
 
-        return $this->markdown('mail/account.account-edited')
+        return $this->markdown('mail/shortInformationMail')
             ->subject(Lang::get('mail.subjectAccountEdited'))
             ->with([
             'header' =>  Lang::get('mail.editAccountHeader'),

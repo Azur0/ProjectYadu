@@ -51,7 +51,7 @@ class EventJoined extends Mailable
                 $this->executor->firstName ." ".Lang::get('mail.participantJoinedEvent') . " " . $this->event->eventName. ".";
         }
 
-        return $this->markdown('mail/event.event-joined')
+        return $this->markdown('mail/shortInformationMail')
             ->subject($headText)
             ->with([
             'headText' =>  $headText,

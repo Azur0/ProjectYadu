@@ -166,12 +166,11 @@ function update_counter_desc(textarea) {
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
 function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {
-            lat: 51.6978162,
-            lng: 5.3036748
+            lat: {{longlat()['latitude']}},
+            lng: {{longlat()['longitude']}}
         },
         zoom: 13,
         mapTypeId: 'roadmap'

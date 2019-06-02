@@ -11211,3 +11211,28 @@ a.text-dark:focus {
   font-size: 30px;
 }
 
+.addeventatc_dropdown .copyx {
+  display: none !important;
+}
+
+.editButton {
+  float: left;
+}
+
+.editButton i {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #2578AF;
+}
+
+.deleteButton {
+  background-color: transparent;
+  border: none;
+}
+
+.deleteButton i {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #b10808;
+}
+

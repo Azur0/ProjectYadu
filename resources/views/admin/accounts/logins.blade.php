@@ -56,18 +56,16 @@
 						</tr>
 						</thead>
 						<tbody>
-							{{-- {{ $amount->teachSpread }} --}}
 							@foreach($amount as $login)
 								<tr>
 									<th scope="col">{{ $login->pluck('ip') }}</th>
 									<th scope="col">{{ $login->count() }}</th>
-									<td><a><i class="fas fa-unlock-alt"> block</i></a></td>
+									<td scope="col"><a href=""><i class="fas fa-user-slash"></i> block</i></a></td>
 								</tr>
 							@endforeach
 						</tbody>
 					</table>
 				</div>
-
 				<div class="col">
 					<h3>logins</h3>
 					<table class="table table-hover">
@@ -83,7 +81,7 @@
 							<tr>
 								<td>{{ $login->ip }}</td>
 								<td>{{ $login->created_at }}</td>
-								<td><a><i class="fas fa-unlock-alt"> block</i></a></td>
+								<td><a href=""><i class="fas fa-user-slash"></i> block</i></a></td>
 							</tr>
 						@endforeach
 						</tbody>

@@ -32,8 +32,30 @@
                             <a href="/events/{{$event->id}}/leave"
                                class="btn btn-danger btn-sm my-auto mx-2">{{__('events.show_leave')}}</a>
                         @elseif($event->participants->count() < $event->numberOfPeople)
-                            <a href="/events/{{$event->id}}/join"
-                               class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
+                                @if(Auth::user()->hasVerifiedEmail())
+                                <a data-toggle="modal" data-target="#notActivated" class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
+                                <div id="notActivated" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">{{__('accounts.non_activation_header')}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h5>{{__('accounts.non_activation_message')}}</h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">{{__('accounts.non_activation_button')}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @else
+                                <a href="/events/{{$event->id}}/join" class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
+                                @endif
                         @endif
                     @endif
                 @endif

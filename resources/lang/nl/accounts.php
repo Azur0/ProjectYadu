@@ -68,5 +68,8 @@ return [
     'activation_header' => 'Account is geactiveerd!',
     'activation_message' => 'Bedankt voor het activeren van uw account, kijk gelijk of er evenementen zijn om aan mee te doen!',
     'activation_button' => 'Ga naar Yadu',
+    'non_activation_header' => 'Uw account is niet actief',
+    'non_activation_message' => 'U heeft uw email nog niet geverifieerd en daarom kunt u niet meedoen aan dit uitje.',
+    'non_activation_button' => 'Ga terug Yadu',
 
 ];

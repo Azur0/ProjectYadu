@@ -267,7 +267,6 @@ class EventsController extends Controller
         }
 
         $event = Event::where('id', $id)->firstorfail();
-
         if (Auth::id() == $event->owner_id) {
             $location = Location::where('id', $event->location_id)->firstorfail();
             $event->update(

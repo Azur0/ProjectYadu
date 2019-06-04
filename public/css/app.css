@@ -11003,6 +11003,18 @@ a.text-dark:focus {
   text-align: center;
 }
 
+#addeventatc1 {
+  margin-left: 20%;
+  color: white !important;
+  background-color: #E79535 !important;
+}
+
+.addeventatc_icon {
+  -webkit-filter: brightness(0) invert(1);
+          filter: brightness(0) invert(1);
+  color: white !important;
+}
+
 @media screen and (max-width: 580px) {
   .events {
     display: block;

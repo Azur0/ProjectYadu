@@ -296,6 +296,7 @@
                             Echo.private('event.'+this.event.id)
                                 .listen('NewMessage', (message) => {
                                     this.messages.push(message)
+                                    notifyMe();
                                 })
                         }
                     }
@@ -311,6 +312,37 @@
                 });
 
             </script>
+
+            <!-- Start section desktop notifications -->
+            <script>
+                // request permission on page load
+                document.addEventListener('DOMContentLoaded', function () {
+                    if (!Notification) {
+                        alert('Desktop notifications not available in your browser. Try a different browser.');
+                        return;
+                    }
+
+                    if (Notification.permission !== "granted")
+                        Notification.requestPermission();
+                });
+
+                function notifyMe() {
+                    if (Notification.permission !== "granted")
+                        Notification.requestPermission();
+                    else {
+                        let notification = new Notification('{{$event->eventName}}', {
+                            icon: `{{ asset('images/logoCircle.png')}}`,
+                            {{--body: `{{$event->description}}`,--}}
+                            body: `{{__('events.push_body')}}`,
+                        });
+
+                        notification.onclick = function () {
+                            window.open(window.location.href);
+                        };
+                    }
+                }
+            </script>
+            <!-- End section desktop notifications -->
         @endsection
     @endif
 @endif

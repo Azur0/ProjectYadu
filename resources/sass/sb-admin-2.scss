@@ -93,7 +93,7 @@ h6.collapse-header {
 
 		height: 80px;
 		overflow-y: hidden;
-		overflow-x: scroll;
+		overflow-x: auto;
 
 		.search
 		{
@@ -154,4 +154,10 @@ h6.collapse-header {
 
 .btn_inline{
 	float: right; margin-right: 2%;
+}
+
+.admin-form-control {
+	padding: 0.375rem 0.75rem;
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
 }

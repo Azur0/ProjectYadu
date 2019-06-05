@@ -14,6 +14,7 @@ return [
     'nav_home' => 'HOME',
     'nav_events' => 'EVENEMENTEN',
     'nav_eventsS' => 'Evenementen',
+    'nav_overview' => 'Overzicht',
     'nav_about' => 'OVER ONS',
     'nav_contact' => 'CONTACT',
     'nav_dashboard' => 'PROFIEL',
@@ -24,8 +25,7 @@ return [
     'nav_pages' => 'Pagina\'s',
     'nav_swearWords' => 'Scheldwoorden',
     'nav_socialmedia' => 'Socialmedia',
-    'nav_links' => 'Links',
-    'nav_users' => 'Gebruikers',
+    'nav_links' => 'Links',    
 
 ///////////////////////////////// Footer //////////////////////////////////
 

@@ -82,6 +82,9 @@ Route::post('admin/accounts/{id}/update', 'Management\AccountsController@update'
 Route::get('admin/accounts/{id}/avatarreset', 'Management\AccountsController@resetavatar')->middleware('auth', 'isAdmin');
 Route::get('admin/accounts/{id}/logins', 'Management\AccountsController@logins')->middleware('auth', 'isAdmin');
 
+Route::get('admin/ip/{ip}/user/{id}/block', 'Management\AccountsController@blockIP')->middleware('auth', 'isAdmin');
+Route::get('admin/ip/{ip}/unblock', 'Management\AccountsController@unblockIP')->middleware('auth', 'isAdmin');
+
 Route::post('admin/accounts/action', 'Management\AccountsController@action')->name('admin_accounts_controller.action');
 
 Route::resource('admin/events','Management\EventsController');

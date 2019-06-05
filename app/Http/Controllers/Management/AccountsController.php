@@ -179,4 +179,15 @@ class AccountsController extends Controller
 
         return view('admin.accounts.logins', compact(['account', 'logins', 'amount', 'countedLogins', 'bannedIps']) );
     }
+
+    public function blockIP($ip, $id){
+        //TODO: logout user on IP-Ban
+        BannedIp::firstOrCreate(['ip' => $ip]);
+        return redirect()->back();
+    }
+
+    public function unblockIP($ip){
+        BannedIp::where('ip', $ip)->delete();
+        return redirect()->back();
+    }
 }

@@ -157,10 +157,10 @@ class AccountsController extends Controller
     public function logins($id)
     {
     	$account = Account::where('id', $id)->firstOrFail();
-    	$logins = Login::where('account_id', $id)->orderBy('created_at', 'DESC')->take(10)->get();
-    	$amount = Login::where('account_id', $id)->get()->groupBy('ip');
+    	$logins = Login::where('account_id', $id)->orderBy('created_at', 'DESC')->get();
 
     	$countedLogins = array();
+    	$recentLogins = array();
     	$bannedIps = array();
 
     	foreach ($logins as $login){
@@ -178,7 +178,10 @@ class AccountsController extends Controller
         arsort($countedLogins);
     	array_slice($countedLogins, 0, 10);
 
-        return view('admin.accounts.logins', compact(['account', 'logins', 'amount', 'countedLogins', 'bannedIps']) );
+    	$logins = $logins->take(10);
+        $recentLogins = $logins->toArray();
+
+        return view('admin.accounts.logins', compact(['account', 'recentLogins', 'countedLogins', 'bannedIps']) );
     }
 
     public function blockIP($ip, $id){

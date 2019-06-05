@@ -86,10 +86,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($logins as $login)
+                        @foreach($recentLogins as $login)
                             <tr>
-                                <td>{{ $login->ip }}</td>
-                                <td>{{ $login->created_at }}</td>
+                                <td>{{ $login['ip'] }}</td>
+                                <td>{{ $login['created_at'] }}</td>
                                 <td scope="col">
                                     @if(in_array($ip, $bannedIps))
                                         <a href="/admin/ip/{{$ip}}/unblock"><i class="fas fa-unlock"></i>&nbsp;{{__('bans.block')}}</a>

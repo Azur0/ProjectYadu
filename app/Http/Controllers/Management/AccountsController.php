@@ -157,7 +157,7 @@ class AccountsController extends Controller
     public function logins($id)
     {
     	$account = Account::where('id', $id)->firstOrFail();
-    	$logins = Login::where('account_id', $id)->orderBy('created_at', 'DESC')->get();
+    	$logins = Login::where('account_id', $id)->orderBy('created_at', 'DESC')->take(10)->get();
     	$amount = Login::where('account_id', $id)->get()->groupBy('ip');
 
     	$countedLogins = array();
@@ -175,7 +175,8 @@ class AccountsController extends Controller
             }
         }
 
-    	arsort($countedLogins);
+        arsort($countedLogins);
+    	array_slice($countedLogins, 0, 10);
 
         return view('admin.accounts.logins', compact(['account', 'logins', 'amount', 'countedLogins', 'bannedIps']) );
     }

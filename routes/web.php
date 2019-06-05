@@ -86,6 +86,8 @@ Route::get('admin/accounts/{id}/logins', 'Management\AccountsController@logins')
 Route::get('admin/ip/{ip}/user/{id}/block', 'Management\AccountsController@blockIP')->middleware('auth', 'isAdmin');
 Route::get('admin/ip/{ip}/unblock', 'Management\AccountsController@unblockIP')->middleware('auth', 'isAdmin');
 
+Route::get('admin/suspensions/ip', 'Management\SuspensionsController@index')->middleware('auth', 'isAdmin');
+
 Route::post('admin/accounts/action', 'Management\AccountsController@action')->name('admin_accounts_controller.action');
 
 Route::resource('admin/events','Management\EventsController');

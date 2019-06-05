@@ -23,6 +23,7 @@ return [
     'nav_logout' => 'UITLOGGEN',
     'nav_pages' => 'Pagina\'s',
     'nav_swearWords' => 'Scheldwoorden',
+    'nav_suspensions' => 'Schorsingen',
     'nav_socialmedia' => 'Socialmedia',
     'nav_links' => 'Links',    
 

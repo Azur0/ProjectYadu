@@ -81,6 +81,7 @@ return [
     'show_title' => 'Title',
     'show_overview' => 'Overview',
     'show_chat_login' => 'Log in and join this event to chat!',
+    'add_to_calendar' => 'Add to Calendar',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Cancel',

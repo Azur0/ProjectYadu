@@ -43,7 +43,6 @@ class Kernel extends HttpKernel
             'bindings',
         ],
         'auth' => [
-            \App\Http\Middleware\IsIpBanned::class,
             \App\Http\Middleware\Authenticate::class,
         ],
     ];

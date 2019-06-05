@@ -20,6 +20,7 @@ return [
     'nav_dashboard' => 'PROFILE',
     'nav_admin' => 'ADMIN PANEL',
     'nav_login' => 'LOGIN',
+    'nav_register' => 'REGISTER',
     'nav_logout' => 'LOGOUT',
     'nav_pages' => 'Pages',
     'nav_swearWords' => 'Swear words',

@@ -41,6 +41,7 @@ return [
     'create_step4' => 'Select the date and time',
     'create_step5' => 'Describe your event',
     'create_step6' => 'Amount of people',
+    'create_step7' => 'Initiator',
 
     'create_submit' => 'Submit',
     'create_title' => 'Title',
@@ -51,6 +52,9 @@ return [
 
     'create_select_type_first' => 'Please select an event type first',
     'create_amount_of_participants' => 'people can join (including yourself)',
+    'create_initiator_info' => 'Make yourself the initiator',
+    'create_initiator_true' => 'true',
+    'create_initiator_false' => 'false',
 
     'create_error_select_photo' => 'Please select a photo',
     'create_error_select_type' => 'Please select a event type',

@@ -31,21 +31,24 @@ class SendEventCreatedNotification
     {
         $currentLocale = app()->getLocale();
 
-        Mail::to($event->event->owner->email)->send(
-            new EventCreatedMail($event->event,$event->event->owner)
-        );
+        if($event->owner_id != null)
+        {
+	        Mail::to($event->event->owner->email)->send(
+	            new EventCreatedMail($event->event,$event->event->owner)
+	        );
 
-        //TODO: for when followers is merged - test this
+	        //TODO: for when followers is merged - test this
 
-        foreach($event->event->owner->followers as $follower){
-            if($follower->status == 'accepted' && $follower->follower->settings->FollowNotificationCreateEvent == 1){
-                self::switchLang($follower->follower);
-                Mail::to($follower->follower->email)->send(
-                    new EventCreatedMail($event->event,$follower->follower)
-                );
-            }
-        }
-        App::setLocale($currentLocale);
+	        foreach($event->event->owner->followers as $follower){
+	            if($follower->status == 'accepted' && $follower->follower->settings->FollowNotificationCreateEvent == 1){
+	                self::switchLang($follower->follower);
+	                Mail::to($follower->follower->email)->send(
+	                    new EventCreatedMail($event->event,$follower->follower)
+	                );
+	            }
+	        }
+	        App::setLocale($currentLocale);
+	    }
     }
 
     private function switchLang($user){

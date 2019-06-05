@@ -6,23 +6,26 @@ use App\Account;
 use App\EventPicture;
 use App\Event;
 use App\BlockedUser;
+use App\Location;
+use App\AccountHasFollowers;
+use App\EventHasParticipants;
+use App\EventTag;
+
 use App\Events\EventJoined;
 use App\Events\EventLeft;
-use App\EventHasParticipants;
 use App\Http\Controllers\API\LocationController;
+use App\Http\Requests\CreateEventRequest;
 use App\Traits\DateToText;
+
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use App\EventTag;
 use Illuminate\Support\Facades\App;
-use Validator;
-use Illuminate\View\View;
-use function PhpParser\filesInDir;
 use Illuminate\Support\Carbon;
-use App\Location;
-use Auth;
-use App\AccountHasFollowers;
+use Illuminate\View\View;
 
+use function PhpParser\filesInDir;
+use Validator;
+use Auth;
 
 class EventsController extends Controller
 {
@@ -152,19 +155,24 @@ class EventsController extends Controller
             'locality' => $request['locality'],
         ]);
 
-        Event::create(
-            [
-                'eventName' => $request['activityName'],
-                'description' => $request['description'],
-                'startDate' => $request['startDate'],
-                'numberOfPeople' => $request['people'],
-                'tag_id' => $request['tag'],
-                'location_id' => $location->id,
-                'owner_id' => auth()->user()->id,
-                'event_picture_id' => $request['picture']
-            ]
-        );
-        return redirect('/events');
+        $newEvent = new Event;
+        $newEvent->eventName = $request['activityName'];
+        $newEvent->description = $request['description'];
+        $newEvent->startDate = $request['startDate'];
+        $newEvent->numberOfPeople = $request['people'];
+        $newEvent->tag_id = $request['tag'];
+        $newEvent->event_picture_id = $request['picture'];
+
+        $newEvent->location_id = $location->id;
+
+        // if($request['initiator'] == true)
+        // {
+        // 	$newEvent->owner_id = auth()->user()->id;
+        // }
+
+        $newEvent->save();
+
+        return redirect('/events/'.$newEvent->id);
     }
 
     public function isPictureValid($tag, $picture)

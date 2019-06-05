@@ -41,6 +41,7 @@ return [
     'create_step4' => 'Kies de datum en tijd',
     'create_step5' => 'Beschrijf je uitje',
     'create_step6' => 'Aantal personen',
+    'create_step7' => 'Eigenaar',
 
     'create_submit' => 'Verzenden',
     'create_title' => 'Titel',
@@ -50,6 +51,9 @@ return [
 
     'create_select_type_first' => 'Kies eerst het type event',
     'create_amount_of_participants' => 'mensen kunnen mee (incl. jezelf)',
+    'create_initiator_info' => 'Maak jezelf de eigenaar',
+    'create_initiator_true' => 'ja',
+    'create_initiator_false' => 'Nee',
 
     'create_error_select_photo' => 'Kies een foto',
     'create_error_select_type' => 'Kies een type',
@@ -61,8 +65,6 @@ return [
     'create_error_description_required' => 'Het omschrijving-veld is verplicht.',
     'create_error_max_participants_required' => 'Het max aantal mensen-veld is verplicht.',
     
-    
-   
 
 ///////////////////////////////// Show ////////////////////////////////////
     'show' => 'Weergeven',

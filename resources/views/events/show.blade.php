@@ -31,18 +31,18 @@
                         @if($event->participants->contains(auth()->user()->id))
                             <a href="/events/{{$event->id}}/leave"
                                class="btn btn-danger btn-sm my-auto mx-2">{{__('events.show_leave')}}</a>
-                        @elseif($event->participants->count() < $event->numberOfPeople)
+                        @elseif($event->participants->count()+1 < $event->numberOfPeople)
                             <a href="/events/{{$event->id}}/join"
                                class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
                         @endif
                     @endif
                 @endif
             </div>
-            <p class="text-md-right">{{__('events.show_number_of_attendees', ['amount' => $event->participants->count(), 'max' => $event->numberOfPeople])}}</p>
+            <p class="text-md-right">{{__('events.show_number_of_attendees', ['amount' => $event->participants->count()+1, 'max' => $event->numberOfPeople])}}</p>
             <div class="progress">
                 <div class="progress-bar" role="progressbar"
-                     style="width: {{$event->participants->count() / $event->numberOfPeople * 100}}%" aria-valuemin="0"
-                     aria-valuenow="{{$event->participants->count()}}" aria-valuemax="{{$event->numberOfPeople}}"></div>
+                     style="width: {{($event->participants->count()+1) / $event->numberOfPeople * 100}}%" aria-valuemin="0"
+                     aria-valuenow="{{$event->participants->count()+1}}" aria-valuemax="{{$event->numberOfPeople}}"></div>
             </div>
             @foreach($event->participants as $participant)
                 <div class="row my-1">
@@ -97,9 +97,20 @@
                     <a id="share-facebook" class="fab fa-facebook event-media-icons"></a>
                     <a id="share-twitter" class="fab fa-twitter event-media-icons"></a>
                     <a id="share-link" class="fa fa-link event-media-icons" data-toggle="modal" data-target="#confirmDeleteAccount"></a>
-                </div>
+                    <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
+            <div title="Add to Calendar" class="addeventatc addevent">
+                {{__('events.add_to_calendar')}}
+                <span class="start">{{date('m/d/Y h:i A', strtotime($event->startDate))}}</span>
+                <span class="end">{{date('m/d/Y h:i A', strtotime($event->startDate))}}</span>
+                <span class="timezone">Europe/Amsterdam</span>
+                <span class="title">{{$event->eventName}}</span>
+                <span class="description">{{$event->description}}</span>
+                <span class="location">{{ $event->location()->first()->route }} {{ $event->location()->first()->houseNumber }}, {{ $event->location()->first()->locality }}</span>
             </div>
-
+                </div>
+                
+            </div>
+                
             <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -119,6 +130,7 @@
                     </div>
                 </div>
             </div>
+           
 
             <script>
 

@@ -11003,6 +11003,18 @@ a.text-dark:focus {
   text-align: center;
 }
 
+#addeventatc1 {
+  margin-left: 20%;
+  color: white !important;
+  background-color: #E79535 !important;
+}
+
+.addeventatc_icon {
+  -webkit-filter: brightness(0) invert(1);
+          filter: brightness(0) invert(1);
+  color: white !important;
+}
+
 @media screen and (max-width: 580px) {
   .events {
     display: block;
@@ -11209,5 +11221,30 @@ a.text-dark:focus {
 
 #http_error a {
   font-size: 30px;
+}
+
+.addeventatc_dropdown .copyx {
+  display: none !important;
+}
+
+.editButton {
+  float: left;
+}
+
+.editButton i {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #2578AF;
+}
+
+.deleteButton {
+  background-color: transparent;
+  border: none;
+}
+
+.deleteButton i {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #b10808;
 }
 

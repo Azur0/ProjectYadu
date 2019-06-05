@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\BannedIp;
+use App\Account;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
-class IsIpBanned
+class ForceLogout
 {
     /**
      * Handle an incoming request.
@@ -16,13 +17,12 @@ class IsIpBanned
      */
     public function handle($request, Closure $next)
     {
-        $isBanned = BannedIp::where('ip', $request->ip())->exists();
-
-        if($isBanned){
-            auth()->logout();
-            return redirect('ipbanned');
+        if(Auth::check()){
+            $forceLogout = Account::where('id', Auth::id())->pluck('doForceLogout')->first();
+            if($forceLogout == 1){
+                Auth::logout();
+            }
         }
-
         return $next($request);
     }
 }

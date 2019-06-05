@@ -19,7 +19,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
-        \App\Http\Middleware\SetLocale::class
+        \App\Http\Middleware\SetLocale::class,
     ];
 
     /**
@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\ForceLogout::class
         ],
 
         'api' => [
@@ -43,7 +44,6 @@ class Kernel extends HttpKernel
             'bindings',
         ],
         'auth' => [
-            \App\Http\Middleware\IsIpBanned::class,
             \App\Http\Middleware\Authenticate::class,
         ],
     ];

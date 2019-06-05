@@ -40,7 +40,7 @@
             <!-- Optional -->
             @yield('banner')
 
-			@yield('content')
+			@yield('main')
 
             <div id="footer">
                 @include('layouts.footer')

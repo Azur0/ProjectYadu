@@ -61,7 +61,8 @@ Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middle
 Route::post('/profile/updatePrivacySettings', 'AccountController@updatePrivacySettings')->middleware('auth');
 Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
 Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middleware('auth');
-Route::patch('/profile/updateAccountSettings/{id}', 'AccountController@updateSettings')->middleware('auth');
+Route::post('/profile/updateAccountSettings', 'AccountController@updateSettings')->middleware('auth');
+Route::post('/profile/setMailLanguage', 'AccountController@setMailLanguage')->middleware('auth');
 Route::post('/profile/blockUser', 'AccountController@blockAccount')->middleware('auth');
 Route::post('/profile/unblockUser/', 'AccountController@unblockAccount')->middleware('auth');
 
@@ -81,6 +82,9 @@ Route::get('admin/accounts/{id}/delete', 'Management\AccountsController@destroy'
 Route::post('admin/accounts/{id}/update', 'Management\AccountsController@update')->middleware('auth', 'isAdmin');
 Route::get('admin/accounts/{id}/avatarreset', 'Management\AccountsController@resetavatar')->middleware('auth', 'isAdmin');
 Route::get('admin/accounts/{id}/logins', 'Management\AccountsController@logins')->middleware('auth', 'isAdmin');
+
+Route::get('admin/ip/{ip}/user/{id}/block', 'Management\AccountsController@blockIP')->middleware('auth', 'isAdmin');
+Route::get('admin/ip/{ip}/unblock', 'Management\AccountsController@unblockIP')->middleware('auth', 'isAdmin');
 
 Route::post('admin/accounts/action', 'Management\AccountsController@action')->name('admin_accounts_controller.action');
 

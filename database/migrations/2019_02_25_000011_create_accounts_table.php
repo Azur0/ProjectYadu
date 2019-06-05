@@ -33,6 +33,7 @@ class CreateAccountsTable extends Migration
             $table->date('dateOfBirth')->nullable();
             $table->binary('avatar')->nullable()->default(null);
             $table->tinyInteger('doForcePasswordChange')->default('0');
+            $table->tinyInteger('doForceLogout')->default('0');
             $table->tinyInteger('isDeleted')->default('0');
             $table->dateTime('email_verified_at')->nullable();
             $table->longText('bio')->nullable();

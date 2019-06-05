@@ -65,7 +65,7 @@
                                 <th scope="col">{{ $amount }}</th>
                                 <td scope="col">
                                     @if(in_array($ip, $bannedIps))
-                                        <a href="/admin/ip/{{$ip}}/unblock"><i class="fas fa-user-slash"></i> unblock</a>
+                                        <a href="/admin/ip/{{$ip}}/unblock"><i class="fas fa-unlock"></i> unblock</a>
                                     @else
                                         <a href="/admin/ip/{{$ip}}/user/{{$account->id}}/block"><i class="fas fa-user-slash"></i> block</a>
                                     @endif
@@ -90,7 +90,13 @@
                             <tr>
                                 <td>{{ $login->ip }}</td>
                                 <td>{{ $login->created_at }}</td>
-                                <td><a href=""><i class="fas fa-user-slash"></i> block</i></a></td>
+                                <td scope="col">
+                                    @if(in_array($ip, $bannedIps))
+                                        <a href="/admin/ip/{{$ip}}/unblock"><i class="fas fa-unlock"></i> unblock</a>
+                                    @else
+                                        <a href="/admin/ip/{{$ip}}/user/{{$account->id}}/block"><i class="fas fa-user-slash"></i> block</a>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

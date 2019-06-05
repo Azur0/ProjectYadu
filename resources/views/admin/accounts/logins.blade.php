@@ -56,11 +56,11 @@
 						</tr>
 						</thead>
 						<tbody>
-							@foreach($amount as $login)
+							@foreach($countedLogins as $ip => $amount)
 								<tr>
-									<th scope="col">{{ $login->pluck('ip') }}</th>
-									<th scope="col">{{ $login->count() }}</th>
-									<td scope="col"><a href=""><i class="fas fa-user-slash"></i> block</i></a></td>
+									<th scope="col">{{ $ip }}</th>
+									<th scope="col">{{ $amount }}</th>
+									<td scope="col"><a href=""><i class="fas fa-user-slash"></i> block</a></td>
 								</tr>
 							@endforeach
 						</tbody>

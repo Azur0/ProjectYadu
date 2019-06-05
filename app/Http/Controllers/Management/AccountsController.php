@@ -158,7 +158,19 @@ class AccountsController extends Controller
     	$account = Account::where('id', $id)->firstOrFail();
     	$logins = Login::where('account_id', $id)->orderBy('created_at', 'DESC')->get();
     	$amount = Login::where('account_id', $id)->get()->groupBy('ip');
-    	//dd($amount);
-        return view('admin.accounts.logins', compact('account', 'logins', 'amount') );
+
+    	$countedLogins = array();
+    	foreach ($logins as $login){
+    	    if(array_key_exists($login->ip, $countedLogins)){
+    	        $countedLogins[$login->ip]++;
+            }
+    	    else{
+    	        $countedLogins[$login->ip] = 1;
+            }
+        }
+
+    	arsort($countedLogins);
+
+        return view('admin.accounts.logins', compact(['account', 'logins', 'amount', 'countedLogins']) );
     }
 }

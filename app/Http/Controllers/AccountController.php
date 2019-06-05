@@ -208,7 +208,7 @@ class AccountController extends Controller
 
 		$account->email = $id;
 		$account->password = '';
-		$account->firstname = encrypt('Deleted user');
+		$account->firstname = encrypt('Anonymous user');
 		$account->middlename = encrypt(null);
 		$account->lastname = encrypt(null);
 		$account->avatar = null;

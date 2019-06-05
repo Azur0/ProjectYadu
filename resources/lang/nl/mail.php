@@ -2,10 +2,20 @@
 
 return [
     "salutation" => "Goedendag ",
+
+    "eventCreatedTitle" => "Je hebt een evenement aangemaakt.",
+    "eventFollowerCreatedTitle" => "heeft een evenement aangemaakt",
+    "eventCreatedText1" => "Het evenement dat is aangemaakt is ",
+    "eventCreatedText2" => ".",
+
     "editTitle" => "Een van je evenementen is aangepast.",
+    "editTitleParticipant" => "One of the events ",
     "editText1" => "Evenement ",
     "editText2" => " is aangepast.",
-    "deleteTitle" => "Een van je evenementen is verwijdert.",
+
+    "deleteTitle1" => "Je hebt het evenement ",
+    "deleteTitle2" => "verwijdert.",
+
     "deleteTitleParticipant" => "Een evenement waar je voor hebt aangemeld is verwijdert",
     "deleteText1" => "Evenement ",
     "deleteText2" => " is verwijdert.",
@@ -19,12 +29,12 @@ return [
 
     "joinedYourEvent" => "heeft zich aangemeld voor je evenement",
     "participantJoinedEvent" => "heeft zich aangemeld voor",
-    "leftEvent" => "Je hebt je afgemeld voor",
+    "leftEvent" => "je hebt je afgemeld voor",
     "leftYourEvent" => "heeft zich afgemeld voor je evenement",
     "participantLeftEvent" => "heeft zich afgemeld voor",
-    "eventJoinedHeader" => "Iemand heeft zich aangemeld voor een evenement",
-    "eventLeftHeader" => "Iemand heeft zich afgemeld voor een evenement",
-    "youLeftEventHeader" => "Je hebt je afgemeld voor een evenement",
+    "eventJoinedHeader" => "iemand heeft zich aangemeld voor een evenement",
+    "eventLeftHeader" => "iemand heeft zich afgemeld voor een evenement",
+    "youLeftEventHeader" => "je hebt je afgemeld voor een evenement",
     "eventLeftYourHeader" => "Iemand heeft zich afgemeld voor een van je evenementen",
     "eventInfoTitle" => "Eventement informatie",
     "eventOwner" => "Eigenaar evenement",
@@ -33,10 +43,10 @@ return [
     "changedPassword" => "Je wachtwoord is veranderd",
     "changedEmail" => "Je emailadres is veranderd",
     "changedPersonalInfo" => "Eén of meer van persoonlijk gegevens zijns veranderd",
-    "editAccountHeader" => "Je accountgegevens zijn bewerkt",
+    "editAccountHeader" => "je accountgegevens zijn bewerkt",
 
     //Subject
-    "subjectAccountEdited" => "Account is gewijzigd",
+    "subjectAccountEdited" => "jou account is gewijzigd",
     "subjectEventEdited" => "Evenement is gewijzigd",
     "subjectEventDeleted" => "Evenement is verwijdert",
     "subjectEventJoined" => "Er is aangemeld voor een evenement",

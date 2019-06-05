@@ -27,12 +27,14 @@
 
 	<!-- Divider -->
 	<hr class="sidebar-divider">
-
+    <div class="sidebar-heading">
+		Edit
+	</div>
     <!-- Nav Item - Pages -->
     <li class="nav-item {{ request()->is('edit/*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
             aria-controls="collapsePages">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-fw fa-language"></i>
             <span>{{__('navigation.nav_pages')}}</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -74,6 +76,18 @@
             </div>
         </div>
     </li>
+
+    <li class="nav-item {{ request()->is('admin/links') ? 'active' : '' }}">
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLinks" aria-expanded="true" aria-controls="collapseLinks">
+			<i class="fas fa-fw fa-share-alt"></i>
+			<span>{{__('navigation.nav_socialmedia')}}</span>
+		</a>
+		<div id="collapseLinks" class="collapse" aria-labelledby="headingLinks" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<a class="collapse-item" href="{{ url('admin/links')  }}">{{__('navigation.nav_links')}}</a>
+			</div>
+		</div>
+	</li>
 	
 	<!-- Divider -->
 	<hr class="sidebar-divider">
@@ -101,7 +115,7 @@
 	<!-- Nav Item - Events -->
 	<li class="nav-item {{ request()->is('admin/events') ? 'active' : '' }}">
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEvents" aria-expanded="true" aria-controls="collapseEvents">
-			<i class="fas fa-fw fa-users"></i>
+			<i class="fas fa-fw fa-calendar-week"></i>
 			<span>{{__('navigation.nav_eventsS')}}</span>
 		</a>
 		<div id="collapseEvents" class="collapse" aria-labelledby="headingEvents" data-parent="#accordionSidebar">
@@ -111,6 +125,14 @@
 				<!--<a class="collapse-item" href="{{ url('admin/events/create')  }}">Create</a>-->
 			</div>
 		</div>
+	</li>
+
+	<!-- Nav Item - Swear words -->
+	<li class="nav-item {{ request()->is('admin/swearWords') ? 'active' : '' }}">
+		<a class="nav-link collapsed" href="{{ url('admin/swearWords')  }}">
+			<i class="fas fa-fw fa-file-word"></i>
+			<span>{{__('navigation.nav_swearWords')}}</span>
+		</a>
 	</li>
 
 	<!-- Divider

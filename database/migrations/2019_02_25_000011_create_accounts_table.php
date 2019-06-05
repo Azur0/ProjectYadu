@@ -38,6 +38,11 @@ class CreateAccountsTable extends Migration
             $table->string('api_token', 60)->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->enum('followerVisibility', ['public', 'follower', 'private'])->default('private');
+            $table->enum('followingVisibility', ['public', 'follower', 'private'])->default('private');
+            $table->enum('infoVisibility', ['public', 'follower', 'private'])->default('private');
+            $table->enum('eventsVisibility', ['public', 'follower', 'private'])->default('private');
+            $table->enum('participatingVisibility', ['public', 'follower', 'private'])->default('private');
 
             $table->index(["accountRole"], 'fk_accounts_accountRoles1_idx');
 

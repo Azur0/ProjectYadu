@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Management;
 
+use App\BannedIp;
 use DB;
 use App\AccountRole;
 use App\Login;
@@ -160,17 +161,22 @@ class AccountsController extends Controller
     	$amount = Login::where('account_id', $id)->get()->groupBy('ip');
 
     	$countedLogins = array();
+    	$bannedIps = array();
+
     	foreach ($logins as $login){
     	    if(array_key_exists($login->ip, $countedLogins)){
     	        $countedLogins[$login->ip]++;
             }
     	    else{
     	        $countedLogins[$login->ip] = 1;
+    	        if(BannedIp::where('ip', $login->ip)->exists()){
+                    array_push($bannedIps, $login->ip);
+                }
             }
         }
 
     	arsort($countedLogins);
 
-        return view('admin.accounts.logins', compact(['account', 'logins', 'amount', 'countedLogins']) );
+        return view('admin.accounts.logins', compact(['account', 'logins', 'amount', 'countedLogins', 'bannedIps']) );
     }
 }

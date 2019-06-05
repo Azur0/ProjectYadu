@@ -77,16 +77,12 @@
         </div>
     </li>
 
+	<!-- Social Media -->
     <li class="nav-item {{ request()->is('admin/links') ? 'active' : '' }}">
-		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLinks" aria-expanded="true" aria-controls="collapseLinks">
+		<a class="nav-link collapsed" href="{{ url('admin/links')  }}">
 			<i class="fas fa-fw fa-share-alt"></i>
 			<span>{{__('navigation.nav_socialmedia')}}</span>
 		</a>
-		<div id="collapseLinks" class="collapse" aria-labelledby="headingLinks" data-parent="#accordionSidebar">
-			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="{{ url('admin/links')  }}">{{__('navigation.nav_links')}}</a>
-			</div>
-		</div>
 	</li>
 	
 	<!-- Divider -->
@@ -99,32 +95,18 @@
 
     <!-- Nav Item - Users -->
     <li class="nav-item {{ request()->is('admin/accounts') ? 'active' : '' }}">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true"
-            aria-controls="collapseUsers">
+        <a class="nav-link collapsed" href="{{ url('admin/accounts')  }}">
             <i class="fas fa-fw fa-users"></i>
-            <span>Gebruikers</span>
+            <span>{{__('navigation.nav_users')}}</span>
         </a>
-        <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Beheren:</h6>
-                <a class="collapse-item" href="{{ url('admin/accounts')  }}">Accounts</a>
-            </div>
-        </div>
     </li>
 
 	<!-- Nav Item - Events -->
 	<li class="nav-item {{ request()->is('admin/events') ? 'active' : '' }}">
-		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEvents" aria-expanded="true" aria-controls="collapseEvents">
+		<a class="nav-link collapsed" href="{{ url('admin/events')  }}">
 			<i class="fas fa-fw fa-calendar-week"></i>
 			<span>{{__('navigation.nav_eventsS')}}</span>
 		</a>
-		<div id="collapseEvents" class="collapse" aria-labelledby="headingEvents" data-parent="#accordionSidebar">
-			<div class="bg-white py-2 collapse-inner rounded">
-				<!--<h6 class="collapse-header">Beheren:</h6>-->
-				<a class="collapse-item" href="{{ url('admin/events')  }}">{{__('navigation.nav_overview')}}</a>
-				<!--<a class="collapse-item" href="{{ url('admin/events/create')  }}">Create</a>-->
-			</div>
-		</div>
 	</li>
 
 	<!-- Nav Item - Swear words -->

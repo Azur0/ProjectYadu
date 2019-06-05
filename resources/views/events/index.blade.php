@@ -43,7 +43,30 @@
     <div class="event_overview row" id="eventsToDisplay">
         <img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>
     </div>
-
+    @if(Session::get('error'))
+    <!-- Modal -->
+        <div class="modal fade" id="activateModal" tabindex="-1" role="dialog" aria-labelledby="activateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="activateModalLabel">{{ __('events.index_activate_modal_title') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            {{ __('events.index_activate_modal_description') }}
+            </div>
+            <div class="modal-footer">
+                <a href="www.google.nl">
+                    <button type="button" class="btn btn-primary">{{ __('events.index_activate_modal_button') }}</button>
+                </a>
+            </div>
+            </div>
+        </div>
+        </div>
+        <script defer>$("#activateModal").modal('show');</script>
+    @endif
 
     <script type="text/javascript">
     var slider = document.getElementById("rangeValue");

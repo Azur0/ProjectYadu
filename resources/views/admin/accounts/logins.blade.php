@@ -49,12 +49,12 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <h3>Logins per IP</h3>
+                    <h3>{{__('bans.logins_per_ip')}}</h3>
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">IP</th>
-                            <th scope="col">amount of logins</th>
+                            <th scope="col">{{__('bans.ip')}}</th>
+                            <th scope="col">{{__('bans.amount_of_logins')}}</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -65,9 +65,9 @@
                                 <th scope="col">{{ $amount }}</th>
                                 <td scope="col">
                                     @if(in_array($ip, $bannedIps))
-                                        <a href="/admin/ip/{{$ip}}/unblock"><i class="fas fa-unlock"></i> unblock</a>
+                                        <a href="/admin/ip/{{$ip}}/unblock"><i class="fas fa-unlock"></i>&nbsp;{{__('bans.block')}}</a>
                                     @else
-                                        <a href="/admin/ip/{{$ip}}/user/{{$account->id}}/block"><i class="fas fa-user-slash"></i> block</a>
+                                        <a href="/admin/ip/{{$ip}}/user/{{$account->id}}/block"><i class="fas fa-user-slash"></i>&nbsp;{{__('bans.unblock')}}</a>
                                     @endif
                                 </td>
                             </tr>
@@ -76,12 +76,12 @@
                     </table>
                 </div>
                 <div class="col">
-                    <h3>logins</h3>
+                    <h3>{{__('bans.logins')}}</h3>
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">IP</th>
-                            <th scope="col">Login {{__('home.participating_table_colname_date')}}</th>
+                            <th scope="col">{{__('bans.ip')}}</th>
+                            <th scope="col">{{__('bans.login_date')}}</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -92,9 +92,9 @@
                                 <td>{{ $login->created_at }}</td>
                                 <td scope="col">
                                     @if(in_array($ip, $bannedIps))
-                                        <a href="/admin/ip/{{$ip}}/unblock"><i class="fas fa-unlock"></i> unblock</a>
+                                        <a href="/admin/ip/{{$ip}}/unblock"><i class="fas fa-unlock"></i>&nbsp;{{__('bans.block')}}</a>
                                     @else
-                                        <a href="/admin/ip/{{$ip}}/user/{{$account->id}}/block"><i class="fas fa-user-slash"></i> block</a>
+                                        <a href="/admin/ip/{{$ip}}/user/{{$account->id}}/block"><i class="fas fa-user-slash"></i>&nbsp;{{__('bans.unblock')}}</a>
                                     @endif
                                 </td>
                             </tr>

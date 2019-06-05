@@ -16,7 +16,9 @@ class EditAvatarRequest extends FormRequest
     {
         return [
             'accountId' => ['required'],
-            'avatar' => ['required', 'mimes:jpeg,jpg,png', 'dimensions:max_width=400, max_height=400, ratio=1', 'max:10240']
+            'avatar' => ['required', 'mimes:jpeg,jpg,png', 'dimensions:ratio=1/1,max_width=500,max_height=500', 'max:10240']
         ];
     }
+
+
 }

@@ -17,6 +17,7 @@ return [
     'edit_edit_avatar_upload' => 'Uploaden',
     'edit_edit_avatar_choose_image' => 'Kies afbeelding',
     'edit_update_avatar' => 'Avatar bijwerken',
+    'edit_avatar_info' => 'Een avatar moet vierkant zijn en mag niet groter zijn dan 500x500 pixels',
 
     'edit_edit_profile_title' => 'Profiel bewerken',
     'edit_firstname' => 'Voornaam',

@@ -34,6 +34,7 @@
                                                        for="avatar">{{__('profile.edit_edit_avatar_choose_image')}}</label>
                                             </div>
                                         </div>
+                                        <span class="tiny-text">{{__('profile.edit_avatar_info')}}</span>
 
                                         @if ($errors->has('avatar'))
                                             <span class="invalid-feedback d-block" role="alert">

@@ -11,8 +11,15 @@ class SuspensionsController extends Controller
     //
 	public function index()
     {
-        $ips = BannedIp::all();
+        $ips = BannedIp::simplePaginate(10);
         return view('admin.suspensions.index', compact('ips'));
     }
 
+    public function destroy($id)
+    {
+    	$ip = BannedIp::findOrFail($id);
+        $ip->delete();
+
+        return redirect('admin/suspensions/ip');
+    }
 }

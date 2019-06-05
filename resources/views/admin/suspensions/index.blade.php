@@ -9,19 +9,13 @@
 @endsection
 @section('content')
 
-	@if (count($errors) > 0)
-		<div class="alert alert-danger alert-dismissible fade show">
-			<strong>Error!</strong> {{__('ProhibitedWords.ProhibitedWord_error')}}
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-		</div>
-	@endif
-
 	<div class="card">
 		<div class="card-header">
 			<h2>IP</h2>
 		</div>
 		<div class="card-body">
 			<div>
+				{{$ips->links() }}
 				<table class="table">
 					<thead>
 					<tr>
@@ -37,7 +31,7 @@
 							<td>{{$ip->id}}</td>
 							<td>{{$ip->ip}}</td>
 							<td>
-								<form method="POST" action="/suspensions/ip/delete" class="btn_inline">
+								<form method="POST" action="/admin/suspensions/ip/{{$ip->id}}/destroy" class="btn_inline">
 									@csrf
 									<input hidden name="ip" value="{{$ip->ip}}">
 									<button type="submit" class="button-remove button-hover">{{__('ProhibitedWords.show_delete')}}</button>

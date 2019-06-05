@@ -181,7 +181,7 @@ class AccountsController extends Controller
     }
 
     public function blockIP($ip, $id){
-        //TODO: logout user on IP-Ban
+        Account::where('id', $id)->update(['doForceLogout' => 1]);
         BannedIp::firstOrCreate(['ip' => $ip]);
         return redirect()->back();
     }

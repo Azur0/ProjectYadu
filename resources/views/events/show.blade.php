@@ -97,9 +97,20 @@
                     <a id="share-facebook" class="fab fa-facebook event-media-icons"></a>
                     <a id="share-twitter" class="fab fa-twitter event-media-icons"></a>
                     <a id="share-link" class="fa fa-link event-media-icons" data-toggle="modal" data-target="#confirmDeleteAccount"></a>
-                </div>
+                    <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
+            <div title="Add to Calendar" class="addeventatc addevent">
+                {{__('events.add_to_calendar')}}
+                <span class="start">{{date('m/d/Y h:i A', strtotime($event->startDate))}}</span>
+                <span class="end">{{date('m/d/Y h:i A', strtotime($event->startDate))}}</span>
+                <span class="timezone">Europe/Amsterdam</span>
+                <span class="title">{{$event->eventName}}</span>
+                <span class="description">{{$event->description}}</span>
+                <span class="location">{{ $event->location()->first()->route }} {{ $event->location()->first()->houseNumber }}, {{ $event->location()->first()->locality }}</span>
             </div>
-
+                </div>
+                
+            </div>
+                
             <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -119,6 +130,7 @@
                     </div>
                 </div>
             </div>
+           
 
             <script>
 

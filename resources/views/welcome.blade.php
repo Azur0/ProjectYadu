@@ -1,6 +1,6 @@
-@extends('layouts/app_welcome')
+@extends('layouts/app_blank')
 
-@section('content')
+@section('main')
 	<div id="welcome_carousel">
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">

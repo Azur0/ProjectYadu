@@ -83,7 +83,6 @@ return [
     'show_title' => 'Titel',
     'show_overview' => 'Overzicht',
     'show_chat_login' => 'Log in en meld je aan bij dit event om te kunnen chatten!',
-    'show_delete' => 'Verwijder hier uw evenement.',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Annuleren',

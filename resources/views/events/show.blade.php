@@ -1,19 +1,6 @@
 @extends('layouts/app')
 
 @section('content')
-@if($event->owner->id == auth()->user()->id)
-<div class="card bg-danger alert">
-    <div class="row">
-        <div class="card-body">
-        <h1 class="badge-danger">{{__('events.show_delete')}}</h1>
-        </div>
-        <form action="/events/destroy/{{$event->owner_id}}" method="POST">
-        @csrf
-        <button class="btn btn-danger" type="submit" style="margin-top: 8px;"><h1><i class="far fa-times-circle" style="margin-top: 10px;"></i></h1></button>
-        </form>
-    </div>
-</div>
-@endif
     <div class="row">
         <div class="col-md-6">
             <div>

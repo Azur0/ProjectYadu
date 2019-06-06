@@ -146,7 +146,6 @@ class EventsController extends Controller
 	{
 		if (Auth::check())
 		{
-			//dd(Auth::user());
 			if (Auth::user()->accountRole == 'Admin')
 			{
 				$data = array(

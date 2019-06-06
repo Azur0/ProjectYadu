@@ -32,7 +32,7 @@
                             <a href="/events/{{$event->id}}/leave"
                                class="btn btn-danger btn-sm my-auto mx-2">{{__('events.show_leave')}}</a>
                         @elseif($event->participants->count() < $event->numberOfPeople)
-                                @if(Auth::user()->hasVerifiedEmail())
+                                @if(!Auth::user()->hasVerifiedEmail())
                                 <a data-toggle="modal" data-target="#notActivated" class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
                                 <div id="notActivated" class="modal fade" role="dialog">
                                     <div class="modal-dialog">

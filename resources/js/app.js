@@ -8,7 +8,6 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-window.chartjs = require('chart.js');
 
 /**
  * The following block of code may be used to automatically register your

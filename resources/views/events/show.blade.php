@@ -302,6 +302,7 @@
                         clearTimeout(this.timer);
                         this.timer = null;
                     }
+                    
                     this.timer = setTimeout(() => {
                         axios.post(`/api/events/${this.event.id}/message`, {
                         api_token: this.account.api_token,

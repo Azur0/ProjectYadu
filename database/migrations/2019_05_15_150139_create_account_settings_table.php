@@ -26,6 +26,8 @@ class CreateAccountSettingsTable extends Migration
             $table->tinyInteger('NotificationEventDeleted')->default('1');
             // Participant
             $table->tinyInteger('NotificationJoinAndLeaveEvent')->default('1');
+            // Mail language preference
+            $table->string('LanguagePreference')->default('eng');
 
             $table->timestamps();
 

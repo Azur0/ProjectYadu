@@ -83,6 +83,7 @@ return [
     'show_title' => 'Titel',
     'show_overview' => 'Overzicht',
     'show_chat_login' => 'Log in en meld je aan bij dit event om te kunnen chatten!',
+    'add_to_calendar' => 'Voeg toe aan agenda',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Annuleren',
@@ -112,9 +113,9 @@ return [
 	'edit_error_img' => 'Kies een foto.',
 	'edit_error_location' => 'Het locatie-veld is verplicht.',
     'show_datetime_at' => 'om',
-    'show_chat_swearword' => 'Scheldwoord gedecteerd',
     'show_chat_entertext' => 'Gelieve iets te typen',
     'show_chat_characterlimit' => 'Maximaal 180 karakters toegestaan',
+    'show_chat_swearword' => 'Scheldwoord gedetecteerd',
     'show_chat_send' => 'Verstuur',
     'show_chat_typemessage' => 'Schrijf je bericht',
 

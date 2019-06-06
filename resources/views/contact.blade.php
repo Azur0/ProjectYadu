@@ -41,16 +41,16 @@
         </div>
         <div class="contact-item">
             <h5>{{__('contact.social')}}</h5>
-            <a href="{{$socialmedia->find('linkedin')->link}}">
+            <a href="{{$socialmedia->find('linkedin')->link}}" target="_blank">
                 <i class="fab fa-linkedin media-icons"></i>
             </a>
-            <a href="{{$socialmedia->find('twitter')->link}}" class="contact-item">
+            <a href="{{$socialmedia->find('twitter')->link}}" target="_blank" class="contact-item">
                 <i class="fab fa-twitter media-icons"></i>
             </a>
-            <a href="{{$socialmedia->find('facebook')->link}}" class="contact-item">
+            <a href="{{$socialmedia->find('facebook')->link}}" target="_blank" class="contact-item">
                 <i class="fab fa-facebook media-icons"></i>
             </a>
-            <a href="{{$socialmedia->find('instagram')->link}}" class="contact-item">
+            <a href="{{$socialmedia->find('instagram')->link}}" target="_blank" class="contact-item">
                 <i class="fab fa-instagram media-icons"></i>
             </a>
         </div>

@@ -27,11 +27,11 @@
                                             </a>
                                             @elseif($follow->status == "pending")
                                             <a href="#" class="btn btn-primary" disabled>
-                                                {{ __('profile.follow_pending') }}
+                                            <i class="fas fa-hourglass-end"></i> {{ __('profile.follow_pending') }}
                                             </a>
                                             @elseif($follow->status == "accepted")
                                             <a href="/profile/{{$account->id}}/unfollow" class="btn btn-primary">
-                                                <i class="fas fa-user-minus"></i> {{ __('profile.unfollow') }}
+                                                <i class="fas fa-user-minus"></i> {{ __('profile.follow_accepted') }}
                                             </a>
                                             @endif
                                             @if (session('error'))

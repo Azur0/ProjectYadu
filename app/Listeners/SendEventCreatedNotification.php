@@ -31,7 +31,7 @@ class SendEventCreatedNotification
     {
         $currentLocale = app()->getLocale();
 
-        if($event->owner_id != null)
+        if($event->event->owner_id != null )
         {
 	        Mail::to($event->event->owner->email)->send(
 	            new EventCreatedMail($event->event,$event->event->owner)

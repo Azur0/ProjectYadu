@@ -86,6 +86,7 @@ return [
     'show_overview' => 'Overzicht',
     'show_chat_login' => 'Log in en meld je aan bij dit event om te kunnen chatten!',
     'add_to_calendar' => 'Voeg toe aan agenda',
+    'show_no_initiator' => 'Er is nog geen event eigenaar, meld je aan om de eigenaar te worden.',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Annuleren',

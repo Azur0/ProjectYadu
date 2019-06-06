@@ -165,10 +165,10 @@ class EventsController extends Controller
 
         $newEvent->location_id = $location->id;
 
-        // if($request['initiator'] == true)
-        // {
-        // 	$newEvent->owner_id = auth()->user()->id;
-        // }
+        if($request['initiator'] == "true")
+        {
+        	$newEvent->owner_id = auth()->user()->id;
+        }
 
         $newEvent->save();
 
@@ -326,14 +326,23 @@ class EventsController extends Controller
 
     public function join($id)
     {
-
-        if (Auth::user()->hasVerifiedEmail()) {
+        if (Auth::user()->hasVerifiedEmail())
+        {
             $event = Event::findOrFail($id);
-            if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
-                $event->participants()->attach(auth()->user()->id);
-                event(new EventJoined($event,auth()->user()->id));
+            if($event->owner_id)
+            {
+            	if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id))
+				{
+            		$event->participants()->attach(auth()->user()->id);
+                	event(new EventJoined($event,auth()->user()->id));
+            	}
+            	//TODO: Add error 'You already joined!' 
             }
-            //TODO: Add error 'You already joined!'
+            else
+            {
+				$event->owner_id = auth()->user()->id;
+				$event->save();
+            }
         }
         //TODO: Add error 'You are not logged in!'
         return redirect('/events/' . $id);

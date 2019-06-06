@@ -86,6 +86,7 @@ return [
     'show_overview' => 'Overview',
     'show_chat_login' => 'Log in and join this event to chat!',
     'add_to_calendar' => 'Add to Calendar',
+    'show_no_initiator' => 'There is no initiator yet, join to become the initiator.',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Cancel',

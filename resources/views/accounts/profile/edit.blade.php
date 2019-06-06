@@ -562,8 +562,6 @@
 								</div>
 							</form>
 						@endforeach
-
-
 					</div>
 				</div>
 

@@ -230,9 +230,9 @@
                     <!-- end chat-history -->
 
                     <div class="chat-message clearfix">
-                        <textarea name="message-to-send" id="message-to-send" placeholder="{{ __('events.show_chat_typemessage') }}" rows="3" v-model="messageBox" v-on:keyup.enter="postMessage"></textarea>
+                        <textarea name="message-to-send" id="message-to-send" placeholder="{{ __('events.show_chat_typemessage') }}" rows="3" v-model.trim="messageBox" v-on:keyup.enter="postMessage" required></textarea>
 
-                        <button @click.prevent="postMessage">{{ __('events.show_chat_send') }}</button>
+                        <button id="sendButton" @click.prevent="postMessage">{{ __('events.show_chat_send') }}</button>
 
                     </div>
                     <!-- end chat-message -->
@@ -255,74 +255,93 @@
     </div>
 
 @endsection
-@if(Auth::check())
-    @if((!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
-        @section('scripts')
-            <script>
+@if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
+@section('scripts')
+    <script>
 
-                let warning = document.createElement("strong");
-                warning.style.color = "red";
-                warning.innerHTML = "{{ __('events.show_chat_swearword') }}";
+        let warning = document.createElement("strong");
+        warning.style.color = "red";
 
-                function insertAfter(referenceNode, newNode) {
-                    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        function insertAfter(referenceNode, newNode) {
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        }
+
+            const app = new Vue({
+            el: '#app',
+            data: {
+                messages: {},
+                messageBox: '',
+                event: {!! json_encode($event->getAttributes()) !!},
+                account: {!! Auth::check() ? json_encode(Auth::user()->only(['id', 'firstName', 'lastName', 'api_token'])) : 'null' !!}
+            },
+            mounted() {
+                this.getMessages();
+                this.listen();
+            },
+            methods: {
+                getMessages() {
+                    axios.get(`/api/events/${this.event.id}/messages`)
+                        .then((response) => {
+                            this.messages = response.data
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                postMessage() {
+                    let btn = $("#sendButton");
+
+                    setTimeout(function(){
+                        btn.prop('disabled', true);
+                        setTimeout(function(){
+                            btn.prop('disabled', false);
+                        },1000);
+                    })
+
+                    if (this.timer) {
+                        clearTimeout(this.timer);
+                        this.timer = null;
+                    }
+                    
+                    this.timer = setTimeout(() => {
+                        axios.post(`/api/events/${this.event.id}/message`, {
+                        api_token: this.account.api_token,
+                        body: this.messageBox
+                    })
+                        .then((response) => {
+                            this.messages.push(response.data);
+                            this.messageBox = '';
+                            warning.remove();
+                        })
+                        .catch((error) => {
+                            if(error.response.data.errors.body[0] == 'body is not allowed because it contains a swearword.' || error.response.data.errors.body[0] == 'body is niet toegestaan omdat deze een scheldwoord bevat.') {
+                                warning.innerHTML = "{{ __('events.show_chat_swearword') }}";
+                            } else if(error.response.data.errors.body[0] == 'The body field is required.' || error.response.data.errors.body[0] == 'body is verplicht.') {
+                                warning.innerHTML = "{{ __('events.show_chat_entertext') }}";
+                            } else if(error.response.data.errors.body[0] == 'The body may not be greater than 180 characters.' || error.response.data.errors.body[0] == 'body mag niet uit meer dan 180 tekens bestaan.') {
+                                warning.innerHTML = "{{ __('events.show_chat_characterlimit') }}";
+                            }
+                            insertAfter(document.getElementById("message-to-send"), warning);
+                        });
+                    }, 300);
+                },
+                listen() {
+                    Echo.private('event.'+this.event.id)
+                        .listen('NewMessage', (message) => {
+                            this.messages.push(message)
+                        })
                 }
+            }
+        });
 
-                    const app = new Vue({
-                    el: '#app',
-                    data: {
-                        messages: {},
-                        messageBox: '',
-                        event: {!! json_encode($event->getAttributes()) !!},
-                        account: {!! Auth::check() ? json_encode(Auth::user()->only(['id', 'firstName', 'lastName', 'api_token'])) : 'null' !!}
-                    },
-                    mounted() {
-                        this.getMessages();
-                        this.listen();
-                    },
-                    methods: {
-                        getMessages() {
-                            axios.get(`/api/events/${this.event.id}/messages`)
-                                .then((response) => {
-                                    this.messages = response.data
-                                })
-                                .catch(function (error) {
-                                    console.log(error);
-                                });
-                        },
-                        postMessage() {
-                            axios.post(`/api/events/${this.event.id}/message`, {
-                                api_token: this.account.api_token,
-                                body: this.messageBox
-                            })
-                                .then((response) => {
-                                    this.messages.push(response.data);
-                                    this.messageBox = '';
-                                    warning.remove();
-                                })
-                                .catch(function (error) {
-                                    insertAfter(document.getElementById("message-to-send"), warning);
-                                });
-                        },
-                        listen() {
-                            Echo.private('event.'+this.event.id)
-                                .listen('NewMessage', (message) => {
-                                    this.messages.push(message)
-                                })
-                        }
-                    }
-                });
-
-                // Disable newline on enter(except when holding shift)
-                $('textarea').keydown(function(e){
-                    if (e.keyCode == 13 && !e.shiftKey)
-                    {
-                        // prevent default behavior
-                        e.preventDefault();
-                    }
-                });
-
-            </script>
-        @endsection
-    @endif
+        // Disable newline on enter(except when holding shift)
+        $('textarea').keydown(function(e){
+            if (e.keyCode == 13 && !e.shiftKey)
+            {
+                // prevent default behavior
+                e.preventDefault();
+            }
+        });
+    </script>
+@endsection
 @endif

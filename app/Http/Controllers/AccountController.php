@@ -204,6 +204,8 @@ class AccountController extends Controller
 
 	public static function deleteAccountFromId($id)
 	{
+        Account::where('id', $id)->update(['doForceLogout' => 1]);
+
 		$account = Account::where('id', $id)->firstOrFail();
 
 		$account->email = $id;

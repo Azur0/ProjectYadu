@@ -20,6 +20,7 @@ class ForceLogout
         if(Auth::check()){
             $forceLogout = Account::where('id', Auth::id())->pluck('doForceLogout')->first();
             if($forceLogout == 1){
+                Account::where('id', Auth::id())->update(['doForceLogout' => 0]);
                 Auth::logout();
             }
         }

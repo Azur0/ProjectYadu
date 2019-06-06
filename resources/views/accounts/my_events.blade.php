@@ -31,11 +31,31 @@
 							<td>{{ $event->location->postalcode }} {{ $event->city }}</td>
 							<td>
 								<a class="editButton" href="/events/{{$event->id}}/edit"><i class="fas fa-edit"></i></a>
-								<form id="deleteEvent{{$event->id}}" method="POST" action="/events/{{$event->id}}">
-								@method('DELETE')
-								@csrf
-									<button type="submit" class="deleteButton" form="deleteEvent{{$event->id}}"><i class="fas fa-trash-alt"></i></input>
-								</form>
+								<button type="submit" class="deleteButton" data-toggle="modal" data-target="#confirmDeleteEvent"><i class="fas fa-trash-alt"></i></button>
+								<div class="modal fade" id="confirmDeleteEvent" tabindex="-1" role="dialog">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">{{__('accounts.edit_delete_account_confirm_title')}}</h5>
+												<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												{{__('accounts.edit_delete_event_confirm_content')}}
+											</div>
+											<div class="modal-footer">
+												<form id="deleteEvent{{$event->id}}" method="POST" action="/events/{{$event->id}}">
+												@method('DELETE')
+												@csrf
+													<button type="submit" class="btn btn-danger" form="deleteEvent{{$event->id}}">{{__('accounts.edit_delete_event_positive')}}</button>
+													<button type="button" class="btn btn-primary" data-dismiss="modal">{{__('accounts.edit_delete_event_negative')}}</button>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
 							</td>
 						</tr>
 					@endforeach

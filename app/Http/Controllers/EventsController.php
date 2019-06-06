@@ -113,7 +113,7 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateEventRequest $request)
     {
        
         $validator = Validator::make($request->all(), [
@@ -135,12 +135,15 @@ class EventsController extends Controller
 
         $request['startDate'] = $request['startDate'] . ' ' . $request['startTime'];
 
-        $validator->after(function ($validator) use ($request) {
-            if ($this->isPictureValid($request['tag'], $request['picture'])) {
+        $validator->after(function ($validator) use ($request)
+        {
+            if ($this->isPictureValid($request['tag'], $request['picture']))
+            {
                 $validator->errors()->add('picture', 'Something is wrong with this field!');
             }
         });
-        if ($validator->fails()) {
+        if ($validator->fails())
+        {
             return redirect('/events/create')
                 ->withErrors($validator)
                 ->withInput();
@@ -165,7 +168,7 @@ class EventsController extends Controller
 
         $newEvent->location_id = $location->id;
 
-        if($request['initiator'] == "true")
+        if($request['initiator'] == "1")
         {
         	$newEvent->owner_id = auth()->user()->id;
         }
@@ -177,11 +180,15 @@ class EventsController extends Controller
 
     public function isPictureValid($tag, $picture)
     {
-        if (!EventPicture::where('id', '=', $picture)->exists()) {
+        if (!EventPicture::where('id', '=', $picture)->exists())
+        {
             return true;
-        } else {
+        }
+        else
+        {
             $eventPicture = EventPicture::all()->where('id', '=', $picture)->pluck('tag_id');
-            if ($eventPicture[0] != $tag) {
+            if ($eventPicture[0] != $tag)
+            {
                 return true;
             }
             return false;

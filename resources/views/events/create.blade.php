@@ -107,12 +107,12 @@
                 <label for="initiator">{{__('events.create_initiator_info')}}</label>
               
                 <select name="initiator" class="form-control{{ $errors->has('initiator') ? ' is-invalid' : '' }}">
-					<option value="true">{{__('events.create_initiator_true')}}</option>
-					<option value="false">{{__('events.create_initiator_false')}}</option>
+					<option value="1">{{__('events.create_initiator_true')}}</option>
+					<option value="0">{{__('events.create_initiator_false')}}</option>
 				</select>
 
                 @if ($errors->has('initiator'))
-                	<div class="error">{{__('events.initiator')}}</div>
+                	<div class="error">{{ $errors->first('initiator') }}</div>
                 @endif
             </div>
         </div>

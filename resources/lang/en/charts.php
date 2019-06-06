@@ -19,5 +19,6 @@ return [
     'shared_events' => 'Shared events',
     'event_categories' => 'Events per category',
     'event_heatmap' => 'Event heatmap',
-    'amount_zero_participants' => 'Events with no participants'
+    'amount_zero_participants' => 'Events with no participants',
+    'amount_average_participants' => 'Average amount of participants'
 ];

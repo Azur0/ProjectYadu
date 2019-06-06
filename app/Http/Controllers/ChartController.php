@@ -173,7 +173,18 @@ class ChartController extends Controller
 
     public function GetAverageParticipants(GetChartDateRangeRequest $request){
         $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
-        //TODO
+
+        $events = Event::select('id')->where('isDeleted', 0)->whereBetween('startDate', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->get();
+
+        $totalParticipants = 0;
+        foreach ($events as $event){
+            $totalParticipants += $event->participants()->count();
+        }
+
+        $average = round($totalParticipants / $events->count(), 1);
+
+        $data['averageParticipantEventData'] = array("averageParticipantCount" => $average);
+
         return $data;
     }
 

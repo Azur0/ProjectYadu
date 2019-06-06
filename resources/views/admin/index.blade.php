@@ -140,7 +140,7 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">###Average</div>
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{__('charts.amount_average_participants')}}</div>
                         <div id="averageParticipants" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
                     </div>
                     <div class="col-auto">
@@ -256,6 +256,7 @@
     updateAccountsCreated();
     updateMostActiveAccount();
     updateZeroParticipants();
+    updateAverageParticipants();
 
     //EventChart
     var eventChart = new Chart(document.getElementById('events'), {
@@ -316,6 +317,7 @@
         updateAccountsCreated(fromDate, toDate);
         updateMostActiveAccount(fromDate, toDate);
         updateZeroParticipants(fromDate, toDate);
+        updateAverageParticipants(fromDate, toDate)
 
         updateEventChart(fromDate, toDate);
         updateShareChart(fromDate, toDate);
@@ -446,6 +448,29 @@
             dataType: 'json',
             success: function(data) {
                 document.getElementById("zeroParticipants").innerHTML = data.zeroParticipantEventData.zeroParticipantCount;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    function updateAverageParticipants(fromDate, toDate) {
+        document.getElementById("averageParticipants").innerHTML = "{{__('charts.loading')}}";
+        $.ajax({
+            url: "{{ route('admin_charts_average_participants') }}",
+            method: 'POST',
+            async: true,
+            data: {
+                fromDate: fromDate,
+                toDate: toDate,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(data) {
+                document.getElementById("averageParticipants").innerHTML = data.averageParticipantEventData.averageParticipantCount;
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);

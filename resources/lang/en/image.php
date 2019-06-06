@@ -28,5 +28,6 @@ return [
     'edit_tag_name' => 'Edit name',
     'add_event_picture_first' => 'Upload a new event picture',
     'add_event_picture_second' => 'Upload new picture',
-    'file_too_large' => 'File too large, please compress file to under 10MB',
+    'file_too_large' => 'File too large, please compress the file',
+    'instructions_extra' => 'Upload and select the image you want to change.',
 ];

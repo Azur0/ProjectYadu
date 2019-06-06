@@ -38,7 +38,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xl-6 col-md-6 mb-4">
+    <div class="col-xl-3 col-md-3 mb-2">
         <div class="card border-left-warning shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <div class="col-xl-6 col-md-6 mb-4">
+    <div class="col-xl-3 col-md-3 mb-2">
         <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -68,6 +68,24 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="col-xl-3 col-md-3 mb-2">
+        <a href=# id="activeUserLink">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">mostActiveAccounts</div>
+                            <div id="activeUser" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
     </div>
 
 </div>
@@ -151,6 +169,7 @@
     //Manually update cards on page load
     updateChatmessagesSend();
     updateAccountsCreated();
+    updateMostActiveAccount();
 
     //EventChart
     var eventChart = new Chart(document.getElementById('events'), {
@@ -209,6 +228,7 @@
         updateDateString(fromDate, toDate);
         updateChatmessagesSend(fromDate, toDate);
         updateAccountsCreated(fromDate, toDate);
+        updateMostActiveAccount(fromDate, toDate);
         updateEventChart(fromDate, toDate);
         updateShareChart(fromDate, toDate);
         updateCategoryChart(fromDate, toDate);
@@ -238,7 +258,7 @@
     }
 
     function updateChatmessagesSend(fromDate, toDate) {
-        document.getElementById("newAccounts").innerHTML = "{{__('charts.loading')}}";
+        document.getElementById("chatmessages").innerHTML = "{{__('charts.loading')}}";
         $.ajax({
             url: "{{ route('admin_charts_chatmessages') }}",
             method: 'POST',
@@ -275,6 +295,47 @@
             dataType: 'json',
             success: function(data) {
                 document.getElementById("newAccounts").innerHTML = data.accountData.accountCount;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    }
+
+
+    function updateMostActiveAccount(fromDate, toDate) {
+        document.getElementById("activeUser").innerHTML = "{{__('charts.loading')}}";
+
+        $.ajax({
+            url: "{{ route('admin_charts_most_active_user') }}",
+            method: 'POST',
+            async: true,
+            data: {
+                fromDate: fromDate,
+                toDate: toDate,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                if(data.length > 0){
+                    let name = data[0].firstName
+                    if(data[0].middleName != null){
+                        name = name + ' ' + data[0].middleName + ' '
+                    }
+                    else {
+                        name = name + ' ';
+                    }
+                    name = name + data[0].lastName;
+
+                    document.getElementById("activeUser").innerHTML = name;
+                    document.getElementById("activeUserLink").href = '{{url('/admin/accounts/')}}' + '/' + data[0].id;
+                }
+                else {
+                    document.getElementById("activeUser").innerHTML = '{{__('charts.no_data')}}';
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);
@@ -371,9 +432,6 @@
                 data: plotData
             }]
         };
-
-        console.log(haha);
-        return haha;
     }
 
     function getCategoryData(fromDate, toDate) {

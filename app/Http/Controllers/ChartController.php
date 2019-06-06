@@ -10,10 +10,13 @@ use App\Http\Requests\GetChartDateRangeRequest;
 use App\SharedEvent;
 use App\SocialMediaPlatform;
 use Carbon\Carbon;
+use function GuzzleHttp\json_encode;
+use function Opis\Closure\unserialize;
 
 class ChartController extends Controller
 {
-    public function UpdateDateString(GetChartDateRangeRequest $request){
+    public function UpdateDateString(GetChartDateRangeRequest $request)
+    {
         $format = __('formats.dateFormat');
         $fromDate = strtotime($request['fromDate']);
         $toDate = strtotime($request['toDate']);
@@ -46,14 +49,14 @@ class ChartController extends Controller
         $previousTotalEvents = 0;
         $firstRun = true;
 
-        for($i = 0; $i < $difference; $i++){
+        for ($i = 0; $i < $difference; $i++) {
             $totalEvents = Event::where('isDeleted', 0)->where('created_at', '<', $fromDate->copy()->addDays($i))->count();
             $entry = array(
                 'date' => $fromDate->copy()->addDays($i)->format('c'),
                 'totalEvents' => $totalEvents
             );
 
-            if($previousTotalEvents < $totalEvents || $firstRun) {
+            if ($previousTotalEvents < $totalEvents || $firstRun) {
                 array_push($data, $entry);
                 $firstRun = false;
             }
@@ -104,7 +107,7 @@ class ChartController extends Controller
     public function GetActiveEventLocations(GetChartDateRangeRequest $request)
     {
         $data = array();
-        $events = Event::where('isDeleted',0)->whereBetween('startDate', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->get();
+        $events = Event::where('isDeleted', 0)->whereBetween('startDate', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->get();
 
         foreach ($events as $event) {
             $entry = array(
@@ -113,6 +116,35 @@ class ChartController extends Controller
             );
             array_push($data, $entry);
         }
+        return $data;
+    }
+
+    public function GetMostActiveUser(GetChartDateRangeRequest $request)
+    {
+        $data = array();
+        $events = Event::where('isDeleted', 0)->whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->get();
+
+        foreach ($events as $event) {
+            foreach ($event->participants as $participant) {
+                if (array_key_exists($participant->id, $data)) {
+                    $data[$participant->id]->amount++;
+                } else {
+                    $data[$participant->id] = (object)[
+                        'id' => $participant->id,
+                        'firstName' => $participant->firstName,
+                        'middleName' => $participant->middleName,
+                        'lastName' => $participant->lastName,
+                        'amount' => 1
+                    ];
+                }
+            }
+        }
+
+        usort($data, function($a, $b) {
+            if($a->amount == $b->amount){ return 0 ; }
+            return ($a->amount > $b->amount) ? -1 : 1;
+        });
+        
         return $data;
     }
 

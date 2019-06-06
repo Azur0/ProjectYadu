@@ -76,7 +76,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">mostActiveAccounts</div>
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">###mostActiveAccounts</div>
                             <div id="activeUser" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
                         </div>
                         <div class="col-auto">
@@ -86,6 +86,22 @@
                 </div>
             </div>
         </a>
+    </div>
+
+    <div class="col-xl-3 col-md-3 mb-2">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{__('charts.amount_zero_participants')}}</div>
+                        <div id="zeroParticipants" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -170,6 +186,7 @@
     updateChatmessagesSend();
     updateAccountsCreated();
     updateMostActiveAccount();
+    updateZeroParticipants();
 
     //EventChart
     var eventChart = new Chart(document.getElementById('events'), {
@@ -229,6 +246,8 @@
         updateChatmessagesSend(fromDate, toDate);
         updateAccountsCreated(fromDate, toDate);
         updateMostActiveAccount(fromDate, toDate);
+        updateZeroParticipants(fromDate, toDate);
+
         updateEventChart(fromDate, toDate);
         updateShareChart(fromDate, toDate);
         updateCategoryChart(fromDate, toDate);
@@ -304,7 +323,6 @@
         });
     }
 
-
     function updateMostActiveAccount(fromDate, toDate) {
         document.getElementById("activeUser").innerHTML = "{{__('charts.loading')}}";
 
@@ -336,6 +354,29 @@
                 else {
                     document.getElementById("activeUser").innerHTML = '{{__('charts.no_data')}}';
                 }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    function updateZeroParticipants(fromDate, toDate) {
+        document.getElementById("zeroParticipants").innerHTML = "{{__('charts.loading')}}";
+        $.ajax({
+            url: "{{ route('admin_charts_zero_participants') }}",
+            method: 'POST',
+            async: true,
+            data: {
+                fromDate: fromDate,
+                toDate: toDate,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(data) {
+                document.getElementById("zeroParticipants").innerHTML = data.zeroParticipantEventData.zeroParticipantCount;
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);

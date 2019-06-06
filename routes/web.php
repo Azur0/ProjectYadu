@@ -102,3 +102,4 @@ Route::post('/charts/chatmessages', 'ChartController@GetChatmessages')->name('ad
 Route::post('/charts/accountscreated', 'ChartController@GetAccountsCreated')->name('admin_charts_accounts_created')->middleware('auth', 'isAdmin');
 Route::post('/charts/updatedatesting', 'ChartController@UpdateDateString')->name('admin_charts_update_date_string')->middleware('auth', 'isAdmin');
 Route::post('/charts/mostactiveuser', 'ChartController@GetMostActiveUser')->name('admin_charts_most_active_user')->middleware('auth', 'isAdmin');
+Route::post('/charts/zeroparticipants', 'ChartController@GetZeroParticipants')->name('admin_charts_zero_participants')->middleware('auth', 'isAdmin');

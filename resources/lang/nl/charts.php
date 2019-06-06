@@ -19,4 +19,5 @@ return [
     'shared_events' => 'Gedeelde evenementen',
     'event_categories' => 'Aantal evenementen per categorie',
     'event_heatmap' => 'Evenementen heatmap',
+    'amount_zero_participants' => 'Evenementen zonder deelnemers'
 ];

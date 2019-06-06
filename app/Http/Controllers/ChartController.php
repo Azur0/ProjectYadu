@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\ChatMessage;
 use App\Event;
+use App\EventHasParticipants;
 use App\EventTag;
 use App\Http\Requests\GetChartDateRangeRequest;
 use App\SharedEvent;
@@ -145,6 +146,28 @@ class ChartController extends Controller
             return ($a->amount > $b->amount) ? -1 : 1;
         });
         
+        return $data;
+    }
+
+    public function GetZeroParticipants(GetChartDateRangeRequest $request){
+        $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
+
+        $events = Event::select('id')->where('isDeleted', 0)->whereBetween('startDate', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->get();
+        $eventsWithParticipants = EventHasParticipants::select('event_id')->distinct()->get();
+
+        $ids = array();
+        foreach ($eventsWithParticipants as $event){
+            array_push($ids, $event->event_id);
+        }
+
+        $zeroParticipantEvents = 0;
+        foreach ($events as $event){
+            if(!in_array($event->id, $ids)){
+                $zeroParticipantEvents++;
+            }
+        }
+
+        $data['zeroParticipantEventData'] = array('zeroParticipantCount' => $zeroParticipantEvents);
         return $data;
     }
 

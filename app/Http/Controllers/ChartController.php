@@ -171,6 +171,13 @@ class ChartController extends Controller
         return $data;
     }
 
+    public function GetAverageParticipants(GetChartDateRangeRequest $request){
+        $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
+        //TODO
+        return $data;
+    }
+
+
     private function MakeDataArray($toDate, $fromDate)
     {
         $data = array();

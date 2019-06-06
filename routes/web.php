@@ -103,3 +103,4 @@ Route::post('/charts/accountscreated', 'ChartController@GetAccountsCreated')->na
 Route::post('/charts/updatedatesting', 'ChartController@UpdateDateString')->name('admin_charts_update_date_string')->middleware('auth', 'isAdmin');
 Route::post('/charts/mostactiveuser', 'ChartController@GetMostActiveUser')->name('admin_charts_most_active_user')->middleware('auth', 'isAdmin');
 Route::post('/charts/zeroparticipants', 'ChartController@GetZeroParticipants')->name('admin_charts_zero_participants')->middleware('auth', 'isAdmin');
+Route::post('/charts/averageparticipants', 'ChartController@GetAverageParticipants')->name('admin_charts_average_participants')->middleware('auth', 'isAdmin');

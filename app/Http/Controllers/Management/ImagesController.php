@@ -46,7 +46,7 @@ class ImagesController extends Controller
 			'selectedImage' => 'required|image|max:10240|mimes:jpg,png,jpeg',
 			'naam' => 'required|string|min:1|max:45'
 			]);
-		if($request->file('defaultImage')->getSize() > 10000000 || $request->file('selectedImage')->getSize() > 10000000){
+		if($request->file('defaultImage')->getSize() > 65535 || $request->file('selectedImage')->getSize() > 65535){
 			return back()->withErrors(__('image.file_too_large'));
 		}
 
@@ -67,7 +67,7 @@ class ImagesController extends Controller
 			'selected' => 'required',
 			'default' => 'required|image|max:10240|mimes:jpg,png,jpeg'
 			]);
-		if($request->file('default')->getSize() > 10000000){
+		if($request->file('default')->getSize() > 65535){
 			return back()->withErrors(__('image.file_too_large'));
 		}
 		$location = "images/".$request->selected;
@@ -137,7 +137,7 @@ class ImagesController extends Controller
 		$this->validate($request, [
 			'eventpicture' => 'required|image|mimes:jpg,png,jpeg|max:2048'
 		]);
-		if($request->file('eventpicture')->getSize() > 10000000){
+		if($request->file('eventpicture')->getSize() > 65535){
 			return back()->withErrors(__('image.file_too_large'));
 		}
 		$event_picture = new EventPicture;
@@ -168,7 +168,7 @@ class ImagesController extends Controller
 			'naam' => 'required|string|min:1|max:45'
 			]);
 		if(!empty($request->file('image'))){
-			if($request->file('image')->getSize() > 10000000){
+			if($request->file('image')->getSize() > 65535){
 				return redirect('/admin/images/category')->withErrors(__('image.file_too_large'));
 			}
 		}
@@ -191,7 +191,7 @@ class ImagesController extends Controller
 		$this->validate($request, [
 			'updateevent' => 'image|mimes:jpg,png,jpeg|max:2048',
 			]);
-		if($request->file('updateevent')->getSize() > 10000000){
+		if($request->file('updateevent')->getSize() > 65535){
 			return redirect('/admin/images/category')->withErrors(__('image.file_too_large'));
 		}
 		$selectedPicture = EventPicture::where('id', '=', $request->input('id'))->firstOrFail();

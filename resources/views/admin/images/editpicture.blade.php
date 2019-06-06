@@ -5,7 +5,6 @@
 <div class="card">
     <div class="card-header">
         <h1>{{$tag->tag}}</h1>
-        <p>{{__('image.instructions_extra')}}</p>
     </div>
     @if(count($errors) > 0)
         <div class="alert alert-danger">

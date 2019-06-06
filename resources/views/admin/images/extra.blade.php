@@ -22,6 +22,7 @@
         <div class="card">
                 <div class="card-header">
                 <h1>{{__('image.header_extra')}}</h1>
+                <p>{{__('image.instructions_extra')}}</p>
                 </div>
                 <div class="form card-body">
                         <form action="{{ route('imagescontroller.update') }}" method="POST" enctype="multipart/form-data">

@@ -65,9 +65,9 @@
                                 <th scope="col">{{ $amount }}</th>
                                 <td scope="col">
                                     @if(in_array($ip, $bannedIps))
-                                        <a href="/admin/ip/{{$ip}}/unblock"><i class="fas fa-unlock"></i>&nbsp;{{__('bans.block')}}</a>
+                                        <a href="/admin/ip/{{$ip}}/unblock"><i class="fas fa-unlock"></i>&nbsp;{{__('bans.unblock')}}</a>
                                     @else
-                                        <a href="/admin/ip/{{$ip}}/user/{{$account->id}}/block"><i class="fas fa-user-slash"></i>&nbsp;{{__('bans.unblock')}}</a>
+                                        <a href="/admin/ip/{{$ip}}/user/{{$account->id}}/block"><i class="fas fa-user-slash"></i>&nbsp;{{__('bans.block')}}</a>
                                     @endif
                                 </td>
                             </tr>
@@ -92,9 +92,9 @@
                                 <td>{{ $login['created_at'] }}</td>
                                 <td scope="col">
                                     @if(in_array($ip, $bannedIps))
-                                        <a href="/admin/ip/{{$ip}}/unblock"><i class="fas fa-unlock"></i>&nbsp;{{__('bans.block')}}</a>
+                                        <a href="/admin/ip/{{$ip}}/unblock"><i class="fas fa-unlock"></i>&nbsp;{{__('bans.unblock')}}</a>
                                     @else
-                                        <a href="/admin/ip/{{$ip}}/user/{{$account->id}}/block"><i class="fas fa-user-slash"></i>&nbsp;{{__('bans.unblock')}}</a>
+                                        <a href="/admin/ip/{{$ip}}/user/{{$account->id}}/block"><i class="fas fa-user-slash"></i>&nbsp;{{__('bans.block')}}</a>
                                     @endif
                                 </td>
                             </tr>

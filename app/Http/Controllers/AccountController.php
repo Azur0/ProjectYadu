@@ -249,8 +249,9 @@ class AccountController extends Controller
 
                     return back()->withError($exception->getMessage());
                 }
+                Mail::to($account->email)->send(new FollowMail(Auth::user(),$followRequest));
             }
-			Mail::to($account->email)->send(new FollowMail(Auth::user(),$followRequest));
+
 		}
 
 		return back();

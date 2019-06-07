@@ -9,6 +9,7 @@ use App\Mail\Admin\EventDeleted as EventDeletedMail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Collection;
+use App;
 
 class SendEventEditedNotification
 {

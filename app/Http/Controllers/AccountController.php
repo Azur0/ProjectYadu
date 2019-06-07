@@ -258,30 +258,35 @@ class AccountController extends Controller
 
 	public function accept($id) {
 		$followRequest = AccountHasFollowers::where('verification_string', $id)->first();
+        $text = "No reqeust found";
 		if(!is_null($followRequest)) {
 			if($followRequest->status == 'pending') {
 				$followRequest->status = 'accepted';
 				$followRequest->save();
 			}
+            $account = Account::where('id',$followRequest->account_id)->first();
+            self::switchLang($account);
+            $text = Lang::get('welcome.accepted_follow_request');
 		}
-        $account = Account::where('id',$followRequest->account_id)->first();
-        self::switchLang($account);
-		return redirect('/')->with('alert', Lang::get('welcome.accepted_follow_request'));
+
+		return redirect('/')->with('alert', $text);
 	}
 
 
     public function decline($id) {
         $followRequest = AccountHasFollowers::where('verification_string', $id)->first();
-
+        $text = "No request found";
         if(!is_null($followRequest)) {
             if($followRequest->status == 'pending') {
                 $followRequest->status = 'rejected';
                 $followRequest->save();
             }
+            $account = Account::where('id',$followRequest->account_id)->first();
+            self::switchLang($account);
+            $text = Lang::get('welcome.denied_follow_request');
         }
-        $account = Account::where('id',$followRequest->account_id)->first();
-        self::switchLang($account);
-        return redirect('/')->with('alert', Lang::get('welcome.denied_follow_request'));
+
+        return redirect('/')->with('alert', $text);
     }
 
     private function switchLang($user){

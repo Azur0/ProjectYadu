@@ -228,7 +228,7 @@ class AccountController extends Controller
 		}
 		else {
 			$account = Account::where('id', $id)->first();
-            if(! $account->blockedUsers->pluck('blockedAccount_id')->contains(Auth::user()->id)) {
+            if(! $account->blockedUsers->pluck('blockedAccount_id')->contains(Auth::id())) {
                 try {
                     $followRequest = "";
                     $followRequest2 = AccountHasFollowers::where('account_id', $id)->where('follower_id', Auth::id())->first();

@@ -20,23 +20,22 @@
                                 <div class="col">
                                     <div class="row">
                                         <div class="col-md-auto">
+
                                             @if($account->id != Auth::user()->id)
-                                                @if(is_null($follow) || (strtotime(Carbon\Carbon::now()->toDayDateTimeString()) - strtotime($follow->updated_at)) >= 300)
+                                                @if(is_null($follow)||((strtotime(Carbon\Carbon::now()->toDayDateTimeString()) - strtotime($follow->updated_at)) >= 200))
                                                     <a href="/profile/{{$account->id}}/follow" class="btn btn-primary">
                                                         <i class="fas fa-user-plus"></i> {{ __('profile.follow') }}
                                                     </a>
-                                                @elseif($follow->status == "pending")
-                                                    <a href="#" class="btn btn-primary" disabled>
-                                                    <i class="fas fa-hourglass-end"></i> {{ __('profile.follow_pending') }}
-                                                    </a>
-                                                @elseif($follow->status == "accepted")
+                                                @elseif(($follow->status == "accepted")==1)
                                                     <a href="/profile/{{$account->id}}/unfollow" class="btn btn-primary">
                                                         <i class="fas fa-user-minus"></i> {{ __('profile.follow_accepted') }}
                                                     </a>
                                                 @endif
                                                 @if (! is_null($follow))
-                                                    @if((strtotime(Carbon\Carbon::now()->toDayDateTimeString()) - strtotime($follow->updated_at) ) < 300)
-                                                        <div class="alert alert-danger">{{ __('profile.follow_request_pending') }}</div>
+                                                    @if(((strtotime(Carbon\Carbon::now()->toDayDateTimeString()) - strtotime($follow->updated_at) ) < 200) && ($follow->status != "accepted"))
+                                                        <a href="#" class="btn btn-primary" disabled>
+                                                            <i class="fas fa-hourglass-end"></i> {{ __('profile.follow_pending') }}
+                                                        </a>
                                                     @endif
                                                 @endif
                                             @endif

@@ -16,4 +16,7 @@ return [
 	'recent_events_own' => 'Create your own event',
 	'link_here' => 'here',
 	'link_read_more' => 'Read more',
+
+    'accepted_follow_request' => 'Accepted follow request',
+    'denied_follow_request' => 'Denied follow request',
 ];

@@ -1,6 +1,11 @@
 @extends('layouts/app_welcome')
 
 @section('content')
+	@if (session('alert'))
+		<div class="alert alert-success" role="alert">
+			{{ session('alert') }}
+		</div>
+	@endif
 	<div id="welcome_carousel">
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -87,4 +92,5 @@
 		</div>
 		<p>{{ __('welcome.recent_events_content') }} <a href="/events">{{ __('welcome.link_here') }}</a>.</p>
 	</div>
+
 @endsection

@@ -15,11 +15,13 @@ use App\EventHasParticipants;
 use App\AccountHasFollowers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Mail;
 use DB;
 use Illuminate\Support\Str;
 use Validator;
 use App\Mail\Follow as FollowMail;
+use App;
 
 
 class AccountController extends Controller
@@ -249,8 +251,9 @@ class AccountController extends Controller
 				$followRequest->save();
 			}
 		}
-
-		return redirect('/');
+        $account = Account::where('id',$followRequest->account_id)->first();
+        self::switchLang($account);
+		return redirect('/')->with('alert', Lang::get('welcome.accepted_follow_request'));
 	}
 
     public function decline($id) {
@@ -262,7 +265,20 @@ class AccountController extends Controller
                 $followRequest->save();
             }
         }
-        return redirect('/');
+        $account = Account::where('id',$followRequest->account_id)->first();
+        self::switchLang($account);
+        return redirect('/')->with('alert', Lang::get('welcome.denied_follow_request'));
+    }
+
+    private function switchLang($user){
+        switch($user->settings->LanguagePreference){
+            case 'eng': App::setLocale('eng');
+                break;
+            case 'nl': App::setLocale('nl');
+                break;
+            default: App::setLocale('eng');
+                break;
+        }
     }
 
     public function updateSettings(Request $request, $id){

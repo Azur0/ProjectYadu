@@ -34,15 +34,16 @@
 					<div class="row">
 						<div class="col">
 							@if(Auth::check())
-								@if($event->owner_id && $event->owner->id != auth()->user()->id)
-									@if($event->participants->contains(auth()->user()->id))
-										<a href="/events/{{$event->id}}/leave" class="btn btn-danger btn-sm my-auto mx-2">{{__('events.show_leave')}}</a>
-									@elseif($event->participants->count()+1 < $event->numberOfPeople)
-										<a href="/events/{{$event->id}}/join" class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
+								@if($event->owner_id != null)
+									@if($event->owner->id != auth()->user()->id)
+										@if($event->participants->contains(auth()->user()->id))
+											<a href="/events/{{$event->id}}/leave" class="btn btn-danger btn-sm my-auto mx-2">{{__('events.show_leave')}}</a>
+										@elseif($event->participants->count()+1 < $event->numberOfPeople)
+											<a href="/events/{{$event->id}}/join" class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
+										@endif
 									@endif
 								@else
-									<a href="/events/{{$event->id}}/join"
-										   class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
+									<a href="/events/{{$event->id}}/join" class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
 								@endif
 							@endif
 						</div>

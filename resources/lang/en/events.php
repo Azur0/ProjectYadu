@@ -52,9 +52,9 @@ return [
 
     'create_select_type_first' => 'Please select an event type first',
     'create_amount_of_participants' => 'people can join (including yourself)',
-    'create_initiator_info' => 'Make yourself the initiator',
-    'create_initiator_true' => 'true',
-    'create_initiator_false' => 'false',
+    'create_initiator_info' => 'Make yourself the initiator, the first user to join the event will become the owner.',
+    'create_initiator_true' => 'Yes',
+    'create_initiator_false' => 'No',
 
     'create_error_select_photo' => 'Please select a photo',
     'create_error_select_type' => 'Please select a event type',

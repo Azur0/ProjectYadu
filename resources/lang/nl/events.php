@@ -51,7 +51,7 @@ return [
 
     'create_select_type_first' => 'Kies eerst het type event',
     'create_amount_of_participants' => 'mensen kunnen mee (incl. jezelf)',
-    'create_initiator_info' => 'Maak jezelf de eigenaar',
+    'create_initiator_info' => 'Maak jezelf de eigenaar, de eerste persoon die zich aanmeld zal de eigenaar worden.',
     'create_initiator_true' => 'ja',
     'create_initiator_false' => 'Nee',
 

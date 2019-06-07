@@ -116,6 +116,8 @@ return [
 	'edit_error_img' => 'Kies een foto.',
 	'edit_error_location' => 'Het locatie-veld is verplicht.',
     'show_datetime_at' => 'om',
+    'show_chat_entertext' => 'Gelieve iets te typen',
+    'show_chat_characterlimit' => 'Maximaal 180 karakters toegestaan',
     'show_chat_swearword' => 'Scheldwoord gedetecteerd',
     'show_chat_send' => 'Verstuur',
     'show_chat_typemessage' => 'Schrijf je bericht',

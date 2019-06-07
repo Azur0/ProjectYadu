@@ -256,6 +256,7 @@ class AccountController extends Controller
 		return redirect('/')->with('alert', Lang::get('welcome.accepted_follow_request'));
 	}
 
+
     public function decline($id) {
         $followRequest = AccountHasFollowers::where('verification_string', $id)->first();
 
@@ -281,7 +282,8 @@ class AccountController extends Controller
         }
     }
 
-    public function updateSettings(Request $request, $id){
+
+    public function updateSettings(Request $request){
         if (Auth::check())
         {
             $validator = Validator::make($request->all(),
@@ -324,9 +326,7 @@ class AccountController extends Controller
             {
                 $NotificationJoinAndLeaveEvent = 1;
             }
-
-            $account = Account::where('id', $id)->firstorfail();
-            $accountSettings = AccountSettings::where('account_id', $id)->firstorfail();
+            $accountSettings = AccountSettings::where('account_id', Auth::id())->firstorfail();
 
             $accountSettings->update(
                 [
@@ -383,4 +383,35 @@ class AccountController extends Controller
 		return abort(404);
 	}
 
+	public function setMailLanguage(Request $request){
+	    if (Auth::check())
+        {
+            $validator = Validator::make($request->all(),
+                [
+                    'LanguagePreference' => 'required|string',
+                ]);
+            if ($validator->fails())
+            {
+                return redirect("")
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+            $lang = '';
+            switch($request['LanguagePreference']){
+                case 'English': $lang = 'eng';
+                break;
+                case 'Dutch': $lang = 'nl';
+                break;
+                default:$lang = 'eng';
+                break;
+            }
+            $accountSettings = AccountSettings::where('account_id', Auth::id())->firstorfail();
+            $accountSettings->update(
+                [
+                    'LanguagePreference' => $lang
+                ]
+            );
+            return back();
+        }
+    }
 }

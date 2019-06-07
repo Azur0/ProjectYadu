@@ -81,6 +81,7 @@ return [
     'show_title' => 'Title',
     'show_overview' => 'Overview',
     'show_chat_login' => 'Log in and join this event to chat!',
+    'add_to_calendar' => 'Add to Calendar',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Cancel',
@@ -110,6 +111,8 @@ return [
 	'edit_error_location' => 'The location-field is required.',
     'show_datetime_at' => 'at',
     'show_chat_swearword' => 'Swearword detected',
+    'show_chat_entertext' => 'Please enter some text',
+    'show_chat_characterlimit' => 'The character limit is 180 characters',
     'show_chat_send' => 'Send',
     'show_chat_typemessage' => 'Type your message',
 

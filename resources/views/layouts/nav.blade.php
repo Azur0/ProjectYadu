@@ -23,12 +23,6 @@
                 <a href="/events"
                    class="nav-link m-2 nav-item nav-yadu {{ request()->is('events') ? 'active' : (request()->is('events/*') ? 'active' : '') }}">{{__('navigation.nav_events')}}</a>
             </li>
-            <li>
-                <a href="/about" class="nav-link m-2 nav-item nav-yadu {{ request()->is('about') ? 'active' : '' }}">{{__('navigation.nav_about')}}</a>
-            </li>
-            <li>
-                <a href="/contact" class="nav-link m-2 nav-item nav-yadu {{ request()->is('contact') ? 'active' : '' }}">{{__('navigation.nav_contact')}}</a>
-            </li>
             @if(Auth::user())
 	            <li>
 	                <a href="/home" class="nav-link m-2 nav-item nav-yadu {{ request()->is('home') ? 'active' : '' }}">{{__('navigation.nav_dashboard')}}</a>
@@ -44,6 +38,9 @@
             @else
 	            <li>
 	                <a href="/login" class="nav-link m-2 nav-item nav-yadu {{ request()->is('login') ? 'active' : '' }}">{{__('navigation.nav_login')}}</a>
+	            </li>
+                <li>
+	                <a href="/register" class="nav-link m-2 nav-item nav-yadu {{ request()->is('register') ? 'active' : '' }}">{{__('navigation.nav_register')}}</a>
 	            </li>
             @endif
         </ul>

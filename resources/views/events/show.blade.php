@@ -31,18 +31,18 @@
                         @if($event->participants->contains(auth()->user()->id))
                             <a href="/events/{{$event->id}}/leave"
                                class="btn btn-danger btn-sm my-auto mx-2">{{__('events.show_leave')}}</a>
-                        @elseif($event->participants->count() < $event->numberOfPeople)
+                        @elseif($event->participants->count()+1 < $event->numberOfPeople)
                             <a href="/events/{{$event->id}}/join"
                                class="btn btn-success btn-sm my-auto mx-2">{{__('events.show_join')}}</a>
                         @endif
                     @endif
                 @endif
             </div>
-            <p class="text-md-right">{{__('events.show_number_of_attendees', ['amount' => $event->participants->count(), 'max' => $event->numberOfPeople])}}</p>
+            <p class="text-md-right">{{__('events.show_number_of_attendees', ['amount' => $event->participants->count()+1, 'max' => $event->numberOfPeople])}}</p>
             <div class="progress">
                 <div class="progress-bar" role="progressbar"
-                     style="width: {{$event->participants->count() / $event->numberOfPeople * 100}}%" aria-valuemin="0"
-                     aria-valuenow="{{$event->participants->count()}}" aria-valuemax="{{$event->numberOfPeople}}"></div>
+                     style="width: {{($event->participants->count()+1) / $event->numberOfPeople * 100}}%" aria-valuemin="0"
+                     aria-valuenow="{{$event->participants->count()+1}}" aria-valuemax="{{$event->numberOfPeople}}"></div>
             </div>
             @foreach($event->participants as $participant)
                 <div class="row my-1">
@@ -97,9 +97,20 @@
                     <a id="share-facebook" class="fab fa-facebook event-media-icons"></a>
                     <a id="share-twitter" class="fab fa-twitter event-media-icons"></a>
                     <a id="share-link" class="fa fa-link event-media-icons" data-toggle="modal" data-target="#confirmDeleteAccount"></a>
-                </div>
+                    <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
+            <div title="Add to Calendar" class="addeventatc addevent">
+                {{__('events.add_to_calendar')}}
+                <span class="start">{{date('m/d/Y h:i A', strtotime($event->startDate))}}</span>
+                <span class="end">{{date('m/d/Y h:i A', strtotime($event->startDate))}}</span>
+                <span class="timezone">Europe/Amsterdam</span>
+                <span class="title">{{$event->eventName}}</span>
+                <span class="description">{{$event->description}}</span>
+                <span class="location">{{ $event->location()->first()->route }} {{ $event->location()->first()->houseNumber }}, {{ $event->location()->first()->locality }}</span>
             </div>
-
+                </div>
+                
+            </div>
+                
             <div class="modal fade" id="confirmDeleteAccount" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -119,6 +130,7 @@
                     </div>
                 </div>
             </div>
+           
 
             <script>
 
@@ -218,9 +230,9 @@
                     <!-- end chat-history -->
 
                     <div class="chat-message clearfix">
-                        <textarea name="message-to-send" id="message-to-send" placeholder="{{ __('events.show_chat_typemessage') }}" rows="3" v-model="messageBox" v-on:keyup.enter="postMessage"></textarea>
+                        <textarea name="message-to-send" id="message-to-send" placeholder="{{ __('events.show_chat_typemessage') }}" rows="3" v-model.trim="messageBox" v-on:keyup.enter="postMessage" required></textarea>
 
-                        <button @click.prevent="postMessage">{{ __('events.show_chat_send') }}</button>
+                        <button id="sendButton" @click.prevent="postMessage">{{ __('events.show_chat_send') }}</button>
 
                     </div>
                     <!-- end chat-message -->
@@ -243,74 +255,93 @@
     </div>
 
 @endsection
-@if(Auth::check())
-    @if((!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
-        @section('scripts')
-            <script>
+@if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
+@section('scripts')
+    <script>
 
-                let warning = document.createElement("strong");
-                warning.style.color = "red";
-                warning.innerHTML = "{{ __('events.show_chat_swearword') }}";
+        let warning = document.createElement("strong");
+        warning.style.color = "red";
 
-                function insertAfter(referenceNode, newNode) {
-                    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        function insertAfter(referenceNode, newNode) {
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        }
+
+            const app = new Vue({
+            el: '#app',
+            data: {
+                messages: {},
+                messageBox: '',
+                event: {!! json_encode($event->getAttributes()) !!},
+                account: {!! Auth::check() ? json_encode(Auth::user()->only(['id', 'firstName', 'lastName', 'api_token'])) : 'null' !!}
+            },
+            mounted() {
+                this.getMessages();
+                this.listen();
+            },
+            methods: {
+                getMessages() {
+                    axios.get(`/api/events/${this.event.id}/messages`)
+                        .then((response) => {
+                            this.messages = response.data
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                postMessage() {
+                    let btn = $("#sendButton");
+
+                    setTimeout(function(){
+                        btn.prop('disabled', true);
+                        setTimeout(function(){
+                            btn.prop('disabled', false);
+                        },1000);
+                    })
+
+                    if (this.timer) {
+                        clearTimeout(this.timer);
+                        this.timer = null;
+                    }
+                    
+                    this.timer = setTimeout(() => {
+                        axios.post(`/api/events/${this.event.id}/message`, {
+                        api_token: this.account.api_token,
+                        body: this.messageBox
+                    })
+                        .then((response) => {
+                            this.messages.push(response.data);
+                            this.messageBox = '';
+                            warning.remove();
+                        })
+                        .catch((error) => {
+                            if(error.response.data.errors.body[0] == 'body is not allowed because it contains a swearword.' || error.response.data.errors.body[0] == 'body is niet toegestaan omdat deze een scheldwoord bevat.') {
+                                warning.innerHTML = "{{ __('events.show_chat_swearword') }}";
+                            } else if(error.response.data.errors.body[0] == 'The body field is required.' || error.response.data.errors.body[0] == 'body is verplicht.') {
+                                warning.innerHTML = "{{ __('events.show_chat_entertext') }}";
+                            } else if(error.response.data.errors.body[0] == 'The body may not be greater than 180 characters.' || error.response.data.errors.body[0] == 'body mag niet uit meer dan 180 tekens bestaan.') {
+                                warning.innerHTML = "{{ __('events.show_chat_characterlimit') }}";
+                            }
+                            insertAfter(document.getElementById("message-to-send"), warning);
+                        });
+                    }, 300);
+                },
+                listen() {
+                    Echo.private('event.'+this.event.id)
+                        .listen('NewMessage', (message) => {
+                            this.messages.push(message)
+                        })
                 }
+            }
+        });
 
-                    const app = new Vue({
-                    el: '#app',
-                    data: {
-                        messages: {},
-                        messageBox: '',
-                        event: {!! json_encode($event->getAttributes()) !!},
-                        account: {!! Auth::check() ? json_encode(Auth::user()->only(['id', 'firstName', 'lastName', 'api_token'])) : 'null' !!}
-                    },
-                    mounted() {
-                        this.getMessages();
-                        this.listen();
-                    },
-                    methods: {
-                        getMessages() {
-                            axios.get(`/api/events/${this.event.id}/messages`)
-                                .then((response) => {
-                                    this.messages = response.data
-                                })
-                                .catch(function (error) {
-                                    console.log(error);
-                                });
-                        },
-                        postMessage() {
-                            axios.post(`/api/events/${this.event.id}/message`, {
-                                api_token: this.account.api_token,
-                                body: this.messageBox
-                            })
-                                .then((response) => {
-                                    this.messages.push(response.data);
-                                    this.messageBox = '';
-                                    warning.remove();
-                                })
-                                .catch(function (error) {
-                                    insertAfter(document.getElementById("message-to-send"), warning);
-                                });
-                        },
-                        listen() {
-                            Echo.private('event.'+this.event.id)
-                                .listen('NewMessage', (message) => {
-                                    this.messages.push(message)
-                                })
-                        }
-                    }
-                });
-
-                // Disable newline on enter(except when holding shift)
-                $('textarea').keydown(function(e){
-                    if (e.keyCode == 13 && !e.shiftKey)
-                    {
-                        // prevent default behavior
-                        e.preventDefault();
-                    }
-                });
-
-            </script>
-        @endsection
-    @endif
+        // Disable newline on enter(except when holding shift)
+        $('textarea').keydown(function(e){
+            if (e.keyCode == 13 && !e.shiftKey)
+            {
+                // prevent default behavior
+                e.preventDefault();
+            }
+        });
+    </script>
+@endsection
 @endif

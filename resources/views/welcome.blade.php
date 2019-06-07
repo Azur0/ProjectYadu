@@ -1,11 +1,14 @@
-@extends('layouts/app_welcome')
+@extends('layouts/app_blank')
+
 
 @section('content')
+@section('main')
 	@if (session('alert'))
 		<div class="alert alert-success" role="alert">
 			{{ session('alert') }}
 		</div>
 	@endif
+
 	<div id="welcome_carousel">
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">

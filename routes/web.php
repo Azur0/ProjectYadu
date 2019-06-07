@@ -63,7 +63,8 @@ Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middle
 Route::post('/profile/updatePrivacySettings', 'AccountController@updatePrivacySettings')->middleware('auth');
 Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
 Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middleware('auth');
-Route::patch('/profile/updateAccountSettings/{id}', 'AccountController@updateSettings')->middleware('auth');
+Route::post('/profile/updateAccountSettings', 'AccountController@updateSettings')->middleware('auth');
+Route::post('/profile/setMailLanguage', 'AccountController@setMailLanguage')->middleware('auth');
 Route::post('/profile/blockUser', 'AccountController@blockAccount')->middleware('auth');
 Route::post('/profile/unblockUser/', 'AccountController@unblockAccount')->middleware('auth');
 

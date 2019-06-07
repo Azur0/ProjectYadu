@@ -8,6 +8,7 @@ use App\BlockedUser;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\EditProfileRequest;
 use App\Http\Requests\EditPrivacySettingsRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Gender;
 use App\Event;
@@ -227,13 +228,25 @@ class AccountController extends Controller
 		}
 		else {
 			$account = Account::where('id', $id)->first();
+
 			try {
-				$followRequest = AccountHasFollowers::create([
+			    $followRequest ="";
+            $followRequest2 = AccountHasFollowers::where('account_id',$id)->where('follower_id',Auth::id())->first();
+            if($followRequest2==null){
+			$followRequest = AccountHasFollowers::create([
 					'account_id' => $id,
 					'follower_id' => Auth::id(),
                     'verification_string' => Str::random(32)
 			]);
+            }else{
+
+                $followRequest2->status = 'pending';
+                $followRequest2->touch();
+                $followRequest2->save();
+                $followRequest = $followRequest2;
+            }
 			} catch (\Exception $exception){
+
 				return back()->withError($exception->getMessage());
 			}
 

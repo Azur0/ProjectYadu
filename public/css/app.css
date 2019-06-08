@@ -11248,3 +11248,9 @@ a.text-dark:focus {
   color: #b10808;
 }
 
+.lineClamp {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+}

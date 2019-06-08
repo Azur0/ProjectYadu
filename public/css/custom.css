@@ -575,13 +575,6 @@ input[type=radio]:checked + .category span {
     margin-bottom: 25px;
 }
 
-.lineClamp {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    display: block;
-    overflow: hidden"
-}
-
 @media (max-width: 768px) {
     .event img {
         height: 200px;

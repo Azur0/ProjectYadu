@@ -149,7 +149,6 @@ class EventsController extends Controller
     {
         if (Auth::check())
         {
-            //dd(Auth::user());
             if (Auth::user()->accountRole == 'Admin')
             {
                 $data = array(
@@ -280,7 +279,6 @@ class EventsController extends Controller
         }
     }
 
-    // Remove this later ------------------------------------------------------------
     public function join($id)
     {
 
@@ -295,8 +293,7 @@ class EventsController extends Controller
         return redirect('/events/' . $id);
     }
 
-    // Remove this later ------------------------------------------------------------
-    public function leave($id)
+   public function leave($id)
     {
         if(Auth::check()) {
             $event = Event::findOrFail($id);
@@ -306,8 +303,8 @@ class EventsController extends Controller
             //TODO: Add error 'You are not joined!'
         }
     }
-    // -------------------------------------------------------------------------------
-    private function formatDate()
+
+     private function formatDate()
     {
         $date = getdate();
         $formatted_date = $date['year'] . "/";

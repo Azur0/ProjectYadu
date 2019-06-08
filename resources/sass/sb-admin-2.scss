@@ -161,3 +161,13 @@ h6.collapse-header {
 	border: 1px solid #ced4da;
 	border-radius: 0.25rem;
 }
+
+@media screen and (max-width: 739px)
+{
+	.search {
+		display: flex !important;
+		flex-wrap: nowrap !important;
+		align-items: center !important;
+		white-space: nowrap !important;
+	}
+}

@@ -1,4 +1,4 @@
-@extends('layouts/app_welcome')
+@extends('layouts/app')
 
 @section('content')
 	<div id="http_error">

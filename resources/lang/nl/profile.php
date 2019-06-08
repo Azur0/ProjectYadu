@@ -98,4 +98,6 @@ return [
     'edit_privacy_infoVisibility' => 'Profiel informatie zichtbaarheid',
     'edit_privacy_followingVisibility' => 'Volgende zichtbaarheid',
     'edit_privacy_followerVisibility' => 'Volger zichtbaarheid',
+
+    'follow_request_pending' => 'Volg aanvraag is in behandeling',
 ];

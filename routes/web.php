@@ -52,10 +52,13 @@ Auth::routes(['verify' => true]);
 
 //Profile
 Route::get('/profile/edit', 'AccountController@edit')->middleware('auth');
+//Follow system route methods <-----------------------------------------------------------------------------------------
 Route::get('/profile/{id}/follow', 'AccountController@follow')->middleware('auth');
-Route::get('/profile/{id}/accept', 'AccountController@accept')->middleware('auth');
-Route::get('/profile/{id}/decline', 'AccountController@decline')->middleware('auth');
+Route::get('/profile/{id}/accept', 'AccountController@accept');
+Route::get('/profile/{id}/decline', 'AccountController@decline');
+
 Route::get('/profile/{id}/unfollow', 'AccountController@unfollow')->middleware('auth');
+
 Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
 Route::post('/profile/updatePrivacySettings', 'AccountController@updatePrivacySettings')->middleware('auth');
 Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
@@ -102,3 +105,5 @@ Route::post('/charts/categories', 'ChartController@GetCategories')->name('admin_
 Route::post('/charts/chatmessages', 'ChartController@GetChatmessages')->name('admin_charts_chatmessages')->middleware('auth', 'isAdmin');
 Route::post('/charts/accountscreated', 'ChartController@GetAccountsCreated')->name('admin_charts_accounts_created')->middleware('auth', 'isAdmin');
 Route::post('/charts/updatedatesting', 'ChartController@UpdateDateString')->name('admin_charts_update_date_string')->middleware('auth', 'isAdmin');
+
+

@@ -1,6 +1,15 @@
 @extends('layouts/app_blank')
 
+
+@section('content')
 @section('main')
+	@if (session('alert'))
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+			{{ session('alert') }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	@endif
+
 	<div id="welcome_carousel">
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -50,7 +59,7 @@
 		<a href="/about">{{ __('welcome.link_read_more') }}...</a>
 	</div>
 	<div class="container" id="welcome_recent">
-		<h2>{{ __('welcome.recent_events_header') }}</h2>
+		<a href="/events" class="recentEventsHome"><h2>{{ __('welcome.recent_events_header') }}</h2></a>
 		<div id="#eventsToDisplay" class="event_overview row">
 			<?php $plus = 0; ?>
 			@foreach($regular_events as $event)
@@ -87,4 +96,5 @@
 		</div>
 		<p>{{ __('welcome.recent_events_content') }} <a href="/events">{{ __('welcome.link_here') }}</a>.</p>
 	</div>
+
 @endsection

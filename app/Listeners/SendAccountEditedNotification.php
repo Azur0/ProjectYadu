@@ -39,7 +39,8 @@ class SendAccountEditedNotification
                 break;
         }
 
-        if($event->account->remember_token == $event->account->getOriginal('remember_token')){
+        if($event->account->remember_token == $event->account->getOriginal('remember_token')
+            && $event->account->email_verified_at == $event->account->getOriginal('email_verified_at')){
             Mail::to($event->account->email)->send(
                 new AccountEditedMail($event->account)
             );

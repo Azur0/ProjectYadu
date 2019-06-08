@@ -59,7 +59,7 @@
 		<a href="/about">{{ __('welcome.link_read_more') }}...</a>
 	</div>
 	<div class="container" id="welcome_recent">
-		<h2>{{ __('welcome.recent_events_header') }}</h2>
+		<a href="/events" class="recentEventsHome"><h2>{{ __('welcome.recent_events_header') }}</h2></a>
 		<div id="#eventsToDisplay" class="event_overview row">
 			<?php $plus = 0; ?>
 			@foreach($regular_events as $event)

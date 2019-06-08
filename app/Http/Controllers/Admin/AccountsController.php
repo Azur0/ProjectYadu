@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Management;
+namespace App\Http\Controllers\Admin;
+
 
 use App\AccountRole;
 use App\Http\Controllers\AccountController;
@@ -16,6 +17,8 @@ use App\Gender;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Validator;
+
+
 
 class AccountsController extends Controller
 {

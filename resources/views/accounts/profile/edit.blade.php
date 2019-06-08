@@ -29,7 +29,7 @@
 													  id="inputGroupFileAddon01">{{__('profile.edit_edit_avatar_upload')}}</span>
 										</div>
 										<div class="custom-file">
-											<input type="file" class="custom-file-input" name="avatar" id="avatar" aria-describedby="inputGroupFileAddon01">
+											<input type="file" class="custom-file-input" name="avatar" id="avatar" accept="image/*" aria-describedby="inputGroupFileAddon01">
 											<label id="custom-file-label" class="custom-file-label lineClamp"
 												   for="avatar">{{__('profile.edit_edit_avatar_choose_image')}}</label>
 										</div>

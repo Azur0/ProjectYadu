@@ -76,7 +76,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">###mostActiveAccounts</div>
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{__('charts.active_user')}}</div>
                             <div id="activeUser" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
                         </div>
                         <div class="col-auto">
@@ -151,19 +151,21 @@
     </div>
 
     <div class="col-xl-6 col-md-12 mb-2">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">###TODO</div>
-                        <div id="TODO" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+        <a href=# id="mostParticipantsLink">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{__('charts.most_active_event')}}</div>
+                            <div id="mostParticipants" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 
 </div>
@@ -221,6 +223,7 @@
     updateAccountsCreated();
     updateMostActiveAccount();
     updateZeroParticipants();
+    updateMostParticipants();
     updateAverageParticipants();
 
     //EventChart
@@ -282,6 +285,7 @@
         updateAccountsCreated(fromDate, toDate);
         updateMostActiveAccount(fromDate, toDate);
         updateZeroParticipants(fromDate, toDate);
+        updateMostParticipants(fromDate, toDate)
         updateAverageParticipants(fromDate, toDate)
 
         updateEventChart(fromDate, toDate);
@@ -373,21 +377,18 @@
             },
             dataType: 'json',
             success: function(data) {
-                console.log(data);
-                if(data.length > 0){
+                if (data.length > 0) {
                     let name = data[0].firstName
-                    if(data[0].middleName != null){
+                    if (data[0].middleName != null) {
                         name = name + ' ' + data[0].middleName + ' '
-                    }
-                    else {
+                    } else {
                         name = name + ' ';
                     }
                     name = name + data[0].lastName;
 
                     document.getElementById("activeUser").innerHTML = name;
                     document.getElementById("activeUserLink").href = '{{url('/admin/accounts/')}}' + '/' + data[0].id;
-                }
-                else {
+                } else {
                     document.getElementById("activeUser").innerHTML = '{{__('charts.no_data')}}';
                 }
             },
@@ -413,6 +414,30 @@
             dataType: 'json',
             success: function(data) {
                 document.getElementById("zeroParticipants").innerHTML = data.zeroParticipantEventData.zeroParticipantCount;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    function updateMostParticipants(fromDate, toDate) {
+        document.getElementById("mostParticipants").innerHTML = "{{__('charts.loading')}}";
+        $.ajax({
+            url: "{{ route('admin_charts_most_participants') }}",
+            method: 'POST',
+            async: true,
+            data: {
+                fromDate: fromDate,
+                toDate: toDate,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(data) {
+                document.getElementById("mostParticipants").innerHTML = data.mostParticipantEventData.eventName + ' | ' + data.mostParticipantEventData.amount + ' {{__('charts.participants')}}';
+                document.getElementById("mostParticipantsLink").href = '{{url('/events/')}}' + '/' + data.mostParticipantEventData.id;
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);

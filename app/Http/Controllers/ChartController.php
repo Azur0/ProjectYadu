@@ -123,7 +123,7 @@ class ChartController extends Controller
     public function GetMostActiveUser(GetChartDateRangeRequest $request)
     {
         $data = array();
-        $events = Event::where('isDeleted', 0)->whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->get();
+        $events = Event::where('isDeleted', 0)->whereBetween('startDate', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->get();
 
         foreach ($events as $event) {
             foreach ($event->participants as $participant) {
@@ -141,28 +141,51 @@ class ChartController extends Controller
             }
         }
 
-        usort($data, function($a, $b) {
-            if($a->amount == $b->amount){ return 0 ; }
+        usort($data, function ($a, $b) {
+            if ($a->amount == $b->amount) {
+                return 0;
+            }
             return ($a->amount > $b->amount) ? -1 : 1;
         });
-        
+
         return $data;
     }
 
-    public function GetZeroParticipants(GetChartDateRangeRequest $request){
+    public function GetMostParticipants(GetChartDateRangeRequest $request)
+    {
+        $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
+        $events = Event::where('isDeleted', 0)->whereBetween('startDate', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->get();
+
+        foreach ($events as $item) {
+            $item->amountOfParticipants = $item->participants->count();
+        }
+
+        $returnEvent = $events->sortByDesc('amountOfParticipants')->first();
+
+        $data['mostParticipantEventData'] = (object)[
+            'id' => $returnEvent->id,
+            'eventName' => $returnEvent->eventName,
+            'amount' => $returnEvent->amountOfParticipants
+        ];
+
+        return $data;
+    }
+
+    public function GetZeroParticipants(GetChartDateRangeRequest $request)
+    {
         $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
 
         $events = Event::select('id')->where('isDeleted', 0)->whereBetween('startDate', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->get();
         $eventsWithParticipants = EventHasParticipants::select('event_id')->distinct()->get();
 
         $ids = array();
-        foreach ($eventsWithParticipants as $event){
+        foreach ($eventsWithParticipants as $event) {
             array_push($ids, $event->event_id);
         }
 
         $zeroParticipantEvents = 0;
-        foreach ($events as $event){
-            if(!in_array($event->id, $ids)){
+        foreach ($events as $event) {
+            if (!in_array($event->id, $ids)) {
                 $zeroParticipantEvents++;
             }
         }
@@ -171,13 +194,14 @@ class ChartController extends Controller
         return $data;
     }
 
-    public function GetAverageParticipants(GetChartDateRangeRequest $request){
+    public function GetAverageParticipants(GetChartDateRangeRequest $request)
+    {
         $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
 
         $events = Event::select('id')->where('isDeleted', 0)->whereBetween('startDate', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->get();
 
         $totalParticipants = 0;
-        foreach ($events as $event){
+        foreach ($events as $event) {
             $totalParticipants += $event->participants()->count();
         }
 

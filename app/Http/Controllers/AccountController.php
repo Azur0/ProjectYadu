@@ -256,7 +256,6 @@ class AccountController extends Controller
 
 		return back();
 	}
-
 	public function accept($id) {
 		$followRequest = AccountHasFollowers::where('verification_string', $id)->first();
         $text = "No reqeust found";
@@ -264,15 +263,19 @@ class AccountController extends Controller
 			if($followRequest->status == 'pending') {
 				$followRequest->status = 'accepted';
 				$followRequest->save();
-			}
+                $text = Lang::get('welcome.accepted_follow_request');
+			}else if($followRequest->status == 'accepted'){
+                $text = Lang::get('welcome.already_accepted_follow_request');
+            }else if($followRequest->status == 'rejected'){
+                $text = Lang::get('welcome.already_denied_follow_request');
+            }
             $account = Account::where('id',$followRequest->account_id)->first();
             self::switchLang($account);
-            $text = Lang::get('welcome.accepted_follow_request');
+
 		}
 
 		return redirect('/')->with('alert', $text);
 	}
-
 
     public function decline($id) {
         $followRequest = AccountHasFollowers::where('verification_string', $id)->first();
@@ -281,15 +284,19 @@ class AccountController extends Controller
             if($followRequest->status == 'pending') {
                 $followRequest->status = 'rejected';
                 $followRequest->save();
+                $text = Lang::get('welcome.denied_follow_request');
+            }else if($followRequest->status == 'accepted'){
+                $text = Lang::get('welcome.already_accepted_follow_request');
+            }else if($followRequest->status == 'rejected'){
+                $text = Lang::get('welcome.already_denied_follow_request');
             }
             $account = Account::where('id',$followRequest->account_id)->first();
             self::switchLang($account);
-            $text = Lang::get('welcome.denied_follow_request');
+
         }
 
         return redirect('/')->with('alert', $text);
     }
-
     private function switchLang($user){
         switch($user->settings->LanguagePreference){
             case 'eng': App::setLocale('eng');

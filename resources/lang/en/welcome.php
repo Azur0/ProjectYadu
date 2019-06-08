@@ -19,4 +19,6 @@ return [
 
     'accepted_follow_request' => 'Accepted follow request',
     'denied_follow_request' => 'Denied follow request',
+    'already_accepted_follow_request' => 'You already accepted the follow request',
+    'already_denied_follow_request' => 'You already denied the follow request',
 ];

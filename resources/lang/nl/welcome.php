@@ -19,4 +19,6 @@ return [
 
     'accepted_follow_request' => 'Volgverzoek aanvaard',
     'denied_follow_request' => 'Volgverzoek geweigerd',
+    'already_accepted_follow_request' => 'Je hebt al het volgverzoek aanvaard',
+    'already_denied_follow_request' => 'Je hebt al het volgverzoek geweigerd',
 ];

@@ -4,8 +4,9 @@
 @section('content')
 @section('main')
 	@if (session('alert'))
-		<div class="alert alert-success" role="alert">
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
 			{{ session('alert') }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
 		</div>
 	@endif
 

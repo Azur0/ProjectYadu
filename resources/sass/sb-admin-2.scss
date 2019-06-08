@@ -73,7 +73,11 @@ body {
 			padding: 0rem 1rem !important;
 	}
 }
-
+.alert-danger{
+	float: right;
+	margin-right: 10px;
+	z-index: 120;
+}
 .navbar-header {
 	margin-top: 11px;
 }

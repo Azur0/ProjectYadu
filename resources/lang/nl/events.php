@@ -126,8 +126,5 @@ return [
     'show_share' => 'Evenement delen',
     'show_share_link' => 'De link is gekopieerd naar uw klembord.',
     'show_share_close' => 'Sluiten',
-
-///////////////////////////////// Notification ////////////////////////////////////
-    'push_body' => 'Je hebt een nieuw bericht ontvangen, klik hier om hem te zien.',
 ];
 

@@ -296,7 +296,7 @@
                             Echo.private('event.'+this.event.id)
                                 .listen('NewMessage', (message) => {
                                     this.messages.push(message)
-                                    notifyMe();
+                                    notifyMe(message);
                                 })
                         }
                     }
@@ -326,14 +326,13 @@
                         Notification.requestPermission();
                 });
 
-                function notifyMe() {
+                function notifyMe(message) {
                     if (Notification.permission !== "granted")
                         Notification.requestPermission();
                     else {
                         let notification = new Notification('{{$event->eventName}}', {
                             icon: `{{ asset('images/logoCircle.png')}}`,
-                            {{--body: `{{$event->description}}`,--}}
-                            body: `{{__('events.push_body')}}`,
+                            body: `${message.firstName} ${message.lastName}: ${message.body}`,
                         });
 
                         notification.onclick = function () {

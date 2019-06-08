@@ -123,8 +123,4 @@ return [
     'show_share' => 'Share event',
     'show_share_link' => 'The link has been copied to your clipboard.',
     'show_share_close' => 'Close',
-
-///////////////////////////////// Notification ////////////////////////////////////
-    'push_body' => 'You received a new message, click here to see it',
-
 ];

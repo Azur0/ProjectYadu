@@ -94,4 +94,6 @@ return [
     'edit_privacy_infoVisibility' => 'Info Visibility',
     'edit_privacy_followingVisibility' => 'Following Visibility',
     'edit_privacy_followerVisibility' => 'Follower Visibility',
+
+    'follow_request_pending' => 'Follow request is pending',
 ];

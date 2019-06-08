@@ -1,5 +1,9 @@
 @extends('layouts/app')
 
+@section('custom_script')
+    <script type="text/javascript" src="/js/event_show.js"></script>
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-md-6">
@@ -296,7 +300,7 @@
                             Echo.private('event.'+this.event.id)
                                 .listen('NewMessage', (message) => {
                                     this.messages.push(message)
-                                    notifyMe(message);
+                                    notifyMe('{{$event->eventName}}',`{{ asset('images/logoCircle.png')}}`, message);
                                 })
                         }
                     }
@@ -312,36 +316,6 @@
                 });
 
             </script>
-
-            <!-- Start section desktop notifications -->
-            <script>
-                // request permission on page load
-                document.addEventListener('DOMContentLoaded', function () {
-                    if (!Notification) {
-                        alert('Desktop notifications not available in your browser. Try a different browser.');
-                        return;
-                    }
-
-                    if (Notification.permission !== "granted")
-                        Notification.requestPermission();
-                });
-
-                function notifyMe(message) {
-                    if (Notification.permission !== "granted")
-                        Notification.requestPermission();
-                    else {
-                        let notification = new Notification('{{$event->eventName}}', {
-                            icon: `{{ asset('images/logoCircle.png')}}`,
-                            body: `${message.firstName} ${message.lastName}: ${message.body}`,
-                        });
-
-                        notification.onclick = function () {
-                            window.open(window.location.href);
-                        };
-                    }
-                }
-            </script>
-            <!-- End section desktop notifications -->
         @endsection
     @endif
 @endif

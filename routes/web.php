@@ -45,17 +45,16 @@ Route::post('/events/actionDistanceFilter', 'EventsController@actionDistanceFilt
 Auth::routes(['verify' => true]);
 
 Route::get('/profile/edit', 'AccountController@edit')->middleware('auth');
-
-Route::patch('/profile/updateAccountSettings/{id}', 'AccountController@updateSettings')->middleware('auth');
-Route::post('/profile/updatePrivacySettings', 'AccountController@updatePrivacySettings')->middleware('auth');
-Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
-
 Route::get('/profile/{id}/follow', 'AccountController@follow')->middleware('auth');
-Route::get('/profile/{id}/accept', 'AccountController@accept')->middleware('auth');
-Route::get('/profile/{id}/decline', 'AccountController@decline')->middleware('auth');
+Route::get('/profile/{id}/accept', 'AccountController@accept');
+Route::get('/profile/{id}/decline', 'AccountController@decline');
 Route::get('/profile/{id}/unfollow', 'AccountController@unfollow')->middleware('auth');
+Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
+Route::post('/profile/updatePrivacySettings', 'AccountController@updatePrivacySettings')->middleware('auth');
 Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
 Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middleware('auth');
+Route::post('/profile/updateAccountSettings', 'AccountController@updateSettings')->middleware('auth');
+Route::post('/profile/setMailLanguage', 'AccountController@setMailLanguage')->middleware('auth');
 Route::post('/profile/blockUser', 'AccountController@blockAccount')->middleware('auth');
 Route::post('/profile/unblockUser/', 'AccountController@unblockAccount')->middleware('auth');
 

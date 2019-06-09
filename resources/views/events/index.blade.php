@@ -43,7 +43,7 @@
     <div class="event_overview row" id="eventsToDisplay">
         <img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>
     </div>
-
+<button id="loadMore" onclick="fetch_events()">Load more</button>
 
     <script type="text/javascript">
     var slider = document.getElementById("rangeValue");
@@ -66,7 +66,8 @@
         document.getElementById("box-move-with-distance").style.margin = "0 0 0 " + ((((slider.value / 5) - 1) * 25)) + "%";
 
     });
-
+    var pageNumber = 0;
+    var tempDistance = 20;
     //AJAX request
     function fetch_events() {
         $('#eventsToDisplay').html("<img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>");
@@ -74,6 +75,12 @@
         distance = $("#rangeValue").val();
         var inputTag = $(filterByTag).val();
         var inputName = $(filterByName).val();
+        if(distance != tempDistance){
+            pageNumber = 0;
+            $( "#loadMore" ).show();
+            this.tempDistance = distance;
+        }
+        this.pageNumber +=1; 
 
         $.ajax({
             url: "{{ route('events_controller.actionDistanceFilter')}}",
@@ -82,11 +89,11 @@
                 distance: distance,
                 inputTag: inputTag,
                 inputName: inputName,
+                pageNumber: this.pageNumber,
                 _token: '{{ csrf_token() }}'
             },
             dataType: 'json',
             success: function(data) {
-                console.log(data);
                 if (data == "") {
                     $('#eventsToDisplay').html(
                         //TODO remove inline style
@@ -108,6 +115,9 @@
                             "<br>" + element['loc'] +
                             "</p></div></div></a></div>");
                     });
+                    if(data.length%3 != 0){
+                        $( "#loadMore" ).hide();
+                    }
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {

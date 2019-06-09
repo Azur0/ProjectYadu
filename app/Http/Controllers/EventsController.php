@@ -367,6 +367,8 @@ class EventsController extends Controller
 
         $tags = EventTag::where('tag', 'like', '%' . $request->inputTag . '%')->pluck('id');
         $names = Event::where('eventName', 'like', '%' . $request->inputName . '%')->pluck('id');
+        $pageNumber= $request->pageNumber;
+        // $
 
         $blockedUsers = [];
         $UsersBlockedYou = [];
@@ -384,7 +386,7 @@ class EventsController extends Controller
             ->whereIn('id', $names)
             ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
-            ->get();
+            ->take(($pageNumber)*3)->get();
 
         $events = new Collection();
 

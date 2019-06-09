@@ -13,7 +13,7 @@ return [
     'modal_delete_eventpicture_center' => 'Weet je zeker dat je deze foto wilt verwijderen, dit kan niet ongedaan worden.',
     'modal_delete_confirmation' => 'Bevestigen',
     'modal_delete_dismiss' => 'Annuleren',
-    'modal_delete_event_connected' => 'Er zijn events verbonden aan de gekozen categorie, deze worden gewijzigd bij de events voor het verwijderen.',
+    'modal_delete_event_connected' => 'Er zijn events verbonden aan de gekozen categorie, deze zullen een al bestaande categorie krijgen.',
     'modal_delete_image_connected' => 'Er zijn foto\'s verbonden aan de gekozen categorie, deze worden verwijderd.',
     'modal_edit_eventpicture_title' => 'Wijzig de event foto',
     'error_empty_tags' => 'Geen categoriën opgehaald.',

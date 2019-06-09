@@ -125,6 +125,24 @@
             <div class="imageform">
 
             </div>
+            <div class="modal fade" id="pictureInUse" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Placeholder</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Placeholder</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">Placeholder</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 </div>
 <script>
 $(document).ready(function() {
@@ -363,6 +381,9 @@ $(document).ready(function() {
                 success: function (data) { 
                     let id = $('input[name=tag]:checked').val();
                     fetch_customer_data(id);
+                },
+                error: function (data) {
+                    $('#pictureInUse').modal('show');
                 }
         }) 
     }

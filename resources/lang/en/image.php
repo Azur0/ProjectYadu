@@ -13,7 +13,7 @@ return [
     'modal_delete_eventpicture_center' => 'Are you really sure you want to remove this image, this cannot be undone.',
     'modal_delete_confirmation' => 'Confirm',
     'modal_delete_dismiss' => 'Cancel',
-    'modal_delete_event_connected' => 'There are events linked, these will be changed during the tag deletion.',
+    'modal_delete_event_connected' => 'There are events linked, these will be changed to already existing tags.',
     'modal_delete_image_connected' => 'There are images linked, these will be removed.',
     'modal_edit_eventpicture_title' => 'Edit the event image',
     'error_empty_tags' => 'No tags found',

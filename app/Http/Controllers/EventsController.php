@@ -116,7 +116,7 @@ class EventsController extends Controller
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
-            'people' => 'required', //TODO: min en max nog doen
+            'people' => 'required',
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
             'startTime' => 'required',
@@ -180,7 +180,6 @@ class EventsController extends Controller
         }
     }
 
-
     /**
      * Display the specified resource.
      *
@@ -238,7 +237,7 @@ class EventsController extends Controller
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
-            'numberOfPeople' => 'required', //TODO: min en max nog doen
+            'numberOfPeople' => 'required',
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
             'startTime' => 'required',
@@ -318,16 +317,13 @@ class EventsController extends Controller
 
     public function join($id)
     {
-
         if (Auth::user()->hasVerifiedEmail()) {
             $event = Event::findOrFail($id);
             if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->attach(auth()->user()->id);
                 event(new EventJoined($event,auth()->user()->id));
             }
-            //TODO: Add error 'You already joined!'
         }
-        //TODO: Add error 'You are not logged in!'
         return redirect('/events/' . $id);
     }
 
@@ -339,9 +335,7 @@ class EventsController extends Controller
                 $event->participants()->detach(auth()->user()->id);
                 event(new EventLeft($event,auth()->user()->id));
             }
-            //TODO: Add error 'You are not joined!'
         }
-        //TODO: Add error 'You are not logged in!'
         return redirect('/events/' . $id);
     }
 
@@ -364,7 +358,6 @@ class EventsController extends Controller
 
     public function actionDistanceFilter(Request $request)
     {
-
         $tags = EventTag::where('tag', 'like', '%' . $request->inputTag . '%')->pluck('id');
         $names = Event::where('eventName', 'like', '%' . $request->inputName . '%')->pluck('id');
 
@@ -374,7 +367,6 @@ class EventsController extends Controller
             $blockedUsers = BlockedUser::where('account_id', '=', Auth::id())->pluck('blockedAccount_id');
             $UsersBlockedYou = BlockedUser::where('blockedAccount_id', '=', Auth::id())->pluck('account_id');
         }
-        
 
         $this->distance = $request->input('distance');
         $unfiltered_events = Event::where('isDeleted', '==', 0)

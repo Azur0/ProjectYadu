@@ -35,8 +35,6 @@ class SendEventCreatedNotification
             new EventCreatedMail($event->event,$event->event->owner)
         );
 
-        //TODO: for when followers is merged - test this
-
         foreach($event->event->owner->followers as $follower){
             if($follower->status == 'accepted' && $follower->follower->settings->FollowNotificationCreateEvent == 1){
                 self::switchLang($follower->follower);

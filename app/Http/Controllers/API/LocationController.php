@@ -40,13 +40,13 @@ class LocationController extends Controller
             return $events;
         }
         $userLocation = self::getLocation();
-        //This a temporary measure, this will be removed when it is running on a live server
+        //TODO: This a temporary measure, this will be removed when it is running on a live server
         // $front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=51.688445,5.287405&destinations=';
+
         //TODO:2 uncomment this for the live server
         $front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=';
         $userLocation = $userLocation['lat'] . ',' . $userLocation['lon'];
         $destination = '&destinations=';
-        //TODO:1 get this from a middle ware
         $EndapiKey = "&key=".env('GOOGLE_KEY');
         $eventsToReturn = new Collection();
 

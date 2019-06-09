@@ -14,6 +14,7 @@ function fetch_customer_data(query) {
 		success: function (data) {
 			console.log(data);
 			if (data == "") {
+				//TODO: Text not translated
 				$('#box2').html("<h5><i>Kies eerst het type event</i></h5>");
 			} else {
 				$('#box2').html("");

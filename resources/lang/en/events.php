@@ -34,7 +34,7 @@ return [
     'index_search_category_placeholder' => 'Category',
     'index_activate_modal_title' => 'Activate your account',
     'index_activate_modal_description' => 'You must activate your account in order to create an event.',
-    'index_activate_modal_button' => 'Activate account',
+    'index_ok_modal_button' => 'Ok',
 
 ///////////////////////////////// Create //////////////////////////////////
 

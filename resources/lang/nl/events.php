@@ -34,7 +34,7 @@ return [
     'index_search_category_placeholder' => 'Categorie',
     'index_activate_modal_title' => 'Activeer uw account',
     'index_activate_modal_description' => 'Je moet je account activeren om een evenement aan te maken.',
-    'index_activate_modal_button' => 'Account activeren',
+    'index_ok_modal_button' => 'Ok',
 
 ///////////////////////////////// Create //////////////////////////////////
 

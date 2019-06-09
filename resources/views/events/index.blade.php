@@ -58,8 +58,8 @@
             {{ __('events.index_activate_modal_description') }}
             </div>
             <div class="modal-footer">
-                <a href="www.google.nl">
-                    <button type="button" class="btn btn-primary">{{ __('events.index_activate_modal_button') }}</button>
+                <a data-dismiss="modal">
+                    <button type="button" class="btn btn-primary">{{ __('events.index_ok_modal_button') }}</button>
                 </a>
             </div>
             </div>

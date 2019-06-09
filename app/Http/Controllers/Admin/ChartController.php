@@ -32,7 +32,7 @@ class ChartController extends Controller
     public function GetChatmessages(GetChartDateRangeRequest $request)
     {
         $data = $this->MakeDataArray($request['toDate'], $request['fromDate']);
-        $messageCount = ChatMessage::whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count();
+        $messageCount = ChatMessage::whereBetween('startDate', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count();
         $data['messageData'] = array('messageCount' => $messageCount);
         return $data;
     }
@@ -79,7 +79,7 @@ class ChartController extends Controller
         foreach ($platforms as $platform) {
             $entry = array(
                 'platform' => ucfirst($platform->platform),
-                'shareCount' => SharedEvent::where('platform', $platform->platform)->whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count(),
+                'shareCount' => SharedEvent::where('platform', $platform->platform)->whereBetween('startDate', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count(),
             );
 
             if ($entry['shareCount'] > 0) {
@@ -99,7 +99,7 @@ class ChartController extends Controller
             $tag_id = EventTag::where('tag', $categories[$i])->pluck('id');
             $entry = array(
                 'category' => ucfirst($categories[$i]),
-                'count' => Event::where('tag_id', $tag_id)->whereBetween('created_at', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count()
+                'count' => Event::where('tag_id', $tag_id)->whereBetween('startDate', [$request->fromDate, Carbon::parse($request->toDate)->addDay()])->count()
             );
 
             if ($entry['count'] > 0) {

@@ -109,10 +109,26 @@
 			<div class="mb-5">
 				<div class="row">
 					<div class="col-5">
-						<h3>{{__('events.show_location')}}</h3>
+						<h3>{{__('events.show_postalcode')}}</h3>
 					</div>
 					<div class="col-7">
-						<h5>{{$event->location()->first()->postalcode}} {{$event->location()->first()->houseNumber}}{{$event->location()->first()->houseNumberAddition}}</h5>
+						<h5>{{$event->location()->first()->postalcode}}</h5>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-5">
+						<h3>{{__('events.show_city')}}</h3>
+					</div>
+					<div class="col-7">
+						<h5>{{$event->location()->first()->locality}}</h5>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-5">
+						<h3>{{__('events.show_adres')}}</h3>
+					</div>
+					<div class="col-7">
+						<h5>{{$event->location()->first()->route}} {{$event->location()->first()->houseNumber}}{{$event->location()->first()->houseNumberAddition}}</h5>
 					</div>
 				</div>
 				<div class="row">

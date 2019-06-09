@@ -3,6 +3,8 @@
 return [
     'button_upload_dual' => 'Upload bestanden',
     'button_upload_single' => 'Upload bestand',
+    'button_upload_tag' => 'Upload categorie',
+
     'header_type_tag' => 'Categoriën voor uitjes',
     'header_extra' => 'Wijzig hier de foto\'s die weergegeven worden op Yadu',
     'header_eventpictures' => 'Verbonden foto\'s bij gekozen categorie',

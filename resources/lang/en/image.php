@@ -3,6 +3,8 @@
 return [
     'button_upload_dual' => 'Upload files',
     'button_upload_single' => 'Upload file',
+    'button_upload_tag' => 'Upload category',
+
     'header_type_tag' => 'Event tags',
     'header_extra' => 'Change images here which are displayed on the website',
     'header_eventpictures' => 'Images connected to tags',

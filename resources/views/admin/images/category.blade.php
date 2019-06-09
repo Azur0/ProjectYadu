@@ -47,7 +47,7 @@
                                 </label>
                                 <input id="file2" class="btn btn-info" type="file"  name="selectedImage" accept="image/png, image/jpeg, image/jpg">
                             </label>
-                            <button type="submittype" class="btn btn-primary submit-edit" name="submittype">{{__('image.button_upload_dual')}}</button>
+                            <button type="submittype" class="btn btn-primary" name="submittype">{{__('image.button_upload_tag')}}</button>
                         </form>
                     </div>
                 </div>
@@ -55,7 +55,9 @@
 
             {{-- Show category types --}}
         <div class="types">
-            <h1>{{__('image.header_type_tag')}}</h1>
+            <div class="card-header">
+                <h1>{{__('image.header_type_tag')}}</h1>
+            </div>
                 <div class="box">
                     @foreach ($tags as $tag)
                     <div class="card divider"> 
@@ -108,7 +110,9 @@
                     </div>
                 @endif
             <div class="pic" hidden>
-                <h3>{{__('image.header_eventpictures')}}</h3>
+                <div class="card-header">
+                    <h3>{{__('image.header_eventpictures')}}</h3>
+                </div>
                     <div class="types">
                         <div id="box2" class="box">
                             
@@ -294,7 +298,7 @@ $(document).ready(function() {
                                                             </label>
                                                             <input id="file5" class="btn btn-info" type="file" name="updateevent" accept="image/png, image/jpeg, image/jpg">
                                                             <input type="hidden" value="${element['id']}" name="id">
-                                                            <button type="updateevent" class="btn btn-primary submit-edit" name="updateevent">{{__('image.button_upload_single')}}</button>
+                                                            <button type="updateevent" class="btn btn-primary" name="updateevent">{{__('image.button_upload_single')}}</button>
                                                             </form>
                                                         </div>
                                                     </div>

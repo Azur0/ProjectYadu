@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 use App\Http\Requests\EditLinkRequest;
 use App\Http\Requests\EditEmailRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\App;
 use Hamcrest\Type\IsArray;
@@ -14,7 +16,7 @@ use App\socialmedia;
 class EditLinksController extends Controller
 {
     public function index()
-    {   
+    {
         $socialmedia = socialmedia::all();
         return view("admin.links.editLinks",compact('socialmedia'));
     }
@@ -25,7 +27,7 @@ class EditLinksController extends Controller
         $socialmedia->save();
         return back();
     }
-    
+
     public function saveEmail(EditEmailRequest $request){
         $socialmedia = socialmedia::findOrFail($request['name']);
         $socialmedia->link = $request['email'];

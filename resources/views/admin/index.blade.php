@@ -557,6 +557,8 @@
                 data: plotData
             }]
         };
+
+        return haha;
     }
 
     function getCategoryData(fromDate, toDate) {

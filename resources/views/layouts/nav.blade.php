@@ -39,6 +39,9 @@
 	            <li>
 	                <a href="/login" class="nav-link m-2 nav-item nav-yadu {{ request()->is('login') ? 'active' : '' }}">{{__('navigation.nav_login')}}</a>
 	            </li>
+                <li>
+	                <a href="/register" class="nav-link m-2 nav-item nav-yadu {{ request()->is('register') ? 'active' : '' }}">{{__('navigation.nav_register')}}</a>
+	            </li>
             @endif
         </ul>
     </div>

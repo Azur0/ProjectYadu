@@ -19,6 +19,7 @@ return [
     'nav_dashboard' => 'PROFIEL',
     'nav_admin' => 'ADMIN PANEEL',
     'nav_login' => 'INLOGGEN',
+    'nav_register' => 'REGISTREREN',
     'nav_logout' => 'UITLOGGEN',
     'nav_pages' => 'Pagina\'s',
     'nav_swearWords' => 'Scheldwoorden',

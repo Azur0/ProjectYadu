@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 use App\Account;
 use App\ChatMessage;
@@ -13,6 +16,7 @@ use App\SocialMediaPlatform;
 use Carbon\Carbon;
 use function GuzzleHttp\json_encode;
 use function Opis\Closure\unserialize;
+
 
 class ChartController extends Controller
 {

@@ -18,9 +18,14 @@ return [
     'error_empty_eventpictures' => 'No connected images found',
     'error_picture' => 'Something went wrong upon reading the picture',
     'error_nodata' => 'No data to read, go add some!',
-    'adding_successsful' => 'Adding file succeeded',
+
+    'adding_type_successful' => 'New category type added',
+    'add_event_successful' => 'Event picture uploaded',
+    'update_tag_successful' => 'Category updated',
+    'update_event_successful' => 'Event picture updated',
+    'adding_successful' => 'Adding file succeeded',
     'update_successful' => 'Upload successful',
-    'edit_successful' => 'Changes approved',
+
     'add_tag_title' => 'Insert a new tag here',
     'add_tag_name' => 'Describe the category',
     'add_tag_default' => 'Standard picture',

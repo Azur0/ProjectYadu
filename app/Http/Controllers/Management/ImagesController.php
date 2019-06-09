@@ -59,7 +59,7 @@ class ImagesController extends Controller
 		$event_tag->imageSelected = file_get_contents($image2);
 		$event_tag->created_at = Carbon::now();
 		$event_tag->save();
-		return back()->with('success', __('image.adding_successsful'));
+		return back()->with('success', __('image.adding_type_successful'));
 	}
 
 	public function update(Request $request) {
@@ -144,7 +144,7 @@ class ImagesController extends Controller
 		$event_picture->tag_id = $id;
 		$event_picture->picture = file_get_contents($request->file('eventpicture'));
 		$event_picture->save();
-		return back()->with('eventsuccess', __('image.update_successful'));
+		return back()->with('eventsuccess', __('image.add_event_successful'));
 	}
 
 	public function deleteeventpicture(Request $request) {
@@ -176,7 +176,7 @@ class ImagesController extends Controller
 		$selectedPicture->tag = $request->input('naam');
 		if(empty($request->file('image'))){
 			$selectedPicture->save();
-			return redirect('/admin/images/category')->with('success', __('image.edit_successsful'));
+			return redirect('/admin/images/category')->with('success', __('image.update_tag_successful'));
 		}
 		if($request->input('type') == "default") {
 			$selectedPicture->imageDefault = file_get_contents($request->file('image'));
@@ -184,7 +184,7 @@ class ImagesController extends Controller
 			$selectedPicture->imageSelected = file_get_contents($request->file('image'));
 		}
 		$selectedPicture->save();
-		return redirect('/admin/images/category')->with('success', __('image.adding_successsful'));
+		return redirect('/admin/images/category')->with('success', __('image.update_tag_successful'));
 	}
 
 	public function updateeventpicture(Request $request) {
@@ -197,6 +197,6 @@ class ImagesController extends Controller
 		$selectedPicture = EventPicture::where('id', '=', $request->input('id'))->firstOrFail();
 		$selectedPicture->picture = file_get_contents($request->file('updateevent'));
 		$selectedPicture->save();
-		return redirect('admin/images/category')->with('eventsuccess', __('image.update_successful'));
+		return redirect('admin/images/category')->with('eventsuccess', __('image.update_event_successful'));
 	}
 }

@@ -18,9 +18,14 @@ return [
     'error_empty_eventpictures' => 'Geen verbonden foto\'s gevonden',
     'error_picture' => 'Er ging iets fout bij het laden van de foto',
     'error_nodata' => 'Geen data om weer te geven. Voeg wat foto\'s toe',
-    'adding_successsful' => 'Bestand toevoegen gelukt',
+
+    'adding_type_successful' => 'Nieuwe categorie toegevoegd',
+    'add_event_successful' => 'Nieuwe event foto toegevoegd',
+    'update_tag_successful' => 'Categorie gewijzigd',
+    'update_event_successful' => 'Event foto gewijzigd',
+    'adding_successful' => 'Bestand toevoegen gelukt',
     'update_successful' => 'Uploaden geslaagd',
-    'edit_successfull' => 'Veranderingen doorgevoerd',
+
     'add_tag_title' => 'Voeg hier een nieuwe categorie toe',
     'add_tag_name' => 'Beschrijf hier de categorie',
     'add_tag_default' => 'Standaard foto',

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbg">
     <div class="d-flex flex-grow-1">
         <div class="navbar-header">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -14,20 +14,14 @@
             <img src={{ asset('images/logoCircle.png')}} width="60" alt="logo">
         </a>
     </div>
-    <div class="collapse navbar-collapse flex-grow-1 text-left" id="myNavbar">
-        <ul class="navbar-nav ml-auto flex-nowrap">
+    <div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
+        <ul class="nav navbar-nav ml-auto flex-nowrap">
             <li>
                 <a href="/" class="nav-link m-2 nav-item nav-yadu {{ request()->is('/') ? 'active' : '' }}">{{__('navigation.nav_home')}}</a>
             </li>
             <li>
                 <a href="/events"
                    class="nav-link m-2 nav-item nav-yadu {{ request()->is('events') ? 'active' : (request()->is('events/*') ? 'active' : '') }}">{{__('navigation.nav_events')}}</a>
-            </li>
-            <li>
-                <a href="/about" class="nav-link m-2 nav-item nav-yadu {{ request()->is('about') ? 'active' : '' }}">{{__('navigation.nav_about')}}</a>
-            </li>
-            <li>
-                <a href="/contact" class="nav-link m-2 nav-item nav-yadu {{ request()->is('contact') ? 'active' : '' }}">{{__('navigation.nav_contact')}}</a>
             </li>
             @if(Auth::user())
 	            <li>
@@ -44,6 +38,9 @@
             @else
 	            <li>
 	                <a href="/login" class="nav-link m-2 nav-item nav-yadu {{ request()->is('login') ? 'active' : '' }}">{{__('navigation.nav_login')}}</a>
+	            </li>
+                <li>
+	                <a href="/register" class="nav-link m-2 nav-item nav-yadu {{ request()->is('register') ? 'active' : '' }}">{{__('navigation.nav_register')}}</a>
 	            </li>
             @endif
         </ul>

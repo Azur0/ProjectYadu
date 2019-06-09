@@ -21,5 +21,4 @@ return [
     'days_saturday' => 'Zaterdag',
     'days_sunday' => 'Zondag',
     'edit_lang' => 'Wijzig',
-
 ];

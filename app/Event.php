@@ -2,8 +2,8 @@
 
 namespace App;
 
+use App\Events\EventCreated;
 use Illuminate\Database\Eloquent\Model;
-use App\Events\EventDeleted;
 use App\Events\EventEdited;
 
 class Event extends Model
@@ -12,6 +12,7 @@ class Event extends Model
 
     protected $dispatchesEvents = [
         'updated' => EventEdited::class,
+        'created' => EventCreated::class
     ];
 
     public function eventPicture()
@@ -34,9 +35,7 @@ class Event extends Model
     }
 	
 	public function location(){
-        //return $this->hasOne('App\Location','location_id','id');
         return $this->belongsTo('App\Location','location_id','id');
-        //return $this->belongsTo(Location::class);
 	}
 
 	public function messages() {

@@ -11,7 +11,7 @@ class AccountRolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $roles = array("User", "Admin");
+        $roles = array("User","Admin");
 
         foreach ($roles as $role) 
        	{

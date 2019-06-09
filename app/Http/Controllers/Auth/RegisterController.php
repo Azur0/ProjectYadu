@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Account;
+use App\AccountSettings;
 use App\Rules\genderExists;
 use App\Http\Controllers\Controller;
 use App\Mail\Confirmation;

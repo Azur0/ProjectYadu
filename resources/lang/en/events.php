@@ -52,7 +52,7 @@ return [
 
     'create_select_type_first' => 'Please select an event type first',
     'create_amount_of_participants' => 'people can join (including yourself)',
-    'create_initiator_info' => 'Make yourself the initiator, the first user to join the event will become the owner.',
+    'create_initiator_info' => 'Make yourself the initiator (if you select no, the first user to join the event will become the owner).',
     'create_initiator_true' => 'Yes',
     'create_initiator_false' => 'No',
 

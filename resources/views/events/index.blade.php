@@ -6,46 +6,49 @@
 
 @section('content')
 <div class="slideContainer">
-        <div style="width:90%; margin:auto;">
-            <div class="box-range-value" id="box-move-with-distance">
-                <div id="rangeValueDisplay"></div>
-            </div>
+    <div style="width:90%; margin:auto;">
+        <div class="box-range-value" id="box-move-with-distance">
+            <div id="rangeValueDisplay"></div>
         </div>
-        <input type="range" ticks="[5, 10, 15, 20, 25]" min="5" max="25" step="5" value="20" class="slider"
-               id="rangeValue">
-        <div class="labels">
-            <label class="rangeTextLeft">5 KM</label>
-            <label class="rangeTextCenter">10 KM</label>
-            <label class="rangeTextCenter">15 KM</label>
-            <label class="rangeTextCenter">20 KM</label>
-            <label class="rangeTextRight"> > </label>
-        </div>
-        <div class="search">
-            <label for="filterByTag">{{__('events.index_select_category')}}</label>
-            <input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag"/>
-            <datalist id="tags">
-                @foreach ($tags as $tag)
-                    <option value="{{__('events.cat'.$tag->id)}}">
+    </div>
+    <input type="range" ticks="[5, 10, 15, 20, 25]" min="5" max="25" step="5" value="20" class="slider" id="rangeValue">
+    <div class="labels">
+        <label class="rangeTextLeft">5 KM</label>
+        <label class="rangeTextCenter">10 KM</label>
+        <label class="rangeTextCenter">15 KM</label>
+        <label class="rangeTextCenter">20 KM</label>
+        <label class="rangeTextRight"> > </label>
+    </div>
+    <div class="search">
+        <label for="filterByTag">{{__('events.index_select_category')}}</label>
+        <input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag" />
+        <datalist id="tags">
+            @foreach ($tags as $tag)
+            <option value="{{__('events.cat'.$tag->id)}}">
                 @endforeach
-            </datalist>
-            <label for="filterByName">{{__('events.index_search_name')}}</label>
-            <input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" autocomplete="off"/>
-        </div>
+        </datalist>
+        <label for="filterByName">{{__('events.index_search_name')}}</label>
+        <input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" autocomplete="off" />
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-12">
-            <a href="/events/create" class="btn btn-yadu-orange w-100"><i
-                        class="fas fa-user-friends"></i>&nbsp;{{__('events.index_create_event')}}</a>
-        </div>
+<div class="row">
+    <div class="col-12">
+        <a href="/events/create" class="btn btn-yadu-orange w-100"><i class="fas fa-user-friends"></i>&nbsp;{{__('events.index_create_event')}}</a>
     </div>
+</div>
 
-    <div class="event_overview row" id="eventsToDisplay">
-        <img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>
+<div class="event_overview row" id="eventsToDisplay">
+    <img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-yadu-orange w-100" id="loadMore" onclick="fetch_events()">Load more</button>
     </div>
-<button id="loadMore" onclick="fetch_events()">Load more</button>
+</div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
     var slider = document.getElementById("rangeValue");
     var val = document.getElementById("rangeValueDisplay");
     val.innerHTML = slider.value;
@@ -62,25 +65,26 @@
     };
     $(document).ready(function() {
         fetch_events();
-        document.getElementById("box-move-with-distance").style.transform = "translate(-" + ((((slider.value /5) -1) * 10) + 5) + "px) rotate(-136deg)";
+        document.getElementById("box-move-with-distance").style.transform = "translate(-" + ((((slider.value / 5) - 1) * 10) + 5) + "px) rotate(-136deg)";
         document.getElementById("box-move-with-distance").style.margin = "0 0 0 " + ((((slider.value / 5) - 1) * 25)) + "%";
 
     });
     var pageNumber = 0;
-    var tempDistance = 20;
+    var tempDistance = 0;
     //AJAX request
     function fetch_events() {
-        $('#eventsToDisplay').html("<img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>");
+        // $('#eventsToDisplay').html("<img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>");
         var distance;
         distance = $("#rangeValue").val();
         var inputTag = $(filterByTag).val();
         var inputName = $(filterByName).val();
-        if(distance != tempDistance){
+        var tempDistance = this.tempDistance;
+        if (distance != tempDistance) {
             pageNumber = 0;
-            $( "#loadMore" ).show();
-            this.tempDistance = distance;
+            $("#loadMore").show();
+            $('#eventsToDisplay').html("<img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>");
         }
-        this.pageNumber +=1; 
+        this.pageNumber += 1;
 
         $.ajax({
             url: "{{ route('events_controller.actionDistanceFilter')}}",
@@ -96,13 +100,12 @@
             success: function(data) {
                 if (data == "") {
                     $('#eventsToDisplay').html(
-                        //TODO remove inline style
-                        //TODO TRANSLATION
                         "<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_no_event_found')}}</h1><div>"
                     );
                 } else {
-                    $('#eventsToDisplay').html("");
-
+                    if (distance != tempDistance) {
+                        $('#eventsToDisplay').html("");
+                    }
                     data.forEach(function(element) {
                         var eventNameSliced = element['eventName'];
                         $('#eventsToDisplay').html($("#eventsToDisplay").html() +
@@ -115,18 +118,18 @@
                             "<br>" + element['loc'] +
                             "</p></div></div></a></div>");
                     });
-                    if(data.length%3 != 0){
-                        $( "#loadMore" ).hide();
+                    if (data.length % 3 != 0) {
+                        $("#loadMore").hide();
                     }
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 $('#eventsToDisplay').html(
-                    //TODO TRANSLATION
                     "<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_loading_error')}}</h1><div>"
                 );
             }
         })
+        this.tempDistance = distance;
     }
-    </script>
-    @endsection
+</script>
+@endsection

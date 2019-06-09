@@ -386,7 +386,7 @@ class EventsController extends Controller
             ->whereIn('id', $names)
             ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
-            ->take(($pageNumber)*3)->get();
+            ->take(3)->skip(($pageNumber-1)*3)->get();
 
         $events = new Collection();
 

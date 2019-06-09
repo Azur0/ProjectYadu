@@ -178,7 +178,6 @@
 		   
 
 			<script>
-
 				function LogEventShared(platform){
 					$.ajax({
 						url: "{{route('LogEventShared')}}",

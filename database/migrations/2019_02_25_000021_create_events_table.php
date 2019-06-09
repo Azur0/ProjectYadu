@@ -25,7 +25,7 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('tag_id');
             $table->unsignedInteger('location_id');
-            $table->unsignedInteger('owner_id');
+            $table->unsignedInteger('owner_id')->nullable();
             $table->unsignedInteger('event_picture_id');
             $table->string('eventName', 45);
             $table->dateTime('startDate');

@@ -41,6 +41,7 @@ return [
     'create_step4' => 'Kies de datum en tijd',
     'create_step5' => 'Beschrijf je uitje',
     'create_step6' => 'Aantal personen',
+    'create_step7' => 'Eigenaar',
 
     'create_submit' => 'Verzenden',
     'create_title' => 'Titel',
@@ -50,6 +51,9 @@ return [
 
     'create_select_type_first' => 'Kies eerst het type event',
     'create_amount_of_participants' => 'mensen kunnen mee (incl. jezelf)',
+    'create_initiator_info' => 'Maak jezelf de eigenaar (wanneer je nee kiest zal de eerste persoon die zich aanmeld zal de eigenaar worden).',
+    'create_initiator_true' => 'ja',
+    'create_initiator_false' => 'Nee',
 
     'create_error_select_photo' => 'Kies een foto',
     'create_error_select_type' => 'Kies een type',
@@ -61,14 +65,14 @@ return [
     'create_error_description_required' => 'Het omschrijving-veld is verplicht.',
     'create_error_max_participants_required' => 'Het max aantal mensen-veld is verplicht.',
     
-    
-   
 
 ///////////////////////////////// Show ////////////////////////////////////
     'show' => 'Weergeven',
     'show_category' => 'Categorie',
     'show_lang' => 'Dutch',
-    'show_location' => 'Locatie',
+    'show_postalcode' => 'Postcode',
+    'show_adres' => 'Adres',
+    'show_city' => 'Stad',
     'show_date' => 'Datum en tijd',
     'show_description' => 'Beschrijving',
     'show_initiator' => 'Initiatiefnemer',
@@ -84,6 +88,7 @@ return [
     'show_overview' => 'Overzicht',
     'show_chat_login' => 'Log in en meld je aan bij dit event om te kunnen chatten!',
     'add_to_calendar' => 'Voeg toe aan agenda',
+    'show_no_initiator' => 'Er is nog geen event eigenaar, meld je aan om de eigenaar te worden.',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Annuleren',

@@ -31,7 +31,6 @@ class CreateAccountsTable extends Migration
             $table->string('middleName', 255)->nullable();
             $table->string('lastName', 255)->nullable();
             $table->date('dateOfBirth')->nullable();
-            $table->binary('avatar')->nullable()->default(null);
             $table->tinyInteger('doForcePasswordChange')->default('0');
             $table->tinyInteger('isDeleted')->default('0');
             $table->dateTime('email_verified_at')->nullable();
@@ -62,6 +61,8 @@ class CreateAccountsTable extends Migration
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });
+
+        DB::statement("ALTER TABLE accounts ADD avatar MEDIUMBLOB");
     }
 
     /**

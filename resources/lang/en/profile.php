@@ -34,6 +34,12 @@ return [
 
 ///////////////////////////////// Edit ////////////////////////////////////
 
+    'edit_avatar_title' => 'Edit avatar',
+    'edit_edit_avatar_upload' => 'Upload',
+    'edit_edit_avatar_choose_image' => 'Choose image',
+    'edit_update_avatar' => 'Update avatar',
+    'edit_avatar_info' => 'Avatars need to be square and should be no bigger than 500x500 pixels.',
+
     'edit_edit_profile_title' => 'Edit profile',
     'edit_firstname' => 'Firstname',
     'edit_middlename' => 'Middlename',

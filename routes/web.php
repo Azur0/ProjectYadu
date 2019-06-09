@@ -57,6 +57,7 @@ Route::post('/profile/updateAccountSettings', 'AccountController@updateSettings'
 Route::post('/profile/setMailLanguage', 'AccountController@setMailLanguage')->middleware('auth');
 Route::post('/profile/blockUser', 'AccountController@blockAccount')->middleware('auth');
 Route::post('/profile/unblockUser/', 'AccountController@unblockAccount')->middleware('auth');
+Route::post('/profile/updateAvatar', 'AccountController@updateAvatar')->middleware('auth');
 
 Auth::routes();
 

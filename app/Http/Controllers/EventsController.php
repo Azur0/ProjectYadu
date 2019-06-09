@@ -368,7 +368,6 @@ class EventsController extends Controller
         $tags = EventTag::where('tag', 'like', '%' . $request->inputTag . '%')->pluck('id');
         $names = Event::where('eventName', 'like', '%' . $request->inputName . '%')->pluck('id');
         $pageNumber= $request->pageNumber;
-        // $
 
         $blockedUsers = [];
         $UsersBlockedYou = [];

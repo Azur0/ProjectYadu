@@ -202,7 +202,7 @@
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
 					$('#eventsToDisplay').html(
-						//TODO TRANSLATION
+						//TODO remove Inline style
 						"<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_loading_error')}}</h1><div>"
 					);
 				}

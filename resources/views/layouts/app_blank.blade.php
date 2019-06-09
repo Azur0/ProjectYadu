@@ -2,7 +2,6 @@
 <html lang="{{ config('app.locale') }}" dir="ltr">
     <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <!-- TODO: this page needs to extend app.blade.php so this scrip is automatically imported -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140653687-1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];

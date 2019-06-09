@@ -90,7 +90,6 @@
                 if (data == "") {
                     $('#eventsToDisplay').html(
                         //TODO remove inline style
-                        //TODO TRANSLATION
                         "<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_no_event_found')}}</h1><div>"
                     );
                 } else {
@@ -112,7 +111,7 @@
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 $('#eventsToDisplay').html(
-                    //TODO TRANSLATION
+                    //TODO remove inline style
                     "<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_loading_error')}}</h1><div>"
                 );
             }

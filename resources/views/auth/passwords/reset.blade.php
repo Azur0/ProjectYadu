@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-{{-- TODO: Translate this file && How do I view this page? --}}
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

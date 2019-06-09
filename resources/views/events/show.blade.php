@@ -59,7 +59,6 @@
             @endforeach
         </div>
         <div class="col-md-6">
-            {{--TODO: Add map API--}}
             <h3>{{__('events.show_location')}}</h3>
             <h5>{{$event->location()->first()->postalcode}} {{$event->location()->first()->houseNumber}}{{$event->location()->first()->houseNumberAddition}}</h5>
             <div id="map" class="rounded event_map"></div>

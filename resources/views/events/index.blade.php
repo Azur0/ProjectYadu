@@ -73,7 +73,6 @@
     var tempDistance = 0;
     //AJAX request
     function fetch_events() {
-        // $('#eventsToDisplay').html("<img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>");
         var distance;
         distance = $("#rangeValue").val();
         var inputTag = $(filterByTag).val();

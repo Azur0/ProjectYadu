@@ -117,6 +117,14 @@
 		</a>
 	</li>
 
+	<!-- Nav Item - suspensions -->
+	<li class="nav-item {{ request()->is('admin/suspensions/ip') ? 'active' : '' }}">
+		<a class="nav-link collapsed" href="/admin/suspensions/ip">
+			<i class="fas fa-fw fa-file-word"></i>
+			<span>{{__('navigation.nav_suspensions')}}</span>
+		</a>
+	</li>
+
 	<!-- Divider -->
 	<hr class="sidebar-divider d-none d-md-block">
 

@@ -32,6 +32,7 @@ class CreateAccountsTable extends Migration
             $table->string('lastName', 255)->nullable();
             $table->date('dateOfBirth')->nullable();
             $table->tinyInteger('doForcePasswordChange')->default('0');
+            $table->tinyInteger('doForceLogout')->default('0');
             $table->tinyInteger('isDeleted')->default('0');
             $table->dateTime('email_verified_at')->nullable();
             $table->longText('bio')->nullable();

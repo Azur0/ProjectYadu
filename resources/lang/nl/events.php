@@ -83,6 +83,7 @@ return [
     'show_title' => 'Titel',
     'show_overview' => 'Overzicht',
     'show_chat_login' => 'Log in en meld je aan bij dit event om te kunnen chatten!',
+    'show_date_warning' => 'De geselecteerde datum zit meer dan 1 jaar in de toekomst. Kruis het vakje aan als je hiermee eens bent.',
     'add_to_calendar' => 'Voeg toe aan agenda',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////

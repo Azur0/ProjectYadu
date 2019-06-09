@@ -112,7 +112,6 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-       
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
@@ -120,6 +119,7 @@ class EventsController extends Controller
             'tag' => 'required',
             'startDate' => 'required|date|after:now',
             'startTime' => 'required',
+            'dateWarning' => 'required_if:1,==,1',
             'lng' => 'required|max:45',
             'lat' => 'required|max:45',
             'houseNumber' => 'required|max:10',

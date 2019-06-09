@@ -65,6 +65,10 @@
             <div class="description">
                 <h5>Date</h5>
                 <input id="date" name="startDate" type="date" value="{{ old('startDate') }}" required>
+                <label class="dateWarning">
+                    <input type="checkbox" name="dateWarning">
+                    <span>{{__('events.show_date_warning')}}</span>
+                </label>
                 <h5>Time</h5>
                 <input id="date" name="startTime" type="time" value="{{ old('startTime') }}" required>
                 @if ($errors->has('startDate'))
@@ -152,6 +156,29 @@ function fetch_customer_data(query) {
 }
 </script>
 <script>
+let datepicker = $('#date');
+datepicker.change(function() {
+    let futureDate = new Date(getCurrentDate());
+    futureDate = (futureDate.getFullYear() + 1) + '-' + ((futureDate.getMonth()+1) <10 ? '0' : '') + (futureDate.getMonth()+1) + '-' + ((futureDate.getDate()+1)<10 ? '0' : '') + (futureDate.getDate()+1);
+
+    if(datepicker.val() > futureDate) {
+        $('.dateWarning').show();
+    } else {
+        $('.dateWarning').hide();
+    }
+})
+
+function getCurrentDate(){
+    let d = new Date();
+
+    let month = d.getMonth()+1;
+    let day = d.getDate();
+
+    return d.getFullYear() + '-' +
+        (month<10 ? '0' : '') + month + '-' +
+        (day<10 ? '0' : '') + day;
+    }
+
 function update_counter_title(text) {
     var len = parseInt(text.getAttribute("maxlength"), 10);
     document.getElementById('chars_title').innerHTML = len - text.value.length;

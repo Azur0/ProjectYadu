@@ -81,6 +81,7 @@ return [
     'show_title' => 'Title',
     'show_overview' => 'Overview',
     'show_chat_login' => 'Log in and join this event to chat!',
+    'show_date_warning' => 'The selected date is more than 1 year in the future. Check the box if you are sure of this.'
     'add_to_calendar' => 'Add to Calendar',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////

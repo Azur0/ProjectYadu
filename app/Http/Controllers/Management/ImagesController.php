@@ -152,14 +152,14 @@ class ImagesController extends Controller
 		try{
 			if($request->input('override') == 'true'){
 				// find all events who use the selected picture
-				$connectedEvents = Event::where('tag_id', '=', $request->input('categoryID'))->get();
+				$connectedEvents = Event::where('event_picture_id', '=', $request->input('eventID'))->get();
 				// find an existing event picture under the same category id
-				$newPicture = EventPicture::where('id', '!=', $selectedPicture->id)->firstOrFail();
+				$newPicture = EventPicture::where('id', '!=', $selectedPicture->id)->first();
 				foreach($connectedEvents as $event){
 					$event->event_picture_id = $newPicture->id;
 					$event->save();
 				}
-				// $selectedPicture->delete();
+				$selectedPicture->delete();
 			} else {
 				$event = Event::where('event_picture_id', '=', $request->input('eventID'))->get();
 				if(empty($event)) {

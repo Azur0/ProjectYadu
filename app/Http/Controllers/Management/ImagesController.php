@@ -46,7 +46,7 @@ class ImagesController extends Controller
 			'selectedImage' => 'required|image|max:10240|mimes:jpg,png,jpeg',
 			'naam' => 'required|string|min:1|max:45'
 			]);
-		if($request->file('defaultImage')->getSize() > 65535 || $request->file('selectedImage')->getSize() > 65535){
+		if($request->file('defaultImage')->getSize() > 16777215 || $request->file('selectedImage')->getSize() > 16777215){
 			return back()->withErrors(__('image.file_too_large'));
 		}
 
@@ -67,7 +67,7 @@ class ImagesController extends Controller
 			'selected' => 'required',
 			'default' => 'required|image|max:10240|mimes:jpg,png,jpeg'
 			]);
-		if($request->file('default')->getSize() > 1000000){
+		if($request->file('default')->getSize() > 65535){
 			return back()->withErrors(__('image.file_too_large'));
 		}
 		$location = "images/".$request->selected;
@@ -89,10 +89,10 @@ class ImagesController extends Controller
 	}
 
 	public function removetype(Request $request) {
-		$events = Event::where('tag_id', '=', $request->input('query'))->get();
-		$pictures = EventPicture::where('tag_id', '=', $request->input('query'))->get();
+		$events = Event::where('tag_id', '=', $request->input('categoryID'))->get();
+		$pictures = EventPicture::where('tag_id', '=', $request->input('categoryID'))->get();
 		if($events->isEmpty() && $pictures->isEmpty()) {
-			$tag = EventTag::where('id', '=', $request->input('query'))->firstOrFail();
+			$tag = EventTag::where('id', '=', $request->input('categoryID'))->firstOrFail();
 			$tag->delete();
 			return json_encode("success");
 		} 
@@ -100,7 +100,7 @@ class ImagesController extends Controller
 	}
 
 	public function checktiedpictures(Request $request) {
-		$eventpictures = EventPicture::where('tag_id', '=', $request->input('query'))->get();
+		$eventpictures = EventPicture::where('tag_id', '=', $request->input('categoryID'))->get();
 		foreach ($eventpictures as $pic) {
 			$pic->picture = base64_encode($pic->picture);
 		}
@@ -109,11 +109,11 @@ class ImagesController extends Controller
 
 	public function trueremove(Request $request) {
 		// rechange tag events
-		$events = Event::where('tag_id', '=', $request->input('query'))->get();
-		$pictures = EventPicture::where('tag_id', '=', $request->input('query'))->get();
+		$events = Event::where('tag_id', '=', $request->input('categoryID'))->get();
+		$pictures = EventPicture::where('tag_id', '=', $request->input('categoryID'))->get();
 		if(!$events->isEmpty() || !$pictures->isEmpty()){
 			// set different tag_id in table events
-			$tag = EventTag::where('id', '!=', $request->input('query'))->firstOrFail();
+			$tag = EventTag::where('id', '!=', $request->input('categoryID'))->firstOrFail();
 			$picture = EventPicture::where('tag_id', '=', $tag->id)->firstOrFail();
 			foreach($events as $e){
 				// check event tag_id with a different id in database
@@ -122,12 +122,12 @@ class ImagesController extends Controller
 				$e->save();
 			}
 			// delete all pictures from previous tag 
-			$eventpictures = EventPicture::where('tag_id', '=', $request->input('query'))->get();
+			$eventpictures = EventPicture::where('tag_id', '=', $request->input('categoryID'))->get();
 			foreach($eventpictures as $picture){
 				$picture->delete();
 			}
 			// finally delete the tag itself
-			$tag = EventTag::where('id', '=', $request->input('query'))->firstOrFail();
+			$tag = EventTag::where('id', '=', $request->input('categoryID'))->firstOrFail();
 			$tag->delete();
 		}
 		return json_encode("");
@@ -137,7 +137,7 @@ class ImagesController extends Controller
 		$this->validate($request, [
 			'eventpicture' => 'required|image|mimes:jpg,png,jpeg|max:2048'
 		]);
-		if($request->file('eventpicture')->getSize() > 65535){
+		if($request->file('eventpicture')->getSize() > 16777215){
 			return back()->withErrors(__('image.file_too_large'));
 		}
 		$event_picture = new EventPicture;
@@ -148,9 +148,25 @@ class ImagesController extends Controller
 	}
 
 	public function deleteeventpicture(Request $request) {
-		$selectedPicture = EventPicture::where('id', '=', $request->input('query'))->firstOrFail();
+		$selectedPicture = EventPicture::where('id', '=', $request->input('eventID'))->firstOrFail();
 		try{
-			$selectedPicture->delete();
+			if($request->input('override') == 'true'){
+				// find all events who use the selected picture
+				$connectedEvents = Event::where('tag_id', '=', $request->input('categoryID'))->get();
+				// find an existing event picture under the same category id
+				$newPicture = EventPicture::where('id', '!=', $selectedPicture->id)->firstOrFail();
+				foreach($connectedEvents as $event){
+					$event->event_picture_id = $newPicture->id;
+					$event->save();
+				}
+				// $selectedPicture->delete();
+			} else {
+				$event = Event::where('event_picture_id', '=', $request->input('eventID'))->get();
+				if(empty($event)) {
+					throw new Exception();
+				}
+				$selectedPicture->delete();
+			}
 		} catch(Exception $e) {
 			return json_encode($e);
 		}
@@ -168,7 +184,7 @@ class ImagesController extends Controller
 			'naam' => 'required|string|min:1|max:45'
 			]);
 		if(!empty($request->file('image'))){
-			if($request->file('image')->getSize() > 65535){
+			if($request->file('image')->getSize() > 16777215){
 				return redirect('/admin/images/category')->withErrors(__('image.file_too_large'));
 			}
 		}
@@ -191,7 +207,7 @@ class ImagesController extends Controller
 		$this->validate($request, [
 			'updateevent' => 'image|mimes:jpg,png,jpeg|max:2048',
 			]);
-		if($request->file('updateevent')->getSize() > 65535){
+		if($request->file('updateevent')->getSize() > 16777215){
 			return redirect('/admin/images/category')->withErrors(__('image.file_too_large'));
 		}
 		$selectedPicture = EventPicture::where('id', '=', $request->input('id'))->firstOrFail();

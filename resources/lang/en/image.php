@@ -21,6 +21,10 @@ return [
     'error_picture' => 'Something went wrong upon reading the picture',
     'error_nodata' => 'No data to read, go add some!',
 
+    'warning_event_picture_connected_header' => 'One or more events use this picture!',
+    'warning_event_picture_connected_body' => 'Are you sure you want to delete this picture? The connected events get a different image if you delete this.',
+    'warning_event_picture_connected_button' => 'Delete picture',
+
     'adding_type_successful' => 'New category type added',
     'add_event_successful' => 'Event picture uploaded',
     'update_tag_successful' => 'Category updated',

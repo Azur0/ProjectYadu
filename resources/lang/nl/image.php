@@ -21,6 +21,10 @@ return [
     'error_picture' => 'Er ging iets fout bij het laden van de foto',
     'error_nodata' => 'Geen data om weer te geven. Voeg wat foto\'s toe',
 
+    'warning_event_picture_connected_header' => 'Een of meerdere events gebruiken deze foto!',
+    'warning_event_picture_connected_body' => 'Weet u zeker dat u deze foto wilt verwijderen? De gekoppelde events krijgen een andere foto toegewezen.',
+    'warning_event_picture_connected_button' => 'Verwijder foto',
+
     'adding_type_successful' => 'Nieuwe categorie toegevoegd',
     'add_event_successful' => 'Nieuwe event foto toegevoegd',
     'update_tag_successful' => 'Categorie gewijzigd',

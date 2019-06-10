@@ -23,7 +23,7 @@ class CreateEventPicturesTable extends Migration
             $table->foreign('tag_id', 'fk_event_eventTags2_idx')
             ->references('id')->on('event_tags')
             ->onDelete('no action')
-            ->onUpdate('no action');
+            ->onUpdate('cascade');
         });
         DB::statement("ALTER TABLE event_pictures ADD picture LONGBLOB");
     }

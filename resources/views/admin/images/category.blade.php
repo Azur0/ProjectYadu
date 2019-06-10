@@ -61,10 +61,10 @@
                 <div class="box">
                     @foreach ($tags as $tag)
                     <div class="card divider"> 
-                        <input type="radio" id="{{$tag->id}}" name="tag" value="{{$tag->id}}" onclick="fetch_customer_data({{$tag->id}})">
+                        <input type="radio" id="{{$tag->id}}" name="tag" value="{{$tag->id}}">
                         <label for="{{$tag->id}}" class="category">
-                            <div class="ml-auto my-auto mr-3">
-                                <button type="button" class="btn btn-danger" id="{{$tag->id}}" onclick="setchecked({{$tag->id}})" data-toggle="modal" data-target="#confirmDeleteTag"><i class="far fa-trash-alt"></i></button>
+                            <div class="ml-auto my-auto mr-3" onclick="setcheckedtag({{$tag->id}})">
+                                <button type="button" class="btn btn-danger" id="{{$tag->id}}" data-toggle="modal" data-target="#confirmDeleteTag"><i class="far fa-trash-alt"></i></button>
                                 <button type="button" class="btn btn-warning" id="{{$tag->id}}" onclick="location.href='{{ route('imagescontroller.edittagpicture', $tag->id) }}'"><i class="far fa-edit" style="width:14px"></i></button>
                                         
                                         {{-- Popup for deleting --}}
@@ -129,16 +129,17 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Placeholder</h5>
+                                <h5 class="modal-title">{{__('image.warning_event_picture_connected_header')}}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <h5>Placeholder</h5>
+                                <h5>{{__('image.warning_event_picture_connected_body')}}</h5>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">Placeholder</button>
+                                <button type="button" id="approveRemove" class="btn btn-danger" data-dismiss="modal">{{__('image.warning_event_picture_connected_button')}}</button>
+                                <button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">{{__('image.modal_delete_dismiss')}}</button>
                             </div>
                         </div>
                     </div>
@@ -152,17 +153,18 @@ $(document).ready(function() {
     $("#file2").on("change", function() {
         $('.second').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
     });
+    localStorage.clear("event_id");
+    localStorage.clear("tag_id");
 })
 </script>
 <script>
     function removeType() {
-        let id = $('input[name=tag]:checked').val();
         let imagedata;
         $.ajax({
             url: "{{ route('imagescontroller.checktiedpictures')}}",
             method: 'POST',
             data: {
-                query: id,
+                categoryID: localStorage.clear("tag_id"),
                 _token: '{{ csrf_token() }}'
             },
             dataType: 'json',
@@ -175,7 +177,7 @@ $(document).ready(function() {
             url: "{{ route('imagescontroller.removetype')}}",
             method: 'POST',
             data: {
-                query: id,
+                categoryID: localStorage.clear("tag_id"),
                 _token: '{{ csrf_token() }}'
             },
             dataType: 'json',
@@ -215,7 +217,7 @@ $(document).ready(function() {
                             url: "{{ route('imagescontroller.trueremove')}}",
                             method: 'POST',
                             data: {
-                                query: id,
+                                categoryID: localStorage.clear("tag_id"),
                                 _token: '{{ csrf_token() }}'
                             },
                             dataType: 'json',
@@ -267,8 +269,8 @@ $(document).ready(function() {
                             $('#box2').html($("#box2").html() + `
                                 <div class="box divider">
                                 <input type="radio" id="${element['id']}" class="picture ${element['tag_id']}" name="eventpicture" value="${element['id']}"> 
-                                <label for="${element['id']}" class="picture ${element['tag_id']}">
-                                        <button type="button" onclick="setchecked(${element['id']})" class="btn btn-danger eventpicturebutton" data-toggle="modal" data-target="#confirmDeleteEventPicture"><i class="far fa-trash-alt"></i></button>
+                                <label for="${element['id']}" class="picture ${element['tag_id']}" >
+                                        <button type="button" onclick="setcheckedevent(${element['id']})" class="btn btn-danger eventpicturebutton" data-toggle="modal" data-target="#confirmDeleteEventPicture"><i class="far fa-trash-alt"></i></button>
                                         <button type="button" class="btn btn-warning eventpicturebutton" id="${element['id']}" data-toggle="modal" data-target="#editeventpicture"><i class="far fa-edit" style="width:14px"></i></button>
 
                                         {{-- Popup for deleting --}}
@@ -286,7 +288,7 @@ $(document).ready(function() {
                                                         {{__('image.modal_delete_eventpicture_center')}}
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" onclick="deleteeventpicture(this.value)" value="${element['id']}"
+                                                        <button type="submit" onclick="deleteeventpicture()" value="${element['id']}"
                                                                 class="btn btn-danger" data-dismiss="modal">{{__('image.modal_delete_confirmation')}}</button>
                                                         <button type="button" class="btn btn-primary"
                                                                         data-dismiss="modal">{{__('image.modal_delete_dismiss')}}
@@ -328,7 +330,7 @@ $(document).ready(function() {
                                         </div>
                                         
                                     
-                                    <img class="default" src="data:image/jpeg;base64, ${element['picture']}" id="id${element['id']}">
+                                    <img class="default" src="data:image/jpeg;base64, ${element['picture']}" id="id${element['id']}" onclick="setcheckedevent(${element['id']})">
                                 </label>
                                 </div>`);
                         });
@@ -351,7 +353,6 @@ $(document).ready(function() {
                         document.getElementById("myForm").submit();
                     });
                     $("#file3").on("change", function() {
-                        
                         $('.third').html(`<i class="fa fa-upload"></i>Selected image: ${$(this)[0].files[0].name}`);
                     });
                     $("#file4").on("change", function() {
@@ -364,25 +365,56 @@ $(document).ready(function() {
             })
         }
 
-    function setchecked(id) {
-        document.getElementById(id).checked = true;
+    function setcheckedtag(id) {
+        fetch_customer_data(id);
+        if(localStorage.getItem("event_id") !== null){
+            localStorage.clear("event_id");
+        }
+        localStorage.setItem("tag_id", id);
+    }
+    
+    function setcheckedevent(id) {
+        localStorage.setItem("event_id", id);
     }
 
-    function deleteeventpicture() {
-        let id = $('input[name=eventpicture]:checked').val();
+    function removeEventPicture() {
         $.ajax({
             url: "{{ route('events_controller.deleteeventpicture')}}",
                 method: 'POST',
                 data: {
-                    query: id,
+                    eventID: localStorage.getItem("event_id"),
+                    override: true,
+                    categoryID: localStorage.getItem("tag_id"),
                     _token: '{{ csrf_token() }}'
                 },
                 dataType: 'json',
                 success: function (data) { 
-                    let id = $('input[name=tag]:checked').val();
-                    fetch_customer_data(id);
+                    fetch_customer_data(localStorage.getItem("tag_id"));
                 },
                 error: function (data) {
+                    alert("error");
+                }
+        }) 
+    }
+
+    function deleteeventpicture() {
+        $.ajax({
+            url: "{{ route('events_controller.deleteeventpicture')}}",
+                method: 'POST',
+                data: {
+                    eventID: localStorage.getItem("event_id"),
+                    override: false,
+                    categoryID: localStorage.getItem("tag_id"),
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function (data) { 
+                    fetch_customer_data(localStorage.getItem("tag_id"));
+                },
+                error: function (data) {
+                    document.getElementById('approveRemove').addEventListener('click', function() {
+                        removeEventPicture();
+                    }, false);
                     $('#pictureInUse').modal('show');
                 }
         }) 

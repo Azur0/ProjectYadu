@@ -18,3 +18,5 @@ mix.js('resources/js/sb-admin-2.js', 'public/js')
    .sass('resources/sass/sb-admin-2.scss', 'public/css');
 
 mix.js('resources/js/charts.js', 'public/js');
+
+mix.js('resources/js/event_show.js', 'public/js');

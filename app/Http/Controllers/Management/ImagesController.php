@@ -67,7 +67,7 @@ class ImagesController extends Controller
 			'selected' => 'required',
 			'default' => 'required|image|max:10240|mimes:jpg,png,jpeg'
 			]);
-		if($request->file('default')->getSize() > 65535){
+		if($request->file('default')->getSize() > 16777215){
 			return back()->withErrors(__('image.file_too_large'));
 		}
 		$location = "images/".$request->selected;

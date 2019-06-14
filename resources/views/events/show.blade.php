@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('custom_script')
-    <script type="text/javascript" src="/js/event_show.js"></script>
+
 @endsection
 
 @section('content')
@@ -300,7 +300,7 @@
                             Echo.private('event.'+this.event.id)
                                 .listen('NewMessage', (message) => {
                                     this.messages.push(message)
-                                    notifyMe('{{$event->eventName}}',`{{ asset('images/logoCircle.png')}}`, message);
+                                    notifyMe('{{$event->eventName}}', message);
                                 })
                         }
                     }
@@ -315,6 +315,36 @@
                     }
                 });
 
+            </script>
+
+            <script>
+                // request permission on page load
+                document.addEventListener('DOMContentLoaded', function () {
+                    if (!Notification) {
+                        alert('Desktop notifications not available in your browser. Try Chromium.');
+                        return;
+                    }
+
+                    if (Notification.permission !== 'granted')
+                        Notification.requestPermission();
+                });
+
+                // Show notification
+                function notifyMe(event, message) {
+                    if (Notification.permission !== "granted")
+                        Notification.requestPermission();
+                    else {
+                        let notification = new Notification(event, {
+                            icon: `{{ asset('images/logoCircle.png')}}`,
+                            body: `${message.firstName} ${message.lastName}: ${message.body}`,
+                        });
+
+                        // open link by clicking notification
+                        notification.onclick = function () {
+                            window.open(window.location.href);
+                        };
+                    }
+                }
             </script>
         @endsection
     @endif

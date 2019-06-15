@@ -38,7 +38,7 @@ class EventDeleted extends Mailable
             $title = Lang::get('mail.deleteTitle1'). " ". $this->event->eventName . " " . Lang::get('mail.deleteTitle2');
         }
 
-        return $this->markdown('mail/tableInformationMail')
+        return $this->markdown('admin/mail.event-deleted')
             ->subject($title)
             ->with([
                 'title' => $title,

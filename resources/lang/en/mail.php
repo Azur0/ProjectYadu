@@ -28,13 +28,13 @@ return [
 
     "joinedYourEvent" => "has joined your event",
     "participantJoinedEvent" => "has joined",
-    "leftEvent" => "you have left",
+    "leftEvent" => "You have left",
     "leftYourEvent" => "has left your event",
     "participantLeftEvent" => "has left",
-    "eventJoinedHeader" => "someone joined an event",
-    "eventLeftHeader" => "someone Left an event",
-    "youLeftEventHeader" => "you have left an event",
-    "eventLeftYourHeader" => "someone left your event",
+    "eventJoinedHeader" => "Someone joined an event",
+    "eventLeftHeader" => "Someone Left an event",
+    "youLeftEventHeader" => "You have left an event",
+    "eventLeftYourHeader" => "Someone left your event",
     "eventInfoTitle" => "Event information",
     "eventOwner" => "Event owner",
 
@@ -42,10 +42,10 @@ return [
     "changedPassword" => "Your password has been changed",
     "changedEmail" => "Your email address has been changed",
     "changedPersonalInfo" => "One or more of you personal details have been changed",
-    "editAccountHeader" => "your account details have been edited",
+    "editAccountHeader" => "Your account details have been edited",
 
     //Subject
-    "subjectAccountEdited" => "your account has been edited",
+    "subjectAccountEdited" => "Account has been edited",
     "subjectEventEdited" => "Event has been edited",
     "subjectEventDeleted" => "Event has been removed",
     "subjectEventJoined" => "Event has been joined",

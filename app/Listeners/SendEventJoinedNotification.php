@@ -8,7 +8,6 @@ use App\Mail\Event\EventJoined as EventJoinedMail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Account;
-use Illuminate\Support\Facades\App;
 
 class SendEventJoinedNotification
 {
@@ -30,24 +29,20 @@ class SendEventJoinedNotification
      */
     public function handle(EventJoined $event)
     {
-        $currentLocale = app()->getLocale();
         $executor = Account::findOrFail($event->userId);
         $this->sendMailToExecutor($event,$executor);
         $this->sendMailToOwner($event,$executor);
         $this->sendMailToParticipants($event,$executor);
         $this->sendMailToFollowers($event,$executor);
-        App::setLocale($currentLocale);
     }
 
     private function sendMailToExecutor($event, $executor){
-        self::switchLang($executor);
         Mail::to($executor->email)->send(
             new EventJoinedMail($event->event,$executor,$executor,1)
         );
     }
 
     private function sendMailToOwner($event, $executor){
-        self::switchLang($event->event->owner);
         Mail::to($event->event->owner->email)->send(
             new EventJoinedMail($event->event,$event->event->owner,$executor,0)
         );
@@ -66,7 +61,6 @@ class SendEventJoinedNotification
                 }
                 if($participant->id != $executor->id && $participant->id != $event->event->owner->id && $isNotAFollower
                     && $participant->settings->NotificationJoinAndLeaveEvent == 1){
-                    self::switchLang($participant);
                     Mail::to($participant->email)->send(
                         new EventJoinedMail($event->event,$participant,$executor,0)
                     );
@@ -81,7 +75,6 @@ class SendEventJoinedNotification
                 if($follower->status == 'accepted'){
                     $follower = $follower->follower;
                     if($follower->id != $executor->id && $follower->id != $event->event->owner->id && $follower->settings->FollowNotificationJoinAndLeaveEvent == 1){
-                        self::switchLang($follower);
                         Mail::to($follower->email)->send(
                             new EventJoinedMail($event->event,$follower,$executor,0)
                         );
@@ -91,14 +84,4 @@ class SendEventJoinedNotification
         }
     }
 
-    private function switchLang($user){
-        switch($user->settings->LanguagePreference){
-            case 'eng': App::setLocale('eng');
-                break;
-            case 'nl': App::setLocale('nl');
-                break;
-            default: App::setLocale('eng');
-                break;
-        }
-    }
 }

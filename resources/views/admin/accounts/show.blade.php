@@ -51,7 +51,6 @@
                     <strong>{{ session('adminError') }}</strong>
                 </span>
             @endif
-            <hr>
             <table class="table mb-3">
                 <tr>
                     <th>{{__('accounts.email_verified')}}</th>
@@ -62,12 +61,6 @@
                             <a href="{{url('/admin/accounts/'. $account->id .'/activate')}}"
                                class="btn btn-warning">{{__('accounts.email_verify_button')}}</a>
                         @endif
-                    </td>
-                </tr>
-                <tr>
-                	<th>Logins</th>
-                    <td>
-                        <a href="{{url('/admin/accounts/'. $account->id .'/logins')}}" class="btn btn-warning">logins</a>
                     </td>
                 </tr>
                 {{--<tr>--}}

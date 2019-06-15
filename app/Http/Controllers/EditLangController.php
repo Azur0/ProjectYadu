@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\App;
 use Hamcrest\Type\IsArray;
@@ -12,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class EditLangController extends Controller
 {
     public function index($lang, $page)
-    {
+    {   
         if (Auth::check() && Auth::user()->accountRole == 'Admin') {
             $currentLocale = app()->getLocale();
             App::setLocale($lang);
@@ -43,29 +42,29 @@ class EditLangController extends Controller
         unset($values["lang"]);
         unset($values["_token"]);
         unset($values["lang_file"]);
-
+        
         $fileMiddle = $this->makeMiddle($values, $langArrayFromFile, "", "");
-
+        
         $fileEnd = "];";
-
+        
         file_put_contents($fileName, $fileBegin.$fileMiddle.$fileEnd);
         return redirect('/admin');
     }
-
-    function makeMiddle($input, $baseFile, $fileMiddle, $baseKey)
+    
+    function makeMiddle($input, $baseFile, $fileMiddle, $baseKey) 
     {
-        foreach ($baseFile as $key => $value) {
+        foreach ($baseFile as $key => $value) {            
             if (is_array($value)) {
 
                 $fileMiddle .= "'$key' => [";
                 $fileMiddle = $this->makeMiddle($input, $value, $fileMiddle, $key);
-                $fileMiddle .= " ], ";
+                $fileMiddle .= " ], "; 
 
             } else {
                 if($baseKey != "") {
                     $valueFromInput = $input["$baseKey;$key"];
                 } else {
-                    $valueFromInput = $input["$key"];
+                    $valueFromInput = $input["$key"];    
                 }
                 $valueFromInput = str_replace("'", "\'", $valueFromInput);
                 $fileMiddle .=" '$key' => '$valueFromInput', ";

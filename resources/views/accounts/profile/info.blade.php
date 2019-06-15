@@ -3,7 +3,6 @@
 @section('profilecontent')
 <div class="row">
 	@if($account->id == Auth::id() || $account->eventsVisibility == 'public' || ($account->eventsVisibility == 'follower' && $follow->status == "accepted"))
-
 		<div class="col">
 			<h3>{{__('profile.head_info')}}</h3>
 			<p>

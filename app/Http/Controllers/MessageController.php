@@ -28,12 +28,12 @@ class MessageController extends Controller
     public function store(Request $request, Event $event) {
 
         $this->validate($request, [
-            'body' => ['required', 'max:180', new swearWords]
+            'body' => [new swearWords]
         ]);
 
         $message = $event->messages()->create([
-            'body' => $request->body,
-             'user_id' => Auth::id()
+           'body' => $request->body,
+            'user_id' => Auth::id()
         ]);
 
         $message = ChatMessage::where('id', $message->id)->with(['account' => function ($query) {

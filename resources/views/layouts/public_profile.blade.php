@@ -20,30 +20,23 @@
                                 <div class="col">
                                     <div class="row">
                                         <div class="col-md-auto">
-                                            @if(! $account->blockedUsers->pluck('blockedAccount_id')->contains(Auth::user()->id))
-                                                @if($account->id != Auth::user()->id)
-                                                    @if(is_null($follow))
-                                                        <a href="/profile/{{$account->id}}/follow" class="btn btn-primary">
-                                                            <i class="fas fa-user-plus"></i> {{ __('profile.follow') }}
-                                                        </a>
-                                                    @endif
-                                                    @if (! is_null($follow))
-                                                        @if(((strtotime(Carbon\Carbon::now()->toDayDateTimeString()) - strtotime($follow->updated_at)) >= 10)&& !($follow->status == "accepted"))
-                                                                <a href="/profile/{{$account->id}}/follow" class="btn btn-primary">
-                                                                    <i class="fas fa-user-plus"></i> {{ __('profile.follow') }}
-                                                                </a>
-                                                         @elseif(($follow->status == "accepted")==1)
-                                                            <a href="/profile/{{$account->id}}/unfollow" class="btn btn-primary">
-                                                                <i class="fas fa-user-minus"></i> {{ __('profile.follow_accepted') }}
-                                                            </a>
-                                                        @endif
-                                                        @if(((strtotime(Carbon\Carbon::now()->toDayDateTimeString()) - strtotime($follow->updated_at) ) < 10) && ($follow->status != "accepted"))
-                                                            <a href="#" class="btn btn-primary" disabled>
-                                                                <i class="fas fa-hourglass-end"></i> {{ __('profile.follow_pending') }}
-                                                            </a>
-                                                        @endif
-                                                    @endif
-                                                @endif
+                                            @if($account->id != Auth::user()->id)
+                                            @if(is_null($follow))
+                                            <a href="/profile/{{$account->id}}/follow" class="btn btn-primary">
+                                                <i class="fas fa-user-plus"></i> {{ __('profile.follow') }}
+                                            </a>
+                                            @elseif($follow->status == "pending")
+                                            <a href="#" class="btn btn-primary" disabled>
+                                            <i class="fas fa-hourglass-end"></i> {{ __('profile.follow_pending') }}
+                                            </a>
+                                            @elseif($follow->status == "accepted")
+                                            <a href="/profile/{{$account->id}}/unfollow" class="btn btn-primary">
+                                                <i class="fas fa-user-minus"></i> {{ __('profile.follow_accepted') }}
+                                            </a>
+                                            @endif
+                                            @if (session('error'))
+                                            <div class="alert alert-danger">Request already sent</div>
+                                            @endif
                                             @endif
                                         </div>
                                         @if($account->id != Auth::user()->id)

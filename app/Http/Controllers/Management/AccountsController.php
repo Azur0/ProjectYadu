@@ -1,12 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Management;
 
-
-use App\BannedIp;
-use DB;
 use App\AccountRole;
-use App\Login;
 use App\Http\Controllers\AccountController;
 use App\Rules\genderExists;
 use App\Traits\DateToText;
@@ -20,8 +16,6 @@ use App\Gender;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Validator;
-
-
 
 class AccountsController extends Controller
 {
@@ -155,46 +149,5 @@ class AccountsController extends Controller
         $account->save();
 
         return Redirect::back();
-    }
-
-    public function logins($id)
-    {
-    	$account = Account::where('id', $id)->firstOrFail();
-    	$logins = Login::where('account_id', $id)->orderBy('created_at', 'DESC')->get();
-
-    	$countedLogins = array();
-    	$recentLogins = array();
-    	$bannedIps = array();
-
-    	foreach ($logins as $login){
-    	    if(array_key_exists($login->ip, $countedLogins)){
-    	        $countedLogins[$login->ip]++;
-            }
-    	    else{
-    	        $countedLogins[$login->ip] = 1;
-    	        if(BannedIp::where('ip', $login->ip)->exists()){
-                    array_push($bannedIps, $login->ip);
-                }
-            }
-        }
-
-        arsort($countedLogins);
-    	array_slice($countedLogins, 0, 10);
-
-    	$logins = $logins->take(10);
-        $recentLogins = $logins->toArray();
-
-        return view('admin.accounts.logins', compact(['account', 'recentLogins', 'countedLogins', 'bannedIps']) );
-    }
-
-    public function blockIP($ip, $id){
-        Account::where('id', $id)->update(['doForceLogout' => 1]);
-        BannedIp::firstOrCreate(['ip' => $ip]);
-        return redirect()->back();
-    }
-
-    public function unblockIP($ip){
-        BannedIp::where('ip', $ip)->delete();
-        return redirect()->back();
     }
 }

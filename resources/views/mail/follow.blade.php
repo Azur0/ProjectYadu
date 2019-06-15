@@ -1,13 +1,13 @@
 @component('mail::message')
 
-# {{$ownerName}}
+# {{$ownerName . ' ' . __('profile.follow_request')}}
     
 @component('mail::button', ['url' => URL::to('/') . '/profile/' . $ownerId . '/accept', 'color' => 'success'])
-{{$acceptButtonText}}
+{{__('profile.follow_request_accept')}}
 @endcomponent
 
 @component('mail::button', ['url' => URL::to('/') . '/profile/' . $ownerId . '/decline', 'color' => 'error'])
-{{$declineButtonText}}
+{{__('profile.follow_request_decline')}}
 @endcomponent
 
 @endcomponent

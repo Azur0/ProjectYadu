@@ -100,23 +100,6 @@
                 @endif
             </div>
         </div>
-        @if(Auth::user()->accountRole == 'Admin')
-        <div>
-            <h3>7. {{__('events.create_step7')}}</h3>
-            <div class="description">
-                <label for="initiator">{{__('events.create_initiator_info')}}</label>
-              
-                <select name="initiator" class="form-control{{ $errors->has('initiator') ? ' is-invalid' : '' }}">
-						<option value="1" {{ old('initiator') == "1" ? 'selected' : '' }}>{{__('events.create_initiator_true')}}</option>
-						<option value="0" {{ old('initiator') == "0" ? 'selected' : '' }}>{{__('events.create_initiator_false')}}</option>
-				</select>
-
-                @if ($errors->has('initiator'))
-                	<div class="error">{{ $errors->first('initiator') }}</div>
-                @endif
-            </div>
-        </div>
-        @endif
         <input class="submit" type="submit" value={{__('events.create_submit')}}>
     </form>
 </div>

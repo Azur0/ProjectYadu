@@ -1,7 +1,5 @@
 require('./bootstrap');
 
-window.chartjs = require('chart.js');
-
 (function($) {
   "use strict"; // Start of use strict
 

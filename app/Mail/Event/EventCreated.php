@@ -44,7 +44,7 @@ class EventCreated extends Mailable
         }
 
         $this->event= Event::findOrFail($this->event->id);
-        return $this->markdown('mail/tableInformationMail')
+        return $this->markdown('mail/event.event-created')
             ->subject($title)
             ->with([
                 'title' => $title,

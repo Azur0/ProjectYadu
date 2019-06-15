@@ -3,7 +3,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 class AccountHasFollowers extends Model
 {
-    protected $fillable = ['account_id', 'follower_id','verification_string'];
+    protected $fillable = ['account_id', 'follower_id'];
 
     public function account()
     {

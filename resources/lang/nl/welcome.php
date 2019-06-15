@@ -16,9 +16,4 @@ return [
 	'recent_events_own' => 'Maak je eigen evenement',
 	'link_here' => 'hier',
 	'link_read_more' => 'Lees meer',
-
-    'accepted_follow_request' => 'Volgverzoek aanvaard',
-    'denied_follow_request' => 'Volgverzoek geweigerd',
-    'already_accepted_follow_request' => 'Je hebt het volgverzoek al aanvaard',
-    'already_denied_follow_request' => 'Je hebt het volgverzoek al geweigerd',
 ];

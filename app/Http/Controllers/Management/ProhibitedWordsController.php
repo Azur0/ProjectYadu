@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Management;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 use App\Http\Requests\CreateProhibitedWordRequest;
 use App\Http\Requests\DestroyProhibitedWordRequest;
@@ -12,6 +10,7 @@ use App\ProhibitedWord;
 use App\Http\Controllers\ProhibitedWordController;
 use Validator;
 use Auth;
+use App\Http\Controllers\Controller;
 
 class ProhibitedWordsController extends Controller
 {

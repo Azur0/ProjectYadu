@@ -4,7 +4,7 @@
 
 @if ($errors->has('email'))
 @foreach($errors->get('email') as $error)
-<div class="alert alert-danger alert-dismissible fade show">
+<div class="alert alert-danger alert-dismissible fade show" style="float:right; margin-right: 10px;">
     <strong>Error!</strong> {{$error}}
     <button type="button" class="close" data-dismiss="alert">&times;</button>
 </div>

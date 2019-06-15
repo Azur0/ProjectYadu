@@ -372,6 +372,7 @@
             }]
         };
 
+        console.log(haha);
         return haha;
     }
 

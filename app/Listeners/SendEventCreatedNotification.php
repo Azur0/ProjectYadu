@@ -7,7 +7,6 @@ use App\Mail\Event\EventCreated as EventCreatedMail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\App;
 
 class SendEventCreatedNotification
 {
@@ -29,36 +28,20 @@ class SendEventCreatedNotification
      */
     public function handle(EventCreated $event)
     {
-        $currentLocale = app()->getLocale();
+        Mail::to($event->event->owner->email)->send(
+            new EventCreatedMail($event->event,$event->event->owner)
+        );
 
-        if($event->event->owner_id != null )
-        {
-	        Mail::to($event->event->owner->email)->send(
-	            new EventCreatedMail($event->event,$event->event->owner)
-	        );
+        //TODO: for when followers is merged - test this
 
-	        //TODO: for when followers is merged - test this
+        foreach($event->event->owner->followers as $follower){
+            if($follower->status == 'accepted' && $follower->follower->settings->FollowNotificationCreateEvent == 1){
 
-	        foreach($event->event->owner->followers as $follower){
-	            if($follower->status == 'accepted' && $follower->follower->settings->FollowNotificationCreateEvent == 1){
-	                self::switchLang($follower->follower);
-	                Mail::to($follower->follower->email)->send(
-	                    new EventCreatedMail($event->event,$follower->follower)
-	                );
-	            }
-	        }
-	        App::setLocale($currentLocale);
-	    }
-    }
-
-    private function switchLang($user){
-        switch($user->settings->LanguagePreference){
-            case 'eng': App::setLocale('eng');
-                break;
-            case 'nl': App::setLocale('nl');
-                break;
-            default: App::setLocale('eng');
-                break;
+                Mail::to($follower->follower->email)->send(
+                    new EventCreatedMail($event->event,$follower->follower)
+                );
+            }
         }
+
     }
 }

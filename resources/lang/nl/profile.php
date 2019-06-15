@@ -35,6 +35,12 @@ return [
 
 ///////////////////////////////// Edit ////////////////////////////////////
 
+    'edit_avatar_title' => 'Avatar wijzigen',
+    'edit_edit_avatar_upload' => 'Uploaden',
+    'edit_edit_avatar_choose_image' => 'Kies afbeelding',
+    'edit_update_avatar' => 'Avatar bijwerken',
+    'edit_avatar_info' => 'Een avatar moet vierkant zijn en mag niet groter zijn dan 500x500 pixels',
+
     'edit_edit_profile_title' => 'Profiel bewerken',
     'edit_firstname' => 'Voornaam',
     'edit_middlename' => 'Tussenvoegsel',
@@ -58,6 +64,12 @@ return [
     'edit_change_account_settings_notification_join' => 'Wanneer iemand zich aanmeldt of afmeldt voor een evenement',
     // Button change notification settings
     'edit_change_account_settings' => 'Wijzig instellingen',
+    // Preference settings
+    'edit_change_account_settings_language_preference_title' => 'E-mail taal',
+    'edit_change_account_settings_language_preference' => 'E-mail taal',
+    'English' => 'Engels',
+    'Dutch' => 'Nederlands',
+    'edit_change_account_setting' => 'Wijzig instelling',
 
     'edit_change_password_title' => 'Wachtwoord wijzigen',
     'edit_current_password' => 'Huidig wachtwoord',
@@ -87,4 +99,6 @@ return [
     'edit_privacy_infoVisibility' => 'Profiel informatie zichtbaarheid',
     'edit_privacy_followingVisibility' => 'Volgende zichtbaarheid',
     'edit_privacy_followerVisibility' => 'Volger zichtbaarheid',
+
+    'follow_request_pending' => 'Volg aanvraag is in behandeling',
 ];

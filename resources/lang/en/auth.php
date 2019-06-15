@@ -25,6 +25,8 @@ return [
     'login_login' => 'Login',
     'login_forgot_password' => 'Forgot your password?',
     'login_register_new_account' => 'Don\'t have an account yet? Sign up <a href=":url">here</a>.',
+    'login_banned_title' => 'Banned!',
+    'login_banned_content' => 'This IP has been banned from using this service',
 
     ///////////////////////////////// Register ////////////////////////////////
 

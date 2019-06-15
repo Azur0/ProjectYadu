@@ -35,6 +35,12 @@ return [
 
 ///////////////////////////////// Edit ////////////////////////////////////
 
+    'edit_avatar_title' => 'Edit avatar',
+    'edit_edit_avatar_upload' => 'Upload',
+    'edit_edit_avatar_choose_image' => 'Choose image',
+    'edit_update_avatar' => 'Update avatar',
+    'edit_avatar_info' => 'Avatars need to be square and should be no bigger than 500x500 pixels.',
+
     'edit_edit_profile_title' => 'Edit profile',
     'edit_firstname' => 'Firstname',
     'edit_middlename' => 'Middlename',
@@ -58,6 +64,13 @@ return [
     'edit_change_account_settings_notification_join' => 'When event is joined or left by someone else',
     // Button change notification settings
     'edit_change_account_settings' => 'Change settings',
+    // Preference settings
+    'edit_change_account_settings_language_preference_title' => 'E-mail language',
+    'edit_change_account_settings_language_preference' => 'E-mail language',
+    'English' => 'English',
+    'Dutch' => 'Dutch',
+    'edit_change_account_setting' => 'Change setting',
+
 
 
     'edit_change_password_title' => 'Change password',
@@ -88,4 +101,6 @@ return [
     'edit_privacy_infoVisibility' => 'Info Visibility',
     'edit_privacy_followingVisibility' => 'Following Visibility',
     'edit_privacy_followerVisibility' => 'Follower Visibility',
+
+    'follow_request_pending' => 'Follow request is pending',
 ];

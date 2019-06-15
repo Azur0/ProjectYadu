@@ -57,6 +57,7 @@ Route::get('/profile/{id}/accept', 'AccountController@accept')->middleware('auth
 Route::get('/profile/{id}/decline', 'AccountController@decline')->middleware('auth');
 Route::get('/profile/{id}/unfollow', 'AccountController@unfollow')->middleware('auth');
 Route::post('/profile/updateProfile', 'AccountController@updateProfile')->middleware('auth');
+Route::post('/profile/updatePrivacySettings', 'AccountController@updatePrivacySettings')->middleware('auth');
 Route::post('/profile/changePassword', 'AccountController@changePassword')->middleware('auth');
 Route::post('/profile/deleteAccount', 'AccountController@deleteAccount')->middleware('auth');
 Route::patch('/profile/updateAccountSettings/{id}', 'AccountController@updateSettings')->middleware('auth');

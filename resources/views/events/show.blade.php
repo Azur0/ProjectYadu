@@ -175,7 +175,8 @@
         </div>
     </div>
     <div class="row">
-    @if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
+    @if(Auth::check())
+        @if((!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
         <!-- BEGIN CHAT TEMPLATE -->
             <div id="app" class="message-container clearfix" v-if="account">
 
@@ -231,6 +232,7 @@
             <!-- end container -->
 
             <!-- END CHAT TEMPLATE -->
+            @endif
         @else
             <div class="col-md-6">
                 <h3 style="margin-top:30px;">
@@ -241,72 +243,74 @@
     </div>
 
 @endsection
-@if(Auth::check() && (!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
-@section('scripts')
-    <script>
+@if(Auth::check())
+    @if((!empty($event->participants()->where('account_id', Auth::id())->first()) || !empty($event->owner_id == Auth::id())) || Auth::user()->accountRole == "Admin")
+        @section('scripts')
+            <script>
 
-        let warning = document.createElement("strong");
-        warning.style.color = "red";
-        warning.innerHTML = "{{ __('events.show_chat_swearword') }}";
+                let warning = document.createElement("strong");
+                warning.style.color = "red";
+                warning.innerHTML = "{{ __('events.show_chat_swearword') }}";
 
-        function insertAfter(referenceNode, newNode) {
-            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-        }
-
-            const app = new Vue({
-            el: '#app',
-            data: {
-                messages: {},
-                messageBox: '',
-                event: {!! json_encode($event->getAttributes()) !!},
-                account: {!! Auth::check() ? json_encode(Auth::user()->only(['id', 'firstName', 'lastName', 'api_token'])) : 'null' !!}
-            },
-            mounted() {
-                this.getMessages();
-                this.listen();
-            },
-            methods: {
-                getMessages() {
-                    axios.get(`/api/events/${this.event.id}/messages`)
-                        .then((response) => {
-                            this.messages = response.data
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                },
-                postMessage() {
-                    axios.post(`/api/events/${this.event.id}/message`, {
-                        api_token: this.account.api_token,
-                        body: this.messageBox
-                    })
-                        .then((response) => {
-                            this.messages.push(response.data);
-                            this.messageBox = '';
-                            warning.remove();
-                        })
-                        .catch(function (error) {
-                            insertAfter(document.getElementById("message-to-send"), warning);
-                        });
-                },
-                listen() {
-                    Echo.private('event.'+this.event.id)
-                        .listen('NewMessage', (message) => {
-                            this.messages.push(message)
-                        })
+                function insertAfter(referenceNode, newNode) {
+                    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
                 }
-            }
-        });
 
-        // Disable newline on enter(except when holding shift)
-        $('textarea').keydown(function(e){
-            if (e.keyCode == 13 && !e.shiftKey)
-            {
-                // prevent default behavior
-                e.preventDefault();
-            }
-        });
+                    const app = new Vue({
+                    el: '#app',
+                    data: {
+                        messages: {},
+                        messageBox: '',
+                        event: {!! json_encode($event->getAttributes()) !!},
+                        account: {!! Auth::check() ? json_encode(Auth::user()->only(['id', 'firstName', 'lastName', 'api_token'])) : 'null' !!}
+                    },
+                    mounted() {
+                        this.getMessages();
+                        this.listen();
+                    },
+                    methods: {
+                        getMessages() {
+                            axios.get(`/api/events/${this.event.id}/messages`)
+                                .then((response) => {
+                                    this.messages = response.data
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                        },
+                        postMessage() {
+                            axios.post(`/api/events/${this.event.id}/message`, {
+                                api_token: this.account.api_token,
+                                body: this.messageBox
+                            })
+                                .then((response) => {
+                                    this.messages.push(response.data);
+                                    this.messageBox = '';
+                                    warning.remove();
+                                })
+                                .catch(function (error) {
+                                    insertAfter(document.getElementById("message-to-send"), warning);
+                                });
+                        },
+                        listen() {
+                            Echo.private('event.'+this.event.id)
+                                .listen('NewMessage', (message) => {
+                                    this.messages.push(message)
+                                })
+                        }
+                    }
+                });
 
-    </script>
-@endsection
+                // Disable newline on enter(except when holding shift)
+                $('textarea').keydown(function(e){
+                    if (e.keyCode == 13 && !e.shiftKey)
+                    {
+                        // prevent default behavior
+                        e.preventDefault();
+                    }
+                });
+
+            </script>
+        @endsection
+    @endif
 @endif

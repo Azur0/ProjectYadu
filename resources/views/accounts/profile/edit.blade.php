@@ -134,9 +134,26 @@
 								</div>
 							</div>
 
-							<div class="form-group row">
-								<p>{{__('profile.edit_privacy_head')}}</p>
+							<div class="form-group row mb-0">
+								<div class="col-md-6 offset-md-4">
+									<button id="submit" type="submit" class="btn btn-primary">
+										{{__('profile.edit_update_profile')}}
+									</button>
+								</div>
 							</div>
+
+						</form>
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header">{{__('profile.edit_privacy_head')}}</div>
+
+					<div class="card-body">
+						<form method="POST" action="/profile/updatePrivacySettings">
+							@csrf
+							<input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
+														
 							<div class="form-group row">
 								<label for="followerVisibility"
 									   class="col-md-4 col-form-label text-md-right">{{__('profile.edit_privacy_followerVisibility')}}</label>
@@ -283,6 +300,7 @@
 						</form>
 					</div>
 				</div>
+
 				<div class="card">
                     <div class="card-header"> {{__('profile.edit_unblock_account_title')}}</div>
                     <div class="card-body">

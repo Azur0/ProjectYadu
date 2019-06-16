@@ -64,3 +64,16 @@ window.Vue = require('vue');
         };
     return "undefined" != typeof window && window.Vue && window.Vue.use(t), t
 });
+
+// File name function
+let input = document.getElementById('avatar');
+let infoArea = document.getElementById('custom-file-label');
+
+input.addEventListener('change', changeFilename);
+
+function changeFilename(event) {
+    let input = event.srcElement;
+    let fileName = input.files[0].name;
+
+    infoArea.textContent = fileName;
+}

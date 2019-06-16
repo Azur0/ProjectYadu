@@ -27,7 +27,7 @@
                     </thead>
                     <tbody>
                     @foreach($accounts as $account)
-                        <tr class="accounts-table" onclick="window.location='{{url('/admin/accounts/'. $account->id)}}';">
+                        <tr class="accounts-table on_hover_pointer" onclick="window.location='{{url('/admin/accounts/'. $account->id)}}';">
                             <th scope="row"><img class="img-fluid rounded-circle my-auto avatar"
                                                  src="data:image/jpeg;base64, {{base64_encode($account->avatar)}}"/>
                             </th>
@@ -85,7 +85,7 @@
                             "<tbody>";
                         data.forEach(function (element) {
                             html = html +
-                                "<tr class=\"accounts-table\" onclick=\"window.location='" + element['url'] + " ';\">\n" +
+                                "<tr class=\"accounts-table on_hover_pointer\" onclick=\"window.location='" + element['url'] + " ';\">\n" +
                                 "   <th scope=\"row\"><img class=\"img-fluid rounded-circle my-auto avatar\"\n" +
                                 "       src=\"data:image/jpeg;base64, " + element['avatar'] + "\"/>\n" +
                                 "   </th>\n" +

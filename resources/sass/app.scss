@@ -15,6 +15,11 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+.tiny-text{
+	font-size: 10px;
+	margin-top: 2px;
+}
+
 .backlink {
     margin: 1em 1em 1em 1em;
 }
@@ -1055,4 +1060,11 @@ input[type=radio]:checked+.category span {
     text-align: center;
     font-size: 16px;
     margin-top: 2px;
+}
+
+.lineClamp {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: block;
+	overflow: hidden;
 }

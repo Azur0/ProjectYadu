@@ -6,6 +6,7 @@ use App\Account;
 use App\AccountSettings;
 use App\BlockedUser;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\EditAvatarRequest;
 use App\Http\Requests\EditProfileRequest;
 use App\Http\Requests\EditPrivacySettingsRequest;
 use Carbon\Carbon;
@@ -54,7 +55,7 @@ class AccountController extends Controller
 				{
 					return abort(403);
 				}
-							
+
 				break;
 			case 'participating':
 				$privacy = $account->participatingVisibility;
@@ -191,7 +192,18 @@ class AccountController extends Controller
 		$account->eventsVisibility = $request['eventsVisibility'];
 		$account->participatingVisibility = $request['participatingVisibility'];
 
-		$account->save();
+        $account->save();
+
+        return redirect('/profile/edit');
+    }
+
+    public function updateAvatar(EditAvatarRequest $request){
+        $file = $request->file('avatar');
+        $image = $file->openFile()->fread($file->getSize());
+
+        $account = Account::where('id', $request['accountId'])->firstOrFail();
+        $account->avatar = $image;
+        $account->save();
 
 		return redirect('/profile/edit');
 	}
@@ -219,6 +231,7 @@ class AccountController extends Controller
 		$account->isDeleted = 1;
 		$account->bio = null;
 		$account->remember_token = null;
+		$account->doForceLogout = 1;
 
 		$account->save();
 	}

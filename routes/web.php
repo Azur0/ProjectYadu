@@ -25,6 +25,7 @@ Route::get('/cookies', function () { return view('cookies'); });
 Route::get('/privacy', function () { return view('privacy'); });
 Route::get('/terms', function () { return view('terms'); });
 Route::get('/contact', function () { $socialmedia = socialmedia::all(); return view('contact', compact('socialmedia')); });
+Route::get('/ipbanned', function () { return view('auth/ipbanned'); });
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -57,6 +58,7 @@ Route::post('/profile/updateAccountSettings', 'AccountController@updateSettings'
 Route::post('/profile/setMailLanguage', 'AccountController@setMailLanguage')->middleware('auth');
 Route::post('/profile/blockUser', 'AccountController@blockAccount')->middleware('auth');
 Route::post('/profile/unblockUser/', 'AccountController@unblockAccount')->middleware('auth');
+Route::post('/profile/updateAvatar', 'AccountController@updateAvatar')->middleware('auth');
 
 Auth::routes();
 
@@ -74,13 +76,18 @@ Route::post('admin/accounts/{id}/update', 'Admin\AccountsController@update')->mi
 Route::get('admin/accounts/{id}/activate', 'Admin\AccountsController@activate')->middleware('auth', 'isAdmin');
 Route::get('admin/accounts/{id}/avatarreset', 'Admin\AccountsController@resetavatar')->middleware('auth', 'isAdmin');
 Route::post('admin/accounts/action', 'Admin\AccountsController@action')->name('admin_accounts_controller.action');
+Route::get('admin/accounts/{id}/logins', 'Admin\AccountsController@logins')->middleware('auth', 'isAdmin');
+
+Route::get('admin/ip/{ip}/user/{id}/block', 'Admin\AccountsController@blockIP')->middleware('auth', 'isAdmin');
+Route::get('admin/ip/{ip}/unblock', 'Admin\AccountsController@unblockIP')->middleware('auth', 'isAdmin');
+
+Route::get('admin/suspensions/ip', 'Admin\SuspensionsController@index')->middleware('auth', 'isAdmin');
+Route::post('admin/suspensions/ip/{ip}/destroy', 'Admin\SuspensionsController@destroy')->middleware('auth', 'isAdmin');
+
 
 
 Route::resource('admin/events','Admin\EventsController');
 Route::post('/admin/events/actionDistanceFilter', 'Admin\EventsController@actionDistanceFilter')->name('admin_events_controller.actionDistanceFilter');
-
-
-Route::resource('admin/swearWords','Admin\ProhibitedWordsController');
 
 Route::get('admin/prohibitedWords', 'Admin\ProhibitedWordsController@index')->middleware('auth', 'isAdmin');
 Route::post('admin/prohibitedWords/delete', 'Admin\ProhibitedWordsController@destroy')->middleware('auth', 'isAdmin');

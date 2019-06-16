@@ -8,6 +8,47 @@
 				<div class="backlink">
 					<a href="/home"><i class="fas fa-arrow-left"></i> Dashboard</a>
 				</div>
+
+				<div class="card">
+					<div class="card-header">{{__('profile.edit_avatar_title')}}</div>
+
+					<div class="row px-3 pb-3">
+						<div class="col-xl-5 mt-3">
+							<img class="w-100"
+								 src="data:image/png;base64,{{ chunk_split(base64_encode(Auth::user()->avatar)) }}">
+						</div>
+						<div class="col-xl-7 mt-3">
+							<form method="POST" action="/profile/updateAvatar" enctype="multipart/form-data">
+								@csrf
+
+								<input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
+								<div class="form-group row w-100">
+									<div class="input-group">
+										<div class="input-group-prepend">
+                                                <span class="input-group-text"
+													  id="inputGroupFileAddon01">{{__('profile.edit_edit_avatar_upload')}}</span>
+										</div>
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" name="avatar" id="avatar" accept="image/*" aria-describedby="inputGroupFileAddon01">
+											<label id="custom-file-label" class="custom-file-label lineClamp"
+												   for="avatar">{{__('profile.edit_edit_avatar_choose_image')}}</label>
+										</div>
+									</div>
+									<span class="tiny-text">{{__('profile.edit_avatar_info')}}</span>
+
+									@if ($errors->has('avatar'))
+										<span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $errors->first('avatar') }}</strong>
+                                        </span>
+									@endif
+								</div>
+								<input class="btn btn-primary" type="submit"
+									   value="{{__('profile.edit_update_avatar')}}" name="submit">
+							</form>
+						</div>
+					</div>
+				</div>
+
 				<div class="card">
 					<div class="card-header">{{__('profile.edit_edit_profile_title')}}</div>
 
@@ -562,8 +603,6 @@
 								</div>
 							</form>
 						@endforeach
-
-
 					</div>
 				</div>
 

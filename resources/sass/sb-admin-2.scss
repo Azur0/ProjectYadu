@@ -681,8 +681,6 @@ h6.collapse-header {
 	}
 	.card-header
 	{
-
-		height: 80px;
 		overflow-y: hidden;
 		overflow-x: auto;
 
@@ -779,4 +777,8 @@ h6.collapse-header {
 .on_hover_pointer
 {
     cursor: pointer;
+}
+
+.card-header .alert-danger {
+	float: left;
 }

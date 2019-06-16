@@ -8,15 +8,7 @@
 
 @endsection
 @section('content')
-
-	@if (count($errors) > 0)
-		<div class="alert alert-danger alert-dismissible fade show">
-			<strong>Error!</strong> {{__('ProhibitedWords.ProhibitedWord_error')}}
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-		</div>
-	@endif
-
-	<div class="card">
+<div class="card">
 		<div class="card-header">
 			<b>&nbsp; {{__('ProhibitedWords.addWord')}}</b>
 			<div class="input-group flex-nowrap">
@@ -26,6 +18,13 @@
 				</form>
 				<input type="submit" form="createWord" class="btn btn_prohibitedWord" value="{{__('ProhibitedWords.add')}}">
 			</div>
+			@if (count($errors) > 0)
+				</br>
+				<div class="alert alert-danger alert-dismissible fade show">
+					<strong>Error!</strong> {{__('ProhibitedWords.ProhibitedWord_error')}}
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+				</div>
+			@endif
 		</div>
 		<div class="card-body">
 			<div>

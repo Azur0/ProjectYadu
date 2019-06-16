@@ -285,7 +285,7 @@ class EventsController extends Controller
 
         $event = Event::where('id', $id)->firstorfail();
 
-        if (Auth::id() == $event->owner_id) {
+        if (Auth::id() == $event->owner_id  && $event->startDate > date('Y-m-d H:i:s')) {
             $location = Location::where('id', $event->location_id)->firstorfail();
             $event->update(
                 [
@@ -324,7 +324,7 @@ class EventsController extends Controller
     {
         $event = Event::findOrFail($id);
         
-        if($event->owner_id == Auth::id()) {
+        if($event->owner_id == Auth::id() && $event->startDate > date('Y-m-d H:i:s')) {
             $event->update([
                 'isDeleted' => 1
             ]);;

@@ -37,7 +37,6 @@
         <a href="/events/create" class="btn btn-yadu-orange w-100"><i class="fas fa-user-friends"></i>&nbsp;{{__('events.index_create_event')}}</a>
     </div>
 </div>
-
 <div class="event_overview row" id="eventsToDisplay">
     <img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>
 </div>
@@ -47,7 +46,30 @@
         <button class="btn btn-yadu-orange w-100" id="loadMore" onclick="fetch_events()">Load more</button>
     </div>
 </div>
-
+    @if(Session::get('error'))
+    <!-- Modal -->
+        <div class="modal fade" id="activateModal" tabindex="-1" role="dialog" aria-labelledby="activateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="activateModalLabel">{{ __('events.index_activate_modal_title') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            {{ __('events.index_activate_modal_description') }}
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal">
+                    <button type="button" class="btn btn-primary">{{ __('events.index_ok_modal_button') }}</button>
+                </a>
+            </div>
+            </div>
+        </div>
+        </div>
+        <script defer>$("#activateModal").modal('show');</script>
+    @endif
 <script type="text/javascript">
     var slider = document.getElementById("rangeValue");
     var val = document.getElementById("rangeValueDisplay");

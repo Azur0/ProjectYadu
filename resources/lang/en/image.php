@@ -20,6 +20,9 @@ return [
     'error_empty_eventpictures' => 'No connected images found',
     'error_picture' => 'Something went wrong upon reading the picture',
     'error_nodata' => 'No data to read, go add some!',
+    'error_unknown' => 'Unknown error',
+    'error_atleast_onetype' => 'At least 1 category type should exist.',
+    'something_went_wrong' => 'Something went wrong, we\'re sorry for the inconvenience!',
 
     'warning_event_picture_connected_header' => 'One or more events use this picture!',
     'warning_event_picture_connected_body' => 'Are you sure you want to delete this picture? The connected events get a different image if you delete this.',

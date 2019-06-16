@@ -66,30 +66,6 @@
                             <div class="ml-auto my-auto mr-3" onclick="setcheckedtag({{$tag->id}})">
                                 <button type="button" class="btn btn-danger" id="{{$tag->id}}" data-toggle="modal" data-target="#confirmDeleteTag"><i class="far fa-trash-alt"></i></button>
                                 <button type="button" class="btn btn-warning" id="{{$tag->id}}" onclick="location.href='{{ route('imagescontroller.edittagpicture', $tag->id) }}'"><i class="far fa-edit" style="width:14px"></i></button>
-                                        
-                                        {{-- Popup for deleting --}}
-                                        <div class="modal fade" id="confirmDeleteTag" tabindex="-1" role="dialog">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">{{__('image.modal_delete_title')}}</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <h5 class="text-warning bg-danger eventheader"></h5>
-                                                        <h5 class="text-warning bg-danger pictureheader"></h5>
-                                                        <div class="confirmation">{{__('image.modal_delete_tag_center')}}</div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" id="approve" onclick="removeType({{$tag->id}})" class="btn btn-danger">{{__('image.modal_delete_confirmation')}}</button>
-                                                        <button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">{{__('image.modal_delete_dismiss')}}</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                 <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
                                 <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($tag->imageSelected) . '"/>'; ?>
                             </div>
@@ -101,6 +77,51 @@
                     <div class="error">{{__('image.error_empty_tags')}}</div>
                 @endif
             </div>
+
+            {{-- Popup for deleting --}}
+            <div class="modal fade" id="confirmDeleteTag" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{__('image.modal_delete_title')}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5 class="text-warning bg-danger eventheader"></h5>
+                            <h5 class="text-warning bg-danger pictureheader"></h5>
+                            <div class="confirmation">{{__('image.modal_delete_tag_center')}}</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" id="approve" onclick="removeType()" class="btn btn-danger">{{__('image.modal_delete_confirmation')}}</button>
+                            <button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">{{__('image.modal_delete_dismiss')}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Popup warning --}}
+            <div id="warning" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{__('image.something_went_wrong')}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5 id="warningbody"></h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">{{__('image.modal_delete_dismiss')}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @if($message = Session::get('eventsuccess'))
                     <div class="alert alert-succes alert-block">
                         <button type="button" class="close" data-dismiss="alert">x</button>
@@ -209,7 +230,8 @@ $(document).ready(function() {
                                 location.reload();
                             }, 
                             error: function(data){
-                                console.log(data);
+                                document.getElementById('warningbody').innerHTML = "{{__('image.error_unknown')}}";
+                                $('#warning').modal('show');
                             }
                         });
                     });
@@ -217,6 +239,10 @@ $(document).ready(function() {
                         location.reload();
                     })
                 }
+            },
+            error: function(data) {
+                document.getElementById('warningbody').innerHTML = "{{__('image.error_atleast_onetype')}}";
+                $('#warning').modal('show');
             }
         });
     }

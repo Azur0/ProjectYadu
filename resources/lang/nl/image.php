@@ -20,6 +20,9 @@ return [
     'error_empty_eventpictures' => 'Geen verbonden foto\'s gevonden',
     'error_picture' => 'Er ging iets fout bij het laden van de foto',
     'error_nodata' => 'Geen data om weer te geven. Voeg wat foto\'s toe',
+    'error_unknown' => 'Een niet bekende fout heeft opgetreden',
+    'error_atleast_onetype' => 'Er moet tenminste 1 categorie type blijven bestaan',
+    'something_went_wrong' => 'Er ging iets fout, excuses voor het ongemak!',
 
     'warning_event_picture_connected_header' => 'Een of meerdere events gebruiken deze foto!',
     'warning_event_picture_connected_body' => 'Weet u zeker dat u deze foto wilt verwijderen? De gekoppelde events krijgen een andere foto toegewezen.',

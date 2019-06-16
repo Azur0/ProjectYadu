@@ -94,6 +94,8 @@ class EventsController extends Controller
             $Tags = EventTag::all();
             $Picture = EventPicture::all();
             return view('events.create')->withtags($Tags)->withpictures($Picture);
+        } else if(!Auth::user()->hasVerifiedEmail()) {
+            return redirect('/events')->with(['error' => 'activate message']);
         }
         return redirect('/events');
     }

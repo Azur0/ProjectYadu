@@ -94,6 +94,8 @@ class EventsController extends Controller
             $Tags = EventTag::all();
             $Picture = EventPicture::all();
             return view('events.create')->withtags($Tags)->withpictures($Picture);
+        } else if(!Auth::user()->hasVerifiedEmail()) {
+            return redirect('/events')->with(['error' => 'activate message']);
         }
         return redirect('/events');
     }
@@ -327,8 +329,8 @@ class EventsController extends Controller
                 'isDeleted' => 1
             ]);;
         }
-
-        return redirect('account/myevents');
+        // dd(redirect('account/myevents')->with('success', __('profile.info_event_deleted')));
+        return redirect('account/myevents')->with('success', __('profile.info_event_deleted'));
     }
 
     public function join($id)

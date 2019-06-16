@@ -32,6 +32,9 @@ return [
     'index_loading_error' => 'Er kan geen event worden geladen.',
     'index_search_placeholder' => 'Naam',
     'index_search_category_placeholder' => 'Categorie',
+    'index_activate_modal_title' => 'Activeer uw account',
+    'index_activate_modal_description' => 'Je moet je account activeren om een evenement aan te maken.',
+    'index_ok_modal_button' => 'Ok',
 
 ///////////////////////////////// Create //////////////////////////////////
 

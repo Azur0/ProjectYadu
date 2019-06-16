@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Management;
+namespace App\Http\Controllers\Admin;
 
 use App\BannedIp;
 use Illuminate\Http\Request;

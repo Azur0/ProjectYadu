@@ -90,14 +90,16 @@ class EventsController extends Controller
 
     public function create()
     {
-        if (Auth::check() && Auth::user()->hasVerifiedEmail()) {
-            $Tags = EventTag::all();
-            $Picture = EventPicture::all();
-            return view('events.create')->withtags($Tags)->withpictures($Picture);
-        } else if(!Auth::user()->hasVerifiedEmail()) {
-            return redirect('/events')->with(['error' => 'activate message']);
-        }
-        return redirect('/events');
+        if (Auth::check() ) {
+            if(!Auth::user()->hasVerifiedEmail()) {
+                return redirect('/events')->with(['error' => 'activate message']);
+            }else{
+                $Tags = EventTag::all();
+                $Picture = EventPicture::all();
+                return view('events.create')->withtags($Tags)->withpictures($Picture);
+            }
+        } 
+        return redirect('/login');
     }
 
     public function action(Request $request)

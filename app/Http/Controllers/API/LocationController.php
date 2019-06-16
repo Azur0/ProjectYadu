@@ -23,7 +23,6 @@ class LocationController extends Controller
 
     private function getLocation(){
         $ip = self::get_ip();
-        // $ip = '145.49.103.72';
         $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));
         if($query && $query['status'] == 'success'){
             return $query;
@@ -34,22 +33,16 @@ class LocationController extends Controller
     
     public function areWithinReach($events, $distance)
     {
-        //TODO:4 Until the moment that Yadu gives us the API keys this will be default mode for the distance filter return
-        return $events;
         if ($distance == 25) {
             return $events;
         }
         $userLocation = self::getLocation();
-        //This a temporary measure, this will be removed when it is running on a live server
-        // $front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=51.688445,5.287405&destinations=';
-        //TODO:2 uncomment this for the live server
         $front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=';
         $userLocation = $userLocation['lat'] . ',' . $userLocation['lon'];
         $destination = '&destinations=';
-        //TODO:1 get this from a middle ware
-        $EndapiKey = "&key=".env('GOOGLE_KEY');
+        $EndApiKey = "&key=".env('GOOGLE_KEY');
         $eventsToReturn = new Collection();
-
+        
         //This will separate the events in sets of 25 because the google api can only receive a maximum of 25 destinations for each request
         for ($i = 0; $i <= ceil(count($events) / 25); $i++) {       
             $slicedArray = $events->splice(25 * $i, 25);
@@ -58,9 +51,8 @@ class LocationController extends Controller
                 $locations .= $slice->location->locLatitude . '%2C' . $slice->location->locLongtitude . '%7C';
             }
             $locations = substr($locations, 0, -3);
-            //TODO:2 uncomment this for the live server
-            $request = $front . $userLocation . $destination .$locations . $EndapiKey;
-            // $request = $front . $locations . $EndapiKey;
+
+            $request = $front . $userLocation . $destination .$locations . $EndApiKey;
             $eventDistances = $this->googleRequest($request);
             for ($j = 0; $j < count($slicedArray); $j++) {
                 if($eventDistances['status'] === 'OK'){

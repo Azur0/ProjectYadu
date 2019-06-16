@@ -332,6 +332,7 @@
                 document.getElementById("chatmessages").innerHTML = data.messageData.messageCount;
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                    document.getElementById("chatmessages").innerHTML = '{{__('charts.no_data')}}';
                 console.log(jqXHR);
                 console.log(textStatus);
                 console.log(errorThrown);
@@ -356,6 +357,7 @@
                 document.getElementById("newAccounts").innerHTML = data.accountData.accountCount;
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                    document.getElementById("newAccounts").innerHTML = '{{__('charts.no_data')}}';
                 console.log(jqXHR);
                 console.log(textStatus);
                 console.log(errorThrown);
@@ -390,6 +392,7 @@
                     document.getElementById("activeUserLink").href = '{{url('/admin/accounts/')}}' + '/' + data[0].id;
                 } else {
                     document.getElementById("activeUser").innerHTML = '{{__('charts.no_data')}}';
+                    document.getElementById("activeUserLink").href = '#';
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -416,6 +419,7 @@
                 document.getElementById("zeroParticipants").innerHTML = data.zeroParticipantEventData.zeroParticipantCount;
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                document.getElementById("zeroParticipants").innerHTML = '{{_('charts.no_data')}}';
                 console.log(jqXHR);
                 console.log(textStatus);
                 console.log(errorThrown);
@@ -440,6 +444,8 @@
                 document.getElementById("mostParticipantsLink").href = '{{url('/events/')}}' + '/' + data.mostParticipantEventData.id;
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                document.getElementById("mostParticipants").innerHTML = '{{__('charts.no_data')}}';
+                document.getElementById("mostParticipantsLink").href = '#';
                 console.log(jqXHR);
                 console.log(textStatus);
                 console.log(errorThrown);
@@ -463,6 +469,7 @@
                 document.getElementById("averageParticipants").innerHTML = data.averageParticipantEventData.averageParticipantCount;
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                document.getElementById("averageParticipants").innerHTML = '{{__('charts.no_data')}}';
                 console.log(jqXHR);
                 console.log(textStatus);
                 console.log(errorThrown);

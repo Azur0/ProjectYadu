@@ -194,7 +194,7 @@
 						<form method="POST" action="/profile/updatePrivacySettings">
 							@csrf
 							<input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
-														
+
 							<div class="form-group row">
 								<label for="followerVisibility"
 									   class="col-md-4 col-form-label text-md-right">{{__('profile.edit_privacy_followerVisibility')}}</label>
@@ -221,6 +221,10 @@
 									</span>
 									@endif
 								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_privacy_follower')}}</span>
+								</div>
 							</div>
 							<div class="form-group row">
 								<label for="followingVisibility"
@@ -246,6 +250,10 @@
 										<strong>{{ $errors->first('followingVisibility') }}</strong>
 									</span>
 									@endif
+								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_privacy_following')}}</span>
 								</div>
 							</div>
 							<div class="form-group row">
@@ -274,6 +282,10 @@
 									</span>
 									@endif
 								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_privacy_info')}}</span>
+								</div>
 							</div>
 							<div class="form-group row">
 								<label for="eventsVisibility"
@@ -300,6 +312,10 @@
 										<strong>{{ $errors->first('eventsVisibility') }}</strong>
 									</span>
 									@endif
+								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_privacy_events')}}</span>
 								</div>
 							</div>
 							<div class="form-group row">
@@ -328,8 +344,11 @@
 									</span>
 									@endif
 								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_privacy_participating')}}</span>
+								</div>
 							</div>
-
 							<div class="form-group row mb-0">
 								<div class="col-md-6 offset-md-4">
 									<button id="submit" type="submit" class="btn btn-primary">
@@ -411,6 +430,10 @@
 										<label class="custom-control-label" for="customSwitches"></label>
 									</div>
 								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_notifications_eventCreated')}}</span>
+								</div>
 							</div>
 							<div class="form-group row justify-content-md-center">
 								<label for="FollowNotificationJoinEvent"
@@ -425,6 +448,10 @@
 										@endif
 										<label class="custom-control-label" for="customSwitches1"></label>
 									</div>
+								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_notifications_follower')}}</span>
 								</div>
 							</div>
 							<div class="form-group row justify-content-md-center">
@@ -444,6 +471,10 @@
 										<label class="custom-control-label" for="customSwitches3"></label>
 									</div>
 								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_notifications_eventEdited')}}</span>
+								</div>
 							</div>
 							<div class="form-group row justify-content-md-center">
 								<label for="NotificationEventDeleted"
@@ -458,6 +489,10 @@
 										@endif
 										<label class="custom-control-label" for="customSwitches4"></label>
 									</div>
+								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_notifications_eventDeleted')}}</span>
 								</div>
 							</div>
 							<div class="form-group row justify-content-md-center">
@@ -476,6 +511,10 @@
 										@endif
 										<label class="custom-control-label" for="customSwitches5"></label>
 									</div>
+								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_notifications_eventJoinedLeft')}}</span>
 								</div>
 							</div>
 							<div class="form-group row mb-0">

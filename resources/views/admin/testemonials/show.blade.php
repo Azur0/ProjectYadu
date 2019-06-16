@@ -14,9 +14,9 @@
 			<table class="table table-striped table-hover">
 				<thead>
 				<tr>
-					<th scope="col">#</th>
 					<th scope="col">{{ __('accounts.index_name')}}</th>
 					<th scope="col">{{ __('accounts.Experience')}}</th>
+					<th scope="col"></th>
 				</tr>
 				</thead>
 				<tbody>

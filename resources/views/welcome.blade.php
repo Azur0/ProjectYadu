@@ -95,6 +95,22 @@
 			@endif
 		</div>
 		<p>{{ __('welcome.recent_events_content') }} <a href="/events">{{ __('welcome.link_here') }}</a>.</p>
+
+		<h2>testemonials</h2>
+		<div class="row">
+			<div class="col testemonials">
+				
+				@foreach($testemonials as $testemonial)
+					<div class="testemonial">
+						<div>
+							<h3>{{ $testemonial->name }}</h3>
+							<h6 class="testemonial_date">{{ $testemonial->date }}</h6>
+						</div>
+						<p>&#39;{{ $testemonial->experience }}&#39;</p>
+					</div>
+				@endforeach
+			</div>
+		</div>
 	</div>
 
 @endsection

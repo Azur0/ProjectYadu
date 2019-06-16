@@ -10,6 +10,7 @@ use App\Location;
 use App\AccountHasFollowers;
 use App\EventHasParticipants;
 use App\EventTag;
+use App\Testemonial;
 
 use App\Events\EventJoined;
 use App\Events\EventLeft;
@@ -79,7 +80,14 @@ class EventsController extends Controller
 			$event->writtenDate = self::dateToShortText($event->startDate);
 		}
 		
-		return view('welcome', compact('events', 'regular_events'));
+		$testemonials = array();  
+		$rndtestemonials = Testemonial::inRandomOrder()->get();
+		for($i = 0; $i < 3; $i++)
+		{
+			array_push($testemonials,$rndtestemonials[$i]);
+		}
+
+		return view('welcome', compact('events', 'regular_events', 'testemonials'));
 	}
 
     /**

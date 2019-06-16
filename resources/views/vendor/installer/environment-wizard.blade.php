@@ -131,7 +131,7 @@
                     <label for="google_api">
                         {{ trans('installer_messages.environment.wizard.form.google_api_label') }}
                     </label>
-                    <input type="url" name="google_api" id="google_api" value="AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak" placeholder="{{ trans('installer_messages.environment.wizard.form.google_api_placeholder') }}" />
+                    <input type="text" name="google_api" id="google_api" value="AIzaSyABXHNxtjF9xQGsLuyHcptcKd4lKv6XYak" placeholder="{{ trans('installer_messages.environment.wizard.form.google_api_placeholder') }}" />
                     @if ($errors->has('google_api'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>

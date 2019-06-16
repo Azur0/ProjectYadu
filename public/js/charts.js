@@ -104,7 +104,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Joel\Documents\GitHub\Project-Yadu-A1\resources\js\charts.js */"./resources/js/charts.js");
+module.exports = __webpack_require__(/*! B:\Jaar 2, HBO-ICT\YaduProject\Project-Yadu-A1\resources\js\charts.js */"./resources/js/charts.js");
 
 
 /***/ })

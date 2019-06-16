@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 use App\Account;
 use App\ChatMessage;
@@ -10,6 +13,7 @@ use App\Http\Requests\GetChartDateRangeRequest;
 use App\SharedEvent;
 use App\SocialMediaPlatform;
 use Carbon\Carbon;
+
 
 class ChartController extends Controller
 {

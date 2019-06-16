@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Management;
+namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 use App\Http\Requests\CreateProhibitedWordRequest;
 use App\Http\Requests\DestroyProhibitedWordRequest;
@@ -10,7 +12,6 @@ use App\ProhibitedWord;
 use App\Http\Controllers\ProhibitedWordController;
 use Validator;
 use Auth;
-use App\Http\Controllers\Controller;
 
 class ProhibitedWordsController extends Controller
 {
@@ -23,7 +24,7 @@ class ProhibitedWordsController extends Controller
     public function destroy(DestroyProhibitedWordRequest $request)
     {
         ProhibitedWord::where('word', $request['prohibitedWordToDelete'])->delete();
-        return redirect('admin/swearWords');
+        return redirect('admin/prohibitedWords');
     }
 
     public function update(UpdateProhibitedWordRequest $request)
@@ -32,7 +33,7 @@ class ProhibitedWordsController extends Controller
         $newWord = $request['updatedProhibitedWord'];
 
         ProhibitedWord::where('word', $oldWord)->update(['word' => $newWord]);
-        return redirect('admin/swearWords');
+        return redirect('admin/prohibitedWords');
     }
 
     public function create(CreateProhibitedWordRequest $request)
@@ -41,6 +42,6 @@ class ProhibitedWordsController extends Controller
         $prohibitedWord->word = $request['newProhibitedWord'];
         $prohibitedWord->save();
 
-        return redirect('admin/swearWords');
+        return redirect('admin/prohibitedWords');
     }
 }

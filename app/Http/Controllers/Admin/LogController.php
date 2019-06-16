@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Events\EventShared;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Events\EventShared;
 
 class LogController extends Controller
 {

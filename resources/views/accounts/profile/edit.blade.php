@@ -428,11 +428,11 @@
 											<input type="checkbox" name="FollowNotificationCreateEvent" class="custom-control-input" id="customSwitches" checked>
 										@endif
 										<label class="custom-control-label" for="customSwitches"></label>
+										<div class="CSH_tooltip">
+											<i class="fas fa-question-circle"></i>
+											<span class="tooltiptext">{{__('profile.CSH_notifications_eventCreated')}}</span>
+										</div>
 									</div>
-								</div>
-								<div class="CSH_tooltip">
-									<i class="fas fa-question-circle"></i>
-									<span class="tooltiptext">{{__('profile.CSH_notifications_eventCreated')}}</span>
 								</div>
 							</div>
 							<div class="form-group row justify-content-md-center">
@@ -447,11 +447,11 @@
 											<input type="checkbox" name="FollowNotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches1" checked>
 										@endif
 										<label class="custom-control-label" for="customSwitches1"></label>
+										<div class="CSH_tooltip">
+											<i class="fas fa-question-circle"></i>
+											<span class="tooltiptext">{{__('profile.CSH_notifications_follower')}}</span>
+										</div>
 									</div>
-								</div>
-								<div class="CSH_tooltip">
-									<i class="fas fa-question-circle"></i>
-									<span class="tooltiptext">{{__('profile.CSH_notifications_follower')}}</span>
 								</div>
 							</div>
 							<div class="form-group row justify-content-md-center">
@@ -469,11 +469,11 @@
 											<input type="checkbox" name="NotificationEventEdited" class="custom-control-input" id="customSwitches3" checked>
 										@endif
 										<label class="custom-control-label" for="customSwitches3"></label>
+										<div class="CSH_tooltip">
+											<i class="fas fa-question-circle"></i>
+											<span class="tooltiptext">{{__('profile.CSH_notifications_eventEdited')}}</span>
+										</div>
 									</div>
-								</div>
-								<div class="CSH_tooltip">
-									<i class="fas fa-question-circle"></i>
-									<span class="tooltiptext">{{__('profile.CSH_notifications_eventEdited')}}</span>
 								</div>
 							</div>
 							<div class="form-group row justify-content-md-center">
@@ -488,11 +488,11 @@
 											<input type="checkbox" name="NotificationEventDeleted" class="custom-control-input" id="customSwitches4" checked>
 										@endif
 										<label class="custom-control-label" for="customSwitches4"></label>
+										<div class="CSH_tooltip">
+											<i class="fas fa-question-circle"></i>
+											<span class="tooltiptext">{{__('profile.CSH_notifications_eventDeleted')}}</span>
+										</div>
 									</div>
-								</div>
-								<div class="CSH_tooltip">
-									<i class="fas fa-question-circle"></i>
-									<span class="tooltiptext">{{__('profile.CSH_notifications_eventDeleted')}}</span>
 								</div>
 							</div>
 							<div class="form-group row justify-content-md-center">
@@ -510,11 +510,11 @@
 											<input type="checkbox" name="NotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches5" checked>
 										@endif
 										<label class="custom-control-label" for="customSwitches5"></label>
+										<div class="CSH_tooltip">
+											<i class="fas fa-question-circle"></i>
+											<span class="tooltiptext">{{__('profile.CSH_notifications_eventJoinedLeft')}}</span>
+										</div>
 									</div>
-								</div>
-								<div class="CSH_tooltip">
-									<i class="fas fa-question-circle"></i>
-									<span class="tooltiptext">{{__('profile.CSH_notifications_eventJoinedLeft')}}</span>
 								</div>
 							</div>
 							<div class="form-group row mb-0">

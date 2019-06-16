@@ -84,7 +84,7 @@ Route::get('admin/ip/{ip}/unblock', 'Admin\AccountsController@unblockIP')->middl
 Route::get('admin/suspensions/ip', 'Admin\SuspensionsController@index')->middleware('auth', 'isAdmin');
 Route::post('admin/suspensions/ip/{ip}/destroy', 'Admin\SuspensionsController@destroy')->middleware('auth', 'isAdmin');
 
-
+Route::resource('admin/testemonials', 'TestemonialsController')->middleware('auth', 'isAdmin');
 
 Route::resource('admin/events','Admin\EventsController');
 Route::post('/admin/events/actionDistanceFilter', 'Admin\EventsController@actionDistanceFilter')->name('admin_events_controller.actionDistanceFilter');

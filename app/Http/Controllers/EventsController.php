@@ -404,6 +404,16 @@ class EventsController extends Controller
             $event->setAttribute('date', $date);
             $events->push($event);
         }
-        return json_encode($events);
+        $events2 = Event::where('isDeleted', '==', 0)
+        ->where('startDate', '>=', $this->formatDate())
+        ->whereNotIn('owner_id', $blockedUsers)
+        ->whereNotIn('owner_id', $UsersBlockedYou)
+        ->whereIn('id', $names)
+        ->whereIn('tag_id', $tags)->get();
+        $data = array();
+        $data['events'] = $events;
+        $data['total_length'] = count($events2);
+        
+        return json_encode($data);
     }
 }

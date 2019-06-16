@@ -70,6 +70,7 @@
 
     });
     var pageNumber = 0;
+    var totalEvents = 0;
     var tempDistance = 0;
     //AJAX request
     function fetch_events() {
@@ -80,6 +81,7 @@
         var tempDistance = this.tempDistance;
         if (distance != tempDistance) {
             pageNumber = 0;
+            totalEvents = 0;
             $("#loadMore").show();
             $('#eventsToDisplay').html("<img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>");
         }
@@ -97,6 +99,8 @@
             },
             dataType: 'json',
             success: function(data) {
+                events = data["events"];
+                totalEvents +=events.length;
                 if (data == "") {
                     $('#eventsToDisplay').html(
                         "<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_no_event_found')}}</h1><div>"
@@ -105,7 +109,7 @@
                     if (distance != tempDistance) {
                         $('#eventsToDisplay').html("");
                     }
-                    data.forEach(function(element) {
+                    events.forEach(function(element) {
                         var eventNameSliced = element['eventName'];
                         $('#eventsToDisplay').html($("#eventsToDisplay").html() +
                             "<div class='col-md-6 col-lg-4 event'><a href='/events/" + element[
@@ -117,7 +121,7 @@
                             "<br>" + element['loc'] +
                             "</p></div></div></a></div>");
                     });
-                    if (data.length % 3 != 0) {
+                    if (totalEvents == data["total_length"]) {
                         $("#loadMore").hide();
                     }
                 }

@@ -120,7 +120,7 @@
 	<!-- Nav Item - suspensions -->
 	<li class="nav-item {{ request()->is('admin/suspensions/ip') ? 'active' : '' }}">
 		<a class="nav-link collapsed" href="/admin/suspensions/ip">
-			<i class="fas fa-fw fa-file-word"></i>
+			<i class="fas fa-user-slash"></i>
 			<span>{{__('navigation.nav_suspensions')}}</span>
 		</a>
 	</li>

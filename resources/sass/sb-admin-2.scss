@@ -752,8 +752,7 @@ h6.collapse-header {
 	border-radius: 0.25rem;
 }
 
-@media screen and (max-width: 739px)
-{
+@media screen and (max-width: 739px) {
 	.search {
 		display: flex !important;
 		flex-wrap: nowrap !important;
@@ -761,17 +760,18 @@ h6.collapse-header {
 		white-space: nowrap !important;
 	}
 
-.avatar {
-	width: 50px;
-	height: 50px;
-}
+	.avatar {
+		width: 50px;
+		height: 50px;
+	}
 
-.avatar-lg {
-	width: 100px;
-	height: 100px;
-}
+	.avatar-lg {
+		width: 100px;
+		height: 100px;
+	}
 
-.collapse-item {
-	overflow: hidden !important;
-	text-overflow: ellipsis;
+	.collapse-item {
+		overflow: hidden !important;
+		text-overflow: ellipsis;
+	}
 }

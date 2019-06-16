@@ -18,11 +18,13 @@ class CreateBannedIpsTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->string('ip',45)->primary();
+            $table->increments('id');
+            $table->string('ip',45);
             $table->timestamps();
         });
     }

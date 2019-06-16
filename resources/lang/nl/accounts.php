@@ -70,6 +70,6 @@ return [
     'activation_button' => 'Ga naar Yadu',
     'non_activation_header' => 'Uw account is niet actief',
     'non_activation_message' => 'U heeft uw email nog niet geverifieerd en daarom kunt u niet meedoen aan dit uitje.',
-    'non_activation_button' => 'Ga terug Yadu',
+    'non_activation_button' => 'Ga terug',
 
 ];

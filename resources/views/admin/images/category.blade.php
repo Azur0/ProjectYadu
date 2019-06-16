@@ -79,9 +79,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <h5 class="text-warning bg-danger eventheader"></h5>
-                                                        <div class="eventsbody" id="eventbox"></div>
                                                         <h5 class="text-warning bg-danger pictureheader"></h5>
-                                                        <div class="imagebody" id="imagebox"></div>
                                                         <div class="confirmation">{{__('image.modal_delete_tag_center')}}</div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -164,7 +162,7 @@ $(document).ready(function() {
             url: "{{ route('imagescontroller.checktiedpictures')}}",
             method: 'POST',
             data: {
-                categoryID: localStorage.clear("tag_id"),
+                categoryID: localStorage.getItem("tag_id"),
                 _token: '{{ csrf_token() }}'
             },
             dataType: 'json',
@@ -177,7 +175,7 @@ $(document).ready(function() {
             url: "{{ route('imagescontroller.removetype')}}",
             method: 'POST',
             data: {
-                categoryID: localStorage.clear("tag_id"),
+                categoryID: localStorage.getItem("tag_id"),
                 _token: '{{ csrf_token() }}'
             },
             dataType: 'json',
@@ -197,32 +195,21 @@ $(document).ready(function() {
                     let deny = document.getElementById('deny');
                     approve.setAttribute('data-dismiss', 'modal');
 
-                    // get div bodies
-                    let eventsbody = document.querySelector('.eventsbody');
-                    let imagebody = document.querySelector('.imagebody')
-                    eventsbody.appendChild(document.createElement('ul'));
-
-                    // set bodies
-                    data.forEach(function (element) {
-                        $(eventsbody).html($("#eventbox").html() + `<li>${element['eventName']}</li>`);
-                    });
-                    eventsbody.appendChild(document.createElement('br'));
-                    imagedata.forEach(function (element) {
-                        $(imagebody).html($("#imagebox").html() + `<label class="picture"><img class="responsive" src="data:image/jpeg;base64, ${element['picture']}"></label>`);
-                    });
-
                     // set reload and ajax on event click
                     approve.addEventListener('click', function() {
                         $.ajax({
                             url: "{{ route('imagescontroller.trueremove')}}",
                             method: 'POST',
                             data: {
-                                categoryID: localStorage.clear("tag_id"),
+                                categoryID: localStorage.getItem("tag_id"),
                                 _token: '{{ csrf_token() }}'
                             },
                             dataType: 'json',
                             success: function(data) {
                                 location.reload();
+                            }, 
+                            error: function(data){
+                                console.log(data);
                             }
                         });
                     });
@@ -392,7 +379,7 @@ $(document).ready(function() {
                     fetch_customer_data(localStorage.getItem("tag_id"));
                 },
                 error: function (data) {
-                    alert("error");
+                    console.log(data);
                 }
         }) 
     }

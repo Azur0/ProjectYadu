@@ -681,8 +681,6 @@ h6.collapse-header {
 	}
 	.card-header
 	{
-
-		height: 80px;
 		overflow-y: hidden;
 		overflow-x: auto;
 
@@ -704,7 +702,7 @@ h6.collapse-header {
 	.card-body
 	{
 		overflow-y: hidden;
-		overflow-x: scroll;
+		overflow-x: auto;
 	}
 }
 
@@ -760,10 +758,12 @@ h6.collapse-header {
 		align-items: center !important;
 		white-space: nowrap !important;
 	}
-
+}
 .avatar {
-	width: 50px;
-	height: 50px;
+	width: auto;
+	max-width: 50px;
+	height: auto;
+	max-height: 50px;
 }
 
 .avatar-lg {

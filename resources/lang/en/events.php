@@ -8,21 +8,6 @@ return [
 |--------------------------------------------------------------------------
 */
 
-///////////////////////////////// Global //////////////////////////////////
-
-    'cat1' => 'With families',
-    'cat2' => 'Food',
-    'cat3' => 'Drinks',
-    'cat4' => 'Coffee',
-    'cat5' => 'Hiking',
-    'cat6' => 'In the City',
-    'cat7' => 'Museum',
-    'cat8' => 'Theater/film',
-    'cat9' => 'Events',
-    'cat10' => 'A little bit of everything',
-    'cat11' => 'Sports',
-    'cat12' => 'On wheels',
-
 ///////////////////////////////// Index ///////////////////////////////////
 
     'index_create_event' => 'Organize an event',

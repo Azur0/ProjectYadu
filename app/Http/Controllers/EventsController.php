@@ -327,8 +327,8 @@ class EventsController extends Controller
                 'isDeleted' => 1
             ]);;
         }
-
-        return redirect('account/myevents');
+        // dd(redirect('account/myevents')->with('success', __('profile.info_event_deleted')));
+        return redirect('account/myevents')->with('success', __('profile.info_event_deleted'));
     }
 
     public function join($id)

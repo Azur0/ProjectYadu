@@ -89,9 +89,6 @@ Route::post('admin/suspensions/ip/{ip}/destroy', 'Admin\SuspensionsController@de
 Route::resource('admin/events','Admin\EventsController');
 Route::post('/admin/events/actionDistanceFilter', 'Admin\EventsController@actionDistanceFilter')->name('admin_events_controller.actionDistanceFilter');
 
-
-Route::resource('admin/swearWords','Admin\ProhibitedWordsController');
-
 Route::get('admin/prohibitedWords', 'Admin\ProhibitedWordsController@index')->middleware('auth', 'isAdmin');
 Route::post('admin/prohibitedWords/delete', 'Admin\ProhibitedWordsController@destroy')->middleware('auth', 'isAdmin');
 Route::post('admin/prohibitedWords/update', 'Admin\ProhibitedWordsController@update')->middleware('auth', 'isAdmin');

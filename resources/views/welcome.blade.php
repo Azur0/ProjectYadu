@@ -95,22 +95,32 @@
 			@endif
 		</div>
 		<p>{{ __('welcome.recent_events_content') }} <a href="/events">{{ __('welcome.link_here') }}</a>.</p>
-
-		<h2>testemonials</h2>
-		<div class="row">
-			<div class="col testemonials">
-				
-				@foreach($testemonials as $testemonial)
-					<div class="testemonial">
-						<div>
-							<h3>{{ $testemonial->name }}</h3>
-							<h6 class="testemonial_date">{{ $testemonial->created_at }}</h6>
+		@if(!empty($testemonials))
+			<br><br>
+			<h2>{{ __('testemonials.header_testemonial')}} </h2>
+			<div class="row">
+				<div class="col testemonials">
+					
+					@foreach($testemonials as $testemonial)
+						<div class="testemonial">
+							<div>
+								@if(empty($testemonial->account_id))
+									<h3>{{ $testemonial->name }}</h3>
+								@else
+									<h3>
+										<a href="/account/{{ $testemonial->account_id }}/profile/info">
+											{{ $testemonial->account->firstName }} {{ $testemonial->account->middleName }} {{ $testemonial->account->lastName }}
+										</a>
+									</h3>
+								@endif
+								<h6 class="testemonial_date">{{ $testemonial->created_at }}</h6>
+							</div>
+							<p>&#39;{{ $testemonial->experience }}&#39;</p>
 						</div>
-						<p>&#39;{{ $testemonial->experience }}&#39;</p>
-					</div>
-				@endforeach
+					@endforeach
+				</div>
 			</div>
-		</div>
+		@endif
 	</div>
 
 @endsection

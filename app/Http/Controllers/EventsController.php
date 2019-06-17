@@ -81,11 +81,9 @@ class EventsController extends Controller
 		}
 		
 		$testemonials = array();  
-		$rndtestemonials = Testemonial::inRandomOrder()->get();
-		for($i = 0; $i < 3; $i++)
-		{
-			array_push($testemonials,$rndtestemonials[$i]);
-		}
+		$testemonials = Testemonial::all()->where('accepted', '==', true);
+		$testemonials = $testemonials->shuffle();
+		$testemonials->splice(3);
 
 		return view('welcome', compact('events', 'regular_events', 'testemonials'));
 	}

@@ -18,7 +18,7 @@ class TestemonialsController extends Controller
 	 */
 	public function index()
 	{
-		$testemonials = Testemonial::all();
+		$testemonials = Testemonial::simplePaginate(5);
 		return view('admin.testemonials.index', compact('testemonials'));
 	}
 

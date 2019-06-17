@@ -3,21 +3,26 @@
 @section('content')
 	<div class="card">
 		<div class="card-header">
-			<a href="/admin/testemonials/create">{{ __('testemonials.header_new')}} <i class="fas fa-plus-square"></i></a>
+			{{ __('testemonials.header_testemonial')}} 
+			<div class="float-right">
+				<a href="/admin/testemonials/create">{{ __('testemonials.header_new')}} <i class="fas fa-plus-square"></i></a>
+			</div>
 		</div>
 		<div class="card-body">
+			{{ $testemonials->links() }}
 			<table class="table table-striped table-hover">
 				<thead>
-				<tr>
-					<th scope="col">ID</th>
-					<th scope="col">{{ __('testemonials.table_type')}}</th>
-					<th scope="col">{{ __('testemonials.table_accepted')}}</th>
-					<th scope="col">{{ __('testemonials.table_name')}}</th>
-					<th scope="col">{{ __('testemonials.table_experience')}}</th>
-					<th scope="col">{{ __('testemonials.table_date')}}</th>
-					<th scope="col"></th>
-					<th scope="col"></th>
-				</tr>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">{{ __('testemonials.table_type')}}</th>
+						<th scope="col">{{ __('testemonials.table_accepted')}}</th>
+						<th scope="col">{{ __('testemonials.table_name')}}</th>
+						<th scope="col">{{ __('testemonials.table_experience')}}</th>
+						<th scope="col">{{ __('testemonials.table_date')}}</th>
+						<th scope="col"></th>
+						<th scope="col"></th>
+						<th scope="col"></th>
+					</tr>
 				</thead>
 				<tbody>
 				@foreach($testemonials as $testemonial)

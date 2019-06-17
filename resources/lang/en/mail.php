@@ -52,4 +52,21 @@ return [
     "subjectEventDeleted" => "Event has been removed",
     "subjectEventJoined" => "Event has been joined",
     "subjectEventLeft" => "Event has been left",
+
+    //Reset
+    "reset_password_title" => "Reset your password",
+    "reset_password_greeting" => "",
+    "reset_password_reason" => "You are receiving this email because we received a password reset request for your account.",
+    "reset_password_action" => "Reset Password",
+    "reset_password_expire" => "This password reset link will expire in :count minutes.",
+    "reset_password_else_no_action_needed" => "If you did not request a password reset, no further action is required.",
+    "reset_password_signee" => "Yadu",
+
+    //Verify
+    "verify_title" => "Activate account",
+    "verify_start" => "This e-mail has been sent to verify your registration at Yadu.",
+    "verify_action" => "Activate account",
+    "verify_instruction" => "This is to activate your account.",
+    "verify_closing" => "With kind regards,",
+    "verify_signee" => "Yadu",
 ];

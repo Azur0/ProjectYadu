@@ -3,41 +3,35 @@
 @section('content')
 	<div class="row ml-3 mb-3">
 		<div class="backlink">
-			<a href="{{url('admin/testemonials')}}"><i class="fas fa-arrow-left"></i> {{__('accounts.back')}}</a>
+			<a href="{{ url('admin/testemonials') }}"><i class="fas fa-arrow-left"></i> {{__('accounts.back')}}</a>
 		</div>
 	</div>
 	<div class="card">
 		<div class="card-header">
-			{{}}
+			{{__('testemonials.header_testemonial')}}: {{ $testemonial->id }}
+
 		</div>
 		<div class="card-body">
-			<form action="/admin/testemonials" method="POST">
-				@csrf
-				<input type="hidden" name="id" value="{{ $testemonial->id }}">
-
-				<div class="form-group">
-					<label for="name">{{ __('testemonials.form_name') }}</label>
-					<input type="text" class="form-control" name="name" placeholder="{{__('testemonials.form_name')}}" maxlength="99" required value="{{ $testemonial->name }}">
-			
-					@if ($errors->has('activityName'))
-						<div class="error">{{__('events.create_error_title_required')}}</div>
+			<div class="row">
+				<div class="col">
+					<h3>{{ $testemonial->name }}</h3>
+					<h6>{{ $testemonial->created_at }}</h6>
+				</div>
+				<div class="col">
+					@if( $testemonial->accepted == true )
+						Status: <i class="fas fa-check"></i>
+					@else
+						Status: <i class="fas fa-times"></i>
 					@endif
 				</div>
-				<div class="form-group">
-					<label for="experience">{{ __('testemonials.form_name') }}</label>
-					<textarea name="experience" placeholder="{{__('testemonials.form_experience')}}" maxlength="150" required>
+			</div>
+			<div class="row">
+				<div class="col">
+					<p>
 						{{ $testemonial->experience }}
-					</textarea>
-
-					@if ($errors->has('description'))
-						<div class="error">{{__('events.create_error_description_required')}}</div>
-					@endif
+					</p>
 				</div>
-
-				<div>
-					<input type="submit" name="submit" value="{{__('testemonials.update')}}">
-				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 @endsection

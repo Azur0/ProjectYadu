@@ -21,6 +21,7 @@ class CreateTestemonialsTable extends Migration
 			$table->unsignedInteger('account_id')->nullable();
 			$table->string('name', 99);
 			$table->text('experience');
+			$table->boolean('accepted')->default(false);
 			$table->timestamps();
 
 			$table->index(["account_id"], 'fk_testemonial_accounts_idx');

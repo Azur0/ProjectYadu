@@ -13,7 +13,7 @@ class CreateTestemonialRequest extends FormRequest
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 	/**
@@ -25,7 +25,8 @@ class CreateTestemonialRequest extends FormRequest
 	{
 		return [
 			'name' => 'nullable|max:99',
-			'experience' => 'required',
+			'experience' => 'required|string',
+			'accepted' => 'nullable|boolean',
 		];
 	}
 }

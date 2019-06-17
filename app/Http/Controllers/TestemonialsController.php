@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Testemonial;
+
 use Illuminate\Http\Request;
+use Auth;
+
 use App\Http\Requests\CreateTestemonialRequest;
 
 class TestemonialsController extends Controller
@@ -17,6 +20,18 @@ class TestemonialsController extends Controller
 	{
 		$testemonials = Testemonial::all();
 		return view('admin.testemonials.index', compact('testemonials'));
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($id)
+	{
+		$testemonial = Testemonial::findOrFail($id);
+		return view('admin.testemonials.show', compact('testemonial'));
 	}
 
 	/**
@@ -37,18 +52,22 @@ class TestemonialsController extends Controller
 	 */
 	public function store(CreateTestemonialRequest $request)
 	{
-		//
-	}
+		$newTestemonial = new Testemonial;
+		$newTestemonial->name = $request['name'];
+		$newTestemonial->experience = $request['experience'];
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show($id)
-	{
-		//
+		if(Auth::user()->accountRole == 'Admin')
+		{
+			$newTestemonial->accepted = true;
+			$newTestemonial->save();
+			return redirect('/admin/testemonials/'.$newTestemonial->id);
+		}
+		else
+		{
+			$newTestemonial->account_id = auth()->user()->id;
+			$newTestemonial->save();
+			return redirect('/home');
+		}
 	}
 
 	/**
@@ -59,7 +78,8 @@ class TestemonialsController extends Controller
 	 */
 	public function edit($id)
 	{
-		//
+		$testemonial = Testemonial::findOrFail($id);
+		return view('admin.testemonials.edit', compact('testemonial'));
 	}
 
 	/**
@@ -69,9 +89,23 @@ class TestemonialsController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(CreateTestemonialRequest $request, $id)
 	{
-		//
+		$newTestemonial = Testemonial::findOrFail($id);
+		$newTestemonial->name = $request['name'];
+		$newTestemonial->experience = $request['experience'];
+		$newTestemonial->accepted = $request['accepted'];
+
+		$newTestemonial->save();
+
+		if(Auth::user()->accountRole == 'Admin')
+		{
+			return redirect('/admin/testemonials/'.$newTestemonial->id);
+		}
+		else
+		{
+			return redirect('/home');
+		}
 	}
 
 	/**
@@ -82,6 +116,21 @@ class TestemonialsController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		$testemonial = Event::findOrFail($id);
+		
+		if($testemonial->account_id == Auth::id() || Auth::user()->accountRole == 'Admin')
+		{
+			$testemonial->delete();
+		}
+
+		if(Auth::user()->accountRole == 'Admin')
+		{
+			return redirect('/admin/testemonials');	
+		}
+		else
+		{
+			return redirect('/home');	
+		}
+		
 	}
 }

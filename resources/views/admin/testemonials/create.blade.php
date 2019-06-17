@@ -22,10 +22,8 @@
 					@endif
 				</div>
 				<div class="form-group">
-					<label for="experience">{{ __('testemonials.form_name') }}</label>
-					<textarea name="experience" placeholder="{{__('testemonials.form_experience')}}" maxlength="150" required>
-						{{ old('experience') }}
-					</textarea>
+					<label for="experience">{{ __('testemonials.form_experience') }}</label>
+					<textarea name="experience" placeholder="{{__('testemonials.form_experience')}}" maxlength="150" required>{{ old('experience') }}</textarea>
 
 					@if ($errors->has('description'))
 						<div class="error">{{__('events.create_error_description_required')}}</div>
@@ -33,7 +31,7 @@
 				</div>
 
 				<div>
-					<input type="submit" name="submit" value="{{__('testemonials.create')}}">
+					<input type="submit" name="submit" value="{{__('testemonials.form_create')}}">
 				</div>
 			</form>
 		</div>

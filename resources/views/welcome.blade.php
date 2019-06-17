@@ -104,7 +104,7 @@
 					<div class="testemonial">
 						<div>
 							<h3>{{ $testemonial->name }}</h3>
-							<h6 class="testemonial_date">{{ $testemonial->date }}</h6>
+							<h6 class="testemonial_date">{{ $testemonial->created_at }}</h6>
 						</div>
 						<p>&#39;{{ $testemonial->experience }}&#39;</p>
 					</div>

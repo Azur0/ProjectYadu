@@ -27,6 +27,7 @@ return [
     'nav_socialmedia' => 'Socialmedia',
     'nav_links' => 'Links',
     'nav_users' => 'Gebruikers',
+    'nav_testemonials' => 'Testemonials',
 
 ///////////////////////////////// Footer //////////////////////////////////
 

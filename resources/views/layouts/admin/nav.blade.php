@@ -127,7 +127,7 @@
 	<!-- Nav Item - testemonials -->
 	<li class="nav-item {{ request()->is('admin/testemonials') ? 'active' : '' }}">
 		<a class="nav-link collapsed" href="/admin/testemonials">
-			<i class="fas fa-user-slash"></i>
+			<i class="fas fa-comment-dots"></i>
 			<span>{{__('navigation.nav_testemonials')}}</span>
 		</a>
 	</li>

@@ -235,9 +235,6 @@ $(document).ready(function() {
                             }
                         });
                     });
-                    deny.addEventListener('click', function() {
-                        location.reload();
-                    })
                 }
             },
             error: function(data) {

@@ -11,7 +11,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Collection;
 
-
 class SendEventEditedNotification
 {
     /**

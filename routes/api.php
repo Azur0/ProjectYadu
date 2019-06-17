@@ -15,10 +15,5 @@ use Illuminate\Http\Request;
 
 Route::get('events/{event}/messages', 'MessageController@index');
 
-Route::middleware('auth:api')->group(function () {
-    Route::post('events/{event}/message', 'MessageController@store');
-});
-
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::post('events/{event}/message', 'MessageController@store');
+    

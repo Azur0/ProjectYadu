@@ -311,6 +311,7 @@ $(document).ready(function() {
                                         {{-- Popup for editing --}}
                                         <div class="modal fade" id="editeventpicture" tabindex="-1" role="dialog">
                                             <div class="modal-dialog" role="document">
+                                                <form class="form-group" action="{{ route('imagescontroller.updateeventpicture') }}" method="POST" enctype="multipart/form-data">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title">{{__('image.modal_edit_eventpicture_title')}}</h5>
@@ -320,7 +321,6 @@ $(document).ready(function() {
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="responsive">
-                                                            <form class="form-group" action="{{ route('imagescontroller.updateeventpicture') }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             <label for="file5" class="input-label fifth formitem">
                                                                 <i class="fa fa-upload"></i>
@@ -328,15 +328,13 @@ $(document).ready(function() {
                                                             </label>
                                                             <input id="file5" class="btn btn-info" type="file" name="updateevent" accept="image/png, image/jpeg, image/jpg">
                                                             <input type="hidden" value="${element['id']}" name="id">
-                                                            
-                                                            
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">{{__('image.modal_delete_dismiss')}}</button>
                                                         <button type="updateevent" class="btn btn-primary" name="updateevent">{{__('image.button_upload_single')}}</button>
-                                                    </form>
                                                     </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

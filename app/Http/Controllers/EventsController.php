@@ -16,6 +16,7 @@ use App\Events\EventJoined;
 use App\Events\EventLeft;
 use App\Http\Controllers\API\LocationController;
 use App\Http\Requests\CreateEventRequest;
+use App\Testimonial;
 use App\Traits\DateToText;
 
 use Illuminate\Database\Eloquent\Collection;

@@ -10,7 +10,7 @@ use App\Location;
 use App\AccountHasFollowers;
 use App\EventHasParticipants;
 use App\EventTag;
-use App\Testemonial;
+use App\Testimonial;
 
 use App\Events\EventJoined;
 use App\Events\EventLeft;

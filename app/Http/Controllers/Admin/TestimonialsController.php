@@ -6,6 +6,7 @@ use App\Testimonial;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Http\Controllers\Controller;
 
 use App\Http\Requests\CreateTestimonialRequest;
 
@@ -100,7 +101,7 @@ class TestimonialsController extends Controller
 	{
 		$testimonial = Testimonial::findOrFail($id);
 		
-		if($testimonial->account_id == Auth::id() || Auth::user()->accountRole == 'Admin')
+		if(Auth::user()->accountRole == 'Admin')
 		{
 			$testimonial->delete();
 		}

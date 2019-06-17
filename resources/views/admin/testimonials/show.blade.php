@@ -17,13 +17,6 @@
 					<h3>{{ $testimonial->name }}</h3>
 					<h6>{{ $testimonial->created_at }}</h6>
 				</div>
-				<div class="col">
-					@if( $testimonial->accepted == true )
-						Status: <i class="fas fa-check"></i>
-					@else
-						Status: <i class="fas fa-times"></i>
-					@endif
-				</div>
 			</div>
 			<div class="row">
 				<div class="col">

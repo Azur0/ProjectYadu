@@ -40,7 +40,7 @@ class LocationController extends Controller
         $front = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=';
         $userLocation = $userLocation['lat'] . ',' . $userLocation['lon'];
         $destination = '&destinations=';
-        $EndApiKey = "&key=".env('GOOGLE_KEY');
+        $EndApiKey = "&key=".env('GOOGLE_KEY_DISTANCE');
         $eventsToReturn = new Collection();
         
         //This will separate the events in sets of 25 because the google api can only receive a maximum of 25 destinations for each request

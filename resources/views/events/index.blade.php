@@ -109,8 +109,6 @@
             },
             dataType: 'json',
             success: function(data) {
-                //TODO remove this -- LOG -----------------------------------------------------------------------------
-                console.log(data);
                 if (data == "") {
                     $('#eventsToDisplay').html(
                         //TODO remove inline style

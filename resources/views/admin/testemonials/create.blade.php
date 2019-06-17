@@ -8,16 +8,14 @@
 	</div>
 	<div class="card">
 		<div class="card-header">
-			{{}}
+			
 		</div>
 		<div class="card-body">
 			<form action="/admin/testemonials" method="POST">
 				@csrf
-				<input type="hidden" name="id" value="{{ $testemonial->id }}">
-
 				<div class="form-group">
 					<label for="name">{{ __('testemonials.form_name') }}</label>
-					<input type="text" class="form-control" name="name" placeholder="{{__('testemonials.form_name')}}" maxlength="99" required value="{{ $testemonial->name }}">
+					<input type="text" class="form-control" name="name" placeholder="{{__('testemonials.form_name')}}" maxlength="99" required value="{{ old('name') }}">
 			
 					@if ($errors->has('activityName'))
 						<div class="error">{{__('events.create_error_title_required')}}</div>
@@ -26,7 +24,7 @@
 				<div class="form-group">
 					<label for="experience">{{ __('testemonials.form_name') }}</label>
 					<textarea name="experience" placeholder="{{__('testemonials.form_experience')}}" maxlength="150" required>
-						{{ $testemonial->experience }}
+						{{ old('experience') }}
 					</textarea>
 
 					@if ($errors->has('description'))
@@ -35,7 +33,7 @@
 				</div>
 
 				<div>
-					<input type="submit" name="submit" value="{{__('testemonials.update')}}">
+					<input type="submit" name="submit" value="{{__('testemonials.create')}}">
 				</div>
 			</form>
 		</div>

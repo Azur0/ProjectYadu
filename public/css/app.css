@@ -11954,7 +11954,7 @@ input[type=radio]:checked + .category span {
 
 .CSH_tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 200px;
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -11964,7 +11964,7 @@ input[type=radio]:checked + .category span {
   z-index: 1;
   bottom: 125%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -100px;
   opacity: 0;
   transition: opacity 0.3s;
 }

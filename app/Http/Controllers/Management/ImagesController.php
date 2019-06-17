@@ -42,8 +42,8 @@ class ImagesController extends Controller
 
 	public function addtype(Request $request) {
 		$thing = $this->validate($request, [
-			'defaultImage' => 'required|image|max:10240|mimes:jpg,png,jpeg',
-			'selectedImage' => 'required|image|max:10240|mimes:jpg,png,jpeg',
+			'defaultImage' => 'required|image|dimensions:ratio=1/1,max_width=10000,max_height=10000|max:10240|mimes:jpg,png,jpeg',
+			'selectedImage' => 'required|image|dimensions:ratio=1/1,max_width=10000,max_height=10000|max:10240|mimes:jpg,png,jpeg',
 			'naam' => 'required|string|min:1|max:25'
 			]);
 		if($request->file('defaultImage')->getSize() > 16777215 || $request->file('selectedImage')->getSize() > 16777215){
@@ -65,7 +65,7 @@ class ImagesController extends Controller
 	public function update(Request $request) {
 		$this->validate($request, [
 			'selected' => 'required',
-			'default' => 'required|image|max:10240|mimes:jpg,png,jpeg'
+			'default' => 'required|image|dimensions:ratio=1/1,max_width=10000,max_height=10000|max:10240|mimes:jpg,png,jpeg'
 			]);
 		if($request->file('default')->getSize() > 16777215){
 			return back()->withErrors(__('image.file_too_large'));
@@ -135,7 +135,7 @@ class ImagesController extends Controller
 
 	public function addeventpicture(Request $request, $id) {
 		$this->validate($request, [
-			'eventpicture' => 'required|image|mimes:jpg,png,jpeg|max:2048'
+			'eventpicture' => 'required|imagedimensions:ratio=1/1,max_width=10000,max_height=10000||mimes:jpg,png,jpeg|max:2048'
 		]);
 		if($request->file('eventpicture')->getSize() > 16777215){
 			return back()->withErrors(__('image.file_too_large'));
@@ -180,7 +180,7 @@ class ImagesController extends Controller
 
 	public function updatetagpicture(Request $request) {
 		$this->validate($request, [
-			'image' => 'image|mimes:jpg,png,jpeg|max:2048',
+			'image' => 'image|dimensions:ratio=1/1,max_width=10000,max_height=10000|mimes:jpg,png,jpeg|max:2048',
 			'naam' => 'required|string|min:1|max:25'
 			]);
 		if(!empty($request->file('image'))){
@@ -205,7 +205,7 @@ class ImagesController extends Controller
 
 	public function updateeventpicture(Request $request) {
 		$this->validate($request, [
-			'updateevent' => 'image|mimes:jpg,png,jpeg|max:2048',
+			'updateevent' => 'image|dimensions:ratio=1/1,max_width=10000,max_height=10000|mimes:jpg,png,jpeg|max:2048',
 			]);
 		if($request->file('updateevent')->getSize() > 16777215){
 			return redirect('/admin/images/category')->withErrors(__('image.file_too_large'));

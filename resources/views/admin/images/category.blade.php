@@ -403,9 +403,6 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function (data) { 
                     fetch_customer_data(localStorage.getItem("tag_id"));
-                },
-                error: function (data) {
-                    console.log(data);
                 }
         }) 
     }

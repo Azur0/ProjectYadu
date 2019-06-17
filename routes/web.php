@@ -87,7 +87,7 @@ Route::post('admin/suspensions/ip/{ip}/destroy', 'Admin\SuspensionsController@de
 //testemonials
 Route::resource('/testemonials', 'TestemonialsController');
 Route::get('/account/testemonials', 'HomeController@myTestemonials');
-Route::resource('admin/testemonials', 'Admin\TestemonialsController')->middleware('auth', 'isAdmin');
+Route::resource('admin/testemonials', 'Admin\AdminTestemonialsController')->middleware('auth', 'isAdmin');
 
 Route::resource('admin/events','Admin\EventsController');
 Route::post('/admin/events/actionDistanceFilter', 'Admin\EventsController@actionDistanceFilter')->name('admin_events_controller.actionDistanceFilter');

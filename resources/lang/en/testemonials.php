@@ -1,20 +1,20 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Testemonials Language Lines
+| Testimonials Language Lines
 |--------------------------------------------------------------------------
 */
 
 return [
-	'header_testemonials' => 'Testemonials',
-	'header_testemonial' => 'Testemonial',
+	'header_testemonials' => 'Testimonials',
+	'header_testemonial' => 'Testimonial',
 	'header_testemonials_text' => 'How did other people experience Yadu?',
 	'header_new' => 'new',
 
 	'form_name' => 'Name',
 	'form_experience' => 'Experience',
-	'form_create' => 'Create Testemonial',
-	'form_update' => 'Update Testemonial',
+	'form_create' => 'Create Testimonial',
+	'form_update' => 'Update Testimonial',
 	'form_accepted' => 'Status',
 	'form_accepted_true' => 'Accepted',
 	'form_accepted_false' => 'Denied',
@@ -31,5 +31,5 @@ return [
 	'delete_title_confirm' => 'Are you sure?',
 	'delete_confirm_delete' => 'Delete',
 	'delete_dismiss_delete' => 'Cancel',
-	'delete_confirm_text' => 'The Testemonial will be permanently deleted!',
+	'delete_confirm_text' => 'The Testimonial will be permanently deleted!',
 ];

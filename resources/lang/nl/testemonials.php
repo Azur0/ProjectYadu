@@ -1,20 +1,20 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Testemonials Language Lines
+| Testimonials Language Lines
 |--------------------------------------------------------------------------
 */
 
 return [
-	'header_testemonials' => 'Testemonials',
-	'header_testemonial' => 'Testemonial',
+	'header_testemonials' => 'Testimonials',
+	'header_testemonial' => 'Testimonial',
 	'header_testemonials_text' => 'Hoe hebben andere mensen Yadu ervaren?',
 	'header_new' => 'Nieuw',
 
 	'form_name' => 'Naam',
 	'form_experience' => 'Ervaring',
-	'form_create' => 'Testemonial Aanmaken',
-	'form_update' => 'Testemonial Bijwerken',
+	'form_create' => 'Testimonial Aanmaken',
+	'form_update' => 'Testimonial Bijwerken',
 	'form_accepted' => 'Status',
 	'form_accepted_true' => 'Geaccepteerd',
 	'form_accepted_false' => 'Afgekeurt',

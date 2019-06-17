@@ -16,7 +16,12 @@ return [
     'amount_chatmessages' => 'Aantal chat berichten',
     'amount_new_accounts' => 'Aantal nieuwe accounts',
     'amount_total_events' => 'Totaal aantal evenementen',
+    'active_user' => 'Meest actieve gebruiker',
+    'most_active_event' => 'Meest actieve evenement',
+    'participants' => 'Deelnemers',
     'shared_events' => 'Gedeelde evenementen',
     'event_categories' => 'Aantal evenementen per categorie',
     'event_heatmap' => 'Evenementen heatmap',
+    'amount_zero_participants' => 'Evenementen zonder deelnemers',
+    'amount_average_participants' => 'Gemiddeld aantal deelnemers'
 ];

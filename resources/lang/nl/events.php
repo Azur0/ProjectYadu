@@ -8,21 +8,6 @@ return [
 |--------------------------------------------------------------------------
 */
 
-///////////////////////////////// Global //////////////////////////////////
-
-    'cat1' => 'Uitje met gezinnen',
-    'cat2' => 'Eten',
-    'cat3' => 'Borrelen',
-    'cat4' => 'Koffie',
-    'cat5' => 'Wandelen',
-    'cat6' => 'Uitje in stad',
-    'cat7' => 'Museum',
-    'cat8' => 'Theater/film',
-    'cat9' => 'Evenementen',
-    'cat10' => 'Van alles wat',
-    'cat11' => 'Sporten',
-    'cat12' => 'Op wielen',
-
 ///////////////////////////////// Index ///////////////////////////////////
 
     'index_create_event' => 'Organiseer een evenement',
@@ -32,6 +17,9 @@ return [
     'index_loading_error' => 'Er kan geen event worden geladen.',
     'index_search_placeholder' => 'Naam',
     'index_search_category_placeholder' => 'Categorie',
+    'index_activate_modal_title' => 'Activeer uw account',
+    'index_activate_modal_description' => 'Je moet je account activeren om een evenement aan te maken.',
+    'index_ok_modal_button' => 'Ok',
 
 ///////////////////////////////// Create //////////////////////////////////
 

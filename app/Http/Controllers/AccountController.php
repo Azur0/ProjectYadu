@@ -231,6 +231,7 @@ class AccountController extends Controller
 		$account->isDeleted = 1;
 		$account->bio = null;
 		$account->remember_token = null;
+		$account->doForceLogout = 1;
 
 		$account->save();
 	}

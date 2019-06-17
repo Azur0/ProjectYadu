@@ -8,21 +8,6 @@ return [
 |--------------------------------------------------------------------------
 */
 
-///////////////////////////////// Global //////////////////////////////////
-
-    'cat1' => 'With families',
-    'cat2' => 'Food',
-    'cat3' => 'Drinks',
-    'cat4' => 'Coffee',
-    'cat5' => 'Hiking',
-    'cat6' => 'In the City',
-    'cat7' => 'Museum',
-    'cat8' => 'Theater/film',
-    'cat9' => 'Events',
-    'cat10' => 'A little bit of everything',
-    'cat11' => 'Sports',
-    'cat12' => 'On wheels',
-
 ///////////////////////////////// Index ///////////////////////////////////
 
     'index_create_event' => 'Organize an event',
@@ -32,6 +17,9 @@ return [
     'index_loading_error' => 'Events could not be loaded',
     'index_search_placeholder' => 'Name',
     'index_search_category_placeholder' => 'Category',
+    'index_activate_modal_title' => 'Activate your account',
+    'index_activate_modal_description' => 'You must activate your account in order to create an event.',
+    'index_ok_modal_button' => 'Ok',
 
 ///////////////////////////////// Create //////////////////////////////////
 

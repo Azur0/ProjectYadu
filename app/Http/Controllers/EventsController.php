@@ -90,12 +90,16 @@ class EventsController extends Controller
 
     public function create()
     {
-        if (Auth::check() && Auth::user()->hasVerifiedEmail()) {
-            $Tags = EventTag::all();
-            $Picture = EventPicture::all();
-            return view('events.create')->withtags($Tags)->withpictures($Picture);
-        }
-        return redirect('/events');
+        if (Auth::check() ) {
+            if(!Auth::user()->hasVerifiedEmail()) {
+                return redirect('/events')->with(['error' => 'activate message']);
+            }else{
+                $Tags = EventTag::all();
+                $Picture = EventPicture::all();
+                return view('events.create')->withtags($Tags)->withpictures($Picture);
+            }
+        } 
+        return redirect('/login');
     }
 
     public function action(Request $request)
@@ -327,8 +331,8 @@ class EventsController extends Controller
                 'isDeleted' => 1
             ]);;
         }
-
-        return redirect('account/myevents');
+        // dd(redirect('account/myevents')->with('success', __('profile.info_event_deleted')));
+        return redirect('account/myevents')->with('success', __('profile.info_event_deleted'));
     }
 
     public function join($id)
@@ -391,6 +395,7 @@ class EventsController extends Controller
 
         $tags = EventTag::where('tag', 'like', '%' . $request->inputTag . '%')->pluck('id');
         $names = Event::where('eventName', 'like', '%' . $request->inputName . '%')->pluck('id');
+        $pageNumber= $request->pageNumber;
 
         $blockedUsers = [];
         $UsersBlockedYou = [];
@@ -408,7 +413,7 @@ class EventsController extends Controller
             ->whereIn('id', $names)
             ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
-            ->get();
+            ->take(24)->skip(($pageNumber-1)*24)->get();
 
         $events = new Collection();
 
@@ -427,6 +432,16 @@ class EventsController extends Controller
             $event->setAttribute('date', $date);
             $events->push($event);
         }
-        return json_encode($events);
+        $events2 = Event::where('isDeleted', '==', 0)
+        ->where('startDate', '>=', $this->formatDate())
+        ->whereNotIn('owner_id', $blockedUsers)
+        ->whereNotIn('owner_id', $UsersBlockedYou)
+        ->whereIn('id', $names)
+        ->whereIn('tag_id', $tags)->get();
+        $data = array();
+        $data['events'] = $events;
+        $data['total_length'] = count($events2);
+        
+        return json_encode($data);
     }
 }

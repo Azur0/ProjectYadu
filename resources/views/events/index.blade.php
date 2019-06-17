@@ -25,27 +25,53 @@
             <input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag"/>
             <datalist id="tags">
                 @foreach ($tags as $tag)
-                    <option value="{{__('events.cat'.$tag->id)}}">
+                    <option value="{{$tag->tag}}">
                 @endforeach
-            </datalist>
-            <label for="filterByName">{{__('events.index_search_name')}}</label>
-            <input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" autocomplete="off"/>
+        </datalist>
+        <label for="filterByName">{{__('events.index_search_name')}}</label>
+        <input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" autocomplete="off" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <a href="/events/create" class="btn btn-yadu-orange w-100"><i class="fas fa-user-friends"></i>&nbsp;{{__('events.index_create_event')}}</a>
+    </div>
+</div>
+<div class="event_overview row" id="eventsToDisplay">
+    <img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-yadu-orange w-100" id="loadMore" onclick="fetch_events()">Load more</button>
+    </div>
+</div>
+    @if(Session::get('error'))
+    <!-- Modal -->
+        <div class="modal fade" id="activateModal" tabindex="-1" role="dialog" aria-labelledby="activateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="activateModalLabel">{{ __('events.index_activate_modal_title') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            {{ __('events.index_activate_modal_description') }}
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal">
+                    <button type="button" class="btn btn-primary">{{ __('events.index_ok_modal_button') }}</button>
+                </a>
+            </div>
+            </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <a href="/events/create" class="btn btn-yadu-orange w-100"><i
-                        class="fas fa-user-friends"></i>&nbsp;{{__('events.index_create_event')}}</a>
         </div>
-    </div>
-
-    <div class="event_overview row" id="eventsToDisplay">
-        <img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>
-    </div>
-
-
-    <script type="text/javascript">
+        <script defer>$("#activateModal").modal('show');</script>
+    @endif
+<script type="text/javascript">
     var slider = document.getElementById("rangeValue");
     var val = document.getElementById("rangeValueDisplay");
     val.innerHTML = slider.value;
@@ -62,18 +88,27 @@
     };
     $(document).ready(function() {
         fetch_events();
-        document.getElementById("box-move-with-distance").style.transform = "translate(-" + ((((slider.value /5) -1) * 10) + 5) + "px) rotate(-136deg)";
+        document.getElementById("box-move-with-distance").style.transform = "translate(-" + ((((slider.value / 5) - 1) * 10) + 5) + "px) rotate(-136deg)";
         document.getElementById("box-move-with-distance").style.margin = "0 0 0 " + ((((slider.value / 5) - 1) * 25)) + "%";
 
     });
-
+    var pageNumber = 0;
+    var totalEvents = 0;
+    var tempDistance = 0;
     //AJAX request
     function fetch_events() {
-        $('#eventsToDisplay').html("<img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>");
         var distance;
         distance = $("#rangeValue").val();
         var inputTag = $(filterByTag).val();
         var inputName = $(filterByName).val();
+        var tempDistance = this.tempDistance;
+        if (distance != tempDistance) {
+            pageNumber = 0;
+            totalEvents = 0;
+            $("#loadMore").show();
+            $('#eventsToDisplay').html("<img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>");
+        }
+        this.pageNumber += 1;
 
         $.ajax({
             url: "{{ route('events_controller.actionDistanceFilter')}}",
@@ -82,21 +117,22 @@
                 distance: distance,
                 inputTag: inputTag,
                 inputName: inputName,
+                pageNumber: this.pageNumber,
                 _token: '{{ csrf_token() }}'
             },
             dataType: 'json',
             success: function(data) {
-                console.log(data);
+                events = data["events"];
+                totalEvents +=events.length;
                 if (data == "") {
                     $('#eventsToDisplay').html(
-                        //TODO remove inline style
-                        //TODO TRANSLATION
                         "<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_no_event_found')}}</h1><div>"
                     );
                 } else {
-                    $('#eventsToDisplay').html("");
-
-                    data.forEach(function(element) {
+                    if (distance != tempDistance) {
+                        $('#eventsToDisplay').html("");
+                    }
+                    events.forEach(function(element) {
                         var eventNameSliced = element['eventName'];
                         $('#eventsToDisplay').html($("#eventsToDisplay").html() +
                             "<div class='col-md-6 col-lg-4 event'><a href='/events/" + element[
@@ -108,15 +144,18 @@
                             "<br>" + element['loc'] +
                             "</p></div></div></a></div>");
                     });
+                    if (totalEvents == data["total_length"]) {
+                        $("#loadMore").hide();
+                    }
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 $('#eventsToDisplay').html(
-                    //TODO TRANSLATION
                     "<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_loading_error')}}</h1><div>"
                 );
             }
         })
+        this.tempDistance = distance;
     }
-    </script>
-    @endsection
+</script>
+@endsection

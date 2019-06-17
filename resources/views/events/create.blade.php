@@ -15,7 +15,7 @@
                     <label for="{{$Tag->tag}}" class="category">
                         <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($Tag->imageDefault) . '"/>'; ?>
                         <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($Tag->imageSelected) . '"/>'; ?>
-                        <span>{{__('events.cat'.$Tag->id)}}</span>
+                        <span>{{$Tag->tag}}</span>
                     </label>
                     @endforeach
                 </div>
@@ -63,9 +63,9 @@
         <div class="date">
             <h3>4. {{__('events.create_step4')}}</h3>
             <div class="description">
-                <h5>Date</h5>
+                <h5>{{__('events.create_date')}}</h5>
                 <input id="date" name="startDate" type="date" value="{{ old('startDate') }}" required>
-                <h5>Time</h5>
+                <h5>{{__('events.create_time')}}</h5>
                 <input id="date" name="startTime" type="time" value="{{ old('startTime') }}" required>
                 @if ($errors->has('startDate'))
                 <div class="error">{{__('events.create_error_invalid_datetime')}}</div>
@@ -141,7 +141,6 @@ function fetch_customer_data(query) {
         },
         dataType: 'json',
         success: function(data) {
-            console.log(data);
             if (data == "") {
                 $('#box2').html("<h5><i>{{__('events.create_select_type_first')}}</i></h5>");
             } else {

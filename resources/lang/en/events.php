@@ -8,21 +8,6 @@ return [
 |--------------------------------------------------------------------------
 */
 
-///////////////////////////////// Global //////////////////////////////////
-
-    'cat1' => 'With families',
-    'cat2' => 'Food',
-    'cat3' => 'Drinks',
-    'cat4' => 'Coffee',
-    'cat5' => 'Hiking',
-    'cat6' => 'In the City',
-    'cat7' => 'Museum',
-    'cat8' => 'Theater/film',
-    'cat9' => 'Events',
-    'cat10' => 'A little bit of everything',
-    'cat11' => 'Sports',
-    'cat12' => 'On wheels',
-
 ///////////////////////////////// Index ///////////////////////////////////
 
     'index_create_event' => 'Organize an event',
@@ -45,6 +30,9 @@ return [
     'create_step5' => 'Describe your event',
     'create_step6' => 'Amount of people',
     'create_step7' => 'Initiator',
+
+    'create_date' => 'Date',
+    'create_time' => 'Time',
 
     'create_submit' => 'Submit',
     'create_title' => 'Title',

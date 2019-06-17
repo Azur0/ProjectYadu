@@ -27,6 +27,13 @@
 	display: flex !important;
 }
 
+.item-grouping{
+	position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
 .btn-yadu-orange {
 	color: white;
 	background-color: #F39200;
@@ -732,7 +739,7 @@ h6.collapse-header {
 .btn_prohibitedWord
 {
 	background-color: #308d2c;
-	margin-left: 2%;
+	margin-left: 25px;
 	color: white;
 }
 
@@ -750,36 +757,32 @@ h6.collapse-header {
 	border-radius: 0.25rem;
 }
 
-@media screen and (max-width: 739px)
-{
+@media screen and (max-width: 739px) {
 	.search {
 		display: flex !important;
 		flex-wrap: nowrap !important;
 		align-items: center !important;
 		white-space: nowrap !important;
 	}
-}
-.avatar {
-	width: auto;
-	max-width: 50px;
-	height: auto;
-	max-height: 50px;
+
+	.avatar {
+		width: 50px;
+		height: 50px;
+	}
+
+	.avatar-lg {
+		width: 100px;
+		height: 100px;
+	}
+
+	.collapse-item {
+		overflow: hidden !important;
+		text-overflow: ellipsis;
+	}
 }
 
-.avatar-lg {
-	width: 100px;
-	height: 100px;
-}
 
-.collapse-item {
-	overflow: hidden !important;
-	text-overflow: ellipsis;
-}
-
-.search {
-	width: 100%;
-}
-
-.search div{
-	display: inline-block;
+.on_hover_pointer
+{
+    cursor: pointer;
 }

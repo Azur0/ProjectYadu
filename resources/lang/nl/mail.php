@@ -8,8 +8,10 @@ return [
     "eventCreatedText1" => "Het evenement dat is aangemaakt is ",
     "eventCreatedText2" => ".",
 
-    "editTitle" => "Een van je evenementen is aangepast.",
-    "editTitleParticipant" => "One of the events ",
+    "editTitle" => "een van je evenementen is aangepast.",
+    "editTitle2" => "heeft evenement" ,
+    "editTitle21" => "aangepast",
+    "editTitleParticipant" => "Eén van je evenementen is aangepast",
     "editText1" => "Evenement ",
     "editText2" => " is aangepast.",
 

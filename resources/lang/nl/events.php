@@ -8,21 +8,6 @@ return [
 |--------------------------------------------------------------------------
 */
 
-///////////////////////////////// Global //////////////////////////////////
-
-    'cat1' => 'Uitje met gezinnen',
-    'cat2' => 'Eten',
-    'cat3' => 'Borrelen',
-    'cat4' => 'Koffie',
-    'cat5' => 'Wandelen',
-    'cat6' => 'Uitje in stad',
-    'cat7' => 'Museum',
-    'cat8' => 'Theater/film',
-    'cat9' => 'Evenementen',
-    'cat10' => 'Van alles wat',
-    'cat11' => 'Sporten',
-    'cat12' => 'Op wielen',
-
 ///////////////////////////////// Index ///////////////////////////////////
 
     'index_create_event' => 'Organiseer een evenement',
@@ -45,6 +30,9 @@ return [
     'create_step5' => 'Beschrijf je uitje',
     'create_step6' => 'Aantal personen',
     'create_step7' => 'Eigenaar',
+
+    'create_date' => 'Datum',
+    'create_time' => 'Tijd',
 
     'create_submit' => 'Verzenden',
     'create_title' => 'Titel',

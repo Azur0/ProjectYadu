@@ -8,6 +8,47 @@
 				<div class="backlink">
 					<a href="/home"><i class="fas fa-arrow-left"></i> Dashboard</a>
 				</div>
+
+				<div class="card">
+					<div class="card-header">{{__('profile.edit_avatar_title')}}</div>
+
+					<div class="row px-3 pb-3">
+						<div class="col-xl-5 mt-3">
+							<img class="w-100"
+								 src="data:image/png;base64,{{ chunk_split(base64_encode(Auth::user()->avatar)) }}">
+						</div>
+						<div class="col-xl-7 mt-3">
+							<form method="POST" action="/profile/updateAvatar" enctype="multipart/form-data">
+								@csrf
+
+								<input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
+								<div class="form-group row w-100">
+									<div class="input-group">
+										<div class="input-group-prepend">
+                                                <span class="input-group-text"
+													  id="inputGroupFileAddon01">{{__('profile.edit_edit_avatar_upload')}}</span>
+										</div>
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" name="avatar" id="avatar" accept="image/*" aria-describedby="inputGroupFileAddon01">
+											<label id="custom-file-label" class="custom-file-label lineClamp"
+												   for="avatar">{{__('profile.edit_edit_avatar_choose_image')}}</label>
+										</div>
+									</div>
+									<span class="tiny-text">{{__('profile.edit_avatar_info')}}</span>
+
+									@if ($errors->has('avatar'))
+										<span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $errors->first('avatar') }}</strong>
+                                        </span>
+									@endif
+								</div>
+								<input class="btn btn-primary" type="submit"
+									   value="{{__('profile.edit_update_avatar')}}" name="submit">
+							</form>
+						</div>
+					</div>
+				</div>
+
 				<div class="card">
 					<div class="card-header">{{__('profile.edit_edit_profile_title')}}</div>
 
@@ -153,7 +194,7 @@
 						<form method="POST" action="/profile/updatePrivacySettings">
 							@csrf
 							<input type="hidden" id="accountId" name="accountId" value="{{$account->id}}">
-														
+
 							<div class="form-group row">
 								<label for="followerVisibility"
 									   class="col-md-4 col-form-label text-md-right">{{__('profile.edit_privacy_followerVisibility')}}</label>
@@ -180,6 +221,10 @@
 									</span>
 									@endif
 								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_privacy_follower')}}</span>
+								</div>
 							</div>
 							<div class="form-group row">
 								<label for="followingVisibility"
@@ -205,6 +250,10 @@
 										<strong>{{ $errors->first('followingVisibility') }}</strong>
 									</span>
 									@endif
+								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_privacy_following')}}</span>
 								</div>
 							</div>
 							<div class="form-group row">
@@ -233,6 +282,10 @@
 									</span>
 									@endif
 								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_privacy_info')}}</span>
+								</div>
 							</div>
 							<div class="form-group row">
 								<label for="eventsVisibility"
@@ -259,6 +312,10 @@
 										<strong>{{ $errors->first('eventsVisibility') }}</strong>
 									</span>
 									@endif
+								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_privacy_events')}}</span>
 								</div>
 							</div>
 							<div class="form-group row">
@@ -287,8 +344,11 @@
 									</span>
 									@endif
 								</div>
+								<div class="CSH_tooltip">
+									<i class="fas fa-question-circle"></i>
+									<span class="tooltiptext">{{__('profile.CSH_privacy_participating')}}</span>
+								</div>
 							</div>
-
 							<div class="form-group row mb-0">
 								<div class="col-md-6 offset-md-4">
 									<button id="submit" type="submit" class="btn btn-primary">
@@ -301,63 +361,57 @@
 					</div>
 				</div>
 
+
+				<!-- Email language preference settings -->
 				<div class="card">
-                    <div class="card-header"> {{__('profile.edit_unblock_account_title')}}</div>
-                    <div class="card-body">
-                            @foreach ( $account->blockedUsers as $blockedUser )
-                            <form method="POST" id="unblock{{$blockedUser->blockedAccount->firstName}}" action="/profile/unblockUser">
-                            @csrf
-                            <input type="hidden" name="id" value="{{$blockedUser->blockedAccount->id}}">
-                            <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{$blockedUser->blockedAccount->firstName}} {{ $blockedUser->blockedAccount->middleName }} {{ $blockedUser->blockedAccount->lastName }}</label>
-                                    <div class="col-md-4">
-                                    <button type="button" class="btn btn-primary float-right" data-toggle="modal"
-                                            data-target="#confirmUnblockAccount{{$blockedUser->blockedAccount->firstName}}">
-                                        {{__('profile.edit_unblock_account_button')}}
-                                    </button>
-                                </div>
+					<div class="card-header">
+						{{__('profile.edit_change_account_settings_language_preference_title')}}
+					</div>
+					<div class="card-body">
+						<form method="POST" action="/profile/setMailLanguage">
+						@csrf
+							<div class="form-group row justify-content-md-center">
+								<label for="FollowNotificationCreateEvent"
+									   class="col-md-4 col-form-label text-md-right">{{__('profile.edit_change_account_settings_language_preference')}}
+								</label>
 
-                                <div class="modal fade" id="confirmUnblockAccount{{$blockedUser->blockedAccount->firstName}}" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">{{__('profile.edit_delete_account_confirm_title')}}</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                            {{__('profile.edit_unblock_account_areYouSure', ['name' => $blockedUser->blockedAccount->firstName])}}
-                                            
-                                            </div>
-                                            <div class="modal-footer">
-                                                <input type="submit" form="unblock{{$blockedUser->blockedAccount->firstName}}" class="btn btn-danger"
-                                                       value="{{__('profile.edit_unblock_account_positive', ['name' => $blockedUser->blockedAccount->firstName])}}">
-                                                <button type="button" class="btn btn-primary"
-                                                        data-dismiss="modal">{{__('profile.edit_unblock_account_negative', ['name' => $blockedUser->blockedAccount->firstName])}}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </form>
-                            @endforeach
+								<div class="col-md-6">
+									<select name="LanguagePreference" selected="{{$account->LanguagePreference}}"
+											class="form-control{{ $errors->has('LanguagePreference') ? ' is-invalid' : '' }}">
+										@if($account->settings->LanguagePreference == 'eng')
+											<option value="English" selected>{{__('profile.English')}}</option>
+											<option value="Dutch">{{__('profile.Dutch')}}</option>
+										@elseif($account->settings->LanguagePreference == 'nl')
+											<option value="English">{{__('profile.English')}}</option>
+											<option value="Dutch" selected>{{__('profile.Dutch')}}</option>
+										@endif
+									</select>
+									@if ($errors->has('LanguagePreference'))
+										<span class="invalid-feedback force-show" role="alert">
+                							<strong>{{ $errors->first('LanguagePreference') }}</strong>
+            							</span>
+									@endif
+								</div>
+							</div>
 
-                            
-                    </div>
-                </div>
-
+							<div class="col-md-6 offset-md-4">
+								<div class="col">
+									<button id="submit" type="submit" class="btn btn-primary">
+										{{__('profile.edit_change_account_setting')}}
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 				<!-- Notification settings -->
 				<div class="card">
 					<div class="card-header">
 						{{__('profile.edit_change_account_settings_title')}}
 					</div>
 					<div class="card-body">
-						<form method="POST" action="/profile/updateAccountSettings/{{$account->id}}">
+						<form method="POST" action="/profile/updateAccountSettings">
 							@csrf
-							@method("PATCH")
 							<div class="form-group row justify-content-md-center">
 								<h5>{{__('profile.edit_change_account_settings_follow_notification_title')}}</h5>
 							</div>
@@ -374,6 +428,10 @@
 											<input type="checkbox" name="FollowNotificationCreateEvent" class="custom-control-input" id="customSwitches" checked>
 										@endif
 										<label class="custom-control-label" for="customSwitches"></label>
+										<div class="CSH_tooltip">
+											<i class="fas fa-question-circle"></i>
+											<span class="tooltiptext">{{__('profile.CSH_notifications_eventCreated')}}</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -389,6 +447,10 @@
 											<input type="checkbox" name="FollowNotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches1" checked>
 										@endif
 										<label class="custom-control-label" for="customSwitches1"></label>
+										<div class="CSH_tooltip">
+											<i class="fas fa-question-circle"></i>
+											<span class="tooltiptext">{{__('profile.CSH_notifications_follower')}}</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -407,6 +469,10 @@
 											<input type="checkbox" name="NotificationEventEdited" class="custom-control-input" id="customSwitches3" checked>
 										@endif
 										<label class="custom-control-label" for="customSwitches3"></label>
+										<div class="CSH_tooltip">
+											<i class="fas fa-question-circle"></i>
+											<span class="tooltiptext">{{__('profile.CSH_notifications_eventEdited')}}</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -422,6 +488,10 @@
 											<input type="checkbox" name="NotificationEventDeleted" class="custom-control-input" id="customSwitches4" checked>
 										@endif
 										<label class="custom-control-label" for="customSwitches4"></label>
+										<div class="CSH_tooltip">
+											<i class="fas fa-question-circle"></i>
+											<span class="tooltiptext">{{__('profile.CSH_notifications_eventDeleted')}}</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -440,6 +510,10 @@
 											<input type="checkbox" name="NotificationJoinAndLeaveEvent" class="custom-control-input" id="customSwitches5" checked>
 										@endif
 										<label class="custom-control-label" for="customSwitches5"></label>
+										<div class="CSH_tooltip">
+											<i class="fas fa-question-circle"></i>
+											<span class="tooltiptext">{{__('profile.CSH_notifications_eventJoinedLeft')}}</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -522,6 +596,52 @@
 								</div>
 							</div>
 						</form>
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header"> {{__('profile.edit_unblock_account_title')}}</div>
+					<div class="card-body">
+						@foreach ( $account->blockedUsers as $blockedUser )
+							<form method="POST" id="unblock{{$blockedUser->blockedAccount->firstName}}" action="/profile/unblockUser">
+								@csrf
+								<input type="hidden" name="id" value="{{$blockedUser->blockedAccount->id}}">
+								<div class="form-group row">
+									<label class="col-md-4 col-form-label text-md-right">{{$blockedUser->blockedAccount->firstName}} {{ $blockedUser->blockedAccount->middleName }} {{ $blockedUser->blockedAccount->lastName }}</label>
+									<div class="col-md-4">
+										<button type="button" class="btn btn-primary float-right" data-toggle="modal"
+												data-target="#confirmUnblockAccount{{$blockedUser->blockedAccount->firstName}}">
+											{{__('profile.edit_unblock_account_button')}}
+										</button>
+									</div>
+
+									<div class="modal fade" id="confirmUnblockAccount{{$blockedUser->blockedAccount->firstName}}" tabindex="-1" role="dialog">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title">{{__('profile.edit_delete_account_confirm_title')}}</h5>
+													<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													{{__('profile.edit_unblock_account_areYouSure', ['name' => $blockedUser->blockedAccount->firstName])}}
+
+												</div>
+												<div class="modal-footer">
+													<input type="submit" form="unblock{{$blockedUser->blockedAccount->firstName}}" class="btn btn-danger"
+														   value="{{__('profile.edit_unblock_account_positive', ['name' => $blockedUser->blockedAccount->firstName])}}">
+													<button type="button" class="btn btn-primary"
+															data-dismiss="modal">{{__('profile.edit_unblock_account_negative', ['name' => $blockedUser->blockedAccount->firstName])}}
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						@endforeach
 					</div>
 				</div>
 

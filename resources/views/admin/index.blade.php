@@ -38,7 +38,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xl-6 col-md-6 mb-4">
+    <div class="col-xl-3 col-md-6 mb-2">
         <div class="card border-left-warning shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <div class="col-xl-6 col-md-6 mb-4">
+    <div class="col-xl-3 col-md-6 mb-2">
         <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -70,6 +70,23 @@
         </div>
     </div>
 
+    <div class="col-xl-6 col-md-12 mb-2">
+        <a href=# id="activeUserLink">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{__('charts.active_user')}}</div>
+                            <div id="activeUser" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>
 <div class='row mb-3'>
 
@@ -98,6 +115,59 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-2">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{__('charts.amount_zero_participants')}}</div>
+                        <div id="zeroParticipants" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-2">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{__('charts.amount_average_participants')}}</div>
+                        <div id="averageParticipants" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-12 mb-2">
+        <a href=# id="mostParticipantsLink">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{__('charts.most_active_event')}}</div>
+                            <div id="mostParticipants" class="h5 mb-0 font-weight-bold text-gray-800">{{__('charts.loading')}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
 </div>
 
 <div class='row mb-3'>
@@ -151,6 +221,10 @@
     //Manually update cards on page load
     updateChatmessagesSend();
     updateAccountsCreated();
+    updateMostActiveAccount();
+    updateZeroParticipants();
+    updateMostParticipants();
+    updateAverageParticipants();
 
     //EventChart
     var eventChart = new Chart(document.getElementById('events'), {
@@ -209,6 +283,11 @@
         updateDateString(fromDate, toDate);
         updateChatmessagesSend(fromDate, toDate);
         updateAccountsCreated(fromDate, toDate);
+        updateMostActiveAccount(fromDate, toDate);
+        updateZeroParticipants(fromDate, toDate);
+        updateMostParticipants(fromDate, toDate)
+        updateAverageParticipants(fromDate, toDate)
+
         updateEventChart(fromDate, toDate);
         updateShareChart(fromDate, toDate);
         updateCategoryChart(fromDate, toDate);
@@ -238,7 +317,7 @@
     }
 
     function updateChatmessagesSend(fromDate, toDate) {
-        document.getElementById("newAccounts").innerHTML = "{{__('charts.loading')}}";
+        document.getElementById("chatmessages").innerHTML = "{{__('charts.loading')}}";
         $.ajax({
             url: "{{ route('admin_charts_chatmessages') }}",
             method: 'POST',
@@ -253,6 +332,7 @@
                 document.getElementById("chatmessages").innerHTML = data.messageData.messageCount;
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                    document.getElementById("chatmessages").innerHTML = '{{__('charts.no_data')}}';
                 console.log(jqXHR);
                 console.log(textStatus);
                 console.log(errorThrown);
@@ -277,6 +357,119 @@
                 document.getElementById("newAccounts").innerHTML = data.accountData.accountCount;
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                    document.getElementById("newAccounts").innerHTML = '{{__('charts.no_data')}}';
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    function updateMostActiveAccount(fromDate, toDate) {
+        document.getElementById("activeUser").innerHTML = "{{__('charts.loading')}}";
+
+        $.ajax({
+            url: "{{ route('admin_charts_most_active_user') }}",
+            method: 'POST',
+            async: true,
+            data: {
+                fromDate: fromDate,
+                toDate: toDate,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.length > 0) {
+                    let name = data[0].firstName
+                    if (data[0].middleName != null) {
+                        name = name + ' ' + data[0].middleName + ' '
+                    } else {
+                        name = name + ' ';
+                    }
+                    name = name + data[0].lastName;
+
+                    document.getElementById("activeUser").innerHTML = name;
+                    document.getElementById("activeUserLink").href = '{{url('/admin/accounts/')}}' + '/' + data[0].id;
+                } else {
+                    document.getElementById("activeUser").innerHTML = '{{__('charts.no_data')}}';
+                    document.getElementById("activeUserLink").href = '#';
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    function updateZeroParticipants(fromDate, toDate) {
+        document.getElementById("zeroParticipants").innerHTML = "{{__('charts.loading')}}";
+        $.ajax({
+            url: "{{ route('admin_charts_zero_participants') }}",
+            method: 'POST',
+            async: true,
+            data: {
+                fromDate: fromDate,
+                toDate: toDate,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(data) {
+                document.getElementById("zeroParticipants").innerHTML = data.zeroParticipantEventData.zeroParticipantCount;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                document.getElementById("zeroParticipants").innerHTML = '{{_('charts.no_data')}}';
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    function updateMostParticipants(fromDate, toDate) {
+        document.getElementById("mostParticipants").innerHTML = "{{__('charts.loading')}}";
+        $.ajax({
+            url: "{{ route('admin_charts_most_participants') }}",
+            method: 'POST',
+            async: true,
+            data: {
+                fromDate: fromDate,
+                toDate: toDate,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(data) {
+                document.getElementById("mostParticipants").innerHTML = data.mostParticipantEventData.eventName + ' | ' + data.mostParticipantEventData.amount + ' {{__('charts.participants')}}';
+                document.getElementById("mostParticipantsLink").href = '{{url('/events/')}}' + '/' + data.mostParticipantEventData.id;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                document.getElementById("mostParticipants").innerHTML = '{{__('charts.no_data')}}';
+                document.getElementById("mostParticipantsLink").href = '#';
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    function updateAverageParticipants(fromDate, toDate) {
+        document.getElementById("averageParticipants").innerHTML = "{{__('charts.loading')}}";
+        $.ajax({
+            url: "{{ route('admin_charts_average_participants') }}",
+            method: 'POST',
+            async: true,
+            data: {
+                fromDate: fromDate,
+                toDate: toDate,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(data) {
+                document.getElementById("averageParticipants").innerHTML = data.averageParticipantEventData.averageParticipantCount;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                document.getElementById("averageParticipants").innerHTML = '{{__('charts.no_data')}}';
                 console.log(jqXHR);
                 console.log(textStatus);
                 console.log(errorThrown);
@@ -372,7 +565,6 @@
             }]
         };
 
-        console.log(haha);
         return haha;
     }
 

@@ -45,6 +45,11 @@ return [
     'edit_delete_account_admin_error' => 'Je kan geen admin verwijderen',
     'edit_change_role_admin_error' => 'Je kan de rol van een admin account niet veranderen',
 
+    'edit_delete_account_confirm_title' => 'Verwijder event',
+    'edit_delete_event_confirm_content' => 'Weet je zeker dat je je account wilt verwijderen? Mensen die meededen krijgen een melding.',
+    'edit_delete_event_positive' => 'Ja, verwijder dit uitje',
+    'edit_delete_event_negative' => 'Nee, bewaar dit uitje!',
+
     'edit_restore_account_title' => 'Herstel account',
     'edit_restore_account_content' => 'Klik op de knop om dit account te herstellen.',
     'edit_restore_account_confirm_title' => 'Bevestigen',

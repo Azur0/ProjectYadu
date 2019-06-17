@@ -32,21 +32,19 @@ class EventEdited extends Mailable
     {
         $title = '';
         if($this->event->userName == $this->event->owner->firstName){
-            $title = Lang::get('mail.editText1') . " " .$this->event->eventName." ".Lang::get('mail.editText2');
+            $title = $this->event->owner->firstName . " " . Lang::get('mail.editTitle2') . " "
+                .$this->event->eventName." ". Lang::get('mail.editTitle21');
         }else {
-            $title = Lang::get('mail.editTitle');
+            $title = $this->event->userName ." ".Lang::get('mail.editTitle');
         }
 
-
-        return $this->markdown('admin/mail.event-edited')
+        return $this->markdown('mail/shortInformationMail')
             ->subject($title)
             ->with([
-                'title' => $title,
+                'headText' => $title,
             'salutation'=> Lang::get('mail.salutation'),
-            'ownerName'=>$this->event->owner->firstName . ",",
-                'body' => Lang::get('mail.editText1').$this->event->eventName . Lang::get('mail.editText2'),
-                'closing' => Lang::get('mail.closing')
-
+            'name'=>$this->event->owner->firstName . ",",
+                'bodyText' => Lang::get('mail.editText1').$this->event->eventName . Lang::get('mail.editText2'),
         ]);
     }
 }

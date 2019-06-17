@@ -6,23 +6,26 @@ use App\Account;
 use App\EventPicture;
 use App\Event;
 use App\BlockedUser;
+use App\Location;
+use App\AccountHasFollowers;
+use App\EventHasParticipants;
+use App\EventTag;
+
 use App\Events\EventJoined;
 use App\Events\EventLeft;
-use App\EventHasParticipants;
 use App\Http\Controllers\API\LocationController;
+use App\Http\Requests\CreateEventRequest;
 use App\Traits\DateToText;
+
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use App\EventTag;
 use Illuminate\Support\Facades\App;
-use Validator;
-use Illuminate\View\View;
-use function PhpParser\filesInDir;
 use Illuminate\Support\Carbon;
-use App\Location;
-use Auth;
-use App\AccountHasFollowers;
+use Illuminate\View\View;
 
+use function PhpParser\filesInDir;
+use Validator;
+use Auth;
 
 class EventsController extends Controller
 {
@@ -87,12 +90,16 @@ class EventsController extends Controller
 
     public function create()
     {
-        if (Auth::check() && Auth::user()->hasVerifiedEmail()) {
-            $Tags = EventTag::all();
-            $Picture = EventPicture::all();
-            return view('events.create')->withtags($Tags)->withpictures($Picture);
-        }
-        return redirect('/events');
+        if (Auth::check() ) {
+            if(!Auth::user()->hasVerifiedEmail()) {
+                return redirect('/events')->with(['error' => 'activate message']);
+            }else{
+                $Tags = EventTag::all();
+                $Picture = EventPicture::all();
+                return view('events.create')->withtags($Tags)->withpictures($Picture);
+            }
+        } 
+        return redirect('/login');
     }
 
     public function action(Request $request)
@@ -110,7 +117,7 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateEventRequest $request)
     {
        
         $validator = Validator::make($request->all(), [
@@ -132,12 +139,15 @@ class EventsController extends Controller
 
         $request['startDate'] = $request['startDate'] . ' ' . $request['startTime'];
 
-        $validator->after(function ($validator) use ($request) {
-            if ($this->isPictureValid($request['tag'], $request['picture'])) {
+        $validator->after(function ($validator) use ($request)
+        {
+            if ($this->isPictureValid($request['tag'], $request['picture']))
+            {
                 $validator->errors()->add('picture', 'Something is wrong with this field!');
             }
         });
-        if ($validator->fails()) {
+        if ($validator->fails())
+        {
             return redirect('/events/create')
                 ->withErrors($validator)
                 ->withInput();
@@ -152,28 +162,37 @@ class EventsController extends Controller
             'locality' => $request['locality'],
         ]);
 
-        Event::create(
-            [
-                'eventName' => $request['activityName'],
-                'description' => $request['description'],
-                'startDate' => $request['startDate'],
-                'numberOfPeople' => $request['people'],
-                'tag_id' => $request['tag'],
-                'location_id' => $location->id,
-                'owner_id' => auth()->user()->id,
-                'event_picture_id' => $request['picture']
-            ]
-        );
-        return redirect('/events');
+        $newEvent = new Event;
+        $newEvent->eventName = $request['activityName'];
+        $newEvent->description = $request['description'];
+        $newEvent->startDate = $request['startDate'];
+        $newEvent->numberOfPeople = $request['people'];
+        $newEvent->tag_id = $request['tag'];
+        $newEvent->event_picture_id = $request['picture'];
+
+        $newEvent->location_id = $location->id;
+
+        if($request['initiator'] == "1" || Auth::User()->accountRole != "Admin")
+        {
+        	$newEvent->owner_id = auth()->user()->id;
+        }
+
+        $newEvent->save();
+
+        return redirect('/events/'.$newEvent->id);
     }
 
     public function isPictureValid($tag, $picture)
     {
-        if (!EventPicture::where('id', '=', $picture)->exists()) {
+        if (!EventPicture::where('id', '=', $picture)->exists())
+        {
             return true;
-        } else {
+        }
+        else
+        {
             $eventPicture = EventPicture::all()->where('id', '=', $picture)->pluck('tag_id');
-            if ($eventPicture[0] != $tag) {
+            if ($eventPicture[0] != $tag)
+            {
                 return true;
             }
             return false;
@@ -267,7 +286,8 @@ class EventsController extends Controller
         }
 
         $event = Event::where('id', $id)->firstorfail();
-        if (Auth::id() == $event->owner_id) {
+
+        if (Auth::id() == $event->owner_id  && $event->startDate > date('Y-m-d H:i:s')) {
             $location = Location::where('id', $event->location_id)->firstorfail();
             $event->update(
                 [
@@ -306,25 +326,34 @@ class EventsController extends Controller
     {
         $event = Event::findOrFail($id);
         
-        if($event->owner_id == Auth::id()) {
+        if($event->owner_id == Auth::id() && $event->startDate > date('Y-m-d H:i:s')) {
             $event->update([
                 'isDeleted' => 1
             ]);;
         }
-
-        return redirect('account/myevents');
+        // dd(redirect('account/myevents')->with('success', __('profile.info_event_deleted')));
+        return redirect('account/myevents')->with('success', __('profile.info_event_deleted'));
     }
 
     public function join($id)
     {
-
-        if (Auth::user()->hasVerifiedEmail()) {
+        if (Auth::user()->hasVerifiedEmail())
+        {
             $event = Event::findOrFail($id);
-            if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
-                $event->participants()->attach(auth()->user()->id);
-                event(new EventJoined($event,auth()->user()->id));
+            if($event->owner_id)
+            {
+            	if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id))
+				{
+            		$event->participants()->attach(auth()->user()->id);
+                	event(new EventJoined($event,auth()->user()->id));
+            	}
+            	//TODO: Add error 'You already joined!' 
             }
-            //TODO: Add error 'You already joined!'
+            else
+            {
+				$event->owner_id = auth()->user()->id;
+				$event->save();
+            }
         }
         //TODO: Add error 'You are not logged in!'
         return redirect('/events/' . $id);
@@ -366,6 +395,7 @@ class EventsController extends Controller
 
         $tags = EventTag::where('tag', 'like', '%' . $request->inputTag . '%')->pluck('id');
         $names = Event::where('eventName', 'like', '%' . $request->inputName . '%')->pluck('id');
+        $pageNumber= $request->pageNumber;
 
         $blockedUsers = [];
         $UsersBlockedYou = [];
@@ -383,7 +413,7 @@ class EventsController extends Controller
             ->whereIn('id', $names)
             ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
-            ->get();
+            ->take(24)->skip(($pageNumber-1)*24)->get();
 
         $events = new Collection();
 
@@ -402,6 +432,16 @@ class EventsController extends Controller
             $event->setAttribute('date', $date);
             $events->push($event);
         }
-        return json_encode($events);
+        $events2 = Event::where('isDeleted', '==', 0)
+        ->where('startDate', '>=', $this->formatDate())
+        ->whereNotIn('owner_id', $blockedUsers)
+        ->whereNotIn('owner_id', $UsersBlockedYou)
+        ->whereIn('id', $names)
+        ->whereIn('tag_id', $tags)->get();
+        $data = array();
+        $data['events'] = $events;
+        $data['total_length'] = count($events2);
+        
+        return json_encode($data);
     }
 }

@@ -8,21 +8,6 @@ return [
 |--------------------------------------------------------------------------
 */
 
-///////////////////////////////// Global //////////////////////////////////
-
-    'cat1' => 'With families',
-    'cat2' => 'Food',
-    'cat3' => 'Drinks',
-    'cat4' => 'Coffee',
-    'cat5' => 'Hiking',
-    'cat6' => 'In the City',
-    'cat7' => 'Museum',
-    'cat8' => 'Theater/film',
-    'cat9' => 'Events',
-    'cat10' => 'A little bit of everything',
-    'cat11' => 'Sports',
-    'cat12' => 'On wheels',
-
 ///////////////////////////////// Index ///////////////////////////////////
 
     'index_create_event' => 'Organize an event',
@@ -32,6 +17,9 @@ return [
     'index_loading_error' => 'Events could not be loaded',
     'index_search_placeholder' => 'Name',
     'index_search_category_placeholder' => 'Category',
+    'index_activate_modal_title' => 'Activate your account',
+    'index_activate_modal_description' => 'You must activate your account in order to create an event.',
+    'index_ok_modal_button' => 'Ok',
 
 ///////////////////////////////// Create //////////////////////////////////
 
@@ -41,6 +29,10 @@ return [
     'create_step4' => 'Select the date and time',
     'create_step5' => 'Describe your event',
     'create_step6' => 'Amount of people',
+    'create_step7' => 'Initiator',
+
+    'create_date' => 'Date',
+    'create_time' => 'Time',
 
     'create_submit' => 'Submit',
     'create_title' => 'Title',
@@ -51,6 +43,9 @@ return [
 
     'create_select_type_first' => 'Please select an event type first',
     'create_amount_of_participants' => 'people can join (including yourself)',
+    'create_initiator_info' => 'Make yourself the initiator (if you select no, the first user to join the event will become the owner).',
+    'create_initiator_true' => 'Yes',
+    'create_initiator_false' => 'No',
 
     'create_error_select_photo' => 'Please select a photo',
     'create_error_select_type' => 'Please select a event type',
@@ -66,7 +61,9 @@ return [
     'show' => 'View',
     'show_category' => 'Category',
     'show_lang' => 'English',
-    'show_location' => 'Location',
+    'show_postalcode' => 'Postalcode',
+    'show_city' => 'City',
+    'show_adres' => 'Adress',
     'show_date' => 'Date and time',
     'show_description' => 'Description',
     'show_initiator' => 'Initiator',
@@ -81,6 +78,8 @@ return [
     'show_title' => 'Title',
     'show_overview' => 'Overview',
     'show_chat_login' => 'Log in and join this event to chat!',
+    'add_to_calendar' => 'Add to Calendar',
+    'show_no_initiator' => 'There is no initiator yet, join to become the initiator.',
 
     ///////////////////////////////// Show-delete ////////////////////////////////////
     'dismiss_delete' => 'Cancel',
@@ -110,6 +109,8 @@ return [
 	'edit_error_location' => 'The location-field is required.',
     'show_datetime_at' => 'at',
     'show_chat_swearword' => 'Swearword detected',
+    'show_chat_entertext' => 'Please enter some text',
+    'show_chat_characterlimit' => 'The character limit is 180 characters',
     'show_chat_send' => 'Send',
     'show_chat_typemessage' => 'Type your message',
 
@@ -123,4 +124,13 @@ return [
     'show_share' => 'Share event',
     'show_share_link' => 'The link has been copied to your clipboard.',
     'show_share_close' => 'Close',
+
+    ///////////////////////////////// Context sensetive help ////////////////////////////////////
+    'CSH_step1' => 'Choose a category for your event',
+    'CSH_step2' => 'Choose a photo for your event',
+    'CSH_step3' => 'Choose the location or the collection location where your event will take place',
+    'CSH_step4' => 'Choose the date and time when your event location will be found',
+    'CSH_step5' => 'Describe your event',
+    'CSH_step6' => 'Choose the number of people who can participate in your event (max. 25)',
+    'CSH_step7' => 'Choose whether you want to be the owner of the outing or the first person to participate in the event',
 ];

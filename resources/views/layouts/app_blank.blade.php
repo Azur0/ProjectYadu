@@ -26,10 +26,8 @@
 
         <script src="{{ asset('js/app.js') }}"></script>
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/filterCSS.css') }}">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-        <script src="{{ asset('js/app.js') }}"></script>     
+        <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body>
         <div id="main">
@@ -40,7 +38,7 @@
             <!-- Optional -->
             @yield('banner')
 
-			@yield('content')
+			@yield('main')
 
             <div id="footer">
                 @include('layouts.footer')

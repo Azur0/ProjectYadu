@@ -96,26 +96,13 @@
 			@endif
 		</div>
 		<p>{{ __('welcome.recent_events_content') }} <a href="/events">{{ __('welcome.link_here') }}</a>.</p>
-		<br><br>
-		<div class="row">
-			<div class="col testimonials">
-				<div class="testimonial">
-					<div>
-						@if(empty($testimonial->account_id))
-							<h3>{{ $testimonial->name }}</h3>
-						@else
-							<h3>
-								<a href="/account/{{ $testimonial->account_id }}/profile/info">
-									{{ $testimonial->account->firstName }} {{ $testimonial->account->middleName }} {{ $testimonial->account->lastName }}
-								</a>
-							</h3>
-						@endif
-						<h6 class="testimonial_date">{{ $testimonial->created_at }}</h6>
-					</div>
-					<p>&#39;{{ $testimonial->experience }}&#39;</p>
-				</div>
-			</div>
-		</div>
-	</div>
+		
+            <div class="row">
+                <div class="col testimonial">
+                    {{$testimonial->name}}
+                    {{$testimonial->experience}}
+                </div>
+            </div>
+        </div>
 
 @endsection

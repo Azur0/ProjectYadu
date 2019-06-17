@@ -66,6 +66,15 @@ return [
     'avatar_reset_button' => 'Avatar resetten',
 
     'index_no_event_found' => 'Geen accounts gevonden',
-    'index_loading_error' => 'Error tijdens het laden van accounts'
+    'index_loading_error' => 'Error tijdens het laden van accounts',
+
+    ///////////////////////////////// Activation ////////////////////////////////////
+
+    'activation_header' => 'Account is geactiveerd!',
+    'activation_message' => 'Bedankt voor het activeren van uw account, kijk gelijk of er evenementen zijn om aan mee te doen!',
+    'activation_button' => 'Ga naar Yadu',
+    'non_activation_header' => 'Uw account is niet actief',
+    'non_activation_message' => 'U heeft uw email nog niet geverifieerd en daarom kunt u niet meedoen aan dit uitje.',
+    'non_activation_button' => 'Ga terug',
 
 ];

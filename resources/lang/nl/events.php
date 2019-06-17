@@ -8,21 +8,6 @@ return [
 |--------------------------------------------------------------------------
 */
 
-///////////////////////////////// Global //////////////////////////////////
-
-    'cat1' => 'Uitje met gezinnen',
-    'cat2' => 'Eten',
-    'cat3' => 'Borrelen',
-    'cat4' => 'Koffie',
-    'cat5' => 'Wandelen',
-    'cat6' => 'Uitje in stad',
-    'cat7' => 'Museum',
-    'cat8' => 'Theater/film',
-    'cat9' => 'Evenementen',
-    'cat10' => 'Van alles wat',
-    'cat11' => 'Sporten',
-    'cat12' => 'Op wielen',
-
 ///////////////////////////////// Index ///////////////////////////////////
 
     'index_create_event' => 'Organiseer een evenement',
@@ -45,6 +30,9 @@ return [
     'create_step5' => 'Beschrijf je uitje',
     'create_step6' => 'Aantal personen',
     'create_step7' => 'Eigenaar',
+
+    'create_date' => 'Datum',
+    'create_time' => 'Tijd',
 
     'create_submit' => 'Verzenden',
     'create_title' => 'Titel',
@@ -137,5 +125,14 @@ return [
     'show_share' => 'Evenement delen',
     'show_share_link' => 'De link is gekopieerd naar uw klembord.',
     'show_share_close' => 'Sluiten',
+
+    ///////////////////////////////// Context sensetive help ////////////////////////////////////
+    'CSH_step1' => 'Kies een categorie voor uw evenement',
+    'CSH_step2' => 'Kies een foto voor uw evenement',
+    'CSH_step3' => 'Kies de locatie of de verzamellocatie waar uw evenement plaats zal vinden',
+    'CSH_step4' => 'Kies de datum en tijd wanneer uw evenement plaats zal vinden',
+    'CSH_step5' => 'Beschrijf uw evenement',
+    'CSH_step6' => 'Kies het aantal personen dat deel kunnen nemen aan uw evenement  (maximaal 25)',
+    'CSH_step7' => 'Kies of u de eigenaar van het uitje wilt zijn, of de eerste persoon die deelneemt aan het evenement ',
 ];
 

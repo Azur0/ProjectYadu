@@ -8,21 +8,6 @@ return [
 |--------------------------------------------------------------------------
 */
 
-///////////////////////////////// Global //////////////////////////////////
-
-    'cat1' => 'With families',
-    'cat2' => 'Food',
-    'cat3' => 'Drinks',
-    'cat4' => 'Coffee',
-    'cat5' => 'Hiking',
-    'cat6' => 'In the City',
-    'cat7' => 'Museum',
-    'cat8' => 'Theater/film',
-    'cat9' => 'Events',
-    'cat10' => 'A little bit of everything',
-    'cat11' => 'Sports',
-    'cat12' => 'On wheels',
-
 ///////////////////////////////// Index ///////////////////////////////////
 
     'index_create_event' => 'Organize an event',
@@ -45,6 +30,9 @@ return [
     'create_step5' => 'Describe your event',
     'create_step6' => 'Amount of people',
     'create_step7' => 'Initiator',
+
+    'create_date' => 'Date',
+    'create_time' => 'Time',
 
     'create_submit' => 'Submit',
     'create_title' => 'Title',
@@ -136,4 +124,13 @@ return [
     'show_share' => 'Share event',
     'show_share_link' => 'The link has been copied to your clipboard.',
     'show_share_close' => 'Close',
+
+    ///////////////////////////////// Context sensetive help ////////////////////////////////////
+    'CSH_step1' => 'Choose a category for your event',
+    'CSH_step2' => 'Choose a photo for your event',
+    'CSH_step3' => 'Choose the location or the collection location where your event will take place',
+    'CSH_step4' => 'Choose the date and time when your event location will be found',
+    'CSH_step5' => 'Describe your event',
+    'CSH_step6' => 'Choose the number of people who can participate in your event (max. 25)',
+    'CSH_step7' => 'Choose whether you want to be the owner of the outing or the first person to participate in the event',
 ];

@@ -14,20 +14,22 @@ return [
     'nav_home' => 'HOME',
     'nav_events' => 'EVENTS',
     'nav_eventsS' => 'Events',
-    'nav_overview' => 'Overview',
     'nav_about' => 'ABOUT US',
     'nav_contact' => 'CONTACT',
     'nav_dashboard' => 'PROFILE',
     'nav_admin' => 'ADMIN PANEL',
     'nav_login' => 'LOGIN',
+    'nav_register' => 'REGISTER',
     'nav_logout' => 'LOGOUT',
     'nav_pages' => 'Pages',
     'nav_images' => 'Images',
     'nav_header_category' => 'Categories:',
     'nav_header_extra' => 'Extra:',
     'nav_swearWords' => 'Swear words',
+    'nav_suspensions' => 'Suspensions',
     'nav_socialmedia' => 'Socialmedia',
     'nav_links' => 'Links',
+    'nav_users' => 'Users',
 
 ///////////////////////////////// Footer //////////////////////////////////
 

@@ -146,7 +146,6 @@ class EventsController extends Controller
 	{
 		if (Auth::check())
 		{
-			//dd(Auth::user());
 			if (Auth::user()->accountRole == 'Admin')
 			{
 				$data = array(
@@ -272,7 +271,7 @@ class EventsController extends Controller
 			$event->update([
 			   'isDeleted' => 1
             ]);
-      
+				
 			return redirect('admin/events');
 		}
 	}

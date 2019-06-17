@@ -44,7 +44,7 @@ class ImagesController extends Controller
 		$thing = $this->validate($request, [
 			'defaultImage' => 'required|image|max:10240|mimes:jpg,png,jpeg',
 			'selectedImage' => 'required|image|max:10240|mimes:jpg,png,jpeg',
-			'naam' => 'required|string|min:1|max:45'
+			'naam' => 'required|string|min:1|max:25'
 			]);
 		if($request->file('defaultImage')->getSize() > 16777215 || $request->file('selectedImage')->getSize() > 16777215){
 			return back()->withErrors(__('image.file_too_large'));

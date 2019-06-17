@@ -3,22 +3,22 @@
 @section('content')
 	<div class="row ml-3 mb-3">
 		<div class="backlink">
-			<a href="{{ url('admin/testemonials') }}"><i class="fas fa-arrow-left"></i> {{__('accounts.back')}}</a>
+			<a href="{{ url('admin/testimonials') }}"><i class="fas fa-arrow-left"></i> {{__('accounts.back')}}</a>
 		</div>
 	</div>
 	<div class="card">
 		<div class="card-header">
-			{{__('testemonials.header_testemonial')}}: {{ $testemonial->id }}
+			{{__('testimonials.header_testimonial')}}: {{ $testimonial->id }}
 
 		</div>
 		<div class="card-body">
 			<div class="row">
 				<div class="col">
-					<h3>{{ $testemonial->name }}</h3>
-					<h6>{{ $testemonial->created_at }}</h6>
+					<h3>{{ $testimonial->name }}</h3>
+					<h6>{{ $testimonial->created_at }}</h6>
 				</div>
 				<div class="col">
-					@if( $testemonial->accepted == true )
+					@if( $testimonial->accepted == true )
 						Status: <i class="fas fa-check"></i>
 					@else
 						Status: <i class="fas fa-times"></i>
@@ -28,7 +28,7 @@
 			<div class="row">
 				<div class="col">
 					<p>
-						{{ $testemonial->experience }}
+						{{ $testimonial->experience }}
 					</p>
 				</div>
 			</div>

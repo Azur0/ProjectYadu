@@ -129,11 +129,11 @@
 			<span>{{__('navigation.nav_suspensions')}}</span>
 		</a>
 	</li>
-	<!-- Nav Item - testemonials -->
-	<li class="nav-item {{ request()->is('admin/testemonials') ? 'active' : '' }}">
-		<a class="nav-link collapsed" href="/admin/testemonials">
+	<!-- Nav Item - testimonials -->
+	<li class="nav-item {{ request()->is('admin/testimonials') ? 'active' : '' }}">
+		<a class="nav-link collapsed" href="/admin/testimonials">
 			<i class="fas fa-comment-dots"></i>
-			<span>{{__('navigation.nav_testemonials')}}</span>
+			<span>{{__('navigation.nav_testimonials')}}</span>
 		</a>
 	</li>
 

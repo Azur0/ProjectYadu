@@ -46,6 +46,9 @@ return [
     'create_step6' => 'Amount of people',
     'create_step7' => 'Initiator',
 
+    'create_date' => 'Date',
+    'create_time' => 'Time',
+
     'create_submit' => 'Submit',
     'create_title' => 'Title',
     'create_description' => 'Description',

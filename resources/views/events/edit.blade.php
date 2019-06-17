@@ -20,7 +20,7 @@
                     <label for="{{$tag->tag}}" class="category" title="Uitje met gezinnen">
                         <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
                         <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($tag->imageSelected) . '"/>'; ?>
-                        <span>{{__('events.cat'.$tag->id)}}</span>
+                        <span>{{$tag->tag}}</span>
                     </label>
                     @endforeach
                 </div>

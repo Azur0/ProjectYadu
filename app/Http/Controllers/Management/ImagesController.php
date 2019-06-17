@@ -181,7 +181,7 @@ class ImagesController extends Controller
 	public function updatetagpicture(Request $request) {
 		$this->validate($request, [
 			'image' => 'image|mimes:jpg,png,jpeg|max:2048',
-			'naam' => 'required|string|min:1|max:45'
+			'naam' => 'required|string|min:1|max:25'
 			]);
 		if(!empty($request->file('image'))){
 			if($request->file('image')->getSize() > 16777215){

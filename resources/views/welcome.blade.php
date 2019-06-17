@@ -96,34 +96,26 @@
 			@endif
 		</div>
 		<p>{{ __('welcome.recent_events_content') }} <a href="/events">{{ __('welcome.link_here') }}</a>.</p>
-		@if(!empty($testimonials))
-			<br><br>
-			<a href="/testimonials" class="recentEventsHome">
-				<h2>{{ __('testimonials.header_testimonials')}}</h2>
-			</a>
-			<div class="row">
-				<div class="col testimonials">
-					
-					@foreach($testimonials as $testimonial)
-						<div class="testimonial">
-							<div>
-								@if(empty($testimonial->account_id))
-									<h3>{{ $testimonial->name }}</h3>
-								@else
-									<h3>
-										<a href="/account/{{ $testimonial->account_id }}/profile/info">
-											{{ $testimonial->account->firstName }} {{ $testimonial->account->middleName }} {{ $testimonial->account->lastName }}
-										</a>
-									</h3>
-								@endif
-								<h6 class="testimonial_date">{{ $testimonial->created_at }}</h6>
-							</div>
-							<p>&#39;{{ $testimonial->experience }}&#39;</p>
-						</div>
-					@endforeach
+		<br><br>
+		<div class="row">
+			<div class="col testimonials">
+				<div class="testimonial">
+					<div>
+						@if(empty($testimonial->account_id))
+							<h3>{{ $testimonial->name }}</h3>
+						@else
+							<h3>
+								<a href="/account/{{ $testimonial->account_id }}/profile/info">
+									{{ $testimonial->account->firstName }} {{ $testimonial->account->middleName }} {{ $testimonial->account->lastName }}
+								</a>
+							</h3>
+						@endif
+						<h6 class="testimonial_date">{{ $testimonial->created_at }}</h6>
+					</div>
+					<p>&#39;{{ $testimonial->experience }}&#39;</p>
 				</div>
 			</div>
-		@endif
+		</div>
 	</div>
 
 @endsection

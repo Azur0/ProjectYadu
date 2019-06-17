@@ -8,31 +8,19 @@
 	</div>
 	<div class="card">
 		<div class="card-header">
-			{{__('testimonials.header_testemonial')}}: {{ $testemonial->id }}
+			{{__('testimonials.header_testimonial')}}: {{ $testimonial->id }}
 
 		</div>
 		<div class="card-body">
-			<form action="/admin/testimonials/{{ $testemonial->id }}" method="POST">
+			<form action="/admin/testimonials/{{ $testimonial->id }}" method="POST">
 				@method("PATCH")
 				@csrf
 
-				<input type="hidden" name="id" value="{{ $testemonial->id }}">
-
-				<div class="form-group">
-					<label for="name">{{ __('testimonials.form_accepted') }}</label>
-					<select name="accepted" class="form-control{{ $errors->has('accepted') ? ' is-invalid' : '' }}">
-						<option value="1" {{ $testemonial->accepted == "1" ? 'selected' : '' }}>
-							{{__('testimonials.form_accepted_true')}}
-						</option>
-						<option value="0" {{ $testemonial->accepted == "0" ? 'selected' : '' }}>
-							{{__('testimonials.form_accepted_false')}}
-						</option>
-					</select>
-				</div>
+				<input type="hidden" name="id" value="{{ $testimonial->id }}">
 
 				<div class="form-group">
 					<label for="name">{{ __('testimonials.form_name') }}</label>
-					<input type="text" class="form-control" name="name" placeholder="{{__('testimonials.form_name')}}" maxlength="99" required value="{{ $testemonial->name }}">
+					<input type="text" class="form-control" name="name" placeholder="{{__('testimonials.form_name')}}" maxlength="99" required value="{{ $testimonial->name }}">
 			
 					@if ($errors->has('activityName'))
 						<div class="error">{{__('events.create_error_title_required')}}</div>
@@ -40,7 +28,7 @@
 				</div>
 				<div class="form-group">
 					<label for="experience">{{ __('testimonials.form_name') }}</label>
-					<textarea name="experience" placeholder="{{__('testimonials.form_experience')}}" maxlength="150" required>{{ $testemonial->experience }}</textarea>
+					<textarea name="experience" placeholder="{{__('testimonials.form_experience')}}" maxlength="150" required>{{ $testimonial->experience }}</textarea>
 
 					@if ($errors->has('description'))
 						<div class="error">{{__('events.create_error_description_required')}}</div>

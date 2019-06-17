@@ -6,7 +6,11 @@
     <form action="/events" method="POST">
         @csrf
         <div class="type">
-            <h3>1. {{__('events.create_step1')}}</h3>
+            <h3 style="display: inline">1. {{__('events.create_step1')}}</h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step1')}}</span>
+            </div>
             <div class="types">
                 <div class="box">
                     @foreach ($tags as $Tag)
@@ -26,7 +30,11 @@
         </div>
 
         <div class="pic">
-            <h3>2. {{__('events.create_step2')}}</h3>
+            <h3 style="display: inline">2. {{__('events.create_step2')}}</h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step2')}}</span>
+            </div>
             <div class="types">
                 <div id="box2" class="box">
 
@@ -38,7 +46,11 @@
         </div>
 
         <div class="loc">
-            <h3>3. {{__('events.create_step3')}}</h3>
+            <h3 style="display: inline">3. {{__('events.create_step3')}}</h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step3')}}</span>
+            </div>
             <div class="description location">
                 <input type="hidden" name="lng" id="lng" value="">
                 <input type="hidden" name="lat" id="lat" value="">
@@ -61,7 +73,11 @@
            
         </div>
         <div class="date">
-            <h3>4. {{__('events.create_step4')}}</h3>
+            <h3 style="display: inline">4. {{__('events.create_step4')}}</h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step4')}}</span>
+            </div>
             <div class="description">
                 <h5>{{__('events.create_date')}}</h5>
                 <input id="date" name="startDate" type="date" value="{{ old('startDate') }}" required>
@@ -73,7 +89,11 @@
             </div>
         </div>
         <div>
-            <h3>5. {{__('events.create_step5')}}</h3>
+            <h3 style="display: inline">5. {{__('events.create_step5')}}</h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step5')}}</span>
+            </div>
             <div class="description">
                 <input type="text" id="title" name="activityName" placeholder="{{__('events.create_title')}}"
                     oninput="update_counter_title(this)" maxlength="30" required value="{{ old('activityName') }}">
@@ -91,7 +111,11 @@
             </div>
         </div>
         <div>
-            <h3>6. {{__('events.create_step6')}}</h3>
+            <h3 style="display: inline">6. {{__('events.create_step6')}}</h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step6')}}</span>
+            </div>
             <div class="description">
                 <input type="number" name="people" min="1" max="25" value="{{ old('people') }}">
                 <span class="number_desc">{{__('events.create_amount_of_participants')}}</span>
@@ -102,7 +126,11 @@
         </div>
         @if(Auth::user()->accountRole == 'Admin')
         <div>
-            <h3>7. {{__('events.create_step7')}}</h3>
+            <h3 style="display: inline">7. {{__('events.create_step7')}}</h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step7')}}</span>
+            </div>
             <div class="description">
                 <label for="initiator">{{__('events.create_initiator_info')}}</label>
               

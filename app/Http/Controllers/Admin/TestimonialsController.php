@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Testemonial;
+use App\Testimonial;
 
 use Illuminate\Http\Request;
 use Auth;
 
-use App\Http\Requests\CreateTestemonialRequest;
+use App\Http\Requests\CreateTestimonialRequest;
 
 class TestimonialsController extends Controller
 {
@@ -18,7 +18,7 @@ class TestimonialsController extends Controller
 	 */
 	public function index()
 	{
-		$testimonials = Testemonial::simplePaginate(10);
+		$testimonials = Testimonial::simplePaginate(10);
 		return view('admin.testimonials.index', compact('testimonials'));
 	}
 
@@ -30,7 +30,7 @@ class TestimonialsController extends Controller
 	 */
 	public function show($id)
 	{
-		$testimonial = Testemonial::findOrFail($id);
+		$testimonial = Testimonial::findOrFail($id);
 		return view('admin.testimonials.show', compact('testimonial'));
 	}
 
@@ -50,15 +50,14 @@ class TestimonialsController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(CreateTestemonialRequest $request)
+	public function store(CreateTestimonialRequest $request)
 	{
-		$newTestemonial = new Testemonial;
-		$newTestemonial->name = $request['name'];
-		$newTestemonial->experience = $request['experience'];
+		$newTestimonial = new Testimonial;
+		$newTestimonial->name = $request['name'];
+		$newTestimonial->experience = $request['experience'];
 
-		$newTestemonial->accepted = true;
-		$newTestemonial->save();
-		return redirect('/admin/testimonials/'.$newTestemonial->id);
+		$newTestimonial->save();
+		return redirect('/admin/testimonials/'.$newTestimonial->id);
 	}
 
 	/**
@@ -69,7 +68,7 @@ class TestimonialsController extends Controller
 	 */
 	public function edit($id)
 	{
-		$testimonial = Testemonial::findOrFail($id);
+		$testimonial = Testimonial::findOrFail($id);
 		return view('admin.testimonials.edit', compact('testimonial'));
 	}
 
@@ -80,16 +79,15 @@ class TestimonialsController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(CreateTestemonialRequest $request, $id)
+	public function update(CreateTestimonialRequest $request, $id)
 	{
-		$newTestemonial = Testemonial::findOrFail($id);
-		$newTestemonial->name = $request['name'];
-		$newTestemonial->experience = $request['experience'];
-		$newTestemonial->accepted = $request['accepted'];
+		$newTestimonial = Testimonial::findOrFail($id);
+		$newTestimonial->name = $request['name'];
+		$newTestimonial->experience = $request['experience'];
 
-		$newTestemonial->save();
+		$newTestimonial->save();
 
-		return redirect('/admin/testimonials/'.$newTestemonial->id);
+		return redirect('/admin/testimonials/'.$newTestimonial->id);
 	}
 
 	/**
@@ -100,7 +98,7 @@ class TestimonialsController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$testimonial = Testemonial::findOrFail($id);
+		$testimonial = Testimonial::findOrFail($id);
 		
 		if($testimonial->account_id == Auth::id() || Auth::user()->accountRole == 'Admin')
 		{

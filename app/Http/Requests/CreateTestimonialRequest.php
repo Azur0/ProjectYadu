@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateTestemonialRequest extends FormRequest
+class CreateTestimonialRequest extends FormRequest
 {
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -26,7 +26,6 @@ class CreateTestemonialRequest extends FormRequest
 		return [
 			'name' => 'nullable|max:99',
 			'experience' => 'required|string',
-			'accepted' => 'nullable|boolean',
 		];
 	}
 }

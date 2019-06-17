@@ -9,7 +9,7 @@ use Auth;
 
 use App\Http\Requests\CreateTestemonialRequest;
 
-class TestemonialsController extends Controller
+class TestimonialsController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
@@ -18,8 +18,8 @@ class TestemonialsController extends Controller
 	 */
 	public function index()
 	{
-		$testemonials = Testemonial::simplePaginate(10);
-		return view('admin.testemonials.index', compact('testemonials'));
+		$testimonials = Testemonial::simplePaginate(10);
+		return view('admin.testimonials.index', compact('testimonials'));
 	}
 
 	/**
@@ -30,8 +30,8 @@ class TestemonialsController extends Controller
 	 */
 	public function show($id)
 	{
-		$testemonial = Testemonial::findOrFail($id);
-		return view('admin.testemonials.show', compact('testemonial'));
+		$testimonial = Testemonial::findOrFail($id);
+		return view('admin.testimonials.show', compact('testimonial'));
 	}
 
 	/**
@@ -41,7 +41,7 @@ class TestemonialsController extends Controller
 	 */
 	public function create()
 	{
-		return view('admin.testemonials.create');
+		return view('admin.testimonials.create');
 	}
 
 	/**
@@ -58,7 +58,7 @@ class TestemonialsController extends Controller
 
 		$newTestemonial->accepted = true;
 		$newTestemonial->save();
-		return redirect('/admin/testemonials/'.$newTestemonial->id);
+		return redirect('/admin/testimonials/'.$newTestemonial->id);
 	}
 
 	/**
@@ -69,8 +69,8 @@ class TestemonialsController extends Controller
 	 */
 	public function edit($id)
 	{
-		$testemonial = Testemonial::findOrFail($id);
-		return view('admin.testemonials.edit', compact('testemonial'));
+		$testimonial = Testemonial::findOrFail($id);
+		return view('admin.testimonials.edit', compact('testimonial'));
 	}
 
 	/**
@@ -89,7 +89,7 @@ class TestemonialsController extends Controller
 
 		$newTestemonial->save();
 
-		return redirect('/admin/testemonials/'.$newTestemonial->id);
+		return redirect('/admin/testimonials/'.$newTestemonial->id);
 	}
 
 	/**
@@ -100,13 +100,13 @@ class TestemonialsController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$testemonial = Testemonial::findOrFail($id);
+		$testimonial = Testemonial::findOrFail($id);
 		
-		if($testemonial->account_id == Auth::id() || Auth::user()->accountRole == 'Admin')
+		if($testimonial->account_id == Auth::id() || Auth::user()->accountRole == 'Admin')
 		{
-			$testemonial->delete();
+			$testimonial->delete();
 		}
 
-		return redirect('/admin/testemonials');			
+		return redirect('/admin/testimonials');
 	}
 }

@@ -80,11 +80,9 @@ class EventsController extends Controller
 			$event->writtenDate = self::dateToShortText($event->startDate);
 		}
 		 
-		$testemonials = Testemonial::all()->where('accepted', '==', true);
-		$testemonials = $testemonials->shuffle();
-		$testemonials->splice(3);
+		$testimonial = Testemonial::inRandomOrder()->first();
 
-		return view('welcome', compact('events', 'regular_events', 'testemonials'));
+		return view('welcome', compact('events', 'regular_events', 'testimonial'));
 	}
 
     /**

@@ -4,32 +4,23 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTestemonialsTable extends Migration
+class CreateTestimonialsTable extends Migration
 {
 	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
-	private $tableName = 'testemonials';
+	private $tableName = 'testimonials';
 
 	public function up()
 	{
 		Schema::create($this->tableName, function (Blueprint $table)
 		{
 			$table->increments('id');
-			$table->unsignedInteger('account_id')->nullable();
 			$table->string('name', 99);
 			$table->text('experience');
-			$table->boolean('accepted')->default(false);
 			$table->timestamps();
-
-			$table->index(["account_id"], 'fk_testemonial_accounts_idx');
-
-			$table->foreign('account_id', 'fk_testemonial_accounts_idx')
-				->references('id')->on('accounts')
-				->onDelete('no action')
-				->onUpdate('no action');
 		});
 	}
 

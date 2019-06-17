@@ -79472,7 +79472,7 @@ window.chartjs = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/di
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Project-Yadu-A1\resources\js\sb-admin-2.js */"./resources/js/sb-admin-2.js");
+module.exports = __webpack_require__(/*! B:\Jaar 2, HBO-ICT\YaduProject\Project-Yadu-A1\resources\js\sb-admin-2.js */"./resources/js/sb-admin-2.js");
 
 
 /***/ })

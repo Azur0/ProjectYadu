@@ -13,15 +13,19 @@
 	<div class="card">
 		<div class="card-header">
 			<div class="search">
+			<div>
 				<label for="filterByTag">{{__('events.index_select_category')}}</label>
 				<input class="admin-form-control" oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag" placeholder="{{__('events.index_search_category_placeholder')}}"/>
 				<datalist id="tags">
 					@foreach ($tags as $tag)
-						<option value="{{__('events.cat'.$tag->id)}}">
+						<option value="{{$tag->tag}}">
 					@endforeach
 				</datalist>
+			</div>
+			<div>
 				<label for="filterByName">{{__('events.index_search_name')}}</label>
 				<input class="admin-form-control" oninput="fetch_events()" list="names" id="filterByName" name="filterByName" placeholder="{{__('events.index_search_placeholder')}}" autocomplete="off"/>
+			</div>
 			</div>
 		</div>
 		<div class="card-body">
@@ -202,7 +206,6 @@
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
 					$('#eventsToDisplay').html(
-						//TODO TRANSLATION
 						"<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_loading_error')}}</h1><div>"
 					);
 				}

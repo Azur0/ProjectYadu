@@ -50,7 +50,7 @@ return [
     'edit_email' => 'E-Mailadres',
     'edit_update_profile' => 'Profiel bijwerken',
 
-    'edit_change_account_settings_title' => 'Account instellingen - meldingen',
+    'edit_change_account_settings_title' => 'Meldingen instellingen',
     // Follow notification
     'edit_change_account_settings_follow_notification_title' => 'Over volgen',
     'edit_change_account_settings_follow_notification_creation' => 'Wanneer een evenement is aangemaakt door iemand die je volgt',

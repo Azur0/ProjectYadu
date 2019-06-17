@@ -27,6 +27,13 @@
 	display: flex !important;
 }
 
+.item-grouping{
+	position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
 .btn-yadu-orange {
 	color: white;
 	background-color: #F39200;
@@ -681,8 +688,6 @@ h6.collapse-header {
 	}
 	.card-header
 	{
-
-		height: 80px;
 		overflow-y: hidden;
 		overflow-x: auto;
 
@@ -734,7 +739,7 @@ h6.collapse-header {
 .btn_prohibitedWord
 {
 	background-color: #308d2c;
-	margin-left: 2%;
+	margin-left: 25px;
 	color: white;
 }
 

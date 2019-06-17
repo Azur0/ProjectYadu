@@ -135,7 +135,7 @@ class ImagesController extends Controller
 
 	public function addeventpicture(Request $request, $id) {
 		$this->validate($request, [
-			'eventpicture' => 'required|imagedimensions:max_width=10000,max_height=10000||mimes:jpg,png,jpeg|max:2048'
+			'eventpicture' => 'required|image|dimensions:max_width=10000,max_height=10000||mimes:jpg,png,jpeg|max:2048'
 		]);
 		if($request->file('eventpicture')->getSize() > 16777215){
 			return back()->withErrors(__('image.file_too_large'));

@@ -45,7 +45,7 @@
                                     {{__('image.add_tag_default')}}
                                 </label>
                                 <input id="file1" class="btn btn-info" type="file" name="default" accept="image/png, image/jpeg, image/jpg">
-                                <button type="submit" class="btn btn-primary" name="submittype">{{__('image.button_upload_single')}}</button>
+                                <button type="submit" class="btn btn-primary" onclick="location.reload()" name="submittype">{{__('image.button_upload_single')}}</button>
                             </div>
                     </form>
         </div>

@@ -281,7 +281,7 @@ $(document).ready(function() {
                                 <input type="radio" id="${element['id']}" class="picture ${element['tag_id']}" name="eventpicture" value="${element['id']}"> 
                                 <label for="${element['id']}" class="picture ${element['tag_id']}" >
                                         <button type="button" onclick="setcheckedevent(${element['id']})" class="btn btn-danger eventpicturebutton" data-toggle="modal" data-target="#confirmDeleteEventPicture"><i class="far fa-trash-alt"></i></button>
-                                        <button type="button" class="btn btn-warning eventpicturebutton" id="${element['id']}" data-toggle="modal" data-target="#editeventpicture"><i class="far fa-edit" style="width:14px"></i></button>
+                                        <button type="button" onclick="setcheckedevent(${element['id']})" class="btn btn-warning eventpicturebutton" id="${element['id']}" data-toggle="modal" data-target="#editeventpicture"><i class="far fa-edit" style="width:14px"></i></button>
 
                                         {{-- Popup for deleting --}}
                                         <div class="modal fade" id="confirmDeleteEventPicture" tabindex="-1" role="dialog">

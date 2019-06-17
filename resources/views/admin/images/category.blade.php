@@ -61,7 +61,7 @@
                 <div class="box">
                     @foreach ($tags as $tag)
                     <div class="card divider"> 
-                        <input type="radio" id="{{$tag->id}}" name="tag" value="{{$tag->id}}">
+                        <input type="radio"  name="tag" id="{{$tag->id}}">
                         <label for="{{$tag->id}}" class="category">
                             <div class="ml-auto my-auto mr-3" onclick="setcheckedtag({{$tag->id}})">
                                 <button type="button" class="btn btn-danger" id="{{$tag->id}}" data-toggle="modal" data-target="#confirmDeleteTag"><i class="far fa-trash-alt"></i></button>
@@ -69,7 +69,7 @@
                                 <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($tag->imageDefault) . '"/>'; ?>
                                 <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($tag->imageSelected) . '"/>'; ?>
                             </div>
-                        </label>  
+                        </label>
                     </div>                     
                     @endforeach
                 </div>
@@ -278,8 +278,8 @@ $(document).ready(function() {
                         data.forEach(function (element) {
                             $('#box2').html($("#box2").html() + `
                                 <div class="box divider">
-                                <input type="radio" id="${element['id']}" class="picture ${element['tag_id']}" name="eventpicture" value="${element['id']}"> 
-                                <label for="${element['id']}" class="picture ${element['tag_id']}" >
+                                <input type="radio" id="event${element['id']}" class="picture ${element['tag_id']}" name="eventpicture" value="event${element['id']}"> 
+                                <label for="event${element['id']}" class="picture ${element['tag_id']}" >
                                         <button type="button" onclick="setcheckedevent(${element['id']})" class="btn btn-danger eventpicturebutton" data-toggle="modal" data-target="#confirmDeleteEventPicture"><i class="far fa-trash-alt"></i></button>
                                         <button type="button" onclick="setediteventpicture(${element['id']})" class="btn btn-warning eventpicturebutton" id="${element['id']}" data-toggle="modal" data-target="#editeventpicture"><i class="far fa-edit" style="width:14px"></i></button>
 

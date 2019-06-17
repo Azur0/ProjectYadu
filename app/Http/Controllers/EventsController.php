@@ -32,6 +32,7 @@ use Auth;
 class EventsController extends Controller
 {
     use DateToText;
+
     /**
      * Display a listing of the resource.
      *
@@ -45,46 +46,51 @@ class EventsController extends Controller
     }
 
     public function welcome()
-	{
+    {
         $blockedUsers = [];
         $UsersBlockedYou = [];
 
-        if(Auth::id()){
+        if (Auth::id()) {
             $blockedUsers = BlockedUser::where('account_id', '=', Auth::id())->pluck('blockedAccount_id');
             $UsersBlockedYou = BlockedUser::where('blockedAccount_id', '=', Auth::id())->pluck('account_id');
         }
 
-		$events = Event::take(6)
+        $events = Event::take(6)
             ->where('isDeleted', '==', 0)
             ->whereNotIn('owner_id', $blockedUsers)
             ->whereNotIn('owner_id', $UsersBlockedYou)
-			->orderBy('isHighlighted', 'desc')
-			->orderBy('startDate', 'desc')
+            ->orderBy('isHighlighted', 'desc')
+            ->orderBy('startDate', 'desc')
             ->get();
-            
-		$regular_events = Event::take(3)
+
+        $regular_events = Event::take(3)
             ->where('isDeleted', '==', 0)
             ->whereNotIn('owner_id', $blockedUsers)
             ->whereNotIn('owner_id', $UsersBlockedYou)
-			->where('isHighlighted', '==', 0)
-			->orderBy('startDate', 'desc')
-			->get();
+            ->where('isHighlighted', '==', 0)
+            ->orderBy('startDate', 'desc')
+            ->get();
 
-		foreach($events as $event)
-		{
-			$event->city = $event->location->locality;
-			$event->writtenDate = self::dateToShortText($event->startDate);
-		}
-		foreach($regular_events as $event)
-		{
-			$event->city = $event->location->locality;
-			$event->writtenDate = self::dateToShortText($event->startDate);
-		}
-		 
-		$testimonial = Testimonial::inRandomOrder()->first();
+        foreach ($events as $event) {
+            $event->city = $event->location->locality;
+            $event->writtenDate = self::dateToShortText($event->startDate);
+        }
+        foreach ($regular_events as $event) {
+            $event->city = $event->location->locality;
+            $event->writtenDate = self::dateToShortText($event->startDate);
+        }
 
-		return view('welcome', compact('events', 'regular_events', 'testimonial'));
-	}
+        if (Testimonial::count() > 0) {
+            $testimonial = Testimonial::inRandomOrder()->first();
+        } else {
+            $testimonial = new Testimonial();
+            $testimonial->name = "Ed Example";
+            $testimonial->experience = "Top initiatief. Ik heb er al veel vrienden mee gemaakt!";
+            $testimonial->save();
+        }
+
+        return view('welcome', compact('events', 'regular_events', 'testimonial'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -94,15 +100,15 @@ class EventsController extends Controller
 
     public function create()
     {
-        if (Auth::check() ) {
-            if(!Auth::user()->hasVerifiedEmail()) {
+        if (Auth::check()) {
+            if (!Auth::user()->hasVerifiedEmail()) {
                 return redirect('/events')->with(['error' => 'activate message']);
-            }else{
+            } else {
                 $Tags = EventTag::all();
                 $Picture = EventPicture::all();
                 return view('events.create')->withtags($Tags)->withpictures($Picture);
             }
-        } 
+        }
         return redirect('/login');
     }
 
@@ -123,7 +129,7 @@ class EventsController extends Controller
      */
     public function store(CreateEventRequest $request)
     {
-       
+
         $validator = Validator::make($request->all(), [
             'activityName' => 'required|max:30',
             'description' => 'required|max:150',
@@ -136,22 +142,19 @@ class EventsController extends Controller
             'houseNumber' => 'required|max:10',
             'postalCode' => 'required|max:45',
             'location' => 'required',
-            'route'=> 'required',
+            'route' => 'required',
             'locality' => 'required',
             'picture' => 'required'
         ]);
 
         $request['startDate'] = $request['startDate'] . ' ' . $request['startTime'];
 
-        $validator->after(function ($validator) use ($request)
-        {
-            if ($this->isPictureValid($request['tag'], $request['picture']))
-            {
+        $validator->after(function ($validator) use ($request) {
+            if ($this->isPictureValid($request['tag'], $request['picture'])) {
                 $validator->errors()->add('picture', 'Something is wrong with this field!');
             }
         });
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return redirect('/events/create')
                 ->withErrors($validator)
                 ->withInput();
@@ -176,27 +179,22 @@ class EventsController extends Controller
 
         $newEvent->location_id = $location->id;
 
-        if($request['initiator'] == "1" || Auth::User()->accountRole != "Admin")
-        {
-        	$newEvent->owner_id = auth()->user()->id;
+        if ($request['initiator'] == "1" || Auth::User()->accountRole != "Admin") {
+            $newEvent->owner_id = auth()->user()->id;
         }
 
         $newEvent->save();
 
-        return redirect('/events/'.$newEvent->id);
+        return redirect('/events/' . $newEvent->id);
     }
 
     public function isPictureValid($tag, $picture)
     {
-        if (!EventPicture::where('id', '=', $picture)->exists())
-        {
+        if (!EventPicture::where('id', '=', $picture)->exists()) {
             return true;
-        }
-        else
-        {
+        } else {
             $eventPicture = EventPicture::all()->where('id', '=', $picture)->pluck('tag_id');
-            if ($eventPicture[0] != $tag)
-            {
+            if ($eventPicture[0] != $tag) {
                 return true;
             }
             return false;
@@ -213,7 +211,7 @@ class EventsController extends Controller
     public function show(Event $event)
     {
         $follow = null;
-        if(Auth::check()){
+        if (Auth::check()) {
             $follow = AccountHasFollowers::where('account_id', $event->owner_id)->where('follower_id', Auth::id())->first();
         }
         $event->writtenDate = $this->dateToLongText($event->startDate);
@@ -269,7 +267,7 @@ class EventsController extends Controller
             'lat' => 'required|max:45',
             'houseNumber' => 'required|max:10',
             'postalCode' => 'required|max:45',
-            'route'=> 'required',
+            'route' => 'required',
             'locality' => 'required',
             'numberOfPeople' => 'required'
         ]);
@@ -291,7 +289,7 @@ class EventsController extends Controller
 
         $event = Event::where('id', $id)->firstorfail();
 
-        if (Auth::id() == $event->owner_id  && $event->startDate > date('Y-m-d H:i:s')) {
+        if (Auth::id() == $event->owner_id && $event->startDate > date('Y-m-d H:i:s')) {
             $location = Location::where('id', $event->location_id)->firstorfail();
             $event->update(
                 [
@@ -303,19 +301,18 @@ class EventsController extends Controller
                     'event_picture_id' => $request['picture']
                 ]
             );
-            
+
             $location->update([
                 'locLongtitude' => $request['lng'],
                 'locLatitude' => $request['lat'],
                 'houseNumber' => $request['houseNumber'],
                 'postalcode' => str_replace(' ', '', $request['postalCode']),
-                'route'=> $request['route'],
+                'route' => $request['route'],
                 'locality' => $request['locality'],
             ]);
 
             return redirect('/events');
-        }
-        else {
+        } else {
             abort(403);
         }
     }
@@ -329,8 +326,8 @@ class EventsController extends Controller
     public function destroy($id)
     {
         $event = Event::findOrFail($id);
-        
-        if($event->owner_id == Auth::id() && $event->startDate > date('Y-m-d H:i:s')) {
+
+        if ($event->owner_id == Auth::id() && $event->startDate > date('Y-m-d H:i:s')) {
             $event->update([
                 'isDeleted' => 1
             ]);;
@@ -341,22 +338,17 @@ class EventsController extends Controller
 
     public function join($id)
     {
-        if (Auth::user()->hasVerifiedEmail())
-        {
+        if (Auth::user()->hasVerifiedEmail()) {
             $event = Event::findOrFail($id);
-            if($event->owner_id)
-            {
-            	if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id))
-				{
-            		$event->participants()->attach(auth()->user()->id);
-                	event(new EventJoined($event,auth()->user()->id));
-            	}
-            	//TODO: Add error 'You already joined!' 
-            }
-            else
-            {
-				$event->owner_id = auth()->user()->id;
-				$event->save();
+            if ($event->owner_id) {
+                if (!$event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
+                    $event->participants()->attach(auth()->user()->id);
+                    event(new EventJoined($event, auth()->user()->id));
+                }
+                //TODO: Add error 'You already joined!'
+            } else {
+                $event->owner_id = auth()->user()->id;
+                $event->save();
             }
         }
         //TODO: Add error 'You are not logged in!'
@@ -369,7 +361,7 @@ class EventsController extends Controller
             $event = Event::findOrFail($id);
             if ($event->participants->contains(auth()->user()->id) && ($event->owner->id != auth()->user()->id)) {
                 $event->participants()->detach(auth()->user()->id);
-                event(new EventLeft($event,auth()->user()->id));
+                event(new EventLeft($event, auth()->user()->id));
             }
             //TODO: Add error 'You are not joined!'
         }
@@ -399,15 +391,15 @@ class EventsController extends Controller
 
         $tags = EventTag::where('tag', 'like', '%' . $request->inputTag . '%')->pluck('id');
         $names = Event::where('eventName', 'like', '%' . $request->inputName . '%')->pluck('id');
-        $pageNumber= $request->pageNumber;
+        $pageNumber = $request->pageNumber;
 
         $blockedUsers = [];
         $UsersBlockedYou = [];
-        if(Auth::id()){
+        if (Auth::id()) {
             $blockedUsers = BlockedUser::where('account_id', '=', Auth::id())->pluck('blockedAccount_id');
             $UsersBlockedYou = BlockedUser::where('blockedAccount_id', '=', Auth::id())->pluck('account_id');
         }
-        
+
 
         $this->distance = $request->input('distance');
         $unfiltered_events = Event::where('isDeleted', '==', 0)
@@ -417,7 +409,7 @@ class EventsController extends Controller
             ->whereIn('id', $names)
             ->whereIn('tag_id', $tags)
             ->orderBy('startDate', 'asc')
-            ->take(24)->skip(($pageNumber-1)*24)->get();
+            ->take(24)->skip(($pageNumber - 1) * 24)->get();
 
         $events = new Collection();
 
@@ -437,15 +429,15 @@ class EventsController extends Controller
             $events->push($event);
         }
         $events2 = Event::where('isDeleted', '==', 0)
-        ->where('startDate', '>=', $this->formatDate())
-        ->whereNotIn('owner_id', $blockedUsers)
-        ->whereNotIn('owner_id', $UsersBlockedYou)
-        ->whereIn('id', $names)
-        ->whereIn('tag_id', $tags)->get();
+            ->where('startDate', '>=', $this->formatDate())
+            ->whereNotIn('owner_id', $blockedUsers)
+            ->whereNotIn('owner_id', $UsersBlockedYou)
+            ->whereIn('id', $names)
+            ->whereIn('tag_id', $tags)->get();
         $data = array();
         $data['events'] = $events;
         $data['total_length'] = count($events2);
-        
+
         return json_encode($data);
     }
 }

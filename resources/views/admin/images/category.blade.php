@@ -331,12 +331,14 @@ $(document).ready(function() {
                                                             </label>
                                                             <input id="file5" class="btn btn-info" type="file" name="updateevent" accept="image/png, image/jpeg, image/jpg">
                                                             <input type="hidden" value="${element['id']}" name="id">
-                                                            <button type="updateevent" class="btn btn-primary" name="updateevent">{{__('image.button_upload_single')}}</button>
-                                                            </form>
+                                                            
+                                                            
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">{{__('image.modal_delete_dismiss')}}</button>
+                                                        <button type="updateevent" class="btn btn-primary" name="updateevent">{{__('image.button_upload_single')}}</button>
+                                                    </form>
                                                     </div>
                                                 </div>
                                             </div>

@@ -31,6 +31,9 @@ return [
     'create_step6' => 'Aantal personen',
     'create_step7' => 'Eigenaar',
 
+    'create_date' => 'Datum',
+    'create_time' => 'Tijd',
+
     'create_submit' => 'Verzenden',
     'create_title' => 'Titel',
     'create_description' => 'Beschrijving',

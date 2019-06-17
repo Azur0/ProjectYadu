@@ -6,25 +6,26 @@
 
 @section('content')
 <div class="slideContainer">
-    <div style="width:90%; margin:auto;">
-        <div class="box-range-value" id="box-move-with-distance">
-            <div id="rangeValueDisplay"></div>
+        <div style="width:90%; margin:auto;">
+            <div class="box-range-value" id="box-move-with-distance">
+                <div id="rangeValueDisplay"></div>
+            </div>
         </div>
-    </div>
-    <input type="range" ticks="[5, 10, 15, 20, 25]" min="5" max="25" step="5" value="20" class="slider" id="rangeValue">
-    <div class="labels">
-        <label class="rangeTextLeft">5 KM</label>
-        <label class="rangeTextCenter">10 KM</label>
-        <label class="rangeTextCenter">15 KM</label>
-        <label class="rangeTextCenter">20 KM</label>
-        <label class="rangeTextRight"> > </label>
-    </div>
-    <div class="search">
-        <label for="filterByTag">{{__('events.index_select_category')}}</label>
-        <input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag" />
-        <datalist id="tags">
-            @foreach ($tags as $tag)
-            <option value="{{__('events.cat'.$tag->id)}}">
+        <input type="range" ticks="[5, 10, 15, 20, 25]" min="5" max="25" step="5" value="20" class="slider"
+               id="rangeValue">
+        <div class="labels">
+            <label class="rangeTextLeft">5 KM</label>
+            <label class="rangeTextCenter">10 KM</label>
+            <label class="rangeTextCenter">15 KM</label>
+            <label class="rangeTextCenter">20 KM</label>
+            <label class="rangeTextRight"> > </label>
+        </div>
+        <div class="search">
+            <label for="filterByTag">{{__('events.index_select_category')}}</label>
+            <input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag"/>
+            <datalist id="tags">
+                @foreach ($tags as $tag)
+                    <option value="{{$tag->tag}}">
                 @endforeach
         </datalist>
         <label for="filterByName">{{__('events.index_search_name')}}</label>

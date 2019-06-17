@@ -281,7 +281,7 @@ $(document).ready(function() {
                                 <input type="radio" id="${element['id']}" class="picture ${element['tag_id']}" name="eventpicture" value="${element['id']}"> 
                                 <label for="${element['id']}" class="picture ${element['tag_id']}" >
                                         <button type="button" onclick="setcheckedevent(${element['id']})" class="btn btn-danger eventpicturebutton" data-toggle="modal" data-target="#confirmDeleteEventPicture"><i class="far fa-trash-alt"></i></button>
-                                        <button type="button" onclick="setcheckedevent(${element['id']})" class="btn btn-warning eventpicturebutton" id="${element['id']}" data-toggle="modal" data-target="#editeventpicture"><i class="far fa-edit" style="width:14px"></i></button>
+                                        <button type="button" onclick="setediteventpicture(${element['id']})" class="btn btn-warning eventpicturebutton" id="${element['id']}" data-toggle="modal" data-target="#editeventpicture"><i class="far fa-edit" style="width:14px"></i></button>
 
                                         {{-- Popup for deleting --}}
                                         <div class="modal fade" id="confirmDeleteEventPicture" tabindex="-1" role="dialog">
@@ -327,12 +327,12 @@ $(document).ready(function() {
                                                                 {{__('image.add_tag_default')}}
                                                             </label>
                                                             <input id="file5" class="btn btn-info" type="file" name="updateevent" accept="image/png, image/jpeg, image/jpg">
-                                                            <input type="hidden" value="${element['id']}" name="id">
+                                                            <input type="hidden" id="eventID" value="${element['id']}" name="id">
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">{{__('image.modal_delete_dismiss')}}</button>
-                                                        <button type="updateevent" class="btn btn-primary" name="updateevent">{{__('image.button_upload_single')}}</button>
+                                                        <button type="update" class="btn btn-primary" name="updateevent">{{__('image.button_upload_single')}}</button>
                                                     </div>
                                                     </form>
                                                 </div>
@@ -385,6 +385,14 @@ $(document).ready(function() {
     
     function setcheckedevent(id) {
         localStorage.setItem("event_id", id);
+    }
+
+    function setediteventpicture(id) {
+        localStorage.setItem("event_id", id);
+        let eventpictures = document.querySelectorAll('#eventID');
+        eventpictures.forEach(function(element) {
+            element.setAttribute('value', localStorage.getItem("event_id"));
+        });
     }
 
     function removeEventPicture() {

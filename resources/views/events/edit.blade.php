@@ -7,7 +7,7 @@
         @method("PATCH")
         @csrf
         <div class="type">
-            <h3 style="display: inline">1. Kies het type event </h3>
+            <h3 style="display: inline">1. {{__('events.create_step1')}} </h3>
             <div class="CSH_tooltip">
                 <i class="fas fa-question-circle"></i>
                 <span class="tooltiptext">{{__('events.CSH_step1')}}</span>
@@ -29,13 +29,13 @@
                     @endforeach
                 </div>
                 @if ($errors->has('tag'))
-                <div class="error">Kies een type.</div>
+                <div class="error">{{__('events.create_error_select_type')}}.</div>
                 @endif
             </div>
         </div>
 
         <div class="pic">
-            <h3 style="display: inline">2. Kies een foto voor je event </h3>
+            <h3 style="display: inline">2. {{__('events.create_step2')}} </h3>
             <div class="CSH_tooltip">
                 <i class="fas fa-question-circle"></i>
                 <span class="tooltiptext">{{__('events.CSH_step2')}}</span>
@@ -48,19 +48,19 @@
                     checked
                     @endif
                     >
-                    <label for='{{$picture->id}}' class='picture {{$picture->id}}' title='Uitje met gezinnen'>
+                    <label for='{{$picture->id}}' class='picture {{$picture->id}}'>
                         <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($picture->picture) . '"/>'; ?>
                     </label>
                     @endforeach
                 </div>
                 @if ($errors->has('picture'))
-                <div class="error">Kies een foto.</div>
+                <div class="error">{{__('events.create_error_select_photo')}}</div>
                 @endif
             </div>
         </div>
 
         <div class="loc">
-            <h3 style="display: inline">3. Kies de (verzamel)locatie </h3>
+            <h3 style="display: inline">3. {{__('events.create_step3')}} </h3>
             <div class="CSH_tooltip">
                 <i class="fas fa-question-circle"></i>
                 <span class="tooltiptext">{{__('events.CSH_step3')}}</span>
@@ -93,46 +93,46 @@
             </div>
         </div>
         <div class="date">
-            <h3 style="display: inline">4. Kies de datum en tijd</h3>
+            <h3 style="display: inline">4. {{__('events.create_step4')}}</h3>
             <div class="CSH_tooltip">
                 <i class="fas fa-question-circle"></i>
                 <span class="tooltiptext">{{__('events.CSH_step4')}}</span>
             </div>
             <div class="description">
-                <h5>Date</h5>
+                <h5>{{__('events.create_date')}}</h5>
                 <input id="date" name="startDate" type="date" value="{{ $data['event']->startDate }}" required>
-                <h5>Time</h5>
+                <h5>{{__('events.create_time')}}</h5>
                 <input id="date" name="startTime" type="time" value="{{ $data['event']->startTime }}" required>
                 @if ($errors->has('startDate'))
-                <div class="error">Deze datum/tijd is ongeldig.</div>
+                <div class="error">{{__('events.create_error_invalid_datetime')}}</div>
                 @endif
             </div>
         </div>
         <div>
-            <h3 style="display: inline">5. Beschrijf je uitje</h3>
+            <h3 style="display: inline">5. {{__('events.create_step5')}}</h3>
             <div class="CSH_tooltip">
                 <i class="fas fa-question-circle"></i>
                 <span class="tooltiptext">{{__('events.CSH_step5')}}</span>
             </div>
             <div class="description">
-                <input type="text" id="title" name="activityName" placeholder="Titel"
+                <input type="text" id="title" name="activityName" placeholder="{{__('events.create_title')}}"
                     oninput="update_counter_title(this)" maxlength="30" required
                     value="{{ $data['event']->eventName }}">
-                <span id="chars_title"></span> characters remaining
+                <span id="chars_title"></span> {{__('events.create_characters_remaining')}}
                 @if ($errors->has('activityName'))
-                <div class="error">Het titel-veld is verplicht.</div>
+                <div class="error">{{__('events.create_error_title_required')}}</div>
                 @endif
 
-                <textarea id="desc" name="description" placeholder="Omschrijving.." oninput="update_counter_desc(this)"
+                <textarea id="desc" name="description" placeholder="{{__('events.create_description')}}" oninput="update_counter_desc(this)"
                     maxlength="150" required>{{ $data['event']->description }}</textarea>
-                <span id="chars_desc"></span> characters remaining
+                <span id="chars_desc"></span> {{__('events.create_characters_remaining')}}
                 @if ($errors->has('description'))
-                <div class="error">Het omschrijving-veld is verplicht.</div>
+                <div class="error">{{__('events.create_error_description_required')}}</div>
                 @endif
             </div>
         </div>
         <div>
-            <h3 style="display: inline">6. Hoeveel mensen gaan er max mee?</h3>
+            <h3 style="display: inline">6. {{__('events.create_step6')}}</h3>
             <div class="CSH_tooltip">
                 <i class="fas fa-question-circle"></i>
                 <span class="tooltiptext">{{__('events.CSH_step6')}}</span>
@@ -140,13 +140,13 @@
             <div class="description">
                 <input type="number" name="numberOfPeople" min="1" max="25"
                     value="{{ $data['event']->numberOfPeople }}">
-                <span class="number_desc">mensen kunnen mee (incl. jezelf)</span>
+                <span class="number_desc">{{__('events.create_amount_of_participants')}}</span>
                 @if ($errors->has('numberOfPeople'))
-                <div class="error">Het max aantal mensen-veld is verplicht.</div>
+                <div class="error">{{__('events.create_error_max_participants_required')}}</div>
                 @endif
             </div>
         </div>
-        <input class="submit" type="submit" name="verzenden" value="Verzend">
+        <input class="submit" type="submit" name="verzenden" value="{{__('events.create_submit')}}">
     </form>
 </div>
 <script>
@@ -164,13 +164,11 @@ function fetch_customer_data(query) {
         },
         dataType: 'json',
         success: function(data) {
-            console.log(data);
             if (data == "") {
-                $('#box2').html("<h5><i>Kies eerst het type event</i></h5>");
+                $('#box2').html("<h5><i>{{__('events.create_select_type_first')}}</i></h5>");
             } else {
                 $('#box2').html("");
                 data.forEach(function(element) {
-                    //TODO: add if statement if element tag equals tag in given event add "checked"
                     $('#box2').html($("#box2").html() + "<input type='radio' id='" +
                         element['id'] + "' class='picture " + element['tag_id'] +
                         "' name='picture' value='" + element['id'] + "'> <label for='" +

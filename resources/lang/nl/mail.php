@@ -8,8 +8,10 @@ return [
     "eventCreatedText1" => "Het evenement dat is aangemaakt is ",
     "eventCreatedText2" => ".",
 
-    "editTitle" => "Een van je evenementen is aangepast.",
-    "editTitleParticipant" => "One of the events ",
+    "editTitle" => "een van je evenementen is aangepast.",
+    "editTitle2" => "heeft evenement" ,
+    "editTitle21" => "aangepast",
+    "editTitleParticipant" => "Eén van je evenementen is aangepast",
     "editText1" => "Evenement ",
     "editText2" => " is aangepast.",
 
@@ -51,4 +53,21 @@ return [
     "subjectEventDeleted" => "Evenement is verwijdert",
     "subjectEventJoined" => "Er is aangemeld voor een evenement",
     "subjectEventLeft" => "Er is afgemeld voor een evenement",
+
+    //Reset
+    "reset_password_title" => "Reset je wachtwoord",
+    "reset_password_greeting" => "",
+    "reset_password_reason" => "Je ontvangt deze mail omdat je een wachtwoord reset verzoek hebt ingediend.",
+    "reset_password_action" => "Reset Wachtwoord",
+    "reset_password_expire" => "Deze link zal na :count minuten niet meer geldig zijn.",
+    "reset_password_else_no_action_needed" => "Als je geen wachtwoord verzoek hebt gedaan dan kun je deze mail negeren.",
+    "reset_password_signee" => "Yadu",
+    
+    //Verify
+    "verify_title" => "Activeer account",
+    "verify_start" => "Dit e-mailtje is naar aanleiding van uw registratie bij Yadu.",
+    "verify_action" => "Activeer account ",
+    "verify_instruction" => "De activatie dient gedaan te worden om uw account te activeren.",
+    "verify_closing" => "Met vriendelijk groet van,",
+    "verify_signee" => "Yadu",
 ];

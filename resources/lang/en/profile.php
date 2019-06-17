@@ -50,7 +50,7 @@ return [
     'edit_email' => 'E-mail address',
     'edit_update_profile' => 'Update profile',
 
-    'edit_change_account_settings_title' => 'Account settings - Notifications',
+    'edit_change_account_settings_title' => 'Notifications settings',
     // Follow notification
     'edit_change_account_settings_follow_notification_title' =>'About following',
     'edit_change_account_settings_follow_notification_creation' => 'When event is created by someone you follow',

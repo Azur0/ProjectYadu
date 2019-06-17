@@ -79,8 +79,7 @@ class EventsController extends Controller
 			$event->city = $event->location->locality;
 			$event->writtenDate = self::dateToShortText($event->startDate);
 		}
-		
-		$testemonials = array();  
+		 
 		$testemonials = Testemonial::all()->where('accepted', '==', true);
 		$testemonials = $testemonials->shuffle();
 		$testemonials->splice(3);

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Traits\DateToText;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 use App\Event;
+use App\Testemonial;
 use App\EventHasParticipants;
 use Auth;
 
@@ -31,6 +33,13 @@ class HomeController extends Controller
     public function index()
     {
         $events = Event::where('owner_id', auth()->user()->id)->where('isDeleted', '==', 0)->take(5)->get();
+        $testemonials = Testemonial::where('account_id', auth()->user()->id)->take(5)->get();
+
+       	foreach($testemonials as $testemonial)
+		{
+			$testemonial->date = self::dateToShortText($testemonial->created_at);
+		}
+
         $participation = array();        
         $part = EventHasParticipants::get()->where('account_id', '==', auth()->user()->id);
 
@@ -57,7 +66,18 @@ class HomeController extends Controller
 			$event->city = self::cityFromPostalcode($event->location->postalcode);
 		}
 
-        return view('home', compact('events','participation'));
+        return view('home', compact('events','participation','testemonials'));
+    }
+
+    public function myTestemonials()
+    {
+        $testemonials = Testemonial::where('account_id', auth()->user()->id)->simplePaginate(10);
+       	foreach($testemonials as $testemonial)
+		{
+			$testemonial->date = self::dateToShortText($testemonial->created_at);
+		}
+
+		return view('accounts/testemonials', compact('testemonials'));
     }
 
     public function myEvents()

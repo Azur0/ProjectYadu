@@ -11938,7 +11938,8 @@ input[type=radio]:checked + .category span {
   margin: 1em;
 }
 
-.testemonials .testemonial {
+.testemonials .testemonial,
+.testemonials .testemonial2 {
   background: white;
   border-radius: 5px;
   padding: 5px;
@@ -11946,15 +11947,21 @@ input[type=radio]:checked + .category span {
   margin-bottom: 1em;
 }
 
-.testemonials .testemonial p {
+.testemonials .testemonial p,
+.testemonials .testemonial2 p {
   margin: 0px;
   padding: 5px;
 }
 
-.testemonials .testemonial .testemonial_date {
+.testemonials .testemonial .testemonial_date,
+.testemonials .testemonial2 .testemonial_date {
   text-align: center;
   font-size: 10px;
   margin: auto;
   width: 100%;
+}
+
+.testemonials .testemonial2 {
+  padding: 1em;
 }
 

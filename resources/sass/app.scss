@@ -1073,7 +1073,7 @@ input[type=radio]:checked+.category span {
 {
 	margin: 1em;
 
-	.testemonial
+	.testemonial, .testemonial2
 	{
 		background: white;
 		border-radius: 5px;
@@ -1093,6 +1093,16 @@ input[type=radio]:checked+.category span {
 			font-size: 10px;
 			margin: auto;
 			width: 100%;
+		}
+	}
+
+	.testemonial2 
+	{
+		padding: 1em;
+
+		p
+		{
+
 		}
 	}
 }

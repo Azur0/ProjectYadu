@@ -18,8 +18,8 @@ class TestemonialsController extends Controller
 	 */
 	public function index()
 	{
-		$testemonials = Testemonial::orderBy('created_at', 'desc')->simplePaginate(10);
-		return view('testemonials.index', compact('testemonials'));
+		$testemonials = Testemonial::simplePaginate(10);
+		return view('admin.testemonials.index', compact('testemonials'));
 	}
 
 	/**
@@ -30,7 +30,8 @@ class TestemonialsController extends Controller
 	 */
 	public function show($id)
 	{
-		return redirect('/home');
+		$testemonial = Testemonial::findOrFail($id);
+		return view('admin.testemonials.show', compact('testemonial'));
 	}
 
 	/**
@@ -40,7 +41,7 @@ class TestemonialsController extends Controller
 	 */
 	public function create()
 	{
-		return view('testemonials.create');
+		return view('admin.testemonials.create');
 	}
 
 	/**
@@ -52,18 +53,12 @@ class TestemonialsController extends Controller
 	public function store(CreateTestemonialRequest $request)
 	{
 		$newTestemonial = new Testemonial;
-		$newTestemonial->name = "";
+		$newTestemonial->name = $request['name'];
 		$newTestemonial->experience = $request['experience'];
-		$newTestemonial->account_id = auth()->user()->id;
-		
-		if(Auth::user()->accountRole == 'Admin')
-		{
-			$newTestemonial->accepted = true;
-		}
 
+		$newTestemonial->accepted = true;
 		$newTestemonial->save();
-
-		return redirect('/home');
+		return redirect('/admin/testemonials/'.$newTestemonial->id);
 	}
 
 	/**
@@ -75,7 +70,7 @@ class TestemonialsController extends Controller
 	public function edit($id)
 	{
 		$testemonial = Testemonial::findOrFail($id);
-		return view('testemonials.edit', compact('testemonial'));
+		return view('admin.testemonials.edit', compact('testemonial'));
 	}
 
 	/**
@@ -88,11 +83,13 @@ class TestemonialsController extends Controller
 	public function update(CreateTestemonialRequest $request, $id)
 	{
 		$newTestemonial = Testemonial::findOrFail($id);
+		$newTestemonial->name = $request['name'];
 		$newTestemonial->experience = $request['experience'];
+		$newTestemonial->accepted = $request['accepted'];
 
 		$newTestemonial->save();
 
-		return redirect('/home');
+		return redirect('/admin/testemonials/'.$newTestemonial->id);
 	}
 
 	/**
@@ -105,11 +102,11 @@ class TestemonialsController extends Controller
 	{
 		$testemonial = Testemonial::findOrFail($id);
 		
-		if($testemonial->account_id == Auth::id())
+		if($testemonial->account_id == Auth::id() || Auth::user()->accountRole == 'Admin')
 		{
 			$testemonial->delete();
 		}
 
-		return redirect('/testemonials');	
+		return redirect('/admin/testemonials');			
 	}
 }

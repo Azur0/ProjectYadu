@@ -59,7 +59,9 @@
 		<a href="/about">{{ __('welcome.link_read_more') }}...</a>
 	</div>
 	<div class="container" id="welcome_recent">
-		<a href="/events" class="recentEventsHome"><h2>{{ __('welcome.recent_events_header') }}</h2></a>
+		<a href="/events" class="recentEventsHome">
+			<h2>{{ __('welcome.recent_events_header') }}</h2>
+		</a>
 		<div id="#eventsToDisplay" class="event_overview row">
 			<?php $plus = 0; ?>
 			@foreach($regular_events as $event)
@@ -97,7 +99,9 @@
 		<p>{{ __('welcome.recent_events_content') }} <a href="/events">{{ __('welcome.link_here') }}</a>.</p>
 		@if(!empty($testemonials))
 			<br><br>
-			<h2>{{ __('testemonials.header_testemonial')}} </h2>
+			<a href="/testemonials" class="recentEventsHome">
+				<h2>{{ __('testemonials.header_testemonials')}}</h2>
+			</a>
 			<div class="row">
 				<div class="col testemonials">
 					

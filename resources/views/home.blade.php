@@ -31,6 +31,46 @@
 					</table>
 				</div>
 			</div>
+			<div class="card">
+				<div class="card-header">
+					<a href="/account/testemonials"><i class="fas fa-calendar-alt"></i> {{ __('testemonials.header_testemonials')}}</a>
+					<div class="float-right">
+						<a href="/testemonials/create"><i class="fas fa-plus-square"></i></a>
+					</div>
+				</div>
+				<div class="card-body">
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th scope="col">{{ __('testemonials.table_accepted')}}</th>
+								<th scope="col">{{ __('testemonials.table_experience')}}</th>
+								<th scope="col">{{ __('testemonials.table_date')}}</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+						@foreach($testemonials as $testemonial)
+							<tr>						
+								<td>
+									@if( $testemonial->accepted == true )
+										<i class="fas fa-check"></i>
+									@else
+										<i class="fas fa-times"></i>
+									@endif
+								</td>
+								<td>{{ str_limit($testemonial->experience, $limit = 15, $end = '...') }}</td>
+								<td>{{ $testemonial->date }}</td>
+								<td>
+									<a href="/testemonials/{{ $testemonial->id }}/edit">
+										<i class="fas fa-edit"></i>
+									</a>
+								</td>
+							</tr>
+						@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="card">

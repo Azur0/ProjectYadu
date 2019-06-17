@@ -32,11 +32,11 @@ class EventEdited extends Mailable
     {
         $title = '';
         if($this->event->userName == $this->event->owner->firstName){
-            $title = Lang::get('mail.editText1') . " " .$this->event->eventName." ".Lang::get('mail.editText2');
+            $title = $this->event->owner->firstName . " " . Lang::get('mail.editTitle2') . " "
+                .$this->event->eventName." ". Lang::get('mail.editTitle21');
         }else {
-            $title = Lang::get('mail.editTitle');
+            $title = $this->event->userName ." ".Lang::get('mail.editTitle');
         }
-
 
         return $this->markdown('mail/shortInformationMail')
             ->subject($title)
@@ -45,8 +45,6 @@ class EventEdited extends Mailable
             'salutation'=> Lang::get('mail.salutation'),
             'name'=>$this->event->owner->firstName . ",",
                 'bodyText' => Lang::get('mail.editText1').$this->event->eventName . Lang::get('mail.editText2'),
-
-
         ]);
     }
 }

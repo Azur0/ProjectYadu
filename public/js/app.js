@@ -59094,8 +59094,8 @@ if (token) {
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "1da8de2224e1c0ab887b",
-  cluster: "eu",
+  key: Object({"NODE_ENV":"development"}).MIX_PUSHER_APP_KEY,
+  cluster: Object({"NODE_ENV":"development"}).MIX_PUSHER_APP_CLUSTER,
   encrypted: true
 });
 
@@ -59130,9 +59130,9 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Joel\Documents\GitHub\Project-Yadu-A1\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\Joel\Documents\GitHub\Project-Yadu-A1\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\Joel\Documents\GitHub\Project-Yadu-A1\resources\sass\sb-admin-2.scss */"./resources/sass/sb-admin-2.scss");
+__webpack_require__(/*! B:\Jaar 2, HBO-ICT\YaduProject\Project-Yadu-A1\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! B:\Jaar 2, HBO-ICT\YaduProject\Project-Yadu-A1\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! B:\Jaar 2, HBO-ICT\YaduProject\Project-Yadu-A1\resources\sass\sb-admin-2.scss */"./resources/sass/sb-admin-2.scss");
 
 
 /***/ })

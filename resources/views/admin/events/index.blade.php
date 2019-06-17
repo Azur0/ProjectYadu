@@ -17,7 +17,7 @@
 				<input class="admin-form-control" oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag" placeholder="{{__('events.index_search_category_placeholder')}}"/>
 				<datalist id="tags">
 					@foreach ($tags as $tag)
-						<option value="{{__('events.cat'.$tag->id)}}">
+						<option value="{{$tag->tag}}">
 					@endforeach
 				</datalist>
 				<label for="filterByName">{{__('events.index_search_name')}}</label>
@@ -202,7 +202,6 @@
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
 					$('#eventsToDisplay').html(
-						//TODO TRANSLATION
 						"<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_loading_error')}}</h1><div>"
 					);
 				}

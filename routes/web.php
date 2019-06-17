@@ -103,6 +103,10 @@ Route::post('/charts/categories', 'Admin\ChartController@GetCategories')->name('
 Route::post('/charts/chatmessages', 'Admin\ChartController@GetChatmessages')->name('admin_charts_chatmessages')->middleware('auth', 'isAdmin');
 Route::post('/charts/accountscreated', 'Admin\ChartController@GetAccountsCreated')->name('admin_charts_accounts_created')->middleware('auth', 'isAdmin');
 Route::post('/charts/updatedatesting', 'Admin\ChartController@UpdateDateString')->name('admin_charts_update_date_string')->middleware('auth', 'isAdmin');
+Route::post('/charts/mostactiveuser', 'Admin\ChartController@GetMostActiveUser')->name('admin_charts_most_active_user')->middleware('auth', 'isAdmin');
+Route::post('/charts/zeroparticipants', 'Admin\ChartController@GetZeroParticipants')->name('admin_charts_zero_participants')->middleware('auth', 'isAdmin');
+Route::post('/charts/averageparticipants', 'Admin\ChartController@GetAverageParticipants')->name('admin_charts_average_participants')->middleware('auth', 'isAdmin');
+Route::post('/charts/mostparticipants', 'Admin\ChartController@GetMostParticipants')->name('admin_charts_most_participants')->middleware('auth', 'isAdmin');
 
 Route::get('/edit/{lang}/{page}', 'Admin\EditLangController@index')->middleware('auth', 'isAdmin');
 Route::post('admin', 'Admin\EditLangController@saveFile')->middleware('auth', 'isAdmin');

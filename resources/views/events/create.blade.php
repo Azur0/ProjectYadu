@@ -15,7 +15,7 @@
                     <label for="{{$Tag->tag}}" class="category">
                         <?php echo '<img class="default" src="data:image/jpeg;base64,' . base64_encode($Tag->imageDefault) . '"/>'; ?>
                         <?php echo '<img class="selected" src="data:image/jpeg;base64,' . base64_encode($Tag->imageSelected) . '"/>'; ?>
-                        <span>{{__('events.cat'.$Tag->id)}}</span>
+                        <span>{{$Tag->tag}}</span>
                     </label>
                     @endforeach
                 </div>

@@ -96,13 +96,13 @@
 			@endif
 		</div>
 		<p>{{ __('welcome.recent_events_content') }} <a href="/events">{{ __('welcome.link_here') }}</a>.</p>
-		
             <div class="row">
                 <div class="col testimonial">
-                    {{$testimonial->name}}
-                    {{$testimonial->experience}}
+                    <hr>
+	                    <h3 class="text-center">{{$testimonial->name}}</h3>
+	                    <h4 class="text-center"><i>&quot{{$testimonial->experience}}&quot</i></h4>
+                	<hr>
                 </div>
             </div>
         </div>
-
 @endsection

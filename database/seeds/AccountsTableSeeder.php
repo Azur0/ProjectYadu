@@ -13,7 +13,7 @@ class AccountsTableSeeder extends Seeder
     {
         DB::table('accounts')->insert([
             'accountRole' => 'Admin',
-            'email' => 'admin@yadu.com',
+            'email' => 'admin@yadu.nu',
             'password' => Hash::make('password'),
             'doForcePasswordChange' => 1,
             'firstName' => encrypt('Admin'),

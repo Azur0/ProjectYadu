@@ -46,7 +46,7 @@
                     <i class="fa fa-upload"></i>
                     {{__('image.add_tag_default')}}
                 </label>
-                <input id="file1" class="btn btn-info" type="file" name="image" accept="image/png">
+                <input id="file1" class="btn btn-info" type="file" name="image" accept="image/png, image/jpg, image/jpeg">
                 <button type="submit" class="btn btn-primary" name="submittype">{{__('image.button_upload_single')}}</button>
             </div>
         </form>

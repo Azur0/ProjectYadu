@@ -7,7 +7,9 @@ return [
     "eventCreatedText1" => "The event that is created:",
     "eventCreatedText2" => ".",
 
-    "editTitle" => "One of your events has been edited.",
+    "editTitle" => "one of your events has been edited.",
+    "editTitle2" => "has edited event" ,
+    "editTitle21" => "",
     "editTitleParticipant" => "One of the events ",
     "editText1" => "Event ",
     "editText2" => " has being edited.",

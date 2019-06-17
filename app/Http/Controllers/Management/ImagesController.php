@@ -205,7 +205,7 @@ class ImagesController extends Controller
 
 	public function updateeventpicture(Request $request) {
 		$this->validate($request, [
-			'updateevent' => 'image|dimensions:ratio=1/1,max_width=10000,max_height=10000|mimes:jpg,png,jpeg|max:2048',
+			'updateevent' => 'image|dimensions:max_width=10000,max_height=10000|mimes:jpg,png,jpeg|max:2048',
 			]);
 		if($request->file('updateevent')->getSize() > 16777215){
 			return redirect('/admin/images/category')->withErrors(__('image.file_too_large'));

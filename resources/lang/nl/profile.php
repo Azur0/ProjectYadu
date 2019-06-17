@@ -94,8 +94,8 @@ return [
     'edit_unblock_account_areYouSure' => 'Weet je zeker dat je :name wilt deblokkeren?',
     
     'edit_privacy_head' => 'Privacy Instellingen',
-    'edit_privacy_participatingVisibility' => 'No, Keep it!',
-    'edit_privacy_eventsVisibility' => 'No, Keep it!',
+    'edit_privacy_participatingVisibility' => 'Deelnemende zichtbaarheid',
+    'edit_privacy_eventsVisibility' => 'Evenementen zichtbaarheid',
     'edit_privacy_infoVisibility' => 'Profiel informatie zichtbaarheid',
     'edit_privacy_followingVisibility' => 'Volgende zichtbaarheid',
     'edit_privacy_followerVisibility' => 'Volger zichtbaarheid',

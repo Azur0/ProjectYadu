@@ -22,14 +22,14 @@
         </div>
         <div class="search">
             <label for="filterByTag">{{__('events.index_select_category')}}</label>
-            <input oninput="fetch_events()" list="tags" id="filterByTag" name="filterByTag"/>
+            <input oninput="fetch_events(false)" list="tags" id="filterByTag" name="filterByTag"/>
             <datalist id="tags">
                 @foreach ($tags as $tag)
                     <option value="{{$tag->tag}}">
                 @endforeach
         </datalist>
         <label for="filterByName">{{__('events.index_search_name')}}</label>
-        <input oninput="fetch_events()" list="names" id="filterByName" name="filterByName" autocomplete="off" />
+        <input oninput="fetch_events(false)" list="names" id="filterByName" name="filterByName" autocomplete="off" />
     </div>
 </div>
 
@@ -44,7 +44,7 @@
 
 <div class="row">
     <div class="col-12">
-        <button class="btn btn-yadu-orange w-100" id="loadMore" onclick="fetch_events()">Load more</button>
+        <button class="btn btn-yadu-orange w-100" id="loadMore" onclick="fetch_events(true)">Load more</button>
     </div>
 </div>
     @if(Session::get('error'))
@@ -87,7 +87,7 @@
         fetch_events();
     };
     $(document).ready(function() {
-        fetch_events();
+        fetch_events(true);
         document.getElementById("box-move-with-distance").style.transform = "translate(-" + ((((slider.value / 5) - 1) * 10) + 5) + "px) rotate(-136deg)";
         document.getElementById("box-move-with-distance").style.margin = "0 0 0 " + ((((slider.value / 5) - 1) * 25)) + "%";
 
@@ -96,19 +96,26 @@
     var totalEvents = 0;
     var tempDistance = 0;
     //AJAX request
-    function fetch_events() {
+    function fetch_events(loadMore) {
+
         var distance;
         distance = $("#rangeValue").val();
         var inputTag = $(filterByTag).val();
         var inputName = $(filterByName).val();
         var tempDistance = this.tempDistance;
+
         if (distance != tempDistance) {
             pageNumber = 0;
             totalEvents = 0;
             $("#loadMore").show();
             $('#eventsToDisplay').html("<img class='loadingSpinner' src='images/Spinner-1s-200px.gif'>");
         }
-        this.pageNumber += 1;
+
+        if(loadMore == true){
+            this.pageNumber += 1;
+        }else{
+            this.pageNumber = 1;
+        }
 
         $.ajax({
             url: "{{ route('events_controller.actionDistanceFilter')}}",
@@ -123,7 +130,12 @@
             dataType: 'json',
             success: function(data) {
                 events = data["events"];
-                totalEvents +=events.length;
+                if(loadMore == true){
+                    totalEvents +=events.length;
+                }else{
+                    totalEvents = events.length;
+                    $('#eventsToDisplay').html(""); 
+                }
                 if (data == "") {
                     $('#eventsToDisplay').html(
                         "<div style='text-align:center; width:100%; padding-top:50px;'><h1>{{__('events.index_no_event_found')}}</h1><div>"
@@ -146,6 +158,16 @@
                     });
                     if (totalEvents == data["total_length"]) {
                         $("#loadMore").hide();
+                        if(loadMore == false){
+                            pageNumber = totalEvents/24;
+                        }
+                    }
+                    if (totalEvents != data["total_length"]) {
+                        $("#loadMore").show();
+                        if(loadMore == false){
+
+                            pageNumber = totalEvents/3;
+                        }
                     }
                 }
             },

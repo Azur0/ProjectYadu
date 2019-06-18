@@ -5,7 +5,7 @@
 		<div class="card-header">
 			{{ __('testimonials.header_testimonial')}} 
 			<div class="float-right">
-				<a href="/admin/testimonials/create">{{ __('testimonials.header_new')}} <i class="fas fa-plus-square"></i></a>
+				<a href="/admin/testimonials/create" class="btn btn_prohibitedWord">{{ __('testimonials.header_new')}} <i class="fas fa-plus-square"></i></a>
 			</div>
 		</div>
 		<div class="card-body">

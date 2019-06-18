@@ -6,9 +6,9 @@
 */
 
 return [
-	'header_testemonials' => 'Testimonials',
-	'header_testemonial' => 'Testimonial',
-	'header_testemonials_text' => 'Hoe hebben andere mensen Yadu ervaren?',
+	'header_testimonials' => 'Testimonials',
+	'header_testimonial' => 'Testimonial',
+	'header_testimonials_text' => 'Hoe hebben andere mensen Yadu ervaren?',
 	'header_new' => 'Nieuw',
 
 	'form_name' => 'Naam',

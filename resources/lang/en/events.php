@@ -124,4 +124,13 @@ return [
     'show_share' => 'Share event',
     'show_share_link' => 'The link has been copied to your clipboard.',
     'show_share_close' => 'Close',
+
+    ///////////////////////////////// Context sensetive help ////////////////////////////////////
+    'CSH_step1' => 'Choose a category for your event',
+    'CSH_step2' => 'Choose a photo for your event',
+    'CSH_step3' => 'Choose the location or the collection location where your event will take place',
+    'CSH_step4' => 'Choose the date and time when your event location will be found',
+    'CSH_step5' => 'Describe your event',
+    'CSH_step6' => 'Choose the number of people who can participate in your event (max. 25)',
+    'CSH_step7' => 'Choose whether you want to be the owner of the outing or the first person to participate in the event',
 ];

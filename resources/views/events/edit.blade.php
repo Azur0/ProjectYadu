@@ -7,7 +7,11 @@
         @method("PATCH")
         @csrf
         <div class="type">
-            <h3>1. {{__('events.create_step1')}} </h3>
+            <h3 style="display: inline">1. {{__('events.create_step1')}} </h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step1')}}</span>
+            </div>
             <div class="types">
                 <div class="box">
                     @foreach ($data['tags'] as $tag)
@@ -31,7 +35,11 @@
         </div>
 
         <div class="pic">
-            <h3>2. {{__('events.create_step2')}} </h3>
+            <h3 style="display: inline">2. {{__('events.create_step2')}} </h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step2')}}</span>
+            </div>
             <div class="types">
                 <div id="box2" class="box">
                     @foreach($selectedTag->eventPictures()->get() as $picture)
@@ -52,7 +60,11 @@
         </div>
 
         <div class="loc">
-            <h3>3. {{__('events.create_step3')}} </h3>
+            <h3 style="display: inline">3. {{__('events.create_step3')}} </h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step3')}}</span>
+            </div>
             <div class="description location">
                 <input type="hidden" name="lng" id="lng" value="{{$data['event']->location()->first()->locLongtitude}}">
                 <input type="hidden" name="lat" id="lat" value="{{$data['event']->location()->first()->locLatitude}}">
@@ -81,7 +93,11 @@
             </div>
         </div>
         <div class="date">
-            <h3>4. {{__('events.create_step4')}}</h3>
+            <h3 style="display: inline">4. {{__('events.create_step4')}}</h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step4')}}</span>
+            </div>
             <div class="description">
                 <h5>{{__('events.create_date')}}</h5>
                 <input id="date" name="startDate" type="date" value="{{ $data['event']->startDate }}" required>
@@ -93,7 +109,11 @@
             </div>
         </div>
         <div>
-            <h3>5. {{__('events.create_step5')}}</h3>
+            <h3 style="display: inline">5. {{__('events.create_step5')}}</h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step5')}}</span>
+            </div>
             <div class="description">
                 <input type="text" id="title" name="activityName" placeholder="{{__('events.create_title')}}"
                     oninput="update_counter_title(this)" maxlength="30" required
@@ -112,7 +132,11 @@
             </div>
         </div>
         <div>
-            <h3>6. {{__('events.create_step6')}}</h3>
+            <h3 style="display: inline">6. {{__('events.create_step6')}}</h3>
+            <div class="CSH_tooltip">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltiptext">{{__('events.CSH_step6')}}</span>
+            </div>
             <div class="description">
                 <input type="number" name="numberOfPeople" min="1" max="25"
                     value="{{ $data['event']->numberOfPeople }}">

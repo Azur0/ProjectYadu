@@ -48,7 +48,7 @@ return [
     "editAccountHeader" => "je accountgegevens zijn bewerkt",
 
     //Subject
-    "subjectAccountEdited" => "jou account is gewijzigd",
+    "subjectAccountEdited" => "jouw account is gewijzigd",
     "subjectEventEdited" => "Evenement is gewijzigd",
     "subjectEventDeleted" => "Evenement is verwijdert",
     "subjectEventJoined" => "Er is aangemeld voor een evenement",

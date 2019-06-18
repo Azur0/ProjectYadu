@@ -66,5 +66,15 @@ return [
     'avatar_reset_button' => 'Reset Avatar',
 
     'index_no_event_found' => 'No accounts found',
-    'index_loading_error' => 'Error loading accounts'
+    'index_loading_error' => 'Error loading accounts',
+
+    ///////////////////////////////// Activation ////////////////////////////////////
+
+    'activation_header' => 'Account activated!',
+    'activation_message' => 'Thanks for activating your account, go find an event to join!',
+    'activation_button' => 'Back to Yadu',
+    'non_activation_header' => 'Inactive account, please verify',
+    'non_activation_message' => 'U haven\'t verified your email, please do so in order to join this event.',
+    'non_activation_button' => 'Go back',
+
 ];

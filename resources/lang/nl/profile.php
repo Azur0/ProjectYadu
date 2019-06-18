@@ -94,11 +94,23 @@ return [
     'edit_unblock_account_areYouSure' => 'Weet je zeker dat je :name wilt deblokkeren?',
     
     'edit_privacy_head' => 'Privacy Instellingen',
-    'edit_privacy_participatingVisibility' => 'No, Keep it!',
-    'edit_privacy_eventsVisibility' => 'No, Keep it!',
+    'edit_privacy_participatingVisibility' => 'Deelnemende evenementen zichtbaarheid',
+    'edit_privacy_eventsVisibility' => 'Evenementen zichtbaarheid',
     'edit_privacy_infoVisibility' => 'Profiel informatie zichtbaarheid',
     'edit_privacy_followingVisibility' => 'Volgende zichtbaarheid',
     'edit_privacy_followerVisibility' => 'Volger zichtbaarheid',
 
     'follow_request_pending' => 'Volg aanvraag is in behandeling',
+
+    ///////////////////////////////// Context sensetive help ////////////////////////////////////
+    'CSH_privacy_follower' => 'Kies wie kan zien wie u volgen',
+    'CSH_privacy_following' => 'Kies wie kan zien wie u volgt',
+    'CSH_privacy_info' => 'Kies wie uw gegevens kan zien',
+    'CSH_privacy_events' => 'Kies wie uw evenementen kunnen zien',
+    'CSH_privacy_participating' => 'Kies wie kan zien aan welke evenementen u deelneemt',
+    'CSH_notifications_eventCreated' => 'Krijg een melding als iemand die u volgt een evenement aanmaakt',
+    'CSH_notifications_follower' => 'Krijg een melding als iemand die u volgt aan een evenement deelneemt of afmeld',
+    'CSH_notifications_eventEdited' => 'Krijg een melding als een evenement waaraan u deelneemt wordt bewerkt',
+    'CSH_notifications_eventDeleted' => 'Krijg een melding als een evenement waaraan u deelneemt wordt verwijderd',
+    'CSH_notifications_eventJoinedLeft' => 'Krijg een melding als iemand deelneemt of afmeld aan een evenement waaraan u deelneemt',
 ];

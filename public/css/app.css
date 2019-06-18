@@ -11934,34 +11934,42 @@ input[type=radio]:checked + .category span {
   overflow: hidden;
 }
 
-.testemonials {
-  margin: 1em;
+.CSH_tooltip {
+  position: relative;
+  display: inline-block;
+  margin-top: 5px;
 }
 
-.testemonials .testemonial,
-.testemonials .testemonial2 {
-  background: white;
-  border-radius: 5px;
-  padding: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  margin-bottom: 1em;
-}
-
-.testemonials .testemonial p,
-.testemonials .testemonial2 p {
-  margin: 0px;
-  padding: 5px;
-}
-
-.testemonials .testemonial .testemonial_date,
-.testemonials .testemonial2 .testemonial_date {
+.CSH_tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #555;
+  color: #fff;
   text-align: center;
-  font-size: 10px;
-  margin: auto;
-  width: 100%;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-.testemonials .testemonial2 {
-  padding: 1em;
+.CSH_tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.CSH_tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
 

@@ -10,60 +10,54 @@
         </div>
     @endif
     {{-- Carousel --}}
-    <div id="welcome_carousel">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                @foreach($events as $event)
-                    @if ($loop->first)
-                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->index }}"
-                            class="active"></li>
-                    @else
-                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->index }}"></li>
-                    @endif
-                @endforeach
-            </ol>
-            <div class="carousel-inner">
-                @foreach($events as $event)
-                    @if ($loop->first)
-                        <div class="carousel-item active">
-                    @else
-                        <div class="carousel-item">
-                    @endif
-                            <div class="carousel_img_container">
-                                <img class="d-block w-100"
-                                     src="data:image/png;base64,{{ chunk_split(base64_encode($event->eventPicture->picture)) }}"
-                                     alt="First slide">
-                            </div>
-                            <div class="carousel-caption d-md-block">
-                                <h5>{{ $event->eventName }}</h5>
-                                <p>{{ $event->description }}</p>
-                                <h6>{{ $event->city }} {{ $event->writtenDate }}</h6>
-                                <a href="/events/{{ $event->id }}">{{ __('welcome.link_read_more') }}...</a>
-                            </div>
-                         </div>
-                @endforeach
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                   data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">{{ __('welcome.carousel_prev') }}</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                   data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">{{ __('welcome.carousel_next') }}</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    {{-- Welcome info --}}
-    <div class="container" id="welcome_info">
-        <h1>{{ __('welcome.welcome_header') }}</h1>
-        <h4>{{ __('welcome.welcome_content1') }}</h4>
-        <p>{{ __('welcome.welcome_content2') }}</p>
-        <a href="/about">{{ __('welcome.link_read_more') }}...</a>
-    </div>
-
+	<div id="welcome_carousel">
+		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				@foreach($events as $event)
+				@if ($loop->first)
+						<li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->index }}" class="active"></li>	
+					@else
+						<li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->index }}"></li>
+					@endif
+				@endforeach
+			</ol>
+			<div class="carousel-inner">
+				@foreach($events as $event)
+					@if ($loop->first)
+						<div class="carousel-item active">	
+					@else
+						<div class="carousel-item">
+					@endif		
+							<div class="carousel_img_container">
+								<img class="d-block w-100" src="data:image/png;base64,{{ chunk_split(base64_encode($event->eventPicture->picture)) }}" alt="First slide">
+							</div>
+							<div class="carousel-caption d-md-block">
+								<h5>{{ $event->eventName }}</h5>
+								<p>{{ $event->description }}</p>
+								<h6>{{ $event->city }} {{ $event->writtenDate }}</h6>
+								<a href="/events/{{ $event->id }}">{{ __('welcome.link_read_more') }}...</a>
+							</div>
+						</div>
+				@endforeach
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">{{ __('welcome.carousel_prev') }}</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">{{ __('welcome.carousel_next') }}</span>
+			</a>
+		</div>
+	</div>
+	<div class="container" id="welcome_info">
+		<h1>{{ __('welcome.welcome_header') }}</h1>
+		<h4>{{ __('welcome.welcome_content1') }}</h4>
+		<p>
+			{{ __('welcome.welcome_content2') }}
+		</p>
+		<a href="/about">{{ __('welcome.link_read_more') }}...</a>
+	</div>
     {{-- Highlighted events --}}
     <div class="container" id="welcome_recent">
         <a href="/events" class="recentEventsHome">

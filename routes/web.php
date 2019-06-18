@@ -88,6 +88,26 @@ Route::post('admin/suspensions/ip/{ip}/destroy', 'Admin\SuspensionsController@de
 //testimonials
 Route::resource('admin/testimonials', 'Admin\TestimonialsController')->middleware('auth', 'isAdmin');
 
+// admin/images/category
+Route::get('admin/images/category', 'Management\ImagesController@showtype')->name('imagescontroller.index')->middleware('auth', 'isAdmin');
+Route::post('admin/images/category/addtype', 'Management\ImagesController@addtype')->name('imagescontroller.addtype')->middleware('auth', 'isAdmin');
+Route::post('admin/images/category/removetype', 'Management\ImagesController@removetype')->name('imagescontroller.removetype')->middleware('auth', 'isAdmin');
+Route::post('admin/images/category/checktiedpictures', 'Management\ImagesController@checktiedpictures')->name('imagescontroller.checktiedpictures')->middleware('auth', 'isAdmin');
+Route::post('admin/images/category/deleteeventpicture', 'Management\ImagesController@deleteeventpicture')->name('events_controller.deleteeventpicture')->middleware('auth', 'isAdmin');
+Route::post('admin/images/category/trueremove', 'Management\ImagesController@trueremove')->name('imagescontroller.trueremove')->middleware('auth', 'isAdmin');
+Route::post('admin/images/category/addeventpicture/{id}', 'Management\ImagesController@addeventpicture')->name('imagescontroller.addeventpicture')->middleware('auth', 'isAdmin');
+Route::get('admin/images/category/edittagpicture/{id}', 'Management\ImagesController@edittagpicture')->name('imagescontroller.edittagpicture')->middleware('auth', 'isAdmin');
+Route::post('admin/images/category/updatetagpicture', 'Management\ImagesController@updatetagpicture')->name('imagescontroller.updatetagpicture')->middleware('auth', 'isAdmin');
+Route::post('admin/images/category/updateeventpicture', 'Management\ImagesController@updateeventpicture')->name('imagescontroller.updateeventpicture')->middleware('auth', 'isAdmin');
+
+// admin/images/extra
+Route::get('admin/images/extra', 'Management\ImagesController@showextra')->middleware('auth', 'isAdmin');
+Route::post('admin/images/extra', 'Management\ImagesController@update')->name('imagescontroller.update')->middleware('auth', 'isAdmin');
+Route::resource('admin/swearWords','Management\ProhibitedWordsController');
+Route::get('admin/prohibitedWords', 'Management\ProhibitedWordsController@index')->middleware('auth', 'isAdmin');
+Route::post('admin/prohibitedWords/delete', 'Management\ProhibitedWordsController@destroy')->middleware('auth', 'isAdmin');
+Route::post('admin/prohibitedWords/update', 'Management\ProhibitedWordsController@update')->middleware('auth', 'isAdmin');
+Route::post('admin/prohibitedWords/create', 'Management\ProhibitedWordsController@create')->middleware('auth', 'isAdmin');
 Route::resource('admin/events','Admin\EventsController');
 Route::post('/admin/events/actionDistanceFilter', 'Admin\EventsController@actionDistanceFilter')->name('admin_events_controller.actionDistanceFilter');
 

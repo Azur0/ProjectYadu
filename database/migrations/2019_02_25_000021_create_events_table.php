@@ -55,13 +55,13 @@ class CreateEventsTable extends Migration
 
             $table->foreign('tag_id', 'fk_event_eventTags1_idx')
                 ->references('id')->on('event_tags')
-                ->onDelete('no action')
+                ->onDelete('cascade')
                 ->onUpdate('no action');
 
             $table->foreign('event_picture_id', 'fk_event_pictures1_idx')
                 ->references('id')->on('event_pictures')
                 ->onDelete('no action')
-                ->onUpdate('no action');
+                ->onUpdate('cascade');
         });
     }
 

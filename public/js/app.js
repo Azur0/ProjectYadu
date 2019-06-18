@@ -59432,9 +59432,9 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! B:\Jaar 2, HBO-ICT\YaduProject\Project-Yadu-A1\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! B:\Jaar 2, HBO-ICT\YaduProject\Project-Yadu-A1\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! B:\Jaar 2, HBO-ICT\YaduProject\Project-Yadu-A1\resources\sass\sb-admin-2.scss */"./resources/sass/sb-admin-2.scss");
+__webpack_require__(/*! C:\Users\MerijnOmen\Desktop\Avans\Projecten\2018-2019\YaDu\Project-Yadu-A1\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\MerijnOmen\Desktop\Avans\Projecten\2018-2019\YaDu\Project-Yadu-A1\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\MerijnOmen\Desktop\Avans\Projecten\2018-2019\YaDu\Project-Yadu-A1\resources\sass\sb-admin-2.scss */"./resources/sass/sb-admin-2.scss");
 
 
 /***/ })

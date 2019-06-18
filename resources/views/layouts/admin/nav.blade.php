@@ -112,6 +112,29 @@
 			<i class="fas fa-fw fa-calendar-week"></i>
 			<span>{{__('navigation.nav_eventsS')}}</span>
 		</a>
+		<div id="collapseEvents" class="collapse" aria-labelledby="headingEvents" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<!--<h6 class="collapse-header">Beheren:</h6>-->
+				<a class="collapse-item" href="{{ url('admin/events')  }}">{{__('navigation.nav_overview')}}</a>
+				<!--<a class="collapse-item" href="{{ url('admin/events/create')  }}">Create</a>-->
+			</div>
+		</div>
+    </li>
+    
+    <!-- Nav Item - Images -->
+	<li class="nav-item {{ request()->is('admin/images') ? 'active' : '' }}">
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImages" aria-expanded="true" aria-controls="collapseImages">
+			<i class="fas fa-fw fa-users"></i>
+			<span>{{__('navigation.nav_images')}}</span>
+		</a>
+		<div id="collapseImages" class="collapse" aria-labelledby="headingImages" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">{{__('navigation.nav_header_category')}}</h6>
+                <a class="collapse-item" href="{{ url('admin/images/category')  }}">{{__('navigation.nav_images')}}</a>
+                <h6 class="collapse-header">{{__('navigation.nav_header_extra')}}</h6>
+                <a class="collapse-item" href="{{ url('admin/images/extra')  }}">{{__('navigation.nav_images')}}</a>
+			</div>
+		</div>
 	</li>
 
 	<!-- Nav Item - Swear words -->

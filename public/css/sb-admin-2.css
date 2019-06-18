@@ -12848,6 +12848,7 @@ h6.collapse-header {
 }
 
 .submit-edit {
+  margin-top: 5px;
   margin-left: 20px;
 }
 
@@ -12906,6 +12907,75 @@ h6.collapse-header {
 .admin_user {
   font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
   font-size: 18px !important;
+}
+
+.eventpicturebutton {
+  position: relative;
+  top: 38px;
+  z-index: 1;
+}
+
+.tagimage {
+  float: left;
+  margin-right: 5px;
+  background-color: #EEEEEE;
+  border: black 1px solid;
+  cursor: pointer;
+}
+
+.divider {
+  margin: 10px;
+}
+
+.input-label {
+  background: lightgray;
+  color: black;
+  padding: 30px;
+  transition: 0.3s;
+}
+
+.background-label {
+  background: lightgray;
+  color: black;
+  padding: 30px;
+  transition: 0.3s;
+}
+
+.background-label:hover {
+  background: #ff9900;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.input-label:hover {
+  background: #ff9900;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form {
+  margin: 0 auto;
+}
+
+.formitem {
+  width: 100%;
+}
+
+.fa {
+  margin-right: 5px;
+}
+
+#file1,
+#file2,
+#file3,
+#file4,
+#file5 {
+  display: none;
+}
+
+#incard {
+  margin-top: 45px;
+  margin-left: 20px;
 }
 
 .btn_prohibitedWord {

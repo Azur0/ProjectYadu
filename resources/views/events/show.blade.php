@@ -361,6 +361,11 @@
 						btn.prop('disabled', false);
 					}, 1000);
 				})
+				if (this.timer) {
+                        clearTimeout(this.timer);
+                        this.timer = null;
+                    }
+                    this.timer = setTimeout(() => {
 				axios.post(`/api/events/${this.event.id}/message`, {
 						api_token: this.account.api_token,
 						body: this.messageBox,
@@ -380,7 +385,8 @@
                                 warning.innerHTML = "{{ __('events.show_chat_characterlimit') }}";
                             }
 							insertAfter(document.getElementById("message-to-send"), warning);
-                        });
+						});
+                    }, 300);
 		},
 		listen() {
 			Echo.private('event.' + this.event.id)
@@ -393,7 +399,7 @@
 	});
 
 	// Disable newline on enter(except when holding shift)
-	$('textarea').keydown1(function(e) {
+	$('textarea').keydown(function(e) {
 		if (e.keyCode == 13 && !e.shiftKey) {
 			// prevent default behavior
 			e.preventDefault();

@@ -1069,6 +1069,39 @@ input[type=radio]:checked+.category span {
 	overflow: hidden;
 }
 
+.testemonials
+{
+	margin: 1em;
+
+	.testemonial, .testemonial2
+	{
+		background: white;
+		border-radius: 5px;
+		padding: 5px;
+		border: 1px solid rgba(0, 0, 0, 0.125);
+		margin-bottom: 1em;
+
+		p
+		{
+			margin: 0px;
+			padding: 5px;
+		}
+
+		.testemonial_date
+		{
+			text-align: center;
+			font-size: 10px;
+			margin: auto;
+			width: 100%;
+		}
+	}
+
+	.testemonial2 
+	{
+		padding: 1em;
+    }
+}
+
 .CSH_tooltip {
   position: relative;
   display: inline-block;

@@ -11,8 +11,6 @@ class EventTagsTableSeeder extends Seeder
      */
     public function run()
     {
-        //factory('App\EventTag')->create();
-
         $filePathDefault = public_path() . "/images/seeder/eventtags/uitje_met_gezinnen.png";
         $filePathSelected = public_path() . "/images/seeder/eventtags/uitje_met_gezinnen_1.png";
 

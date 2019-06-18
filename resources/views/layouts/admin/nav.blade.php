@@ -129,6 +129,13 @@
 			<span>{{__('navigation.nav_suspensions')}}</span>
 		</a>
 	</li>
+	<!-- Nav Item - testimonials -->
+	<li class="nav-item {{ request()->is('admin/testimonials') ? 'active' : '' }}">
+		<a class="nav-link collapsed" href="/admin/testimonials">
+			<i class="fas fa-comment-dots"></i>
+			<span>{{__('navigation.nav_testimonials')}}</span>
+		</a>
+	</li>
 
 	<!-- Divider -->
 	<hr class="sidebar-divider d-none d-md-block">

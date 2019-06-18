@@ -3,13 +3,13 @@
 
 @section('content')
 @section('main')
-	@if (session('alert'))
-		<div class="alert alert-success alert-dismissible fade show" role="alert">
-			{{ session('alert') }}
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-		</div>
-	@endif
-
+    @if (session('alert'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('alert') }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    @endif
+    {{-- Carousel --}}
 	<div id="welcome_carousel">
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -58,69 +58,56 @@
 		</p>
 		<a href="/about">{{ __('welcome.link_read_more') }}...</a>
 	</div>
-	<div class="container" id="welcome_recent">
-		<a href="/events" class="recentEventsHome"><h2>{{ __('welcome.recent_events_header') }}</h2></a>
-		<div id="#eventsToDisplay" class="event_overview row">
-			<?php $plus = 0; ?>
-			@foreach($regular_events as $event)
-				<div class='col-md-6 col-lg-4 event'>
-					<a href='/events/{{ $event->id }}'>
-						@if( $event->startDate > \Carbon\Carbon::now())
-						<div class='card mb-4 box-shadow'>
-						@else
-						<div class='card mb-4 box-shadow greyified'>
-						@endif
-							<img class = 'card-img-top' src="data:image/png;base64,{{ chunk_split(base64_encode($event->eventPicture->picture)) }}" alt = 'Card image cap'>
-							<div class = 'event_info' > 
-								<h3>{{ str_limit($event->eventName, $limit = 25, $end = '...') }}</h3>
-								<p>{{ $event->writtenDate }}<br>{{ $event->city }}</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<?php $plus = $plus + 1 ?>
-			@endforeach
-			@if($plus < 3)
-				<div class='col-md-6 col-lg-4 event'>
-					<a href="/events/create">
-						<div class='card mb-4 box-shadow'>
-							<img class = 'card-img-top' src="/images/plus.png" alt = 'Card image cap'>
-							<div class = 'event_info' > 
-								<h3>{{ __('welcome.recent_events_own') }}</h3>
-								<p><br><br></p>
-							</div>
-						</div>
-					</a>
-				</div>
-			@endif
-		</div>
-		<p>{{ __('welcome.recent_events_content') }} <a href="/events">{{ __('welcome.link_here') }}</a>.</p>
-	</div>
-	
-@if($message = Session::get('activationsuccess'))
-	<div class="modal fade" id="activated" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">{{__('accounts.activation_header')}}</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<h5>{{$message}}</h5>
-				</div>
-				<div class="modal-footer">
-					<button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">{{__('accounts.activation_button')}}</button>
-				</div>
-			</div>
-		</div>
-	</div>
-    <script>
-		$(window).on('load', function(){
-        	$('#activated').modal('show');
-    	});
-	</script>
-@endif
-
+    {{-- Highlighted events --}}
+    <div class="container" id="welcome_recent">
+        <a href="/events" class="recentEventsHome">
+            <h2>{{ __('welcome.recent_events_header') }}</h2>
+        </a>
+        <div id="#eventsToDisplay" class="event_overview row">
+            <?php $plus = 0; ?>
+            @foreach($regular_events as $event)
+                <div class='col-md-6 col-lg-4 event'>
+                    <a href='/events/{{ $event->id }}'>
+                        @if( $event->startDate > \Carbon\Carbon::now())
+                            <div class='card mb-4 box-shadow'>
+                        @else
+                            <div class='card mb-4 box-shadow greyified'>
+                        @endif
+                                <img class='card-img-top'
+                                     src="data:image/png;base64,{{ chunk_split(base64_encode($event->eventPicture->picture)) }}"
+                                     alt='Card image cap'>
+                                <div class='event_info'>
+                                    <h3>{{ str_limit($event->eventName, $limit = 25, $end = '...') }}</h3>
+                                    <p>{{ $event->writtenDate }}<br>{{ $event->city }}</p>
+                                </div>
+                            </div>
+                    </a>
+                </div>
+                <?php $plus = $plus + 1 ?>
+            @endforeach
+            @if($plus < 3)
+                <div class='col-md-6 col-lg-4 event'>
+                    <a href="/events/create">
+                        <div class='card mb-4 box-shadow'>
+                            <img class='card-img-top' src="/images/plus.png" alt='Card image cap'>
+                            <div class='event_info'>
+                                <h3>{{ __('welcome.recent_events_own') }}</h3>
+                                <p><br><br></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endif
+        </div>
+        <p>{{ __('welcome.recent_events_content') }}
+            <a href="/events">{{ __('welcome.link_here') }}</a>.
+        </p>
+        <div class="row">
+            <div class="col testimonial">
+                <hr>
+                <h3 class="text-center"><i>&quot{{$testimonial->experience}}&quot</i></h3>
+                <h5 class="text-center mb-3">-{{$testimonial->name}}</h5>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -32,8 +32,8 @@
 							<td>
 								@if($event->startDate > date('Y-m-d H:i:s'))
 									<a class="editButton" href="/events/{{$event->id}}/edit"><i class="fas fa-edit"></i></a>
-									<button type="submit" class="deleteButton" data-toggle="modal" data-target="#confirmDeleteEvent"><i class="fas fa-trash-alt"></i></button>
-									<div class="modal fade" id="confirmDeleteEvent" tabindex="-1" role="dialog">
+									<button type="submit" class="deleteButton" data-toggle="modal" data-target="#confirmDeleteEvent{{$event->id}}"><i class="fas fa-trash-alt"></i></button>
+									<div class="modal fade" id="confirmDeleteEvent{{$event->id}}" tabindex="-1" role="dialog">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header">

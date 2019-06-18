@@ -107,6 +107,7 @@
 module.exports = __webpack_require__(/*! B:\Jaar 2, HBO-ICT\YaduProject\Project-Yadu-A1\resources\js\charts.js */"./resources/js/charts.js");
 
 
+
 /***/ })
 
 /******/ });

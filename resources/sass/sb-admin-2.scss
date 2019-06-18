@@ -27,6 +27,13 @@
 	display: flex !important;
 }
 
+.item-grouping{
+	position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
 .btn-yadu-orange {
 	color: white;
 	background-color: #F39200;
@@ -681,14 +688,12 @@ h6.collapse-header {
 	}
 	.card-header
 	{
-
-		height: 80px;
 		overflow-y: hidden;
-		overflow-x: scroll;
+		overflow-x: auto;
 
 		.search
 		{
-			min-width: 700px;
+			min-width: 710px;
 
 			label
 			{
@@ -704,7 +709,7 @@ h6.collapse-header {
 	.card-body
 	{
 		overflow-y: hidden;
-		overflow-x: scroll;
+		overflow-x: auto;
 	}
 }
 
@@ -734,7 +739,7 @@ h6.collapse-header {
 .btn_prohibitedWord
 {
 	background-color: #308d2c;
-	margin-left: 2%;
+	margin-left: 25px;
 	color: white;
 }
 
@@ -746,18 +751,38 @@ h6.collapse-header {
 .btn_inline{
 	float: right; margin-right: 2%;
 }
-
-.avatar {
-	width: 50px;
-	height: 50px;
+.admin-form-control {
+	padding: 0.375rem 0.75rem;
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
 }
 
-.avatar-lg {
-	width: 100px;
-	height: 100px;
+@media screen and (max-width: 739px) {
+	.search {
+		display: flex !important;
+		flex-wrap: nowrap !important;
+		align-items: center !important;
+		white-space: nowrap !important;
+	}
+
+	.avatar {
+		width: 50px;
+		height: 50px;
+	}
+
+	.avatar-lg {
+		width: 100px;
+		height: 100px;
+	}
+
+	.collapse-item {
+		overflow: hidden !important;
+		text-overflow: ellipsis;
+	}
 }
 
-.collapse-item {
-	overflow: hidden !important;
-	text-overflow: ellipsis;
+
+.on_hover_pointer
+{
+    cursor: pointer;
 }

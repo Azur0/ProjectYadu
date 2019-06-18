@@ -96,5 +96,31 @@
 		</div>
 		<p>{{ __('welcome.recent_events_content') }} <a href="/events">{{ __('welcome.link_here') }}</a>.</p>
 	</div>
+	
+@if($message = Session::get('activationsuccess'))
+	<div class="modal fade" id="activated" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">{{__('accounts.activation_header')}}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<h5>{{$message}}</h5>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="deny" class="btn btn-primary" data-dismiss="modal">{{__('accounts.activation_button')}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    <script>
+		$(window).on('load', function(){
+        	$('#activated').modal('show');
+    	});
+	</script>
+@endif
 
 @endsection

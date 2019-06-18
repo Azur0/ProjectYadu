@@ -46,7 +46,7 @@
 					<div id="user_avatar">
 						<img src="data:image/png;base64,{{ chunk_split(base64_encode(Auth::user()->avatar)) }}">
 					</div>
-					<h3>	
+					<h3>
 						<a href="/account/{{  Auth::user()->id }}/profile/info">{{ Auth::user()->firstName }} {{ Auth::user()->middleName }} {{ Auth::user()->lastName }}</a>
 					</h3>
 					<div>
@@ -61,7 +61,11 @@
 			</div>
 			<div class="card">
 				<div class="card-header">
-					<a href="/account/myevents"><i class="fas fa-calendar-alt"></i> {{__('home.my_events_title')}}</a><a class="right" href="/events/create"><i class="fas fa-plus-square"></i></a>
+					<a href="/account/myevents"><i class="fas fa-calendar-alt"></i> {{__('home.my_events_title')}}</a>
+					<div class="CSH_tooltip right">
+						<a href="/events/create"><i class="fas fa-plus-square"></i></a>
+						<span class="tooltiptext">{{__('events.index_create_event')}}</span>
+					</div>
 				</div>
 				<div class="card-body">
 					@if($events)

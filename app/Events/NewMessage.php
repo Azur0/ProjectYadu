@@ -10,11 +10,8 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
-// Switch ShouldBroadcastNow to ShouldBroadcast once the project is on Production
-
-class NewMessage implements ShouldBroadcastNow
+class NewMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -46,7 +43,8 @@ class NewMessage implements ShouldBroadcastNow
             'body' => $this->message->body,
             'created_at' => $this->message->created_at->toFormattedDateString(),
             'firstName' => $this->message->account->firstName,
-            'lastName' => $this->message->account->lastName
+            'lastName' => $this->message->account->lastName,
+            'user_id' => $this->message->account->id
         ];
     }
 }

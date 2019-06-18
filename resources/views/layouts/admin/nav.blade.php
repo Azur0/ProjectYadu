@@ -40,38 +40,43 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Nederlands:</h6>
-                <?php
+				<?php
+					$blocked = array("formats");
                     $pages = array_map('basename',  glob(base_path().'/resources/lang/nl/*.php*'));
                 ?>
-                @foreach ($pages as $page)
-                <?php
-                    $pageBasename = basename($page, '.php');
-                    
-                    $currentLocale = app()->getLocale();
-                    App::setLocale("nl");
-                    $x = __($pageBasename);
-                    App::setLocale($currentLocale);
-                ?>
-                @if (!is_string($x))
-                    <a class="collapse-item" href="{{ url('edit/nl/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
-                @endif
+				@foreach ($pages as $page)
+				@if(!in_array(basename($page, '.php'), $blocked)) 
+					<?php
+						$pageBasename = basename($page, '.php');
+						
+						$currentLocale = app()->getLocale();
+						App::setLocale("nl");
+						$x = __($pageBasename);
+						App::setLocale($currentLocale);
+					?>
+					@if (!is_string($x))
+						<a class="collapse-item" href="{{ url('edit/nl/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
+					@endif
+				@endif
                 @endforeach
                 
                 <h6 class="collapse-header">Engels:</h6>
                 <?php
                     $pages = array_map('basename',  glob(base_path().'/resources/lang/en/*.php*'));
                 ?>
-                @foreach ($pages as $page)
-                <?php
-                    $pageBasename = basename($page, '.php');
-                    $currentLocale = app()->getLocale();
-                    App::setLocale("en");
-                    $x = __($pageBasename);
-                    App::setLocale($currentLocale);
-                ?>
-                @if (!is_string($x))
-                <a class="collapse-item" href="{{ url('edit/en/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
-                @endif
+				@foreach ($pages as $page)
+				@if(!in_array(basename($page, '.php'), $blocked)) 
+					<?php
+						$pageBasename = basename($page, '.php');
+						$currentLocale = app()->getLocale();
+						App::setLocale("en");
+						$x = __($pageBasename);
+						App::setLocale($currentLocale);
+					?>
+					@if (!is_string($x))
+						<a class="collapse-item" href="{{ url('edit/en/'.$pageBasename.'')  }}">Edit {{$pageBasename}}</a>
+					@endif
+				@endif
                 @endforeach
             </div>
         </div>
@@ -110,8 +115,8 @@
 	</li>
 
 	<!-- Nav Item - Swear words -->
-	<li class="nav-item {{ request()->is('admin/swearWords') ? 'active' : '' }}">
-		<a class="nav-link collapsed" href="{{ url('admin/swearWords')  }}">
+	<li class="nav-item {{ request()->is('admin/prohibitedWords') ? 'active' : '' }}">
+		<a class="nav-link collapsed" href="{{ url('admin/prohibitedWords')  }}">
 			<i class="fas fa-fw fa-file-word"></i>
 			<span>{{__('navigation.nav_swearWords')}}</span>
 		</a>

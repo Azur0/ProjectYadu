@@ -27,7 +27,7 @@
 					@endif
 				</div>
 				<div class="form-group">
-					<label for="experience">{{ __('testimonials.form_name') }}</label>
+					<label for="experience">{{ __('testimonials.form_experience') }}</label>
 					<textarea name="experience" placeholder="{{__('testimonials.form_experience')}}" maxlength="150" required>{{ $testimonial->experience }}</textarea>
 
 					@if ($errors->has('description'))

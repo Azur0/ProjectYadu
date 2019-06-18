@@ -42,7 +42,7 @@
 							</a>
 						</td>
 						<td>
-							<form class="form_submit_ays" method="POST" id="deleteAccount{{$testimonial->id}}" action="/admin/testimonial/{{$testimonial->id}}">
+							<form class="form_submit_ays" method="POST" id="deleteAccount{{$testimonial->id}}" action="/admin/testimonials/{{$testimonial->id}}">
 								@method('DELETE')
 								@csrf
 								<div>

@@ -11823,8 +11823,7 @@ form.user .btn-user {
 
 @-webkit-keyframes noise-anim {
   0% {
-
-    clip: rect(5px, 9999px, 92px, 0);
+    clip: rect(6px, 9999px, 70px, 0);
   }
 
   5% {
@@ -12888,7 +12887,7 @@ h6.collapse-header {
   }
 
   .card-header .search {
-    min-width: 700px;
+    min-width: 710px;
   }
 
   .card-header .search label {
@@ -12901,7 +12900,7 @@ h6.collapse-header {
 
   .card-body {
     overflow-y: hidden;
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 }
 

@@ -693,7 +693,7 @@ h6.collapse-header {
 
 		.search
 		{
-			min-width: 700px;
+			min-width: 710px;
 
 			label
 			{
@@ -709,7 +709,7 @@ h6.collapse-header {
 	.card-body
 	{
 		overflow-y: hidden;
-		overflow-x: scroll;
+		overflow-x: auto;
 	}
 }
 
@@ -780,6 +780,7 @@ h6.collapse-header {
 		text-overflow: ellipsis;
 	}
 }
+
 
 .on_hover_pointer
 {

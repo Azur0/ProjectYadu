@@ -26,6 +26,7 @@ Route::get('/privacy', function () { return view('privacy'); });
 Route::get('/terms', function () { return view('terms'); });
 Route::get('/contact', function () { $socialmedia = socialmedia::all(); return view('contact', compact('socialmedia')); });
 Route::get('/ipbanned', function () { return view('auth/ipbanned'); });
+Route::get('/activation', 'AccountController@activate');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

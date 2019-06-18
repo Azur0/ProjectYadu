@@ -172,7 +172,7 @@ class EventsController extends Controller
 
         $newEvent->location_id = $location->id;
 
-        if($request['initiator'] == "1")
+        if($request['initiator'] == "1" || Auth::User()->accountRole != "Admin")
         {
         	$newEvent->owner_id = auth()->user()->id;
         }

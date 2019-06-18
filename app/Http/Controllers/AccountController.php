@@ -158,6 +158,10 @@ class AccountController extends Controller
 		return redirect('/profile/edit');
 	}
 
+	public function activate() {
+		return redirect('/')->with('activationsuccess', __('accounts.activation_message'));
+	}
+
 	public function updateProfile(EditProfileRequest $request)
 	{
 		$account = Account::where('id', Auth::id())->firstOrFail();

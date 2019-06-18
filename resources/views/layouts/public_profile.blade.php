@@ -48,31 +48,21 @@
                                         </div>
                                         @if($account->id != Auth::user()->id)
                                         <div class="col-md-auto">
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary dropdown" type="button"
-                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right"
-                                                    aria-labelledby="dropdownMenuButton">
                                                     @if(Auth::user()->blockedUsers->pluck('blockedAccount_id')->contains($account->id))
                                                     <form action="/profile/unblockUser" method="post">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$account->id}}">
                                                         <button type="submit"
-                                                            class="dropdown-item">{{__('profile.edit_unblock_account_button')}}</button>
+                                                            class="btn btn-primary">{{__('profile.edit_unblock_account_button')}}</button>
                                                     </form>
                                                     @else
                                                     <form action="/profile/blockUser" method="post">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$account->id}}">
                                                         <button type="submit"
-                                                            class="dropdown-item">{{__('profile.edit_block_account_button')}}</button>
+                                                            class="btn btn-primary">{{__('profile.edit_block_account_button')}}</button>
                                                     </form>
                                                     @endif
-                                                </div>
-                                            </div>
 										</div> 
 										@endif
                                     </div>

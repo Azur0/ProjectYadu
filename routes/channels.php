@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,13 @@ Broadcast::channel('event.{id}', function ($user, $id) {
     //if($user->id == $authorizedUser) {
     //            return true;
     //        }
-
-    if(empty(App\Event::find($id)->participants()->where('account_id', $user->id)->firstOrFail()->id)) {
+    if(Auth::User()->accountRole == "Admin"){
+        return true;
+    }
+    else if(Auth::User()->id == App\Event::where("id", "=", $id)->first()->owner_id){
+        return true;
+    }
+    else if(empty(App\Event::find($id)->participants()->where('account_id', $user->id)->firstOrFail()->id)) {
         return false;
     }
 

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\Account\AccountEdited as AccountEditedMail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\App;
 
 class SendAccountEditedNotification
 {
@@ -28,10 +29,22 @@ class SendAccountEditedNotification
      */
     public function handle(AccountEdited $event)
     {
-        if($event->account->remember_token == $event->account->getOriginal('remember_token')){
-            Mail::to($event->account->email)->send(
+        $currentLocale = app()->getLocale();
+        switch($event->account->settings->LanguagePreference){
+            case 'eng': App::setLocale('eng');
+                break;
+            case 'nl': App::setLocale('nl');
+                break;
+            default: App::setLocale('eng');
+                break;
+        }
+
+        if($event->account->remember_token == $event->account->getOriginal('remember_token')
+            && $event->account->email_verified_at == $event->account->getOriginal('email_verified_at')){
+            Mail::to($event->account->getOriginal('email'))->send(
                 new AccountEditedMail($event->account)
             );
         }
+        App::setLocale($currentLocale);
     }
 }

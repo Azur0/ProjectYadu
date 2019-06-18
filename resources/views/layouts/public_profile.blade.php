@@ -20,52 +20,49 @@
                                 <div class="col">
                                     <div class="row">
                                         <div class="col-md-auto">
-                                            @if($account->id != Auth::user()->id)
-                                            @if(is_null($follow))
-                                            <a href="/profile/{{$account->id}}/follow" class="btn btn-primary">
-                                                <i class="fas fa-user-plus"></i> {{ __('profile.follow') }}
-                                            </a>
-                                            @elseif($follow->status == "pending")
-                                            <a href="#" class="btn btn-primary" disabled>
-                                                {{ __('profile.follow_pending') }}
-                                            </a>
-                                            @elseif($follow->status == "accepted")
-                                            <a href="/profile/{{$account->id}}/unfollow" class="btn btn-primary">
-                                                <i class="fas fa-user-minus"></i> {{ __('profile.unfollow') }}
-                                            </a>
-                                            @endif
-                                            @if (session('error'))
-                                            <div class="alert alert-danger">Request already sent</div>
-                                            @endif
+                                            @if(! $account->blockedUsers->pluck('blockedAccount_id')->contains(Auth::user()->id))
+                                                @if($account->id != Auth::user()->id)
+                                                    @if(is_null($follow))
+                                                        <a href="/profile/{{$account->id}}/follow" class="btn btn-primary">
+                                                            <i class="fas fa-user-plus"></i> {{ __('profile.follow') }}
+                                                        </a>
+                                                    @endif
+                                                    @if (! is_null($follow))
+                                                        @if(((strtotime(Carbon\Carbon::now()->toDayDateTimeString()) - strtotime($follow->updated_at)) >= 10)&& !($follow->status == "accepted"))
+                                                                <a href="/profile/{{$account->id}}/follow" class="btn btn-primary">
+                                                                    <i class="fas fa-user-plus"></i> {{ __('profile.follow') }}
+                                                                </a>
+                                                         @elseif(($follow->status == "accepted")==1)
+                                                            <a href="/profile/{{$account->id}}/unfollow" class="btn btn-primary">
+                                                                <i class="fas fa-user-minus"></i> {{ __('profile.follow_accepted') }}
+                                                            </a>
+                                                        @endif
+                                                        @if(((strtotime(Carbon\Carbon::now()->toDayDateTimeString()) - strtotime($follow->updated_at) ) < 10) && ($follow->status != "accepted"))
+                                                            <a href="#" class="btn btn-primary" disabled>
+                                                                <i class="fas fa-hourglass-end"></i> {{ __('profile.follow_pending') }}
+                                                            </a>
+                                                        @endif
+                                                    @endif
+                                                @endif
                                             @endif
                                         </div>
                                         @if($account->id != Auth::user()->id)
                                         <div class="col-md-auto">
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary dropdown" type="button"
-                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right"
-                                                    aria-labelledby="dropdownMenuButton">
                                                     @if(Auth::user()->blockedUsers->pluck('blockedAccount_id')->contains($account->id))
                                                     <form action="/profile/unblockUser" method="post">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$account->id}}">
                                                         <button type="submit"
-                                                            class="dropdown-item">{{__('profile.edit_unblock_account_button')}}</button>
+                                                            class="btn btn-primary">{{__('profile.edit_unblock_account_button')}}</button>
                                                     </form>
                                                     @else
                                                     <form action="/profile/blockUser" method="post">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$account->id}}">
                                                         <button type="submit"
-                                                            class="dropdown-item">{{__('profile.edit_block_account_button')}}</button>
+                                                            class="btn btn-primary">{{__('profile.edit_block_account_button')}}</button>
                                                     </form>
                                                     @endif
-                                                </div>
-                                            </div>
 										</div> 
 										@endif
                                     </div>

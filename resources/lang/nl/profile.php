@@ -23,7 +23,7 @@ return [
     'head_participating' => 'Meedoen',
     'head_followers' => 'Volgers',
     'head_following' => 'Volgend',
-    'head_hidden' => 'Gebruiker heeft zijn info afgeschermt',
+    'head_hidden' => 'Gebruiker heeft zijn info afgeschermd',
     'info_name' => 'Naam',
     'info_rol' => 'Rol',
     'info_stats' => 'Statistieken',
@@ -31,8 +31,15 @@ return [
     'info_hosted_by' => 'Aantal evenementen gehost',
     'info_participated' => 'Aantal evenementen aan meegedaan',
     'info_participated_in' => 'Doet mee aan:',
+    'info_event_deleted' => 'Event succesvol verwijderd',
 
 ///////////////////////////////// Edit ////////////////////////////////////
+
+    'edit_avatar_title' => 'Avatar wijzigen',
+    'edit_edit_avatar_upload' => 'Uploaden',
+    'edit_edit_avatar_choose_image' => 'Kies afbeelding',
+    'edit_update_avatar' => 'Avatar bijwerken',
+    'edit_avatar_info' => 'Een avatar moet vierkant zijn en mag niet groter zijn dan 500x500 pixels',
 
     'edit_edit_profile_title' => 'Profiel bewerken',
     'edit_firstname' => 'Voornaam',
@@ -43,7 +50,7 @@ return [
     'edit_email' => 'E-Mailadres',
     'edit_update_profile' => 'Profiel bijwerken',
 
-    'edit_change_account_settings_title' => 'Account instellingen - meldingen',
+    'edit_change_account_settings_title' => 'Meldingen instellingen',
     // Follow notification
     'edit_change_account_settings_follow_notification_title' => 'Over volgen',
     'edit_change_account_settings_follow_notification_creation' => 'Wanneer een evenement is aangemaakt door iemand die je volgt',
@@ -57,6 +64,12 @@ return [
     'edit_change_account_settings_notification_join' => 'Wanneer iemand zich aanmeldt of afmeldt voor een evenement',
     // Button change notification settings
     'edit_change_account_settings' => 'Wijzig instellingen',
+    // Preference settings
+    'edit_change_account_settings_language_preference_title' => 'E-mail taal',
+    'edit_change_account_settings_language_preference' => 'E-mail taal',
+    'English' => 'Engels',
+    'Dutch' => 'Nederlands',
+    'edit_change_account_setting' => 'Wijzig instelling',
 
     'edit_change_password_title' => 'Wachtwoord wijzigen',
     'edit_current_password' => 'Huidig wachtwoord',
@@ -81,9 +94,23 @@ return [
     'edit_unblock_account_areYouSure' => 'Weet je zeker dat je :name wilt deblokkeren?',
     
     'edit_privacy_head' => 'Privacy Instellingen',
-    'edit_privacy_participatingVisibility' => 'No, Keep it!',
-    'edit_privacy_eventsVisibility' => 'No, Keep it!',
+    'edit_privacy_participatingVisibility' => 'Deelnemende evenementen zichtbaarheid',
+    'edit_privacy_eventsVisibility' => 'Evenementen zichtbaarheid',
     'edit_privacy_infoVisibility' => 'Profiel informatie zichtbaarheid',
     'edit_privacy_followingVisibility' => 'Volgende zichtbaarheid',
     'edit_privacy_followerVisibility' => 'Volger zichtbaarheid',
+
+    'follow_request_pending' => 'Volg aanvraag is in behandeling',
+
+    ///////////////////////////////// Context sensetive help ////////////////////////////////////
+    'CSH_privacy_follower' => 'Kies wie kan zien wie u volgen',
+    'CSH_privacy_following' => 'Kies wie kan zien wie u volgt',
+    'CSH_privacy_info' => 'Kies wie uw gegevens kan zien',
+    'CSH_privacy_events' => 'Kies wie uw evenementen kunnen zien',
+    'CSH_privacy_participating' => 'Kies wie kan zien aan welke evenementen u deelneemt',
+    'CSH_notifications_eventCreated' => 'Krijg een melding als iemand die u volgt een evenement aanmaakt',
+    'CSH_notifications_follower' => 'Krijg een melding als iemand die u volgt aan een evenement deelneemt of afmeld',
+    'CSH_notifications_eventEdited' => 'Krijg een melding als een evenement waaraan u deelneemt wordt bewerkt',
+    'CSH_notifications_eventDeleted' => 'Krijg een melding als een evenement waaraan u deelneemt wordt verwijderd',
+    'CSH_notifications_eventJoinedLeft' => 'Krijg een melding als iemand deelneemt of afmeld aan een evenement waaraan u deelneemt',
 ];

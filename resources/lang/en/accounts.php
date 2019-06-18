@@ -45,6 +45,11 @@ return [
     'edit_delete_account_admin_error' => 'You can\'t delete an admin account',
     'edit_change_role_admin_error' => 'Can\'t change role of an admin account',
 
+    'edit_delete_account_confirm_title' => 'Delete event',
+    'edit_delete_event_confirm_content' => 'Are you sure you want to delete your event? Connected users will be notified.',
+    'edit_delete_event_positive' => 'Yes, I am sure',
+    'edit_delete_event_negative' => 'No, Keep it!',
+
     'edit_restore_account_title' => 'Restore account',
     'edit_restore_account_content' => 'Click the button to restore this account.',
     'edit_restore_account_confirm_title' => 'Confirm',
@@ -61,5 +66,15 @@ return [
     'avatar_reset_button' => 'Reset Avatar',
 
     'index_no_event_found' => 'No accounts found',
-    'index_loading_error' => 'Error loading accounts'
+    'index_loading_error' => 'Error loading accounts',
+
+    ///////////////////////////////// Activation ////////////////////////////////////
+
+    'activation_header' => 'Account activated!',
+    'activation_message' => 'Thanks for activating your account, go find an event to join!',
+    'activation_button' => 'Back to Yadu',
+    'non_activation_header' => 'Inactive account, please verify',
+    'non_activation_message' => 'U haven\'t verified your email, please do so in order to join this event.',
+    'non_activation_button' => 'Go back',
+
 ];
